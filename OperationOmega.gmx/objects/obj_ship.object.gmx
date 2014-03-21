@@ -921,8 +921,6 @@ alarm[2]=(6*smoke+10);
 if(global.sfxtoggle = 0)
     audio_emitter_position(sound_stardust, x, y, 0);
 
-repeat(global.framerate)
-{
 if(stardust &gt; 0)
 {
 alarm[1] = 1;
