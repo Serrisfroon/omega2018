@@ -202,7 +202,7 @@ game_restart();
             <string>if(scale != 1 || connected = 1)
  exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 
 if(global.spacehot = 0 &amp;&amp; asked = 0)
 {

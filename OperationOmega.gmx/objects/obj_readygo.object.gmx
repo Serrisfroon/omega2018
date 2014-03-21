@@ -163,7 +163,7 @@ if(global.master = false)
   //info to the host
   case 1:
         if(global.sfxtoggle = 0)
-            sound_play(snd_readyup);
+            audio_play_sound(snd_readyup, 1, 0);
        clearbuffer(0);
        writebyte(13, 0);
        writestring(global.name+" is ready.", 0);

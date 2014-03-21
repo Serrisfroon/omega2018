@@ -69,7 +69,7 @@ else
     image_single = 0;
 global.sfxtoggle = image_single;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 
 </string>
           </argument>

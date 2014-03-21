@@ -205,7 +205,7 @@ room_goto(rm_waiting);
 if(global.creatinggame = 1)
  exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 
 var newversion, vfile;
 newversion = get_version();

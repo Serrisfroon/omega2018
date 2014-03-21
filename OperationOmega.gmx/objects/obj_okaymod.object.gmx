@@ -77,7 +77,7 @@ if(obj_modbox.creategamenow = 0)
 {
  //Fade out the popup
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
  obj_modbox.cancel = 1;
  //The button has been pressed; a game will be made
  obj_modbox.creategamenow = 1;

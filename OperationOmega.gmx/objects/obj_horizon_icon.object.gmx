@@ -133,7 +133,7 @@ obj_profilebox.alarm[1] = 100;
           <argument>
             <kind>1</kind>
             <string>if(global.sfxtoggle = 0)
-    sound_play(snd_overcustom);
+    audio_play_sound(snd_overcustom, 1, 0);
 if(obj_chooseenergy_1.selected = 1 || obj_chooseenergy_2.selected = 1 || obj_chooseenergy_3.selected = 1) &amp;&amp; path_speed &lt;= 0
  growing = 1;
 //Set the information text for the profile room
@@ -171,7 +171,7 @@ with(prnt_selection)
  if(path_speed &gt; 0)
   exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clickcustom);
+    audio_play_sound(snd_clickcustom, 1, 0);
 //Remove the weapon from other slots
 if(global.esecond[1] = 9) global.esecond[1] = 0;
 if(global.esecond[2] = 9) global.esecond[2] = 0;

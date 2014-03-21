@@ -104,7 +104,7 @@ if(global.creatinggame = 1)
  exit;
 //There is now a popup window
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 global.creatinggame = 1;
 //Create the popup
 switch(global.resolution)

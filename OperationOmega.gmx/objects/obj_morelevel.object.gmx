@@ -51,7 +51,7 @@ image_single = 4;
           <argument>
             <kind>1</kind>
             <string>if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 //Cycle through the game maps
 switch(global.matchlevel)
 {

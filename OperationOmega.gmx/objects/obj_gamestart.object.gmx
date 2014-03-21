@@ -509,7 +509,7 @@ countdown = ceil(alarm[0]/60);
 if(countdown &lt; 6 &amp;&amp; alarm[0] != -1)
 {
     if(countdown != oldcountdown)
-        sound_play(snd_changeweapon);
+        audio_play_sound(snd_changeweapon, 1, 0);
     oldcountdown = countdown;
     draw_sprite_ext(spr_matchstart_text, countdown, room_width/2, room_height/2, scaling, scaling, 0, c_white, 1);
 }

@@ -51,7 +51,7 @@ image_single = 6;
           <argument>
             <kind>1</kind>
             <string>if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 //The popup is cancelled
 obj_creategamebox.cancel = 1;
 

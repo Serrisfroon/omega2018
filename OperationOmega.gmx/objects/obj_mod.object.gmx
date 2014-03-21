@@ -1582,7 +1582,7 @@ alarm[1]=2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_play(snd_changeweapon);
+            <string>audio_play_sound(snd_changeweapon, 1, 0);
 switch(selectx)
 {
  case 0:
@@ -1624,7 +1624,7 @@ switch(selectx)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_play(snd_changeweapon);
+            <string>audio_play_sound(snd_changeweapon, 1, 0);
 switch(selectx)
 {
  case 0:
@@ -2083,7 +2083,7 @@ draw_sprite_ext(spr_cursor, targethit+2, mouse_x, mouse_y, scaling*0.7, scaling*
             <kind>1</kind>
             <string>//Check if you are chatting
 if(global.chatting = true) exit;
-sound_play(snd_changeweapon);
+audio_play_sound(snd_changeweapon, 1, 0);
 
 //Switch to the correct new attack
 switch(global.shipselect)
@@ -2316,7 +2316,7 @@ with(obj_ship)
             <kind>1</kind>
             <string>//Check if you are chatting
 if(global.chatting = true) exit;
-sound_play(snd_changeweapon);
+audio_play_sound(snd_changeweapon, 1, 0);
 
 selectx = 64;
 //Switch to the correct new attack
@@ -2534,7 +2534,7 @@ with(obj_ship)
             <kind>1</kind>
             <string>//Check if you are chatting
 if(global.chatting = true) exit;
-sound_play(snd_changeweapon);
+audio_play_sound(snd_changeweapon, 1, 0);
 selectx = 32;
 //Switch to the correct new attack
 switch(global.shipselect)
@@ -2686,7 +2686,7 @@ with(obj_ship)
             <kind>1</kind>
             <string>//Check if you are chatting
 if(global.chatting = true) exit;
-sound_play(snd_changeweapon);
+audio_play_sound(snd_changeweapon, 1, 0);
 dstock = 0;
 selectx = 0;
 //Switch to the correct new attack

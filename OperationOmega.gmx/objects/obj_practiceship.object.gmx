@@ -4082,7 +4082,7 @@ switch(global.secondary)
       energy -= 60;
       heat -= 25;
       cooldown = 0;
-        sound_play(snd_overheat);
+      audio_play_sound(snd_overheat, 1, 0);
       //Create a beam and give it the correct direction
       beam = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_beam);
       beam.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);

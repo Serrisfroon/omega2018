@@ -217,7 +217,7 @@ while(true)
          chatcolor[6] = chatcolor[7];
          chatline[7] = chatline[8];
          chatcolor[7] = chatcolor[8];
-         sound_play(snd_chatmessage);
+         audio_play_sound(snd_chatmessage, 1, 0);
          chatcolor[8] = readshort(0);
          if(chatcolor[8] != c_red)
           chatcolor[8] = c_white;
@@ -246,7 +246,7 @@ while(true)
          chatline[7] = chatline[8];
          chatcolor[7] = chatcolor[8];
          chatcolor[8] = c_red;
-         sound_play(snd_playerjoin);
+         audio_play_sound(snd_playerjoin, 1, 0);
          mid = readbyte(0);
          newteam = readbyte(0);
          global.othername[mid] = readstring(0);
@@ -299,7 +299,7 @@ while(true)
          global.playerprimary[thisplayer] = readbyte(0);
          readystat = readbyte(0);
          global.readied[thisplayer] = readystat;
-         sound_play(snd_readyup);
+         audio_play_sound(snd_readyup, 1, 0);
          //Send a notice to everyone else
          clearbuffer(0);
          writebyte(11, 0);
@@ -339,7 +339,7 @@ while(true)
 
         //A client has quit
     case CLIENT_DROP:
-         sound_play(snd_playerleave);
+         audio_play_sound(snd_playerleave, 1, 0);
          //Get info from leaving player
          mid = readbyte(0);
          droppedname = readstring(0);
@@ -538,7 +538,7 @@ draw_set_alpha(1);
 if(ds_list_size(global.clients) &gt; 0)
 {
   if(keyboard_string = '') exit;
-  sound_play(snd_chatmessage);
+  audio_play_sound(snd_chatmessage, 1, 0);
   //create the new chat line and take note of its middle
   sendline = global.name+": "+ keyboard_string;
   middle = floor(string_length(sendline)/2);

@@ -104,7 +104,7 @@ if(global.myname != '' &amp;&amp; global.myipaddress != '' &amp;&amp; global.pri
   with(prnt_menubutton)
    animation = 1;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
   //Make the background fade out
   obj_menumod.animation = 1;
   //Set time until room transition and action

@@ -153,7 +153,7 @@ if(changeable = 0)
   //Flag it and set a time until next change allowed
   changeable = 1;
     if(global.sfxtoggle = 0)
-        sound_play(snd_clicktext);
+        audio_play_sound(snd_clicktext, 1, 0);
   alarm[0] = 30;
   rotate = 1;
  //Check to see if you're ready

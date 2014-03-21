@@ -97,7 +97,7 @@ doubleclick = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_play(snd_overcustom);
+            <string>audio_play_sound(snd_overcustom, 1, 0);
 if(alpha != 1)
     alpha = 0.5;
 </string>
@@ -130,7 +130,7 @@ if(doubleclick = 0)
     doubleclick = 1;
     alarm[1] = 6;
     if(global.sfxtoggle = 0)
-        sound_play(snd_clickcustom);
+        audio_play_sound(snd_clickcustom, 1, 0);
     //Make this highlight the only visible one
     with(obj_selectgame)
         alpha = 0;

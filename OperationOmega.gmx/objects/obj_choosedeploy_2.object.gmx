@@ -178,7 +178,7 @@ alarm[3] = -1;
           <argument>
             <kind>1</kind>
             <string>if(global.sfxtoggle = 0)
-    sound_play(snd_overcustom);
+    audio_play_sound(snd_overcustom, 1, 0);
 alarm[3] = 20;
 growing = 2;
 </string>
@@ -207,14 +207,14 @@ growing = 2;
 {
  global.spacehot = 5;
 if(global.sfxtoggle = 0)
-    sound_play(snd_hotkey);
+    audio_play_sound(snd_hotkey, 1, 0);
  exit;
 }
 //Exit if mod box is open
 if(global.creatinggame = 1)
  exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_hotkey);
+    audio_play_sound(snd_hotkey, 1, 0);
 if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
  global.spacehot = 5;
 else
@@ -278,7 +278,7 @@ if(selected = 1 || global.tutorial = 1)
 if(global.creatinggame = 1)
  exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clickcustom);
+    audio_play_sound(snd_clickcustom, 1, 0);
 //return icons accordingly
 if(obj_chooseprimary.selected = 1)
 {

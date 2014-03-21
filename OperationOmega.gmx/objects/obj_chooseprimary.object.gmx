@@ -181,7 +181,8 @@ growing = 0;
             <string>alarm[3] = 20;
 growing = 2;
 if(global.sfxtoggle = 0)
-    sound_play(snd_overcustom);
+    audio_play_sound(snd_overcustom, 1, 0);
+
 </string>
           </argument>
         </arguments>
@@ -214,7 +215,7 @@ if(selected = 1 || global.tutorial = 1)
 if(global.creatinggame = 1)
  exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clickcustom);
+    audio_play_sound(snd_clickcustom, 1, 0);
 //return icons accordingly
 if(obj_chooseprimary.selected = 1)
 {

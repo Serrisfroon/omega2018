@@ -213,7 +213,7 @@ growing = 0;
             <kind>1</kind>
             <string>//Turn the growth switch on
 if(global.sfxtoggle = 0)
-    sound_play(snd_overcustom);
+    audio_play_sound(snd_overcustom, 1, 0);
 growing = 1;
 </string>
           </argument>
@@ -243,7 +243,7 @@ growing = 1;
 if(global.creatinggame = 1)
  exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clickcustom);
+    audio_play_sound(snd_clickcustom, 1, 0);
 //There is now a popup window
 global.creatinggame = 1;
 //Create the popup

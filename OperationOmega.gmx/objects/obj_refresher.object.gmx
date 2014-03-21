@@ -279,7 +279,7 @@ for(i=0; i&lt;20; i+=1)
 if(global.creatinggame = 1)
  exit;
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 //Destroy all highlights that exist
 with(obj_selectgame)
  instance_destroy();

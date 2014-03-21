@@ -52,7 +52,7 @@ image_single = 2;
             <kind>1</kind>
             <string>//Cycle through the game types
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
 switch(global.matchlevel)
 {
  case "Deep Space":

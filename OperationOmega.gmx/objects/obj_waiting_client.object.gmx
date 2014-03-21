@@ -187,7 +187,7 @@ alarm[0] = 5;
          chatcolor[6] = chatcolor[7];
          chatline[7] = chatline[8];
          chatcolor[7] = chatcolor[8];
-         sound_play(snd_chatmessage);
+         audio_play_sound(snd_chatmessage, 1, 0);
          hold = readbyte(0);
          chatcolor[8] = readshort(0);
          if(chatcolor[8] != c_red)
@@ -375,7 +375,7 @@ draw_set_alpha(1);
             <kind>1</kind>
             <string>//Send the message to the host
 if(keyboard_string = '') exit;
-sound_play(snd_chatmessage);
+audio_play_sound(snd_chatmessage, 1, 0);
 //create the new chat line and take note of its middle
 sendline = global.name+": "+ keyboard_string;
 middle = floor(string_length(sendline)/2);

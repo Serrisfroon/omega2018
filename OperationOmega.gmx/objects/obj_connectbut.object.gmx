@@ -225,7 +225,7 @@ if(obj_enterhostip.creategamenow = 0)
 {
  //Make the popup disappear
 if(global.sfxtoggle = 0)
-    sound_play(snd_clicktext);
+    audio_play_sound(snd_clicktext, 1, 0);
  obj_enterhostip.cancel = 1;
  //The popup has not been cancelled; the button has been pressed
  obj_enterhostip.creategamenow = 1;
