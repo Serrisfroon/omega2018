@@ -31,6 +31,7 @@
 //these empty events mus exists to avoid error as well.
 //Set explosion time
 alarm[0]=60/global.framerate;
+invincible = 0;
 smokenow = 0;
 //Set ability to shoot
 shoot = 0;
@@ -42,6 +43,7 @@ dusted = 0;
 newdir = 0;
 heat = 50;
 cooldown = 0;
+regentime = -1;
 
 //Set values of ship to avoid error
 energy = 0;

@@ -587,13 +587,20 @@ threshold = 1;
 //to create them
 repeat(global.framerate)
 {
+if(global.sfxtoggle = 0)
+    audio_emitter_position(emit_whip, (view_xview[0]+view_wview[0]/2)-x, y-(view_yview[0]+view_hview[0]/2), 0);
+    
 if(whips &gt; 0)
 {
-alarm[8] = 1;
-whips -= 1;
+    alarm[8] = 1;
+    whips -= 1;
 }
 else
-    sound_stop(snd_whip);
+    if(global.sfxtoggle = 0)
+    {
+        audio_stop_sound(sound_whip);
+        audio_emitter_free(emit_whip);
+    }
 //Set target direction
 aim = point_direction(x, y, hitx, hity);
 //Get movement speed of the current bullet
@@ -870,15 +877,21 @@ alarm[2]=(6*smoke+10)/global.framerate;
             <string>//Stardust
 //If there are parts of the attack left, reset the alarm
 //to create them
-repeat(global.framerate)
-{
+if(global.sfxtoggle = 0)
+    audio_emitter_position(emit_stardust, (view_xview[0]+view_wview[0]/2)-x, y-(view_yview[0]+view_hview[0]/2), 0);
+
 if(stardust &gt; 0)
 {
 alarm[1] = 1;
 stardust -= 1;
 }
 else
-    sound_stop(snd_stardust);
+    if(global.sfxtoggle = 0)
+    {
+        audio_stop_sound(sound_stardust);
+        audio_emitter_free(emit_stardust);
+    }
+
 //Set target direction
 aim = point_direction(x, y, hitx, hity);
 //Create a stardust part
@@ -989,7 +1002,7 @@ switch(stardust)
       fuse.direction = aim+25;
  break;
 }
-}
+
 
 </string>
           </argument>
@@ -3888,7 +3901,11 @@ switch(global.secondary)
            exit;
       //Initialize the attack
         if(global.sfxtoggle = 0)
-            sound_loop(snd_stardust);
+        {  
+            emit_stardust = audio_emitter_create();
+            sound_stardust = audio_play_sound_on(emit_stardust, snd_stardust, 1, 1);
+            audio_emitter_position(emit_stardust, x, y, 0);
+        }
       energygain = 0.2*global.framerate;
       alarm[1] = 1;
       stardust = 25;
@@ -4473,6 +4490,12 @@ switch(global.secondary)
       //Check to see if you have enough energy to use it
       if(energy &lt; 20 || whips &gt; 0)
        exit;
+        if(global.sfxtoggle = 0)
+        {
+            emit_whip = audio_emitter_create();
+            sound_whip = audio_play_sound_on(emit_whip, snd_whip, 1, 1);
+            audio_emitter_position(emit_whip, x, y, 0);
+        }
       //Initialize the attack
       energygain = 0.2*global.framerate;
       alarm[8] = 1;
@@ -5345,7 +5368,11 @@ switch(global.spacesecond)
          if(stardust &gt; 0)
            exit;
         if(global.sfxtoggle = 0)
-            sound_loop(snd_stardust);
+        {  
+            emit_stardust = audio_emitter_create();
+            sound_stardust = audio_play_sound_on(emit_stardust, snd_stardust, 1, 1);
+            audio_emitter_position(emit_stardust, x, y, 0);
+        }
       //Initialize the attack
       energygain = 0.2;
       alarm[1] = 1;
@@ -5968,6 +5995,12 @@ switch(global.spacesecond)
       //Check to see if you have enough energy to use it
       if(energy &lt; 20 || whips &gt; 0)
        exit;
+        if(global.sfxtoggle = 0)
+        {
+            emit_whip = audio_emitter_create();
+            sound_whip = audio_play_sound_on(emit_whip, snd_whip, 1, 1);
+            audio_emitter_position(emit_whip, x, y, 0);
+        }
       //Initialize the attack
       energygain = 0.2;
       alarm[8] = 1;

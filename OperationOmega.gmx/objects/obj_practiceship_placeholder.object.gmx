@@ -32,6 +32,8 @@
 //these empty events mus exists to avoid error as well.
 
 //Set ability to shoot
+regentime = -1;
+invincible = 0;
 shoot = 0;
 //Set initial target values
 target = -1;
