@@ -63,7 +63,7 @@
                 if(global.sfxtoggle = 0)
                 {
                  global.playership[dummy].emit_stardust = audio_emitter_create();
-                 audio_emitter_position(global.playership[dummy].emit_stardust, x, y, 0);
+                 audio_emitter_position(global.playership[dummy].emit_stardust, global.playership[dummy].x, global.playership[dummy].y, 0);
                  global.playership[dummy].sound_stardust = audio_play_sound_on(global.playership[dummy].emit_stardust, snd_stardust, 1, 1);
                 }
               global.playership[dummy].alarm[1] = 1;

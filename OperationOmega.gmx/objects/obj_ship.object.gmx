@@ -398,8 +398,8 @@ mid = global.mymid;
           <argument>
             <kind>1</kind>
             <string>//Stop looping sounds
-sound_stop(snd_stardust);
-sound_stop(snd_whip);
+audio_stop_sound(snd_stardust);
+audio_stop_sound(snd_whip);
 
 //Disable collisions
 mask_index = spr_empty;
@@ -621,17 +621,22 @@ threshold = 1;
           <argument>
             <kind>1</kind>
             <string>//Whip
-
-
 //If there are parts of the attack left, reset the alarm
 //to create them
+if(global.sfxtoggle = 0)
+    audio_emitter_position(sound_whip, x, y, 0);
+    
 if(whips &gt; 0)
 {
     alarm[8] = 1;
     whips -= 1;
 }
 else
-    sound_stop(snd_whip);
+    if(global.sfxtoggle = 0)
+    {
+        audio_stop_sound(sound_whip);
+        audio_emitter_free(emit_whip);
+    }
     
 //Set target direction
 aim = point_direction(x, y, hitx, hity);
@@ -913,13 +918,22 @@ alarm[2]=(6*smoke+10);
             <string>//Stardust
 //If there are parts of the attack left, reset the alarm
 //to create them
+if(global.sfxtoggle = 0)
+    audio_emitter_position(sound_stardust, x, y, 0);
+
+repeat(global.framerate)
+{
 if(stardust &gt; 0)
 {
-    alarm[1] = 1;
-    stardust -= 1;
+alarm[1] = 1;
+stardust -= 1;
 }
 else
-    sound_stop(snd_stardust);
+    if(global.sfxtoggle = 0)
+    {
+        audio_stop_sound(sound_stardust);
+        audio_emitter_free(emit_stardust);
+    }
 //Set target direction
 aim = point_direction(x, y, hitx, hity);
 //Create a stardust part
@@ -2371,7 +2385,11 @@ switch(global.secondary)
             energygain = 0.8;   
                   
         if(global.sfxtoggle = 0)
-            sound_loop(snd_stardust);
+        {  
+            emit_stardust = audio_emitter_create();
+            sound_stardust = audio_play_sound_on(emit_stardust, snd_stardust, 1, 1);
+            audio_emitter_position(emit_stardust, x, y, 0);
+        }
         
         alarm[1] = 1;
         stardust = 25;
@@ -3340,7 +3358,11 @@ switch(global.secondary)
             energygain = 0.8;  
                    
         if(global.sfxtoggle = 0)
-            sound_loop(snd_whip);
+        {
+            emit_whip = audio_emitter_create();
+            sound_whip = audio_play_sound_on(emit_whip, snd_whip, 1, 1);
+            audio_emitter_position(emit_whip, x, y, 0);
+        }
         alarm[8] = 1;
         
         if(amplified = 0)
@@ -4388,8 +4410,11 @@ switch(global.spacesecond)
             energygain = 0.8;   
                          
         if(global.sfxtoggle = 0)
-            sound_loop(snd_stardust);
-        
+        {
+            emit_stardust = audio_emitter_create();
+            sound_stardust = audio_play_sound_on(emit_stardust, snd_stardust, 1, 1);
+            audio_emitter_position(emit_stardust, x, y, 0);
+        }
         alarm[1] = 1;
         stardust = 25;
         staramp = 0;
@@ -5357,7 +5382,11 @@ switch(global.spacesecond)
             energygain = 0.8;  
                    
         if(global.sfxtoggle = 0)
-            sound_loop(snd_whip);
+        {
+            emit_whip = audio_emitter_create();
+            sound_whip = audio_play_sound_on(emit_whip, snd_whip, 1, 1);
+            audio_emitter_position(emit_whip, x, y, 0);
+        }
         alarm[8] = 1;
         
         if(amplified = 0)
