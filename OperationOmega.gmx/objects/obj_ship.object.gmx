@@ -4124,7 +4124,7 @@ if(beserk = 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_flame();
+            <string>draw_flame(direction);
 draw_turnblur();
 //Draw the ship
 draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, invincible);

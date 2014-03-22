@@ -6,7 +6,7 @@ part_particles_create(obj_partsystem.system, x+lengthdir_x(8, facedir-180), y+le
 flamelife[nextflame] = 10;
 flamex[nextflame] = x+lengthdir_x(8, facedir-180);
 flamey[nextflame] = y+lengthdir_y(8, facedir-180);
-flamedir[nextflame] = direction;
+flamedir[nextflame] = argument0;
 if(speed > maxspeed+0.3)
     flameimg[nextflame] = 3;
 else
@@ -44,7 +44,7 @@ for(i = 0; i <= 11; i += 1)
        flameimage[i] = 2;
   break;
  }
- draw_sprite_ext(spr_engineflame, flameimage[i]+flameimg[i], flamex[i], flamey[i], 1, 1, flamedir, c_white, 0.8);
+ draw_sprite_ext(spr_engineflame, flameimage[i]+flameimg[i], flamex[i], flamey[i], 1, 1, flamedir[i], c_white, 0.8);
  flamelife[i] -= 1*global.framerate;
 }
 

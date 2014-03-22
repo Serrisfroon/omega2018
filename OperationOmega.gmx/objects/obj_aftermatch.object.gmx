@@ -118,9 +118,9 @@ global.rot2-=4;
 global.rot3+=6;
 
 //Draw the cursor
-draw_sprite_ext(spr_cursor, targethit, mouse_x, mouse_y, scaling*0.7, scaling*0.7, global.rot1, c_white, 0.7);
-draw_sprite_ext(spr_cursor, targethit+1, mouse_x, mouse_y, scaling*0.7, scaling*0.7, global.rot2, c_white, 0.7);
-draw_sprite_ext(spr_cursor, targethit+2, mouse_x, mouse_y, scaling*0.7, scaling*0.7, global.rot3, c_white, 0.7);
+draw_sprite_ext(spr_cursor, targethit, mouse_x, mouse_y, 0.7, 0.7, global.rot1, c_white, 0.7);
+draw_sprite_ext(spr_cursor, targethit+1, mouse_x, mouse_y, 0.7, 0.7, global.rot2, c_white, 0.7);
+draw_sprite_ext(spr_cursor, targethit+2, mouse_x, mouse_y, 0.7, 0.7, global.rot3, c_white, 0.7);
 </string>
           </argument>
         </arguments>
