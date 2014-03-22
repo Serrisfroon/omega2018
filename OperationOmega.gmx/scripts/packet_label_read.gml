@@ -19,7 +19,7 @@ switch(label)
       label -= 50;
 
       obj_mod.dummy = floor(label/20)-1;
-      label -= (dummy+1)*20;
+      label -= (obj_mod.dummy+1)*20;
       obj_mod.packet = label;
  break;
 }
