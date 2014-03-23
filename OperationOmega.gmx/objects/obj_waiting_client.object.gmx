@@ -407,7 +407,7 @@ writebyte(11, 0);
 writebyte(global.mymid, 0);
 writeshort(c_black, 0);
 writestring(sendline, 0);
-sendmessage(global.host, 0, 0, 0);
+sendmessage(global.host, "", 0, 0);
 
 keyboard_string = "";
 </string>

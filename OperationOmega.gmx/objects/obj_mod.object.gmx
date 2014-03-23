@@ -859,23 +859,20 @@ switch(refreshing)
             <string>//This part of the step event deals with player communications
 //This is the host object, so it must relay messages to other
 //players
-check_disconnect();
+//check_disconnect();
 
 //Start the infinite while loop. It will cycle through until 
 //there are no new messages
 while(true)
  {
   //Initialize variables
-  var size;
+  //var size;
   size = 0;
   //Check each player one by one for a new message
-  for(i = 0; i &lt; ds_list_size(global.clients); i += 1)
+  for(clienti = 0; clienti &lt; ds_list_size(global.clients); clienti += 1)
   {
    //Check for a tcp message
-   size = receivemessage(client_port(i), 0, 0);
-   //If no tcp from this player, try  udp
-   if(size &lt;= 0)
-    size = receivemessage(client_udpsock(i), 0, 0);
+   size = receivemessage(client_port(clienti), 0, 0);
    //If a message was received, break the for loop
    if(size &gt; 0) break;
   }

@@ -15,7 +15,7 @@ switch(type)
       for(i = 0; i < ds_list_size(global.clients); i +=1)
       {
        if(client_mid(i) != block)
-        sendmessage(client_port(i),0,0,0);
+        sendmessage(client_port(i),"",0,0);
       }
  break;
  case 1:

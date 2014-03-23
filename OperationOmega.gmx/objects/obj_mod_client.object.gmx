@@ -37,7 +37,7 @@
       writebyte(floor(global.ping[global.mymid]/20), 0);
       writebyte(fps, 0);
       pinged = 0;
-      sendmessage(global.host, 0, 0, 0);   
+      sendmessage(global.host, "", 0, 0);   
       sendping = 120;   
  break;
  default:
@@ -93,7 +93,7 @@ switch(refreshing)
       }
       //Send to the host
       //sendmessage(global.host, 0, 0, 0);   
-        sendmessage(global.host, 0, 0, 0);
+        sendmessage(global.host, "", 0, 0);
       refreshing = 3;
  break;
  default:
