@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_stop_all();
+            <string>updatenow = 10;
+sound_stop_all();
 if(global.musictoggle = 0)
 {
     audio_stop_music();
@@ -382,28 +383,34 @@ while(true)
   }
 
 //Send the constant update
-clearbuffer(0);
-writebyte(CLIENT_CHECK, 0);
-writebyte(ds_list_size(global.clients)+1, 0);
-global.playercount = ds_list_size(global.clients)+1;
-writebyte(global.maxplayers, 0);
-writestring(global.matchtype, 0);
-writebyte(global.matchvariable, 0);
-writestring(global.matchlevel, 0);
-for(i = 0; i &lt;= 7; i += 1)
+if(updatenow = 0)
 {
- writebyte(global.activated[i], 0);
- if(global.activated[i] = 1)
- {
-  writestring(global.othername[i], 0);
-  writebyte(global.team[i], 0);
-  writebyte(global.lolship[i], 0);
-  writebyte(global.readied[i], 0);
- }
+    clearbuffer(0);
+    writebyte(CLIENT_CHECK, 0);
+    writebyte(ds_list_size(global.clients)+1, 0);
+    global.playercount = ds_list_size(global.clients)+1;
+    writebyte(global.maxplayers, 0);
+    writestring(global.matchtype, 0);
+    writebyte(global.matchvariable, 0);
+    writestring(global.matchlevel, 0);
+    for(i = 0; i &lt;= 7; i += 1)
+    {
+     writebyte(global.activated[i], 0);
+     if(global.activated[i] = 1)
+     {
+      writestring(global.othername[i], 0);
+      writebyte(global.team[i], 0);
+      writebyte(global.lolship[i], 0);
+      writebyte(global.readied[i], 0);
+     }
+    }
+    writebyte(global.redteam, 0);
+    writebyte(global.blueteam, 0);
+    client_sendall(0, 0);
+    updatenow = 10;
 }
-writebyte(global.redteam, 0);
-writebyte(global.blueteam, 0);
-client_sendall(0, 0);
+else
+    updatenow -= 1;
 
 if(room = rm_aftergame) exit;
 if(obj_readygo.go = 7) exit;

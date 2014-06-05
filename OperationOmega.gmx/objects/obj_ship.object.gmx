@@ -1194,7 +1194,7 @@ if(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
         y -= 10;
         facedir = direction;
     }
-    
+    obj_mod.refreshing = 0;
     exit;
 }
 
@@ -2045,7 +2045,10 @@ if(speed &lt; maxspeed+bonusspeed)
     speed += 0.2;
 
 if(speed &gt; maxspeed+0.2 &amp;&amp; predictspeed = 1)
+{
     predictspeed = 3;
+    obj_mod.refreshing = 0;
+}
 //Disable acceleration if under stasis effect
 if(extraslow &gt; 0)
 {
@@ -4164,6 +4167,8 @@ predictspeed = 1;
 boosteffect = instance_create(x+lengthdir_x(8, image_angle-180), y+lengthdir_y(8, image_angle-180), obj_boosteffect)
 boosteffect.image_angle = image_angle;
 boosteffect.source = obj_ship;
+obj_mod.refreshing = 0;
+
 </string>
           </argument>
         </arguments>
@@ -4190,6 +4195,7 @@ boosteffect.source = obj_ship;
 if(global.chatting = true || hacked = true) exit;
 
 predictspeed = 2;
+obj_mod.refreshing = 0;
 
 </string>
           </argument>
@@ -4217,6 +4223,8 @@ predictspeed = 2;
 if(global.chatting = true || hacked = true) exit;
 
 predictturn = 1;
+obj_mod.refreshing = 0;
+
 </string>
           </argument>
         </arguments>
@@ -4243,6 +4251,7 @@ predictturn = 1;
 if(global.chatting = true || hacked = true) exit;
 
 predictturn = 2;
+obj_mod.refreshing = 0;
 
  
 </string>
@@ -5903,6 +5912,7 @@ switch(global.shipselect)
           <argument>
             <kind>1</kind>
             <string>predictspeed = 0;
+obj_mod.refreshing = 0;
 
 </string>
           </argument>
@@ -5927,6 +5937,7 @@ switch(global.shipselect)
           <argument>
             <kind>1</kind>
             <string>predictspeed = 0;
+obj_mod.refreshing = 0;
 
 </string>
           </argument>
@@ -5952,6 +5963,7 @@ switch(global.shipselect)
             <kind>1</kind>
             <string>predictturn = 0;
 thisturn = 0;
+obj_mod.refreshing = 0;
 
 </string>
           </argument>
@@ -5977,6 +5989,7 @@ thisturn = 0;
             <kind>1</kind>
             <string>predictturn = 0;
 thisturn = 0;
+obj_mod.refreshing = 0;
 
 </string>
           </argument>

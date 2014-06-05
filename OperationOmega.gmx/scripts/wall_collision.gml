@@ -79,6 +79,7 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
             alarm[11] = 240;
         }    
     }
+    obj_mod.refreshing = 0;
 }
 else
     
@@ -148,4 +149,6 @@ else
                 alarm[11] = 300;
             }    
         }
+        obj_mod.refreshing = 0;
+
     }

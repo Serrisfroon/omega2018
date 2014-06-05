@@ -23,4 +23,4 @@ switch(label)
       obj_mod.packet = label;
  break;
 }
-
+update_ship_read();

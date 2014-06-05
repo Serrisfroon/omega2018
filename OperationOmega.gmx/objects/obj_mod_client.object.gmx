@@ -96,9 +96,6 @@ switch(refreshing)
         sendmessage(global.host, "", 0, 0);
       refreshing = 3;
  break;
- default:
-         refreshing -= 1;
- break;
 }
 
 </string>
@@ -136,9 +133,6 @@ while(true)
   size = 0;
   //Check for a tcp message
   size = receivemessage(global.host, 0, 0);
-  //If there is no tcp message, try for a udp message
-  if(size &lt;= 0)
-   size = receivemessage(global.udpsock, 0, 0);
   //If there was no response, the host disconnected
   if(size == 0 || disconnectcheck &gt;= 300)
   {
@@ -739,11 +733,12 @@ else
 //Center your ship
 screen_shake(view_object);
 //Update match time
-if(global.matchtype = "stock")
- exit;
+if(global.matchtype != "stock")
+{
 global.time = date_current_datetime();
 if(minute = 0)
  global.matchcolor = c_red;
+}
 
 </string>
           </argument>

@@ -30,7 +30,7 @@ if(compress > 12)
 }
 if(compress > 8)
 {
-      global.playership[dummy].turning = 1;
+      global.playership[dummy].turning = 2;
       compress -= 8;
 }
 if(compress > 4)

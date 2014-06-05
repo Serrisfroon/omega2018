@@ -6,7 +6,7 @@ if(obj_ship.deploystock[argument0] < obj_ship.maxdstock[argument0])
  obj_ship.deploystock[argument0] += singleratio;
 
 if(room != rm_practice)
-    exit;
+    return 0;
  switch(global.deploy[argument0])
  {
   case 1:

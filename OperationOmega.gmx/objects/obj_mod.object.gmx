@@ -829,9 +829,7 @@ switch(refreshing)
       client_sendall(0, 0);
       refreshing = 5;
  break;
- default:
-         refreshing -= 1;
- break;
+
 }
 
 </string>
@@ -856,7 +854,8 @@ switch(refreshing)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//This part of the step event deals with player communications
+            <string>
+//This part of the step event deals with player communications
 //This is the host object, so it must relay messages to other
 //players
 //check_disconnect();
@@ -869,12 +868,14 @@ while(true)
   //var size;
   size = 0;
   //Check each player one by one for a new message
-  for(clienti = 0; clienti &lt; ds_list_size(global.clients); clienti += 1)
+  for(i = 0; i &lt; ds_list_size(global.clients); i += 1)
   {
    //Check for a tcp message
-   size = receivemessage(client_port(clienti), 0, 0);
+   size = receivemessage(client_port(i), 0, 0);
    //If a message was received, break the for loop
-   if(size &gt; 0) break;
+   if(size &gt; 0) {
+   show_message("shit happened");
+   break;}
   }
   //If no message was received, break the while loop
   if(size &lt; 0) break;
@@ -1299,12 +1300,13 @@ while(true)
  }
 //Listen for a new player
 newclient = tcpaccept(global.listen, true);
-if(newclient &lt;= 0)
- exit;
-//Reject the new player
-clearbuffer(0);
-writebyte(CLIENT_UNABLE, 0);
-sendmessage(newclient, 0, 0, 0);
+if(newclient &gt; 0)
+{
+    //Reject the new player
+    clearbuffer(0);
+    writebyte(CLIENT_UNABLE, 0);
+    sendmessage(newclient, 0, 0, 0);
+}
 </string>
           </argument>
         </arguments>

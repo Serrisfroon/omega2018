@@ -6,7 +6,7 @@ sockId = tcpconnect("insomniasoft.net", 80, 0, 0);
 if(!sockId)
 {
  show_message("Unable to connect");
- exit;
+ return 0;
 }
 
 setformat(sockId, 1, chr(13) + chr(10));

@@ -201,7 +201,7 @@ else
           case 1: //Alphastar
                sprite_index = spr_alphastar;
                autoturn = 2*global.framerate;
-               forceturn = 3*global.framerate;
+               forceturn = 5*global.framerate;
                minspeed = 2*global.framerate;
                maxspeed = 7*global.framerate;
                controlturn = 0.75*global.framerate;
@@ -209,7 +209,7 @@ else
           case 2: //Swiftwing
                sprite_index = spr_swiftwing;
                autoturn = 3*global.framerate;
-               forceturn = 5*global.framerate;
+               forceturn = 8*global.framerate;
                minspeed = 4*global.framerate;
                maxspeed = 10*global.framerate;               
                controlturn = 1.2*global.framerate;
@@ -217,7 +217,7 @@ else
           case 3: //Goliath
                sprite_index = spr_goliath;
                autoturn = 1*global.framerate;
-               forceturn = 2*global.framerate;
+               forceturn = 3*global.framerate;
                minspeed = 1*global.framerate;
                maxspeed = 5*global.framerate;
                controlturn = 0.5*global.framerate;
@@ -231,7 +231,7 @@ else
           case 1: //Alphastar
                sprite_index = spr_alphastar_enemy;
                autoturn = 2*global.framerate;
-               forceturn = 3*global.framerate;
+               forceturn = 5*global.framerate;
                minspeed = 2*global.framerate;
                maxspeed = 7*global.framerate;               
                controlturn = 0.75*global.framerate;
@@ -239,7 +239,7 @@ else
           case 2: //Swiftwing
                sprite_index = spr_swiftwing_enemy;
                autoturn = 3*global.framerate;
-               forceturn = 5*global.framerate;
+               forceturn = 8*global.framerate;
                minspeed = 4*global.framerate;
                maxspeed = 10*global.framerate;               
                controlturn = 1.2*global.framerate;
@@ -247,7 +247,7 @@ else
           case 3: //Goliath
                sprite_index = spr_goliath_enemy;
                autoturn = 1*global.framerate;
-               forceturn = 2*global.framerate;
+               forceturn = 3*global.framerate;
                minspeed = 1*global.framerate;
                maxspeed = 5*global.framerate;               
                controlturn = 0.5*global.framerate;

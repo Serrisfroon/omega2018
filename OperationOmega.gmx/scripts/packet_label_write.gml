@@ -24,3 +24,4 @@ switch(packet)
  break;
 }
 writebyte(output,0);
+update_ship_write();

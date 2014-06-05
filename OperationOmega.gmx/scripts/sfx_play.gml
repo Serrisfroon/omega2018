@@ -7,7 +7,7 @@ soundy = argument2;
 soundcount = instance_number(obj_soundeffect);
 
 if(global.sfxtoggle = 1)
-    exit;
+    return 0;
 if(soundcount >= 8)
     with(obj_soundeffect)
         if(soundnumber >= 8)

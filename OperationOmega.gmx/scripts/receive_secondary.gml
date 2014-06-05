@@ -881,7 +881,7 @@
              }
         
              if(instance_number(align) < 1)
-              exit;
+              return 0;
              with(align)
              {
               if(mid = obj_mod.dummy)
