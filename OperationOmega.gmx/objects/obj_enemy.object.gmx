@@ -39,7 +39,7 @@ beserking= 0;
 heat = 50;
 maxarmor = 100
 stasismark = 100;
-
+snapdir = 0;
 nextturnblur = 0;
 totalturnblur = 0;
 
@@ -63,11 +63,11 @@ shooting = 0;
 smoke = 6;
 alarm[2] = 1;
 //Set default movement values to prevent error
-autoturn = 2*global.framerate;
-forceturn = 5*global.framerate;
-minspeed = 2*global.framerate;
-maxspeed = 7*global.framerate; 
-controlturn = 0.75*global.framerate;
+autoturn = 2;
+forceturn = 5;
+minspeed = 2;
+maxspeed = 7; 
+controlturn = 0.75;
 //Initialize Hacker Mine hack variable
 hacked = false;
 //Initialize Shock Missile shock variable
@@ -679,23 +679,15 @@ image_angle = facedir;
 
 //Handle abilities
 if(global.lolship[mid] = 1)
- if(abilityactive = 1)
- {
-  controlturn = 0.1
-  if(global.framerate = 2)
-  controlturn = 0.4;
- }
- else
- {
-  controlturn = 0.75
-  if(global.framerate = 2)
-  controlturn = 3;
- }
+    if(abilityactive = 1)
+        controlturn = 0.1
+    else
+        controlturn = 0.75
 
 //update the facedir of this ship
 prespeed = speed;
-hspeed += lengthdir_x(controlturn, facedir);
-vspeed += lengthdir_y(controlturn, facedir);
+hspeed += lengthdir_x(prespeed/7, facedir);
+vspeed += lengthdir_y(prespeed/7, facedir);
 speed = prespeed;
 //Handle swiftwing warping
 if(warping &gt; -1)
@@ -750,6 +742,10 @@ switch(turning)
  break;
 }
 
+if(facedir &gt; 360)
+    facedir -= 360;
+if(facedir &lt; 0)
+    facedir += 360;
 
 //Predict speed
 speedmin = minspeed;
@@ -798,7 +794,8 @@ switch(speeding)
  case 0:
     oldspeeding = 0;
  break;
-}//Lower speed
+}
+//Lower speed
 if(speed &gt; speedmin) 
  speed -= 0.04; 
 else 
@@ -824,7 +821,7 @@ if(shoot &lt;= 0)
         part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
         if(global.psplasheffect = 1)
          part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);      
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", newdir-3+random(6), mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", (direction+(snapdir*10))-3+primary_random(6, mid), mid, 0);
   break;
   
   //Sonic
@@ -836,8 +833,8 @@ if(shoot &lt;= 0)
         part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
         if(global.psplasheffect = 1)
          part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+random(14), mid, 0);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+random(14), mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", (direction+(snapdir*10))-7+primary_random(14, mid), mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", (direction+(snapdir*10))-7+primary_random(14, mid), mid, 0);
   break;
   
   //Wave
@@ -850,7 +847,7 @@ if(shoot &lt;= 0)
         if(global.psplasheffect = 1)
          part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 15);
         //Create the shot and give it speed and facedir
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", newdir-1+random(2), mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", (direction+(snapdir*10))-1+primary_random(2, mid), mid, 0);
   break;
 
   //Flank
@@ -866,7 +863,7 @@ if(shoot &lt;= 0)
         sfx_play(snd_flank, x, y);
         flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank_enemy);
         flank.speed = 14;
-        flank.direction = newdir-7+random(14);
+        flank.direction = (direction+(snapdir*10))-7+primary_random(14, mid);
         flank.mid = mid;
         flank.target = flankcurve;
   break;
@@ -888,7 +885,7 @@ if(shoot &lt;= 0)
                 global.playership[global.checkmid].stasisslow = 1;
         sfx_play(snd_stasis, x, y);
         bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew_enemy);
-        bullet.direction = newdir;
+        bullet.direction = (direction+(snapdir*10));
         bullet.mid = mid;
         if(stasisslow = 1)
             shoot = 20;
@@ -907,13 +904,13 @@ if(shoot &lt;= 0)
         //Create the shot and give it speed and facedir
         cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire_enemy);
         cross.speed = 16;
-        cross.direction = newdir;
+        cross.direction = (direction+(snapdir*10));
         cross.mid = mid;
         cross.side = 1;
         //Create the shot and give it speed and facedir
         cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire_enemy);
         cross.speed = 16;
-        cross.direction = newdir;
+        cross.direction = (direction+(snapdir*10));
         cross.mid = mid;
         cross.side = 2;
   break;
@@ -953,12 +950,14 @@ if(shoot &lt;= 0)
         part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
         if(global.psplasheffect = 1)
          part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-        addshotdir = -5+random(10); 
+        addshotdir = -5+primary_random(10, mid); 
         sfx_play(snd_double, x, y);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", newdir+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", (direction+(snapdir*10))+addshotdir, mid, 0);
         enemynear = instance_nearest(x, y, prnt_ally);
         if(instance_exists(enemynear))
             newdir = aim_limit(facedir-180, point_direction(x, y, enemynear.x, enemynear.y), 30)-180;
+        else
+            newdir = (direction+(snapdir*10))
         bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", newdir-180, mid, 0);
   break;
 
@@ -971,7 +970,7 @@ if(shoot &lt;= 0)
         part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
         if(global.psplasheffect = 1)
          part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);      
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", newdir-4+random(8), mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", (direction+(snapdir*10))-4+primary_random(8, mid), mid, 0);
   break;
   
   //Spread Primary
@@ -983,15 +982,15 @@ if(shoot &lt;= 0)
         part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
         if(global.psplasheffect = 1)
          part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 30);
-        addshotdir = -5+random(10); 
+        addshotdir = -5+primary_random(10, mid); 
         sfx_play(snd_spread, x, y);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir+addshotdir, mid, 0);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir-15+addshotdir, mid, 0);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir-30+addshotdir, mid, 0);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir-45+addshotdir, mid, 0);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir+15+addshotdir, mid, 0);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir+30+addshotdir, mid, 0);
-        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir+45+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", (direction+(snapdir*10))+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", (direction+(snapdir*10))-15+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", (direction+(snapdir*10))-30+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", (direction+(snapdir*10))-45+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", (direction+(snapdir*10))+15+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", (direction+(snapdir*10))+30+addshotdir, mid, 0);
+        bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", (direction+(snapdir*10))+45+addshotdir, mid, 0);
   break;
 
  }

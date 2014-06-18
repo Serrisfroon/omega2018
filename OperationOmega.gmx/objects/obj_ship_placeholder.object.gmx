@@ -47,6 +47,7 @@ maxshield = 100;
 maxarmor = 100;
 autoturn = 0;
 dualmissile = 0;
+snapdir = 0;
 hit = 0;
 dusted = 0;
 secondary = 0;

@@ -80,6 +80,7 @@ else
 //Initialize score window values
 for(i = 0; i &lt; 8; i += 1)
 {
+ global.primaryRNG[i] = 1234;
  global.playerfps[i] = 60;
  global.ping[i] = 0;
  global.kills[i] = 0;
@@ -221,7 +222,7 @@ view_yview[0] = room_height/2 - view_hview[0]/2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>beginning = 1;
+            <string>wearbeginning = 1;
 
 //If on the barricade map, move the background to maintain its center  
 if(room = rm_satellite)
@@ -306,14 +307,14 @@ if(global.master = true)
    //Create an ally if this player is on your team
    if(global.team[i] = global.team[global.mymid])
    {
-    global.playership[i] = instance_create(8000, 8000, obj_ally);
+    global.playership[i] = instance_create(6500, 6500, obj_ally);
     global.playership[i].ally = true;
     global.playership[i].thisname = global.othername[i];
    }
    //Create an enemy if this player is not on your team
    else
    {
-    global.playership[i] = instance_create(8000, 8000, obj_enemy);
+    global.playership[i] = instance_create(6500, 6500, obj_enemy);
     global.playership[i].ally = false;
     global.playership[i].thisname = global.othername[i];
    }
@@ -339,14 +340,14 @@ else
    //Create an ally if this player is on your team
    if(global.team[i] = global.team[global.mymid])
    {
-    global.playership[i] = instance_create(8000, 8000, obj_ally);
+    global.playership[i] = instance_create(6500, 6500, obj_ally);
     global.playership[i].ally = true;
     global.playership[i].thisname = global.othername[i];
    }
    //Create an enemy if this player is not on your team
    else
    {
-    global.playership[i] = instance_create(8000, 8000, obj_enemy);
+    global.playership[i] = instance_create(6500, 6500, obj_enemy);
     global.playership[i].ally = false;
     global.playership[i].thisname = global.othername[i];
    }
@@ -373,6 +374,8 @@ global.matchcolor = c_black;
 //Transfer extra background speeds
 obj_mod.back_extrahspeed = back_extrahspeed;
 obj_mod.back_extravspeed = back_extravspeed;
+
+instance_destroy();
 
 
 

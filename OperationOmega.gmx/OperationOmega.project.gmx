@@ -5,40 +5,6 @@
   </Configs>
   <datafiles number="3" name="datafiles">
     <datafile>
-      <name>changelog.rtf</name>
-      <exists>-1</exists>
-      <size>14501</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>1373109428311098624</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>changelog.rtf</filename>
-    </datafile>
-    <datafile>
-      <name>guide.rtf</name>
-      <exists>-1</exists>
-      <size>5422</size>
-      <exportAction>2</exportAction>
-      <exportDir></exportDir>
-      <overwrite>0</overwrite>
-      <freeData>-1</freeData>
-      <removeEnd>0</removeEnd>
-      <store>0</store>
-      <ConfigOptions>
-        <Config name="Default">
-          <CopyToMask>1373109428311098624</CopyToMask>
-        </Config>
-      </ConfigOptions>
-      <filename>guide.rtf</filename>
-    </datafile>
-    <datafile>
       <name>thirtyninedll.dll</name>
       <exists>-1</exists>
       <size>82944</size>
@@ -665,9 +631,11 @@
       <script>scripts\get_turn.gml</script>
       <script>scripts\aim_limit.gml</script>
     </scripts>
-    <scripts name="Fucking Triangles">
+    <scripts name="Fucking Triangles and Collisions">
       <script>scripts\triangle_area.gml</script>
       <script>scripts\point_in_triangle2.gml</script>
+      <script>scripts\wall_collision.gml</script>
+      <script>scripts\attack_collision.gml</script>
     </scripts>
     <scripts name="Misc Compressions">
       <script>scripts\prediction_compress.gml</script>
@@ -703,21 +671,39 @@
       <script>scripts\sql_modify.gml</script>
       <script>scripts\sql_remove.gml</script>
     </scripts>
-    <script>scripts\chatline_add.gml</script>
+    <scripts name="Crush">
+      <scripts name="Pack">
+        <script>scripts\clearpack.gml</script>
+        <script>scripts\crush.gml</script>
+        <script>scripts\bufferpack.gml</script>
+      </scripts>
+      <scripts name="Unpack">
+        <script>scripts\uncrushbegin.gml</script>
+        <script>scripts\uncrush.gml</script>
+      </scripts>
+      <scripts name="Advanced">
+        <script>scripts\crushbitcount.gml</script>
+        <script>scripts\wastedbits.gml</script>
+      </scripts>
+      <scripts name="Others">
+        <script>scripts\initpack.gml</script>
+        <script>scripts\convert_from_binary.gml</script>
+        <script>scripts\convert_to_binary.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="Misc Netcode">
+      <script>scripts\chatline_add.gml</script>
+      <script>scripts\check_disconnect.gml</script>
+      <script>scripts\version_update.gml</script>
+      <script>scripts\download_game.gml</script>
+    </scripts>
     <script>scripts\view_sync.gml</script>
     <script>scripts\select_tip.gml</script>
     <script>scripts\random_map.gml</script>
-    <script>scripts\attack_collision.gml</script>
-    <script>scripts\wall_collision.gml</script>
     <script>scripts\omegadata_read.gml</script>
     <script>scripts\omegadata_write.gml</script>
-    <script>scripts\check_disconnect.gml</script>
-    <script>scripts\version_update.gml</script>
-    <script>scripts\download_game.gml</script>
-    <script>scripts\update_ship_write.gml</script>
-    <script>scripts\update_ship_read.gml</script>
+    <script>scripts\primary_random.gml</script>
   </scripts>
-  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_digital</font>
     <font>fonts\fnt_chat</font>
@@ -726,7 +712,6 @@
   <objects name="objects">
     <objects name="In Game">
       <object>objects\obj_ship</object>
-      <object>objects\obj_grazefield</object>
       <object>objects\obj_ally</object>
       <object>objects\obj_enemy</object>
       <object>objects\obj_wall</object>
@@ -1039,6 +1024,7 @@
       <object>objects\obj_practice_enemytele</object>
     </objects>
     <object>objects\obj_postgrid</object>
+    <object>objects\obj_grazefield</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room24</room>

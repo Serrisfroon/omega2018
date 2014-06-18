@@ -110,14 +110,16 @@ if(global.newgame = 0)
 global.redteamout = 0;
 global.blueteamout = 0;
 
-
+         if(global.gameslist = 1)
+         {
+ 
           if(global.playercount = global.maxplayers)
             roomstatus = "Full";
           else
             roomstatus = "Waiting";
           global.createtime = get_servertime();
           sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, roomstatus);
-
+}
 </string>
           </argument>
         </arguments>

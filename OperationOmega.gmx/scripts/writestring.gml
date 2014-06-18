@@ -8,3 +8,4 @@ Argument0 = String to write.
 it to 0 to use the default buffer.
 */
 return external_call(global._BufB, argument0, argument1);
+

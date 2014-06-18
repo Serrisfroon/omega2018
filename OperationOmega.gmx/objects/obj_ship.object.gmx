@@ -31,12 +31,11 @@ view_object = id;
 nextturnblur = 0;
 totalturnblur = 0;
 
+snapdir = 0;
 
 //Initialize redirect variable for instant firing
 redirectfire = 0;
 
-//Create your graze field
-field = instance_create(x, y, obj_grazefield);
 
 //Set invincibility time
 invincible = 0.6;
@@ -413,11 +412,7 @@ with(obj_shieldpulse)
 with(obj_turret)
     if(mid = global.mymid)
         instance_destroy();
-        
-//Destroy your graze field
-with(field)
-    instance_destroy();
-        
+                
 with(obj_trigger)
     if(mid = global.mymid)
         instance_destroy();
@@ -1098,21 +1093,16 @@ fuse.mid = global.mymid;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_listener_position(x, y, 0);
-
+            <string>
 //Primary weapon fire delay
 shoot -= 1;
-
-//Replace graze field
-field.x = x;
-field.y = y;
 
 //Change the angle of the ship
 image_angle = facedir;
 //update the direction of this ship
 prespeed = speed;
-hspeed += lengthdir_x(controlturn, facedir);
-vspeed += lengthdir_y(controlturn, facedir);
+hspeed += lengthdir_x(prespeed/7, facedir);
+vspeed += lengthdir_y(prespeed/7, facedir);
 speed = prespeed;
 
 //Handle swiftwing warping
@@ -3789,8 +3779,9 @@ if(shoot &lt;= 0)
                 part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
                 part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
                 
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);        
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", newdir-3+random(6), global.mymid, 0);
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+                snapdir = (newdir-direction)/5;
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", newdir-3+primary_random(6, global.mymid), global.mymid, 0);
             }
             else
             {
@@ -3816,9 +3807,10 @@ if(shoot &lt;= 0)
                 part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
                 part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
                 
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+random(14), global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+random(14), global.mymid, 0);
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+                snapdir = (newdir-direction)/5;
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
             }
             else
             {
@@ -3845,8 +3837,9 @@ if(shoot &lt;= 0)
                 part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 15);
                 
                 //Create the shot and give it speed and facedir
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);        
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", newdir-1+random(2), global.mymid, 0);
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+                snapdir = (newdir-direction)/5;
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", newdir-1+primary_random(2, global.mymid), global.mymid, 0);
             }
             else
             {
@@ -3875,8 +3868,9 @@ if(shoot &lt;= 0)
                 //Create the shot and give it speed and facedir
                 flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank);
                 flank.speed = 14;
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-                flank.direction = newdir-7+random(14);
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+                snapdir = (newdir-direction)/5;
+                flank.direction = newdir-7+primary_random(14, global.mymid);
                 flank.mid = global.mymid;
             }
             else
@@ -3903,7 +3897,8 @@ if(shoot &lt;= 0)
                 part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
                 part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
                 //Create the shot and give it speed and facedir
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 40);      
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 40)/5)*5;      
+                snapdir = (newdir-direction)/5;
                 bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew);
                 sfx_play(snd_stasis, x, y);
                 bullet.direction = newdir;
@@ -3919,7 +3914,7 @@ if(shoot &lt;= 0)
             }
         break;
         
-        //Crossfire
+        //Helix
         case 6:
             //Check to see if you have enough heat to shoot
             if(heat &gt; 4.1)
@@ -3936,15 +3931,15 @@ if(shoot &lt;= 0)
                 sfx_play(snd_helix, x, y);
                 cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
                 cross.speed = 16;
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-                cross.direction = newdir;
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+                snapdir = (newdir-direction)/5;
+                cross.direction = newdir-7+primary_random(14, global.mymid);;
                 cross.mid = global.mymid;
                 cross.side = 1;
                 //Create the shot and give it speed and facedir
                 cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
                 cross.speed = 16;
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-                cross.direction = newdir;
+                cross.direction = newdir-7+primary_random(14, global.mymid);;
                 cross.mid = global.mymid;
                 cross.side = 2;
             }          
@@ -4020,13 +4015,15 @@ if(shoot &lt;= 0)
                 part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
                 part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
                 sfx_play(snd_double, x, y);
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)-5+random(10); 
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", newdir, global.mymid, 0);
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5; 
+                snapdir = (newdir-direction)/5;
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", newdir-5+primary_random(10, global.mymid), global.mymid, 0);
                 //Fire the second shot at the closest enemy
                 enemynear = instance_nearest(x, y, prnt_enemy);
                 if(instance_exists(enemynear))
-                    newdir = aim_limit(facedir-180, point_direction(x, y, enemynear.x, enemynear.y), 30)-180;
-                bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", newdir-180, global.mymid, 0);
+                    bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", aim_limit(facedir-180, point_direction(x, y, enemynear.x, enemynear.y), 30), global.mymid, 0);
+                else
+                    bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", newdir-180, global.mymid, 0);
             }
             else
             {
@@ -4051,8 +4048,9 @@ if(shoot &lt;= 0)
                 part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
                 part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
                 part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);        
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", newdir-4+random(8), global.mymid, 0);
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+                snapdir = (newdir-direction)/5;
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", newdir-4+primary_random(8, global.mymid), global.mymid, 0);
             }
             else
             {
@@ -4079,14 +4077,16 @@ if(shoot &lt;= 0)
                 part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 30);
                 sfx_play(snd_spread, x, y);
                 //Find the newdir and create the bullets
-                newdir = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 10)-5+random(10);        
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir-15, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir-30, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir-45, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir+15, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir+30, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", newdir+45, global.mymid, 0);
+                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;  
+                snapdir = (newdir-direction)/5;
+                spreaddir = newdir-5+primary_random(10, global.mymid);  
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir, global.mymid, 0);
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-15, global.mymid, 0);
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-30, global.mymid, 0);
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-45, global.mymid, 0);
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+15, global.mymid, 0);
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+30, global.mymid, 0);
+                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+45, global.mymid, 0);
             }
             else
             {

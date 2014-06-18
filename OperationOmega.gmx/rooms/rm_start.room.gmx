@@ -11,8 +11,10 @@
   <colour>0</colour>
   <showcolour>-1</showcolour>
   <code>cursor_sprite = spr_empty;
+window_set_cursor(cr_none);
 //sounds_init();
 dllinit(0,true,true);
+initpack();
 global.fromprofile = 0;
 global.tutorial = 0;
 global.messageup = 0;
@@ -52,7 +54,9 @@ global.sshakeeffect = 1;
         global.mapselect[i] = 100;
 
 for(i = 0; i &lt; 8; i += 1)
+{
   global.lolship[i] = 0;
+}
 
 
 view_sync(global.resolution);
@@ -74,6 +78,7 @@ else
 }</code>
   <enableViews>0</enableViews>
   <clearViewBackground>-1</clearViewBackground>
+  <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>0</isSet>
     <w>0</w>

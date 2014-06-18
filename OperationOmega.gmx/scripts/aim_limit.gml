@@ -7,7 +7,7 @@
 //Returns the changed direction
 /////////////////////////////////////////////////////////////////
 //Initialize variables
-var startdirec, change, lolmax;
+var startdirec, change, lolmax, gauge;
 startdirec = argument0
 change = argument1-argument0;
 lolmax = argument2;
@@ -22,9 +22,18 @@ if(change < -180)
 if(lolmax <= abs(change))
 {
  if(change < 0)
-  return startdirec-lolmax;
+ {
+  gauge = startdirec-lolmax;
+  if(gauge < 0)
+    gauge += 360;
+ }
  else
-  return startdirec+lolmax;
+ {
+  gauge = startdirec+lolmax;
+  if(gauge > 360)
+    gauge -= 360;
+ }
+ return gauge;
 }
 else
  return argument1;

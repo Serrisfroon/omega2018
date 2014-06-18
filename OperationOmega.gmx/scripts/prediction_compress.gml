@@ -1,5 +1,5 @@
 //This function compresses the three prediction variables into a single variable
-//with a value 1-27. Because of this, 1 byte is sent for predictions in the 
+//with a value 1-71. Because of this, 1 byte is sent for predictions in the 
 //refresh packet, and all three predictions can be sent whenever any change
 //////////////////////////////////////////////////////////////////////////////////
 //argument0 = auto-turn prediction

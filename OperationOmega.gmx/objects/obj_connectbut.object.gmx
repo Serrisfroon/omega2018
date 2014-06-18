@@ -125,7 +125,6 @@ global.creatinggame = 0;
 //Set the host tcp value
 global.host = server;
 setnagle(global.host, true);
-
 //Wait for a reply from the host
 var size;
 while(true)

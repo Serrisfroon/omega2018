@@ -42,6 +42,7 @@ dusted = 0;
 newdir = 0;
 heat = 50;
 shieldup = 0;
+snapdir = 0;
 
 //Set values of ship to avoid error
 cooldown = 0;

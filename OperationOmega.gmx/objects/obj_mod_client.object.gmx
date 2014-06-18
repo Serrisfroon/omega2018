@@ -50,17 +50,19 @@ if((obj_ship.armor &lt;= 0 &amp;&amp; obj_ship.beserk = 0) || instance_number(ob
 switch(refreshing)
 {
  case 0:
-      clearbuffer(0);
+      refreshing = 20;
+      clearpack();
       packet_label_write(0, global.mymid);
-      writebyte(obj_ship.direction/1.5, 0);
-      writebyte(obj_ship.facedir/1.5, 0);
-      writeshort(obj_ship.x, 0);
-      writeshort(obj_ship.y, 0);
-      writebyte(obj_ship.speed*10, 0);
-      writebyte(prediction_compress(0, obj_ship.predictturn, obj_ship.predictspeed, obj_ship.nowshoot), 0);
+      crush(round(obj_ship.direction*10), 3600, 0);
+      crush(round(obj_ship.facedir*10), 3600, 0);
+      crush(round(obj_ship.x*10), 65000, 0);
+      crush(round(obj_ship.y*10), 65000, 0);      
+      crush(round(obj_ship.speed*100), 2500, 0);
+      crush(prediction_compress(0, obj_ship.predictturn, obj_ship.predictspeed, obj_ship.nowshoot), 72, 0);
       if(obj_ship.nowshoot = 1)
       {
-       writebyte(obj_ship.newdir/1.5, 0);
+       refreshing = 3;
+       crush(round(obj_ship.newdir*10), 3600, 0);
        switch(global.primary)
        {
         case 4:
@@ -78,26 +80,37 @@ switch(refreshing)
                break;
              }
             }
-            writebyte(testtarget, 0);
+            crush(testtarget, 8, 0);
         break;
         case 6:
-             writebyte(point_distance(obj_ship.x, obj_ship.y, mouse_x, mouse_y)/10, 0);
+             crush(min(100, round(point_distance(obj_ship.x, obj_ship.y, mouse_x, mouse_y)/10)), 100, 0);
         break;
         case 7:
              if(foundtarget != -1)
-              writebyte(foundtarget.mid, 0);
+              crush(foundtarget.mid, 10, 0);
              else
-              writebyte(10, 0);
+              crush(10, 10, 0);
         break;
        }
       }
       //Send to the host
       //sendmessage(global.host, 0, 0, 0);   
+        bufferpack();
         sendmessage(global.host, "", 0, 0);
-      refreshing = 3;
  break;
+ default:
+    refreshing -= 1;
+ break;   
 }
 
+if(obj_ship.snapdir != oldsnap)
+{
+    clearbuffer(0);
+    packet_label_write(13, global.mymid);
+    writebyte(obj_ship.snapdir+100, 0);
+    writeushort(global.primaryRNG[global.mymid], 0);
+    sendmessage(global.host, "", 0, 0);
+}
 </string>
           </argument>
         </arguments>
@@ -174,6 +187,7 @@ while(true)
   
    //The player sends its refresh packet
    case 0:
+        uncrushbegin();
         for(i = 0; i &lt; 8; i += 1)
         {
          if(i != 0) 
@@ -183,23 +197,26 @@ while(true)
           //Read the cycle if it is your player slot, and put it into a junk variable.
           if(i = global.mymid)
           {
-           holdvar = readbyte(0);
-           holdvar = readbyte(0);
-           holdvar = readshort(0);
-           holdvar = readshort(0);
-           holdvar = readbyte(0);
-           holdvar = readbyte(0);
+           holdvar = uncrush(3600, 0);
+           holdvar = uncrush(3600, 0);
+           holdvar = uncrush(65000, 0);
+           holdvar = uncrush(65000, 0);
+           holdvar = uncrush(2500, 0);
+           holdvar = uncrush(72, 0);
            //Check if the compressed prediction holds shooting as 1
-           if(holdvar &gt;= 28)
+           if(holdvar &gt; 36)
            {
-            holdvar = readbyte(0);
+            holdvar = uncrush(3600, 0);
             switch(global.primary)
             {          
              case 4:
-             case 5:
+                  holdvar = uncrush(8, 0);
+             break;
              case 6:
+                  holdvar = uncrush(100, 0);
+             break;
              case 7:
-                  holdvar = readbyte(0);
+                  holdvar = uncrush(10, 0);
              break;
             }
            }
@@ -207,27 +224,27 @@ while(true)
           }
          }             
          if(global.playership[i] = obj_dud) continue;
-         global.playership[i].direction = readbyte(0)*1.5;
-         global.playership[i].facedir = readbyte(0)*1.5;
-         global.playership[i].x = readshort(0);
-         global.playership[i].y = readshort(0);
-         global.playership[i].speed = readbyte(0)/10;
+        global.playership[i].direction = uncrush(3600, 0)/10;
+        global.playership[i].facedir = uncrush(3600, 0)/10;
+        global.playership[i].x = uncrush(65000, 0)/10;
+        global.playership[i].y = uncrush(65000, 0)/10;
+        global.playership[i].speed = uncrush(2500, 0)/100;
          dummy = i;
-         decomp = readbyte(0);
+         decomp = uncrush(72, 0);
          prediction_decompress(decomp);
          if(global.playership[i].shooting = 1)
          {
-          global.playership[i].newdir = readbyte(0)*1.5;
+          global.playership[i].newdir = uncrush(3600, 0)/10;
           switch(global.playerprimary[i])
           {          
            case 4:
-                global.playership[i].flankcurve = readbyte(0);
+                global.playership[i].flankcurve = uncrush(8, 0);
            break;
            case 6:
-                global.playership[i].crossfiredist = readbyte(0)*10;
+                global.playership[i].crossfiredist = uncrush(100, 0)*10;
            break;
            case 7:
-                global.playership[i].siphontarget = readbyte(0);
+                global.playership[i].siphontarget = uncrush(10, 0);
            break;
           }
          }
@@ -498,6 +515,12 @@ while(true)
         global.playership[dummy].beserk = 1;
    break;
    
+   //Change snapdir
+   case 13:
+        global.playership[dummy].snapdir = readbyte(0)-100;
+        global.primaryRNG[dummy] = readushort(0);
+   break;
+   
    //A Deathmatch is over
    case TIME_UP:
         chatline_add(readstring(0), c_red);
@@ -568,6 +591,8 @@ if(fadetoblack = 1)
     if(blackalpha &gt;= 1)
         room_goto(rm_aftermatch);
 }
+
+audio_listener_position(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, 0);
 
 //Update chain image loop
 chaincount += 1;

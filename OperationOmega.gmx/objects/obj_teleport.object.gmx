@@ -99,6 +99,7 @@ dusted = 0;
 newdir = 0;
 chained = 0;
 smoke = 6;
+snapdir = 0;
 
 //Set values of ship to avoid error
 cooldown = 0;
