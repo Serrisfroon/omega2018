@@ -20,6 +20,7 @@ background_index[5] = global.background[5];
 background_index[7] = global.background[7];</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
+  <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>0</isSet>
     <w>0</w>

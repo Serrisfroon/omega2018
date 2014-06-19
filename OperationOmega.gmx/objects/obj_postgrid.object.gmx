@@ -67,17 +67,31 @@ go = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(hspeed != 0)
+            <string>if(go = 1)
+    exit;
+if(hspeed != 0)
     {
-        (instance_create(x, y, obj_postgrid)).vspeed = 18;
-        (instance_create(x, y, obj_postgrid)).vspeed = -18;
+        grid = instance_create(x, y, obj_postgrid);
+        grid.vspeed = 18;
+        grid.go = 1;
+        grid = instance_create(x, y, obj_postgrid);
+        grid.vspeed = -18;
+        grid.go = 1;
     }
     else
     {
-        (instance_create(x, y, obj_postgrid)).hspeed = 18;
-        (instance_create(x, y, obj_postgrid)).hspeed = -18;
+        grid = instance_create(x, y, obj_postgrid);
+        grid.hspeed = 18;
+        grid.go = 1;
+        grid = instance_create(x, y, obj_postgrid);
+        grid.hspeed = -18;
+        grid.go = 1;
     }
-  
+if(hspeed &lt; 0 &amp;&amp; x = 396) go = 1;
+if(hspeed &gt; 0 &amp;&amp; x = 378) go = 1;
+if(vspeed &lt; 0 &amp;&amp; y = 256) go = 1;
+if(vspeed &gt; 0 &amp;&amp; y = 234) go = 1;
+
 </string>
           </argument>
         </arguments>
@@ -119,5 +133,8 @@ draw_sprite_ext(sprite_index, 0, x, y, 1, 1, direction, c_white, 1);
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>10,8</point>
+    <point>10,10</point>
+  </PhysicsShapePoints>
 </object>

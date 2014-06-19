@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>keyboard_string = '';
 mouseover = 0;
 alpha = 0;
 if(global.outcome = 0)

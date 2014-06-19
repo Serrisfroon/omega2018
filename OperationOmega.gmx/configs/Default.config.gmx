@@ -214,12 +214,13 @@
     <option_noscreensaver>true</option_noscreensaver>
     <option_ouya_packaging>0</option_ouya_packaging>
     <option_priority>0</option_priority>
-    <option_ps4_interpolate>true</option_ps4_interpolate>
+    <option_ps4_interpolate>-1</option_ps4_interpolate>
     <option_ps4_nptitleid></option_ps4_nptitleid>
-    <option_ps4_nptitlesecret></option_ps4_nptitlesecret>
-    <option_ps4_package_id>IV0002-NPXS29129_00-APP0990000000022</option_ps4_package_id>
-    <option_ps4_passcode>GvE6xCpZxd96scOUGuLPbuLp8O800B0s</option_ps4_passcode>
-    <option_ps4_scale>-1</option_ps4_scale>
+    <option_ps4_nptitlesecret>Memo1
+</option_ps4_nptitlesecret>
+    <option_ps4_package_id></option_ps4_package_id>
+    <option_ps4_passcode></option_ps4_passcode>
+    <option_ps4_scale>0</option_ps4_scale>
     <option_ps4_texture_page>2048</option_ps4_texture_page>
     <option_psvita_interpolation>true</option_psvita_interpolation>
     <option_psvita_package_id>EP9000-NPXB01693_00-GMSTUDIORUNNER00</option_psvita_package_id>
@@ -350,7 +351,7 @@
     <option_use_new_audio>True</option_use_new_audio>
     <option_variableerrors>False</option_variableerrors>
     <option_version>100</option_version>
-    <option_version_build>8</option_version_build>
+    <option_version_build>10</option_version_build>
     <option_version_company></option_version_company>
     <option_version_copyright></option_version_copyright>
     <option_version_description></option_version_description>
@@ -394,7 +395,7 @@
     <option_win8_texture_page>2048</option_win8_texture_page>
     <option_win8_wide_logo>Configs\Default\Windows8\logos\logo310.png</option_win8_wide_logo>
     <option_windowcolor>clBlack</option_windowcolor>
-    <option_windows_build_version>8</option_windows_build_version>
+    <option_windows_build_version>10</option_windows_build_version>
     <option_windows_company_info></option_windows_company_info>
     <option_windows_copyright_info></option_windows_copyright_info>
     <option_windows_description_info></option_windows_description_info>

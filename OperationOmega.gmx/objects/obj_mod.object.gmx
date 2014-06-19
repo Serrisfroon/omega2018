@@ -624,10 +624,12 @@ if(global.ships&gt;0)
  tele.mid = global.mymid;
  //destroy the error stopper
  with(obj_ship_placeholder)
- instance_destroy();
+    instance_destroy();
   //Send respawn to host
   clearbuffer(0);
   packet_label_write(10, global.mymid);
+  writeushort(global.myspawnx, 0);
+  writeushort(global.myspawny, 0);
   //Send to everyone if host
   if(global.master = true)
    client_sendall(0, 0);
@@ -846,7 +848,6 @@ if(obj_ship.snapdir != oldsnap)
     clearbuffer(0);
     packet_label_write(13, global.mymid);
     writebyte(obj_ship.snapdir+100, 0);
-    writeushort(global.primaryRNG[global.mymid], 0);
     client_sendall(0, 0);
 }
 </string>
@@ -1204,7 +1205,9 @@ while(true)
    
    //Respawn Packet
    case 10:
-        tele = instance_create(global.spawnx[anotherspawn[dummy]], global.spawny[anotherspawn[dummy]], obj_teleport_other);
+        dummyx = readushort(0);
+        dummyy = readushort(0);
+        tele = instance_create(dummyx, dummyy, obj_teleport_other);
         tele.mid = dummy;
         client_sendall(0, dummy);        
    break;  
@@ -1224,6 +1227,11 @@ while(true)
    //Change snapdir
    case 13:
         global.playership[dummy].snapdir = readbyte(0)-100;
+        client_sendall(0, dummy);
+   break;
+   
+   //Begin Firing Primary weapon
+   case 14:
         global.primaryRNG[dummy] = readushort(0);
         client_sendall(0, dummy);
    break;
@@ -2314,6 +2322,7 @@ switch(global.shipselect)
 selectx = 96;
 
 obj_ship.redirectfire = 1;
+if(global.firingmode = 1)
 with(obj_ship)
     event_perform(ev_mouse, ev_global_right_press);
 </string>
@@ -2532,6 +2541,7 @@ switch(global.shipselect)
 }
 
 obj_ship.redirectfire = 1;
+if(global.firingmode = 1)
 with(obj_ship)
     event_perform(ev_mouse, ev_global_right_press);
 </string>
@@ -2684,6 +2694,7 @@ switch(global.shipselect)
 }
 
 obj_ship.redirectfire = 1;
+if(global.firingmode = 1)
 with(obj_ship)
     event_perform(ev_mouse, ev_global_right_press);
 </string>
@@ -2764,8 +2775,9 @@ switch(global.esecond[1])
 }
 
 obj_ship.redirectfire = 1;
-with(obj_ship)
-    event_perform(ev_mouse, ev_global_right_press);
+if(global.firingmode = 1)
+    with(obj_ship)
+        event_perform(ev_mouse, ev_global_right_press);
 </string>
           </argument>
         </arguments>

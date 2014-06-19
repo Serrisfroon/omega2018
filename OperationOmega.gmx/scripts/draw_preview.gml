@@ -4,8 +4,8 @@ _background = argument0;
 _backscroll = argument1;
 _backwidth = background_get_width(_background);
 
-while(_backscroll > _backwidth)
-    _backscroll -= _backwidth;
+_backscroll = _backscroll mod _backwidth;
+
 if(_backscroll > _backwidth-200)
 {
     draw_background_part_ext(_background, _backscroll, 0, _backwidth-_backscroll, 80, 0, 187, 1, 1, c_white, image_alpha);

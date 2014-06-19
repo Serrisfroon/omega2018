@@ -108,7 +108,6 @@ if(obj_ship.snapdir != oldsnap)
     clearbuffer(0);
     packet_label_write(13, global.mymid);
     writebyte(obj_ship.snapdir+100, 0);
-    writeushort(global.primaryRNG[global.mymid], 0);
     sendmessage(global.host, "", 0, 0);
 }
 </string>
@@ -501,7 +500,7 @@ while(true)
   
    //Respawn Packet
    case 10:
-        tele = instance_create(global.spawnx[anotherspawn[dummy]], global.spawny[anotherspawn[dummy]], obj_teleport_other);
+        tele = instance_create(readushort(0), readushort(0), obj_teleport_other);
         tele.mid = dummy;
    break;  
 
@@ -518,10 +517,14 @@ while(true)
    //Change snapdir
    case 13:
         global.playership[dummy].snapdir = readbyte(0)-100;
-        global.primaryRNG[dummy] = readushort(0);
    break;
    
-   //A Deathmatch is over
+   //Begin Firing Primary weapon
+   case 14:
+        global.primaryRNG[dummy] = readushort(0);
+   break;
+
+      //A Deathmatch is over
    case TIME_UP:
         chatline_add(readstring(0), c_red);
         chatline_add(readstring(0), c_blue);

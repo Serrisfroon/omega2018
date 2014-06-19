@@ -1113,6 +1113,7 @@ if(warping &gt; -1)
     {
         x = warpx;
         y = warpy;
+        view_object = id;
     }
     //Return to the normal sprite at the last frame
     if(warping = 0)
@@ -1148,7 +1149,7 @@ else
  
 //Constantly recover energy the current energy regen rate
 if(energy &lt; 100 &amp;&amp; cooldown = 1) energy += energygain;
-if(heat &lt; 50) 
+/*if(heat &lt; 50) 
     heat += 0.2;
 else 
 {
@@ -1156,7 +1157,7 @@ else
         instance_create(x, y, obj_overheatshine);
     cooldown = 1;
 }
-
+*/
 //Bounce back into the map if you move out of it
 if(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
 {
@@ -3724,6 +3725,16 @@ nowshoot = 1;
 shooting = 1;
 obj_mod.refreshing = 0;
 
+clearbuffer(0);
+packet_label_write(14, global.mymid);
+writeushort(global.primaryRNG[global.mymid], 0);
+//Send to everyone if host
+if(global.master = true)
+    client_sendall(0, 0);
+else
+    //Send to host if client
+    sendmessage(global.host, 0, 0, 0);
+
 </string>
           </argument>
         </arguments>
@@ -3752,13 +3763,11 @@ if(global.chatting = true)
  
 
 //Disbale shooting if hacked or overheated
-if(hacked = true || cooldown = 0) 
+if(hacked = true) 
     exit;
     
 if(shoot &lt;= 0)
 {
-    var oldheat;
-    oldheat = heat;
 
     nowshoot = 1;
     
@@ -3767,308 +3776,178 @@ if(shoot &lt;= 0)
         
         //Needle Primary
         case 1:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 2.1)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 2.1;
-                shoot = 7;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_aqua);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-                
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
-                snapdir = (newdir-direction)/5;
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", newdir-3+primary_random(6, global.mymid), global.mymid, 0);
-            }
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+            //set a fire rate
+            shoot = 7;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_aqua);
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
+            
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+            snapdir = (newdir-direction)/5;
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", newdir-3+primary_random(6, global.mymid), global.mymid, 0);
         break;
         
         //Sonic
         case 2:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 2.4)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 2.4;
-                shoot = 4;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, make_color_rgb(152, 77, 7));
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
-                
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
-                snapdir = (newdir-direction)/5;
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
-            }
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+            shoot = 4;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, make_color_rgb(152, 77, 7));
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
+            
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+            snapdir = (newdir-direction)/5;
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
         break;
         
         //Wave
         case 3:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 4.5)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 4.5;
-                shoot = 12;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_purple);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 15);
-                
-                //Create the shot and give it speed and facedir
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
-                snapdir = (newdir-direction)/5;
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", newdir-1+primary_random(2, global.mymid), global.mymid, 0);
-            }
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+            shoot = 12;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_purple);
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 15);
+            
+            //Create the shot and give it speed and facedir
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+            snapdir = (newdir-direction)/5;
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", newdir-1+primary_random(2, global.mymid), global.mymid, 0);
         break;
         
         //Seeker
         case 4:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 5.3)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 5.3;
-                shoot = 10;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_orange);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-                sfx_play(snd_flank, x, y);
-                //Create the shot and give it speed and facedir
-                flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank);
-                flank.speed = 14;
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
-                snapdir = (newdir-direction)/5;
-                flank.direction = newdir-7+primary_random(14, global.mymid);
-                flank.mid = global.mymid;
-            }
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+            shoot = 10;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_orange);
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
+            sfx_play(snd_flank, x, y);
+            //Create the shot and give it speed and facedir
+            flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank);
+            flank.speed = 14;
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+            snapdir = (newdir-direction)/5;
+            flank.direction = newdir-7+primary_random(14, global.mymid);
+            flank.mid = global.mymid;
         break;
         
         //Stasis
         case 5:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt;= 11)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 11;
-                shoot = 25;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_aqua);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-                //Create the shot and give it speed and facedir
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 40)/5)*5;      
-                snapdir = (newdir-direction)/5;
-                bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew);
-                sfx_play(snd_stasis, x, y);
-                bullet.direction = newdir;
-                bullet.mid = global.mymid;
-            }
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+            shoot = 25;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_aqua);
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
+            //Create the shot and give it speed and facedir
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 40)/5)*5;      
+            snapdir = (newdir-direction)/5;
+            bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew);
+            sfx_play(snd_stasis, x, y);
+            bullet.direction = newdir;
+            bullet.mid = global.mymid;
         break;
         
         //Helix
         case 6:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 4.1)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 4.1;
-                shoot = 9;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_fuchsia);
-                part_type_speed(obj_partsystem.primarypart,1.68,2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-230,facedir+230,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-                //Create the shot and give it speed and facedir
-                sfx_play(snd_helix, x, y);
-                cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
-                cross.speed = 16;
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
-                snapdir = (newdir-direction)/5;
-                cross.direction = newdir-7+primary_random(14, global.mymid);;
-                cross.mid = global.mymid;
-                cross.side = 1;
-                //Create the shot and give it speed and facedir
-                cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
-                cross.speed = 16;
-                cross.direction = newdir-7+primary_random(14, global.mymid);;
-                cross.mid = global.mymid;
-                cross.side = 2;
-            }          
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+            shoot = 9;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_fuchsia);
+            part_type_speed(obj_partsystem.primarypart,1.68,2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-230,facedir+230,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
+            //Create the shot and give it speed and facedir
+            sfx_play(snd_helix, x, y);
+            cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
+            cross.speed = 16;
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+            snapdir = (newdir-direction)/5;
+            cross.direction = newdir-7+primary_random(14, global.mymid);;
+            cross.mid = global.mymid;
+            cross.side = 1;
+            //Create the shot and give it speed and facedir
+            cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
+            cross.speed = 16;
+            cross.direction = newdir-7+primary_random(14, global.mymid);;
+            cross.mid = global.mymid;
+            cross.side = 2;
         break;
         
         //Siphon
         case 7:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 5)
+            nowshoot = 0;
+            shoot = 12;
+            newdir = 0;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_aqua);
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
+            //Check if the target is nearby
+            if(obj_mod.foundtarget &lt; 0 || point_distance(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y) &gt; 400) 
             {
-                nowshoot = 0;
-                //Reduce heat and set a fire rate
-                heat -= 5;
-                shoot = 12;
-                newdir = 0;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_aqua);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
-                //Check if the target is nearby
-                if(obj_mod.foundtarget &lt; 0 || point_distance(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y) &gt; 400) 
-                {
-                    heat -= 2;
-                    break;
-                }
-                //Check if the target is withing firing angle
-                point = point_direction(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y);
-                if(aim_limit(facedir, point, 30) != point)
-                {
-                    heat -= 2;
-                    break;
-                }
-                //Create the shot and give it speed and facedir
-                nowshoot = 1;
-                siphon = instance_create(0, 0, obj_siphon);
-                siphon.mid = global.mymid;
-                siphon.targetmid = obj_mod.foundtarget.mid;
-                sfx_play(snd_siphon, x, y);
-                //Absorb shield
-                if(obj_mod.foundtarget.shield &gt; 0) shield += 2;
-                if(shield &gt; maxshield) shield = maxshield;
+                heat -= 2;
+                break;
             }
-            else
+            //Check if the target is withing firing angle
+            point = point_direction(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y);
+            if(aim_limit(facedir, point, 30) != point)
             {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
+                heat -= 2;
+                break;
             }
+            //Create the shot and give it speed and facedir
+            nowshoot = 1;
+            siphon = instance_create(0, 0, obj_siphon);
+            siphon.mid = global.mymid;
+            siphon.targetmid = obj_mod.foundtarget.mid;
+            sfx_play(snd_siphon, x, y);
+            //Absorb shield
+            if(obj_mod.foundtarget.shield &gt; 0) shield += 2;
+            if(shield &gt; maxshield) shield = maxshield;
         break;
         
         //Double Primary
         case 8:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 3)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 3;
-                shoot = 10;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_maroon);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-                sfx_play(snd_double, x, y);
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5; 
-                snapdir = (newdir-direction)/5;
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", newdir-5+primary_random(10, global.mymid), global.mymid, 0);
-                //Fire the second shot at the closest enemy
-                enemynear = instance_nearest(x, y, prnt_enemy);
-                if(instance_exists(enemynear))
-                    bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", aim_limit(facedir-180, point_direction(x, y, enemynear.x, enemynear.y), 30), global.mymid, 0);
-                else
-                    bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", newdir-180, global.mymid, 0);
-            }
+            shoot = 10;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_maroon);
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
+            sfx_play(snd_double, x, y);
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5; 
+            snapdir = (newdir-direction)/5;
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", newdir-5+primary_random(10, global.mymid), global.mymid, 0);
+            //Fire the second shot at the closest enemy
+            enemynear = instance_nearest(x, y, prnt_enemy);
+            if(instance_exists(enemynear))
+                bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", aim_limit(facedir-180, point_direction(x, y, enemynear.x, enemynear.y), 30), global.mymid, 0);
             else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+                bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", newdir-180, global.mymid, 0);
         break;
         
         //Pierce Primary
         case 9:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 3.3)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 3.3;
-                shoot = 7;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_aqua);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
-                snapdir = (newdir-direction)/5;
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", newdir-4+primary_random(8, global.mymid), global.mymid, 0);
-            }
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
+            shoot = 7;
+            //Create an effect
+            part_type_color1(obj_partsystem.primarypart, c_aqua);
+            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+            snapdir = (newdir-direction)/5;
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", newdir-4+primary_random(8, global.mymid), global.mymid, 0);
         break;
         
         //Spread Primary
         case 10:
-            //Check to see if you have enough heat to shoot
-            if(heat &gt; 7)
-            {
-                //Reduce heat and set a fire rate
-                heat -= 7;
                 shoot = 20;
                 //Create an effect
                 part_type_color1(obj_partsystem.primarypart, c_maroon);
@@ -4087,21 +3966,9 @@ if(shoot &lt;= 0)
                 bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+15, global.mymid, 0);
                 bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+30, global.mymid, 0);
                 bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+45, global.mymid, 0);
-            }
-            else
-            {
-                nowshoot = 0;
-                obj_mod.refreshing = 0;       
-                heat = 0;
-                cooldown = 0;
-                    audio_play_sound(snd_overheat, 1, 0);
-            }
         break;
     
     }
-
-if(beserk = 1)
-    heat = oldheat;
     
 } 
 
@@ -5823,6 +5690,10 @@ switch(global.shipselect)
         warping = 40;
         heat -= 30;
         cooldown = 0;
+        swiftteled = instance_create(x, y, obj_swifttele);
+        view_object[0] = swiftteled;
+        swiftteled.hspeed = (warpx-x)/10;
+        swiftteled.vspeed = (warpy-y)/10;
         
         //Change sprite to show warp
         sprite_index = spr_swiftwing_warp;

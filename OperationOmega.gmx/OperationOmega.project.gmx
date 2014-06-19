@@ -1025,6 +1025,7 @@
     </objects>
     <object>objects\obj_postgrid</object>
     <object>objects\obj_grazefield</object>
+    <object>objects\obj_swifttele</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room24</room>
