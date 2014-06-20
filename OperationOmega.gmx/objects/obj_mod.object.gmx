@@ -587,7 +587,10 @@ blackalpha = 0;
             <kind>1</kind>
             <string>//Close the udp stocket if you are a client
 if(global.master = false)
+{
  closesocket(global.udpsock);
+ closesocket(global.host);
+}
 //End 39dll
 dllfree();
 //Return to the appropriate room
@@ -753,7 +756,7 @@ else
 switch(refreshing)
 {
  case 0:
-      refreshing = 20;
+      refreshing = 5;
       clearpack();
       packet_label_write(0, global.mymid);
       crush(round(obj_ship.direction*10), 3600, 0);
@@ -1619,19 +1622,15 @@ switch(selectx)
 {
  case 0:
       keyboard_key_press(ord('2'));
-      keyboard_key_release(ord('2'));
  break;
  case 32:
       keyboard_key_press(ord('3'));
-      keyboard_key_release(ord('3'));
  break;
  case 64:
       keyboard_key_press(ord('4'));
-      keyboard_key_release(ord('4'));
  break;
  case 96:
       keyboard_key_press(ord('1'));
-      keyboard_key_release(ord('1'));
  break;
 } 
 </string>
@@ -1661,19 +1660,15 @@ switch(selectx)
 {
  case 0:
       keyboard_key_press(ord('4'));
-      keyboard_key_release(ord('4'));
  break;
  case 32:
       keyboard_key_press(ord('1'));
-      keyboard_key_release(ord('1'));
  break;
  case 64:
       keyboard_key_press(ord('2'));
-      keyboard_key_release(ord('2'));
  break;
  case 96:
       keyboard_key_press(ord('3'));
-      keyboard_key_release(ord('3'));
  break;
 } 
 </string>
@@ -2091,6 +2086,36 @@ draw_rectangle(view_xview[0]-30, view_yview[0]-30, view_xview[0]+view_wview[0]+3
 draw_sprite_ext(spr_cursor, targethit, mouse_x, mouse_y, scaling*0.7, scaling*0.7, global.rot1, c_white, 0.7);
 draw_sprite_ext(spr_cursor, targethit+1, mouse_x, mouse_y, scaling*0.7, scaling*0.7, global.rot2, c_white, 0.7);
 draw_sprite_ext(spr_cursor, targethit+2, mouse_x, mouse_y, scaling*0.7, scaling*0.7, global.rot3, c_white, 0.7);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="115">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if window_get_fullscreen()
+{
+    window_set_fullscreen(false);
+}
+else
+{
+    window_set_fullscreen(true);
+}
 </string>
           </argument>
         </arguments>
@@ -2811,6 +2836,7 @@ if(global.master = true)
  //Remove the game from the games list if you made the game on it
  if(global.gameslist = 1)
         sql_remove(global.myipaddress); 
+ host_quit();
  //Set time until exiting the game
  alarm[1]=2;
  exit;

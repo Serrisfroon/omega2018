@@ -44,7 +44,7 @@ switch(type)
       sprite = spr_wave;
       life = 240;
       after = obj_wave_hit;
-      dmg = 18;
+      dmg = 16;
       mask = 14;
       lolspeed = 11*global.framerate;
       sfx_play(snd_wave, lolx, loly);

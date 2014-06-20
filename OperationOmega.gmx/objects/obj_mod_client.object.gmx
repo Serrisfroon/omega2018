@@ -50,7 +50,7 @@ if((obj_ship.armor &lt;= 0 &amp;&amp; obj_ship.beserk = 0) || instance_number(ob
 switch(refreshing)
 {
  case 0:
-      refreshing = 20;
+      refreshing = 5;
       clearpack();
       packet_label_write(0, global.mymid);
       crush(round(obj_ship.direction*10), 3600, 0);

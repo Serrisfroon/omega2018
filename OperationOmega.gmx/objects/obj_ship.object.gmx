@@ -96,8 +96,41 @@ cooldown = 1;
 beserk = 0;
 
 //Initialize energy regenration and set time until regen speeds up
-energygain = 0.3;
-alarm[3] = 120;
+switch(global.primary)
+{
+    case 1:
+        basegain = 26/60;
+    break;
+    case 2:
+        basegain = 18/60;
+    break;
+    case 3:
+        basegain = 29/60;
+    break;
+    case 4:
+        basegain = 22/60;
+    break;
+    case 5:
+        basegain = 19/60;
+    break;
+    case 6:
+        basegain = 24/60;
+    break;
+    case 7:
+        basegain = 23/60;
+    break;
+    case 8:
+        basegain = 28/60;
+    break;
+    case 9:
+        basegain = 21/60;
+    break;
+    case 10:
+        basegain = 20/60;
+    break;
+}    
+    
+energygain = basegain;
 
 //Initialize shield regen
 alarm[4] = 1;
@@ -752,6 +785,11 @@ depoyhits = 0;
             <kind>1</kind>
             <string>//Reset shock variable
 shocked = false;
+basegain *= 3;
+if(nowshoot = 0)
+    energygain = basegain;
+else
+    energygain = basegain/2;
 
 </string>
           </argument>
@@ -813,32 +851,6 @@ if(shield &lt; maxshield)
         shield += regenrate/2;
 }
 alarm[4] = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="3">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Increase the energy regen rate and set time until next increase
-if(shocked = false)
- energygain += 0.2;
-alarm[3] = 120;
 </string>
           </argument>
         </arguments>
@@ -1148,8 +1160,8 @@ else
 
  
 //Constantly recover energy the current energy regen rate
-if(energy &lt; 100 &amp;&amp; cooldown = 1) energy += energygain;
-/*if(heat &lt; 50) 
+if(energy &lt; 100) energy += energygain;
+if(heat &lt; 50) 
     heat += 0.2;
 else 
 {
@@ -1157,7 +1169,6 @@ else
         instance_create(x, y, obj_overheatshine);
     cooldown = 1;
 }
-*/
 //Bounce back into the map if you move out of it
 if(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
 {
@@ -1241,7 +1252,7 @@ if(thisturn != lastturn)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>attack_collision(10, 10, 0, 8, "Cluster Mine");
+            <string>attack_collision(11, 11, 0, 8, "Cluster Mine");
 </string>
           </argument>
         </arguments>
@@ -1289,13 +1300,13 @@ if(thisturn != lastturn)
             <kind>1</kind>
             <string>var regdmg, penedmg;
 
-regdmg = 10;
+regdmg = 12;
 penedmg = 15;
 
 if(other.amplified = 1)
 {
     regdmg = 0;
-    penedmg = 25;
+    penedmg = 27;
 }
 attack_collision(regdmg, penedmg, 0, 8, "Strike Mine");
 
@@ -1437,10 +1448,17 @@ with(other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(attack_collision(6, 10, 0, 8, "Shock Missile") = 1)
+            <string>if(attack_collision(10, 10, 0, 8, "Shock Missile") = 1)
 {
-    shocked = true;
-    energygain = 0.1;
+    if(shocked = false)
+    {
+        shocked = true;
+        basegain /= 3;
+        if(nowshoot = 0)
+            energygain = basegain;
+        else
+            energygain = basegain/2;
+    }
     if(other.amplified = 0)
         alarm[6] = 600;
     else
@@ -1468,7 +1486,7 @@ with(other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>attack_collision(2, other.dmg, 0, 4, "Trident Missile");
+            <string>attack_collision(4, other.dmg, 0, 4, "Trident Missile");
 </string>
           </argument>
         </arguments>
@@ -1491,7 +1509,7 @@ with(other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>attack_collision(20, 15, 0, 8, "Phantom Mine");
+            <string>attack_collision(22, 16, 0, 8, "Phantom Mine");
 </string>
           </argument>
         </arguments>
@@ -1622,7 +1640,7 @@ if(armor &lt;= 0 &amp;&amp; beserk = 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>attack_collision(15, 25, 0, 8, "Hunter Mine");
+            <string>attack_collision(18, 26, 0, 8, "Hunter Mine");
 </string>
           </argument>
         </arguments>
@@ -1692,7 +1710,7 @@ attack_collision(regdmg, penedmg, 0, 8, "Layer Missile");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>attack_collision(8, 10, 0, 8, "Dual Missile");
+            <string>attack_collision(10, 10, 0, 8, "Dual Missile");
 
 </string>
           </argument>
@@ -2213,6 +2231,7 @@ event_perform(ev_keyboard, vk_control);
             <string>nowshoot = 0;
 shooting = 0;
 obj_mod.refreshing = 0;
+energygain = basegain;
 
 </string>
           </argument>
@@ -2322,11 +2341,6 @@ switch(global.secondary)
             exit;
         }
         //Initialize the attack
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         alarm[0] = 1;
         fusions = 5;
         if(amplified = 1)
@@ -2363,11 +2377,6 @@ switch(global.secondary)
         if(stardust &gt; 0)
             exit;
         //Initialize the attack
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;   
                   
         if(global.sfxtoggle = 0)  
             sfx_play(snd_swifttele, x, y);
@@ -2654,12 +2663,7 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
-        //Reduce Energy
+       //Reduce Energy
         energy -= 30;
         //Crete and send the initial shot at the cursor
         form = instance_create(x, y, obj_formationa);
@@ -2699,16 +2703,11 @@ switch(global.secondary)
     //Beam
     case 10:
         //Check if you have energy for the beam and that you are not moving
-        if((energy &lt; 60 &amp;&amp; amplified = 1) || (energy &lt; 80 &amp;&amp; amplified = 0) || speed &gt; 0)
+        if(energy &lt; 99 || speed &gt; 0)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 60;
         if(amplified = 0)
@@ -2750,11 +2749,6 @@ switch(global.secondary)
         if(instance_exists(node) &amp;&amp; node != -1)
             if(node.stage = 1)
                 exit;
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 15;
         if(amplified = 0)
@@ -2852,11 +2846,6 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         //Crete and send the initial shot at the cursor
@@ -2972,11 +2961,6 @@ switch(global.secondary)
             exit;
         }
     
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 25;
         //Create and send the initial shot at the cursor
@@ -3017,11 +3001,6 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;  
                    
         //Reduce Energy
         energy -= 25;
@@ -3292,11 +3271,6 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         //Crete and send the initial shot at the cursor
@@ -3331,12 +3305,6 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        //Initialize the attack
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;  
                    
         if(global.sfxtoggle = 0)
         {
@@ -3378,11 +3346,6 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 30;
         //Crete and send the initial shot at the cursor
@@ -3414,11 +3377,6 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 30;
         //Create and send the shot at the cursor
@@ -3451,11 +3409,6 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         with(obj_storm)
@@ -3561,11 +3514,6 @@ switch(global.secondary)
             if(speed &gt; 0)
                 exit;
                 
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         
@@ -3719,11 +3667,10 @@ switch(global.secondary)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(cooldown = 0)
-    exit;
-nowshoot = 1;
+            <string>nowshoot = 1;
 shooting = 1;
 obj_mod.refreshing = 0;
+energygain = basegain/2;
 
 clearbuffer(0);
 packet_label_write(14, global.mymid);
@@ -3806,7 +3753,7 @@ if(shoot &lt;= 0)
         
         //Wave
         case 3:
-            shoot = 12;
+            shoot = 15;
             //Create an effect
             part_type_color1(obj_partsystem.primarypart, c_purple);
             part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
@@ -4225,11 +4172,6 @@ switch(global.spacesecond)
             exit;
         }
         //Initialize the attack
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         alarm[0] = 1;
         fusions = 5;
         if(amplified = 1)
@@ -4266,12 +4208,7 @@ switch(global.spacesecond)
         if(stardust &gt; 0)
             exit;
         //Initialize the attack
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;   
-                         
+                        
         if(global.sfxtoggle = 0)
             sfx_play(snd_swifttele, x, y);
 
@@ -4385,11 +4322,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 25;
         if(amplified = 0)
@@ -4557,11 +4489,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 30;
         //Crete and send the initial shot at the cursor
@@ -4607,11 +4534,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 60;
         if(amplified = 0)
@@ -4653,11 +4575,6 @@ switch(global.spacesecond)
         if(instance_exists(node) &amp;&amp; node != -1)
             if(node.stage = 1)
                 exit;
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 15;
         if(amplified = 0)
@@ -4755,11 +4672,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         //Crete and send the initial shot at the cursor
@@ -4875,11 +4787,6 @@ switch(global.spacesecond)
             exit;
         }
     
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 25;
         //Create and send the initial shot at the cursor
@@ -4919,13 +4826,7 @@ switch(global.spacesecond)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
-        }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;  
-                   
+        }                   
         //Reduce Energy
         energy -= 25;
         //Crete and send the initial shot at the cursor
@@ -5195,11 +5096,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         //Crete and send the initial shot at the cursor
@@ -5235,11 +5131,6 @@ switch(global.spacesecond)
             exit;
         }
         //Initialize the attack
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;  
                    
         if(global.sfxtoggle = 0)
         {
@@ -5281,11 +5172,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 30;
         //Crete and send the initial shot at the cursor
@@ -5317,11 +5203,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 30;
         //Create and send the shot at the cursor
@@ -5354,11 +5235,6 @@ switch(global.spacesecond)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         with(obj_storm)
@@ -5464,11 +5340,6 @@ switch(global.spacesecond)
             if(speed &gt; 0)
                 exit;
                 
-        energygain = 0.066;
-        if(shocked = false)
-            energygain = 0.2;
-        if(beserk = 1)
-            energygain = 0.8;         
         //Reduce Energy
         energy -= 20;
         

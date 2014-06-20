@@ -29,14 +29,14 @@
               missile = instance_create(shootx, shooty, align);
               missile.startdir = shootdir;
               missile.direction = shootdir-90;
-              missile.speed = 4*global.framerate;
+              missile.speed = 4;
               missile.target = lockon;
               missile.mid = dummy;
               missile.amplified = amplified;
               missile=instance_create(shootx, shooty, align);
               missile.startdir = shootdir;
               missile.direction = shootdir+90;
-              missile.speed = 4*global.framerate;
+              missile.speed = 4;
               missile.target = lockon;
               missile.mid = dummy;
               missile.amplified = amplified;
@@ -103,7 +103,7 @@
               align = obj_layermissile;
              missile = instance_create(shootx, shooty, align);
              missile.direction = shootdir;
-             missile.speed = 12*global.framerate;
+             missile.speed = 12;
              missile.mid = dummy;
              missile.amplified = readbyte(0);
              if(global.master = true)
@@ -423,7 +423,7 @@
               missile1 = instance_create(shootx, shooty, align);
               missile1.startdir = shootdir;
               missile1.direction = shootdir;
-              missile1.speed = 4*global.framerate;
+              missile1.speed = 4;
               missile1.target = lockon;
               missile1.mid = dummy;
               missile1.trio = 1;
@@ -432,7 +432,7 @@
               missile2 = instance_create(shootx, shooty, align);
               missile2.startdir = shootdir;
               missile2.direction = shootdir-90;
-              missile2.speed = 4*global.framerate;
+              missile2.speed = 4;
               missile2.target = lockon;
               missile2.mid = dummy;
               missile2.trio = 2;
@@ -442,7 +442,7 @@
               missile3 = instance_create(shootx, shooty, align);
               missile3.startdir = shootdir;
               missile3.direction = shootdir+90;
-              missile3.speed = 4*global.framerate;
+              missile3.speed = 4;
               missile3.target = lockon;
               missile3.mid = dummy;
               missile3.trio = 3;
@@ -527,7 +527,7 @@
              }
              missile = instance_create(shootx, shooty, align);
              missile.direction = shootdir;
-             missile.speed = 12*global.framerate;
+             missile.speed = 12;
              missile.target = lockon;
              missile.mid = dummy;
              missile.amplified = readbyte(0);
@@ -576,7 +576,7 @@
                align = obj_hermitmissile; 
              missile = instance_create(shootx, shooty, align);
              missile.direction = shootdir;
-             missile.speed = 13*global.framerate;
+             missile.speed = 13;
              missile.mid = dummy;
              missile.amplified = readbyte(0);
              missile.target = global.playership[targeted];
@@ -606,7 +606,7 @@
              }
              missile = instance_create(shootx, shooty, align);
              missile.direction = shootdir;
-             missile.speed = 13*global.framerate;
+             missile.speed = 13;
              missile.target = lockon;
              missile.mid = dummy;
              missile.amplified = readbyte(0);
@@ -919,7 +919,7 @@
                align = obj_splitmissile; 
              missile = instance_create(shootx, shooty, align);
              missile.direction = shootdir;
-             missile.speed = 13*global.framerate;
+             missile.speed = 13;
              missile.mid = dummy;
              missile.oldmid = -1;
              missile.damage = 11;

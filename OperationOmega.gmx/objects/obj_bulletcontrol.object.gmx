@@ -258,7 +258,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             //Find the closest enemy to the bullet
             possihit = instance_nearest(bulletx[i], bullety[i], prnt_ally);
             //Break the switch statement if there are no allys
-            if(possihit = noone) break;
+            if(possihit = noone || possihit = obj_deadship || possihit = obj_ship_placeholder) break;
             //Check if the nearest enemy is close to a collision
             //Also check if the closest ally is actually an error check
             //Check if the nearest enemy is close to a collision

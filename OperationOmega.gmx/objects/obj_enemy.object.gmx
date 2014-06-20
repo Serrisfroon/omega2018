@@ -839,7 +839,7 @@ if(shoot &lt;= 0)
   
   //Wave
   case 3:
-        shoot = 12;
+        shoot = 15;
         //Create an effect
         part_type_color1(obj_partsystem.primarypart, c_purple);
         part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);

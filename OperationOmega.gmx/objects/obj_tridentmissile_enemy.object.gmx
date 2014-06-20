@@ -110,6 +110,10 @@ with(obj_homingeffect)
             <kind>1</kind>
             <string>image_angle = startdir;
 visible = 1;
+if(trio != 1)
+    dmg = 4;
+else
+    dmg = 14;
 </string>
           </argument>
         </arguments>

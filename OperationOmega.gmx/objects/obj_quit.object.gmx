@@ -86,6 +86,7 @@ if(global.master = true)
 {
     if(global.gameslist = 1)
         sql_remove(global.myipaddress); 
+    host_quit();
  alarm[0] = 4;
  exit;
 }
@@ -97,6 +98,7 @@ writebyte(CLIENT_DROP, 0);
 writebyte(global.mymid, 0);
 writestring(global.name, 0);
 sendmessage(global.host, 0, 0, 0);
+closesocket(global.host);
 closesocket(global.udpsock);
 alarm[0] = 4;
 </string>
