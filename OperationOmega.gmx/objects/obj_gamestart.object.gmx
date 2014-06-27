@@ -68,13 +68,13 @@ background_vspeed[4]=back_extravspeed/5;
 //Set colors
 if(global.team[global.mymid] = 1)
 {
- global.allycolor = c_red;
- global.enemycolor = c_blue;
+ global.allycolor = make_color_rgb(255, 55, 55);
+ global.enemycolor = make_color_rgb(55, 55, 255);
 }
 else
 {
- global.allycolor = c_blue;
- global.enemycolor = c_red;
+ global.allycolor = make_color_rgb(55, 55, 255);
+ global.enemycolor = make_color_rgb(255, 55, 55);
 }
 
 //Initialize score window values

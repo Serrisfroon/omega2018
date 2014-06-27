@@ -18,6 +18,12 @@ if(invincible = 0.7)
     dmg = 0;
     pene = 0;
 }
+if(sprite_index = spr_goliath || sprite_index = spr_goliath_enemy)
+    if(abilityactive = 1)
+    {
+        dmg *= 0.4;
+        pene /= 2;
+    }
 
 sfx_play(snd_hit, x, y);
 

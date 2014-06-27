@@ -30,7 +30,6 @@ alarm[0] = 150;
 alarm[1] = 1;
 image_blend = global.allycolor;
 go = 0;
-speed = 13;
 hitting = 0;
 </string>
           </argument>
@@ -156,5 +155,8 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>24,19</point>
+    <point>24,24</point>
+  </PhysicsShapePoints>
 </object>

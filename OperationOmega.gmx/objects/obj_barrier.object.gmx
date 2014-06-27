@@ -170,7 +170,7 @@ alarm[1] = 5/global.framerate;
             <kind>1</kind>
             <string>//Increase the barrier's size to its full size
 if(image_yscale &lt; fullscale)
- image_yscale += 0.1*global.framerate;
+ image_yscale += 0.05;
 //If the barrier is at max size, set a variable to note it
 if(image_yscale &gt;= fullscale)
 {

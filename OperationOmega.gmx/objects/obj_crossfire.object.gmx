@@ -130,5 +130,8 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>24,60</point>
+    <point>60,60</point>
+  </PhysicsShapePoints>
 </object>

@@ -26,7 +26,7 @@ switch(type)
       after = obj_needle_hit;
       dmg = 10;
       mask = 5;
-      lolspeed = 13*global.framerate;
+      lolspeed = 6+speed;
       sfx_play(snd_needle, lolx, loly);
  break;
  case "Sonic":
@@ -36,7 +36,7 @@ switch(type)
       after = obj_sonic_hit;
       dmg = 4;
       mask = 3;
-      lolspeed = 17*global.framerate;
+      lolspeed = 10+speed;
       sfx_play(snd_sonic, lolx, loly);
  break;
  case "Wave":
@@ -46,7 +46,7 @@ switch(type)
       after = obj_wave_hit;
       dmg = 16;
       mask = 14;
-      lolspeed = 11*global.framerate;
+      lolspeed = 4+speed;
       sfx_play(snd_wave, lolx, loly);
  break;
  case "Crossfire":
@@ -56,7 +56,7 @@ switch(type)
       after = obj_crossfire_hit;
       dmg = 6;
       mask = 7;
-      lolspeed = 21*global.framerate;
+      lolspeed = 21;
  break;
  case "Stasis":
       name = "Stasis";
@@ -68,7 +68,7 @@ switch(type)
        after = obj_enemystasis_field;      
       dmg = 1;
       mask = 7;
-      lolspeed = 13*global.framerate;
+      lolspeed = 6+speed;
  break;
  case "Stasisb":
       name = "Stasis";
@@ -85,7 +85,7 @@ switch(type)
        after = obj_enemystasis_field;      
       dmg = 1;
       mask = 9;
-      lolspeed = 13*global.framerate;
+      lolspeed = 6+speed;
  break;
  case "Burst":
       name = "Burst";
@@ -94,7 +94,7 @@ switch(type)
       after = obj_burst_hit;      
       dmg = 5;
       mask = 7;
-      lolspeed = 12*global.framerate;
+      lolspeed = 12;
  break;
  case "Formation":
       name = "Formation";
@@ -103,7 +103,7 @@ switch(type)
       after = obj_formation_hit;      
       dmg = 5;
       mask = 7;
-      lolspeed = 10*global.framerate;
+      lolspeed = 10;
  break;
  case "Solus":
       name = "Solus";
@@ -112,7 +112,7 @@ switch(type)
       after = obj_formation_hit;      
       dmg = 4;
       mask = 7;
-      lolspeed = 14*global.framerate;
+      lolspeed = 14;
  break;
  case "Horizon":
       name = "Horizon";
@@ -121,7 +121,7 @@ switch(type)
       after = obj_slash_hit;      
       dmg = 8;
       mask = 8;
-      lolspeed = 9*global.framerate;
+      lolspeed = 9;
  break;
  case "Slash":
       name = "Slash";
@@ -130,7 +130,7 @@ switch(type)
       after = obj_slash_hit;      
       dmg = 5;
       mask = 8;
-      lolspeed = 12*global.framerate;
+      lolspeed = 12;
  break;
  case "Slashamp":
       name = "Slash";
@@ -139,7 +139,7 @@ switch(type)
       after = obj_slash_hit;      
       dmg = 5;
       mask = 8;
-      lolspeed = 15*global.framerate;
+      lolspeed = 15;
  break;
  case "Double":
       name = "Double";
@@ -148,7 +148,7 @@ switch(type)
       after = obj_double_hit;
       dmg = 8;
       mask = 7;
-      lolspeed = 13*global.framerate
+      lolspeed = 6+speed;
  break;
  case "Pierce":
       name = "Pierce";
@@ -157,7 +157,7 @@ switch(type)
       after = obj_slash_hit;
       dmg = 3;
       mask = 5;
-      lolspeed = 14*global.framerate
+      lolspeed = 7+speed;
       sfx_play(snd_pierce, lolx, loly);
  break;
  case "Spread":
@@ -167,7 +167,7 @@ switch(type)
       after = obj_spread_hit;
       dmg = 5;
       mask = 8;
-      lolspeed = 14*global.framerate
+      lolspeed = 7+speed;
  break;
  case "Turret":
       name = "Turret";
@@ -176,7 +176,7 @@ switch(type)
       after = obj_burst_hit;      
       dmg = 3;
       mask = 4;
-      lolspeed = 10*global.framerate;
+      lolspeed = 10;
       sfx_play(snd_sonic, lolx, loly);
  break;
  case "Whip":
@@ -186,7 +186,7 @@ switch(type)
       after = obj_whip_hit;      
       dmg = 5;
       mask = 8;
-      lolspeed = argument5*global.framerate;
+      lolspeed = argument5;
  break;
  case "Direct":
       name = "Direct";
@@ -195,7 +195,7 @@ switch(type)
       after = obj_whip_hit;      
       dmg = 5;
       mask = 7;
-      lolspeed = 14*global.framerate;
+      lolspeed = 14;
  break;
  case "Serpent":
       name = "Serpent";

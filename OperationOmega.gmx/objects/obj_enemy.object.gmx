@@ -424,6 +424,33 @@ depoyhits = 0;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>abilityactive = 0;
+maxspeed = 5;
+forceturn = 3;
+if(speed &gt; 5)
+    speed = 5;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="2">
       <action>
         <libid>1</libid>
@@ -677,17 +704,20 @@ fuse.mid = mid;
             <string>//Change the angle of the ship
 image_angle = facedir;
 
+//update the direction of this ship
+prespeed = speed;
 //Handle abilities
 if(global.lolship[mid] = 1)
-    if(abilityactive = 1)
-        controlturn = 0.1
-    else
-        controlturn = 0.75
-
-//update the facedir of this ship
-prespeed = speed;
-hspeed += lengthdir_x(prespeed/7, facedir);
-vspeed += lengthdir_y(prespeed/7, facedir);
+ if(abilityactive = 1)
+ {
+  controlturn = 0.1
+ }
+ else
+ {
+  controlturn = prespeed/7
+ }
+hspeed += lengthdir_x(controlturn, facedir);
+vspeed += lengthdir_y(controlturn, facedir);
 speed = prespeed;
 //Handle swiftwing warping
 if(warping &gt; -1)
@@ -862,7 +892,7 @@ if(shoot &lt;= 0)
         //Create the shot and give it speed and facedir
         sfx_play(snd_flank, x, y);
         flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank_enemy);
-        flank.speed = 14;
+        flank.speed = 7+speed;
         flank.direction = (direction+(snapdir*5))-7+primary_random(14, mid);
         flank.mid = mid;
         flank.target = flankcurve;
@@ -886,6 +916,7 @@ if(shoot &lt;= 0)
         sfx_play(snd_stasis, x, y);
         bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew_enemy);
         bullet.direction = (direction+(snapdir*5));
+        bullet.speed = 7+speed;
         bullet.mid = mid;
         if(stasisslow = 1)
             shoot = 20;
@@ -903,13 +934,13 @@ if(shoot &lt;= 0)
         sfx_play(snd_helix, x, y);
         //Create the shot and give it speed and facedir
         cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire_enemy);
-        cross.speed = 16;
+        cross.speed = 7+speed;
         cross.direction = (direction+(snapdir*5));
         cross.mid = mid;
         cross.side = 1;
         //Create the shot and give it speed and facedir
         cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire_enemy);
-        cross.speed = 16;
+        cross.speed = 7+speed;
         cross.direction = (direction+(snapdir*5));
         cross.mid = mid;
         cross.side = 2;
@@ -1505,6 +1536,9 @@ with(other) instance_destroy();
             <string>draw_flame(direction);
 draw_turnblur();
 //Draw the ship
+if(abilityactive = 1 &amp;&amp; (sprite_index = spr_goliath || sprite_index = spr_goliath_enemy))
+    draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, invincible);
+draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, 1);
 draw_sprite_ext(sprite_index,-1,x,y,1,1,image_angle,c_white,1);
 if(shocked = true)
  draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);

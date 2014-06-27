@@ -105,6 +105,7 @@
     <sprite>sprites\spr_swiftwing_beserkglow</sprite>
     <sprite>sprites\spr_swiftwing_warp</sprite>
     <sprite>sprites\spr_swiftwing_warp_enemy</sprite>
+    <sprite>sprites\spr_goliath_hyperrush</sprite>
     <sprites name="Primary">
       <sprite>sprites\spr_needle</sprite>
       <sprite>sprites\spr_needle_hit</sprite>
@@ -277,6 +278,18 @@
       <sprite>sprites\spr_homingeffect</sprite>
       <sprite>sprites\spr_slasheffect</sprite>
     </sprites>
+    <sprites name="Menu">
+      <sprites name="Mouseover Info">
+        <sprite>sprites\spr_ship_infos</sprite>
+        <sprite>sprites\spr_primary_infos</sprite>
+        <sprite>sprites\spr_energy_infos</sprite>
+        <sprite>sprites\spr_deploy_infos</sprite>
+        <sprite>sprites\spr_buff_infos</sprite>
+        <sprite>sprites\spr_map_previews</sprite>
+        <sprite>sprites\spr_matchstats</sprite>
+        <sprite>sprites\spr_stats_infos</sprite>
+      </sprites>
+    </sprites>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_messagebox</sprite>
     <sprite>sprites\spr_okaybut</sprite>
@@ -288,15 +301,12 @@
     <sprite>sprites\spr_back</sprite>
     <sprite>sprites\spr_beginoperation</sprite>
     <sprite>sprites\spr_breakline</sprite>
-    <sprite>sprites\spr_buff_infos</sprite>
     <sprite>sprites\spr_changelog</sprite>
     <sprite>sprites\spr_clicktostart</sprite>
     <sprite>sprites\spr_connect</sprite>
     <sprite>sprites\spr_creategame</sprite>
     <sprite>sprites\spr_creategamebox</sprite>
     <sprite>sprites\spr_createprofile</sprite>
-    <sprite>sprites\spr_deploy_infos</sprite>
-    <sprite>sprites\spr_energy_infos</sprite>
     <sprite>sprites\spr_enterhostip</sprite>
     <sprite>sprites\spr_firing</sprite>
     <sprite>sprites\spr_gotopractice</sprite>
@@ -308,10 +318,8 @@
     <sprite>sprites\spr_levelnames</sprite>
     <sprite>sprites\spr_loadingnumbers</sprite>
     <sprite>sprites\spr_makename_box</sprite>
-    <sprite>sprites\spr_map_previews</sprite>
     <sprite>sprites\spr_map_select</sprite>
     <sprite>sprites\spr_matchnames</sprite>
-    <sprite>sprites\spr_matchstats</sprite>
     <sprite>sprites\spr_menuback</sprite>
     <sprite>sprites\spr_menugrid</sprite>
     <sprite>sprites\spr_modbox</sprite>
@@ -322,7 +330,6 @@
     <sprite>sprites\spr_playerslot</sprite>
     <sprite>sprites\spr_playertypes</sprite>
     <sprite>sprites\spr_previewnames</sprite>
-    <sprite>sprites\spr_primary_infos</sprite>
     <sprite>sprites\spr_private</sprite>
     <sprite>sprites\spr_profiles</sprite>
     <sprite>sprites\spr_profileslot</sprite>
@@ -332,12 +339,10 @@
     <sprite>sprites\spr_selectgame</sprite>
     <sprite>sprites\spr_server</sprite>
     <sprite>sprites\spr_sfx</sprite>
-    <sprite>sprites\spr_ship_infos</sprite>
     <sprite>sprites\spr_ships_mouseon</sprite>
     <sprite>sprites\spr_singleplayer</sprite>
     <sprite>sprites\spr_statbar</sprite>
     <sprite>sprites\spr_staticons</sprite>
-    <sprite>sprites\spr_stats_infos</sprite>
     <sprite>sprites\spr_teamchange</sprite>
     <sprite>sprites\spr_title</sprite>
     <sprite>sprites\spr_tutorialbox</sprite>
@@ -345,6 +350,8 @@
     <sprite>sprites\spr_typename</sprite>
     <sprite>sprites\spr_viewmap_mask</sprite>
     <sprite>sprites\spr_weapons_infos</sprite>
+    <sprite>sprites\sprite231</sprite>
+    <sprite>sprites\spr_previewbound</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Map Preview">

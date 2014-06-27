@@ -7,7 +7,7 @@ var killer, defeated, weapon, choosemessage;
 killer = argument0;
 defeated = argument1;
 weapon = argument2;
-choosemessage = floor(random(50))
+choosemessage = floor(random(51))
 
 switch(choosemessage)
 {
@@ -162,6 +162,9 @@ switch(choosemessage)
       obj_ship.message = killer+" did a speedrun of "+defeated+".("+weapon+"%)";
  break;
  case 50:
+      obj_ship.message = killer+" bodied "+defeated+".("+weapon+")";
+ break;
+ case 51:
       obj_ship.message = killer+" crushed "+defeated+".("+weapon+")";
  break;
 }

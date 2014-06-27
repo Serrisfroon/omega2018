@@ -115,9 +115,19 @@
              barrierx = readshort(0);
              barriery = readshort(0);
              if(global.team[dummy] != global.team[global.mymid])
-              barrier = instance_create(barrierx, barriery, obj_barrier_enemy);             
+             {
+                with(obj_barrier_enemy)
+                    if(mid = obj_mod.dummy)
+                        instance_destroy();
+                barrier = instance_create(barrierx, barriery, obj_barrier_enemy);    
+             }         
              else
-              barrier = instance_create(barrierx, barriery, obj_barrier);
+             {
+                with(obj_barrier)
+                    if(mid = obj_mod.dummy)
+                        instance_destroy();
+                barrier = instance_create(barrierx, barriery, obj_barrier);
+             }
              barrier.direction = readbyte(0)*1.5;
              barrier.amplified = readbyte(0);
              barrier.mid = dummy;
@@ -550,13 +560,10 @@
         case 21:
             if(global.playership[dummy].sprite_index = spr_goliath || global.playership[dummy].sprite_index = spr_goliath_enemy)
             {
-                with(obj_shieldpulse)
-                    if(mid = obj_mod.dummy)
-                        endnow = 1;
-                with(obj_shieldpulse_enemy)
-                    if(mid = obj_mod.dummy)
-                        endnow = 1;
-                break;
+                global.playership[dummy].maxspeed = 10;
+                global.playership[dummy].speed = 10;
+                global.playership[dummy].forceturn = 9;
+                global.playership[dummy].alarm[3] = 90;
             }
 
             global.playership[dummy].abilityactive = readbyte(0);
@@ -662,7 +669,7 @@
                client_sendall(0, dummy);
         break;
         
-        //Laser
+        //Whip
         case 27:
             if(global.sfxtoggle = 0)
             {

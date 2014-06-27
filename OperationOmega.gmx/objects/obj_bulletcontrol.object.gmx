@@ -190,6 +190,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             possihit = instance_nearest(bulletx[i], bullety[i], prnt_allenemy);
             //Break the switch statement if there are no allys
             if(possihit = noone) break;
+            if(possihit.object_index = obj_ship_placeholder || possihit.object_index = obj_teleport || possihit.object_index = obj_deadship) break;
             //Check if the nearest enemy is close to a collision
             if(abs(possihit.x-bulletx[i]) &gt; 30 || abs(possihit.y-bullety[i]) &gt; 30) break;
 
@@ -258,7 +259,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             //Find the closest enemy to the bullet
             possihit = instance_nearest(bulletx[i], bullety[i], prnt_ally);
             //Break the switch statement if there are no allys
-            if(possihit = noone || possihit = obj_deadship || possihit = obj_ship_placeholder) break;
+            if(possihit = noone) break;
             //Check if the nearest enemy is close to a collision
             //Also check if the closest ally is actually an error check
             //Check if the nearest enemy is close to a collision
@@ -302,9 +303,15 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         if(bullettype[i] = spr_pierce)
                         {
                             possihit.armor -= 3;
-                            global.damagetaken[global.mymid] += 3*possihit.threshold/shielded;
-                            global.damagedealt[bulletmid[i]] += 3*possihit.threshold/shielded;                        
+                            global.damagetaken[global.mymid] += 3;
+                            global.damagedealt[bulletmid[i]] += 3;                        
                         }
+                        //Goliath Hyper Rush damage reduction
+                        if(possihit.sprite_index = spr_goliath || possihit.sprite_index = spr_goliath_enemy)
+                            if(possihit.abilityactive = 1)
+                            {
+                                bulletdamage[i] *= 0.4;
+                            }
                         //If burst, slash, or whip, apply threshold damage
                         if((bullettype[i] = spr_burst || bullettype[i] = spr_slash || bullettype[i] = spr_whip || bulletname[i] = "Formation"))
                         {
