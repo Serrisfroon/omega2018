@@ -5,7 +5,7 @@
 //possible argument5 for stasis: life
 //returns the id of the bullet
 ////////////////////////////////////////////////////////////////////////
-var lolx, loly, type, lolspeed, mid, name, sprite, life, after, dmg, mask, blend, i;
+var lolx, loly, type, lolspeed, mid, name, sprite, life, after, dmg, mask, blend, i, image;
 lolx = argument0;
 loly = argument1;
 type = argument2;
@@ -17,6 +17,11 @@ if(global.team[mid] = global.team[global.mymid])
 else
  blend = global.enemycolor;
 
+if(blend = c_red)
+    image = 0;
+else
+    image = 1;
+    
 switch(type)
 {
  case "Needle":
@@ -50,7 +55,7 @@ switch(type)
       sfx_play(snd_wave, lolx, loly);
  break;
  case "Crossfire":
-      name = "Helix";
+      name = "Seeker";
       sprite = spr_flank;
       life = 120;
       after = obj_crossfire_hit;
@@ -236,6 +241,8 @@ for(i = 1; i <= obj_bulletcontrol.bulletmax+1; i += 1)
  obj_bulletcontrol.bulletdirection[i] = obj_bulletcontrol.direction;
  //The bullet's blend atribute. It shows what team it belongs to
  obj_bulletcontrol.bulletblend[i] = blend;
+ //The bullet's image, it's single frame of the sprite
+ obj_bulletcontrol.bulletsingle[i] = image;
  //The bullet's life. Each step, it is lowered by one. At 0, this index is freed.
  obj_bulletcontrol.bulletlife[i] = life;
  //The bullet's damage. Stored to make loops much easier

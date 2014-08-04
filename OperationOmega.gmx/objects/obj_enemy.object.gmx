@@ -667,13 +667,13 @@ switch(stardust)
 if(fusions &gt; 0)
 {
 alarm[0] = 5/global.framerate;
-fusions -= 1;
 }
+fusions -= 1;
 //Create a fusion part
 fuse = instance_create(x, y, obj_fusion_enemy);
 //Set its movement
 fuse.speed = 10*global.framerate;
-fuse.direction = 72*fusions;
+fuse.direction = 60*fusions;
 //Set its target location
 fuse.targetx = hitx;
 fuse.targety = hity;
@@ -961,7 +961,7 @@ if(shoot &lt;= 0)
          siphonship = obj_ship;
         else
          siphonship = global.playership[siphontarget];
-        if(point_distance(x, y, siphonship.x, siphonship.y) &gt; 260) break;
+        if(point_distance(x, y, siphonship.x, siphonship.y) &gt; 400) break;
         //Check if the target is withing firing angle
         point = point_direction(x, y, siphonship.x, siphonship.y);
         if(aim_limit(facedir, point, 30) != point) break;
@@ -1516,6 +1516,36 @@ with(other) instance_destroy();
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Draw the player's name
+draw_set_alpha(0.7);
+draw_set_font(fnt_chat);
+if(global.team[global.mymid] = 1)
+ draw_set_color(c_navy);
+else
+ draw_set_color(c_red);
+draw_text((x-view_xview[0])/obj_mod.scaling, (y-48-view_yview[0])/obj_mod.scaling, thisname);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -1536,10 +1566,9 @@ with(other) instance_destroy();
             <string>draw_flame(direction);
 draw_turnblur();
 //Draw the ship
-if(abilityactive = 1 &amp;&amp; (sprite_index = spr_goliath || sprite_index = spr_goliath_enemy))
-    draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, invincible);
 draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, 1);
-draw_sprite_ext(sprite_index,-1,x,y,1,1,image_angle,c_white,1);
+if(abilityactive = 1 &amp;&amp; (sprite_index = spr_goliath || sprite_index = spr_goliath_enemy))
+    draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, 1);
 if(shocked = true)
  draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);
 if(beserk = true &amp;&amp; warping = -1)
@@ -1548,14 +1577,7 @@ if(beserk = true &amp;&amp; warping = -1)
 //Draw the flame trail particles
 part_system_drawit(system);
  
-//Draw the player's name
-draw_set_alpha(0.7);
-draw_set_font(fnt_chat);
-if(global.team[global.mymid] = 1)
- draw_set_color(c_navy);
-else
- draw_set_color(c_red);
-draw_text_transformed(x, y-48, thisname, obj_mod.scaling, obj_mod.scaling, 0);
+
 
 </string>
           </argument>

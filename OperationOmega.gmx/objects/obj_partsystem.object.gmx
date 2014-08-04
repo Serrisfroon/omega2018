@@ -54,6 +54,35 @@ part_type_orientation(primarypart,0,0,0,0,1);
 part_type_blend(primarypart,0);
 part_type_life(primarypart,20,30);
 
+//Electric sparks
+elecspark = part_type_create();
+part_type_shape(elecspark,pt_shape_spark);
+part_type_size(elecspark,0.10,0.43,0,0);
+part_type_scale(elecspark,1,1);
+part_type_color3(elecspark,16777215,16776960,16776960);
+part_type_alpha3(elecspark,0.93,0.70,0.09);
+part_type_speed(elecspark,2.44,3.59,0,0);
+part_type_direction(elecspark,0,359,-1,0);
+part_type_gravity(elecspark,0,270);
+part_type_orientation(elecspark,0,0,6,0,1);
+part_type_blend(elecspark,1);
+part_type_life(elecspark,20,40);
+
+
+//Stasis field sparks
+stasis_field = part_type_create();
+part_type_shape(stasis_field,pt_shape_spark);
+part_type_size(stasis_field,0.30,0.30,0,0);
+part_type_scale(stasis_field,1,1);
+part_type_color3(stasis_field,16777215,255,16777088);
+part_type_alpha3(stasis_field,0.85,0.65,0.01);
+part_type_speed(stasis_field,3.78,5.96,-0.15,0);
+part_type_direction(stasis_field,0,359,1,0);
+part_type_gravity(stasis_field,0,270);
+part_type_orientation(stasis_field,0,0,0,0,0);
+part_type_blend(stasis_field,1);
+part_type_life(stasis_field,42,61);
+
 //Fusion Flares
 fusionflare = part_type_create();
 part_type_shape(fusionflare,pt_shape_flare);
@@ -82,19 +111,62 @@ part_type_orientation(fusionring,0,359,0,0,1);
 part_type_blend(fusionring,1);
 part_type_life(fusionring,30,30);
 
+//Fusion bursts
+fusion_burst = part_type_create();
+part_type_shape(fusion_burst,pt_shape_flare);
+part_type_size(fusion_burst,0.40,0.80,-0.01,0);
+part_type_scale(fusion_burst,1,1);
+part_type_colour3(fusion_burst,8684799,255,255);
+part_type_alpha3(fusion_burst,0.87,0.36,0.03);
+part_type_speed(fusion_burst,1.06,3.52,-0.02,0);
+part_type_direction(fusion_burst,0,359,0,0);
+part_type_gravity(fusion_burst,0,270);
+part_type_orientation(fusion_burst,0,0,0,0,1);
+part_type_blend(fusion_burst,1);
+part_type_life(fusion_burst,55,72);
+
+//Stardust Smoke
+stardust_smoke = part_type_create();
+part_type_shape(stardust_smoke,pt_shape_sphere);
+part_type_size(stardust_smoke,0.83,0.93,-0.03,0);
+part_type_scale(stardust_smoke,0.7, 0.48);
+part_type_color3(stardust_smoke,16777215,8421504,8421504);
+part_type_alpha3(stardust_smoke,0.86,0.50,0.06);
+part_type_speed(stardust_smoke,1.5,2,-0.05,0);
+part_type_direction(stardust_smoke,0,359,0,0);
+part_type_gravity(stardust_smoke,0,270);
+part_type_orientation(stardust_smoke,0,0,0,0,1);
+part_type_blend(stardust_smoke,1);
+part_type_life(stardust_smoke,40,45);
+
+
 //Stardust Burst
 starburst = part_type_create();
 part_type_shape(starburst,pt_shape_spark);
-part_type_size(starburst,0.20,0.30,0,0);
+part_type_size(starburst,0.40,0.55,0,0);
 part_type_scale(starburst,1,1);
 part_type_color1(starburst,255);
-part_type_alpha2(starburst,1,0);
+part_type_alpha3(starburst,0.7, 0.6, 0.3);
 part_type_speed(starburst,1,3,-0.05,0);
 part_type_direction(starburst,0,359,0,0);
 part_type_gravity(starburst,0,270);
 part_type_orientation(starburst,0,359,3,0,1);
 part_type_blend(starburst,0);
-part_type_life(starburst,20,30);
+part_type_life(starburst,15,25);
+
+//Barrier light
+barrier_light = part_type_create();
+part_type_shape(barrier_light,pt_shape_disk);
+part_type_size(barrier_light,0.40,0.68,0,0);
+part_type_scale(barrier_light,1,0.90);
+part_type_color3(barrier_light,8421631,255,8421631);
+part_type_alpha3(barrier_light,0.54,0.46,0.05);
+part_type_speed(barrier_light,0.50,1.80,-0.10,0);
+part_type_direction(barrier_light,0,359,0,0);
+part_type_gravity(barrier_light,0,270);
+part_type_orientation(barrier_light,0,0,6,0,0);
+part_type_blend(barrier_light,1);
+part_type_life(barrier_light,30,60);
 
 //Beam Sparks
 beamspark = part_type_create();
@@ -181,7 +253,7 @@ part_type_speed(missileburst,1,4,-0.04,0);
 part_type_direction(missileburst,0,359,0,0);
 part_type_gravity(missileburst,0,270);
 part_type_orientation(missileburst,0,0,0,0,1);
-part_type_blend(missileburst,0);
+part_type_blend(missileburst,1);
 part_type_life(missileburst,30,40);
 
 //Deploy Hit

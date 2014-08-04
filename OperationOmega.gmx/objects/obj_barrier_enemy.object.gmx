@@ -64,15 +64,17 @@ absorb = 0;
           <argument>
             <kind>1</kind>
             <string>//Create a smoke effect over the barrier's area
-effect_create_above(ef_smoke, x-lengthdir_x(75, direction-90), y-lengthdir_y(75, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x-lengthdir_x(55, direction-90), y-lengthdir_y(55, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x-lengthdir_x(35, direction-90), y-lengthdir_y(35, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x-lengthdir_x(15, direction-90), y-lengthdir_y(15, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x, y, 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(15, direction-90), y-lengthdir_y(15, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(35, direction-90), y-lengthdir_y(35, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x-lengthdir_x(55, direction-90), y-lengthdir_y(55, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x-lengthdir_x(75, direction-90), y-lengthdir_y(75, direction-90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(20, direction), y+lengthdir_y(20, direction), 2, c_gray);
+
+effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction+90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction+90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction+90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction+90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction+90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction+90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction+90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction+90), 2, c_gray);
+
+effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction-90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction-90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction-90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction-90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction-90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction-90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction-90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction-90), 2, c_gray);
 
 </string>
           </argument>
@@ -176,6 +178,20 @@ if(image_yscale &lt; fullscale)
 if(image_yscale &gt;= fullscale)
 {
  image_yscale = fullscale;
+ full = 1;
+}
+
+if(global.enemycolor = c_red)
+    part_type_color3(obj_partsystem.barrier_light,8421631,255,8421631);
+else
+    part_type_color3(obj_partsystem.barrier_light,16744576,16711680,16744576);
+
+repeat(5)
+{
+    pix = random(55);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction-90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction-90), obj_partsystem.barrier_light, 1);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction+90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction+90), obj_partsystem.barrier_light, 1);
+
 }
 </string>
           </argument>
@@ -202,6 +218,32 @@ if(image_yscale &gt;= fullscale)
             <string>//If it is, destroy enemy fire
 with(other)
  instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(full = 0) 
+    exit;
+draw_sprite_ext(spr_barrier, image_index, x, y, image_xscale, image_yscale, direction, c_white, 1);
+
 </string>
           </argument>
         </arguments>

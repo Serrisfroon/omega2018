@@ -31,8 +31,11 @@ alarm[0] = 120;
 //Initialize stage variable
 go = 0;
 image_blend = global.allycolor;
-if(global.esecondeffect = 1)
- part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionflare, 5);
+cycleimage = 0;
+if(image_blend != c_red)
+cycleimage = 2;
+
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionflare, 5);
 outspeed = 0.3;
 inspeed = 0.5; 
 if(global.framerate = 2)
@@ -41,7 +44,13 @@ if(global.framerate = 2)
  inspeed = 2;
 }
 sfx_play(snd_fusion, x, y);
- 
+
+nextflame = 0;
+for(i = 0; i &lt;= 11 i++)
+    flamelife[i] = 0;
+    
+image_xscale = 0.1;
+image_yscale = 0.1;
 </string>
           </argument>
         </arguments>
@@ -65,10 +74,23 @@ sfx_play(snd_fusion, x, y);
           <argument>
             <kind>1</kind>
             <string>//Create an effect
-instance_create(x, y, obj_fusion_hit);
+//instance_create(x, y, obj_fusion_hit);
 sfx_play(snd_fusionexplode, x, y);
-if(global.esecondeffect = 1)
- part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring, 1);
+
+if(image_blend = c_red)
+{
+    part_type_colour3(obj_partsystem.fusion_burst,8684799,255,255);
+    part_type_color1(obj_partsystem.fusionring,255);
+}
+else
+{
+    part_type_colour3(obj_partsystem.fusion_burst,16746632,16711680,16711680);
+    part_type_color1(obj_partsystem.fusionring,c_blue);
+}
+
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring, 1);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusion_burst, 20);
+
 </string>
           </argument>
         </arguments>
@@ -130,7 +152,12 @@ if(global.esecondeffect = 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(go &gt; 0)
+            <string>if(image_xscale &lt; 1)
+{
+    image_xscale += 0.05;
+    image_yscale += 0.05;
+}
+if(go &gt; 0)
 {
     dir = point_direction(x, y, targetx, targety);
     hspeed += lengthdir_x(0.3, dir);
@@ -156,6 +183,56 @@ if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
  instance_destroy();
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Draw the sprite
+
+//Draw flame
+flamelife[nextflame] = 10;
+flamex[nextflame] = x;
+flamey[nextflame] = y;
+
+switch(nextflame)
+{
+ case 10:
+      nextflame = 0;
+ break;
+ default:
+      nextflame += 1;
+ break;
+}
+
+draw_set_blend_mode(bm_add);
+
+for(i = 0; i &lt;= 11; i += 1)
+{
+ if(flamelife[i] &lt;= 1) continue;
+ draw_sprite_ext(spr_fusion, 1+cycleimage, flamex[i], flamey[i], (image_xscale-0.1)*(flamelife[i]/10), (image_xscale-0.1)*(flamelife[i]/10), 0, c_white, 1*(flamelife[i]/10));
+ flamelife[i] -= 1;
+}
+
+draw_sprite_ext(sprite_index, cycleimage, x, y, image_xscale-0.1, image_yscale-0.1, direction, c_white, 1);
+draw_set_blend_mode(bm_normal);
 </string>
           </argument>
         </arguments>

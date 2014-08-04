@@ -7,10 +7,10 @@
   <coltolerance>77</coltolerance>
   <sepmasks>-1</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>2</bbox_left>
-  <bbox_right>44</bbox_right>
-  <bbox_top>4</bbox_top>
-  <bbox_bottom>107</bbox_bottom>
+  <bbox_left>3</bbox_left>
+  <bbox_right>45</bbox_right>
+  <bbox_top>12</bbox_top>
+  <bbox_bottom>108</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -40,7 +40,5 @@
     <frame index="17">images\spr_helix_17.png</frame>
     <frame index="18">images\spr_helix_18.png</frame>
     <frame index="19">images\spr_helix_19.png</frame>
-    <frame index="20">images\spr_helix_20.png</frame>
-    <frame index="21">images\spr_helix_21.png</frame>
   </frames>
 </sprite>

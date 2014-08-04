@@ -4,13 +4,13 @@
   <xorig>24</xorig>
   <yorigin>60</yorigin>
   <colkind>1</colkind>
-  <coltolerance>77</coltolerance>
-  <sepmasks>-1</sepmasks>
+  <coltolerance>0</coltolerance>
+  <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>2</bbox_left>
-  <bbox_right>44</bbox_right>
-  <bbox_top>12</bbox_top>
-  <bbox_bottom>115</bbox_bottom>
+  <bbox_left>3</bbox_left>
+  <bbox_right>45</bbox_right>
+  <bbox_top>11</bbox_top>
+  <bbox_bottom>107</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -40,8 +40,5 @@
     <frame index="17">images\spr_helix2_17.png</frame>
     <frame index="18">images\spr_helix2_18.png</frame>
     <frame index="19">images\spr_helix2_19.png</frame>
-    <frame index="20">images\spr_helix2_20.png</frame>
-    <frame index="21">images\spr_helix2_21.png</frame>
-    <frame index="22">images\spr_helix2_22.png</frame>
   </frames>
 </sprite>

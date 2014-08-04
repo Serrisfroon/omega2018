@@ -562,8 +562,8 @@
             {
                 global.playership[dummy].maxspeed = 10;
                 global.playership[dummy].speed = 10;
-                global.playership[dummy].forceturn = 9;
-                global.playership[dummy].alarm[3] = 90;
+                global.playership[dummy].forceturn = 8;
+                global.playership[dummy].alarm[3] = 60;
             }
 
             global.playership[dummy].abilityactive = readbyte(0);

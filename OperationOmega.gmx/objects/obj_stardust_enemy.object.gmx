@@ -26,31 +26,19 @@
           <argument>
             <kind>1</kind>
             <string>//Set destroy time
-alarm[0] = 60/global.framerate;
+alarm[0] = 60;
 effect_create_below(ef_smoke, x, y, 0, c_white);
 slowdown = 0.1;
-if(global.framerate = 2)
- slowdown = 0.4;
 amplified = 0;
 alarm[1] = 1;
-
+image_speed = 0;
+if(global.allycolor = c_blue)
+    image_index = 0;
+else
+    image_index = 1;
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="1" enumb="0">
@@ -71,9 +59,13 @@ alarm[1] = 1;
           <argument>
             <kind>1</kind>
             <string>//Create effect
-instance_create(x, y, obj_fusion_hit);
-if(global.esecondeffect = 1)
- part_particles_create(obj_partsystem.system, x, y, obj_partsystem.starburst, 6);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stardust_smoke, 8);
+if(global.allycolor = c_blue)
+    part_type_color3(obj_partsystem.starburst, c_white, make_color_rgb(255, 100, 100), make_color_rgb(255, 100, 100));
+else
+    part_type_color3(obj_partsystem.starburst, c_white, make_color_rgb(100, 100, 255), make_color_rgb(100, 100, 255));
+
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.starburst, 6);
 </string>
           </argument>
         </arguments>
@@ -169,7 +161,7 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
           <argument>
             <kind>1</kind>
             <string>//Draw the sprite
-draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, direction, global.enemycolor, 1);
+draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, direction, c_white, 1);
 </string>
           </argument>
         </arguments>

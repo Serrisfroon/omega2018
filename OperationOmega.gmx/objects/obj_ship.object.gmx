@@ -1094,13 +1094,13 @@ switch(stardust)
 if(fusions &gt; 0)
 {
     alarm[0] = 5;
-    fusions -= 1;
 }
+fusions -= 1;
 //Create a fusion part
 fuse = instance_create(x, y, obj_fusion);
 //Set its movement
 fuse.speed = 10;
-fuse.direction = 72*fusions;
+fuse.direction = 60*fusions;
 //Set its target location
 fuse.targetx = hitx;
 fuse.targety = hity;
@@ -3846,13 +3846,14 @@ if(shoot &lt;= 0)
             cross.speed = 8+speed;
             newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
             snapdir = (newdir-direction)/5;
-            cross.direction = newdir-7+primary_random(14, global.mymid);;
+            crossdir = newdir-7+primary_random(14, global.mymid);
+            cross.direction = crossdir;
             cross.mid = global.mymid;
             cross.side = 1;
             //Create the shot and give it speed and facedir
             cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
             cross.speed = 8+speed;
-            cross.direction = newdir-7+primary_random(14, global.mymid);;
+            cross.direction = crossdir;
             cross.mid = global.mymid;
             cross.side = 2;
         break;
@@ -3975,10 +3976,11 @@ if(shoot &lt;= 0)
             <string>draw_flame(direction);
 draw_turnblur();
 //Draw the ship
+draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, invincible);
+
 if(abilityactive = 1 &amp;&amp; global.shipselect = 3)
     draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, invincible);
 
-draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, invincible);
 if(shocked = true)
     draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);
 if(beserk = true &amp;&amp; warping = -1)
@@ -5627,15 +5629,16 @@ switch(global.shipselect)
         heat -= 25;
         cooldown = 0;
         //Create pulse
-        forceturn = 9;
+        forceturn = 8;
         maxspeed = 10;
         speed = 10;
         abilityactive = 1;
-        alarm[3] = 90;
+        alarm[3] = 60;
         //Send the information
         clearbuffer(0);
         packet_label_write(2, global.mymid);
         writebyte(21, 0)//Treat pulse as a secondary
+        writebyte(1, 0);
         //Send to everyone if host
         if(global.master = true)
             client_sendall(0, 0);

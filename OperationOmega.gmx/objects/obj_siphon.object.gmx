@@ -115,17 +115,12 @@ part_particles_create(obj_partsystem.system, global.playership[targetmid].x, glo
             <kind>1</kind>
             <string>if(show = 0) exit;
 if(!instance_exists(source)) exit;
-//Set the number of images to draw depenadant on the distance between the two nodes
-lines = ceil(point_distance(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y)/64);
-//Set the direction to the node
-dir = point_direction(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y);
-//Set the scale value so that all images are drawn the same
-scale = (point_distance(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y)/64)/lines;
-for(i = 1; i &lt;= lines; i += 1)
-{
- draw_sprite_ext(spr_sparkline_line, -1, source.x+lengthdir_x(64*scale*(i-1), dir), source.y+lengthdir_y(64*scale*(i-1), dir), scale, 1, dir, c_white, 0.8);
-}
+var pointdist, pointdir;
+draw_electricity(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y, c_blue, 3, 3, 6, true)//3-random(6) is equall in either way
 
+pointdist = irandom(point_distance(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y));
+pointdir = point_direction(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y);
+part_particles_create(obj_partsystem.system, source.x+lengthdir_x(pointdist, pointdir), source.y+lengthdir_y(pointdist, pointdir), obj_partsystem.elecspark, 1);
 </string>
           </argument>
         </arguments>
@@ -143,5 +138,8 @@ for(i = 1; i &lt;= lines; i += 1)
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>0,8</point>
+    <point>32,32</point>
+  </PhysicsShapePoints>
 </object>

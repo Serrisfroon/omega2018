@@ -26,6 +26,34 @@
           <argument>
             <kind>1</kind>
             <string>//This object will replace the need for most primary shots, solus shots, and formation shots
+bloom=surface_create(view_wview[0]/2,view_hview[0]/2);
+bloom2=surface_create(view_wview[0]/4,view_hview[0]/4);
+bloom3=surface_create(view_wview[0]/8,view_hview[0]/8);
+bloom4=surface_create(view_wview[0]/16,view_hview[0]/16);
+bloom5=surface_create(view_wview[0]/32,view_hview[0]/32);
+surface_set_target(bloom);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom2);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom3);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom4);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom5);
+draw_clear(c_black);
+surface_reset_target();
+
+
+
+
 
 //Initialize bullet attributes
 
@@ -597,12 +625,88 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Draw the bullets
+            <string>surface_resize(bloom, view_wview[0]/2,view_hview[0]/2);
+surface_resize(bloom2, view_wview[0]/4,view_hview[0]/4);
+surface_resize(bloom3, view_wview[0]/8,view_hview[0]/8);
+surface_resize(bloom4, view_wview[0]/16,view_hview[0]/16);
+surface_resize(bloom5, view_wview[0]/32,view_hview[0]/32);
+surface_set_target(bloom);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom2);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom3);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom4);
+draw_clear(c_black);
+surface_reset_target();
+
+surface_set_target(bloom5);
+draw_clear(c_black);
+surface_reset_target();
+
+// Draws Lamp and then wall to the bloom surfaces
+surface_set_target(bloom);
+d3d_set_projection_ortho(0,0,view_wview[0],view_hview[0],0);
+draw_set_color(c_black);
+draw_set_alpha(0.5);
+draw_rectangle(0,0,view_wview[0],view_hview[0],0); // Clear the surface to clear the "trails" effect
+draw_set_alpha(1);
+
+//Draw the bullets
 for(i = 1; i &lt;= bulletmax; i += 1)
 {
     if(bulletfree[i] = true) continue;
-    draw_sprite_ext(bullettype[i], -1, bulletx[i], bullety[i], 1, 1, bulletdirection[i], bulletblend[i], 1);
+    draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i]-view_xview[0], bullety[i]-view_yview[0], 1, 1, bulletdirection[i], c_white, 1);
 }
+with(prnt_enemyenergy)
+    draw_sprite_ext(sprite_index, image_index, x-view_xview[0], y-view_yview[0], image_xscale, image_yscale, image_angle, c_white,image_alpha);
+with(prnt_allyenergy)
+    draw_sprite_ext(sprite_index, image_index, x-view_xview[0], y-view_yview[0], image_xscale, image_yscale, image_angle, c_white,image_alpha);
+    
+surface_reset_target();
+
+surface_set_target(bloom2);
+draw_surface_ext(bloom,0,0,0.5,0.5,0,c_white,1);
+surface_reset_target();
+
+surface_set_target(bloom3);
+draw_surface_ext(bloom2,0,0,0.5,0.5,0,c_white,1);
+surface_reset_target();
+
+surface_set_target(bloom4);
+draw_surface_ext(bloom3,0,0,0.5,0.5,0,c_white,1);
+surface_reset_target();
+
+surface_set_target(bloom5);
+draw_surface_ext(bloom4,0,0,0.5,0.5,0,c_white,1);
+surface_reset_target();
+
+
+//Draw the bullets
+for(i = 1; i &lt;= bulletmax; i += 1)
+{
+    if(bulletfree[i] = true) continue;
+    draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);
+}
+with(prnt_enemyenergy)
+    draw_self();
+with(prnt_allyenergy)
+    draw_self();
+
+draw_set_blend_mode(bm_add);
+draw_surface_stretched_ext(bloom,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
+draw_surface_stretched_ext(bloom2,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
+draw_surface_stretched_ext(bloom3,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
+draw_surface_stretched_ext(bloom4,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
+draw_surface_stretched_ext(bloom5,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
+draw_set_blend_mode(bm_normal);
+
 
 </string>
           </argument>

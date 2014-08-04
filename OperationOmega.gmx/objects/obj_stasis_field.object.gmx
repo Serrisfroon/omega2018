@@ -42,6 +42,18 @@ damaged[7] = 0;
 damaged[8] = 0;
 focus = -1;
 
+
+if(global.allycolor = c_red)
+{
+part_type_colour3(obj_partsystem.stasis_field,c_white,c_red,c_aqua);
+
+}
+else
+{
+part_type_colour3(obj_partsystem.stasis_field,c_white,c_blue,c_aqua);
+}
+
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stasis_field, 15);
 </string>
           </argument>
         </arguments>

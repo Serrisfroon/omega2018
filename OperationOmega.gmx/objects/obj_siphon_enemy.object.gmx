@@ -134,7 +134,7 @@ effect_create_above(ef_ring, target.x, target.y, 0, c_aqua);
 part_type_color1(obj_partsystem.primarypart, c_aqua);
 part_type_speed(obj_partsystem.primarypart,1.68,2.40,-0.04,0);
 part_type_direction(obj_partsystem.primarypart,0,359,0,0);
-part_particles_create(obj_partsystem.system, targetx, target.y, obj_partsystem.primarypart, 7);
+part_particles_create(obj_partsystem.system, target.x, target.y, obj_partsystem.primarypart, 7);
 </string>
           </argument>
         </arguments>
@@ -175,17 +175,11 @@ part_particles_create(obj_partsystem.system, targetx, target.y, obj_partsystem.p
             <kind>1</kind>
             <string>if(show = 0) exit;
 if(!instance_exists(source)) exit;
-//Set the number of images to draw depenadant on the distance between the two nodes
-lines = ceil(point_distance(source.x, source.y, target.x, target.y)/64);
-//Set the direction to the node
-dir = point_direction(source.x, source.y, target.x, target.y);
-//Set the scale value so that all images are drawn the same
-scale = (point_distance(source.x, source.y, target.x, target.y)/64)/lines;
-for(i = 1; i &lt;= lines; i += 1)
-{
- draw_sprite_ext(spr_sparkline_line, -1, source.x+lengthdir_x(64*scale*(i-1), dir), source.y+lengthdir_y(64*scale*(i-1), dir), scale, 1, dir, c_white, 0.8);
-}
+draw_electricity(source.x, source.y, target.x, target.y, c_blue, 3, 3, 6, true)//3-random(6) is equall in either way
 
+pointdist = irandom(point_distance(source.x, source.y, target.x, target.y));
+pointdir = point_direction(source.x, source.y, target.x, target.y);
+part_particles_create(obj_partsystem.system, source.x+lengthdir_x(pointdist, pointdir), source.y+lengthdir_y(pointdist, pointdir), obj_partsystem.elecspark, 1);
 </string>
           </argument>
         </arguments>

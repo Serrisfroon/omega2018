@@ -119,6 +119,8 @@
       <sprite>sprites\spr_stasis_field</sprite>
       <sprite>sprites\spr_helix</sprite>
       <sprite>sprites\spr_helix2</sprite>
+      <sprite>sprites\spr_bluehelix</sprite>
+      <sprite>sprites\spr_bluehelix2</sprite>
       <sprite>sprites\spr_crossfire_hit</sprite>
       <sprite>sprites\spr_double</sprite>
       <sprite>sprites\spr_double_hit</sprite>
@@ -288,70 +290,71 @@
         <sprite>sprites\spr_map_previews</sprite>
         <sprite>sprites\spr_matchstats</sprite>
         <sprite>sprites\spr_stats_infos</sprite>
+        <sprite>sprites\spr_weapons_infos</sprite>
       </sprites>
+      <sprite>sprites\spr_back</sprite>
+      <sprite>sprites\spr_okaybut</sprite>
+      <sprite>sprites\spr_previewbound</sprite>
+      <sprite>sprites\spr_yesnobox</sprite>
+      <sprite>sprites\spr_beginoperation</sprite>
+      <sprite>sprites\spr_alphastar_select</sprite>
+      <sprite>sprites\spr_clicktostart</sprite>
+      <sprite>sprites\spr_connect</sprite>
+      <sprite>sprites\spr_creategame</sprite>
+      <sprite>sprites\spr_createprofile</sprite>
+      <sprite>sprites\spr_changelog</sprite>
+      <sprite>sprites\spr_enterhostip</sprite>
+      <sprite>sprites\spr_firing</sprite>
+      <sprite>sprites\spr_gotopractice</sprite>
+      <sprite>sprites\spr_guidebutton</sprite>
+      <sprite>sprites\spr_creategamebox</sprite>
+      <sprite>sprites\spr_host</sprite>
+      <sprite>sprites\spr_messagebox</sprite>
+      <sprite>sprites\spr_icon_select</sprite>
+      <sprite>sprites\spr_breakline</sprite>
+      <sprite>sprites\spr_loadingnumbers</sprite>
+      <sprite>sprites\spr_levelnames</sprite>
+      <sprite>sprites\spr_makename_box</sprite>
+      <sprite>sprites\spr_joingame</sprite>
+      <sprite>sprites\spr_map_select</sprite>
+      <sprite>sprites\spr_menugrid</sprite>
+      <sprite>sprites\spr_matchnames</sprite>
+      <sprite>sprites\spr_insomniasoft</sprite>
+      <sprite>sprites\spr_multiplayer</sprite>
+      <sprite>sprites\spr_music</sprite>
+      <sprite>sprites\spr_options</sprite>
+      <sprite>sprites\spr_playagain</sprite>
+      <sprite>sprites\spr_modbox</sprite>
+      <sprite>sprites\spr_playertypes</sprite>
+      <sprite>sprites\spr_profileslot</sprite>
+      <sprite>sprites\spr_previewnames</sprite>
+      <sprite>sprites\spr_private</sprite>
+      <sprite>sprites\spr_profiles</sprite>
+      <sprite>sprites\spr_quit</sprite>
+      <sprite>sprites\spr_readygo</sprite>
+      <sprite>sprites\spr_refresher</sprite>
+      <sprite>sprites\spr_server</sprite>
+      <sprite>sprites\spr_sfx</sprite>
+      <sprite>sprites\spr_statbar</sprite>
+      <sprite>sprites\spr_staticons</sprite>
+      <sprite>sprites\spr_singleplayer</sprite>
+      <sprite>sprites\spr_playerslot</sprite>
+      <sprite>sprites\spr_selectgame</sprite>
+      <sprite>sprites\spr_teamchange</sprite>
+      <sprite>sprites\spr_typename</sprite>
+      <sprite>sprites\spr_viewmap_mask</sprite>
+      <sprite>sprites\spr_ships_mouseon</sprite>
+      <sprite>sprites\spr_tutorialbox</sprite>
+      <sprite>sprites\spr_typeip</sprite>
+      <sprite>sprites\spr_menuback</sprite>
     </sprites>
+    <sprite>sprites\spr_title</sprite>
     <sprite>sprites\spr_empty</sprite>
-    <sprite>sprites\spr_messagebox</sprite>
-    <sprite>sprites\spr_okaybut</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
     <sprite>sprites\sprite238</sprite>
-    <sprite>sprites\spr_yesnobox</sprite>
-    <sprite>sprites\spr_alphastar_select</sprite>
-    <sprite>sprites\spr_back</sprite>
-    <sprite>sprites\spr_beginoperation</sprite>
-    <sprite>sprites\spr_breakline</sprite>
-    <sprite>sprites\spr_changelog</sprite>
-    <sprite>sprites\spr_clicktostart</sprite>
-    <sprite>sprites\spr_connect</sprite>
-    <sprite>sprites\spr_creategame</sprite>
-    <sprite>sprites\spr_creategamebox</sprite>
-    <sprite>sprites\spr_createprofile</sprite>
-    <sprite>sprites\spr_enterhostip</sprite>
-    <sprite>sprites\spr_firing</sprite>
-    <sprite>sprites\spr_gotopractice</sprite>
-    <sprite>sprites\spr_guidebutton</sprite>
-    <sprite>sprites\spr_host</sprite>
-    <sprite>sprites\spr_icon_select</sprite>
-    <sprite>sprites\spr_insomniasoft</sprite>
-    <sprite>sprites\spr_joingame</sprite>
-    <sprite>sprites\spr_levelnames</sprite>
-    <sprite>sprites\spr_loadingnumbers</sprite>
-    <sprite>sprites\spr_makename_box</sprite>
-    <sprite>sprites\spr_map_select</sprite>
-    <sprite>sprites\spr_matchnames</sprite>
-    <sprite>sprites\spr_menuback</sprite>
-    <sprite>sprites\spr_menugrid</sprite>
-    <sprite>sprites\spr_modbox</sprite>
-    <sprite>sprites\spr_multiplayer</sprite>
-    <sprite>sprites\spr_music</sprite>
-    <sprite>sprites\spr_options</sprite>
-    <sprite>sprites\spr_playagain</sprite>
-    <sprite>sprites\spr_playerslot</sprite>
-    <sprite>sprites\spr_playertypes</sprite>
-    <sprite>sprites\spr_previewnames</sprite>
-    <sprite>sprites\spr_private</sprite>
-    <sprite>sprites\spr_profiles</sprite>
-    <sprite>sprites\spr_profileslot</sprite>
-    <sprite>sprites\spr_quit</sprite>
-    <sprite>sprites\spr_readygo</sprite>
-    <sprite>sprites\spr_refresher</sprite>
-    <sprite>sprites\spr_selectgame</sprite>
-    <sprite>sprites\spr_server</sprite>
-    <sprite>sprites\spr_sfx</sprite>
-    <sprite>sprites\spr_ships_mouseon</sprite>
-    <sprite>sprites\spr_singleplayer</sprite>
-    <sprite>sprites\spr_statbar</sprite>
-    <sprite>sprites\spr_staticons</sprite>
-    <sprite>sprites\spr_teamchange</sprite>
-    <sprite>sprites\spr_title</sprite>
-    <sprite>sprites\spr_tutorialbox</sprite>
-    <sprite>sprites\spr_typeip</sprite>
-    <sprite>sprites\spr_typename</sprite>
-    <sprite>sprites\spr_viewmap_mask</sprite>
-    <sprite>sprites\spr_weapons_infos</sprite>
     <sprite>sprites\sprite231</sprite>
-    <sprite>sprites\spr_previewbound</sprite>
+    <sprite>sprites\spr_barrierbox</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Map Preview">
@@ -669,6 +672,7 @@
       <script>scripts\sfx_play.gml</script>
       <script>scripts\mouseon_switch.gml</script>
       <script>scripts\draw_preview.gml</script>
+      <script>scripts\draw_electricity.gml</script>
     </scripts>
     <scripts name="PHP">
       <script>scripts\get_externalip.gml</script>
@@ -711,6 +715,10 @@
     <script>scripts\omegadata_write.gml</script>
     <script>scripts\primary_random.gml</script>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shd_magnify.shader</shader>
+    <shader type="GLSLES">shaders\shd_scanlines.shader</shader>
+  </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_digital</font>
     <font>fonts\fnt_chat</font>
@@ -730,6 +738,8 @@
       <object>objects\prnt_enemyattack</object>
       <object>objects\prnt_allyattack</object>
       <object>objects\prnt_weaponattack</object>
+      <object>objects\prnt_allyenergy</object>
+      <object>objects\prnt_enemyenergy</object>
       <objects name="Primary Weapons">
         <object>objects\obj_needle_hit</object>
         <object>objects\obj_sonic_hit</object>
@@ -1063,7 +1073,7 @@
       <room>rooms\rm_orbitstation</room>
     </rooms>
   </rooms>
-  <constants number="10">
+  <constants number="12">
     <constant name="LOGINSERVER_IP">"potato"</constant>
     <constant name="VERSION_NUMBER">"0.6.7d"</constant>
     <constant name="CLIENT_CHECK">30</constant>
@@ -1074,6 +1084,8 @@
     <constant name="CLIENT_DROP">22</constant>
     <constant name="CLIENT_UNABLE">23</constant>
     <constant name="TIME_UP">40</constant>
+    <constant name="GM_build_date">41855.4392358565</constant>
+    <constant name="GM_version">'1.0.0.13'</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
