@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyattack</parentName>
+  <parentName>prnt_enemyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,8 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>//Set speed
-speed = 12*global.framerate;
-image_blend = global.enemycolor;
+speed = 12;
+image_speed = 0;
+image_index = 0;
+if(global.allycolor = c_red)
+    image_index = 1;
 alarm[0] = 1;
 amplified = 0;
 sfx_play(snd_burst, x, y);
@@ -36,19 +39,32 @@ sfx_play(snd_burst, x, y);
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="1" enumb="0">
       <action>
         <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.allycolor != c_red)
+    part_type_color3(obj_partsystem.spiralburst,c_white,c_red,c_red);
+else
+    part_type_color3(obj_partsystem.spiralburst,16777215,16711680,16711680);    
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.spiralburst, 20);
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="2" enumb="0">
@@ -68,8 +84,7 @@ sfx_play(snd_burst, x, y);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>visible = 1;
-if(amplified = 1)
+            <string>if(amplified = 1)
  speed += 4;
 </string>
           </argument>
@@ -99,7 +114,6 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
 {
  //Create an effect
  sfx_play(snd_spiral, x, y);
- effect_create_above(ef_spark, x, y, 2, c_orange);
  //Create smaller shots. Give them their direction.
  //Create the shot and give it speed and direction
  spiral = instance_create(x, y, obj_spiralout_enemy);

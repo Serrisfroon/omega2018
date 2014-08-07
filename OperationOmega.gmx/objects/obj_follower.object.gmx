@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_trailshot</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>obj_trail</parentName>
@@ -26,7 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>//Set the blending color to match your team
-image_blend = global.allycolor;
+image_speed = 0;
+image_index = 0;
+if(global.allycolor != c_red)
+    image_index = 1;
+    
+image_xscale = 0;
+image_yscale = 0;
 
 //Set destroy time
 alarm[0] = 250;
@@ -99,6 +105,20 @@ homing = noone;
             <kind>1</kind>
             <string>//Rotate the image
 image_angle += 20;
+if(image_xscale &lt; 1)
+{
+    image_xscale += 0.08;
+    image_yscale += 0.08;
+}
+if(irandom(30) == 1)
+{
+    if(global.allycolor = c_red)
+        part_type_color3(obj_partsystem.trailfade,make_color_rgb(255, 125, 125),c_red,c_red);
+    else
+        part_type_color3(obj_partsystem.trailfade,make_color_rgb(125, 125, 255),16711680,16711680);    
+    part_type_orientation(obj_partsystem.trailfade,image_angle,image_angle,0,0,0);
+    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.trailfade, 1);
+}
 //Check if there is a homing target
 if(homing = noone)
 {

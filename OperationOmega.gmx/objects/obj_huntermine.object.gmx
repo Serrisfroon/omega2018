@@ -58,11 +58,7 @@ amplified = 0;
             <kind>1</kind>
             <string>sfx_play(snd_explode2, x, y);
 //Create an effect
-repeat(3)
-{
- explodecolor = make_color_rgb(255, random(255), 0);
- effect_create_above(ef_explosion, x+lengthdir_x(16, direction)-30+random(60), y+lengthdir_y(16, direction)-30+random(60), 0, explodecolor);
-}
+create_explosion(1);
 if(hit = 1 &amp;&amp; mid = global.mymid)
 {
  obj_mod.targethit = 3;

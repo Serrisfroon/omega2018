@@ -53,6 +53,9 @@ sfx_play(snd_horizon, x, y);
           <argument>
             <kind>1</kind>
             <string>speed = 9;
+image = 0;
+if(global.allycolor != c_red)
+    image = 1;
 if(amplified = 0)
 {
 for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
@@ -64,7 +67,11 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction-90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction-90);
- effect_create_below(ef_smoke, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], 1, c_orange);
+    if(global.allycolor = c_red)
+        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
+    else
+        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;
@@ -72,8 +79,9 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  obj_bulletcontrol.bulletdirection[i] = direction;
  //The bullet's blend atribute. It shows what team it belongs to
  obj_bulletcontrol.bulletblend[i] = global.allycolor;
+ obj_bulletcontrol.bulletsingle[i] = image;
  //The bullet's life. Each step, it is lowered by one. At 0, this index is freed.
- obj_bulletcontrol.bulletlife[i] = 120/global.framerate;
+ obj_bulletcontrol.bulletlife[i] = 120;
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 5;
  //The bullet's death object. When a bullet has a collision, this object is created.
@@ -96,7 +104,11 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction+90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction+90);
- effect_create_below(ef_smoke, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], 1, c_orange);
+    if(global.allycolor = c_red)
+        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
+    else
+        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;
@@ -104,8 +116,9 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  obj_bulletcontrol.bulletdirection[i] = direction;
  //The bullet's blend atribute. It shows what team it belongs to
  obj_bulletcontrol.bulletblend[i] = global.allycolor;
+ obj_bulletcontrol.bulletsingle[i] = image;
  //The bullet's life. Each step, it is lowered by one. At 0, this index is freed.
- obj_bulletcontrol.bulletlife[i] = 120/global.framerate;
+ obj_bulletcontrol.bulletlife[i] = 120;
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 5;
  //The bullet's death object. When a bullet has a collision, this object is created.
@@ -131,7 +144,11 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction-90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction-90);
- effect_create_below(ef_smoke, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], 1, c_orange);
+    if(global.allycolor = c_red)
+        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
+    else
+        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;
@@ -139,6 +156,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  obj_bulletcontrol.bulletdirection[i] = direction;
  //The bullet's blend atribute. It shows what team it belongs to
  obj_bulletcontrol.bulletblend[i] = global.allycolor;
+ obj_bulletcontrol.bulletsingle[i] = image;
  //The bullet's life. Each step, it is lowered by one. At 0, this index is freed.
  obj_bulletcontrol.bulletlife[i] = 120/global.framerate;
  //The bullet's damage. Stored to make loops much easier
@@ -163,7 +181,11 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction+90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction+90);
- effect_create_below(ef_smoke, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], 1, c_orange);
+    if(global.allycolor = c_red)
+        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
+    else
+        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;
@@ -171,6 +193,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  obj_bulletcontrol.bulletdirection[i] = direction;
  //The bullet's blend atribute. It shows what team it belongs to
  obj_bulletcontrol.bulletblend[i] = global.allycolor;
+ obj_bulletcontrol.bulletsingle[i] = image;
  //The bullet's life. Each step, it is lowered by one. At 0, this index is freed.
  obj_bulletcontrol.bulletlife[i] = 120/global.framerate;
  //The bullet's damage. Stored to make loops much easier

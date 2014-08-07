@@ -2,10 +2,10 @@
 <object>
   <spriteName>spr_formation</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_allyattack</parentName>
+  <parentName>prnt_allyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,9 +28,46 @@
             <string>sfx_play(snd_formation, x, y);
 //Set speed
 speed = 12*global.framerate;
-image_blend = global.allycolor;
 
 amplified = 0;
+
+image_speed = 0
+image_index = 0;
+if(global.allycolor != c_red)
+    image_index = 1;
+    
+
+alarm[4] = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.allycolor = c_red)
+    part_type_color3(obj_partsystem.formsplit,c_white,c_red,c_red);
+else
+    part_type_color3(obj_partsystem.formsplit,16777215,16711680,16711680);    
+part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
+part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
+repeat(10)
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit, 1);
 </string>
           </argument>
         </arguments>
@@ -80,9 +117,14 @@ instance_destroy();
             <string>//Move towards the target if it still exists
 if(instance_exists(target))
  direction = point_direction(x, y, target.x, target.y);
-part_type_direction(obj_partsystem.formfire,direction-20,direction+20,0,0);
-if(global.fbursteffect = 1)
- part_particles_create(obj_partsystem.system, x, y, obj_partsystem.formfire, 10);
+if(global.allycolor = c_red)
+    part_type_color3(obj_partsystem.formsplit,c_white,c_red,c_red);
+else
+    part_type_color3(obj_partsystem.formsplit,16777215,16711680,16711680);    
+part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
+part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
+repeat(10)
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit, 1);
 sfx_play(snd_formation, x, y);
 bullet_create(x, y, "Formation", direction, mid, 0);
 instance_destroy();
@@ -122,6 +164,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  //Keep track of this instance in them. Set the time until they attack.
  form = instance_create(x, y, obj_formationb);
  form.direction = 0;
+ form.image_angle = form.direction;
  form.priority = 1;
  form.part = 1;
  form.location = 1;
@@ -131,6 +174,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb);
  form.direction = 90;
+ form.image_angle = form.direction;
  form.part = 1;
  form.location = 2;
  form.control = id;
@@ -139,6 +183,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb);
  form.direction = 180;
+ form.image_angle = form.direction;
  form.part = 1;
  form.location = 3;
  form.control = id;
@@ -147,6 +192,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb);
  form.direction = 270;
+ form.image_angle = form.direction;
  form.part = 1; 
  form.location = 4;
  form.control = id;

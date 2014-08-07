@@ -72,10 +72,7 @@ amplified = 0;
           <argument>
             <kind>1</kind>
             <string>sfx_play(snd_explode1, x, y);
-explodecolor = make_color_rgb(255, random(255), 0);
-effect_create_above(ef_explosion, x, y, 0, explodecolor);
-explodecolor = make_color_rgb(255, random(255), 0);
-effect_create_above(ef_explosion, x, y, 0, explodecolor);
+create_explosion(1);
 repeat(8)
     effect_create_above(ef_spark, x-30+random(60), y-30+random(60), 1, c_teal);
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missileburst, 15);

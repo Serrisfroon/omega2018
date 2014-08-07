@@ -36,6 +36,7 @@ newdir = 0;
 flankcurve = 0;
 stasislife = 0;
 crossfiredist = 0;
+invincible = 1;
 siphontarget = 0;
 
 //Initialize prediction variables

@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>prnt_enemyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -32,6 +32,9 @@ scale = 0;
 stage = 0;
 alarm[0] = 1;
 sfx_play(snd_beam, x, y);
+image_yscale = 0;
+image_xscale = 6;
+stream = 0;
 
 </string>
           </argument>
@@ -80,10 +83,13 @@ part_emitter_destroy(obj_partsystem.system, emit);
           <argument>
             <kind>1</kind>
             <string>part_emitter_region(obj_partsystem.system, emit, x, x+lengthdir_x(1536, direction), y, y+lengthdir_y(1536, direction), ps_shape_line, ps_distr_linear);
-part_emitter_stream(obj_partsystem.system, emit, obj_partsystem.beamspark, 25);
+part_emitter_burst(obj_partsystem.system, emit, obj_partsystem.beamspark[irandom(2)], 18);
+stream = 1;
 flare = instance_create(x, y, obj_beamflare);
 flare.mid = mid;
 flare.direction = direction;
+flare.image_angle = direction;
+image_angle = direction;
 </string>
           </argument>
         </arguments>
@@ -109,6 +115,15 @@ flare.direction = direction;
             <string>//Widen the beam until its max size
 if(scale &lt; 1 &amp;&amp; stage = 0)
     scale += 0.1;
+image_yscale = scale;
+if(stream = 1)
+{
+    coloring = irandom(2);
+    part_type_direction(obj_partsystem.beamline[coloring], direction, direction, 0, 0);
+    part_type_orientation(obj_partsystem.beamline[coloring],direction,direction,0,0,0);
+    part_emitter_burst(obj_partsystem.system, emit, obj_partsystem.beamspark[coloring], 18);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(-30*image_yscale+random(60*image_yscale), direction-90), y+lengthdir_y(-30*image_yscale+random(60*image_yscale), direction-90), obj_partsystem.beamline[coloring], 1);
+}
 //When at max size, check for collisions
 if(scale = 1 &amp;&amp; stage = 0)
 {
@@ -242,30 +257,6 @@ if(scale = 0 &amp;&amp; stage = 1)
           <argument>
             <kind>1</kind>
             <string>part_emitter_destroy(obj_partsystem.system, emit);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Draw the image in the correct direction at the correct size
-draw_sprite_ext(spr_beam, 0, x, y, 6, scale, direction, c_white, 1);
 </string>
           </argument>
         </arguments>

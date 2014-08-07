@@ -2,10 +2,10 @@
 <object>
   <spriteName>spr_snake_tail</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyattack</parentName>
+  <parentName>prnt_enemyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,6 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>alarm[0] = 1;
+image_speed = 0
+image_index = 0;
+if(global.allycolor != c_red)
+    image_index = 1;
 </string>
           </argument>
         </arguments>
@@ -70,5 +74,8 @@ if(image_alpha = 0)
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>35,22</point>
+    <point>28,28</point>
+  </PhysicsShapePoints>
 </object>

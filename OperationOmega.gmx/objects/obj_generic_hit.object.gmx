@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,9 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set the effect's destroy time
-alarm[0] = 73;
-
+            <string>//Set the destroy time
+alarm[0] = 1;
 
 </string>
           </argument>
@@ -51,8 +50,20 @@ alarm[0] = 73;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>part_type_destroy(particle1);
-part_emitter_destroy(obj_partsystem.system, emitter1);
+            <string>if(global.team[mid] = global.team[global.mymid])
+{
+if(global.allycolor = c_red)
+    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[0], 8);
+else
+    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[1], 8);
+}
+else
+{
+if(global.allycolor != c_red)
+    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[0], 8);
+else
+    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[1], 8);
+}
 instance_destroy();
 </string>
           </argument>
@@ -72,7 +83,7 @@ instance_destroy();
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>32,32</point>
-    <point>32,32</point>
+    <point>6,6</point>
+    <point>6,6</point>
   </PhysicsShapePoints>
 </object>

@@ -133,6 +133,7 @@
       <sprite>sprites\spr_fusion_hit</sprite>
       <sprite>sprites\spr_stardust</sprite>
       <sprite>sprites\spr_barrier</sprite>
+      <sprite>sprites\spr_newformation</sprite>
       <sprite>sprites\spr_formation</sprite>
       <sprite>sprites\spr_beamflare</sprite>
       <sprite>sprites\spr_beam</sprite>
@@ -146,6 +147,7 @@
       <sprite>sprites\spr_spiral_shot</sprite>
       <sprite>sprites\spr_trail</sprite>
       <sprite>sprites\spr_trailshot</sprite>
+      <sprite>sprites\spr_trail_particle</sprite>
       <sprite>sprites\spr_whip</sprite>
       <sprite>sprites\spr_whip_hit</sprite>
       <sprite>sprites\spr_snake_head</sprite>
@@ -279,6 +281,7 @@
       <sprite>sprites\spr_paladinshield</sprite>
       <sprite>sprites\spr_homingeffect</sprite>
       <sprite>sprites\spr_slasheffect</sprite>
+      <sprite>sprites\spr_formation_particle</sprite>
     </sprites>
     <sprites name="Menu">
       <sprites name="Mouseover Info">
@@ -354,7 +357,7 @@
     <sprite>sprites\spr_shipmask</sprite>
     <sprite>sprites\sprite238</sprite>
     <sprite>sprites\sprite231</sprite>
-    <sprite>sprites\spr_barrierbox</sprite>
+    <sprite>sprites\sprite239</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Map Preview">
@@ -673,6 +676,8 @@
       <script>scripts\mouseon_switch.gml</script>
       <script>scripts\draw_preview.gml</script>
       <script>scripts\draw_electricity.gml</script>
+      <script>scripts\create_explosion.gml</script>
+      <script>scripts\create_burning.gml</script>
     </scripts>
     <scripts name="PHP">
       <script>scripts\get_externalip.gml</script>
@@ -741,6 +746,7 @@
       <object>objects\prnt_allyenergy</object>
       <object>objects\prnt_enemyenergy</object>
       <objects name="Primary Weapons">
+        <object>objects\obj_generic_hit</object>
         <object>objects\obj_needle_hit</object>
         <object>objects\obj_sonic_hit</object>
         <object>objects\obj_wave_hit</object>
@@ -763,9 +769,9 @@
       <objects name="Energy Secondy Attacks">
         <object>objects\obj_fusion</object>
         <object>objects\obj_fusion_enemy</object>
-        <object>objects\obj_fusion_hit</object>
         <object>objects\obj_stardust</object>
         <object>objects\obj_stardust_enemy</object>
+        <object>objects\obj_stardust_end</object>
         <object>objects\obj_barrier</object>
         <object>objects\obj_barrier_enemy</object>
         <object>objects\obj_formationa</object>
@@ -778,6 +784,7 @@
         <object>objects\obj_beam_enemy</object>
         <object>objects\obj_sparkline</object>
         <object>objects\obj_sparkline_enemy</object>
+        <object>objects\obj_sparkline_spark</object>
         <object>objects\obj_nodetarget</object>
         <object>objects\obj_burst</object>
         <object>objects\obj_burst_enemy</object>
@@ -1084,7 +1091,7 @@
     <constant name="CLIENT_DROP">22</constant>
     <constant name="CLIENT_UNABLE">23</constant>
     <constant name="TIME_UP">40</constant>
-    <constant name="GM_build_date">41855.4392358565</constant>
+    <constant name="GM_build_date">41858.3781854514</constant>
     <constant name="GM_version">'1.0.0.13'</constant>
   </constants>
   <help>

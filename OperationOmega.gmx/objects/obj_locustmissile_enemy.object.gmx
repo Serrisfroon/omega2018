@@ -71,9 +71,7 @@ alarm[3] = 1;
             <kind>1</kind>
             <string>sfx_play(snd_explode1, x, y);
 //Create an effect
-explodecolor = make_color_rgb(255, random(255), 0);
-effect_create_above(ef_explosion, x, y, 0, explodecolor);
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missileburst, 5);
+create_explosion(0);
 obj_mod.createcheck = id;
 with(obj_homingeffect)
     if(create = obj_mod.createcheck)

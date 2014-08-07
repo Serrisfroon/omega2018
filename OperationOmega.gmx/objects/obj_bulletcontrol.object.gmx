@@ -143,20 +143,6 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         if(bulletlife[i] &lt;= 0)
         {
             bulletfree[i] = true; 
-            if(bulletgraze[i] = 1)
-            {
-                obj_ship.energy += 4;
-                if(obj_ship.energy &gt; 100)
-                    obj_ship.energy = 100;
-                obj_ship.heat += 2;
-                if(obj_ship.heat &gt; 50)
-                    obj_ship.heat = 50;
-                repeat(3)
-                    effect_create_below(ef_spark, bulletx[i]-7+random(14), bullety[i]-7+random(14), 0, c_aqua);
-                sfx_play(snd_graze, bulletx[i], bullety[i]);
-
-                bulletgraze[i] = 0;
-            }
                
             //Reduce the bullet max if this is the last bullet
             if(bulletmax = i)
@@ -173,19 +159,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         if(bulletlife[i] &lt;= 0 || bulletx[i] &lt;= 0 || bulletx[i] &gt;= room_width || bullety[i] &lt;= 0 || bullety[i] &gt;= room_height)
         {
             bulletfree[i] = true;
-            if(bulletgraze[i] = 1)
-            {
-                obj_ship.energy += 4;
-                if(obj_ship.energy &gt; 100)
-                    obj_ship.energy = 100;
-                obj_ship.heat += 2;
-                if(obj_ship.heat &gt; 50)
-                    obj_ship.heat = 50;
-                repeat(3)
-                    effect_create_below(ef_spark, bulletx[i]-7+random(14), bullety[i]-7+random(14), 0, c_aqua);
-                sfx_play(snd_graze, bulletx[i], bullety[i]);
-                bulletgraze[i] = 0;
-            }
+
             //Create a stasis field if it is a stasis bullet
             if(bullettype[i] = spr_whip || bullettype[i] = spr_snake_body || bullettype[i] = spr_stasis)
             {         
@@ -193,9 +167,13 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                 ending.direction = bulletdirection[i];
                 ending.image_angle = ending.direction;
                 ending.mid = bulletmid[i];
-                if(bullettype[i] = spr_snake_body)
+                if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
                 {
-                    ending.image_blend = bulletblend[i];
+                    ending.image_speed = 0;
+                    if(bulletblend[i] = c_red)
+                        ending.image_index = 0;
+                    else
+                        ending.image_index = 1;                    
                     ending.image_angle = ending.direction;    
                 }
             }
@@ -276,9 +254,13 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body)
+            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
             {
-                ending.image_blend = bulletblend[i];
+                ending.image_speed = 0;
+                if(bulletblend[i] = c_red)
+                    ending.image_index = 0;
+                else
+                    ending.image_index = 1;                    
                 ending.image_angle = ending.direction;    
             }
         break;
@@ -288,6 +270,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             possihit = instance_nearest(bulletx[i], bullety[i], prnt_ally);
             //Break the switch statement if there are no allys
             if(possihit = noone) break;
+            if(possihit.object_index = obj_ship_placeholder || possihit.object_index = obj_teleport || possihit.object_index = obj_deadship) break;
             //Check if the nearest enemy is close to a collision
             //Also check if the closest ally is actually an error check
             //Check if the nearest enemy is close to a collision
@@ -480,10 +463,14 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body)
+            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
             {
-             ending.image_blend = bulletblend[i];
-             ending.image_angle = ending.direction;    
+                ending.image_speed = 0;
+                if(bulletblend[i] = c_red)
+                    ending.image_index = 0;
+                else
+                    ending.image_index = 1;                    
+                ending.image_angle = ending.direction;    
             }
         break;
     }
@@ -515,9 +502,13 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body)
+            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
             {
-                ending.image_blend = bulletblend[i];
+                ending.image_speed = 0;
+                if(bulletblend[i] = c_red)
+                    ending.image_index = 0;
+                else
+                    ending.image_index = 1;                    
                 ending.image_angle = ending.direction;    
             }
         break;
@@ -557,9 +548,13 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body)
+            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
             {
-                ending.image_blend = bulletblend[i];
+                ending.image_speed = 0;
+                if(bulletblend[i] = c_red)
+                    ending.image_index = 0;
+                else
+                    ending.image_index = 1;                    
                 ending.image_angle = ending.direction;    
             }
         break;
@@ -573,19 +568,6 @@ for(i = 1; i &lt;= bulletmax; i += 1)
     if(wallposition[floor(bulletx[i]/32), floor(bullety[i]/32)] = false) continue;
     //Free this index
     bulletfree[i] = true;
-    if(bulletgraze[i] = 1)
-    {
-        obj_ship.energy += 4;
-        if(obj_ship.energy &gt; 100)
-            obj_ship.energy = 100;
-        obj_ship.heat += 2;
-        if(obj_ship.heat &gt; 50)
-            obj_ship.heat = 50;
-        repeat(3)
-            effect_create_below(ef_spark, bulletx[i]-7+random(14), bullety[i]-7+random(14), 0, c_aqua);
-        sfx_play(snd_graze, bulletx[i], bullety[i]);
-        bulletgraze[i] = 0;
-    }
     //Reduce the bullet max if this is the last bullet
     if(bulletmax = i)
     //Reduce until a new max is found

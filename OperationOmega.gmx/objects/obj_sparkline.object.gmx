@@ -69,6 +69,25 @@ part_type_speed(obj_partsystem.primarypart,1.68,2.40,-0.04,0);
 part_type_direction(obj_partsystem.primarypart,0,359,0,0);
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.primarypart, 8);
 
+repeat(2)
+{
+    spark = instance_create(x-15+random(30), y-15+random(30), obj_sparkline_spark);
+    spark.connect = -1;
+    spark.direction = random(360);
+    spark.speed = 2+random(3);
+    
+    spark2 = instance_create(x-15+random(30), y-15+random(30), obj_sparkline_spark);
+    spark2.connect = spark;
+    spark2.direction = random(360);
+    spark2.speed = 2+random(3);
+}
+spark = instance_create(x-15+random(30), y-15+random(30), obj_sparkline_spark);
+spark.connect = spark2;
+spark.direction = random(360);
+spark.speed = 2+random(3);
+
+
+
 </string>
           </argument>
         </arguments>
@@ -285,16 +304,15 @@ if(instance_exists(second) &amp;&amp; second != -1)
 {
  if((speed = 0 &amp;&amp; second.speed = 0) || stage = 1)
  {
-  //Set the number of images to draw depenadant on the distance between the two nodes
-  lines = ceil(point_distance(x, y, second.x, second.y)/64);
-  //Set the direction to the node
-  dir = point_direction(x, y, second.x, second.y);
-  //Set the scale value so that all images are drawn the same
-  scale = (point_distance(x, y, second.x, second.y)/64)/lines;
-  for(i = 1; i &lt;= lines; i += 1)
-  {
-   draw_sprite_ext(spr_sparkline_line, -1, x+lengthdir_x(64*scale*(i-1), dir), y+lengthdir_y(64*scale*(i-1), dir), scale, 1, dir, c_white, 0.8);
-  }
+    var pointdist, pointdir;
+    draw_electricity(x, y, second.x, second.y, c_blue, 3, 3, 6, true)//3-random(6) is equall in either way
+    
+    if(irandom(3) = 1)
+    {
+        pointdist = irandom(point_distance(x, y, second.x, second.y));
+        pointdir = point_direction(x, y, second.x, second.y);
+        part_particles_create(obj_partsystem.system, x+lengthdir_x(pointdist, pointdir), y+lengthdir_y(pointdist, pointdir), obj_partsystem.elecspark, 1);
+    }
  }
 }
 //Draw the image. It's drawn after the sparkline image to remain on top

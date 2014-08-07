@@ -38,7 +38,7 @@ switch(type)
       name = "Sonic";
       sprite = spr_sonic;
       life = 180;
-      after = obj_sonic_hit;
+      after = obj_generic_hit;
       dmg = 4;
       mask = 3;
       lolspeed = 10+speed;
@@ -48,7 +48,7 @@ switch(type)
       name = "Wave";
       sprite = spr_wave;
       life = 240;
-      after = obj_wave_hit;
+      after = obj_generic_hit;
       dmg = 16;
       mask = 14;
       lolspeed = 4+speed;
@@ -58,7 +58,7 @@ switch(type)
       name = "Seeker";
       sprite = spr_flank;
       life = 120;
-      after = obj_crossfire_hit;
+      after = obj_generic_hit;
       dmg = 6;
       mask = 7;
       lolspeed = 21;
@@ -96,16 +96,16 @@ switch(type)
       name = "Burst";
       sprite = spr_burst;
       life = 250;
-      after = obj_burst_hit;      
+      after = obj_generic_hit;
       dmg = 5;
       mask = 7;
       lolspeed = 12;
  break;
  case "Formation":
       name = "Formation";
-      sprite = spr_formation;
+      sprite = spr_newformation;
       life = 240;
-      after = obj_formation_hit;      
+      after = obj_generic_hit;
       dmg = 5;
       mask = 7;
       lolspeed = 10;
@@ -114,7 +114,7 @@ switch(type)
       name = "Solus";
       sprite = spr_formation;
       life = 100;
-      after = obj_formation_hit;      
+      after = obj_generic_hit;
       dmg = 4;
       mask = 7;
       lolspeed = 14;
@@ -123,7 +123,7 @@ switch(type)
       name = "Horizon";
       sprite = spr_horizon;
       life = 120;
-      after = obj_slash_hit;      
+      after = obj_generic_hit;
       dmg = 8;
       mask = 8;
       lolspeed = 9;
@@ -132,7 +132,7 @@ switch(type)
       name = "Slash";
       sprite = spr_slash;
       life = 200;
-      after = obj_slash_hit;      
+      after = obj_generic_hit;
       dmg = 5;
       mask = 8;
       lolspeed = 12;
@@ -141,7 +141,7 @@ switch(type)
       name = "Slash";
       sprite = spr_slash;
       life = 200;
-      after = obj_slash_hit;      
+      after = obj_generic_hit;
       dmg = 5;
       mask = 8;
       lolspeed = 15;
@@ -150,7 +150,7 @@ switch(type)
       name = "Double";
       sprite = spr_double;
       life = 140;
-      after = obj_double_hit;
+      after = obj_generic_hit;
       dmg = 8;
       mask = 7;
       lolspeed = 6+speed;
@@ -159,7 +159,7 @@ switch(type)
       name = "Pierce";
       sprite = spr_pierce;
       life = 200;
-      after = obj_slash_hit;
+      after = obj_generic_hit;
       dmg = 3;
       mask = 5;
       lolspeed = 7+speed;
@@ -169,7 +169,7 @@ switch(type)
       name = "Spread";
       sprite = spr_spread;
       life = 200;
-      after = obj_spread_hit;
+      after = obj_generic_hit;
       dmg = 5;
       mask = 8;
       lolspeed = 7+speed;
@@ -178,7 +178,7 @@ switch(type)
       name = "Turret";
       sprite = spr_turretshot;
       life = 200;
-      after = obj_burst_hit;      
+      after = obj_generic_hit;
       dmg = 3;
       mask = 4;
       lolspeed = 10;
@@ -197,7 +197,7 @@ switch(type)
       name = "Direct";
       sprite = spr_trigger_shot;
       life = 55;
-      after = obj_whip_hit;      
+      after = obj_generic_hit;
       dmg = 5;
       mask = 7;
       lolspeed = 14;

@@ -1,10 +1,5 @@
 //attack_collision(dmg, pene, threshold, shake, name)
 
-//Cancel the collision if a pulse is active
-closepulse = instance_nearest(x, y, obj_shieldpulse);
-if(closepulse != noone)
-    if(closepulse.mid = global.mymid)
-        return 0;
 
 //Script variables
 var dmg, pene, thresh, shak, weaponname;

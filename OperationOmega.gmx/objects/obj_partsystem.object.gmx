@@ -25,7 +25,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Smoke trail for missiles
+            <string>//Ship burning
+ship_burn = part_type_create();
+part_type_shape(ship_burn,pt_shape_smoke);
+part_type_size(ship_burn,0.10,0.20,0.01,0);
+part_type_scale(ship_burn,1,1);
+part_type_color1(ship_burn,3513087);
+part_type_alpha2(ship_burn,1,0.30);
+part_type_speed(ship_burn,0,0,0,0);
+part_type_direction(ship_burn,0,359,0,0);
+part_type_gravity(ship_burn,0,270);
+part_type_orientation(ship_burn,0,359,0,0,1);
+part_type_blend(ship_burn,1);
+part_type_life(ship_burn,10,20);
+
+//Smoke trail for missiles
 system = part_system_create();
 particle1 = part_type_create();
 part_type_shape(particle1,pt_shape_smoke);
@@ -40,6 +54,21 @@ part_type_orientation(particle1,0,0,0,0,1);
 part_type_blend(particle1,0);
 part_type_life(particle1,25,30);
 
+//Ship part flame trail
+part_trail = part_type_create();
+part_type_shape(part_trail,pt_shape_explosion);
+part_type_size(part_trail,0.20,0.40,0,0);
+part_type_scale(part_trail,1,1);
+part_type_color2(part_trail,6008319,4235263);
+part_type_alpha2(part_trail,0.96,0);
+part_type_speed(part_trail,0,0,0,0);
+part_type_direction(part_trail,0,0,0,0);
+part_type_gravity(part_trail,0,270);
+part_type_orientation(part_trail,0,359,0,0,0);
+part_type_blend(part_trail,1);
+part_type_life(part_trail,58,59);
+
+
 //Primary shooting
 primarypart = part_type_create();
 part_type_shape(primarypart,pt_shape_flare);
@@ -53,6 +82,34 @@ part_type_gravity(primarypart,0,270);
 part_type_orientation(primarypart,0,0,0,0,1);
 part_type_blend(primarypart,0);
 part_type_life(primarypart,20,30);
+
+//Energy hit
+energyhit[0] = part_type_create();
+part_type_shape(energyhit[0],pt_shape_flare);
+part_type_size(energyhit[0],0.20,0.40,-0.003,0);
+part_type_scale(energyhit[0],1,1);
+part_type_color2(energyhit[0],16777215,255);
+part_type_alpha3(energyhit[0],0.72,0.56,0.08);
+part_type_speed(energyhit[0],1,3,-0.05,0);
+part_type_direction(energyhit[0],0,359,0,0);
+part_type_gravity(energyhit[0],0,270);
+part_type_orientation(energyhit[0],0,0,0,0,1);
+part_type_blend(energyhit[0],1);
+part_type_life(energyhit[0],30,40);
+
+energyhit[1] = part_type_create();
+part_type_shape(energyhit[1],pt_shape_flare);
+part_type_size(energyhit[1],0.20,0.40,-0.003,0);
+part_type_scale(energyhit[1],1,1);
+part_type_color2(energyhit[1],16777215,c_blue);
+part_type_alpha3(energyhit[1],0.72,0.56,0.08);
+part_type_speed(energyhit[1],1,3,-0.05,0);
+part_type_direction(energyhit[1],0,359,0,0);
+part_type_gravity(energyhit[1],0,270);
+part_type_orientation(energyhit[1],0,0,0,0,1);
+part_type_blend(energyhit[1],1);
+part_type_life(energyhit[1],30,40);
+
 
 //Electric sparks
 elecspark = part_type_create();
@@ -169,18 +226,44 @@ part_type_blend(barrier_light,1);
 part_type_life(barrier_light,30,60);
 
 //Beam Sparks
-beamspark = part_type_create();
-part_type_shape(beamspark,pt_shape_spark);
-part_type_size(beamspark,0.10,0.30,0,0);
-part_type_scale(beamspark,2.25,1);
-part_type_color3(beamspark,8388608,16777215,16711680);
-part_type_alpha3(beamspark,0.68,0.63,0.03);
-part_type_speed(beamspark,1.13,3.98,0.02,0);
-part_type_direction(beamspark,0,359,1,0);
-part_type_gravity(beamspark,0,270);
-part_type_orientation(beamspark,0,0,0,0,0);
-part_type_blend(beamspark,0);
-part_type_life(beamspark,30,40);
+beamspark[0] = part_type_create();
+part_type_shape(beamspark[0],pt_shape_spark);
+part_type_size(beamspark[0],0.10,0.30,0,0);
+part_type_scale(beamspark[0],2.25,1);
+part_type_color3(beamspark[0],c_blue,c_white,c_blue);
+part_type_alpha3(beamspark[0],0.68,0.63,0.03);
+part_type_speed(beamspark[0],1.13,3.98,0.02,0);
+part_type_direction(beamspark[0],0,359,1,0);
+part_type_gravity(beamspark[0],0,270);
+part_type_orientation(beamspark[0],0,0,0,0,0);
+part_type_blend(beamspark[0],0);
+part_type_life(beamspark[0],30,40);
+
+beamspark[1] = part_type_create();
+part_type_shape(beamspark[1],pt_shape_spark);
+part_type_size(beamspark[1],0.10,0.30,0,0);
+part_type_scale(beamspark[1],2.25,1);
+part_type_color3(beamspark[1],c_green,c_white,c_green);
+part_type_alpha3(beamspark[1],0.68,0.63,0.03);
+part_type_speed(beamspark[1],1.13,3.98,0.02,0);
+part_type_direction(beamspark[1],0,359,1,0);
+part_type_gravity(beamspark[1],0,270);
+part_type_orientation(beamspark[1],0,0,0,0,0);
+part_type_blend(beamspark[1],0);
+part_type_life(beamspark[1],30,40);
+
+beamspark[2] = part_type_create();
+part_type_shape(beamspark[2],pt_shape_spark);
+part_type_size(beamspark[2],0.10,0.30,0,0);
+part_type_scale(beamspark[2],2.25,1);
+part_type_color3(beamspark[2],c_red,c_white,c_red);
+part_type_alpha3(beamspark[2],0.68,0.63,0.03);
+part_type_speed(beamspark[2],1.13,3.98,0.02,0);
+part_type_direction(beamspark[2],0,359,1,0);
+part_type_gravity(beamspark[2],0,270);
+part_type_orientation(beamspark[2],0,0,0,0,0);
+part_type_blend(beamspark[2],0);
+part_type_life(beamspark[2],30,40);
 
 //Beam Hit
 beamhit = part_type_create();
@@ -196,19 +279,76 @@ part_type_orientation(beamhit,0,0,0,0,1);
 part_type_blend(beamhit,0);
 part_type_life(beamhit,30,40);
 
+//Beam lines
+beamline[0] = part_type_create();
+part_type_shape(beamline[0],pt_shape_line);
+part_type_size(beamline[0],0.10,0.40,0,0);
+part_type_scale(beamline[0],4,1);
+part_type_color2(beamline[0],13290239,8421631);
+part_type_alpha2(beamline[0],1, 0.2);
+part_type_speed(beamline[0],55,60,0,0);
+part_type_direction(beamline[0],0,0,0,0);
+part_type_gravity(beamline[0],0,270);
+part_type_orientation(beamline[0],0,0,0,0,1);
+part_type_blend(beamline[0],1);
+part_type_life(beamline[0],25,25);
+
+beamline[1] = part_type_create();
+part_type_shape(beamline[1],pt_shape_line);
+part_type_size(beamline[1],0.10,0.40,0,0);
+part_type_scale(beamline[1],4,1);
+part_type_color2(beamline[1],make_color_rgb(200, 255, 200) ,make_color_rgb(125, 255, 125) );
+part_type_alpha2(beamline[1],1, 0.2);
+part_type_speed(beamline[1],55,60,0,0);
+part_type_direction(beamline[1],0,0,0,0);
+part_type_gravity(beamline[1],0,270);
+part_type_orientation(beamline[1],0,0,0,0,1);
+part_type_blend(beamline[1],1);
+part_type_life(beamline[1],25,25);
+
+beamline[2] = part_type_create();
+part_type_shape(beamline[2],pt_shape_line);
+part_type_size(beamline[2],0.10,0.40,0,0);
+part_type_scale(beamline[2],4,1);
+part_type_color2(beamline[2],make_color_rgb(200, 200, 255) ,make_color_rgb(125, 125, 255) );
+part_type_alpha2(beamline[2],1, 0.2);
+part_type_speed(beamline[2],55,60,0,0);
+part_type_direction(beamline[2],0,0,0,0);
+part_type_gravity(beamline[2],0,270);
+part_type_orientation(beamline[2],0,0,0,0,1);
+part_type_blend(beamline[2],1);
+part_type_life(beamline[2],25,25);
+
+
+
+//Horizon flare
+horizonflare = part_type_create();
+part_type_shape(horizonflare,pt_shape_flare);
+part_type_size(horizonflare,0.70,1,0,0);
+part_type_scale(horizonflare,1,1);
+part_type_color3(horizonflare,16777215,255,255);
+part_type_alpha3(horizonflare,0.63,0.40,0.03);
+part_type_speed(horizonflare,0.50,1.50,-0.03,0);
+part_type_direction(horizonflare,0,359,-1,0);
+part_type_gravity(horizonflare,0,270);
+part_type_orientation(horizonflare,0,0,0,0,1);
+part_type_blend(horizonflare,1);
+part_type_life(horizonflare,36,56);
+
+
 //Formation Split
 formsplit = part_type_create();
-part_type_shape(formsplit,pt_shape_square);
-part_type_size(formsplit,0.30,0.40,-0.01,0);
-part_type_scale(formsplit,1,0.50);
-part_type_color1(formsplit,16384);
-part_type_alpha3(formsplit,1,0.55,0.03);
-part_type_speed(formsplit,2,4,-0.08,0);
-part_type_direction(formsplit,0,359,4,0);
+part_type_sprite(formsplit,spr_formation_particle,0,0,0);
+part_type_size(formsplit,0.38,0.68,0,0);
+part_type_scale(formsplit,2.50,2);
+part_type_color3(formsplit,16777215,16711680,16711680);
+part_type_alpha3(formsplit,0.79,0.38,0.05);
+part_type_speed(formsplit,2.50,4,-0.18,0);
+part_type_direction(formsplit,0,0,0,0);
 part_type_gravity(formsplit,0,270);
-part_type_orientation(formsplit,0,359,4,0,0);
-part_type_blend(formsplit,0);
-part_type_life(formsplit,30,50);
+part_type_orientation(formsplit,0,0,0,0,0);
+part_type_blend(formsplit,1);
+part_type_life(formsplit,20,30);
 
 //Formation Fire
 formfire = part_type_create();
@@ -224,8 +364,6 @@ part_type_orientation(formfire,0,0,0,0,0);
 part_type_blend(formfire,0);
 part_type_life(formfire,20,30);
 
-
-
 //Burst split
 burstsplit = part_type_create();
 part_type_shape(burstsplit,pt_shape_flare);
@@ -237,10 +375,36 @@ part_type_speed(burstsplit,1,5,0.02,0);
 part_type_direction(burstsplit,0,359,0,0);
 part_type_gravity(burstsplit,0,270);
 part_type_orientation(burstsplit,0,0,0,0,1);
-part_type_blend(burstsplit,0);
+part_type_blend(burstsplit,1);
 part_type_life(burstsplit,20,30);
 
+//Spiral Burst
+spiralburst = part_type_create();
+part_type_shape(spiralburst,pt_shape_flare);
+part_type_size(spiralburst,0.44,0.54,0,0);
+part_type_scale(spiralburst,1,1);
+part_type_color3(spiralburst,16777215,255,255);
+part_type_alpha3(spiralburst,0.80,0.78,0.05);
+part_type_speed(spiralburst,1,5,0,0);
+part_type_direction(spiralburst,0,359,4,0);
+part_type_gravity(spiralburst,0,270);
+part_type_orientation(spiralburst,0,0,0,0,1);
+part_type_blend(spiralburst,1);
+part_type_life(spiralburst,40,60);
 
+//Trail Fadeaway
+trailfade = part_type_create();
+part_type_sprite(trailfade,spr_trail_particle,0,0,0);
+part_type_size(trailfade,1,1,0,0);
+part_type_scale(trailfade,1,1);
+part_type_color3(trailfade,16777215,255,255);
+part_type_alpha2(trailfade,0.80,0);
+part_type_speed(trailfade,0,0,0,0);
+part_type_direction(trailfade,0,359,0,0);
+part_type_gravity(trailfade,0,270);
+part_type_orientation(trailfade,0,0,0,0,1);
+part_type_blend(trailfade,1);
+part_type_life(trailfade,60,90);
 
 //Missile Burst
 missileburst = part_type_create();
@@ -267,7 +431,7 @@ part_type_speed(deployhit,0,0,0,0);
 part_type_direction(deployhit,0,0,0,0);
 part_type_gravity(deployhit,0,270);
 part_type_orientation(deployhit,0,0,0,0,0);
-part_type_blend(deployhit,0);
+part_type_blend(deployhit,1);
 part_type_life(deployhit,15,25);
 
 
@@ -285,6 +449,58 @@ part_type_orientation(enginesparks,0,359,0,0,1);
 part_type_blend(enginesparks,1);
 part_type_life(enginesparks,10,17);
 
+
+//Explosion
+explosion_core = part_type_create();
+part_type_shape(explosion_core,pt_shape_explosion);
+part_type_size(explosion_core,0.30,0.40,0.01,0);
+part_type_scale(explosion_core,1,1);
+part_type_color3(explosion_core,33023,5329233,5987163);
+part_type_alpha3(explosion_core,0.95,0.39,0.01);
+part_type_speed(explosion_core,1.50,2,-0.16,0);
+part_type_direction(explosion_core,0,359,0,0);
+part_type_gravity(explosion_core,0,270);
+part_type_orientation(explosion_core,0,0,0,0,1);
+part_type_blend(explosion_core,1);
+part_type_life(explosion_core,60,76);
+
+explosion_glare = part_type_create();
+part_type_shape(explosion_glare,pt_shape_sphere);
+part_type_size(explosion_glare,0.40,1,0.01,0);
+part_type_scale(explosion_glare,3,3);
+part_type_color1(explosion_glare,7715583);
+part_type_alpha3(explosion_glare,0.40,0.10,0);
+part_type_speed(explosion_glare,0,0,0,0);
+part_type_direction(explosion_glare,0,0,0,0);
+part_type_gravity(explosion_glare,0,270);
+part_type_orientation(explosion_glare,0,0,0,0,1);
+part_type_blend(explosion_glare,1);
+part_type_life(explosion_glare,45,45);
+
+explosion_burst = part_type_create();
+part_type_shape(explosion_burst,pt_shape_flare);
+part_type_size(explosion_burst,0.40,0.40,-0.01,0);
+part_type_scale(explosion_burst,4,0.60);
+part_type_color3(explosion_burst,16777215,8454143,65535);
+part_type_alpha3(explosion_burst,0.95,0.39,0.01);
+part_type_speed(explosion_burst,5,10,-0.16,0);
+part_type_direction(explosion_burst,0,359,0,0);
+part_type_gravity(explosion_burst,0,270);
+part_type_orientation(explosion_burst,0,0,0,0,1);
+part_type_blend(explosion_burst,1);
+part_type_life(explosion_burst,40,50);
+
+explosion_flare = part_type_create();
+part_type_shape(explosion_flare,pt_shape_flare);
+part_type_size(explosion_flare,0.35,0.35,0,0);
+part_type_scale(explosion_flare,4.96,1);
+part_type_color2(explosion_flare,255,33023);
+part_type_alpha3(explosion_flare,0.80,0.44,0.10);
+part_type_speed(explosion_flare,0,0,0.01,0);
+part_type_direction(explosion_flare,0,359,0,0);
+part_type_orientation(explosion_flare,0,0,0,0,1);
+part_type_blend(explosion_flare,1);
+part_type_life(explosion_flare,45,60);
 
 
 

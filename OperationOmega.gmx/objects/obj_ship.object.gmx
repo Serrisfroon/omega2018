@@ -900,24 +900,22 @@ if(speed &gt; 5)
 if(smoke &lt; 6)
 {
     //Select a color
-    switch(floor(random(3)))
-    {
-        case 0:
-            //Make a random color somewhere between pure red and pure yellow
-            smokecolor = make_color_rgb(255, random(255), 0);
-        break;
-        case 1:
-            smokecolor = c_gray;
-        break;
-        case 2:
-            smokecolor = c_dkgray;
-        break;
-    }
-    //If smoking is still low, force gray smoke
     if(smoke &gt; 3) 
-        smokecolor = c_gray;
-    //Create the smoke on the ship
-    effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, smokecolor);
+        effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_gray);
+    else
+        switch(irandom(5))
+        {
+            case 1:
+                effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_gray);
+            break;
+            case 2:
+                effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_dkgray);
+            break;
+            default:
+                //Make a random color somewhere between pure red and pure yellow
+                create_burning(x-6+random(12), y-6+random(12));
+            break;
+        }
 }
 //Set the time until the next smoke effect, dependant on how bad smoking is
 alarm[2]=(6*smoke+10);

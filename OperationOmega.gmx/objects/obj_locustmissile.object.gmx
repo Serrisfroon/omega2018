@@ -57,11 +57,12 @@ alarm[3] = 1;
           <argument>
             <kind>1</kind>
             <string>sfx_play(snd_explode1, x, y);
+obj_mod.createcheck = id;
+with(obj_homingeffect)
+    if(create = obj_mod.createcheck)
+        instance_destroy();
 //Create an effect
-explodecolor = make_color_rgb(255, random(255), 0);
-effect_create_above(ef_explosion, x, y, 0, explodecolor);
-if(global.mflareseffect = 1)
- part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missileburst, 5);
+create_explosion(0);
 </string>
           </argument>
         </arguments>

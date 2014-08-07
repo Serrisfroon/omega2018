@@ -7,7 +7,7 @@ var killer, defeated, weapon, choosemessage;
 killer = argument0;
 defeated = argument1;
 weapon = argument2;
-choosemessage = floor(random(51))
+choosemessage = floor(random(54))
 
 switch(choosemessage)
 {
@@ -163,8 +163,17 @@ switch(choosemessage)
  break;
  case 50:
       obj_ship.message = killer+" bodied "+defeated+".("+weapon+")";
- break;
+ break; 
  case 51:
+      obj_ship.message = killer+" deleted "+defeated+".("+weapon+")";
+ break;
+ case 52:
+      obj_ship.message = killer+" removed "+defeated+".("+weapon+")";
+ break; 
+ case 53:
+      obj_ship.message = killer+" noscoped "+defeated+".("+weapon+")";
+ break;
+ case 54:
       obj_ship.message = killer+" crushed "+defeated+".("+weapon+")";
  break;
 }

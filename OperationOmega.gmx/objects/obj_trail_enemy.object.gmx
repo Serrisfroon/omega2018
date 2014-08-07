@@ -2,10 +2,10 @@
 <object>
   <spriteName>spr_trail</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyattack</parentName>
+  <parentName>prnt_enemyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,7 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>//Set the blending color to match your team
-image_blend = global.enemycolor;
+image_speed = 0;
+image_index = 0;
+if(global.allycolor = c_red)
+    image_index = 1;
 //Initialize shot spawning alarm
 alarm[0] = 12;
 //Set self-destruct time
@@ -39,20 +42,6 @@ amplified = 0;
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="1" enumb="0">
@@ -72,12 +61,7 @@ amplified = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>effect_create_below(ef_spark, x, y, 1, c_fuchsia);
-part_type_color1(obj_partsystem.primarypart, c_fuchsia);
-part_type_speed(obj_partsystem.primarypart,1.68,2.40,-0.04,0);
-part_type_direction(obj_partsystem.primarypart,0,359,0,0);
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.primarypart, 8);
-
+            <string>(instance_create(x, y, obj_generic_hit)).mid = mid;
 </string>
           </argument>
         </arguments>
@@ -162,7 +146,8 @@ if(point_distance(x, y, follower.homing.x, follower.homing.y) &gt; 1000)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
+            <string>image_angle += 18;
+if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 {
  instance_destroy();
  exit;

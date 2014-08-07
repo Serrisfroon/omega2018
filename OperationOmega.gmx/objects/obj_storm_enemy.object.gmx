@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>-1</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyattack</parentName>
+  <parentName>prnt_enemyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,8 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 15*global.framerate;
-image_blend = global.enemycolor;
+            <string>speed = 15;
+image_speed = 0;
+image_index = 0;
+if(global.allycolor = c_red)
+    image_index = 1;
 autokill = 1;
 alarm[0] = 1;
 alarm[2] = 2;
@@ -35,20 +38,6 @@ age = 0;
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="1" enumb="0">
@@ -68,7 +57,7 @@ age = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(x, y, obj_storm_hit);
+            <string>(instance_create(x, y, obj_generic_hit)).mid = mid;
 </string>
           </argument>
         </arguments>
@@ -131,7 +120,7 @@ age = 0;
           <argument>
             <kind>1</kind>
             <string>image_angle = direction;
-visible = 1;
+
 </string>
           </argument>
         </arguments>

@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_allyattack</parentName>
+  <parentName>prnt_allyenergy</parentName>
   <maskName>spr_empty</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -28,7 +28,8 @@
             <string>creates = 8;
 alarm[0] = 1;
 image_angle = direction;
-image_blend = global.allycolor;
+image_xscale = 0;
+image_yscale = 0;
 amplified = 0;
 </string>
           </argument>
@@ -54,7 +55,6 @@ amplified = 0;
             <kind>1</kind>
             <string>direction = point_direction(x, y, targetx, targety);
 image_angle = direction;
-visible = 1;
 sfx_play(snd_slash, x, y);
 if(amplified = 0)
 {
@@ -126,20 +126,37 @@ image_blend = c_white;
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="7">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
-        <id>203</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_kill_object</functionname>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(image_yscale &gt;= 1)
+{
+    image_xscale -= 0.1;
+    if(image_xscale = 0)
+        instance_destroy();
+}
+else
+{
+    image_xscale += 0.1;
+    image_yscale += 0.1;
+}
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>

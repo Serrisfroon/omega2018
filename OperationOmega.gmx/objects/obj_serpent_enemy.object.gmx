@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyattack</parentName>
+  <parentName>prnt_enemyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -32,24 +32,13 @@ alarm[1] = 240;
 step = 0;
 amplified = 0;
  sfx_play(snd_serpent, x, y);
-
+image_speed = 0
+image_index = 0;
+if(global.allycolor = c_red)
+    image_index = 1;
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="2" enumb="3">
@@ -69,9 +58,8 @@ amplified = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>visible = true;
-image_angle = direction;
-image_blend = global.enemycolor;
+            <string>image_angle = direction;
+
 </string>
           </argument>
         </arguments>
