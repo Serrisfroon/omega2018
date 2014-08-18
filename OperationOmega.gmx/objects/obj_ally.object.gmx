@@ -965,6 +965,14 @@ if(shoot &lt;= 0)
             newdir = aim_limit(facedir-180, point_direction(x, y, enemynear.x, enemynear.y), 30)-180;
         else
             newdir = (direction+(snapdir*5))
+        do
+        {
+            if(newdir &gt; 360)
+                newdir -= 360;
+            if(newdir &lt; 0)
+                newdir += 360;                
+        }
+        until(newdir &lt;=360 &amp;&amp; newdir &gt;= 0)
         bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", newdir-180, mid, 0);
   break;
 
@@ -1517,7 +1525,7 @@ if(global.team[global.mymid] = 1)
  draw_set_color(c_red);
 else
  draw_set_color(c_navy);
-draw_text((x-view_xview[0])/obj_mod.scaling, (y-48-view_yview[0])/obj_mod.scaling, thisname);
+draw_text((x-view_xview[0])/obj_mod.scaling*obj_mod.hudscale, (y-48-view_yview[0])/obj_mod.scaling*obj_mod.hudscale, thisname);
 </string>
           </argument>
         </arguments>

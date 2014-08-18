@@ -54,7 +54,7 @@ chatcolor[8] = c_black;
 found = 0;
 text = "";
 flashing = '|';
-alarm[0] = 5;
+alarm[0] = 12;
 
 switch(global.resolution)
 {
@@ -148,7 +148,7 @@ if(flashing = '')
 else
  flashing = '';
 //Set time until next flash
-alarm[0] = 5;
+alarm[0] = 12;
 </string>
           </argument>
         </arguments>
@@ -415,6 +415,7 @@ else
     updatenow -= 1;
 
 if(room = rm_aftergame) exit;
+if(!instance_exists(obj_readygo)) exit;
 if(obj_readygo.go = 7) exit;
 //Listen for a new player
 newclient = tcpaccept(global.listen, true);
@@ -485,7 +486,10 @@ else
           <argument>
             <kind>1</kind>
             <string>draw_set_font(fnt_chat);
-draw_set_alpha(background_alpha[1]);
+if(instance_exists(obj_customizer))
+    draw_set_alpha(obj_customizer.backbox.display_alpha);
+else
+    draw_set_alpha(1);
 //Stop more input if max is reached
 if(string_length(keyboard_string) &gt; 90)
  keyboard_string = string_copy(keyboard_string, 0, 90);

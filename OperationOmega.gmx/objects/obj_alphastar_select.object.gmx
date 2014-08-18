@@ -166,161 +166,10 @@ if(global.creatinggame = 1)
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clickcustom, 1, 0);
 //return icons accordingly
-if(obj_chooseprimary.selected = 1)
+with(obj_icon_option)
 {
- obj_chooseprimary.selected = 0;
- with(obj_needle_icon)
-  path_start(path_rfirstslot, 16, 0, 0);
- with(obj_sonic_icon)
-  path_start(path_rprimary2, 16, 0, 0);
- with(obj_wave_icon)
-  path_start(path_rprimary3, 16, 0, 0);
- with(obj_flank_icon)
-  path_start(path_rprimary4, 16, 0, 0);
- with(obj_stasis_icon)
-  path_start(path_rprimary5, 16, 0, 0);
- with(obj_crossfire_icon)
-  path_start(path_rprimary6, 16, 0, 0);
- with(obj_siphon_icon)
-  path_start(path_rprimary7, 16, 0, 0);
- with(obj_double_icon)
-  path_start(path_rprimary8, 16, 0, 0);
- with(obj_pierce_icon)
-  path_start(path_rprimary9, 16, 0, 0);
- with(obj_spread_icon)
-  path_start(path_rprimary10, 16, 0, 0);
-}
-if(obj_chooseenergy_1.selected = 1)
-{
- with(obj_fusion_icon)
-  path_start(path_rfirstslot, 16, 0, 0);
- with(obj_stardust_icon)
-  path_start(path_rprimary2, 16, 0, 0);
- with(obj_barrier_icon)
-  path_start(path_rprimary3, 16, 0, 0);
- with(obj_formation_icon)
-  path_start(path_rprimary4, 16, 0, 0);
- with(obj_beam_icon)
-  path_start(path_rprimary5, 16, 0, 0);
- with(obj_sparkline_icon)
-  path_start(path_rprimary6, 16, 0, 0);
- with(obj_burst_icon)
-  path_start(path_rprimary7, 16, 0, 0);
- with(obj_slash_icon)
-  path_start(path_rprimary8, 16, 0, 0);
- with(obj_horizon_icon)
-  path_start(path_rprimary9, 16, 0, 0);
- with(obj_spiral_icon)
-  path_start(path_rprimary10, 16, 0, 0);
- with(obj_laser_icon)
-  path_start(path_rprimary11, 16, 0, 0);
- with(obj_trail_icon)
-  path_start(path_rprimary12, 16, 0, 0);
- with(obj_reflection_icon)
-  path_start(path_rprimary13, 16, 0, 0);
- with(obj_storm_icon)
-  path_start(path_rprimary14, 16, 0, 0);
- with(obj_trigger_icon)
-  path_start(path_rprimary15, 16, 0, 0);
-}
-if(obj_chooseenergy_2.selected = 1)
-{
- with(obj_fusion_icon)
-  path_start(path_rshift1_1, 16, 0, 0);
- with(obj_stardust_icon)
-  path_start(path_rfirstslot, 16, 0, 0);
- with(obj_barrier_icon)
-  path_start(path_rprimary2, 16, 0, 0);
- with(obj_formation_icon)
-  path_start(path_rprimary3, 16, 0, 0);
- with(obj_beam_icon)
-  path_start(path_rprimary4, 16, 0, 0);
- with(obj_sparkline_icon)
-  path_start(path_rshift1_2, 16, 0, 0);
- with(obj_burst_icon)
-  path_start(path_rprimary6, 16, 0, 0);
- with(obj_slash_icon)
-  path_start(path_rprimary7, 16, 0, 0);
- with(obj_horizon_icon)
-  path_start(path_rprimary8, 16, 0, 0);
- with(obj_spiral_icon)
-  path_start(path_rprimary9, 16, 0, 0);
- with(obj_laser_icon)
-  path_start(path_rshift1_3, 16, 0, 0);
- with(obj_trail_icon)
-  path_start(path_rprimary11, 16, 0, 0);
- with(obj_reflection_icon)
-  path_start(path_rprimary12, 16, 0, 0);
- with(obj_storm_icon)
-  path_start(path_rprimary13, 16, 0, 0);
- with(obj_trigger_icon)
-  path_start(path_rprimary14, 16, 0, 0);
-}
-if(obj_chooseenergy_3.selected = 1)
-{
- with(obj_fusion_icon)
-  path_start(path_rshift2_1, 16, 0, 0);
- with(obj_stardust_icon)
-  path_start(path_rshift1_1, 16, 0, 0);
- with(obj_barrier_icon)
-  path_start(path_rfirstslot, 16, 0, 0);
- with(obj_formation_icon)
-  path_start(path_rprimary2, 16, 0, 0);
- with(obj_beam_icon)
-  path_start(path_rprimary3, 16, 0, 0);
- with(obj_sparkline_icon)
-  path_start(path_rshift2_2, 16, 0, 0);
- with(obj_burst_icon)
-  path_start(path_rshift1_2, 16, 0, 0);
- with(obj_slash_icon)
-  path_start(path_rprimary6, 16, 0, 0);
- with(obj_horizon_icon)
-  path_start(path_rprimary7, 16, 0, 0);
- with(obj_spiral_icon)
-  path_start(path_rprimary8, 16, 0, 0);
- with(obj_laser_icon)
-  path_start(path_rshift2_3, 16, 0, 0);
- with(obj_trail_icon)
-  path_start(path_rshift1_3, 16, 0, 0);
- with(obj_reflection_icon)
-  path_start(path_rprimary11, 16, 0, 0);
- with(obj_storm_icon)
-  path_start(path_rprimary12, 16, 0, 0);
- with(obj_trigger_icon)
-  path_start(path_rprimary13, 16, 0, 0);
-}
-if(obj_choosedeploy_1.selected = 1 || obj_choosedeploy_2.selected = 1 || obj_choosedeploy_3.selected = 1)
-{
-with(obj_dualmissile_icon)
- path_start(path_rshift4_1, 16, 0, 0);
-with(obj_layermissile_icon)
- path_start(path_rshift3_1, 16, 0, 0);
-with(obj_locustmissile_icon)
- path_start(path_rshift2_1, 16, 0, 0);
-with(obj_tridentmissile_icon)
- path_start(path_rshift1_1, 16, 0, 0);
-with(obj_shockmissile_icon)
- path_start(path_rfirstslot, 16, 0, 0);
-with(obj_hermitmissile_icon)
- path_start(path_rshift4_2, 16, 0, 0);
-with(obj_splitmissile_icon)
- path_start(path_rshift3_2, 16, 0, 0);
-with(obj_strikemissile_icon)
- path_start(path_rshift2_2, 16, 0, 0);
-with(obj_huntermine_icon)
- path_start(path_rshift1_2, 16, 0, 0);
-with(obj_phantommine_icon)
- path_start(path_rprimary6, 16, 0, 0);
-with(obj_hackermine_icon)
- path_start(path_rshift4_3, 16, 0, 0);
-with(obj_clustermine_icon)
- path_start(path_rshift3_3, 16, 0, 0);
-with(obj_strikemine_icon)
- path_start(path_rshift2_3, 16, 0, 0);
-with(obj_solus_icon)
- path_start(path_rshift1_3, 16, 0, 0);
-with(obj_turret_icon)
- path_start(path_rprimary11, 16, 0, 0);
+    action = 1;
+    alarm[1] = 1;
 }
 with(prnt_selection) selected = 0;
 //Select this slot
@@ -347,8 +196,14 @@ if(room = rm_profile)
         obj_chooseenergy_2.x = 256;
         obj_chooseenergy_3.x = 288;
         obj_choosedeploy_1.x = 336; 
+        if(obj_choosedeploy_1.empty != -1)
+            obj_choosedeploy_1.empty.x = 336;
         obj_choosedeploy_2.x = -3000; 
+        if(obj_choosedeploy_2.empty != -1)
+            with(obj_choosedeploy_2.empty)
+                instance_destroy();
         obj_choosedeploy_3.x = -3000;
+        obj_chooseenergy_3.empty = instance_create(obj_chooseenergy_3.x, obj_chooseenergy_3.y, obj_emptyslot);    
   break;
   case 2:
         global.shipselect = 3;
@@ -359,10 +214,20 @@ if(room = rm_profile)
         obj_profilebox.mmaxd = 0.3;
         obj_profilebox.cmaxd = 0.3;
         obj_chooseenergy_2.x = -3000;
+        if(obj_chooseenergy_2.empty != -1)
+            with(obj_chooseenergy_2.empty)
+                instance_destroy();
         obj_chooseenergy_3.x = -3000;
+        if(obj_chooseenergy_3.empty != -1)
+            with(obj_chooseenergy_3.empty)
+                instance_destroy();
         obj_choosedeploy_1.x = 272; 
+        if(obj_choosedeploy_1.empty != -1)
+            obj_choosedeploy_1.empty.x = 272;
         obj_choosedeploy_2.x = 304; 
         obj_choosedeploy_3.x = 336;
+        obj_choosedeploy_2.empty = instance_create(obj_choosedeploy_2.x, obj_choosedeploy_2.y, obj_emptyslot);    
+        obj_choosedeploy_3.empty = instance_create(obj_choosedeploy_3.x, obj_choosedeploy_3.y, obj_emptyslot);    
   break;
   case 3:
         global.shipselect = 1;
@@ -375,8 +240,13 @@ if(room = rm_profile)
         obj_chooseenergy_2.x = 256;
         obj_chooseenergy_3.x = -3000;
         obj_choosedeploy_1.x = 304; 
+        if(obj_choosedeploy_1.empty != -1)
+            obj_choosedeploy_1.empty.x = 304;
         obj_choosedeploy_2.x = 336; 
+        if(obj_choosedeploy_2.empty != -1)
+            obj_choosedeploy_2.empty.x = 336;
         obj_choosedeploy_3.x = -3000;
+        obj_chooseenergy_2.empty = instance_create(obj_chooseenergy_2.x, obj_chooseenergy_2.y, obj_emptyslot);    
   break;
  }
  exit;
@@ -391,54 +261,77 @@ if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
  moveimage = 1;
  image_index += 1;
  //Change to the correct ship, depending on the current ship shown
- switch(global.shipselect)
+switch(global.shipselect)
  {
   case 1:
         global.shipselect = 2;
         global.spacehot = 0;
         //Set the bars' max sizes
-        obj_customizer.amaxd = 0.2;
-        obj_customizer.smaxd = 0.6;
-        obj_customizer.mmaxd = 0.9;
-        obj_customizer.cmaxd = 0.9;
-        obj_chooseenergy_2.x = 256;
-        obj_chooseenergy_3.x = 288;
-        obj_choosedeploy_1.x = 336; 
+        obj_profilebox.amaxd = 0.2;
+        obj_profilebox.smaxd = 0.6;
+        obj_profilebox.mmaxd = 0.9;
+        obj_profilebox.cmaxd = 0.9;
+        obj_chooseenergy_2.x = 243;
+        obj_chooseenergy_3.x = 279;
+        obj_choosedeploy_1.x = 333; 
+        if(obj_choosedeploy_1.empty != -1)
+            obj_choosedeploy_1.empty.x = 333;
         obj_choosedeploy_2.x = -3000; 
+        if(obj_choosedeploy_2.empty != -1)
+            with(obj_choosedeploy_2.empty)
+                instance_destroy();
         obj_choosedeploy_3.x = -3000;
+        obj_chooseenergy_3.empty = instance_create(obj_chooseenergy_3.x, obj_chooseenergy_3.y, obj_emptyslot);    
         global.deploy[2] = 0;
-        global.deploy[3] = 0;
   break;
   case 2:
         global.shipselect = 3;
         global.spacehot = 0;
        //Set the bars' max sizes
-        obj_customizer.amaxd = 0.9;
-        obj_customizer.smaxd = 0.9;
-        obj_customizer.mmaxd = 0.3;
-        obj_customizer.cmaxd = 0.3;
+        obj_profilebox.amaxd = 0.9;
+        obj_profilebox.smaxd = 0.9;
+        obj_profilebox.mmaxd = 0.3;
+        obj_profilebox.cmaxd = 0.3;
         obj_chooseenergy_2.x = -3000;
+        if(obj_chooseenergy_2.empty != -1)
+            with(obj_chooseenergy_2.empty)
+                instance_destroy();
         obj_chooseenergy_3.x = -3000;
-        obj_choosedeploy_1.x = 272; 
-        obj_choosedeploy_2.x = 304; 
-        obj_choosedeploy_3.x = 336;
-        global.esecond[3] = 0;
+        if(obj_chooseenergy_3.empty != -1)
+            with(obj_chooseenergy_3.empty)
+                instance_destroy();
+        obj_choosedeploy_1.x = 261; 
+        if(obj_choosedeploy_1.empty != -1)
+            obj_choosedeploy_1.empty.x = 261;
+        obj_choosedeploy_2.x = 297; 
+        obj_choosedeploy_3.x = 333;
+        obj_choosedeploy_2.empty = instance_create(obj_choosedeploy_2.x, obj_choosedeploy_2.y, obj_emptyslot);    
+        obj_choosedeploy_3.empty = instance_create(obj_choosedeploy_3.x, obj_choosedeploy_3.y, obj_emptyslot);    
+        global.esecond[2] = 0;
         global.esecond[3] = 0;
   break;
   case 3:
         global.shipselect = 1;
         global.spacehot = 0;
         //Set the bars' max sizes
-        obj_customizer.amaxd = 0.6;
-        obj_customizer.smaxd = 0.6;
-        obj_customizer.mmaxd = 0.6;
-        obj_customizer.cmaxd = 0.6;
-        obj_chooseenergy_2.x = 256;
+        obj_profilebox.amaxd = 0.6;
+        obj_profilebox.smaxd = 0.6;
+        obj_profilebox.mmaxd = 0.6;
+        obj_profilebox.cmaxd = 0.6;
+        obj_chooseenergy_2.x = 243;
         obj_chooseenergy_3.x = -3000;
-        obj_choosedeploy_1.x = 304; 
-        obj_choosedeploy_2.x = 336; 
+        obj_choosedeploy_1.x = 297; 
+        if(obj_choosedeploy_1.empty != -1)
+            obj_choosedeploy_1.empty.x = 297;
+        obj_choosedeploy_2.x = 333; 
+        if(obj_choosedeploy_2.empty != -1)
+            obj_choosedeploy_2.empty.x = 333;
         obj_choosedeploy_3.x = -3000;
-        global.esecond[3] = 0;
+        if(obj_choosedeploy_3.empty != -1)
+            with(obj_choosedeploy_3.empty)
+                instance_destroy();
+        obj_chooseenergy_2.empty = instance_create(obj_chooseenergy_2.x, obj_chooseenergy_2.y, obj_emptyslot);    
+        global.deploy[2] = 0;
         global.deploy[3] = 0;
   break;
  }

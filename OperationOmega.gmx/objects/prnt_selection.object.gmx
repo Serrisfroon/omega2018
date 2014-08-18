@@ -27,12 +27,7 @@
             <kind>1</kind>
             <string>//Make the image invisible at the start of the room for transition effect
 image_alpha = 0;
-/*
-if(room != rm_waiting &amp;&amp; room != rm_profile)
-{
- reflection = instance_create(x, y, obj_selectreflect);
- reflection.reflecting = id;
-}
+
 </string>
           </argument>
         </arguments>
@@ -56,32 +51,7 @@ if(room != rm_waiting &amp;&amp; room != rm_profile)
           <argument>
             <kind>1</kind>
             <string>//Make the tranparency follow taht of the background for transition effect
-image_alpha = background_alpha[1];
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="8">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>path_speed = 0;
-if(round(x) = xstart &amp;&amp; round(y) = ystart)
- instance_destroy();
+image_alpha = obj_customizer.backbox.display_alpha;
 </string>
           </argument>
         </arguments>

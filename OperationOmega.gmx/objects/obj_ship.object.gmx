@@ -1307,7 +1307,20 @@ if(thisturn != lastturn)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
+            <string>if(other.damage &gt; 4)
+{
+ other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
+ other.split.mid = other.mid;
+ other.split.direction = other.direction-30;
+ other.split.damage = other.damage-2+other.amplified*2;
+ other.split.oldmid = mid;
+ other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
+ other.split.mid = other.mid;
+ other.split.direction = other.direction+30;
+ other.split.damage = other.damage-2+other.amplified*2;
+ other.split.oldmid = mid;
+}
+attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
 </string>
           </argument>
         </arguments>
@@ -5596,7 +5609,7 @@ switch(global.shipselect)
         warping = 40;
         heat -= 30;
         cooldown = 0;
-        swiftteled = instance_create(x, y, obj_swifttele);
+        //swiftteled = instance_create(x, y, obj_swifttele);
         view_object[0] = swiftteled;
         swiftteled.hspeed = (warpx-x)/10;
         swiftteled.vspeed = (warpy-y)/10;

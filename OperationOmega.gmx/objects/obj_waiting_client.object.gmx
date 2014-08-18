@@ -52,7 +52,7 @@ chatline[8] = "";
 chatcolor[8] = c_black;
 found = 0;
 text = "";
-alarm[0] = 5;
+alarm[0] = 12;
 flashing = '|';
 //Initialize match rule variable to avoid error
 global.matchtype = "";
@@ -106,7 +106,7 @@ if(flashing = '')
 else
  flashing = '';
 //Set time until next flash
-alarm[0] = 5;
+alarm[0] = 12;
 </string>
           </argument>
         </arguments>
@@ -220,8 +220,8 @@ alarm[0] = 5;
          global.playerprimary[i] = readbyte(0);
         }
         obj_menumod.alarm[3] = 25;
-        with(prnt_menubutton)
-         animation = 1;
+        obj_waiting_boxes.animation = 3;
+        prnt_menubutton.animation = 2;
         obj_menumod.animation = 1;
    break;
    
@@ -315,7 +315,7 @@ alarm[0] = 5;
           <argument>
             <kind>1</kind>
             <string>draw_set_font(fnt_chat);
-draw_set_alpha(background_alpha[1]);
+draw_set_alpha(obj_customizer.backbox.display_alpha);
 //Stop more input if max is reached
 if(string_length(keyboard_string) &gt; 90)
  keyboard_string = string_copy(keyboard_string, 0, 90);

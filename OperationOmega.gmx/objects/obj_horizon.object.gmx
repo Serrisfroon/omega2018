@@ -85,7 +85,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 5;
  //The bullet's death object. When a bullet has a collision, this object is created.
- obj_bulletcontrol.bulletend[i] = obj_slash_hit;     
+ obj_bulletcontrol.bulletend[i] = obj_generic_hit;     
  //The bullet's multiplayer id. This will trace the bullet to the player who shot it.
  obj_bulletcontrol.bulletmid[i] = global.mymid;
  //The bullet's name. Stored for ease of use
@@ -122,7 +122,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 5;
  //The bullet's death object. When a bullet has a collision, this object is created.
- obj_bulletcontrol.bulletend[i] = obj_slash_hit;     
+ obj_bulletcontrol.bulletend[i] = obj_generic_hit;     
  //The bullet's multiplayer id. This will trace the bullet to the player who shot it.
  obj_bulletcontrol.bulletmid[i] = global.mymid;
  //The bullet's name. Stored for ease of use
@@ -162,7 +162,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 6;
  //The bullet's death object. When a bullet has a collision, this object is created.
- obj_bulletcontrol.bulletend[i] = obj_slash_hit;     
+ obj_bulletcontrol.bulletend[i] = obj_generic_hit;     
  //The bullet's multiplayer id. This will trace the bullet to the player who shot it.
  obj_bulletcontrol.bulletmid[i] = global.mymid;
  //The bullet's name. Stored for ease of use
@@ -199,7 +199,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 8;
  //The bullet's death object. When a bullet has a collision, this object is created.
- obj_bulletcontrol.bulletend[i] = obj_slash_hit;     
+ obj_bulletcontrol.bulletend[i] = obj_generic_hit;     
  //The bullet's multiplayer id. This will trace the bullet to the player who shot it.
  obj_bulletcontrol.bulletmid[i] = global.mymid;
  //The bullet's name. Stored for ease of use

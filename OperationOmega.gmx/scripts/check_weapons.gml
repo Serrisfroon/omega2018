@@ -11,7 +11,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 2: //Stardust
@@ -21,7 +21,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 3: //Barrier
@@ -31,7 +31,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 4: //Beam
@@ -41,7 +41,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 5: //Formation
@@ -51,7 +51,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 6: //Sparkline
@@ -61,7 +61,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 7: //Sparkline
@@ -71,7 +71,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 8: //Slash
@@ -81,7 +81,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 9: //Horizon
@@ -91,7 +91,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 10: //Spiral
@@ -101,7 +101,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 11: //Whip
@@ -111,7 +111,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 12: //Trail
@@ -121,7 +121,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 13: //Serpent
@@ -131,7 +131,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 14: //Storm
@@ -141,7 +141,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
  case 15: //Trigger
@@ -151,7 +151,7 @@ switch(global.esecond[i])
         if(esecondfade[i] = c_dkgray)
         {     
             esecondfade[i] = c_white;
-            instance_create((i-1)*32, 0, obj_weaponflash);
+            instance_create((i-1)*40+2, 0, obj_weaponflash);
         }
  break;
 }
@@ -182,7 +182,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 2: //Layer Missile
@@ -196,7 +196,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 3: //Hunter Mine
@@ -210,7 +210,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 4: //Locust Missile
@@ -224,7 +224,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 5: //Phantom Mine
@@ -234,7 +234,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 6: //Solus
@@ -248,7 +248,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 7: //Trident Missile
@@ -262,7 +262,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 8: //Shock Missile
@@ -276,7 +276,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 9: //Hacker Mine
@@ -286,7 +286,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 10: //Hermit Missile
@@ -300,7 +300,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 11: //Strike Missile
@@ -310,7 +310,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 12: //Strike Mine
@@ -320,7 +320,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 13: //Turret
@@ -330,7 +330,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 14: //Split Missile
@@ -344,7 +344,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
        case 15: //Cluster Mine
@@ -355,7 +355,7 @@ switch(global.shipselect)
                 if(deployfade[i] = c_dkgray)
                 {     
                     deployfade[i] = c_white;
-                    instance_create((i-1+moveover)*32, 0, obj_weaponflash);
+                    instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                 }
        break;
       }

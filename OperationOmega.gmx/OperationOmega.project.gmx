@@ -108,25 +108,18 @@
     <sprite>sprites\spr_goliath_hyperrush</sprite>
     <sprites name="Primary">
       <sprite>sprites\spr_needle</sprite>
-      <sprite>sprites\spr_needle_hit</sprite>
       <sprite>sprites\spr_sonic</sprite>
-      <sprite>sprites\spr_sonic_hit</sprite>
       <sprite>sprites\spr_wave</sprite>
-      <sprite>sprites\spr_wave_hit</sprite>
       <sprite>sprites\spr_flank</sprite>
-      <sprite>sprites\spr_flank_hit</sprite>
       <sprite>sprites\spr_stasis</sprite>
       <sprite>sprites\spr_stasis_field</sprite>
       <sprite>sprites\spr_helix</sprite>
       <sprite>sprites\spr_helix2</sprite>
       <sprite>sprites\spr_bluehelix</sprite>
       <sprite>sprites\spr_bluehelix2</sprite>
-      <sprite>sprites\spr_crossfire_hit</sprite>
       <sprite>sprites\spr_double</sprite>
-      <sprite>sprites\spr_double_hit</sprite>
       <sprite>sprites\spr_pierce</sprite>
       <sprite>sprites\spr_spread</sprite>
-      <sprite>sprites\spr_spread_hit</sprite>
     </sprites>
     <sprites name="Energy Secondary">
       <sprite>sprites\spr_fusion</sprite>
@@ -139,7 +132,6 @@
       <sprite>sprites\spr_beam</sprite>
       <sprite>sprites\spr_nodetarget</sprite>
       <sprite>sprites\spr_sparkline</sprite>
-      <sprite>sprites\spr_sparkline_line</sprite>
       <sprite>sprites\spr_burst</sprite>
       <sprite>sprites\spr_slash</sprite>
       <sprite>sprites\spr_horizon</sprite>
@@ -158,14 +150,13 @@
       <sprite>sprites\spr_storm_wall</sprite>
       <sprite>sprites\spr_trigger_bomb</sprite>
       <sprite>sprites\spr_trigger_shot</sprite>
-      <sprite>sprites\spr_shieldpulse</sprite>
     </sprites>
     <sprites name="Deploy Secondary">
       <sprite>sprites\spr_dualmissile</sprite>
       <sprite>sprites\spr_layermissile</sprite>
       <sprite>sprites\spr_locustmissile</sprite>
-      <sprite>sprites\spr_shockmissile</sprite>
       <sprite>sprites\spr_tridentmissile</sprite>
+      <sprite>sprites\spr_shockmissile</sprite>
       <sprite>sprites\spr_hermitmissile</sprite>
       <sprite>sprites\spr_strikemissile</sprite>
       <sprite>sprites\spr_splitmissile</sprite>
@@ -182,61 +173,27 @@
       <sprite>sprites\spr_turretshot</sprite>
     </sprites>
     <sprites name="HUD">
-      <sprite>sprites\spr_cursor</sprite>
-      <sprite>sprites\spr_targetcursor</sprite>
-      <sprite>sprites\spr_homingcursor</sprite>
-      <sprite>sprites\spr_gauges</sprite>
-      <sprite>sprites\spr_radar</sprite>
-      <sprite>sprites\spr_shieldbar</sprite>
+      <sprite>sprites\spr_ammobar</sprite>
       <sprite>sprites\spr_armorbar</sprite>
       <sprite>sprites\spr_beserkbar</sprite>
-      <sprite>sprites\spr_energybar</sprite>
-      <sprite>sprites\spr_ammobar</sprite>
-      <sprite>sprites\spr_extchat</sprite>
       <sprite>sprites\spr_chatinput</sprite>
-      <sprite>sprites\spr_pscores</sprite>
-      <sprite>sprites\spr_matchbox</sprite>
       <sprite>sprites\spr_controlwindow</sprite>
-      <sprite>sprites\spr_matchstart_text</sprite>
+      <sprite>sprites\spr_cursor</sprite>
+      <sprite>sprites\spr_energybar</sprite>
+      <sprite>sprites\spr_extchat</sprite>
+      <sprite>sprites\spr_gauges</sprite>
+      <sprite>sprites\spr_homingcursor</sprite>
       <sprite>sprites\spr_lifecount</sprite>
+      <sprite>sprites\spr_matchbox</sprite>
+      <sprite>sprites\spr_matchstart_text</sprite>
+      <sprite>sprites\spr_pscores</sprite>
+      <sprite>sprites\spr_radar</sprite>
       <sprite>sprites\spr_radar_player</sprite>
+      <sprite>sprites\spr_shieldbar</sprite>
+      <sprite>sprites\spr_targetcursor</sprite>
       <sprite>sprites\spr_weaponswitch_box</sprite>
     </sprites>
     <sprites name="Icons">
-      <sprite>sprites\spr_numbers_icon</sprite>
-      <sprite>sprites\spr_deploybar</sprite>
-      <sprite>sprites\spr_numbers_selected</sprite>
-      <sprite>sprites\spr_weapon_active</sprite>
-      <sprites name="Primary">
-        <sprite>sprites\spr_needle_icon</sprite>
-        <sprite>sprites\spr_sonic_icon</sprite>
-        <sprite>sprites\spr_wave_icon</sprite>
-        <sprite>sprites\spr_flank_icon</sprite>
-        <sprite>sprites\spr_stasis_icon</sprite>
-        <sprite>sprites\spr_crossfire_icon</sprite>
-        <sprite>sprites\spr_siphon_icon</sprite>
-        <sprite>sprites\spr_double_icon</sprite>
-        <sprite>sprites\spr_pierce_icon</sprite>
-        <sprite>sprites\spr_spread_icon</sprite>
-      </sprites>
-      <sprites name="Energy Secondary">
-        <sprite>sprites\spr_fusion_icon</sprite>
-        <sprite>sprites\spr_stardust_icon</sprite>
-        <sprite>sprites\spr_barrier_icon</sprite>
-        <sprite>sprites\spr_formation_icon</sprite>
-        <sprite>sprites\spr_beam_icon</sprite>
-        <sprite>sprites\spr_sparkline_icon</sprite>
-        <sprite>sprites\spr_burst_icon</sprite>
-        <sprite>sprites\spr_slash_icon</sprite>
-        <sprite>sprites\spr_horizon_icon</sprite>
-        <sprite>sprites\spr_spiral_icon</sprite>
-        <sprite>sprites\spr_laser_icon</sprite>
-        <sprite>sprites\spr_trail_icon</sprite>
-        <sprite>sprites\spr_reflection_icon</sprite>
-        <sprite>sprites\spr_snake_icon</sprite>
-        <sprite>sprites\spr_storm_icon</sprite>
-        <sprite>sprites\spr_trigger_icon</sprite>
-      </sprites>
       <sprites name="Deploy Secondary">
         <sprite>sprites\spr_dualmissile_icon</sprite>
         <sprite>sprites\spr_layermissile_icon</sprite>
@@ -254,36 +211,97 @@
         <sprite>sprites\spr_splitmissile_icon</sprite>
         <sprite>sprites\spr_clustermine_icon</sprite>
       </sprites>
-      <sprite>sprites\sprite173</sprite>
+      <sprites name="Energy Secondary">
+        <sprite>sprites\spr_fusion_icon</sprite>
+        <sprite>sprites\spr_stardust_icon</sprite>
+        <sprite>sprites\spr_barrier_icon</sprite>
+        <sprite>sprites\spr_formation_icon</sprite>
+        <sprite>sprites\spr_beam_icon</sprite>
+        <sprite>sprites\spr_sparkline_icon</sprite>
+        <sprite>sprites\spr_burst_icon</sprite>
+        <sprite>sprites\spr_slash_icon</sprite>
+        <sprite>sprites\spr_horizon_icon</sprite>
+        <sprite>sprites\spr_spiral_icon</sprite>
+        <sprite>sprites\spr_laser_icon</sprite>
+        <sprite>sprites\spr_trail_icon</sprite>
+        <sprite>sprites\spr_reflection_icon</sprite>
+        <sprite>sprites\spr_storm_icon</sprite>
+        <sprite>sprites\spr_trigger_icon</sprite>
+      </sprites>
+      <sprites name="Primary">
+        <sprite>sprites\spr_needle_icon</sprite>
+        <sprite>sprites\spr_sonic_icon</sprite>
+        <sprite>sprites\spr_wave_icon</sprite>
+        <sprite>sprites\spr_flank_icon</sprite>
+        <sprite>sprites\spr_stasis_icon</sprite>
+        <sprite>sprites\spr_crossfire_icon</sprite>
+        <sprite>sprites\spr_siphon_icon</sprite>
+        <sprite>sprites\spr_double_icon</sprite>
+        <sprite>sprites\spr_pierce_icon</sprite>
+        <sprite>sprites\spr_spread_icon</sprite>
+      </sprites>
+      <sprite>sprites\spr_deploybar</sprite>
       <sprite>sprites\spr_greenpixel</sprite>
-      <sprite>sprites\spr_weaponswitch_infos</sprite>
       <sprite>sprites\spr_icon_selectt</sprite>
+      <sprite>sprites\spr_numbers_icon</sprite>
+      <sprite>sprites\spr_numbers_selected</sprite>
+      <sprite>sprites\spr_selectprimary</sprite>
+      <sprite>sprites\spr_selectsecondary</sprite>
+      <sprite>sprites\spr_icon_select</sprite>
+      <sprite>sprites\spr_weapon_active</sprite>
+      <sprite>sprites\spr_weaponswitch_infos</sprite>
+      <sprite>sprites\sprite173</sprite>
     </sprites>
     <sprites name="Effects">
-      <sprite>sprites\spr_shipparts</sprite>
+      <sprite>sprites\spr_alphastar_enemy_teleport</sprite>
+      <sprite>sprites\spr_alphastar_teleport</sprite>
       <sprite>sprites\spr_engineflame</sprite>
+      <sprite>sprites\spr_formation_particle</sprite>
+      <sprite>sprites\spr_goliath_enemy_teleport</sprite>
+      <sprite>sprites\spr_goliath_teleport</sprite>
+      <sprite>sprites\spr_homingeffect</sprite>
+      <sprite>sprites\spr_lockon_cursor</sprite>
+      <sprite>sprites\spr_overheatbar</sprite>
+      <sprite>sprites\spr_overheatshine</sprite>
+      <sprite>sprites\spr_paladinshield</sprite>
+      <sprite>sprites\spr_ringeffect</sprite>
       <sprite>sprites\spr_shield</sprite>
       <sprite>sprites\spr_shieldpieces</sprite>
+      <sprite>sprites\spr_shipparts</sprite>
       <sprite>sprites\spr_shocksparks</sprite>
-      <sprite>sprites\spr_gridpass</sprite>
-      <sprite>sprites\spr_whitepixel</sprite>
-      <sprite>sprites\spr_alphastar_teleport</sprite>
-      <sprite>sprites\spr_swiftwing_teleport</sprite>
-      <sprite>sprites\spr_goliath_teleport</sprite>
-      <sprite>sprites\spr_alphastar_enemy_teleport</sprite>
-      <sprite>sprites\spr_swiftwing_enemy_teleport</sprite>
-      <sprite>sprites\spr_goliath_enemy_teleport</sprite>
-      <sprite>sprites\spr_teleport_hole</sprite>
-      <sprite>sprites\spr_ringeffect</sprite>
-      <sprite>sprites\spr_overheatshine</sprite>
-      <sprite>sprites\spr_overheatbar</sprite>
-      <sprite>sprites\spr_lockon_cursor</sprite>
-      <sprite>sprites\spr_paladinshield</sprite>
-      <sprite>sprites\spr_homingeffect</sprite>
       <sprite>sprites\spr_slasheffect</sprite>
-      <sprite>sprites\spr_formation_particle</sprite>
+      <sprite>sprites\spr_swiftwing_enemy_teleport</sprite>
+      <sprite>sprites\spr_swiftwing_teleport</sprite>
+      <sprite>sprites\spr_teleport_hole</sprite>
+      <sprite>sprites\spr_whitepixel</sprite>
     </sprites>
     <sprites name="Menu">
+      <sprites name="Background">
+        <sprite>sprites\spr_menugrid</sprite>
+        <sprite>sprites\spr_menugrid2</sprite>
+        <sprite>sprites\spr_menuback</sprite>
+        <sprite>sprites\spr_gridpass</sprite>
+        <sprite>sprites\spr_backpass</sprite>
+      </sprites>
+      <sprites name="Games Server">
+        <sprite>sprites\spr_creategame</sprite>
+        <sprite>sprites\spr_joingame</sprite>
+        <sprite>sprites\spr_refresher</sprite>
+        <sprite>sprites\spr_selectgame</sprite>
+        <sprite>sprites\spr_creategamebox</sprite>
+      </sprites>
+      <sprites name="Loading Screen">
+        <sprite>sprites\spr_matchnames</sprite>
+        <sprite>sprites\spr_playertypes</sprite>
+        <sprite>sprites\spr_loadingnumbers</sprite>
+        <sprite>sprites\spr_beginoperation</sprite>
+      </sprites>
+      <sprites name="Main Menu">
+        <sprite>sprites\spr_singleplayer</sprite>
+        <sprite>sprites\spr_multiplayer</sprite>
+        <sprite>sprites\spr_options</sprite>
+        <sprite>sprites\spr_quit</sprite>
+      </sprites>
       <sprites name="Mouseover Info">
         <sprite>sprites\spr_ship_infos</sprite>
         <sprite>sprites\spr_primary_infos</sprite>
@@ -295,69 +313,87 @@
         <sprite>sprites\spr_stats_infos</sprite>
         <sprite>sprites\spr_weapons_infos</sprite>
       </sprites>
-      <sprite>sprites\spr_back</sprite>
-      <sprite>sprites\spr_okaybut</sprite>
-      <sprite>sprites\spr_previewbound</sprite>
-      <sprite>sprites\spr_yesnobox</sprite>
-      <sprite>sprites\spr_beginoperation</sprite>
-      <sprite>sprites\spr_alphastar_select</sprite>
-      <sprite>sprites\spr_clicktostart</sprite>
-      <sprite>sprites\spr_connect</sprite>
-      <sprite>sprites\spr_creategame</sprite>
-      <sprite>sprites\spr_createprofile</sprite>
-      <sprite>sprites\spr_changelog</sprite>
-      <sprite>sprites\spr_enterhostip</sprite>
-      <sprite>sprites\spr_firing</sprite>
-      <sprite>sprites\spr_gotopractice</sprite>
-      <sprite>sprites\spr_guidebutton</sprite>
-      <sprite>sprites\spr_creategamebox</sprite>
-      <sprite>sprites\spr_host</sprite>
-      <sprite>sprites\spr_messagebox</sprite>
-      <sprite>sprites\spr_icon_select</sprite>
+      <sprites name="Multiplayer">
+        <sprite>sprites\spr_server</sprite>
+        <sprite>sprites\spr_private</sprite>
+        <sprite>sprites\spr_back</sprite>
+        <sprite>sprites\spr_profileslot</sprite>
+      </sprites>
+      <sprites name="Options">
+        <sprite>sprites\spr_musicon</sprite>
+        <sprite>sprites\spr_musicoff</sprite>
+        <sprite>sprites\spr_sfxon</sprite>
+        <sprite>sprites\spr_sfxoff</sprite>
+        <sprite>sprites\spr_firing</sprite>
+        <sprite>sprites\spr_firing2</sprite>
+      </sprites>
+      <sprites name="Postgame Room">
+        <sprite>sprites\spr_playagain</sprite>
+      </sprites>
+      <sprites name="Private Game">
+        <sprite>sprites\spr_host</sprite>
+        <sprite>sprites\spr_connect</sprite>
+        <sprite>sprites\spr_enterhostip</sprite>
+      </sprites>
       <sprite>sprites\spr_breakline</sprite>
-      <sprite>sprites\spr_loadingnumbers</sprite>
-      <sprite>sprites\spr_levelnames</sprite>
-      <sprite>sprites\spr_makename_box</sprite>
-      <sprite>sprites\spr_joingame</sprite>
-      <sprite>sprites\spr_map_select</sprite>
-      <sprite>sprites\spr_menugrid</sprite>
-      <sprite>sprites\spr_matchnames</sprite>
-      <sprite>sprites\spr_insomniasoft</sprite>
-      <sprite>sprites\spr_multiplayer</sprite>
-      <sprite>sprites\spr_music</sprite>
-      <sprite>sprites\spr_options</sprite>
-      <sprite>sprites\spr_playagain</sprite>
-      <sprite>sprites\spr_modbox</sprite>
-      <sprite>sprites\spr_playertypes</sprite>
-      <sprite>sprites\spr_profileslot</sprite>
-      <sprite>sprites\spr_previewnames</sprite>
-      <sprite>sprites\spr_private</sprite>
-      <sprite>sprites\spr_profiles</sprite>
-      <sprite>sprites\spr_quit</sprite>
-      <sprite>sprites\spr_readygo</sprite>
-      <sprite>sprites\spr_refresher</sprite>
-      <sprite>sprites\spr_server</sprite>
-      <sprite>sprites\spr_sfx</sprite>
-      <sprite>sprites\spr_statbar</sprite>
-      <sprite>sprites\spr_staticons</sprite>
-      <sprite>sprites\spr_singleplayer</sprite>
-      <sprite>sprites\spr_playerslot</sprite>
-      <sprite>sprites\spr_selectgame</sprite>
-      <sprite>sprites\spr_teamchange</sprite>
-      <sprite>sprites\spr_typename</sprite>
-      <sprite>sprites\spr_viewmap_mask</sprite>
-      <sprite>sprites\spr_ships_mouseon</sprite>
-      <sprite>sprites\spr_tutorialbox</sprite>
-      <sprite>sprites\spr_typeip</sprite>
-      <sprite>sprites\spr_menuback</sprite>
+      <sprite>sprites\spr_gotopractice</sprite>
+      <sprites name="Title">
+        <sprite>sprites\spr_insomniasoft</sprite>
+        <sprite>sprites\spr_title</sprite>
+        <sprite>sprites\spr_clicktostart</sprite>
+        <sprite>sprites\spr_makename_box</sprite>
+      </sprites>
+      <sprites name="Waiting Room">
+        <sprite>sprites\spr_readygo</sprite>
+        <sprite>sprites\spr_staticons</sprite>
+        <sprite>sprites\spr_statbar</sprite>
+        <sprite>sprites\spr_alphastar_select</sprite>
+        <sprite>sprites\spr_ships_mouseon</sprite>
+        <sprites name="Map Preview">
+          <sprite>sprites\spr_viewmap_mask</sprite>
+          <sprite>sprites\spr_map_select</sprite>
+          <sprite>sprites\spr_previewnames</sprite>
+        </sprites>
+        <sprite>sprites\spr_teamchange</sprite>
+        <sprite>sprites\spr_modbox</sprite>
+        <sprite>sprites\spr_playerslot</sprite>
+        <sprite>sprites\spr_waiting</sprite>
+        <sprite>sprites\spr_waiting_bottom</sprite>
+        <sprite>sprites\spr_waiting_right</sprite>
+        <sprite>sprites\spr_levelnames</sprite>
+      </sprites>
     </sprites>
-    <sprite>sprites\spr_title</sprite>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
-    <sprite>sprites\sprite238</sprite>
-    <sprite>sprites\sprite231</sprite>
-    <sprite>sprites\sprite239</sprite>
+    <sprite>sprites\spr_previewbound</sprite>
+    <sprites name="Trash">
+      <sprite>sprites\sprite238</sprite>
+      <sprite>sprites\spr_tutorialbox</sprite>
+      <sprite>sprites\spr_messagebox</sprite>
+      <sprite>sprites\spr_okaybut</sprite>
+      <sprite>sprites\spr_yesnobox</sprite>
+      <sprites name="Trash">
+        <sprite>sprites\spr_changelog</sprite>
+        <sprite>sprites\spr_createprofile</sprite>
+        <sprite>sprites\spr_profiles</sprite>
+        <sprite>sprites\spr_typename</sprite>
+        <sprite>sprites\spr_guidebutton</sprite>
+        <sprite>sprites\spr_typeip</sprite>
+        <sprite>sprites\spr_spread_hit</sprite>
+      </sprites>
+      <sprite>sprites\sprite231</sprite>
+      <sprite>sprites\spr_snake_icon</sprite>
+      <sprite>sprites\spr_sparkline_line</sprite>
+      <sprite>sprites\spr_shieldpulse</sprite>
+      <sprite>sprites\spr_double_hit</sprite>
+      <sprite>sprites\spr_crossfire_hit</sprite>
+      <sprite>sprites\spr_flank_hit</sprite>
+      <sprite>sprites\spr_wave_hit</sprite>
+      <sprite>sprites\spr_sonic_hit</sprite>
+      <sprite>sprites\spr_needle_hit</sprite>
+      <sprite>sprites\sprite239</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Map Preview">
@@ -436,18 +472,21 @@
     </backgrounds>
     <backgrounds name="Menu">
       <background>background\back_aftergame</background>
-      <background>background\back_gamelist</background>
       <background>background\back_messagebox</background>
-      <background>background\back_newprofile</background>
-      <background>background\back_newprofile_right</background>
-      <background>background\back_waiting_bottom</background>
-      <background>background\back_waiting_right</background>
-      <background>background\back_voptions</background>
       <background>background\back_pixel</background>
-      <background>background\back_waiting</background>
+      <background>background\back_menu_space</background>
       <background>background\back_menu</background>
     </backgrounds>
     <background>background\tile_wall</background>
+    <backgrounds name="Trash">
+      <background>background\back_voptions</background>
+      <background>background\back_newprofile</background>
+      <background>background\back_newprofile_right</background>
+      <background>background\back_gamelist</background>
+      <background>background\back_waiting</background>
+      <background>background\back_waiting_bottom</background>
+      <background>background\back_waiting_right</background>
+    </backgrounds>
   </backgrounds>
   <paths name="paths">
     <paths name="I'm fucking lazy">
@@ -678,6 +717,7 @@
       <script>scripts\draw_electricity.gml</script>
       <script>scripts\create_explosion.gml</script>
       <script>scripts\create_burning.gml</script>
+      <script>scripts\draw_stasis.gml</script>
     </scripts>
     <scripts name="PHP">
       <script>scripts\get_externalip.gml</script>
@@ -719,6 +759,7 @@
     <script>scripts\omegadata_read.gml</script>
     <script>scripts\omegadata_write.gml</script>
     <script>scripts\primary_random.gml</script>
+    <script>scripts\create_icon.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
@@ -916,21 +957,21 @@
       <objects name="Waiting Room">
         <object>objects\obj_readygo</object>
         <object>objects\obj_quit</object>
-        <object>objects\obj_waiting</object>
-        <object>objects\obj_waiting_client</object>
         <object>objects\obj_teamchange</object>
         <object>objects\obj_teamchange_client</object>
+        <object>objects\obj_waiting</object>
+        <object>objects\obj_waiting_client</object>
         <object>objects\obj_customizer</object>
         <object>objects\obj_armorstat</object>
         <object>objects\obj_shieldstat</object>
         <object>objects\obj_speedstat</object>
-        <object>objects\obj_handlingstat</object>
         <object>objects\obj_modsettings</object>
         <object>objects\obj_viewmap</object>
         <object>objects\obj_modbox</object>
         <object>objects\obj_okaymod</object>
         <object>objects\obj_playerslot</object>
         <object>objects\obj_showpreview</object>
+        <object>objects\obj_waiting_boxes</object>
       </objects>
       <objects name="select">
         <object>objects\obj_chooseprimary</object>
@@ -940,9 +981,80 @@
         <object>objects\obj_choosedeploy_1</object>
         <object>objects\obj_choosedeploy_2</object>
         <object>objects\obj_choosedeploy_3</object>
+        <object>objects\obj_icon_option</object>
+        <object>objects\obj_alphastar_select</object>
+        <object>objects\prnt_selection</object>
+        <object>objects\obj_emptyslot</object>
       </objects>
+      <objects name="Title">
+        <object>objects\obj_title</object>
+        <object>objects\obj_login_box</object>
+        <object>objects\obj_gridmake</object>
+      </objects>
+      <objects name="Multiplayer">
+        <object>objects\obj_server</object>
+        <object>objects\obj_private</object>
+        <object>objects\obj_profile_connect</object>
+        <object>objects\obj_tomain</object>
+      </objects>
+      <objects name="Main Menu">
+        <object>objects\obj_singleplayer</object>
+        <object>objects\obj_multiplayer</object>
+        <object>objects\obj_options</object>
+        <object>objects\obj_endgame</object>
+      </objects>
+      <objects name="Options">
+        <object>objects\obj_music</object>
+        <object>objects\obj_sfx</object>
+        <object>objects\obj_firing</object>
+      </objects>
+      <object>objects\obj_messagebox</object>
+      <object>objects\obj_tomulti</object>
+      <object>objects\obj_playagain</object>
+      <object>objects\obj_menumod</object>
+      <object>objects\prnt_menubutton</object>
+      <object>objects\obj_gridpass</object>
+      <object>objects\obj_backpass</object>
+      <object>objects\obj_clickring</object>
+      <object>objects\obj_scanline</object>
+      <object>objects\obj_scanner</object>
+      <object>objects\obj_background</object>
+      <object>objects\obj_prematch</object>
+      <object>objects\obj_aftermatch</object>
+      <object>objects\obj_aftergame</object>
+      <object>objects\obj_gotopractice</object>
+      <object>objects\obj_loadpass</object>
+    </objects>
+    <objects name="Practice">
+      <object>objects\obj_practicemod</object>
+      <object>objects\obj_practiceship</object>
+      <object>objects\obj_practiceship_dead</object>
+      <object>objects\obj_practiceship_placeholder</object>
+      <object>objects\obj_practice_teleport</object>
+      <object>objects\obj_practice_enemy</object>
+      <object>objects\obj_practice_deadenemy</object>
+      <object>objects\obj_practice_enemytele</object>
+    </objects>
+    <objects name="Trash">
+      <object>objects\obj_postgrid</object>
+      <object>objects\obj_grazefield</object>
+      <object>objects\obj_changelog</object>
+      <object>objects\obj_guidebutton</object>
+      <object>objects\obj_swifttele</object>
+      <object>objects\obj_update</object>
+      <objects name="Profile">
+        <object>objects\obj_profiles</object>
+        <object>objects\obj_profilebox</object>
+        <object>objects\obj_profile_done</object>
+        <object>objects\obj_typename</object>
+        <object>objects\obj_typeip</object>
+      </objects>
+      <object>objects\obj_asktutorialbox</object>
+      <object>objects\obj_tutorialmod</object>
+      <object>objects\obj_tutorialpractice</object>
+      <object>objects\obj_gridspark</object>
+      <object>objects\obj_handlingstat</object>
       <objects name="selections">
-        <object>objects\obj_needle_icon</object>
         <object>objects\obj_sonic_icon</object>
         <object>objects\obj_wave_icon</object>
         <object>objects\obj_flank_icon</object>
@@ -982,85 +1094,17 @@
         <object>objects\obj_strikemine_icon</object>
         <object>objects\obj_solus_icon</object>
         <object>objects\obj_turret_icon</object>
-        <object>objects\obj_alphastar_select</object>
-        <object>objects\prnt_selection</object>
+        <object>objects\prnt_icon</object>
       </objects>
-      <objects name="Title">
-        <object>objects\obj_title</object>
-        <object>objects\obj_login_box</object>
-        <object>objects\obj_asktutorialbox</object>
-        <object>objects\obj_tutorialmod</object>
-        <object>objects\obj_tutorialpractice</object>
-        <object>objects\obj_gridmake</object>
-      </objects>
-      <objects name="Multiplayer">
-        <object>objects\obj_private</object>
-        <object>objects\obj_server</object>
-        <object>objects\obj_update</object>
-        <object>objects\obj_guidebutton</object>
-        <object>objects\obj_changelog</object>
-        <object>objects\obj_profile_connect</object>
-        <object>objects\obj_tomain</object>
-      </objects>
-      <objects name="Main Menu">
-        <object>objects\obj_singleplayer</object>
-        <object>objects\obj_multiplayer</object>
-        <object>objects\obj_options</object>
-        <object>objects\obj_endgame</object>
-      </objects>
-      <objects name="Options">
-        <object>objects\obj_music</object>
-        <object>objects\obj_sfx</object>
-        <object>objects\obj_firing</object>
-      </objects>
-      <object>objects\obj_messagebox</object>
-      <object>objects\obj_tomulti</object>
-      <object>objects\obj_playagain</object>
-      <object>objects\obj_menumod</object>
-      <object>objects\prnt_menubutton</object>
-      <object>objects\obj_gridpass</object>
-      <object>objects\obj_gridspark</object>
-      <object>objects\obj_clickring</object>
-      <object>objects\obj_scanline</object>
-      <object>objects\obj_scanner</object>
-      <object>objects\obj_background</object>
-      <object>objects\obj_prematch</object>
-      <object>objects\obj_aftermatch</object>
-      <object>objects\obj_aftergame</object>
-      <object>objects\obj_loadpass</object>
     </objects>
-    <objects name="Profile">
-      <object>objects\obj_profiles</object>
-      <object>objects\obj_profilebox</object>
-      <object>objects\obj_gotopractice</object>
-      <object>objects\obj_profile_done</object>
-      <object>objects\obj_typename</object>
-      <object>objects\obj_typeip</object>
-    </objects>
-    <objects name="Practice">
-      <object>objects\obj_practicemod</object>
-      <object>objects\obj_practiceship</object>
-      <object>objects\obj_practiceship_dead</object>
-      <object>objects\obj_practiceship_placeholder</object>
-      <object>objects\obj_practice_teleport</object>
-      <object>objects\obj_practice_enemy</object>
-      <object>objects\obj_practice_deadenemy</object>
-      <object>objects\obj_practice_enemytele</object>
-    </objects>
-    <object>objects\obj_postgrid</object>
-    <object>objects\obj_grazefield</object>
-    <object>objects\obj_swifttele</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room24</room>
     <room>rooms\rm_start</room>
     <room>rooms\rm_title</room>
     <room>rooms\rm_mainmenu</room>
     <room>rooms\rm_multiplayer</room>
     <room>rooms\rm_connect</room>
     <room>rooms\rm_waiting</room>
-    <room>rooms\rm_profile</room>
-    <room>rooms\rm_voptions</room>
     <room>rooms\rm_gamelist</room>
     <room>rooms\rm_prematch</room>
     <room>rooms\rm_aftermatch</room>
@@ -1079,10 +1123,15 @@
       <room>rooms\rm_spacedepot</room>
       <room>rooms\rm_orbitstation</room>
     </rooms>
+    <rooms name="Trash">
+      <room>rooms\rm_profile</room>
+      <room>rooms\room24</room>
+      <room>rooms\rm_voptions</room>
+    </rooms>
   </rooms>
   <constants number="12">
     <constant name="LOGINSERVER_IP">"potato"</constant>
-    <constant name="VERSION_NUMBER">"0.6.7d"</constant>
+    <constant name="VERSION_NUMBER">"0.7.0"</constant>
     <constant name="CLIENT_CHECK">30</constant>
     <constant name="CLIENT_ACCEPT">20</constant>
     <constant name="CLIENT_REPLY">24</constant>
@@ -1091,7 +1140,7 @@
     <constant name="CLIENT_DROP">22</constant>
     <constant name="CLIENT_UNABLE">23</constant>
     <constant name="TIME_UP">40</constant>
-    <constant name="GM_build_date">41858.3781854514</constant>
+    <constant name="GM_build_date">41863.8417510648</constant>
     <constant name="GM_version">'1.0.0.13'</constant>
   </constants>
   <help>

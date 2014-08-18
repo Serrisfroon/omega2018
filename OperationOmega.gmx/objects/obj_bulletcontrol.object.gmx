@@ -607,11 +607,27 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>surface_resize(bloom, view_wview[0]/2,view_hview[0]/2);
-surface_resize(bloom2, view_wview[0]/4,view_hview[0]/4);
-surface_resize(bloom3, view_wview[0]/8,view_hview[0]/8);
-surface_resize(bloom4, view_wview[0]/16,view_hview[0]/16);
-surface_resize(bloom5, view_wview[0]/32,view_hview[0]/32);
+            <string>if(surface_exists(bloom))
+    surface_resize(bloom, view_wview[0]/2,view_hview[0]/2);
+else
+    bloom=surface_create(view_wview[0]/2,view_hview[0]/2);
+if(surface_exists(bloom2))
+    surface_resize(bloom2, view_wview[0]/4,view_hview[0]/4);
+else
+    bloom2=surface_create(view_wview[0]/4,view_hview[0]/4);
+if(surface_exists(bloom3))
+    surface_resize(bloom3, view_wview[0]/8,view_hview[0]/8);
+else
+    bloom3=surface_create(view_wview[0]/8,view_hview[0]/8);
+if(surface_exists(bloom4))
+    surface_resize(bloom4, view_wview[0]/16,view_hview[0]/16);
+else
+    bloom4=surface_create(view_wview[0]/16,view_hview[0]/16);
+if(surface_exists(bloom5))
+    surface_resize(bloom5, view_wview[0]/32,view_hview[0]/32);
+else
+    bloom5=surface_create(view_wview[0]/32,view_hview[0]/32);
+
 surface_set_target(bloom);
 draw_clear(c_black);
 surface_reset_target();

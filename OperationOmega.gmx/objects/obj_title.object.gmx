@@ -44,6 +44,7 @@ go = 0;
 alpha = 0;
 image = spr_insomniasoft;
 alpha2 = 0;
+back_alpha = 0;
 alarm[0] = 15;
 global.rot1 = 0;
 global.rot2 = 0;
@@ -127,34 +128,41 @@ global.rot3 = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[2] = irandom(59)+1;
+            <string>alarm[2] = irandom(120)+1;
 switch(irandom(3))
 {
  case 0:
-      gridx = irandom(35)*18-1;
+      gridx = irandom(16)*48-385;
       gridy = 0;
+      gridef = instance_create(384+round((384-mouse_x)/20)+gridx, round((240-mouse_y)/20)+gridy-96, obj_gridmake);
       griddir = 270;
  break;
  case 1:
-      gridx = irandom(35)*18-1;
+      gridx = irandom(16)*48-385;
       gridy = view_hview[0];
+      gridef = instance_create(384+round((384-mouse_x)/20)+gridx, round((240-mouse_y)/20)+gridy+96, obj_gridmake);
       griddir = 90;
  break;
  case 2:
       gridx = 0;
-      gridy = irandom(26)*18-1;
+      gridy = irandom(10)*48-241;
+      gridef = instance_create(round((384-mouse_x)/20)+gridx-96, 240+round((240-mouse_y)/20)+gridy, obj_gridmake);
       griddir = 0;
  break;
  case 3:
       gridx = view_wview[0];
-      gridy = irandom(26)*18-1;
+      gridy = irandom(10)*48-241;
+      gridef = instance_create(round((384-mouse_x)/20)+gridx+96, 240+round((240-mouse_y)/20)+gridy, obj_gridmake);
       griddir = 180;
  break;
 }
-gridef = instance_create(gridx, gridy, obj_gridmake);
 gridef.direction = griddir;
 gridef.image_angle = gridef.direction;
-gridef.speed = 8+random(4);
+gridef.speed = 4+random(2);
+gridef.oldmouse_x = mouse_x;
+gridef.oldmouse_y = mouse_y;
+gridef.alarm[1] = 170;
+gridef.control = 1;
 
 </string>
           </argument>
@@ -178,7 +186,10 @@ gridef.speed = 8+random(4);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto_next();
+            <string>with(obj_gridmake)
+    if(destroy_on_move == 1)
+        instance_destroy();
+room_goto_next();
 </string>
           </argument>
         </arguments>
@@ -247,7 +258,7 @@ switch(go)
       else
       {
        go += 1;
-       alarm[0] = 30;
+       alarm[0] = 60;
       }
  break;
  case 3:
@@ -301,15 +312,16 @@ switch(go)
       }
  break;
  case 9:
-      if(alpha &gt; 0)
+      if(back_alpha &lt; 1)
       {
        alpha -= 0.03334;
        alpha2 -= 0.03334;
+       back_alpha += 0.02;
       }
       else
       {
        go += 1;
-       alarm[1] = 30;
+       alarm[1] = 10;
       }
  break;
 }
@@ -351,14 +363,31 @@ if(go = 8)
         if(global.musictoggle = 0)
             audio_play_music(music_quasar, 1);
         go = 9;
-        for(i = 0; i &lt;= 48; i += 2)
-            (instance_create(17+18*i, 0, obj_gridmake)).vspeed = 16.5;
-        for(i = 1; i &lt;= 48; i += 2)
-            (instance_create(17+18*i, view_hview[0], obj_gridmake)).vspeed = -16.5;
-        for(i = 0; i &lt;= 36; i += 2)
-            (instance_create(0, 17+18*i, obj_gridmake)).hspeed = 22;
-        for(i = 1; i &lt;= 36; i += 2)
-            (instance_create(view_wview[0], 17+18*i, obj_gridmake)).hspeed = -22;
+        for(i = 0; i &lt;= 16; i += 2)
+        {
+            gridx = 48*i-385;
+            (instance_create(384+round((384-mouse_x)/20)+gridx, round((240-mouse_y)/20)-96, obj_gridmake)).vspeed = 12.375;
+        }
+        for(i = 1; i &lt;= 16; i += 2)
+        {
+            gridx = 48*i-385;
+            (instance_create(384+round((384-mouse_x)/20)+gridx, round((240-mouse_y)/20)+view_hview[0]+96, obj_gridmake)).vspeed = -12.375;
+        }
+        for(i = 0; i &lt;= 10; i += 2)
+        {
+            gridy = 48*i-241;
+            (instance_create(round((384-mouse_x)/20)-96, 240+round((240-mouse_y)/20)+gridy, obj_gridmake)).hspeed = 16.5;
+        }
+        for(i = 1; i &lt;= 10; i += 2)
+        {
+            gridy = 48*i-241;
+            (instance_create(round((384-mouse_x)/20)+view_wview[0]+96, 240+round((240-mouse_y)/20)+gridy, obj_gridmake)).hspeed = -16.5;
+        }
+        obj_gridmake.control = 1;
+        obj_gridmake.oldmouse_x = mouse_x;
+        obj_gridmake.oldmouse_y = mouse_y;
+        obj_gridmake.destroy_on_move = 1;
+
   }
 }
 if(go &lt;= 7)
@@ -412,7 +441,43 @@ if(go &lt;= 7)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(image, 0, view_wview[0]/2, 244, 1, 1, 0, c_white, alpha);
+            <string>draw_background_ext(back_menu_space, 0, 0, 1, 1, 0, c_white, back_alpha);
+
+draw_set_alpha(0.9);
+draw_set_color(make_color_rgb(0, 0, 0));
+draw_rectangle(0, 0, 768, 480, 0);
+
+draw_sprite_tiled_ext(spr_menugrid, -1, round((384-mouse_x)/50), round((240-mouse_y)/50), 1, 1, c_white, back_alpha);
+
+
+with(obj_gridmake)
+{
+    if(control = 1)
+    {
+        x -= (mouse_x-oldmouse_x)/20;
+        y -= (mouse_y-oldmouse_y)/20;
+        
+        oldmouse_x = mouse_x;
+        oldmouse_y = mouse_y;
+        
+        if(hspeed &gt; 0 &amp;&amp; vspeed = 0)
+            draw_sprite_ext(spr_whitepixel, 1, round(x), round(y), -2000, 1, 0, c_white, linealpha);
+        if(hspeed &lt; 0 &amp;&amp; vspeed = 0)
+            draw_sprite_ext(spr_whitepixel, 1, round(x), round(y), 2000, 1, 0, c_white, linealpha);
+        if(vspeed &gt; 0 &amp;&amp; hspeed = 0)
+            draw_sprite_ext(spr_whitepixel, 1, round(x), round(y)+1, 2000, 1, 90, c_white, linealpha);
+        if(vspeed &lt; 0 &amp;&amp; hspeed = 0)
+            draw_sprite_ext(spr_whitepixel, 1, round(x), round(y)+1, -2000, 1, 90, c_white, linealpha);
+        draw_sprite_ext(sprite_index, 0, round(x), round(y), 1, 1, direction, c_white, 1);
+    }
+    else
+    {
+        draw_sprite_ext(spr_whitepixel, 1, xstart, ystart, x-xstart+1, y-ystart+1, 0, c_white, linealpha);
+        draw_sprite_ext(sprite_index, 0, x, y, 1, 1, direction, c_white, 1);
+    }
+}
+
+draw_sprite_ext(image, 0, view_wview[0]/2, 244, 1, 1, 0, c_white, alpha);
 draw_sprite_ext(spr_clicktostart, -1, view_wview[0]/2, 400, 1, 1, 0, c_white, alpha2);
 draw_set_alpha(alpha2);
 draw_set_font(fnt_chat);
@@ -438,6 +503,22 @@ depth = 0;
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>223</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_current_room</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="9" enumb="27">

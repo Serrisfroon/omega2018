@@ -13,7 +13,7 @@
     <TextureGroup0>1</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>547</width>
-  <height>512</height>
+  <width>387</width>
+  <height>165</height>
   <data>images\back_waiting.png</data>
 </background>

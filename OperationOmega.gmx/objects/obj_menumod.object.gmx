@@ -31,7 +31,7 @@ animation = 0;
 dim = 0;
 dimalpha = 0;
 alarm[0] = 1;
-alarm[1] = 180;
+alarm[4] = 1;
 backalpha = 0;
 instance_create(0, 0, obj_scanner);
 if(room != rm_aftergame)
@@ -49,6 +49,63 @@ switch(global.resolution)
 
 if(!instance_exists(obj_background))
  instance_create(0, 0, obj_background);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[4] = irandom(120)+1;
+switch(irandom(3))
+{
+ case 0:
+      gridx = irandom(29)*26-385;
+      gridy = 0;
+      gridef = instance_create(384+round((384-mouse_x)/50)+gridx, round((240-mouse_y)/50)+gridy-78, obj_backpass);
+      griddir = 270;
+ break;
+ case 1:
+      gridx = irandom(29)*26-385;
+      gridy = view_hview[0];
+      gridef = instance_create(384+round((384-mouse_x)/50)+gridx, round((240-mouse_y)/50)+gridy+78, obj_backpass);
+      griddir = 90;
+ break;
+ case 2:
+      gridx = 0;
+      gridy = irandom(18)*26-241;
+      gridef = instance_create(round((384-mouse_x)/50)+gridx-78, 240+round((240-mouse_y)/50)+gridy, obj_backpass);
+      griddir = 0;
+ break;
+ case 3:
+      gridx = view_wview[0];
+      gridy = irandom(18)*26-241;
+      gridef = instance_create(round((384-mouse_x)/50)+gridx+78, 240+round((240-mouse_y)/50)+gridy, obj_backpass);
+      griddir = 180;
+ break;
+}
+gridef.sprite_index = spr_backpass;
+gridef.direction = griddir;
+gridef.image_angle = gridef.direction;
+gridef.speed = 2+random(1.5);
+gridef.oldmouse_x = mouse_x;
+gridef.oldmouse_y = mouse_y;
+
 </string>
           </argument>
         </arguments>
@@ -103,13 +160,6 @@ with(obj_gridpass)
 with(obj_background)
  instance_destroy();
 
-//Remove menu resources
-background_replace(back_waiting, "back_pixel.png", 0, 0);
-background_replace(back_waiting_right, "back_pixel.png", 0, 0);
-background_replace(back_waiting_bottom, "back_pixel.png", 0, 0);
-background_replace(back_newprofile, "back_pixel.png", 0, 0);
-background_replace(back_newprofile_right, "back_pixel.png", 0, 0);
-background_replace(back_gamelist, "back_pixel.png", 0, 0);
 if(global.matchlevel = "Random") 
 switch(global.randommap)
 {
@@ -510,45 +560,6 @@ room_goto(rm_prematch);
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>alarm[1] = irandom(149)+1;
-gridx = irandom(35)*18-1;
-gridy = irandom(26)*18-1;
-effect_create_below(ef_spark, gridx, gridy, 0, c_white);
-gridef = instance_create(gridx, gridy, obj_gridspark);
-gridef.direction = 0;
-gridef.image_angle = gridef.direction;
-gridef = instance_create(gridx, gridy, obj_gridspark);
-gridef.direction = 90;
-gridef.image_angle = gridef.direction;
-gridef = instance_create(gridx, gridy, obj_gridspark);
-gridef.direction = 180;
-gridef.image_angle = gridef.direction;
-gridef = instance_create(gridx, gridy, obj_gridspark);
-gridef.direction = 270;
-gridef.image_angle = gridef.direction;
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -566,34 +577,39 @@ gridef.image_angle = gridef.direction;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[0] = irandom(59)+1;
+            <string>alarm[0] = irandom(120)+1;
 switch(irandom(3))
 {
  case 0:
-      gridx = irandom(35)*18-1;
+      gridx = irandom(16)*48-385;
       gridy = 0;
+      gridef = instance_create(384+round((384-mouse_x)/20)+gridx, round((240-mouse_y)/20)+gridy-96, obj_gridpass);
       griddir = 270;
  break;
  case 1:
-      gridx = irandom(35)*18-1;
+      gridx = irandom(16)*48-385;
       gridy = view_hview[0];
+      gridef = instance_create(384+round((384-mouse_x)/20)+gridx, round((240-mouse_y)/20)+gridy+96, obj_gridpass);
       griddir = 90;
  break;
  case 2:
       gridx = 0;
-      gridy = irandom(26)*18-1;
+      gridy = irandom(10)*48-241;
+      gridef = instance_create(round((384-mouse_x)/20)+gridx-96, 240+round((240-mouse_y)/20)+gridy, obj_gridpass);
       griddir = 0;
  break;
  case 3:
       gridx = view_wview[0];
-      gridy = irandom(26)*18-1;
+      gridy = irandom(10)*48-241;
+      gridef = instance_create(round((384-mouse_x)/20)+gridx+96, 240+round((240-mouse_y)/20)+gridy, obj_gridpass);
       griddir = 180;
  break;
 }
-gridef = instance_create(gridx, gridy, obj_gridpass);
 gridef.direction = griddir;
 gridef.image_angle = gridef.direction;
-gridef.speed = 8+random(4);
+gridef.speed = 4+random(2);
+gridef.oldmouse_x = mouse_x;
+gridef.oldmouse_y = mouse_y;
 
 </string>
           </argument>
@@ -621,19 +637,6 @@ gridef.speed = 8+random(4);
 global.rot1+=2.5;
 global.rot2-=4;
 global.rot3+=6;
-//Transition into the room
-if(backalpha &lt; 1 &amp;&amp; animation = 0)
- backalpha += 0.1;
-//Transition out of the room
-if(backalpha &gt; 0 &amp;&amp; animation = 1)
- backalpha -= 0.1;
-if(tile_exists(tile_layer_find(100, 0, 0)))
- tile_set_alpha(tile_layer_find(100, 0, 0), backalpha);
-if(tile_exists(tile_layer_find(100, view_wview[0]-10, 80)))
- tile_set_alpha(tile_layer_find(100, view_wview[0]-10, 80), backalpha);
-if(tile_exists(tile_layer_find(100, 0, 176)))
- tile_set_alpha(tile_layer_find(100, 0, 176), backalpha);
-background_alpha[1] = backalpha;
 //Fade the screen to black
 if(dim = 1)
  dimalpha += 0.05;
@@ -660,29 +663,6 @@ if(dim = 1)
           <argument>
             <kind>1</kind>
             <string>instance_create(mouse_x, mouse_y, obj_clickring);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="30">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>event_perform(ev_keypress, vk_escape);
 </string>
           </argument>
         </arguments>
@@ -801,6 +781,28 @@ else
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>224</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_another_room</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>11</kind>
+            <room>rm_title</room>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="27">
       <action>
         <libid>1</libid>
@@ -838,5 +840,8 @@ game_end();
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>0,0</point>
+    <point>16,16</point>
+  </PhysicsShapePoints>
 </object>

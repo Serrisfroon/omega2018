@@ -34,8 +34,8 @@ switch(room)
 {
  case rm_multiplayer:
       timer[0] = 59;
-      linex[0] = 17;
-      liney[0] = 351;
+      linex[0] = 48;
+      liney[0] = 318;
       linewidth[0] = 298;
  break;
  case rm_profile:

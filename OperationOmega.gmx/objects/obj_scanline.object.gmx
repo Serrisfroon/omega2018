@@ -120,9 +120,23 @@ alarm[1] = 8;
 }
 for(i = 0; i &lt;= 30; i += 1)
 {
- if(flamelife[i] = 0) continue;
- draw_sprite_ext(sprite_index, 0, flamex[i], flamey[i], scale, 1, 0, c_white, 0.05*flamelife[i]*background_alpha[1]);
- flamelife[i] -= 1;
+    if(flamelife[i] = 0) continue;
+    switch(room)
+    {
+        case rm_waiting:
+            draw_sprite_ext(sprite_index, 0, flamex[i], flamey[i], scale, 1, 0, c_white, 0.05*flamelife[i]*obj_customizer.bottombox.display_alpha);
+        break;
+        case rm_multiplayer:
+            if(sprite_index = spr_whitepixel)
+                draw_sprite_ext(sprite_index, 0, flamex[i], flamey[i], scale, 1, 0, c_white, 0.05*flamelife[i]*obj_profile_connect.display_alpha); 
+            else
+                draw_sprite_ext(sprite_index, 0, flamex[i], flamey[i], scale, 1, 0, c_white, 0.05*flamelife[i]);                     
+        break;
+        default:
+            draw_sprite_ext(sprite_index, 0, flamex[i], flamey[i], scale, 1, 0, c_white, 0.05*flamelife[i]);         
+        break;
+    }
+    flamelife[i] -= 1;
 }
 
 </string>
@@ -142,5 +156,8 @@ for(i = 0; i &lt;= 30; i += 1)
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>0,5</point>
+    <point>6,6</point>
+  </PhysicsShapePoints>
 </object>

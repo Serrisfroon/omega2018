@@ -28,7 +28,7 @@ switch(type)
       name = "Needle";
       sprite = spr_needle;
       life = 240;
-      after = obj_needle_hit;
+      after = obj_generic_hit;
       dmg = 10;
       mask = 5;
       lolspeed = 6+speed;

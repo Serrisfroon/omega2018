@@ -75,53 +75,53 @@ image_single = 5;
             <string>//Check if the button has been pressed
 if(obj_modbox.creategamenow = 0)
 {
- //Fade out the popup
-if(global.sfxtoggle = 0)
-    audio_play_sound(snd_clicktext, 1, 0);
- obj_modbox.cancel = 1;
- //The button has been pressed; a game will be made
- obj_modbox.creategamenow = 1;
+    //Fade out the popup
+    if(global.sfxtoggle = 0)
+        audio_play_sound(snd_clicktext, 1, 0);
+    obj_modbox.animation = 3;
+    //The button has been pressed; a game will be made
+    obj_modbox.creategamenow = 1;
   //Update the info on the games list
-  if(global.gameslist = 1)
-  {
-          if(ds_list_size(global.clients)+1 = global.maxplayers)
+    if(global.gameslist = 1)
+    {
+        if(ds_list_size(global.clients)+1 = global.maxplayers)
             roomstatus = "Full";
-          else
+        else
             roomstatus = "Waiting";
-          global.createtime = get_servertime();
-          sql_modify(global.myipaddress, global.createtime, global.maxplayers, ds_list_size(global.clients)+1, global.matchtype, global.shortlevel, roomstatus);
-  }  
-with(obj_waiting)
-{
-  chatline[0] = chatline[1];
-  chatcolor[0] = chatcolor[1];
-  chatline[1] = chatline[2];
-  chatcolor[1] = chatcolor[2];
-  chatline[2] = chatline[3];
-  chatcolor[2] = chatcolor[3];
-  chatline[3] = chatline[4];
-  chatcolor[3] = chatcolor[4];
-  chatline[4] = chatline[5];
-  chatcolor[4] = chatcolor[5];
-  chatline[5] = chatline[6];
-  chatcolor[5] = chatcolor[6];
-  chatline[6] = chatline[7];
-  chatcolor[6] = chatcolor[7];
-  chatline[7] = chatline[8];
-  chatcolor[7] = chatcolor[8];
-  chatline[8] = "The host finished changing match settings.";
-  chatcolor[8] = c_red;
- //Send the message to clients
- clearbuffer(0);
- writebyte(11, 0);
- writebyte(global.mymid, 0);
- writeshort(chatcolor[8], 0);
- writestring(chatline[8], 0);
- client_sendall(0, 0);   
-}
- //Reset ready statuses
- for(i = 1; i &lt; 8; i += 1)
-  global.readied[i] = 1;
+        global.createtime = get_servertime();
+        sql_modify(global.myipaddress, global.createtime, global.maxplayers, ds_list_size(global.clients)+1, global.matchtype, global.shortlevel, roomstatus);
+    }  
+    with(obj_waiting)
+    {
+        chatline[0] = chatline[1];
+        chatcolor[0] = chatcolor[1];
+        chatline[1] = chatline[2];
+        chatcolor[1] = chatcolor[2];
+        chatline[2] = chatline[3];
+        chatcolor[2] = chatcolor[3];
+        chatline[3] = chatline[4];
+        chatcolor[3] = chatcolor[4];
+        chatline[4] = chatline[5];
+        chatcolor[4] = chatcolor[5];
+        chatline[5] = chatline[6];
+        chatcolor[5] = chatcolor[6];
+        chatline[6] = chatline[7];
+        chatcolor[6] = chatcolor[7];
+        chatline[7] = chatline[8];
+        chatcolor[7] = chatcolor[8];
+        chatline[8] = "The host finished changing match settings.";
+        chatcolor[8] = c_red;
+        //Send the message to clients
+        clearbuffer(0);
+        writebyte(11, 0);
+        writebyte(global.mymid, 0);
+        writeshort(chatcolor[8], 0);
+        writestring(chatline[8], 0);
+        client_sendall(0, 0);   
+    }
+    //Reset ready statuses
+    for(i = 1; i &lt; 8; i += 1)
+        global.readied[i] = 1;
 }
 </string>
           </argument>

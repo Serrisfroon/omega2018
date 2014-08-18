@@ -247,21 +247,8 @@ if(global.sfxtoggle = 0)
 //There is now a popup window
 global.creatinggame = 1;
 //Create the popup
-switch(global.resolution)
-{
- case 1:
-      instance_create(160, 79, obj_modbox); 
- break;
- case 2:
-      instance_create(160, 95, obj_modbox); 
- break;
- case 3:
-      instance_create(267, 79, obj_modbox); 
- break;
- case 4:
-      instance_create(224, 79, obj_modbox); 
- break;
-}
+instance_create(384, 240, obj_modbox); 
+
   //If a rule change is not typed, send what you typed to clients
 with(obj_waiting)
 {
