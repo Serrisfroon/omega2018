@@ -60,15 +60,13 @@ if(global.allycolor = c_red)
             <kind>1</kind>
             <string>if(global.allycolor != c_red)
 {
-    part_type_color3(obj_partsystem.burstsplit,c_white,c_red,c_red);
     effect_create_above(ef_ring, x, y, 1, c_red);
 }
 else
 {
-    part_type_color3(obj_partsystem.burstsplit,16777215,16711680,16711680);    
     effect_create_above(ef_ring, x, y, 1, c_blue);
 }
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.burstsplit, 30);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.burstsplit[global.team[mid]-1], 30);
 </string>
           </argument>
         </arguments>

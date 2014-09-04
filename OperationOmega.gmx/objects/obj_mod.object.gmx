@@ -25,19 +25,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hudscale = window_get_width()/view_wport[0];
+            <string>display_set_gui_size(view_wport[0], view_hport[0]);
 audio_listener_position(0, 0, 0);
-
+iconbar = global.shipselect*(global.spacetype+1)-1;
 stall = 0;
-chaincount = 0;
 armorpart = 1;
 shieldpart = 1;
 fadetoblack = 0;
 blackalpha = 0;
 oldsnap = 0;
+scaling = view_hview[0]/480;
 
 modify_x = 0;
 modify_y = 0;
+
+
+
+teamcolorimg = global.team[global.mymid]-1;
 
 //Intialize weapon availability
 esecondfade[1] = c_white;
@@ -74,6 +78,7 @@ viewpos = 0;
 
 //Merge walls together
 global.wallsprite = spr_empty;
+global.drawwallsprite = spr_empty;
 makenewwall = 0;
 alarm[4] = 2;
 
@@ -373,10 +378,6 @@ var_circle_zoom_max = 0.60;
 
 magnify1 = surface_create(view_wport[0], view_hport[0]);
 magnify2 = surface_create(view_wport[0], view_hport[0]);
-
-uni_time_scan = shader_get_uniform(shd_scanlines,"time");
-uni_mouse_pos_scan = shader_get_uniform(shd_scanlines,"mouse_pos");
-uni_resolution_scan = shader_get_uniform(shd_scanlines,"resolution");
 </string>
           </argument>
         </arguments>
@@ -665,7 +666,7 @@ else
           <argument>
             <kind>1</kind>
             <string>//respawn if there is stock left
-if(global.ships&gt;0)
+if(global.ships &gt; 0)
 {
  tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
  tele.mid = global.mymid;
@@ -697,7 +698,7 @@ else
    if(global.redteam = global.redteamout)
    {
     //Send it to your chat
-    chatline_add("Red Team has been eliminated.", c_red);
+    chatline_add("Red Team has been eliminated.", c_maroon);
     lolcolor[3] = 1;
     chatline_add("Blue Team has won the match.", c_navy);
     lolcolor[4] = 2;
@@ -728,7 +729,7 @@ else
     //Send it to your chat
     chatline_add("Blue Team has been eliminated.", c_navy);
     lolcolor[3] = 2;
-    chatline_add("Red Team has won the match.", c_red);
+    chatline_add("Red Team has won the match.", c_maroon);
     lolcolor[4] = 1;
     obj_mod.announcing  = 1;
     obj_mod.announcement = "Operation Failed";
@@ -1014,13 +1015,6 @@ while(true)
         with(obj_turret_enemy)
             if(mid = obj_mod.dummy)
                 instance_destroy();
-    with(obj_shieldpulse)
-        if(mid = obj_mod.dummy)
-            endnow = 1;
-    with(obj_shieldpulse_enemy)
-        if(mid = obj_mod.dummy)
-            endnow = 1;
-
         //Update score
         if(defeatmid != 20)
          global.kills[defeatmid] += 1;
@@ -1065,7 +1059,7 @@ while(true)
         switch(readbyte(0))
         {
          case 1:         
-              newcolor = c_red;
+              newcolor = c_maroon;
          break;
          case 2:
               newcolor = c_navy;
@@ -1107,7 +1101,7 @@ while(true)
          {
           //Send it to your chat
           //Send it to your chat
-          chatline_add("Red Team has been eliminated.", c_red);
+          chatline_add("Red Team has been eliminated.", c_maroon);
           lolcolor[3] = 1;
           chatline_add("Blue Team has won the match.", c_navy);
           lolcolor[4] = 2;
@@ -1147,20 +1141,20 @@ while(true)
           //Send it to your chat
           chatline_add("Blue Team has been eliminated.", c_navy);
           lolcolor[3] = 2;
-          chatline_add("Red Team has won the match.", c_red);
+          chatline_add("Red Team has won the match.", c_maroon);
           lolcolor[4] = 1;
           obj_mod.announcing  = 1;
           obj_mod.announcealpha = 0;
           if(global.team[global.mymid] = 1)
           {
            obj_mod.announcement = "Operation Successful";
-           obj_mod.announcement_color = c_red;
+           obj_mod.announcement_color = c_maroon;
            global.outcome = 0;
           }
           else
           {
            obj_mod.announcement = "Operation Failed";
-           obj_mod.announcement_color = c_red;
+           obj_mod.announcement_color = c_maroon;
            global.outcome = 1;
           }
           clearbuffer(0);
@@ -1282,6 +1276,13 @@ while(true)
         global.primaryRNG[dummy] = readushort(0);
         client_sendall(0, dummy);
    break;
+   
+   //Begin Firing Primary weapon
+   case 15:
+        global.playership[dummy].hacked = true;
+        global.playership[dummy].alarm[5] = 90;        
+        client_sendall(0, dummy);
+   break;
 
    //A player leaves the game
    case CLIENT_DROP:
@@ -1295,9 +1296,9 @@ while(true)
         //Create a dud to intercept remaining messages
         global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
         //Send a notice to your chat
-        chatline_add(readstring(0), c_red)
+        chatline_add(readstring(0), c_maroon)
         if(global.team[dummy] = 1)
-         chatcolor[4] = c_red;
+         chatcolor[4] = c_maroon;
         else
          chatcolor[4] = c_navy;
         //Relay the info to other players
@@ -1309,7 +1310,7 @@ while(true)
             if(global.redteam = global.redteamout)
             {
                 //Send it to your chat
-                chatline_add("Red Team has been eliminated.", c_red);
+                chatline_add("Red Team has been eliminated.", c_maroon);
                 lolcolor[3] = 1;
                 chatline_add("Blue Team has won the match.", c_navy);
                 lolcolor[4] = 2;
@@ -1348,10 +1349,10 @@ while(true)
                 //Send it to your chat
                 chatline_add("Blue Team has been eliminated.", c_navy);
                 lolcolor[3] = 2;
-                chatline_add("Red Team has won the match.", c_red);
+                chatline_add("Red Team has won the match.", c_maroon);
                 lolcolor[4] = 1;
                 obj_mod.announcing  = 1;
-                obj_mod.announcement_color = c_red;
+                obj_mod.announcement_color = c_maroon;
                 obj_mod.announcealpha = 0;
                 if(global.team[global.mymid] = 2)
                 {
@@ -1438,54 +1439,54 @@ switch(announcing)
 }
 if(!instance_exists(view_object[0]))
  view_object[0] = obj_ship;
-//Handle background positioning
+
 if((view_xview[0]&gt;0&amp;&amp;view_xview[0]+view_wview[0]&lt;room_width))
 {
-if(room != rm_katrinbase &amp;&amp; room != rm_victabase &amp;&amp; room != rm_victatundra &amp;&amp; room != rm_katrincoast)
-{ 
- background_hspeed[0]=view_object.hspeed/1.5;
- background_hspeed[2]=(view_object.hspeed+back_extrahspeed)/3;
- background_hspeed[3]=(view_object.hspeed+back_extrahspeed)/4;
- background_hspeed[4]=(view_object.hspeed+back_extrahspeed)/5;
-}
-
-background_hspeed[1]=view_object.hspeed/1.5;
-background_hspeed[5]=view_object.hspeed/10;
-background_hspeed[6] = -(view_object.hspeed-back_extrahspeed)*.2;
+    if(global.spacemap = 1)
+    { 
+        background_hspeed[0]=view_object.hspeed/1.2;
+        background_hspeed[2]=(view_object.hspeed+back_extrahspeed)/2;
+        background_hspeed[3]=(view_object.hspeed+back_extrahspeed)/3;
+        background_hspeed[4]=(view_object.hspeed+back_extrahspeed)/4;
+        background_hspeed[5]=(view_object.hspeed+back_extrahspeed)/5.5;
+        background_hspeed[6]=(view_object.hspeed+back_extrahspeed)/8;
+    }
+    
+    background_hspeed[1]=view_object.hspeed/1.2;
 }
 else
 {
-background_hspeed[0]=0;
-background_hspeed[1]=0;
-background_hspeed[2]=back_extrahspeed/3;
-background_hspeed[3]=back_extrahspeed/4;
-background_hspeed[4]=back_extrahspeed/5;
-background_hspeed[5]=0;
-background_hspeed[6]=back_extrahspeed/12;
+    background_hspeed[0]=0;
+    background_hspeed[1]=0;
+    background_hspeed[2]=back_extrahspeed/2;
+    background_hspeed[3]=back_extrahspeed/3;
+    background_hspeed[4]=back_extrahspeed/4;
+    background_hspeed[5]=back_extrahspeed/5.5;
+    background_hspeed[6]=back_extrahspeed/8;
 }
 if((view_yview[0]&gt;0&amp;&amp;view_yview[0]+view_hview[0]&lt;room_height))
 {
-if(room != rm_katrinbase &amp;&amp; room != rm_victabase &amp;&amp; room != rm_victatundra &amp;&amp; room != rm_katrincoast)
-{ 
- background_vspeed[0]=view_object.vspeed/1.5;
- background_vspeed[2]=(view_object.vspeed+back_extravspeed)/3;
- background_vspeed[3]=(view_object.vspeed+back_extravspeed)/4;
- background_vspeed[4]=(view_object.vspeed+back_extravspeed)/5;
-}
-
-background_vspeed[1]=view_object.vspeed/1.5;
-background_vspeed[5]=view_object.vspeed/10;
-background_vspeed[6] = -(view_object.vspeed-back_extravspeed)*.2;
+    if(global.spacemap = 1)
+    { 
+        background_vspeed[0]=view_object.vspeed/1.2;
+        background_vspeed[2]=(view_object.vspeed+back_extravspeed)/2;
+        background_vspeed[3]=(view_object.vspeed+back_extravspeed)/3;
+        background_vspeed[4]=(view_object.vspeed+back_extravspeed)/4;
+        background_vspeed[5]=(view_object.vspeed+back_extravspeed)/5.5;
+        background_vspeed[6]=(view_object.vspeed+back_extravspeed)/8;
+    }
+    
+    background_vspeed[1]=view_object.vspeed/1.2;
 }
 else
 {
-background_vspeed[0]=0;
-background_vspeed[1]=0;
-background_vspeed[2]=back_extravspeed/3;
-background_vspeed[3]=back_extravspeed/4;
-background_vspeed[4]=back_extravspeed/5;
-background_vspeed[5]=0;
-background_hspeed[6]=back_extravspeed/12;
+    background_vspeed[0]=0;
+    background_vspeed[1]=0;
+    background_vspeed[2]=back_extravspeed/2;
+    background_vspeed[3]=back_extravspeed/3;
+    background_vspeed[4]=back_extravspeed/4;
+    background_vspeed[5]=back_extravspeed/5.5;
+    background_vspeed[6]=back_extravspeed/8;
 }
 
 //Rotate cursor parts
@@ -1592,58 +1593,6 @@ screen_shake(view_object);
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_postgrid">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/*
-close button
-if(global.musictoggle = 0)
-{
-    sga_DestroyEmitter( global.gamemusic );
-    global.gamemusic = sga_TrackPlay( -1, "Resources\Lobby1-Quasar.ogg", 1, 0 );
-}
-//Check if you are host
-if(global.master = true)
-{
- //Remove the game from the games list if you made the game on it
- if(global.gameslist = 1)
-        sql_remove(global.myipaddress); 
- //Set time until exiting the game
- alarm[1]=2;
- exit;
-}
-//If you are a client, send the disconnection message 
-//to the host and return to the connecting
-//room
-clearbuffer();
-writebyte(CLIENT_DROP);
-writebyte(global.mymid);
-writestring(global.name);
-if(obj_ship.ismine = 1)
- writestring(global.name+" has RAGEQUIT the game.")
-else
- writestring(global.name+" has left the game.") 
-sendmessage(global.host);
-alarm[1]=2;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="6" enumb="61">
       <action>
         <libid>1</libid>
@@ -1661,20 +1610,16 @@ alarm[1]=2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_play_sound(snd_changeweapon, 1, 0);
-switch(selectx)
+            <string>switch(selectx)
 {
- case 0:
-      keyboard_key_press(ord('2'));
+ case 2:
+    event_perform(ev_keypress, ord('2'));
  break;
- case 32:
-      keyboard_key_press(ord('3'));
+ case 42:
+    event_perform(ev_keypress, ord('3'));
  break;
- case 64:
-      keyboard_key_press(ord('4'));
- break;
- case 96:
-      keyboard_key_press(ord('1'));
+ case 82:
+    event_perform(ev_keypress, ord('1'));
  break;
 } 
 </string>
@@ -1699,20 +1644,16 @@ switch(selectx)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_play_sound(snd_changeweapon, 1, 0);
-switch(selectx)
+            <string>switch(selectx)
 {
- case 0:
-      keyboard_key_press(ord('4'));
+ case 2:
+    event_perform(ev_keypress, ord('3'));
  break;
- case 32:
-      keyboard_key_press(ord('1'));
+ case 42:
+    event_perform(ev_keypress, ord('1'));
  break;
- case 64:
-      keyboard_key_press(ord('2'));
- break;
- case 96:
-      keyboard_key_press(ord('3'));
+ case 82:
+    event_perform(ev_keypress, ord('2'));
  break;
 } 
 </string>
@@ -1861,10 +1802,102 @@ for(i = 0; i &lt; 8; i += 1)
             <kind>1</kind>
             <string>//Delete temporary data from memory
 sprite_delete(global.wallsprite);
+background_delete(global.starback[0]);
+background_delete(global.starback[1]);
+background_delete(global.starback[2]);
+init_menuback();
+switch(global.matchroom)
+{
+    case rm_deepspace:
+         background_delete(global.background[0]);
+         background_delete(global.background[2]);
+         background_delete(global.background[3]);
+         background_delete(global.background[5]);
+    break;
+    case rm_katrinbase:
+         background_delete(global.background[0]);
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3); 
+    break;
+    case rm_combatzone:
+         background_delete(global.background[0]);
+         background_delete(global.background[2]);
+         background_delete(global.background[3]);
+         background_delete(global.background[4]);
+         background_delete(global.background[5]);
+         background_delete(global.background[7]);
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3); 
+    break;
+    case rm_victatundra:
+         background_delete(global.background[0]);
+         background_delete(global.background[2]);
+         background_delete(global.background[4]);
+         background_delete(global.background[7]); 
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3); 
+         background_delete(global.cloudback);        
+    break;
+    case rm_barricade:
+         background_delete(global.background[0]);
+         background_delete(global.background[1]);
+         background_delete(global.background[2]);
+         background_delete(global.background[4]);
+         background_delete(global.background[5]);
+         background_delete(global.background[7]);      
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3); 
+    break;
+    case rm_victabase:
+         background_delete(global.background[0]);
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3);        
+    break;
+    case rm_satellite:
+         background_delete(global.background[0]);
+         background_delete(global.background[1]);
+         background_delete(global.background[2]);
+         background_delete(global.background[4]);
+         background_delete(global.background[5]);
+         background_delete(global.background[7]);      
+    break;
+    case rm_katrincoast:
+         background_delete(global.background[0]);
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3);        
+    break;
+    case rm_spacedepot:
+         background_delete(global.background[0]);
+         background_delete(global.background[2]);
+         background_delete(global.background[4]);
+         background_delete(global.background[5]);
+         background_delete(global.background[7]);      
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3); 
+    break;
+    case rm_orbitstation:
+         background_delete(global.background[0]);
+         background_delete(global.background[2]);
+         background_delete(global.background[4]);
+         background_delete(global.background[5]);
+         background_delete(global.background[7]);      
+         background_delete(global.backpiece_1); 
+         background_delete(global.backpiece_2); 
+         background_delete(global.backpiece_3); 
+    break;
+} 
 
 
-audio_stop_all();
+//audio_stop_all();
 draw_texture_flush();
+cleanmem();
 
 </string>
           </argument>
@@ -1888,11 +1921,11 @@ draw_texture_flush();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hudscale = window_get_width()/view_wport[0];
-
+            <string>scaling = view_hview[0]/480;
+texture_set_interpolation(false);
 //If you are targeting an enemy, draw the targetting cursor
 if(foundtarget &gt; -1 &amp;&amp; !instance_exists(obj_lockoncursor))
- draw_sprite_ext(spr_targetcursor, targetdist, (foundtarget.x-view_xview[0])/scaling*hudscale, (foundtarget.y-view_yview[0])/scaling*hudscale, hudscale, hudscale, global.rot2, c_white, 0.7);
+ draw_sprite_ext(spr_targetcursor, targetdist, (foundtarget.x-view_xview[0])/scaling, (foundtarget.y-view_yview[0])/scaling, 1, 1, global.rot2, c_white, 0.7);
  
 //Draw announcement text, if there is any
 if(announcealpha &gt; 0)
@@ -1901,44 +1934,30 @@ if(announcealpha &gt; 0)
  draw_set_valign(fa_middle);
  draw_set_font(fnt_bigtext);
  draw_set_alpha(announcealpha);
- draw_text_bordered(view_wport[0]*hudscale/2, 130*hudscale, announcement, hudscale, 2, announcement_color);
+ draw_text_bordered(view_wport[0]/2, 130, announcement, 1, 2, announcement_color, c_white);
  draw_set_halign(fa_left);
  draw_set_valign(fa_top);
 }
 //Draw equipped weapons
 check_weapons();
-switch(global.shipselect)
-{
- case 1:
-      draw_sprite_ext(global.esecondimage[1], 0, 2*hudscale, 73*hudscale, hudscale, hudscale, 0, esecondfade[1], 1);
-      draw_sprite_ext(global.esecondimage[2], 0, 42*hudscale, 73*hudscale, hudscale, hudscale, 0, esecondfade[2], 1);
-      draw_sprite_ext(global.deployimage[1], 0, 82*hudscale, 73*hudscale, hudscale, hudscale, 0, deployfade[1], 1);
-      draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[1]/obj_ship.maxdstock[1])*26, 36, 82*hudscale, 73*hudscale, hudscale, hudscale, c_white, 1);
-      draw_sprite_ext(global.deployimage[2], 0, 122*hudscale, 73*hudscale, hudscale, hudscale, 0, deployfade[2], 1);
-      draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[2]/obj_ship.maxdstock[2])*26, 36, 122*hudscale, 73*hudscale, hudscale, hudscale, c_white, 1);
- break;
- case 2:
-      draw_sprite_ext(global.esecondimage[1], 0, 2*hudscale, 73*hudscale, hudscale, hudscale, 0, esecondfade[1], 1);
-      draw_sprite_ext(global.esecondimage[2], 0, 42*hudscale, 73*hudscale, hudscale, hudscale, 0, esecondfade[2], 1);
-      draw_sprite_ext(global.esecondimage[3], 0, 82*hudscale, 73*hudscale, hudscale, hudscale, 0, esecondfade[3], 1);
-      draw_sprite_ext(global.deployimage[1], 0, 122*hudscale, 73*hudscale, hudscale, hudscale, 0, deployfade[1], 1);
-      draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[1]/obj_ship.maxdstock[1])*26, 36, 122*hudscale, 73*hudscale, hudscale, hudscale, c_white, 1);
- break;
- case 3:
-      draw_sprite_ext(global.esecondimage[1], 0, 2*hudscale, 73*hudscale, hudscale, hudscale, 0, esecondfade[1], 1);
-      draw_sprite_ext(global.deployimage[1], 0, 42*hudscale, 73*hudscale, hudscale, hudscale, 0, deployfade[1], 1);
-      draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[1]/obj_ship.maxdstock[1])*26, 36, 42*hudscale, 73*hudscale, hudscale, hudscale, c_white, 1);
-      draw_sprite_ext(global.deployimage[2], 0, 82*hudscale, 73*hudscale, hudscale, hudscale, 0, deployfade[2], 1);
-      draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[2]/obj_ship.maxdstock[2])*26, 36, 82*hudscale, 73*hudscale, hudscale, hudscale, c_white, 1);
-      draw_sprite_ext(global.deployimage[3], 0, 122*hudscale, 73*hudscale, hudscale, hudscale, 0, deployfade[3], 1);
-      draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[3]/obj_ship.maxdstock[3])*26, 36, 122*hudscale, 73*hudscale, hudscale, hudscale, c_white, 1);
- break;
-} 
+draw_sprite_ext(global.secondaryimage[1], teamcolorimg, 2, 73, 1, 1, 0, esecondfade[1], 1);
+if(global.isdeploy[1] &gt; 0)
+    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[1]]/obj_ship.maxdstock[global.isdeploy[1]])*26, 36, 2, 73, 1, 1, c_white, 1);
+draw_sprite_ext(global.secondaryimage[2], teamcolorimg, 42, 73, 1, 1, 0, deployfade[1], 1);
+if(global.isdeploy[2] &gt; 0)
+    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[2]]/obj_ship.maxdstock[global.isdeploy[2]])*26, 36, 42, 73, 1, 1, c_white, 1);
+draw_sprite_ext(global.secondaryimage[3], teamcolorimg, 82, 73, 1, 1, 0, deployfade[2], 1);
+if(global.isdeploy[3] &gt; 0)
+    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[3]]/obj_ship.maxdstock[global.isdeploy[3]])*26, 36, 82, 73, 1, 1, c_white, 1);
+draw_sprite_ext(global.secondaryimage[4], teamcolorimg, 122, 73, 1, 1, 0, deployfade[3], 1);
+if(global.isdeploy[4] &gt; 0)
+    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[4]]/obj_ship.maxdstock[global.isdeploy[4]])*26, 36, 122, 73, 1, 1, c_white, 1);
+
 with(obj_weaponflash)
-    draw_sprite_ext(sprite_index, image_index, xstart*obj_mod.hudscale, 73*obj_mod.hudscale, obj_mod.hudscale, obj_mod.hudscale, 0, c_white, 1);
+    draw_sprite_ext(sprite_index, image_index, xstart, 73, 1, 1, 0, c_white, 1);
     
 //Draw the highlighter
-draw_sprite_ext(spr_numbers_selected, 0, selectx*hudscale, 73*hudscale, hudscale, hudscale, 0, c_white, 1);
+draw_sprite_ext(spr_numbers_selected, 0, selectx, 73, 1, 1, 0, c_white, 1);
 
 //Draw Armor, Shield, Energy, and Ammo bars
 if(obj_ship.armor &gt; 0)
@@ -1948,11 +1967,11 @@ if(obj_ship.armor &gt; 0)
   armorpart -= 0.02;
  else
   armorpart = armorratio;
- draw_sprite_part_ext(spr_armorbar, 0, 0, 0, 4+armorpart*233, 86, 0, 0, hudscale, hudscale, c_white, 1);
+ draw_sprite_part_ext(spr_armorbar, 0, 0, 0, 4+armorpart*233, 86, 0, 0, 1, 1, c_white, 1);
 }
 else
     if(global.shipselect = 2 &amp;&amp; obj_ship.beserk = 1)
-        draw_sprite_part_ext(spr_beserkbar, obj_ship.beserkeffect.image_index, 0, 0, 4+(obj_ship.alarm[11]/300)*233, 86, 0, 0, hudscale, hudscale, c_white, 1);    
+        draw_sprite_part_ext(spr_beserkbar, obj_ship.beserkeffect.image_index, 0, 0, 4+(obj_ship.alarm[11]/300)*233, 86, 0, 0, 1, 1, c_white, 1);    
 if(obj_ship.shield &gt; 0)
 {
  shieldratio = obj_ship.shield/obj_ship.maxshield;
@@ -1960,29 +1979,28 @@ if(obj_ship.shield &gt; 0)
   shieldpart -= 0.02;
  else
   shieldpart = shieldratio;
- draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+shieldpart*233, 86, 0, 0, hudscale, hudscale, c_white, 0.4+(0.6*(obj_ship.shield/obj_ship.maxshield)));
+ draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+shieldpart*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*(obj_ship.shield/obj_ship.maxshield)));
 }
 else
  shieldpart = 0;
 if(obj_ship.energy &gt; 0)
 {
-    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, hudscale, hudscale, c_white, obj_ship.heat/50);
-    draw_sprite_part_ext(spr_energybar, 1, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, hudscale, hudscale, c_white, 1-obj_ship.heat/50); 
+    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, obj_ship.heat/50);
+    draw_sprite_part_ext(spr_energybar, 1, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1-obj_ship.heat/50); 
 }
 if(obj_ship.cooldown = 0)
-    draw_sprite_ext(spr_overheatbar, 0, 0, 0, hudscale, hudscale, 0, c_white, 1);
+    draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
 if(instance_exists(obj_overheatshine))
-    draw_sprite_ext(spr_overheatshine, obj_overheatshine.image_index, 0, 0, hudscale, hudscale, 0, c_white, 1);
+    draw_sprite_ext(spr_overheatshine, obj_overheatshine.image_index, 0, 0, 1, 1, 0, c_white, 1);
    
 
 if(obj_ship.deploystock[dstock] &gt; 0)
- draw_sprite_part_ext(spr_ammobar, maxdstock, 0, 0, 81+(obj_ship.deploystock[dstock]/obj_ship.maxdstock[dstock])*157, 64, 0, 0, hudscale, hudscale, c_white, 1);
+ draw_sprite_part_ext(spr_ammobar, maxdstock, 0, 0, 81+(obj_ship.deploystock[dstock]/obj_ship.maxdstock[dstock])*157, 64, 0, 0, 1, 1, c_white, 1);
 
 //Draw the gauge backgrounds
-draw_sprite_ext(spr_gauges, global.shipselect-1, 0, 0, hudscale, hudscale, 0, c_white, 1);
-//Draw the space hotkey icon
-if(global.spacehot != 0)
- draw_sprite_ext(spr_numbers_icon, 9, spacex*hudscale, 70*hudscale, hudscale, hudscale, 0, c_white, 1);
+draw_sprite_ext(spr_gauges, 0, 0, 0, 1, 1, 0, c_white, 1);
+draw_sprite_ext(spr_weaponicons, iconbar, 0, 0, 1, 1, 0, c_white, 1);
+
 //Draw the match status
 switch(global.matchtype)
 {
@@ -1991,11 +2009,11 @@ switch(global.matchtype)
       {
        case 1:
             for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect, i*shipspace*hudscale, 0, hudscale, hudscale, 0, c_white, .7);
+             draw_sprite_ext(spr_lifecount, global.shipselect, i*shipspace, 0, 1, 1, 0, c_white, .7);
        break;
        case 2:
             for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect+3, i*shipspace*hudscale, 0, hudscale, hudscale, 0, c_white, .7);
+             draw_sprite_ext(spr_lifecount, global.shipselect+3, i*shipspace, 0, 1, 1, 0, c_white, .7);
        break;
       }
  break;
@@ -2005,14 +2023,14 @@ switch(global.matchtype)
       draw_set_color(global.matchcolor);
       minute = floor(date_minute_span(global.time, global.endtime));
       second = floor(date_second_span(global.time, global.endtime)-minute*60);
-      draw_text_transformed(10*hudscale, 5*hudscale, string(minute)+":"+string(second), hudscale, hudscale, 0);
+      draw_text_transformed(10, 5, string(minute)+":"+string(second), 1, 1, 0);
  break;
 }
 
 //Draw the radar
-draw_sprite_ext(spr_radar, 0, view_wport[0]*hudscale, 0, hudscale, hudscale, 0, c_white, 1);
+draw_sprite_ext(spr_radar, 0, view_wport[0], 0, 1, 1, 0, c_white, 1);
 //Draw the map of the walls
-draw_sprite_part_ext(global.wallsprite, 0, (obj_ship.x-1600)/16, (obj_ship.y-1600)/16, 200, 200, view_wport[0]*hudscale-113*hudscale, 11*hudscale, 0.5, 0.5, c_white, 0.8);
+draw_sprite_part_ext(global.wallsprite, 0, (obj_ship.x-1600)/16, (obj_ship.y-1600)/16, 200, 200, view_wport[0]-113, 11, 0.5, 0.5, c_white, 0.8);
 //Check which loop to set to
 for(i = 0; i &lt; 8; i += 1)
 {
@@ -2030,29 +2048,25 @@ for(i = 0; i &lt; 8; i += 1)
   radary = ((global.playership[i].y-obj_ship.y)*50)/1500;
   //Draw radar point if it is in range
   if(abs(radarx) &lt;51 &amp;&amp; abs(radary) &lt; 51)
-   draw_sprite_ext(spr_radar_player, radarpoint, view_wport[0]*hudscale-65*hudscale+radarx*hudscale, 62*hudscale+radary*hudscale, hudscale, hudscale, global.playership[i].image_angle, c_white, 1);
+   draw_sprite_ext(spr_radar_player, radarpoint, view_wport[0]-65+radarx, 62+radary, 1, 1, global.playership[i].image_angle, c_white, 1);
  }
 }
   
 draw_set_font(fnt_chat);
 //Draw the framerate
 draw_set_color(c_white);
-draw_text_transformed(10*hudscale, view_hport[0]*hudscale-20*hudscale, string(fps*global.framerate), hudscale, hudscale, 0);
+draw_text_transformed(10, view_hport[0]-20, string(fps*global.framerate), 1, 1, 0);
 
 //Draw the chat bar if chatting
 switch(global.chatting)
 {
  case true:
       draw_set_color(c_white);
-      draw_sprite_ext(spr_chatinput, 0, 0, view_hport[0]*hudscale, hudscale, hudscale, 0, c_white, 1);
+      draw_sprite_ext(spr_chatinput, 0, 0, view_hport[0], 1, 1, 0, c_white, 1);
       //Stop more input if max is reached
       if(string_length(keyboard_string) &gt; 60)
        keyboard_string = string_copy(keyboard_string, 0, 60);
-      
-      //Undo same-letter spams
-      lastletter = string_copy(keyboard_string, string_length(keyboard_string), 1);
-      keyboard_string = string_replace(keyboard_string, lastletter+lastletter+lastletter+lastletter, lastletter+lastletter+lastletter);
-      
+            
       //Undo '#'
       keyboard_string = string_replace(keyboard_string, '#', '');
       
@@ -2065,13 +2079,13 @@ switch(global.chatting)
         break;  
        }
       //Draw the text in the chat bar
-      draw_text_transformed(14*hudscale, 454*hudscale, string_copy(keyboard_string, startchat, stopchat)+flashing, hudscale, hudscale, 0);
-      draw_sprite_ext(spr_extchat, 0, 0, 0, hudscale, hudscale, 0, c_white, 1);
+      draw_text_transformed(14, 454, string_copy(keyboard_string, startchat, stopchat)+flashing, 1, 1, 0);
+      draw_sprite_ext(spr_extchat, 0, 0, 0, 1, 1, 0, c_white, 1);
       //draw chat
       draw_set_color(c_white);
       for(i = 0; i &lt;= 16; i += 1)
       {
-       draw_text_ext_transformed(14*hudscale, (406-(i*18))*hudscale, extchatline[16-i], 9, 300, hudscale, hudscale, 0);
+       draw_text_ext_transformed(14, (406-(i*18)), extchatline[16-i], 9, 300, 1, 1, 0);
       }
  break;
  case false:
@@ -2080,7 +2094,7 @@ switch(global.chatting)
       {
        draw_set_color(chatcolor[4-i]);
        draw_set_alpha(chatalpha[4-i]);
-       draw_text_ext_transformed(14*hudscale, (406-(i*18))*hudscale, chatline[4-i], 9, 300, hudscale, hudscale, 0);
+       draw_text_ext_transformed(14, (406-(i*18)), chatline[4-i], 9, 300, 1, 1, 0);
        chatalpha[4-i] -= 0.005;
       } 
  break;
@@ -2091,7 +2105,7 @@ draw_set_alpha(1);
 if(keyboard_check_direct(vk_tab))
 {
  global.playerfps[global.mymid] = fps;
- draw_sprite_ext(spr_pscores, 0, view_wport[0]*hudscale, view_hport[0]*hudscale, hudscale, hudscale, 0, c_white, 1);
+ draw_sprite_ext(spr_pscores, 0, view_wport[0], view_hport[0], 1, 1, 0, c_white, 1);
  draw_set_font(fnt_chat);
  for(i = 0; i &lt; 8; i += 1)
  {
@@ -2106,29 +2120,31 @@ if(keyboard_check_direct(vk_tab))
    break;
   }
   draw_set_halign(fa_left);
-  draw_text_transformed(view_wport[0]*hudscale-247*hudscale, view_hport[0]*hudscale-(246-(i*20))*hudscale, global.othername[i], hudscale, hudscale, 0);
+  draw_text_transformed(view_wport[0]-247, view_hport[0]-(246-(i*20)), global.othername[i], 1, 1, 0);
   draw_set_halign(fa_center);
-  draw_text_transformed(view_wport[0]*hudscale-110*hudscale, view_hport[0]*hudscale-(246-(i*20))*hudscale, string(global.playerfps[i]), hudscale, hudscale, 0);
-  draw_text_transformed(view_wport[0]*hudscale-82*hudscale, view_hport[0]*hudscale-(246-(i*20))*hudscale, string(global.ping[i]), hudscale, hudscale, 0);
-  draw_text_transformed(view_wport[0]*hudscale-56*hudscale, view_hport[0]*hudscale-(246-(i*20))*hudscale, string(global.kills[i]), hudscale, hudscale, 0);
-  draw_text_transformed(view_wport[0]*hudscale-29*hudscale, view_hport[0]*hudscale-(246-(i*20))*hudscale, string(global.deaths[i]), hudscale, hudscale, 0);
+  draw_text_transformed(view_wport[0]-110, view_hport[0]-(246-(i*20)), string(global.playerfps[i]), 1, 1, 0);
+  draw_text_transformed(view_wport[0]-82, view_hport[0]-(246-(i*20)), string(global.ping[i]), 1, 1, 0);
+  draw_text_transformed(view_wport[0]-56, view_hport[0]-(246-(i*20)), string(global.kills[i]), 1, 1, 0);
+  draw_text_transformed(view_wport[0]-29, view_hport[0]-(246-(i*20)), string(global.deaths[i]), 1, 1, 0);
  }
  draw_set_color(c_black);
- draw_text_transformed(view_wport[0]*hudscale-52*hudscale, view_hport[0]*hudscale-305*hudscale, string(global.redscore), hudscale, hudscale, 0);
- draw_text_transformed(view_wport[0]*hudscale-52*hudscale, view_hport[0]*hudscale-288*hudscale, string(global.bluescore), hudscale, hudscale, 0); 
+ draw_text_transformed(view_wport[0]-52, view_hport[0]-305, string(global.redscore), 1, 1, 0);
+ draw_text_transformed(view_wport[0]-52, view_hport[0]-288, string(global.bluescore), 1, 1, 0); 
  draw_set_halign(fa_left);
 }
 
  
 draw_set_alpha(blackalpha);
 draw_set_color(c_black);
-draw_rectangle(-30*hudscale, -30*hudscale, view_wport[0]*hudscale+30*hudscale, view_hport[0]*hudscale+30*hudscale, 0);
+draw_rectangle(-30, -30, view_wport[0]+30, view_hport[0]+30, 0);
 
 
 //Draw the cursor
-draw_sprite_ext(spr_cursor, targethit, window_mouse_get_x(), window_mouse_get_y(), 0.7*hudscale, 0.7*hudscale, global.rot1, c_white, 0.7);
-draw_sprite_ext(spr_cursor, targethit+1, window_mouse_get_x(), window_mouse_get_y(), 0.7*hudscale, 0.7*hudscale, global.rot2, c_white, 0.7);
-draw_sprite_ext(spr_cursor, targethit+2,window_mouse_get_x(), window_mouse_get_y(), 0.7*hudscale, 0.7*hudscale, global.rot3, c_white, 0.7);
+draw_sprite_ext(spr_cursor, targethit, (mouse_x-view_xview[0])/scaling, (mouse_y-view_yview[0])/scaling, 0.7, 0.7, global.rot1, c_white, 0.7);
+draw_sprite_ext(spr_cursor, targethit+1, (mouse_x-view_xview[0])/scaling, (mouse_y-view_yview[0])/scaling, 0.7, 0.7, global.rot2, c_white, 0.7);
+draw_sprite_ext(spr_cursor, targethit+2, (mouse_x-view_xview[0])/scaling, (mouse_y-view_yview[0])/scaling, 0.7, 0.7, global.rot3, c_white, 0.7);
+texture_set_interpolation(true);
+
 </string>
           </argument>
         </arguments>
@@ -2213,240 +2229,6 @@ else
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="52">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true) exit;
-audio_play_sound(snd_changeweapon, 1, 0);
-
-//Switch to the correct new attack
-switch(global.shipselect)
-{
- case 1:
-      dstock = 2;
-      switch(global.deploy[2])
-      {
-       case 1:
-            global.secondary = 0; //Dual Missile
-            maxdstock = 4;
-       break;
-       case 2:
-            global.secondary = 4; //Layer Missile
-            maxdstock = 3;
-       break;
-       case 3:
-            global.secondary = 3; //Hunter Mine
-            maxdstock = 3;
-       break;
-       case 4:
-            global.secondary = 6; //Locust Missile
-            maxdstock = 4;
-       break;
-       case 5:
-            global.secondary = 7; //Phantom Mine
-            maxdstock = 4;
-       break;
-       case 6:
-            global.secondary = 8; //Solus
-            maxdstock = 2;
-       break;
-       case 7:
-            global.secondary = 13; //Trident Missile
-            maxdstock = 4;
-       break;
-       case 8:
-            global.secondary = 17; //Shock Missile
-            maxdstock = 3;
-       break;
-       case 9:
-            global.secondary = 16; //Hacker Mine
-            maxdstock = 2;
-       break;
-       case 10:
-            global.secondary = 18; //Hermit Missile
-            maxdstock = 4;
-       break;
-       case 11:
-            global.secondary = 19; //Strike Missile
-            maxdstock = 10;
-       break;
-       case 12:
-            global.secondary = 20; //Strike Mine
-            maxdstock = 8;
-       break;
-       case 13:
-            global.secondary = 21; //Turret
-            maxdstock = 3;
-       break;
-       case 14:
-            global.secondary = 28; //Split Missile
-            maxdstock = 3;
-       break;
-       case 15:
-            global.secondary = 29; //Cluster Mine
-            maxdstock = 3;
-       break;
-      }
- break;
- case 2:
-      dstock = 1;
-      switch(global.deploy[1])
-      {
-       case 1:
-            global.secondary = 0; //Dual Missile
-            maxdstock = 4;
-       break;
-       case 2:
-            global.secondary = 4; //Layer Missile
-            maxdstock = 3;
-       break;
-       case 3:
-            global.secondary = 3; //Hunter Mine
-            maxdstock = 3;
-       break;
-       case 4:
-            global.secondary = 6; //Locust Missile
-            maxdstock = 4;
-       break;
-       case 5:
-            global.secondary = 7; //Phantom Mine
-            maxdstock = 4;
-       break;
-       case 6:
-            global.secondary = 8; //Solus
-            maxdstock = 2;
-       break;
-       case 7:
-            global.secondary = 13; //Trident Missile
-            maxdstock = 4;
-       break;
-       case 8:
-            global.secondary = 17; //Shock Missile
-            maxdstock = 3;
-       break;
-       case 9:
-            global.secondary = 16; //Hacker Mine
-            maxdstock = 2;
-       break;
-       case 10:
-            global.secondary = 18; //Hermit Missile
-            maxdstock = 4;
-       break;
-       case 11:
-            global.secondary = 19; //Strike Missile
-            maxdstock = 10;
-       break;
-       case 12:
-            global.secondary = 20; //Strike Mine
-            maxdstock = 8;
-       break;
-       case 13:
-            global.secondary = 21; //Turret
-            maxdstock = 3;
-       break;
-       case 14:
-            global.secondary = 28; //Split Missile
-            maxdstock = 3;
-       break;
-       case 15:
-            global.secondary = 29; //Cluster Mine
-            maxdstock = 3;
-       break;
-      }
- break;
- case 3:
-      dstock = 3;
-      switch(global.deploy[3])
-      {
-       case 1:
-            global.secondary = 0; //Dual Missile
-            maxdstock = 4;
-       break;
-       case 2:
-            global.secondary = 4; //Layer Missile
-            maxdstock = 3;
-       break;
-       case 3:
-            global.secondary = 3; //Hunter Mine
-            maxdstock = 3;
-       break;
-       case 4:
-            global.secondary = 6; //Locust Missile
-            maxdstock = 4;
-       break;
-       case 5:
-            global.secondary = 7; //Phantom Mine
-            maxdstock = 4;
-       break;
-       case 6:
-            global.secondary = 8; //Solus
-            maxdstock = 2;
-       break;
-       case 7:
-            global.secondary = 13; //Trident Missile
-            maxdstock = 4;
-       break;
-       case 8:
-            global.secondary = 17; //Shock Missile
-            maxdstock = 3;
-       break;
-       case 9:
-            global.secondary = 16; //Hacker Mine
-            maxdstock = 2;
-       break;
-       case 10:
-            global.secondary = 18; //Hermit Missile
-            maxdstock = 4;
-       break;
-       case 11:
-            global.secondary = 19; //Strike Missile
-            maxdstock = 10;
-       break;
-       case 12:
-            global.secondary = 20; //Strike Mine
-            maxdstock = 8;
-       break;
-       case 13:
-            global.secondary = 21; //Turret
-            maxdstock = 3;
-       break;
-       case 14:
-            global.secondary = 28; //Split Missile
-            maxdstock = 3;
-       break;
-       case 15:
-            global.secondary = 29; //Cluster Mine
-            maxdstock = 3;
-       break;
-      }
- break;
-}
-selectx = 122;
-
-obj_ship.redirectfire = 1;
-if(global.firingmode = 1)
-with(obj_ship)
-    event_perform(ev_mouse, ev_global_right_press);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="9" enumb="51">
       <action>
         <libid>1</libid>
@@ -2473,8 +2255,13 @@ selectx = 82;
 switch(global.shipselect)
 {
  case 1:
-      dstock = 1;
-      switch(global.deploy[1])
+      var differentdeploy;
+      if(global.spacetype = 0)
+        differentdeploy = 2;
+      else
+        differentdeploy = 1;
+      dstock = differentdeploy;
+      switch(global.deploy[differentdeploy])
       {
        case 1:
             global.secondary = 0; //Dual Missile
@@ -2539,59 +2326,134 @@ switch(global.shipselect)
       }
  break;
  case 2:
-      dstock = 0;
-      switch(global.esecond[3])
-      {
-       case 1:
-            global.secondary = 1; //Fusion
-       break;
-       case 2:
-            global.secondary = 2; //Stardust
-       break;
-       case 3:
-            global.secondary = 5; //Barrier
-       break;
-       case 4:
-            global.secondary = 10; //Beam
-       break;
-       case 5:
-            global.secondary = 9; //Formation
-       break;
-       case 6:
-            global.secondary = 11; //Sparkline
-       break;
-       case 7:
-            global.secondary = 12; //Burst
-       break;
-       case 8:
-            global.secondary = 14; //Slash
-       break;
-       case 9:
-            global.secondary = 15; //Horizon
-       break;
-       case 10:
-            global.secondary = 22; //Spiral
-       break;
-       case 11:
-            global.secondary = 23; //Laser
-       break;
-       case 12:
-            global.secondary = 24; //Trail  
-       break;
-       case 13:
-            global.secondary = 25; //Reflection
-       break;
-       case 14:
-            global.secondary = 26; //Storm
-       break;
-       case 15:
-            global.secondary = 27; //Trigger
-       break;
-      }
+    if(global.spacetype = 0)
+    {
+        dstock = 1;
+        switch(global.deploy[1])
+        {
+            case 1:
+                 global.secondary = 0; //Dual Missile
+                 maxdstock = 4;
+            break;
+            case 2:
+                 global.secondary = 4; //Layer Missile
+                 maxdstock = 3;
+            break;
+            case 3:
+                 global.secondary = 3; //Hunter Mine
+                 maxdstock = 3;
+            break;
+            case 4:
+                 global.secondary = 6; //Locust Missile
+                 maxdstock = 4;
+            break;
+            case 5:
+                 global.secondary = 7; //Phantom Mine
+                 maxdstock = 4;
+            break;
+            case 6:
+                 global.secondary = 8; //Solus
+                 maxdstock = 2;
+            break;
+            case 7:
+                 global.secondary = 13; //Trident Missile
+                 maxdstock = 4;
+            break;
+            case 8:
+                 global.secondary = 17; //Shock Missile
+                 maxdstock = 3;
+            break;
+            case 9:
+                 global.secondary = 16; //Hacker Mine
+                 maxdstock = 2;
+            break;
+            case 10:
+                 global.secondary = 18; //Hermit Missile
+                 maxdstock = 4;
+            break;
+            case 11:
+                 global.secondary = 19; //Strike Missile
+                 maxdstock = 10;
+            break;
+            case 12:
+                 global.secondary = 20; //Strike Mine
+                 maxdstock = 8;
+            break;
+            case 13:
+                 global.secondary = 21; //Turret
+                 maxdstock = 3;
+            break;
+            case 14:
+                 global.secondary = 28; //Split Missile
+                 maxdstock = 3;
+            break;
+            case 15:
+                 global.secondary = 29; //Cluster Mine
+                 maxdstock = 3;
+            break; 
+        }   
+    }
+    else
+    {
+        dstock = 0;
+        switch(global.esecond[3])
+        {
+            case 1:
+                 global.secondary = 1; //Fusion
+            break;
+            case 2:
+                 global.secondary = 2; //Stardust
+            break;
+            case 3:
+                 global.secondary = 5; //Barrier
+            break;
+            case 4:
+                  global.secondary = 10; //Beam
+            break;
+            case 5:
+                 global.secondary = 9; //Formation
+            break;
+            case 6:
+                 global.secondary = 11; //Sparkline
+            break;
+            case 7:
+                 global.secondary = 12; //Burst
+            break;
+            case 8:
+                 global.secondary = 14; //Slash
+            break;
+            case 9:
+                 global.secondary = 15; //Horizon
+            break;
+            case 10:
+                 global.secondary = 22; //Spiral
+            break;
+            case 11:
+                 global.secondary = 23; //Laser
+            break;
+            case 12:
+                 global.secondary = 24; //Trail  
+            break;
+            case 13:
+                 global.secondary = 25; //Reflection
+            break;
+            case 14:
+                 global.secondary = 26; //Storm
+            break;
+            case 15:
+                 global.secondary = 27; //Trigger
+            break;
+        }
+    }
  break;
  case 3:
-      dstock = 2;
-      switch(global.deploy[2])
+      var differentdeploy;
+      if(global.spacetype = 0)
+        differentdeploy = 3;
+      else
+        differentdeploy = 2;
+      dstock = differentdeploy;
+      switch(global.deploy[differentdeploy])
       {
        case 1:
             global.secondary = 0; //Dual Missile
@@ -2691,6 +2553,126 @@ selectx = 42;
 switch(global.shipselect)
 {
  case 1:
+    if(global.spacetype = 0)
+    {
+        dstock = 1;
+        switch(global.deploy[1])
+        {
+            case 1:
+                 global.secondary = 0; //Dual Missile
+                 maxdstock = 4;
+            break;
+            case 2:
+                 global.secondary = 4; //Layer Missile
+                 maxdstock = 3;
+            break;
+            case 3:
+                 global.secondary = 3; //Hunter Mine
+                 maxdstock = 3;
+            break;
+            case 4:
+                 global.secondary = 6; //Locust Missile
+                 maxdstock = 4;
+            break;
+            case 5:
+                 global.secondary = 7; //Phantom Mine
+                 maxdstock = 4;
+            break;
+            case 6:
+                 global.secondary = 8; //Solus
+                 maxdstock = 2;
+            break;
+            case 7:
+                 global.secondary = 13; //Trident Missile
+                 maxdstock = 4;
+            break;
+            case 8:
+                 global.secondary = 17; //Shock Missile
+                 maxdstock = 3;
+            break;
+            case 9:
+                 global.secondary = 16; //Hacker Mine
+                 maxdstock = 2;
+            break;
+            case 10:
+                 global.secondary = 18; //Hermit Missile
+                 maxdstock = 4;
+            break;
+            case 11:
+                 global.secondary = 19; //Strike Missile
+                 maxdstock = 10;
+            break;
+            case 12:
+                 global.secondary = 20; //Strike Mine
+                 maxdstock = 8;
+            break;
+            case 13:
+                 global.secondary = 21; //Turret
+                 maxdstock = 3;
+            break;
+            case 14:
+                 global.secondary = 28; //Split Missile
+                 maxdstock = 3;
+            break;
+            case 15:
+                 global.secondary = 29; //Cluster Mine
+                 maxdstock = 3;
+            break; 
+        }   
+    }
+    else
+    {
+        dstock = 0;
+        switch(global.esecond[2])
+        {
+            case 1:
+                 global.secondary = 1; //Fusion
+            break;
+            case 2:
+                 global.secondary = 2; //Stardust
+            break;
+            case 3:
+                 global.secondary = 5; //Barrier
+            break;
+            case 4:
+                  global.secondary = 10; //Beam
+            break;
+            case 5:
+                 global.secondary = 9; //Formation
+            break;
+            case 6:
+                 global.secondary = 11; //Sparkline
+            break;
+            case 7:
+                 global.secondary = 12; //Burst
+            break;
+            case 8:
+                 global.secondary = 14; //Slash
+            break;
+            case 9:
+                 global.secondary = 15; //Horizon
+            break;
+            case 10:
+                 global.secondary = 22; //Spiral
+            break;
+            case 11:
+                 global.secondary = 23; //Laser
+            break;
+            case 12:
+                 global.secondary = 24; //Trail  
+            break;
+            case 13:
+                 global.secondary = 25; //Reflection
+            break;
+            case 14:
+                 global.secondary = 26; //Storm
+            break;
+            case 15:
+                 global.secondary = 27; //Trigger
+            break;
+        }
+    }
+ break;
  case 2:
       dstock = 0;
       switch(global.esecond[2])
@@ -2743,8 +2725,13 @@ switch(global.shipselect)
       }
  break;
  case 3:
-      dstock = 1;
-      switch(global.deploy[1])
+      var differentdeploy;
+      if(global.spacetype = 0)
+        differentdeploy = 2;
+      else
+        differentdeploy = 1;
+      dstock = differentdeploy;
+      switch(global.deploy[differentdeploy])
       {
        case 1:
             global.secondary = 0; //Dual Missile
@@ -2890,7 +2877,73 @@ switch(global.esecond[1])
       global.secondary = 27; //Trigger
  break;
 }
-
+if(global.shipselect = 3 &amp;&amp; global.spacetype = 0)
+{
+    dstock = 1;
+    switch(global.deploy[1])
+    {
+        case 1:
+             global.secondary = 0; //Dual Missile
+             maxdstock = 4;
+        break;
+        case 2:
+             global.secondary = 4; //Layer Missile
+             maxdstock = 3;
+        break;
+        case 3:
+             global.secondary = 3; //Hunter Mine
+             maxdstock = 3;
+        break;
+        case 4:
+             global.secondary = 6; //Locust Missile
+             maxdstock = 4;
+        break;
+        case 5:
+             global.secondary = 7; //Phantom Mine
+             maxdstock = 4;
+        break;
+        case 6:
+             global.secondary = 8; //Solus
+             maxdstock = 2;
+        break;
+        case 7:
+             global.secondary = 13; //Trident Missile
+             maxdstock = 4;
+        break;
+        case 8:
+             global.secondary = 17; //Shock Missile
+             maxdstock = 3;
+        break;
+        case 9:
+             global.secondary = 16; //Hacker Mine
+             maxdstock = 2;
+        break;
+        case 10:
+             global.secondary = 18; //Hermit Missile
+             maxdstock = 4;
+        break;
+        case 11:
+             global.secondary = 19; //Strike Missile
+             maxdstock = 10;
+        break;
+        case 12:
+             global.secondary = 20; //Strike Mine
+             maxdstock = 8;
+        break;
+        case 13:
+             global.secondary = 21; //Turret
+             maxdstock = 3;
+        break;
+        case 14:
+             global.secondary = 28; //Split Missile
+             maxdstock = 3;
+        break;
+        case 15:
+             global.secondary = 29; //Cluster Mine
+             maxdstock = 3;
+        break;
+    }
+}
 obj_ship.redirectfire = 1;
 if(global.firingmode = 1)
     with(obj_ship)
@@ -2919,8 +2972,8 @@ if(global.firingmode = 1)
             <kind>1</kind>
             <string>if(global.musictoggle = 0)
 {   
-    audio_stop_music();
-    audio_play_music(music_quasar, 1);
+    audio_stop_all();
+    audio_play_sound(music_quasar, 1, 1);
 }
 //Check if you are host
 if(global.master = true)

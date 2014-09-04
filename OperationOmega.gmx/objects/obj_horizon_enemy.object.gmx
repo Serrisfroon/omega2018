@@ -67,11 +67,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction-90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction-90);
-    if(global.allycolor != c_red)
-        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
-    else
-        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
-    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare[global.team[mid]-1], 2); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;
@@ -104,11 +100,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction+90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction+90);
-    if(global.allycolor != c_red)
-        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
-    else
-        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
-    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare[global.team[mid]-1], 2); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;
@@ -144,11 +136,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction-90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction-90);
-    if(global.allycolor != c_red)
-        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
-    else
-        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
-    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare[global.team[mid]-1], 2); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;
@@ -181,11 +169,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's coordinates
  obj_bulletcontrol.bulletx[i] = x+lengthdir_x(25*creates, direction+90);
  obj_bulletcontrol.bullety[i] = y+lengthdir_y(25*creates, direction+90);
-    if(global.allycolor != c_red)
-        part_type_color3(obj_partsystem.horizonflare,c_white,c_red,c_red);
-    else
-        part_type_color3(obj_partsystem.horizonflare,16777215,16711680,16711680);    
-    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 10); 
+    part_particles_create(obj_partsystem.system, obj_bulletcontrol.bulletx[i], obj_bulletcontrol.bullety[i], obj_partsystem.horizonflare, 2); 
  //The bullet's vspeed and hspeed
  obj_bulletcontrol.bullethspeed[i] = hspeed;
  obj_bulletcontrol.bulletvspeed[i] = vspeed;

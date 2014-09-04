@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>alarm[0] = 1;
 alarm[1] = 200;
+hit = 1;
 image_speed = 0;
 image_index = 0;
 if(global.allycolor != c_red)
@@ -54,7 +55,21 @@ if(global.allycolor != c_red)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>(instance_create(x, y, obj_generic_hit)).mid = mid;
+            <string>//create an effect
+if(hit = 1)
+{
+    endeffect = instance_create(x, y, obj_generic_hit);
+    endeffect.mid = mid;
+    endeffect.direction = direction-180;
+}
+else
+{
+    endeffect = instance_create(x, y, obj_generic_fade);
+    endeffect.mid = mid;
+    endeffect.direction = direction;
+    endeffect.sprite_index = sprite_index;
+    endeffect.speed = speed;
+}
 </string>
           </argument>
         </arguments>
@@ -63,17 +78,25 @@ if(global.allycolor != c_red)
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
-        <id>203</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_kill_object</functionname>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>hit = 0;
+instance_destroy();
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="2" enumb="0">

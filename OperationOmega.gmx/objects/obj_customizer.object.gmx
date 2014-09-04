@@ -74,32 +74,8 @@ switch(global.shipselect)
        cmaxd = 0.3;
  break;
 }
-
 //Move the weapon slots according to the selected ship
-switch(global.shipselect)
-{
- case 1:
- obj_chooseenergy_2.x = 243;
- obj_chooseenergy_3.x = -3000;
- obj_choosedeploy_1.x = 297; 
- obj_choosedeploy_2.x = 333; 
- obj_choosedeploy_3.x = -3000;
- break;
- case 2:
- obj_chooseenergy_2.x = 243;
- obj_chooseenergy_3.x = 279;
- obj_choosedeploy_1.x = 333; 
- obj_choosedeploy_2.x = -3000; 
- obj_choosedeploy_3.x = -3000;
- break;
- case 3:
- obj_chooseenergy_2.x = -3000;
- obj_chooseenergy_3.x = -3000;
- obj_choosedeploy_1.x = 261; 
- obj_choosedeploy_2.x = 297; 
- obj_choosedeploy_3.x = 333;
- break;
-}
+create_weaponslots();
 
 instance_create(48, 35, obj_armorstat);
 instance_create(48, 55, obj_shieldstat);

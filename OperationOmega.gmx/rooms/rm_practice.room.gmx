@@ -58,7 +58,6 @@ background_index[5] = global.background[5];</code>
   <instances>
     <instance objName="obj_partsystem" x="32" y="48" name="inst_EBF0ADCB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_bulletcontrol" x="16" y="48" name="inst_2B5F5F2D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_practicemod" x="48" y="48" name="inst_34C82F72" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

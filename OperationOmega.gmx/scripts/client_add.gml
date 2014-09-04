@@ -1,15 +1,9 @@
 //Adds a new client to the client list
 //////////////////////////////////////
 //argument0 is the tcp port
-//argument1 is the receiving udp port
-//argument2 is the ip used for udp
-//argument3 is the port to send to
 //////////////////////////////////////
-var client, udp, ip, port, mid, temp, free;
+var client, mid, temp, free;
 client = argument0;
-udp = argument1;
-ip = argument2;
-port = argument3;
 mid = 0;
 temp = ds_list_create();
 
@@ -37,9 +31,7 @@ until (free);
 //Add the client ports, ip, and mid to the temporary list
 ds_list_add(temp, client);
 ds_list_add(temp, mid);
-ds_list_add(temp, udp);
-ds_list_add(temp, ip);
-ds_list_add(temp, port);
+
 
 //Add the temporary list to the client list
 ds_list_add(global.clients, temp);

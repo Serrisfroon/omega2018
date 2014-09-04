@@ -27,12 +27,7 @@
             <kind>1</kind>
             <string>//Create effect
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stardust_smoke, 8);
-if(color = c_red)
-    part_type_color3(obj_partsystem.starburst, c_white, make_color_rgb(255, 100, 100), make_color_rgb(255, 100, 100));
-else
-    part_type_color3(obj_partsystem.starburst, c_white, make_color_rgb(100, 100, 255), make_color_rgb(100, 100, 255));
-
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.starburst, 6);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.starburst[global.team[mid]-1], 6);
 </string>
           </argument>
         </arguments>

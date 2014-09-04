@@ -3,7 +3,7 @@
   <spriteName>spr_alphastar</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>prnt_ally</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -375,9 +375,7 @@ if(global.team[global.mymid] = 2)
 }
 
 //Set a new spawn point at random
-nextspawn = floor(random(8));
-if(nextspawn = 8)
-    nextspawn = 7;
+nextspawn = irandom(7);
 global.myspawnx = global.spawnx[nextspawn];
 global.myspawny = global.spawny[nextspawn];
 
@@ -436,11 +434,6 @@ audio_stop_sound(snd_whip);
 
 //Disable collisions
 mask_index = spr_empty;
-
-//Destroy your shieldpulse if you have one
-with(obj_shieldpulse)
-    if(mid = global.mymid)
-        endnow = 1;
         
 //Destroy your turrets
 with(obj_turret)
@@ -517,7 +510,7 @@ defeat.alarm[1] = 1;
 with(obj_mod)
 {
      //Send it to your chat
-     chatline_add(obj_ship.message, c_red);
+     chatline_add(obj_ship.message, c_maroon);
      if(global.team[global.mymid] = 1)
      {
           chatcolor[4] = c_navy;
@@ -525,7 +518,7 @@ with(obj_mod)
      }
      else
      {
-          chatcolor[4] = c_red;
+          chatcolor[4] = c_maroon;
           lolcolor[4] = 1;
      }
 }
@@ -1470,6 +1463,15 @@ with(other)
 {
     hacked = true;
     alarm[5] = 90;
+    //Send the information
+    clearbuffer(0);
+    packet_label_write(15, global.mymid);
+    //Send to everyone if host
+    if(global.master = true)
+        client_sendall(0, 0);
+    else
+        //Send to host if client
+        sendmessage(global.host, 0, 0, 0);
 }
 </string>
           </argument>
@@ -1577,11 +1579,7 @@ with(other)
             <kind>1</kind>
             <string>if(invincible = 0.7)
     exit;
-//Cancel the collision if a pulse is active
-closepulse = instance_nearest(x, y, obj_shieldpulse);
-if(closepulse != noone)
- if(closepulse.mid = global.mymid)
- exit;
+
 
 if(beserk = 0)
 {
@@ -3765,28 +3763,24 @@ if(shoot &lt;= 0)
         //Needle Primary
         case 1:
             //set a fire rate
-            shoot = 7;
+            shoot = 7;            
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;        
             //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_aqua);
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-            
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
             snapdir = (newdir-direction)/5;
             bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", newdir-3+primary_random(6, global.mymid), global.mymid, 0);
         break;
         
         //Sonic
         case 2:
-            shoot = 4;
+            shoot = 4;            
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;
             //Create an effect
-            part_type_color1(obj_partsystem.primarypart, make_color_rgb(152, 77, 7));
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
-            
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
             snapdir = (newdir-direction)/5;
             bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
             bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
@@ -3794,15 +3788,13 @@ if(shoot &lt;= 0)
         
         //Wave
         case 3:
-            shoot = 15;
-            //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_purple);
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 15);
-            
+            shoot = 15;            
             //Create the shot and give it speed and facedir
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+            //Create an effect
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 15);
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;        
             snapdir = (newdir-direction)/5;
             bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", newdir-1+primary_random(2, global.mymid), global.mymid, 0);
         break;
@@ -3810,16 +3802,15 @@ if(shoot &lt;= 0)
         //Seeker
         case 4:
             shoot = 10;
-            //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_orange);
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
             sfx_play(snd_flank, x, y);
             //Create the shot and give it speed and facedir
             flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank);
-            flank.speed = 7+speed;
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+            flank.speed = 10.5+speed/2;
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;
+            //Create an effect
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
             snapdir = (newdir-direction)/5;
             flank.direction = newdir-7+primary_random(14, global.mymid);
             flank.mid = global.mymid;
@@ -3828,13 +3819,12 @@ if(shoot &lt;= 0)
         //Stasis
         case 5:
             shoot = 25;
-            //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_aqua);
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
             //Create the shot and give it speed and facedir
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 40)/5)*5;      
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;      
+            //Create an effect
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
             snapdir = (newdir-direction)/5;
             bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew);
             sfx_play(snd_stasis, x, y);
@@ -3846,16 +3836,15 @@ if(shoot &lt;= 0)
         //Helix
         case 6:
             shoot = 9;
-            //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_fuchsia);
-            part_type_speed(obj_partsystem.primarypart,1.68,2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-230,facedir+230,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
             //Create the shot and give it speed and facedir
             sfx_play(snd_helix, x, y);
             cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
-            cross.speed = 8+speed;
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;
+            cross.speed = 11.5+speed/2;
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;
+            //Create an effect
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
             snapdir = (newdir-direction)/5;
             crossdir = newdir-7+primary_random(14, global.mymid);
             cross.direction = crossdir;
@@ -3863,7 +3852,7 @@ if(shoot &lt;= 0)
             cross.side = 1;
             //Create the shot and give it speed and facedir
             cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
-            cross.speed = 8+speed;
+            cross.speed = 11.5+speed/2;
             cross.direction = crossdir;
             cross.mid = global.mymid;
             cross.side = 2;
@@ -3875,10 +3864,9 @@ if(shoot &lt;= 0)
             shoot = 12;
             newdir = 0;
             //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_aqua);
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 5);
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],facedir-50,facedir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart[global.team[mid]-1], 5);
             //Check if the target is nearby
             if(obj_mod.foundtarget &lt; 0 || point_distance(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y) &gt; 400) 
             {
@@ -3906,13 +3894,12 @@ if(shoot &lt;= 0)
         //Double Primary
         case 8:
             shoot = 10;
-            //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_maroon);
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
             sfx_play(snd_double, x, y);
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5; 
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5; 
+            //Create an effect
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
             snapdir = (newdir-direction)/5;
             bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", newdir-5+primary_random(10, global.mymid), global.mymid, 0);
             //Fire the second shot at the closest enemy
@@ -3926,36 +3913,34 @@ if(shoot &lt;= 0)
         //Pierce Primary
         case 9:
             shoot = 7;
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;        
             //Create an effect
-            part_type_color1(obj_partsystem.primarypart, c_aqua);
-            part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 10);
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;        
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
             snapdir = (newdir-direction)/5;
             bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", newdir-4+primary_random(8, global.mymid), global.mymid, 0);
         break;
         
         //Spread Primary
         case 10:
-                shoot = 20;
-                //Create an effect
-                part_type_color1(obj_partsystem.primarypart, c_maroon);
-                part_type_speed(obj_partsystem.primarypart,speed+1.68,speed+2.80,-0.04,0);
-                part_type_direction(obj_partsystem.primarypart,facedir-50,facedir+50,0,0);
-                part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart, 30);
-                sfx_play(snd_spread, x, y);
-                //Find the newdir and create the bullets
-                newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30)/5)*5;  
-                snapdir = (newdir-direction)/5;
-                spreaddir = newdir-5+primary_random(10, global.mymid);  
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-15, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-30, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-45, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+15, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+30, global.mymid, 0);
-                bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+45, global.mymid, 0);
+            shoot = 20;
+            sfx_play(snd_spread, x, y);
+            //Find the newdir and create the bullets
+            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
+            //Create an effect
+            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
+            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
+            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 20);
+            snapdir = (newdir-direction)/5;
+            spreaddir = newdir-5+primary_random(10, global.mymid);  
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir, global.mymid, 0);
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-15, global.mymid, 0);
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-30, global.mymid, 0);
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-45, global.mymid, 0);
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+15, global.mymid, 0);
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+30, global.mymid, 0);
+            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+45, global.mymid, 0);
         break;
     
     }

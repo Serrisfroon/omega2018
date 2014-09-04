@@ -153,6 +153,7 @@ alarm[0] = 10;
                 global.deploy[2] = 0;
                 global.deploy[3] = 0;
                 global.spacehot = 0;
+                global.spacetype = 1;
                 global.playerkills = 0;
                 global.playerdeaths = 0;
                 global.playermatchwin = 0;
@@ -258,7 +259,11 @@ with(obj_title)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(fnt_digital);
+            <string>//Draw dimming
+draw_set_alpha(image_alpha-0.5)
+draw_rectangle(0, 0, 768, 480, 0);
+
+draw_set_font(fnt_digital);
 //Draw the popup
 //Draw the profile box
 draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, 0, c_white, image_alpha*over_alpha);

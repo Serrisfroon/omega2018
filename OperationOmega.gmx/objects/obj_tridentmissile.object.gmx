@@ -58,7 +58,10 @@ amplified = 0;
             <string>sfx_play(snd_explode2, x, y);
 create_explosion(1);
 if(trio &gt; 1)
- part_emitter_destroy(obj_partsystem.system, emitter1);
+{
+    part_emitter_destroy(obj_partsystem.system, emitter1);
+    part_type_destroy(particle1);
+}
 else
 {
  second.visible = 1;
@@ -191,7 +194,7 @@ switch(trio)
  case 2:
       visible = 0;
       particle1 = part_type_create();
-      part_type_shape(particle1,pt_shape_smoke);
+      part_type_sprite(particle1,spr_smoke_part, 0, 0, 0);
       part_type_size(particle1,0.20,0.25,0.00,0);
       part_type_scale(particle1,1,1);
       part_type_color1(particle1,8421504);
@@ -208,7 +211,7 @@ switch(trio)
  case 3:
       visible = 0;
       particle1 = part_type_create();
-      part_type_shape(particle1,pt_shape_smoke);
+      part_type_sprite(particle1,spr_smoke_part, 0, 0, 0);
       part_type_size(particle1,0.20,0.25,0.00,0);
       part_type_scale(particle1,1,1);
       part_type_color1(particle1,8421504);
@@ -373,15 +376,22 @@ draw_sprite_ext(sprite_index, 1, x, y, 1, 1, image_angle, global.allycolor, 1);
 
 if(go != 1 || trio != 1)
  exit;
+
 if(instance_exists(second))
 {
- draw_sprite_ext(sprite_index, 0, x+lengthdir_x(42, direction-90)+lengthdir_x(42, direction-180), y+lengthdir_y(42, direction-90)+lengthdir_y(42, direction-180), 1, 1, image_angle, c_white, 1);
- draw_sprite_ext(sprite_index, 1, x+lengthdir_x(42, direction-90)+lengthdir_x(42, direction-180), y+lengthdir_y(42, direction-90)+lengthdir_y(42, direction-180), 1, 1, image_angle, global.allycolor, 1);
+ var addxdist1, addydist1;
+ addxdist1 = lengthdir_x(42, direction-90)+lengthdir_x(42, direction-180);
+ addydist1 = lengthdir_y(42, direction-90)+lengthdir_y(42, direction-180);
+ draw_sprite_ext(sprite_index, 0, x+addxdist1, y+addydist1, 1, 1, image_angle, c_white, 1);
+ draw_sprite_ext(sprite_index, 1, x+addxdist1, y+addydist1, 1, 1, image_angle, global.allycolor, 1);
 }
 if(instance_exists(third))
 {
- draw_sprite_ext(sprite_index, 0, x+lengthdir_x(42, direction+90)+lengthdir_x(42, direction-180), y+lengthdir_y(42, direction+90)+lengthdir_y(42, direction-180), 1, 1, image_angle, c_white, 1);
- draw_sprite_ext(sprite_index, 1, x+lengthdir_x(42, direction+90)+lengthdir_x(42, direction-180), y+lengthdir_y(42, direction+90)+lengthdir_y(42, direction-180), 1, 1, image_angle, global.allycolor, 1);
+ var addxdist2, addydist2;
+ addxdist2 = lengthdir_x(42, direction+90)+lengthdir_x(42, direction-180);
+ addydist2 = lengthdir_y(42, direction+90)+lengthdir_y(42, direction-180);
+ draw_sprite_ext(sprite_index, 0, x+addxdist2, y+addydist2, 1, 1, image_angle, c_white, 1);
+ draw_sprite_ext(sprite_index, 1, x+addxdist2, y+addydist2, 1, 1, image_angle, global.allycolor, 1);
 }
 </string>
           </argument>

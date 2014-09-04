@@ -58,14 +58,10 @@ alarm[4] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.allycolor != c_red)
-    part_type_color3(obj_partsystem.formsplit,c_white,c_red,c_red);
-else
-    part_type_color3(obj_partsystem.formsplit,16777215,16711680,16711680);    
-part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
+            <string>part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
 part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
 repeat(10)
-    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit, 1);
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit[global.team[mid]-1], 1);
 </string>
           </argument>
         </arguments>
@@ -107,14 +103,10 @@ repeat(10)
             <string>//Move towards the target if it still exists
 if(instance_exists(target))
  direction = point_direction(x, y, target.x, target.y);
-if(global.allycolor != c_red)
-    part_type_color3(obj_partsystem.formsplit,c_white,c_red,c_red);
-else
-    part_type_color3(obj_partsystem.formsplit,16777215,16711680,16711680);    
 part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
 part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
 repeat(10)
-    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit, 1);
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit[global.team[mid]-1], 1);
 sfx_play(snd_formation, x, y);
 bullet_create(x, y, "Formation", direction, mid, 0);
 instance_destroy();

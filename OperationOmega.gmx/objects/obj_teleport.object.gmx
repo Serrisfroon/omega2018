@@ -72,7 +72,7 @@ ring2y = y;
 system = part_system_create();
 //particles shooting
 primarypart = part_type_create();
-part_type_shape(primarypart,pt_shape_flare);
+part_type_sprite(primarypart,spr_flare_part, 0, 0, 0);
 part_type_size(primarypart,0.13,0.13,0,0);
 part_type_scale(primarypart,1,1);
 part_type_color1(primarypart,c_white);
@@ -162,7 +162,8 @@ global.bluered = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>part_type_destroy(primarypart);
+</string>
           </argument>
         </arguments>
       </action>

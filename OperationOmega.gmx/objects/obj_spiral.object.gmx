@@ -57,11 +57,7 @@ sfx_play(snd_burst, x, y);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.allycolor = c_red)
-    part_type_color3(obj_partsystem.spiralburst,c_white,c_red,c_red);
-else
-    part_type_color3(obj_partsystem.spiralburst,16777215,16711680,16711680);    
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.spiralburst, 20);
+            <string>  part_particles_create(obj_partsystem.system, x, y, obj_partsystem.spiralburst[global.team[mid]-1], 20);
 </string>
           </argument>
         </arguments>

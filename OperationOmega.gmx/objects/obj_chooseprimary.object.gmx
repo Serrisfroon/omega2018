@@ -305,6 +305,404 @@ else
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.primaryimage = spr_empty;
+global.esecondimage[1] = spr_empty;
+global.esecondimage[2] = spr_empty;
+global.esecondimage[3] = spr_empty;
+global.deployimage[1] = spr_empty;
+global.deployimage[2] = spr_empty;
+global.deployimage[3] = spr_empty;
+if(obj_customizer.weaponslot[4].weapontype = 0)
+{
+    switch(global.shipselect)
+    {
+        case 1:
+            global.spacehot = 2;        
+        break;
+        case 2:
+            global.spacehot = 3;        
+        break;
+        case 3:
+            global.spacehot = 1;        
+        break;
+    }
+}
+else
+{
+    switch(global.shipselect)
+    {
+        case 1:
+            global.spacehot = 5;        
+        break;
+        case 2:
+            global.spacehot = 4;        
+        break;
+        case 3:
+            global.spacehot = 6;        
+        break;
+    }
+}
+switch(global.primary)
+{
+ case 1:
+      global.primaryimage = spr_needle_icon;
+ break;
+ case 2:
+      global.primaryimage = spr_sonic_icon;
+ break;
+ case 3:
+      global.primaryimage = spr_wave_icon;
+ break;
+ case 4:
+      global.primaryimage = spr_flank_icon;
+ break;
+ case 5:
+      global.primaryimage = spr_stasis_icon;
+ break;
+ case 6:
+      global.primaryimage = spr_crossfire_icon;
+ break;
+ case 7:
+      global.primaryimage = spr_siphon_icon;
+ break;
+ case 8:
+      global.primaryimage = spr_double_icon;
+ break;
+ case 9:
+      global.primaryimage = spr_pierce_icon;
+ break;
+ case 10:
+      global.primaryimage = spr_spread_icon;
+ break;
+}
+switch(global.esecond[1])
+{
+ case 1:
+      global.esecondimage[1] = spr_fusion_icon;
+ break;
+ case 2:
+      global.esecondimage[1] = spr_stardust_icon;
+ break;
+ case 3:
+      global.esecondimage[1] = spr_barrier_icon;
+ break;
+ case 4:
+      global.esecondimage[1] = spr_beam_icon;
+ break;
+ case 5:
+      global.esecondimage[1] = spr_formation_icon;
+ break;
+ case 6:
+      global.esecondimage[1] = spr_sparkline_icon;
+ break;
+ case 7:
+      global.esecondimage[1] = spr_burst_icon;
+ break;
+ case 8:
+      global.esecondimage[1] = spr_slash_icon;
+ break;
+ case 9:
+      global.esecondimage[1] = spr_horizon_icon;
+ break;
+ case 10:
+      global.esecondimage[1] = spr_spiral_icon;
+ break;
+ case 11:
+      global.esecondimage[1] = spr_laser_icon;
+ break;
+ case 12:
+      global.esecondimage[1] = spr_trail_icon;
+ break;
+ case 13:
+      global.esecondimage[1] = spr_reflection_icon;
+ break;
+ case 14:
+      global.esecondimage[1] = spr_storm_icon;
+ break;
+ case 15:
+      global.esecondimage[1] = spr_trigger_icon;
+ break;
+}
+switch(global.esecond[2])
+{
+ case 1:
+      global.esecondimage[2] = spr_fusion_icon;
+ break;
+ case 2:
+      global.esecondimage[2] = spr_stardust_icon;
+ break;
+ case 3:
+      global.esecondimage[2] = spr_barrier_icon;
+ break;
+ case 4:
+      global.esecondimage[2] = spr_beam_icon;
+ break;
+ case 5:
+      global.esecondimage[2] = spr_formation_icon;
+ break;
+ case 6:
+      global.esecondimage[2] = spr_sparkline_icon;
+ break;
+ case 7:
+      global.esecondimage[2] = spr_burst_icon;
+ break;
+ case 8:
+      global.esecondimage[2] = spr_slash_icon;
+ break;
+ case 9:
+      global.esecondimage[2] = spr_horizon_icon;
+ break;
+ case 10:
+      global.esecondimage[2] = spr_spiral_icon;
+ break;
+ case 11:
+      global.esecondimage[2] = spr_laser_icon;
+ break;
+ case 12:
+      global.esecondimage[2] = spr_trail_icon;
+ break;
+ case 13:
+      global.esecondimage[2] = spr_reflection_icon;
+ break;
+ case 14:
+      global.esecondimage[2] = spr_storm_icon;
+ break;
+ case 15:
+      global.esecondimage[2] = spr_trigger_icon;
+ break;
+}
+switch(global.esecond[3])
+{
+ case 1:
+      global.esecondimage[3] = spr_fusion_icon;
+ break;
+ case 2:
+      global.esecondimage[3] = spr_stardust_icon;
+ break;
+ case 3:
+      global.esecondimage[3] = spr_barrier_icon;
+ break;
+ case 4:
+      global.esecondimage[3] = spr_beam_icon;
+ break;
+ case 5:
+      global.esecondimage[3] = spr_formation_icon;
+ break;
+ case 6:
+      global.esecondimage[3] = spr_sparkline_icon;
+ break;
+ case 7:
+      global.esecondimage[3] = spr_burst_icon;
+ break;
+ case 8:
+      global.esecondimage[3] = spr_slash_icon;
+ break;
+ case 9:
+      global.esecondimage[3] = spr_horizon_icon;
+ break;
+ case 10:
+      global.esecondimage[3] = spr_spiral_icon;
+ break;
+ case 11:
+      global.esecondimage[3] = spr_laser_icon;
+ break;
+ case 12:
+      global.esecondimage[3] = spr_trail_icon;
+ break;
+ case 13:
+      global.esecondimage[3] = spr_reflection_icon;
+ break;
+ case 14:
+      global.esecondimage[3] = spr_storm_icon;
+ break;
+ case 15:
+      global.esecondimage[3] = spr_trigger_icon;
+ break;
+}
+switch(global.deploy[1])
+{
+ case 1:
+      global.deployimage[1] = spr_dualmissile_icon;
+ break;
+ case 2:
+      global.deployimage[1] = spr_layermissile_icon;
+ break;
+ case 3:
+      global.deployimage[1] = spr_huntermine_icon;
+ break;
+ case 4:
+      global.deployimage[1] = spr_locustmissile_icon;
+ break;
+ case 5:
+      global.deployimage[1] = spr_phantommine_icon;
+ break;
+ case 6:
+      global.deployimage[1] = spr_solus_icon;
+ break;
+ case 7:
+      global.deployimage[1] = spr_tridentmissile_icon;
+ break;
+ case 8:
+      global.deployimage[1] = spr_shockmissile_icon;
+ break;
+ case 9:
+      global.deployimage[1] = spr_hackermine_icon;
+ break;
+ case 10:
+      global.deployimage[1] = spr_hermitmissile_icon;
+ break;
+ case 11:
+      global.deployimage[1] = spr_strikemissile_icon;
+ break;
+ case 12:
+      global.deployimage[1] = spr_strikemine_icon;
+ break;
+ case 13:
+      global.deployimage[1] = spr_turret_icon;
+ break;
+ case 14:
+      global.deployimage[1] = spr_splitmissile_icon;
+ break;
+ case 15:
+      global.deployimage[1] = spr_clustermine_icon;
+ break;
+}
+switch(global.deploy[2])
+{
+ case 1:
+      global.deployimage[2] = spr_dualmissile_icon;
+ break;
+ case 2:
+      global.deployimage[2] = spr_layermissile_icon;
+ break;
+ case 3:
+      global.deployimage[2] = spr_huntermine_icon;
+ break;
+ case 4:
+      global.deployimage[2] = spr_locustmissile_icon;
+ break;
+ case 5:
+      global.deployimage[2] = spr_phantommine_icon;
+ break;
+ case 6:
+      global.deployimage[2] = spr_solus_icon;
+ break;
+ case 7:
+      global.deployimage[2] = spr_tridentmissile_icon;
+ break;
+ case 8:
+      global.deployimage[2] = spr_shockmissile_icon;
+ break;
+ case 9:
+      global.deployimage[2] = spr_hackermine_icon;
+ break;
+ case 10:
+      global.deployimage[2] = spr_hermitmissile_icon;
+ break;
+ case 11:
+      global.deployimage[2] = spr_strikemissile_icon;
+ break;
+ case 12:
+      global.deployimage[2] = spr_strikemine_icon;
+ break;
+ case 13:
+      global.deployimage[2] = spr_turret_icon;
+ break;
+ case 14:
+      global.deployimage[2] = spr_splitmissile_icon;
+ break;
+ case 15:
+      global.deployimage[2] = spr_clustermine_icon;
+ break;
+}
+switch(global.deploy[3])
+{
+ case 1:
+      global.deployimage[3] = spr_dualmissile_icon;
+ break;
+ case 2:
+      global.deployimage[3] = spr_layermissile_icon;
+ break;
+ case 3:
+      global.deployimage[3] = spr_huntermine_icon;
+ break;
+ case 4:
+      global.deployimage[3] = spr_locustmissile_icon;
+ break;
+ case 5:
+      global.deployimage[3] = spr_phantommine_icon;
+ break;
+ case 6:
+      global.deployimage[3] = spr_solus_icon;
+ break;
+ case 7:
+      global.deployimage[3] = spr_tridentmissile_icon;
+ break;
+ case 8:
+      global.deployimage[3] = spr_shockmissile_icon;
+ break;
+ case 9:
+      global.deployimage[3] = spr_hackermine_icon;
+ break;
+ case 10:
+      global.deployimage[3] = spr_hermitmissile_icon;
+ break;
+ case 11:
+      global.deployimage[3] = spr_strikemissile_icon;
+ break;
+ case 12:
+      global.deployimage[3] = spr_strikemine_icon;
+ break;
+ case 13:
+      global.deployimage[3] = spr_turret_icon;
+ break;
+ case 14:
+      global.deployimage[3] = spr_splitmissile_icon;
+ break;
+ case 15:
+      global.deployimage[3] = spr_clustermine_icon;
+ break;
+}
+var nextesecond, nextdeploy;
+nextesecond = 1;
+nextdeploy = 1;
+for(i = 1; i &lt;= 4; i++)
+{
+    if(obj_customizer.weaponslot[i].weapontype = 0)
+    {
+        global.secondaryimage[i] = global.esecondimage[nextesecond];
+        nextesecond += 1;
+        global.isdeploy[i] = 0;
+    }
+    else
+    {
+        global.secondaryimage[i] = global.deployimage[nextdeploy];
+        global.isdeploy[i] = nextdeploy;
+        nextdeploy += 1;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -326,40 +724,41 @@ else
 if(selected = 1)
  draw_sprite_ext(spr_numbers_selected, 0, x, y, 1, 1, 0, c_white, image_alpha);
 //Display the correct icon in this slot
+var teamcolorimg = global.team[global.mymid]-1;
 switch(global.primary)
 {
  case 0:
-      draw_sprite_ext(spr_numbers_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_numbers_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 1:
-      draw_sprite_ext(spr_needle_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_needle_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 2:
-      draw_sprite_ext(spr_sonic_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_sonic_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 3:
-      draw_sprite_ext(spr_wave_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_wave_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 4:
-      draw_sprite_ext(spr_flank_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_flank_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 5:
-      draw_sprite_ext(spr_stasis_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_stasis_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 6:
-      draw_sprite_ext(spr_crossfire_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_crossfire_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 7:
-      draw_sprite_ext(spr_siphon_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_siphon_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 8:
-      draw_sprite_ext(spr_double_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_double_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 9:
-      draw_sprite_ext(spr_pierce_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_pierce_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 10:
-      draw_sprite_ext(spr_spread_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_spread_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
 }
 draw_sprite_ext(spr_weapons_infos, 0, x+12, y+12, growth, growth, 0, c_white, 0.6*growth+0.2);

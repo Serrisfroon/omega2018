@@ -26,8 +26,7 @@ global.spawnx[6] = 2640;
 global.spawny[6] = 1500;
 global.spawnx[7] = 1500;
 global.spawny[7] = 2640;
-if(global.framerate = 2)
- room_speed = 30;
+
 background_index[0] = global.background[0];
 background_index[2] = global.background[2];
 background_index[3] = global.background[3];
@@ -58,7 +57,7 @@ background_index[5] = global.background[5];</code>
     <background visible="-1" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="-1" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
-    <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
+    <background visible="-1" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
   </backgrounds>
   <views>

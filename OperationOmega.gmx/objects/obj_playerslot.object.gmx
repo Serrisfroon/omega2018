@@ -101,7 +101,7 @@ switch(global.activated[mid])
         chatcolor[6] = chatcolor[7];
         chatline[7] = chatline[8];
         chatcolor[7] = chatcolor[8];
-        chatcolor[8] = c_red;
+        chatcolor[8] = c_maroon;
         chatline[8] = "Click this slot again to kick the player from the game.";
        }
       }
@@ -133,7 +133,7 @@ switch(global.activated[mid])
         chatline[7] = chatline[8];
         chatcolor[7] = chatcolor[8];
         chatline[8] = "The host has kicked "+global.othername[mid]+" from the game.";
-        chatcolor[8] = c_red;
+        chatcolor[8] = c_maroon;
        }
        //Send the message to clients
        clearbuffer(0);        
@@ -182,7 +182,7 @@ case 1:
      if(global.readied[mid] = 2 || mid = 0)
      draw_sprite_ext(sprite_index, 5+global.team[mid], x, y, 1, 1, 0, c_white, obj_customizer.rightbox.display_alpha);
      draw_set_alpha(obj_customizer.rightbox.display_alpha);
-     draw_text(x+6, y+6, global.othername[mid]);
+     draw_text(x+10, y+6, global.othername[mid]);
      draw_set_alpha(1);
 break;
 default:

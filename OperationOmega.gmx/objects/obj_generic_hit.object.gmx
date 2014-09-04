@@ -50,20 +50,13 @@ alarm[0] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.team[mid] = global.team[global.mymid])
-{
-if(global.allycolor = c_red)
-    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[0], 8);
-else
-    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[1], 8);
-}
-else
-{
-if(global.allycolor != c_red)
-    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[0], 8);
-else
-    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.energyhit[1], 8);
-}
+            <string>var parteffectcolor = obj_partsystem.energyhit[global.team[mid]-1]
+part_type_direction(parteffectcolor,0,359,0,0);
+part_particles_create(obj_partsystem.system, x, y, parteffectcolor, 3);
+
+part_type_direction(parteffectcolor,direction-30,direction+30,0,0);
+part_particles_create(obj_partsystem.system, x, y, parteffectcolor, 6);
+
 instance_destroy();
 </string>
           </argument>

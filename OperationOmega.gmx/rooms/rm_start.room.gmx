@@ -12,9 +12,12 @@
   <showcolour>-1</showcolour>
   <code>cursor_sprite = spr_empty;
 window_set_cursor(cr_none);
-//sounds_init();
 dllinit(0,true,true);
 initpack();
+cleanmem_init(0);
+init_menuback();
+
+
 global.fromprofile = 0;
 global.tutorial = 0;
 global.messageup = 0;
@@ -35,11 +38,12 @@ global.effectlevel = 0;
 
 
 //Set options.
-global.framerate = 1;
-global.resolution = 4;
 global.musictoggle = 0;
 global.sfxtoggle = 0;
 global.firingmode = 0;
+
+global.framerate = 1;
+global.resolution = 4;
 global.msmokeeffect = 1;
 global.fbursteffect = 1;
 global.dflameseffect = 1;
@@ -51,17 +55,20 @@ global.sflameeffect = 1;
 global.sshakeeffect = 1;
 
 //Initialize random map variables
-    for(i = 1; i &lt;= 10; i += 1)
-        global.mapselect[i] = 100;
+for(i = 1; i &lt;= 10; i += 1)
+    global.mapselect[i] = 100;
 
 for(i = 0; i &lt; 8; i += 1)
 {
-  global.lolship[i] = 0;
+    global.lolship[i] = 0;
 }
 
+for(i = 0; i &lt;= 7; i++)
+    global.background[i] = -1;
 
 view_sync(global.resolution);
 
+cleanmem();
 
 //Move to next room
 if(file_exists("omegadata.sav"))
@@ -97,7 +104,7 @@ else
     <yoffset>0</yoffset>
   </makerSettings>
   <backgrounds>
-    <background visible="0" foreground="0" name="back_menu" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
+    <background visible="0" foreground="0" name="&lt;undefined&gt;" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>

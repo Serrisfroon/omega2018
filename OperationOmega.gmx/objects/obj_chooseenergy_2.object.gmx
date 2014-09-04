@@ -403,55 +403,56 @@ else
 if(selected = 1)
  draw_sprite_ext(spr_numbers_selected, 1, x, y, 1, 1, 0, c_white, image_alpha);
 //Display the correct icon in this slot
+var teamcolorimg = global.team[global.mymid]-1;
 switch(global.esecond[2])
 {
  case 0:
       draw_sprite_ext(spr_numbers_icon, 1, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 1:
-      draw_sprite_ext(spr_fusion_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_fusion_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 2:
-      draw_sprite_ext(spr_stardust_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_stardust_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 3:
-      draw_sprite_ext(spr_barrier_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_barrier_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 4:
-      draw_sprite_ext(spr_beam_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_beam_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 5:
-      draw_sprite_ext(spr_formation_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_formation_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 6:
-      draw_sprite_ext(spr_sparkline_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_sparkline_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 7:
-      draw_sprite_ext(spr_burst_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_burst_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 8:
-      draw_sprite_ext(spr_slash_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_slash_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 9:
-      draw_sprite_ext(spr_horizon_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_horizon_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 10:
-      draw_sprite_ext(spr_spiral_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_spiral_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 11:
-      draw_sprite_ext(spr_laser_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_laser_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 12:
-      draw_sprite_ext(spr_trail_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_trail_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 13:
-      draw_sprite_ext(spr_reflection_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_reflection_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 14:
-      draw_sprite_ext(spr_storm_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_storm_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 15:
-      draw_sprite_ext(spr_trigger_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_trigger_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
 }
 draw_sprite_ext(spr_numbers_icon, 3, x, y, 1, 1, 0, c_white, image_alpha);

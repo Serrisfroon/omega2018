@@ -173,7 +173,7 @@ draw_sprite_ext(spr_staticons, 10, 712, 14, 1, 1, 0, c_white, alpha);
 
 draw_set_halign(fa_center);
 
-draw_text_bordered(96, 32, message, 1, 1, messagecolor);
+draw_text_bordered(96, 32, message, 1, 1, messagecolor, c_white);
 
 for(i = 0; i &lt; 8; i += 1)
 {

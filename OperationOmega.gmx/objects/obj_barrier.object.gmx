@@ -180,16 +180,11 @@ if(image_yscale &gt;= fullscale)
  full = 1;
 }
 
-if(global.allycolor = c_red)
-    part_type_color3(obj_partsystem.barrier_light,8421631,255,8421631);
-else
-    part_type_color3(obj_partsystem.barrier_light,16744576,16711680,16744576);
-
 repeat(5)
 {
     pix = random(55);
-    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction-90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction-90), obj_partsystem.barrier_light, 1);
-    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction+90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction+90), obj_partsystem.barrier_light, 1);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction-90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction-90), obj_partsystem.barrier_light[global.team[mid]-1], 1);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction+90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction+90), obj_partsystem.barrier_light[global.team[mid]-1], 1);
 
 }
 </string>

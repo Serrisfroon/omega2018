@@ -8,7 +8,6 @@ for(i = 0; i < ds_list_size(global.clients); i += 1)
 {
  if(client_mid(i) == mid)
  {
-  closesocket(client_udpsock(i));
   closesocket(client_port(i));
   ds_list_delete(global.clients, i);
   break;

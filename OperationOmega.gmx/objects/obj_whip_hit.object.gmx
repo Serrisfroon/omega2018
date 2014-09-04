@@ -26,10 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>alarm[0] = 20;
-part_type_color1(obj_partsystem.primarypart, c_green);
-part_type_speed(obj_partsystem.primarypart,1.68,2.40,-0.04,0);
-part_type_direction(obj_partsystem.primarypart,0,359,0,0);
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.primarypart, 5);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.primarypart[global.team[mid]-1], 5);
 
 </string>
           </argument>

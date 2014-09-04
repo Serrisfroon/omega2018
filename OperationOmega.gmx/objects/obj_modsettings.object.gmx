@@ -58,7 +58,7 @@ with(obj_waiting)
  clearbuffer(0);
  writebyte(11, 0);
  writebyte(global.mymid, 0);
- writeshort(chatcolor[8], 0);
+ writedouble(chatcolor[8], 0);
  writestring(chatline[8], 0);
  client_sendall(0, 0);   
 } 

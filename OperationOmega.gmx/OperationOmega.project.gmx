@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="3" name="datafiles">
+  <datafiles number="76" name="datafiles">
     <datafile>
       <name>thirtyninedll.dll</name>
       <exists>-1</exists>
@@ -21,6 +21,1232 @@
       </ConfigOptions>
       <filename>thirtyninedll.dll</filename>
     </datafile>
+    <datafile>
+      <name>CleanMem.dll</name>
+      <exists>-1</exists>
+      <size>1024</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>CleanMem.dll</filename>
+    </datafile>
+    <datafiles number="76" name="Backgrounds">
+      <datafile>
+        <name>back_clouds.png</name>
+        <exists>-1</exists>
+        <size>470224</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_clouds.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_combatzone_debris.png</name>
+        <exists>-1</exists>
+        <size>90380</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_combatzone_debris.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_combatzone_walls_1.png</name>
+        <exists>-1</exists>
+        <size>114492</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_combatzone_walls_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_combatzone_walls_2.png</name>
+        <exists>-1</exists>
+        <size>136599</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_combatzone_walls_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_combatzone_walls_3.png</name>
+        <exists>-1</exists>
+        <size>116786</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_combatzone_walls_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_combatzone_walls_4.png</name>
+        <exists>-1</exists>
+        <size>121195</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_combatzone_walls_4.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_frontspace.png</name>
+        <exists>-1</exists>
+        <size>44482</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_frontspace.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin.png</name>
+        <exists>-1</exists>
+        <size>5374185</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_base_1.png</name>
+        <exists>-1</exists>
+        <size>8872915</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_base_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_base_2.png</name>
+        <exists>-1</exists>
+        <size>8767267</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_base_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_base_3.png</name>
+        <exists>-1</exists>
+        <size>8775899</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_base_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_base_4.png</name>
+        <exists>-1</exists>
+        <size>8729398</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_base_4.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_coast_1.png</name>
+        <exists>-1</exists>
+        <size>10043250</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_coast_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_coast_2.png</name>
+        <exists>-1</exists>
+        <size>9601438</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_coast_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_coast_3.png</name>
+        <exists>-1</exists>
+        <size>6975578</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_coast_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_coast_4.png</name>
+        <exists>-1</exists>
+        <size>6879594</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_coast_4.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_dust.png</name>
+        <exists>-1</exists>
+        <size>1753604</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_dust.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_katrin_space.png</name>
+        <exists>-1</exists>
+        <size>5746347</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_katrin_space.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_barricade1.png</name>
+        <exists>-1</exists>
+        <size>357888</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_barricade1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_barricade2.png</name>
+        <exists>-1</exists>
+        <size>67500</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_barricade2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_czone1.png</name>
+        <exists>-1</exists>
+        <size>204189</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_czone1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_czone2.png</name>
+        <exists>-1</exists>
+        <size>115356</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_czone2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_czone3.png</name>
+        <exists>-1</exists>
+        <size>22203</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_czone3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_dspace1.png</name>
+        <exists>-1</exists>
+        <size>290195</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_dspace1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_dspace2.png</name>
+        <exists>-1</exists>
+        <size>90756</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_dspace2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_kbase.png</name>
+        <exists>-1</exists>
+        <size>159326</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_kbase.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_kcoast.png</name>
+        <exists>-1</exists>
+        <size>344567</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_kcoast.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_ostation.png</name>
+        <exists>-1</exists>
+        <size>216157</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_ostation.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_ostation2.png</name>
+        <exists>-1</exists>
+        <size>254443</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_ostation2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_random.png</name>
+        <exists>-1</exists>
+        <size>1962</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_random.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_sat1.png</name>
+        <exists>-1</exists>
+        <size>219095</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_sat1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_sat2.png</name>
+        <exists>-1</exists>
+        <size>69526</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_sat2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_sdepot.png</name>
+        <exists>-1</exists>
+        <size>86241</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_sdepot.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_stars.png</name>
+        <exists>-1</exists>
+        <size>7024</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_stars.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_vbase.png</name>
+        <exists>-1</exists>
+        <size>228337</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_vbase.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_vtundra1.png</name>
+        <exists>-1</exists>
+        <size>130711</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_vtundra1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_vtundra2.png</name>
+        <exists>-1</exists>
+        <size>33775</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_vtundra2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_map_vtundra3.png</name>
+        <exists>-1</exists>
+        <size>20819</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_map_vtundra3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_menu_space.png</name>
+        <exists>-1</exists>
+        <size>587162</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_menu_space.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_nebula.png</name>
+        <exists>-1</exists>
+        <size>5135347</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_nebula.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_nebuladust.png</name>
+        <exists>-1</exists>
+        <size>1332474</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_nebuladust.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_orbit_station_1.png</name>
+        <exists>-1</exists>
+        <size>1499604</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_orbit_station_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_orbit_station_2.png</name>
+        <exists>-1</exists>
+        <size>1517862</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_orbit_station_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_orbit_station_3.png</name>
+        <exists>-1</exists>
+        <size>1499117</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_orbit_station_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_orbit_station_4.png</name>
+        <exists>-1</exists>
+        <size>1510828</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_orbit_station_4.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_satellite.png</name>
+        <exists>-1</exists>
+        <size>227109</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_satellite.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_snowfall.png</name>
+        <exists>-1</exists>
+        <size>248028</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_snowfall.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_space.png</name>
+        <exists>-1</exists>
+        <size>55095</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_space.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_spacedepot_walls_1.png</name>
+        <exists>-1</exists>
+        <size>1339987</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_spacedepot_walls_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_spacedepot_walls_2.png</name>
+        <exists>-1</exists>
+        <size>1347533</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_spacedepot_walls_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_spacedepot_walls_3.png</name>
+        <exists>-1</exists>
+        <size>1451134</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_spacedepot_walls_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_spacedepot_walls_4.png</name>
+        <exists>-1</exists>
+        <size>1486845</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_spacedepot_walls_4.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_spacedust.png</name>
+        <exists>-1</exists>
+        <size>1344057</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_spacedust.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_starfield.png</name>
+        <exists>-1</exists>
+        <size>6616579</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_starfield.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa.png</name>
+        <exists>-1</exists>
+        <size>1597974</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_base_1.png</name>
+        <exists>-1</exists>
+        <size>5598225</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_base_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_base_2.png</name>
+        <exists>-1</exists>
+        <size>5664032</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_base_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_base_3.png</name>
+        <exists>-1</exists>
+        <size>5643147</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_base_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_base_4.png</name>
+        <exists>-1</exists>
+        <size>5615109</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_base_4.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_dust.png</name>
+        <exists>-1</exists>
+        <size>1230420</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_dust.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_snow.png</name>
+        <exists>-1</exists>
+        <size>1110892</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_snow.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_space.png</name>
+        <exists>-1</exists>
+        <size>8881549</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_space.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_tundra_wall_1.png</name>
+        <exists>-1</exists>
+        <size>1007209</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_tundra_wall_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_tundra_wall_2.png</name>
+        <exists>-1</exists>
+        <size>1213919</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_tundra_wall_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_tundra_wall_3.png</name>
+        <exists>-1</exists>
+        <size>1306821</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_tundra_wall_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_victa_tundra_wall_4.png</name>
+        <exists>-1</exists>
+        <size>893292</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_victa_tundra_wall_4.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_aftergame.png</name>
+        <exists>-1</exists>
+        <size>7005</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_aftergame.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_barricade_walls_1.png</name>
+        <exists>-1</exists>
+        <size>352737</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_barricade_walls_1.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_barricade_walls_2.png</name>
+        <exists>-1</exists>
+        <size>342467</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_barricade_walls_2.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_barricade_walls_3.png</name>
+        <exists>-1</exists>
+        <size>334299</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_barricade_walls_3.png</filename>
+      </datafile>
+      <datafile>
+        <name>back_barricade_walls_4.png</name>
+        <exists>-1</exists>
+        <size>340489</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>back_barricade_walls_4.png</filename>
+      </datafile>
+    </datafiles>
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
@@ -139,7 +1365,6 @@
       <sprite>sprites\spr_spiral_shot</sprite>
       <sprite>sprites\spr_trail</sprite>
       <sprite>sprites\spr_trailshot</sprite>
-      <sprite>sprites\spr_trail_particle</sprite>
       <sprite>sprites\spr_whip</sprite>
       <sprite>sprites\spr_whip_hit</sprite>
       <sprite>sprites\spr_snake_head</sprite>
@@ -177,11 +1402,11 @@
       <sprite>sprites\spr_armorbar</sprite>
       <sprite>sprites\spr_beserkbar</sprite>
       <sprite>sprites\spr_chatinput</sprite>
-      <sprite>sprites\spr_controlwindow</sprite>
       <sprite>sprites\spr_cursor</sprite>
       <sprite>sprites\spr_energybar</sprite>
       <sprite>sprites\spr_extchat</sprite>
       <sprite>sprites\spr_gauges</sprite>
+      <sprite>sprites\spr_weaponicons</sprite>
       <sprite>sprites\spr_homingcursor</sprite>
       <sprite>sprites\spr_lifecount</sprite>
       <sprite>sprites\spr_matchbox</sprite>
@@ -192,6 +1417,7 @@
       <sprite>sprites\spr_shieldbar</sprite>
       <sprite>sprites\spr_targetcursor</sprite>
       <sprite>sprites\spr_weaponswitch_box</sprite>
+      <sprite>sprites\spr_weaponswitch_options</sprite>
     </sprites>
     <sprites name="Icons">
       <sprites name="Deploy Secondary">
@@ -242,38 +1468,52 @@
       </sprites>
       <sprite>sprites\spr_deploybar</sprite>
       <sprite>sprites\spr_greenpixel</sprite>
-      <sprite>sprites\spr_icon_selectt</sprite>
       <sprite>sprites\spr_numbers_icon</sprite>
+      <sprite>sprites\spr_chooseenergy_icon</sprite>
+      <sprite>sprites\spr_choosedeploy_icon</sprite>
       <sprite>sprites\spr_numbers_selected</sprite>
       <sprite>sprites\spr_selectprimary</sprite>
       <sprite>sprites\spr_selectsecondary</sprite>
       <sprite>sprites\spr_icon_select</sprite>
+      <sprite>sprites\spr_icon_selectt</sprite>
       <sprite>sprites\spr_weapon_active</sprite>
       <sprite>sprites\spr_weaponswitch_infos</sprite>
-      <sprite>sprites\sprite173</sprite>
     </sprites>
     <sprites name="Effects">
+      <sprites name="Particles">
+        <sprite>sprites\spr_pixel_part</sprite>
+        <sprite>sprites\spr_circle_part</sprite>
+        <sprite>sprites\spr_box_part</sprite>
+        <sprite>sprites\spr_ring_part</sprite>
+        <sprite>sprites\spr_sphere_part</sprite>
+        <sprite>sprites\spr_flare_part</sprite>
+        <sprite>sprites\spr_spark_part</sprite>
+        <sprite>sprites\spr_explosion_part</sprite>
+        <sprite>sprites\spr_smoke_part</sprite>
+        <sprite>sprites\spr_fusion_tail_part</sprite>
+        <sprite>sprites\spr_whitepixel</sprite>
+        <sprite>sprites\spr_shipparts</sprite>
+        <sprite>sprites\spr_shieldpieces</sprite>
+        <sprite>sprites\spr_formation_particle</sprite>
+        <sprite>sprites\spr_ringeffect</sprite>
+        <sprite>sprites\spr_trail_particle</sprite>
+      </sprites>
       <sprite>sprites\spr_alphastar_enemy_teleport</sprite>
       <sprite>sprites\spr_alphastar_teleport</sprite>
-      <sprite>sprites\spr_engineflame</sprite>
-      <sprite>sprites\spr_formation_particle</sprite>
       <sprite>sprites\spr_goliath_enemy_teleport</sprite>
       <sprite>sprites\spr_goliath_teleport</sprite>
+      <sprite>sprites\spr_swiftwing_teleport</sprite>
+      <sprite>sprites\spr_swiftwing_enemy_teleport</sprite>
       <sprite>sprites\spr_homingeffect</sprite>
       <sprite>sprites\spr_lockon_cursor</sprite>
       <sprite>sprites\spr_overheatbar</sprite>
       <sprite>sprites\spr_overheatshine</sprite>
       <sprite>sprites\spr_paladinshield</sprite>
-      <sprite>sprites\spr_ringeffect</sprite>
       <sprite>sprites\spr_shield</sprite>
-      <sprite>sprites\spr_shieldpieces</sprite>
-      <sprite>sprites\spr_shipparts</sprite>
       <sprite>sprites\spr_shocksparks</sprite>
       <sprite>sprites\spr_slasheffect</sprite>
-      <sprite>sprites\spr_swiftwing_enemy_teleport</sprite>
-      <sprite>sprites\spr_swiftwing_teleport</sprite>
       <sprite>sprites\spr_teleport_hole</sprite>
-      <sprite>sprites\spr_whitepixel</sprite>
+      <sprite>sprites\spr_singlestar</sprite>
     </sprites>
     <sprites name="Menu">
       <sprites name="Background">
@@ -367,194 +1607,15 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
     <sprite>sprites\spr_previewbound</sprite>
-    <sprites name="Trash">
-      <sprite>sprites\sprite238</sprite>
-      <sprite>sprites\spr_tutorialbox</sprite>
-      <sprite>sprites\spr_messagebox</sprite>
-      <sprite>sprites\spr_okaybut</sprite>
-      <sprite>sprites\spr_yesnobox</sprite>
-      <sprites name="Trash">
-        <sprite>sprites\spr_changelog</sprite>
-        <sprite>sprites\spr_createprofile</sprite>
-        <sprite>sprites\spr_profiles</sprite>
-        <sprite>sprites\spr_typename</sprite>
-        <sprite>sprites\spr_guidebutton</sprite>
-        <sprite>sprites\spr_typeip</sprite>
-        <sprite>sprites\spr_spread_hit</sprite>
-      </sprites>
-      <sprite>sprites\sprite231</sprite>
-      <sprite>sprites\spr_snake_icon</sprite>
-      <sprite>sprites\spr_sparkline_line</sprite>
-      <sprite>sprites\spr_shieldpulse</sprite>
-      <sprite>sprites\spr_double_hit</sprite>
-      <sprite>sprites\spr_crossfire_hit</sprite>
-      <sprite>sprites\spr_flank_hit</sprite>
-      <sprite>sprites\spr_wave_hit</sprite>
-      <sprite>sprites\spr_sonic_hit</sprite>
-      <sprite>sprites\spr_needle_hit</sprite>
-      <sprite>sprites\sprite239</sprite>
-    </sprites>
   </sprites>
   <backgrounds name="background">
-    <backgrounds name="Map Preview">
-      <background>background\back_map_barricade1</background>
-      <background>background\back_map_barricade2</background>
-      <background>background\back_map_czone1</background>
-      <background>background\back_map_czone2</background>
-      <background>background\back_map_czone3</background>
-      <background>background\back_map_dspace1</background>
-      <background>background\back_map_dspace2</background>
-      <background>background\back_map_kbase</background>
-      <background>background\back_map_kcoast</background>
-      <background>background\back_map_ostation</background>
-      <background>background\back_map_ostation2</background>
-      <background>background\back_map_random</background>
-      <background>background\back_map_sat1</background>
-      <background>background\back_map_sat2</background>
-      <background>background\back_map_sdepot</background>
-      <background>background\back_map_stars</background>
-      <background>background\back_map_vbase</background>
-      <background>background\back_map_vtundra1</background>
-      <background>background\back_map_vtundra2</background>
-      <background>background\back_map_vtundra3</background>
+    <backgrounds name="Menu">
+      <background>background\back_messagebox</background>
       <background>background\back_mappreview</background>
     </backgrounds>
-    <backgrounds name="Maps">
-      <background>background\back_barricade_walls_1</background>
-      <background>background\back_barricade_walls_2</background>
-      <background>background\back_barricade_walls_3</background>
-      <background>background\back_barricade_walls_4</background>
-      <background>background\back_clouds</background>
-      <background>background\back_combatzone_debris</background>
-      <background>background\back_combatzone_walls_1</background>
-      <background>background\back_combatzone_walls_2</background>
-      <background>background\back_combatzone_walls_3</background>
-      <background>background\back_combatzone_walls_4</background>
-      <background>background\back_frontspace</background>
-      <background>background\back_katrin</background>
-      <background>background\back_katrin_base_1</background>
-      <background>background\back_katrin_base_2</background>
-      <background>background\back_katrin_base_3</background>
-      <background>background\back_katrin_base_4</background>
-      <background>background\back_katrin_coast_1</background>
-      <background>background\back_katrin_coast_2</background>
-      <background>background\back_katrin_coast_3</background>
-      <background>background\back_katrin_coast_4</background>
-      <background>background\back_katrin_dust</background>
-      <background>background\back_katrin_space</background>
-      <background>background\back_nebula</background>
-      <background>background\back_nebuladust</background>
-      <background>background\back_orbit_station_1</background>
-      <background>background\back_orbit_station_2</background>
-      <background>background\back_orbit_station_3</background>
-      <background>background\back_orbit_station_4</background>
-      <background>background\back_satellite</background>
-      <background>background\back_snowfall</background>
-      <background>background\back_space</background>
-      <background>background\back_spacedepot_walls_1</background>
-      <background>background\back_spacedepot_walls_2</background>
-      <background>background\back_spacedepot_walls_3</background>
-      <background>background\back_spacedepot_walls_4</background>
-      <background>background\back_spacedust</background>
-      <background>background\back_starfield</background>
-      <background>background\back_victa</background>
-      <background>background\back_victa_base_1</background>
-      <background>background\back_victa_base_2</background>
-      <background>background\back_victa_base_3</background>
-      <background>background\back_victa_base_4</background>
-      <background>background\back_victa_dust</background>
-      <background>background\back_victa_snow</background>
-      <background>background\back_victa_space</background>
-      <background>background\back_victa_tundra_wall_1</background>
-      <background>background\back_victa_tundra_wall_2</background>
-      <background>background\back_victa_tundra_wall_3</background>
-      <background>background\back_victa_tundra_wall_4</background>
-    </backgrounds>
-    <backgrounds name="Menu">
-      <background>background\back_aftergame</background>
-      <background>background\back_messagebox</background>
-      <background>background\back_pixel</background>
-      <background>background\back_menu_space</background>
-      <background>background\back_menu</background>
-    </backgrounds>
     <background>background\tile_wall</background>
-    <backgrounds name="Trash">
-      <background>background\back_voptions</background>
-      <background>background\back_newprofile</background>
-      <background>background\back_newprofile_right</background>
-      <background>background\back_gamelist</background>
-      <background>background\back_waiting</background>
-      <background>background\back_waiting_bottom</background>
-      <background>background\back_waiting_right</background>
-    </backgrounds>
   </backgrounds>
   <paths name="paths">
-    <paths name="I'm fucking lazy">
-      <path>paths\path_firstslot</path>
-      <paths name="shifts">
-        <path>paths\path_shift1_1</path>
-        <path>paths\path_shift1_2</path>
-        <path>paths\path_shift1_3</path>
-        <path>paths\path_shift2_1</path>
-        <path>paths\path_shift2_2</path>
-        <path>paths\path_shift2_3</path>
-        <path>paths\path_shift3_1</path>
-        <path>paths\path_shift3_2</path>
-        <path>paths\path_shift3_3</path>
-        <path>paths\path_shift4_1</path>
-        <path>paths\path_shift4_2</path>
-        <path>paths\path_shift4_3</path>
-      </paths>
-      <paths name="primary">
-        <path>paths\path_primary2</path>
-        <path>paths\path_primary3</path>
-        <path>paths\path_primary4</path>
-        <path>paths\path_primary5</path>
-        <path>paths\path_primary6</path>
-        <path>paths\path_primary7</path>
-        <path>paths\path_primary8</path>
-        <path>paths\path_primary9</path>
-        <path>paths\path_primary10</path>
-        <path>paths\path_primary11</path>
-        <path>paths\path_primary12</path>
-        <path>paths\path_primary13</path>
-        <path>paths\path_primary14</path>
-        <path>paths\path_primary15</path>
-      </paths>
-      <paths name="reverse">
-        <path>paths\path_rfirstslot</path>
-        <paths name="shifts">
-          <path>paths\path_rshift1_1</path>
-          <path>paths\path_rshift1_2</path>
-          <path>paths\path_rshift1_3</path>
-          <path>paths\path_rshift2_1</path>
-          <path>paths\path_rshift2_2</path>
-          <path>paths\path_rshift2_3</path>
-          <path>paths\path_rshift3_1</path>
-          <path>paths\path_rshift3_2</path>
-          <path>paths\path_rshift3_3</path>
-          <path>paths\path_rshift4_1</path>
-          <path>paths\path_rshift4_2</path>
-          <path>paths\path_rshift4_3</path>
-        </paths>
-        <paths name="primary">
-          <path>paths\path_rprimary2</path>
-          <path>paths\path_rprimary3</path>
-          <path>paths\path_rprimary4</path>
-          <path>paths\path_rprimary5</path>
-          <path>paths\path_rprimary6</path>
-          <path>paths\path_rprimary7</path>
-          <path>paths\path_rprimary8</path>
-          <path>paths\path_rprimary9</path>
-          <path>paths\path_rprimary10</path>
-          <path>paths\path_rprimary11</path>
-          <path>paths\path_rprimary12</path>
-          <path>paths\path_rprimary13</path>
-          <path>paths\path_rprimary14</path>
-          <path>paths\path_rprimary15</path>
-        </paths>
-      </paths>
-    </paths>
     <path>paths\path_spiral90</path>
     <path>paths\path_spiral180</path>
     <path>paths\path_spiral270</path>
@@ -664,6 +1725,31 @@
         <script>scripts\netconnected.gml</script>
       </scripts>
     </scripts>
+    <scripts name="Crush">
+      <scripts name="Pack">
+        <script>scripts\clearpack.gml</script>
+        <script>scripts\crush.gml</script>
+        <script>scripts\bufferpack.gml</script>
+      </scripts>
+      <scripts name="Unpack">
+        <script>scripts\uncrushbegin.gml</script>
+        <script>scripts\uncrush.gml</script>
+      </scripts>
+      <scripts name="Advanced">
+        <script>scripts\crushbitcount.gml</script>
+        <script>scripts\wastedbits.gml</script>
+      </scripts>
+      <scripts name="Others">
+        <script>scripts\initpack.gml</script>
+        <script>scripts\convert_from_binary.gml</script>
+        <script>scripts\convert_to_binary.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="cleanmem">
+      <script>scripts\cleanmem_init.gml</script>
+      <script>scripts\cleanmem.gml</script>
+      <script>scripts\cleanmem_get_mem.gml</script>
+    </scripts>
     <scripts name="Client Handling">
       <script>scripts\client_init.gml</script>
       <script>scripts\client_add.gml</script>
@@ -671,12 +1757,10 @@
       <script>scripts\client_remove.gml</script>
       <script>scripts\client_mid.gml</script>
       <script>scripts\client_port.gml</script>
-      <script>scripts\client_udpsock.gml</script>
-      <script>scripts\client_udpip.gml</script>
-      <script>scripts\client_udpport.gml</script>
       <script>scripts\client_sendall.gml</script>
       <script>scripts\client_drop.gml</script>
       <script>scripts\host_quit.gml</script>
+      <script>scripts\checkPort.gml</script>
     </scripts>
     <scripts name="Directional Functions">
       <script>scripts\step_towards_direction.gml</script>
@@ -704,11 +1788,10 @@
       <script>scripts\receive_secondary.gml</script>
       <script>scripts\bullet_create.gml</script>
       <script>scripts\check_weapons.gml</script>
+      <script>scripts\primary_random.gml</script>
     </scripts>
     <scripts name="Effects">
       <script>scripts\screen_shake.gml</script>
-      <script>scripts\draw_flame.gml</script>
-      <script>scripts\draw_turnblur.gml</script>
       <script>scripts\random_message.gml</script>
       <script>scripts\draw_text_bordered.gml</script>
       <script>scripts\sfx_play.gml</script>
@@ -718,6 +1801,9 @@
       <script>scripts\create_explosion.gml</script>
       <script>scripts\create_burning.gml</script>
       <script>scripts\draw_stasis.gml</script>
+      <script>scripts\draw_flame.gml</script>
+      <script>scripts\draw_turnblur.gml</script>
+      <script>scripts\create_starfield.gml</script>
     </scripts>
     <scripts name="PHP">
       <script>scripts\get_externalip.gml</script>
@@ -727,43 +1813,33 @@
       <script>scripts\sql_modify.gml</script>
       <script>scripts\sql_remove.gml</script>
     </scripts>
-    <scripts name="Crush">
-      <scripts name="Pack">
-        <script>scripts\clearpack.gml</script>
-        <script>scripts\crush.gml</script>
-        <script>scripts\bufferpack.gml</script>
-      </scripts>
-      <scripts name="Unpack">
-        <script>scripts\uncrushbegin.gml</script>
-        <script>scripts\uncrush.gml</script>
-      </scripts>
-      <scripts name="Advanced">
-        <script>scripts\crushbitcount.gml</script>
-        <script>scripts\wastedbits.gml</script>
-      </scripts>
-      <scripts name="Others">
-        <script>scripts\initpack.gml</script>
-        <script>scripts\convert_from_binary.gml</script>
-        <script>scripts\convert_to_binary.gml</script>
-      </scripts>
-    </scripts>
     <scripts name="Misc Netcode">
       <script>scripts\chatline_add.gml</script>
       <script>scripts\check_disconnect.gml</script>
       <script>scripts\version_update.gml</script>
       <script>scripts\download_game.gml</script>
     </scripts>
-    <script>scripts\view_sync.gml</script>
+    <scripts name="Menu and Savedata">
+      <script>scripts\omegadata_read.gml</script>
+      <script>scripts\omegadata_write.gml</script>
+      <script>scripts\create_weaponslots.gml</script>
+      <script>scripts\create_icon.gml</script>
+      <script>scripts\init_menuback.gml</script>
+      <script>scripts\free_menuback.gml</script>
+      <script>scripts\random_map.gml</script>
+    </scripts>
     <script>scripts\select_tip.gml</script>
-    <script>scripts\random_map.gml</script>
-    <script>scripts\omegadata_read.gml</script>
-    <script>scripts\omegadata_write.gml</script>
-    <script>scripts\primary_random.gml</script>
-    <script>scripts\create_icon.gml</script>
+    <script>scripts\view_sync.gml</script>
+    <scripts name="Trash">
+      <script>scripts\get_mouse.gml</script>
+      <script>scripts\client_udpsock.gml</script>
+      <script>scripts\client_udpport.gml</script>
+      <script>scripts\client_udpip.gml</script>
+      <script>scripts\getip.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
-    <shader type="GLSLES">shaders\shd_scanlines.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_digital</font>
@@ -788,19 +1864,13 @@
       <object>objects\prnt_enemyenergy</object>
       <objects name="Primary Weapons">
         <object>objects\obj_generic_hit</object>
-        <object>objects\obj_needle_hit</object>
-        <object>objects\obj_sonic_hit</object>
-        <object>objects\obj_wave_hit</object>
+        <object>objects\obj_generic_fade</object>
         <object>objects\obj_flank</object>
         <object>objects\obj_flank_enemy</object>
-        <object>objects\obj_flank_hit</object>
         <object>objects\obj_crossfire</object>
         <object>objects\obj_crossfire_enemy</object>
-        <object>objects\obj_crossfire_hit</object>
-        <object>objects\obj_double_hit</object>
         <object>objects\obj_siphon</object>
         <object>objects\obj_siphon_enemy</object>
-        <object>objects\obj_spread_hit</object>
         <object>objects\prnt_primary</object>
         <object>objects\obj_stasis_field</object>
         <object>objects\obj_enemystasis_field</object>
@@ -819,7 +1889,6 @@
         <object>objects\obj_formationb</object>
         <object>objects\obj_formationa_enemy</object>
         <object>objects\obj_formationb_enemy</object>
-        <object>objects\obj_formation_hit</object>
         <object>objects\obj_beamflare</object>
         <object>objects\obj_beam</object>
         <object>objects\obj_beam_enemy</object>
@@ -829,14 +1898,10 @@
         <object>objects\obj_nodetarget</object>
         <object>objects\obj_burst</object>
         <object>objects\obj_burst_enemy</object>
-        <object>objects\obj_burst_hit</object>
         <object>objects\obj_slash</object>
         <object>objects\obj_slash_enemy</object>
-        <object>objects\obj_slash_hit</object>
         <object>objects\obj_horizon</object>
         <object>objects\obj_horizon_enemy</object>
-        <object>objects\obj_shieldpulse</object>
-        <object>objects\obj_shieldpulse_enemy</object>
         <object>objects\obj_spiral</object>
         <object>objects\obj_spiralout</object>
         <object>objects\obj_spiral_enemy</object>
@@ -853,7 +1918,6 @@
         <object>objects\obj_storm_wall</object>
         <object>objects\obj_storm_enemy</object>
         <object>objects\obj_storm_enemy_wall</object>
-        <object>objects\obj_storm_hit</object>
         <object>objects\obj_trigger</object>
         <object>objects\obj_trigger_enemy</object>
       </objects>
@@ -904,10 +1968,10 @@
         <object>objects\obj_bulletcontrol</object>
         <object>objects\obj_partsystem</object>
         <object>objects\obj_weaponswitch</object>
+        <object>objects\obj_starfield_mod</object>
       </objects>
       <objects name="Effects">
         <object>objects\obj_shippart</object>
-        <object>objects\obj_engineflame</object>
         <object>objects\obj_hit</object>
         <object>objects\obj_shieldpart</object>
         <object>objects\obj_deadship</object>
@@ -975,12 +2039,7 @@
       </objects>
       <objects name="select">
         <object>objects\obj_chooseprimary</object>
-        <object>objects\obj_chooseenergy_1</object>
-        <object>objects\obj_chooseenergy_2</object>
-        <object>objects\obj_chooseenergy_3</object>
-        <object>objects\obj_choosedeploy_1</object>
-        <object>objects\obj_choosedeploy_2</object>
-        <object>objects\obj_choosedeploy_3</object>
+        <object>objects\obj_choosesecondary</object>
         <object>objects\obj_icon_option</object>
         <object>objects\obj_alphastar_select</object>
         <object>objects\prnt_selection</object>
@@ -1025,78 +2084,6 @@
       <object>objects\obj_gotopractice</object>
       <object>objects\obj_loadpass</object>
     </objects>
-    <objects name="Practice">
-      <object>objects\obj_practicemod</object>
-      <object>objects\obj_practiceship</object>
-      <object>objects\obj_practiceship_dead</object>
-      <object>objects\obj_practiceship_placeholder</object>
-      <object>objects\obj_practice_teleport</object>
-      <object>objects\obj_practice_enemy</object>
-      <object>objects\obj_practice_deadenemy</object>
-      <object>objects\obj_practice_enemytele</object>
-    </objects>
-    <objects name="Trash">
-      <object>objects\obj_postgrid</object>
-      <object>objects\obj_grazefield</object>
-      <object>objects\obj_changelog</object>
-      <object>objects\obj_guidebutton</object>
-      <object>objects\obj_swifttele</object>
-      <object>objects\obj_update</object>
-      <objects name="Profile">
-        <object>objects\obj_profiles</object>
-        <object>objects\obj_profilebox</object>
-        <object>objects\obj_profile_done</object>
-        <object>objects\obj_typename</object>
-        <object>objects\obj_typeip</object>
-      </objects>
-      <object>objects\obj_asktutorialbox</object>
-      <object>objects\obj_tutorialmod</object>
-      <object>objects\obj_tutorialpractice</object>
-      <object>objects\obj_gridspark</object>
-      <object>objects\obj_handlingstat</object>
-      <objects name="selections">
-        <object>objects\obj_sonic_icon</object>
-        <object>objects\obj_wave_icon</object>
-        <object>objects\obj_flank_icon</object>
-        <object>objects\obj_stasis_icon</object>
-        <object>objects\obj_crossfire_icon</object>
-        <object>objects\obj_siphon_icon</object>
-        <object>objects\obj_double_icon</object>
-        <object>objects\obj_pierce_icon</object>
-        <object>objects\obj_spread_icon</object>
-        <object>objects\obj_fusion_icon</object>
-        <object>objects\obj_stardust_icon</object>
-        <object>objects\obj_barrier_icon</object>
-        <object>objects\obj_formation_icon</object>
-        <object>objects\obj_beam_icon</object>
-        <object>objects\obj_sparkline_icon</object>
-        <object>objects\obj_burst_icon</object>
-        <object>objects\obj_slash_icon</object>
-        <object>objects\obj_horizon_icon</object>
-        <object>objects\obj_spiral_icon</object>
-        <object>objects\obj_laser_icon</object>
-        <object>objects\obj_trail_icon</object>
-        <object>objects\obj_reflection_icon</object>
-        <object>objects\obj_storm_icon</object>
-        <object>objects\obj_trigger_icon</object>
-        <object>objects\obj_dualmissile_icon</object>
-        <object>objects\obj_layermissile_icon</object>
-        <object>objects\obj_locustmissile_icon</object>
-        <object>objects\obj_tridentmissile_icon</object>
-        <object>objects\obj_shockmissile_icon</object>
-        <object>objects\obj_hermitmissile_icon</object>
-        <object>objects\obj_splitmissile_icon</object>
-        <object>objects\obj_strikemissile_icon</object>
-        <object>objects\obj_huntermine_icon</object>
-        <object>objects\obj_phantommine_icon</object>
-        <object>objects\obj_hackermine_icon</object>
-        <object>objects\obj_clustermine_icon</object>
-        <object>objects\obj_strikemine_icon</object>
-        <object>objects\obj_solus_icon</object>
-        <object>objects\obj_turret_icon</object>
-        <object>objects\prnt_icon</object>
-      </objects>
-    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_start</room>
@@ -1123,11 +2110,6 @@
       <room>rooms\rm_spacedepot</room>
       <room>rooms\rm_orbitstation</room>
     </rooms>
-    <rooms name="Trash">
-      <room>rooms\rm_profile</room>
-      <room>rooms\room24</room>
-      <room>rooms\rm_voptions</room>
-    </rooms>
   </rooms>
   <constants number="12">
     <constant name="LOGINSERVER_IP">"potato"</constant>
@@ -1140,7 +2122,7 @@
     <constant name="CLIENT_DROP">22</constant>
     <constant name="CLIENT_UNABLE">23</constant>
     <constant name="TIME_UP">40</constant>
-    <constant name="GM_build_date">41863.8417510648</constant>
+    <constant name="GM_build_date">41886.8292368866</constant>
     <constant name="GM_version">'1.0.0.13'</constant>
   </constants>
   <help>

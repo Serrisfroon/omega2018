@@ -26,11 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>//This object will replace the need for most primary shots, solus shots, and formation shots
-bloom=surface_create(view_wview[0]/2,view_hview[0]/2);
-bloom2=surface_create(view_wview[0]/4,view_hview[0]/4);
-bloom3=surface_create(view_wview[0]/8,view_hview[0]/8);
-bloom4=surface_create(view_wview[0]/16,view_hview[0]/16);
-bloom5=surface_create(view_wview[0]/32,view_hview[0]/32);
+bloom=surface_create(room_width/2, room_height/2);
+bloom2=surface_create(room_width/4, room_height/4);
+bloom3=surface_create(room_width/8, room_height/8);
+bloom4=surface_create(room_width/16, room_height/16);
+bloom5=surface_create(room_width/32, room_height/32);
 surface_set_target(bloom);
 draw_clear(c_black);
 surface_reset_target();
@@ -79,7 +79,7 @@ for(i = 0; i &lt;=2000; i += 1)
  //The bullet's damage. Stored to make loops much easier
  bulletdamage[i] = 0;
  //The bullet's death object. When a bullet has a collision, this object is created.
- bulletend[i] = obj_needle_hit;
+ bulletend[i] = obj_generic_hit;
  //The bullet's multiplayer id. This will trace the bullet to the player who shot it.
  bulletmid[i] = -1;
  //The bullet's name. Stored for ease of use
@@ -177,6 +177,15 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                     ending.image_angle = ending.direction;    
                 }
             }
+            else
+            {
+                ending = instance_create(bulletx[i], bullety[i], obj_generic_fade);
+                ending.direction = bulletdirection[i];
+                ending.hspeed = bullethspeed[i];
+                ending.vspeed = bulletvspeed[i];
+                ending.sprite_index = bullettype[i];
+                ending.mid = bulletmid[i];
+            }
             //Reduce the bullet max if this is the last bullet
             if(bulletmax = i)
                 //Reduce until a new max is found
@@ -198,10 +207,8 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             if(possihit = noone) break;
             if(possihit.object_index = obj_ship_placeholder || possihit.object_index = obj_teleport || possihit.object_index = obj_deadship) break;
             //Check if the nearest enemy is close to a collision
-            if(abs(possihit.x-bulletx[i]) &gt; 30 || abs(possihit.y-bullety[i]) &gt; 30) break;
-
-            //Check if there is a collision
-            if(!collision_circle(bulletx[i], bullety[i], bulletmask[i], possihit, 1, 0)) break;
+            if(abs(possihit.x-bulletx[i]) &gt; bulletmask[i] || abs(possihit.y-bullety[i]) &gt; bulletmask[i]) break;
+            
             sfx_play(snd_hit, bulletx[i], bullety[i]);
             //Take damage
             if(bullettype[i] = spr_pierce)
@@ -274,9 +281,8 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             //Check if the nearest enemy is close to a collision
             //Also check if the closest ally is actually an error check
             //Check if the nearest enemy is close to a collision
-            if(abs(possihit.x-bulletx[i]) &gt; 30 || abs(possihit.y-bullety[i]) &gt; 30) break;
-            //Check if there is a collision
-            if(!collision_circle(bulletx[i], bullety[i], bulletmask[i], possihit, 1, 0)) break;
+            if(abs(possihit.x-bulletx[i]) &gt;  bulletmask[i] || abs(possihit.y-bullety[i]) &gt;  bulletmask[i]) break;
+            
             switch(possihit.mid)
             {
                 case global.mymid:
@@ -607,65 +613,61 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(surface_exists(bloom))
-    surface_resize(bloom, view_wview[0]/2,view_hview[0]/2);
-else
-    bloom=surface_create(view_wview[0]/2,view_hview[0]/2);
-if(surface_exists(bloom2))
-    surface_resize(bloom2, view_wview[0]/4,view_hview[0]/4);
-else
-    bloom2=surface_create(view_wview[0]/4,view_hview[0]/4);
-if(surface_exists(bloom3))
-    surface_resize(bloom3, view_wview[0]/8,view_hview[0]/8);
-else
-    bloom3=surface_create(view_wview[0]/8,view_hview[0]/8);
-if(surface_exists(bloom4))
-    surface_resize(bloom4, view_wview[0]/16,view_hview[0]/16);
-else
-    bloom4=surface_create(view_wview[0]/16,view_hview[0]/16);
-if(surface_exists(bloom5))
-    surface_resize(bloom5, view_wview[0]/32,view_hview[0]/32);
-else
-    bloom5=surface_create(view_wview[0]/32,view_hview[0]/32);
-
-surface_set_target(bloom);
-draw_clear(c_black);
-surface_reset_target();
-
-surface_set_target(bloom2);
-draw_clear(c_black);
-surface_reset_target();
-
-surface_set_target(bloom3);
-draw_clear(c_black);
-surface_reset_target();
-
-surface_set_target(bloom4);
-draw_clear(c_black);
-surface_reset_target();
-
-surface_set_target(bloom5);
-draw_clear(c_black);
-surface_reset_target();
-
+            <string>if(!surface_exists(bloom))
+{
+    bloom=surface_create(room_width/2, room_height/2);
+    surface_set_target(bloom);
+    draw_clear(c_black);
+    surface_reset_target();
+}
+if(!surface_exists(bloom2))
+{    
+    bloom2=surface_create(room_width/4, room_height/4);
+    surface_set_target(bloom2);
+    draw_clear(c_black);
+    surface_reset_target();
+}
+if(!surface_exists(bloom3))
+{
+    bloom3=surface_create(room_width/8, room_height/8);
+    surface_set_target(bloom3);
+    draw_clear(c_black);
+    surface_reset_target();
+}
+if(!surface_exists(bloom4))
+{
+    bloom4=surface_create(room_width/16, room_height/16);
+    surface_set_target(bloom4);
+    draw_clear(c_black);
+    surface_reset_target();
+}
+if(!surface_exists(bloom5))
+{
+    bloom5=surface_create(room_width/32, room_height/32);
+    surface_set_target(bloom5);
+    draw_clear(c_black);
+    surface_reset_target();
+}    
 // Draws Lamp and then wall to the bloom surfaces
 surface_set_target(bloom);
-d3d_set_projection_ortho(0,0,view_wview[0],view_hview[0],0);
+d3d_set_projection_ortho(0,0,room_width,room_height,0);
 draw_set_color(c_black);
-draw_set_alpha(0.5);
-draw_rectangle(0,0,view_wview[0],view_hview[0],0); // Clear the surface to clear the "trails" effect
+draw_set_alpha(0.8);
+draw_rectangle(0,0,room_width,room_height,0); // Clear the surface to clear the "trails" effect
 draw_set_alpha(1);
 
 //Draw the bullets
 for(i = 1; i &lt;= bulletmax; i += 1)
 {
     if(bulletfree[i] = true) continue;
-    draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i]-view_xview[0], bullety[i]-view_yview[0], 1, 1, bulletdirection[i], c_white, 1);
+    draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);
 }
 with(prnt_enemyenergy)
-    draw_sprite_ext(sprite_index, image_index, x-view_xview[0], y-view_yview[0], image_xscale, image_yscale, image_angle, c_white,image_alpha);
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);
 with(prnt_allyenergy)
-    draw_sprite_ext(sprite_index, image_index, x-view_xview[0], y-view_yview[0], image_xscale, image_yscale, image_angle, c_white,image_alpha);
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);
+with(obj_generic_fade)
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);
     
 surface_reset_target();
 
@@ -698,11 +700,11 @@ with(prnt_allyenergy)
     draw_self();
 
 draw_set_blend_mode(bm_add);
-draw_surface_stretched_ext(bloom,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
-draw_surface_stretched_ext(bloom2,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
-draw_surface_stretched_ext(bloom3,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
-draw_surface_stretched_ext(bloom4,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
-draw_surface_stretched_ext(bloom5,view_xview[0], view_yview[0], view_wview[0], view_hview[0],c_white,0.5);
+draw_surface_general(bloom, view_xview[0]/2, view_yview[0]/2, view_wview[0]/2, view_hview[0]/2, view_xview[0], view_yview[0], 2, 2, 0, c_white, c_white, c_white, c_white, 0.5);
+draw_surface_general(bloom2, view_xview[0]/4, view_yview[0]/4, view_wview[0]/4, view_hview[0]/4, view_xview[0], view_yview[0], 4, 4, 0, c_white, c_white, c_white, c_white, 0.5);
+draw_surface_general(bloom3, view_xview[0]/8, view_yview[0]/8, view_wview[0]/8, view_hview[0]/8, view_xview[0], view_yview[0], 8, 8, 0, c_white, c_white, c_white, c_white, 0.5);
+draw_surface_general(bloom4, view_xview[0]/16, view_yview[0]/16, view_wview[0]/16, view_hview[0]/16, view_xview[0], view_yview[0], 16, 16, 0, c_white, c_white, c_white, c_white, 0.5);
+draw_surface_general(bloom5, view_xview[0]/32, view_yview[0]/32, view_wview[0]/32, view_hview[0]/32, view_xview[0], view_yview[0], 32, 32, 0, c_white, c_white, c_white, c_white, 0.5);
 draw_set_blend_mode(bm_normal);
 
 

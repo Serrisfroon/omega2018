@@ -261,7 +261,7 @@
     <option_savekey>true</option_savekey>
     <option_scale>-1</option_scale>
     <option_scaleprogress>true</option_scaleprogress>
-    <option_sci_UseSCI>false</option_sci_UseSCI>
+    <option_sci_UseSCI>0</option_sci_UseSCI>
     <option_screenkey>True</option_screenkey>
     <option_screenshotkey>true</option_screenshotkey>
     <option_shortcircuit>False</option_shortcircuit>
@@ -401,7 +401,7 @@
     <option_win8_build_version>0</option_win8_build_version>
     <option_win8_certificate_location>Windows8_TemporaryKey.pfx</option_win8_certificate_location>
     <option_win8_display_name>Operation Omega</option_win8_display_name>
-    <option_win8_internet_capable>0</option_win8_internet_capable>
+    <option_win8_internet_capable>-1</option_win8_internet_capable>
     <option_win8_interpolate>-1</option_win8_interpolate>
     <option_win8_landscape_allowed>-1</option_win8_landscape_allowed>
     <option_win8_landscape_flipped_allowed>-1</option_win8_landscape_flipped_allowed>

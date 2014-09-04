@@ -544,17 +544,7 @@
              if(global.master = true)
                client_sendall(0, dummy);
         break;
-        
-        //Shield Pulse
-        case 20:
-               if(global.team[dummy] != global.team[global.mymid])
-                pulse = instance_create(0, 0, obj_shieldpulse_enemy);
-               else
-                pulse = instance_create(0, 0, obj_shieldpulse);
-               pulse.mid = dummy;
-             if(global.master = true)
-               client_sendall(0, dummy);
-        break;            
+           
         
         //Alpha Drift/ Barrell Roll
         case 21:
@@ -1003,4 +993,3 @@
                client_sendall(0, dummy);
         break;
        }
-

@@ -293,7 +293,8 @@ if(owner.selected = 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, 0, c_white, image_alpha);
+            <string>var teamcolorimg = global.team[global.mymid]-1;
+draw_sprite_ext(sprite_index, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
 if(growing = 1)
     draw_sprite_ext(spr_icon_select, 0, x, y, 1, 1, 0, c_white, image_alpha);
 switch(owner.object_index)
@@ -301,19 +302,24 @@ switch(owner.object_index)
     case obj_chooseprimary:
         draw_sprite_ext(spr_primary_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);    
     break;
-    case obj_chooseenergy_1:
-    case obj_chooseenergy_2:
-    case obj_chooseenergy_3:
-        draw_sprite_ext(spr_energy_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);        
-        if(global.shipselect = 1)
-            draw_sprite_part_ext(spr_buff_infos, display, 0, 0, 200, 259*growth, x+12, y+12, growth, growth, c_white, 0.6*growth+0.2);
-    break;
-    case obj_choosedeploy_1:
-    case obj_choosedeploy_2:
-    case obj_choosedeploy_3:
-        draw_sprite_ext(spr_deploy_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);        
-        if(global.shipselect = 1)
-            draw_sprite_part_ext(spr_buff_infos, 15+display, 0, 0, 200, 259*growth, x+12, y+12, growth, growth, c_white, 0.6*growth+0.2);
+    case obj_choosesecondary:
+        if(giveselection &gt; 30)
+        {
+            draw_sprite_ext(spr_weapons_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2); 
+            exit;       
+        }
+        if(owner.weapontype = 0)
+        {
+            draw_sprite_ext(spr_energy_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);        
+            if(global.shipselect = 1 &amp;&amp; owner.secondnumber = 4)
+                draw_sprite_part_ext(spr_buff_infos, display, 0, 0, 200, 259*growth, x+16, y+16, growth, growth, c_white, 0.6*growth+0.2);
+        }
+        else
+        {
+            draw_sprite_ext(spr_deploy_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);        
+            if(global.shipselect = 1 &amp;&amp; owner.secondnumber = 4)
+                draw_sprite_part_ext(spr_buff_infos, 15+display, 0, 0, 200, 259*growth, x+16, y+16, growth, growth, c_white, 0.6*growth+0.2);
+        }
     break;
     
 }

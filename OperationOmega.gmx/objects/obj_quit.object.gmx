@@ -43,6 +43,12 @@
             <kind>1</kind>
             <string>//Stop 39dll
 dllfree();
+audio_stop_all();
+if(global.musictoggle = 0)
+{
+        audio_stop_sound(music_quasar);
+        audio_play_sound(music_quasar, 1, 1);
+}
 //Return to the appropriate room
 if(global.gameslist = 1)
  room_goto(rm_gamelist);
@@ -75,8 +81,8 @@ else
 global.needrestart = 1;
 if(global.musictoggle = 0)
 {
-    audio_stop_music();
-    audio_play_music(music_quasar, 1);
+        audio_stop_sound(music_quasar);
+        audio_play_sound(music_quasar, 1, 1);
 }
 
 if(global.master = true)

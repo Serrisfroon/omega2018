@@ -12,6 +12,7 @@ global.deploy[1] = ini_read_real("Data", "deploy1", 1);
 global.deploy[2] = ini_read_real("Data", "deploy2", 2);
 global.deploy[3] = ini_read_real("Data", "deploy3", 3);
 global.spacehot = ini_read_real("Data", "spacehot", 1);
+global.spacetype = ini_read_real("Data", "spacetype", 1);
 global.playerkills = ini_read_real("Data", "playerkills", 0);
 global.playerdeaths = ini_read_real("Data", "playerdeaths", 0);
 global.playermatchwin = ini_read_real("Data", "playermatchwin", 0);
@@ -25,5 +26,4 @@ global.firingmode = ini_read_real("Data", "firingmode", 0);
 global.fromprofile = ini_read_real("Data", "fromprofile", 0);
 
 ini_close();
-
 

@@ -11,6 +11,7 @@ ini_write_real("Data", "deploy1", global.deploy[1]);
 ini_write_real("Data", "deploy2", global.deploy[2]);
 ini_write_real("Data", "deploy3", global.deploy[3]);
 ini_write_real("Data", "spacehot", global.spacehot);
+ini_write_real("Data", "spacetype", global.spacetype);
 ini_write_real("Data", "playerkills", global.playerkills);
 ini_write_real("Data", "playerdeaths", global.playerdeaths);
 ini_write_real("Data", "playermatchwin", global.playermatchwin);
@@ -24,5 +25,4 @@ ini_write_real("Data", "firingmode", global.firingmode);
 ini_write_real("Data", "fromprofile", global.fromprofile);
 
 ini_close();
-
 

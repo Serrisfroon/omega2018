@@ -243,13 +243,7 @@ if(go !=  5) exit;
 global.rot1 += 2.5;
 global.rot2 -= 4;
 global.rot3 += 6;
-//Handle grid sparks
-with(obj_gridspark)
-{
- image_alpha -= 0.05;
- if(image_alpha &lt;= 0)
-  instance_destroy();
-}
+
 switch(go)
 {
  case 1:
@@ -361,7 +355,7 @@ if(go = 8)
         omegadata_read();
         
         if(global.musictoggle = 0)
-            audio_play_music(music_quasar, 1);
+            audio_play_sound(music_quasar, 1, 1);
         go = 9;
         for(i = 0; i &lt;= 16; i += 2)
         {
@@ -441,7 +435,7 @@ if(go &lt;= 7)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_background_ext(back_menu_space, 0, 0, 1, 1, 0, c_white, back_alpha);
+            <string>draw_background_ext(global.back_menu_space, 0, 0, 1, 1, 0, c_white, back_alpha);
 
 draw_set_alpha(0.9);
 draw_set_color(make_color_rgb(0, 0, 0));

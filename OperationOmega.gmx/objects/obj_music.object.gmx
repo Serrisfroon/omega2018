@@ -70,13 +70,13 @@ if(global.musictoggle = 0)
 {
     global.musictoggle = 1;
     sprite_index = spr_musicoff;
-    audio_stop_music();
+    audio_stop_sound(music_quasar);
 }
 else
 {
     global.musictoggle = 0;
     sprite_index = spr_musicon;
-    audio_play_music(music_quasar, 1);
+    audio_play_sound(music_quasar, 1, 1);
 }
 
 </string>

@@ -30,8 +30,9 @@ alarm[0] = 10;
 //Give te effect a random direction
 dir = random(360);
 
-(instance_create(x, y, obj_generic_hit)).mid = mid;
-
+endeffect = instance_create(x, y, obj_generic_hit);
+endeffect.mid = mid;
+endeffect.direction = direction-180;
 </string>
           </argument>
         </arguments>

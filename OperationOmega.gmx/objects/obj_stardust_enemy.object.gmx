@@ -61,7 +61,8 @@ else
             <string>//Create effect
 ending = instance_create(x, y, obj_stardust_end);
 ending.image_angle = direction;
-ending.color = global.enemycolor;
+ending.color = global.team[mid];
+ending.mid = mid;
 </string>
           </argument>
         </arguments>

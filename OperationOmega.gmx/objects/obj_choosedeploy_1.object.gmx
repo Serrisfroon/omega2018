@@ -448,55 +448,56 @@ else
 if(selected = 1)
  draw_sprite_ext(spr_numbers_selected, 2, x, y, 1, 1, 0, c_white, image_alpha);
 //Display the correct icon in this slot
+var teamcolorimg = global.team[global.mymid]-1;
 switch(global.deploy[1])
 {
  case 0:
       draw_sprite_ext(spr_numbers_icon, 2, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 1:
-      draw_sprite_ext(spr_dualmissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_dualmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 2:
-      draw_sprite_ext(spr_layermissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_layermissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 3:
-      draw_sprite_ext(spr_huntermine_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_huntermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 4:
-      draw_sprite_ext(spr_locustmissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_locustmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 5:
-      draw_sprite_ext(spr_phantommine_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_phantommine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 6:
-      draw_sprite_ext(spr_solus_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_solus_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 7:
-      draw_sprite_ext(spr_tridentmissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_tridentmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 8:
-      draw_sprite_ext(spr_shockmissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_shockmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 9:
-      draw_sprite_ext(spr_hackermine_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_hackermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 10:
-      draw_sprite_ext(spr_hermitmissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_hermitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 11:
-      draw_sprite_ext(spr_strikemissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_strikemissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 12:
-      draw_sprite_ext(spr_strikemine_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_strikemine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 13:
-      draw_sprite_ext(spr_turret_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_turret_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 14:
-      draw_sprite_ext(spr_splitmissile_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_splitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
  case 15:
-      draw_sprite_ext(spr_clustermine_icon, 0, x, y, 1, 1, 0, c_white, image_alpha);
+      draw_sprite_ext(spr_clustermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
  break;
 }
 draw_sprite_ext(spr_numbers_icon, 4, x, y, 1, 1, 0, c_white, image_alpha);

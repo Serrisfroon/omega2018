@@ -26,11 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>updatenow = 10;
-sound_stop_all();
+audio_stop_all();
 if(global.musictoggle = 0)
 {
-    audio_stop_music();
-    audio_play_music(music_lunation, 1);
+        audio_stop_sound(music_lunation);
+        audio_play_sound(music_lunation, 1, 1);
 }
 //Initilize chat
 chatline[0] = "";
@@ -221,8 +221,8 @@ while(true)
          chatline[7] = chatline[8];
          chatcolor[7] = chatcolor[8];
          audio_play_sound(snd_chatmessage, 1, 0);
-         chatcolor[8] = readshort(0);
-         if(chatcolor[8] != c_red)
+         chatcolor[8] = readdouble(0);
+         if(chatcolor[8] != c_maroon)
           chatcolor[8] = c_white;
          chatline[8] = readstring(0);
          //Relay the new message to everyone else
@@ -248,7 +248,7 @@ while(true)
          chatcolor[6] = chatcolor[7];
          chatline[7] = chatline[8];
          chatcolor[7] = chatcolor[8];
-         chatcolor[8] = c_red;
+         chatcolor[8] = c_maroon;
          audio_play_sound(snd_playerjoin, 1, 0);
          mid = readbyte(0);
          newteam = readbyte(0);
@@ -269,7 +269,7 @@ while(true)
          clearbuffer(0);
          writebyte(11, 0);
          writebyte(0, 0);
-         writeshort(chatcolor[8], 0);
+         writedouble(chatcolor[8], 0);
          writestring(global.othername[mid]+" has joined the game.", 0);
          client_sendall(0, 0);
     break;
@@ -294,7 +294,7 @@ while(true)
          chatcolor[6] = chatcolor[7];
          chatline[7] = chatline[8];
          chatcolor[7] = chatcolor[8];
-         chatcolor[8] = c_red;
+         chatcolor[8] = c_maroon;
          chatline[8] = readstring(0);
          //Update the players' ready status
          thisplayer = readbyte(0);
@@ -307,7 +307,7 @@ while(true)
          clearbuffer(0);
          writebyte(11, 0);
          writebyte(0, 0);
-         writeshort(chatcolor[8], 0);
+         writedouble(chatcolor[8], 0);
          writestring(chatline[8], 0);
          client_sendall(0, 0);
     break;
@@ -371,7 +371,7 @@ while(true)
          chatcolor[6] = chatcolor[7];
          chatline[7] = chatline[8];
          chatcolor[7] = chatcolor[8];
-         chatcolor[8] = c_red;
+         chatcolor[8] = c_maroon;
          chatline[8] = droppedname+" has left the game.";
          //Send a notice to all clients' chats
          clearbuffer(0);
@@ -424,15 +424,13 @@ if(global.maxplayers &gt; ds_list_size(global.clients)+1)
 {
  //Abort if no new player
  if(newclient &lt;= 0) exit;
- //Initialize UDP Connection on a new port
- udpsock = udpconnect(14801+client_checkfree(), true);
- //Get the new player's IP for UDP communication
- playerip = lastinIP();
- //Decide a target port for the new player
- playerport = 14811+client_checkfree();
- mid = client_add(newclient, udpsock, playerip, playerport);
+ //Add the player to the client list
+ mid = client_add(newclient);
+ 
+ //Activate their player slot and set their ready status
  global.activated[mid] = 1;
  global.readied[mid] = 1;
+ 
  //Tell them they were accepted, give them their mid and other important info
  clearbuffer(0);
  writebyte(CLIENT_ACCEPT, 0);

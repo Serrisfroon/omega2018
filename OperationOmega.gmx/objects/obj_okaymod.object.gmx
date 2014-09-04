@@ -110,12 +110,12 @@ if(obj_modbox.creategamenow = 0)
         chatline[7] = chatline[8];
         chatcolor[7] = chatcolor[8];
         chatline[8] = "The host finished changing match settings.";
-        chatcolor[8] = c_red;
+        chatcolor[8] = c_maroon;
         //Send the message to clients
         clearbuffer(0);
         writebyte(11, 0);
         writebyte(global.mymid, 0);
-        writeshort(chatcolor[8], 0);
+        writedouble(chatcolor[8], 0);
         writestring(chatline[8], 0);
         client_sendall(0, 0);   
     }

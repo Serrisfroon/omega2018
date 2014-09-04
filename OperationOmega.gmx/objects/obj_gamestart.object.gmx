@@ -27,11 +27,32 @@
             <kind>1</kind>
             <string>//This object creates host-client specific objects for the game
 //It also creates dummies for every other player
+global.spacemap = 0;
+/*
+background_index[0] = global.background[0];
+background_index[1] = global.background[1];
+background_index[2] = global.background[2];
+background_index[3] = global.background[3];
+background_index[4] = global.background[4];
+background_index[5] = global.background[5];
+background_index[6] = global.background[6];
+background_index[7] = global.background[7];
+*/
+if(room != rm_katrinbase &amp;&amp; room != rm_victabase &amp;&amp; room != rm_victatundra &amp;&amp; room != rm_katrincoast)
+{
+    global.starback[0] = create_starfield(1000, 0.5, 28);
+    global.starback[1] = create_starfield(1000, 0.45, 45);
+    global.starback[2] = create_starfield(1000, 0.4, 90);
+    background_index[5] = global.starback[2];
+    background_index[6] = global.starback[1];
+    global.spacemap = 1;
+}
+
 oldcountdown = 6;
 packet = 0;
 //Initialize extra background movement
-back_extrahspeed = -2 + random(4);
-back_extravspeed = -2 + random(4);
+back_extrahspeed = -1 + random(2);
+back_extravspeed = -1 + random(2);
 if(room = rm_victatundra)
 {
 back_extrahspeed = -8 + random(16);
@@ -54,9 +75,9 @@ tile_add(global.backpiece_3, 0, 0, 1500, 1500, 1500, 1500, 100001);
 }
 if(room = rm_orbitstation)
 {
-tile_add(global.backpiece_1, 0, 0, 1100, 1100, 655, 1750, 100001);
-tile_add(global.backpiece_2, 0, 0, 1100, 1100, 1755, 650, 100001);
-tile_add(global.backpiece_3, 0, 0, 1100, 1100, 1755, 1750, 100001);
+tile_add(global.backpiece_1, 0, 0, 1100, 1100, 656, 1749, 100001);
+tile_add(global.backpiece_2, 0, 0, 1100, 1100, 1749, 656, 100001);
+tile_add(global.backpiece_3, 0, 0, 1100, 1100, 1749, 1749, 100001);
 }
 background_hspeed[2]=back_extrahspeed/3;
 background_hspeed[3]=back_extrahspeed/4;
@@ -331,6 +352,7 @@ else
  tele.mid = global.mymid;
  instance_create(0, 0, obj_bulletcontrol);
  instance_create(0, 0, obj_partsystem);
+ instance_create(0, 0, obj_starfield_mod);
  //Create a ship for each additional player
  for(i = 0; i &lt;= 7; i += 1)
  {
@@ -498,6 +520,7 @@ if(packet = 0)
             <kind>1</kind>
             <string>if(beginning = 1)
  exit;
+draw_background_tiled_ext(global.starback[0], 0, 0, 1, 1, c_white, 1);
 //Set the scaling value
 scaling = view_hview[0]/480;
 

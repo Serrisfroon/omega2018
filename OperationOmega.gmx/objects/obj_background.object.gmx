@@ -100,7 +100,7 @@ step = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_background(back_menu_space, 0, 0);
+            <string>draw_background(global.back_menu_space, 0, 0);
 
 draw_set_alpha(0.9);
 draw_set_color(make_color_rgb(0, round(backdim), 0));

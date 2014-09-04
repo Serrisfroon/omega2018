@@ -152,11 +152,12 @@ while(true)
    show_message("The host has disconnected.");
     if(global.musictoggle = 0)
     {
-        audio_stop_music();
-        audio_play_music(music_quasar, 1);
+        audio_stop_sound(music_quasar);
+        audio_play_sound(music_quasar, 1, 1);
     }
    //Close the udp socket and stop 39dll
    closesocket(global.udpsock);
+   closesocket(global.host);
    dllfree();
    //Return to the appropriate room
    if(global.gameslist = 1)
@@ -286,12 +287,6 @@ while(true)
         with(obj_turret_enemy)
             if(mid = obj_mod.dummy)
                 instance_destroy();
-        with(obj_shieldpulse)
-            if(mid = obj_mod.dummy)
-                endnow = 1;
-        with(obj_shieldpulse_enemy)
-            if(mid = obj_mod.dummy)
-                endnow = 1;
         //Update score
         if(defeatmid != 20)
          global.kills[defeatmid] += 1;
@@ -335,7 +330,7 @@ while(true)
         switch(readbyte(0))
         {
          case 1:         
-              newcolor = c_red;
+              newcolor = c_maroon;
          break;
          case 2:
               newcolor = c_navy;
@@ -377,7 +372,7 @@ while(true)
         switch(readbyte(0))
         {
          case 1:         
-              newcolor = c_red;
+              newcolor = c_maroon;
               if(global.team[global.mymid] = 1)
               {
                obj_mod.announcement = "Operation Failed";
@@ -396,13 +391,13 @@ while(true)
               if(global.team[global.mymid] = 1)
               {
                obj_mod.announcement = "Operation Successful";
-               obj_mod.announcement_color = c_red;
+               obj_mod.announcement_color = c_maroon;
                global.outcome = 0;
               }
               else
               {
                obj_mod.announcement = "Operation Failed";
-               obj_mod.announcement_color = c_red;
+               obj_mod.announcement_color = c_maroon;
                global.outcome = 1;
               }
          break;
@@ -414,7 +409,7 @@ while(true)
         switch(readbyte(0))
         {
          case 1:         
-              newcolor = c_red;
+              newcolor = c_maroon;
          break;
          case 2:
               newcolor = c_navy;
@@ -526,7 +521,7 @@ while(true)
 
       //A Deathmatch is over
    case TIME_UP:
-        chatline_add(readstring(0), c_red);
+        chatline_add(readstring(0), c_maroon);
         chatline_add(readstring(0), c_blue);
         switch(readbyte(0))
         {
@@ -534,7 +529,7 @@ while(true)
               chatline_add("The match has ended in a draw.", c_white);
          break;
          case 1:
-              chatline_add("Red Team has won the match.", c_red);
+              chatline_add("Red Team has won the match.", c_maroon);
          break;
          case 2:
               chatline_add("Blue Team has won the match.", c_navy);
@@ -543,7 +538,13 @@ while(true)
         alarm[2] = 180;
    break;
    
-   //A player leaves the game
+   //Begin Firing Primary weapon
+   case 15:
+        global.playership[dummy].hacked = true;
+        global.playership[dummy].alarm[5] = 90;        
+   break;
+
+    //A player leaves the game
    case CLIENT_DROP:
         //Get info from leaving player
         droppedname = readstring(0);
@@ -553,9 +554,9 @@ while(true)
         //Create a dud to intercept remaining messages
         global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
         //Send a notice to your chat
-        chatline_add(readstring(0), c_red)        
+        chatline_add(readstring(0), c_maroon)        
         if(global.team[dummy] = 0)
-         chatcolor[4] = c_red;
+         chatcolor[4] = c_maroon;
         else
          chatcolor[4] = c_navy;
    break;
@@ -596,11 +597,6 @@ if(fadetoblack = 1)
 }
 
 audio_listener_position(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, 0);
-
-//Update chain image loop
-chaincount += 1;
-if(chaincount &gt; 33)
- chaincount = 0;
  
 //Handle announcements
 switch(announcing)
@@ -625,53 +621,52 @@ if(!instance_exists(view_object[0]))
 //Handle background positioning
 if((view_xview[0]&gt;0&amp;&amp;view_xview[0]+view_wview[0]&lt;room_width))
 {
-if(room != rm_katrinbase &amp;&amp; room != rm_victabase &amp;&amp; room != rm_victatundra &amp;&amp; room != rm_katrincoast)
-{ 
- background_hspeed[0]=view_object.hspeed/1.5;
- background_hspeed[2]=(view_object.hspeed+back_extrahspeed)/3;
- background_hspeed[3]=(view_object.hspeed+back_extrahspeed)/4;
- background_hspeed[4]=(view_object.hspeed+back_extrahspeed)/5;
-}
-
-background_hspeed[1]=view_object.hspeed/1.5;
-background_hspeed[5]=view_object.hspeed/10;
-background_hspeed[6] = -(view_object.hspeed-back_extrahspeed)*.2;
+    if(global.spacemap = 1)
+    { 
+        background_hspeed[0]=view_object.hspeed/1.2;
+        background_hspeed[2]=(view_object.hspeed+back_extrahspeed)/2;
+        background_hspeed[3]=(view_object.hspeed+back_extrahspeed)/3;
+        background_hspeed[4]=(view_object.hspeed+back_extrahspeed)/4;
+        background_hspeed[5]=(view_object.hspeed+back_extrahspeed)/5.5;
+        background_hspeed[6]=(view_object.hspeed+back_extrahspeed)/8;
+    }
+    
+    background_hspeed[1]=view_object.hspeed/1.2;
 }
 else
 {
-background_hspeed[0]=0;
-background_hspeed[1]=0;
-background_hspeed[2]=back_extrahspeed/3;
-background_hspeed[3]=back_extrahspeed/4;
-background_hspeed[4]=back_extrahspeed/5;
-background_hspeed[5]=0;
-background_hspeed[6]=back_extrahspeed/12;
+    background_hspeed[0]=0;
+    background_hspeed[1]=0;
+    background_hspeed[2]=back_extrahspeed/2;
+    background_hspeed[3]=back_extrahspeed/3;
+    background_hspeed[4]=back_extrahspeed/4;
+    background_hspeed[5]=back_extrahspeed/5.5;
+    background_hspeed[6]=back_extrahspeed/8;
 }
 if((view_yview[0]&gt;0&amp;&amp;view_yview[0]+view_hview[0]&lt;room_height))
 {
-if(room != rm_katrinbase &amp;&amp; room != rm_victabase &amp;&amp; room != rm_victatundra &amp;&amp; room != rm_katrincoast)
-{ 
- background_vspeed[0]=view_object.vspeed/1.5;
- background_vspeed[2]=(view_object.vspeed+back_extravspeed)/3;
- background_vspeed[3]=(view_object.vspeed+back_extravspeed)/4;
- background_vspeed[4]=(view_object.vspeed+back_extravspeed)/5;
-}
-
-background_vspeed[1]=view_object.vspeed/1.5;
-background_vspeed[5]=view_object.vspeed/10;
-background_vspeed[6] = -(view_object.vspeed-back_extravspeed)*.2;
+    if(global.spacemap = 1)
+    { 
+        background_vspeed[0]=view_object.vspeed/1.2;
+        background_vspeed[2]=(view_object.vspeed+back_extravspeed)/2;
+        background_vspeed[3]=(view_object.vspeed+back_extravspeed)/3;
+        background_vspeed[4]=(view_object.vspeed+back_extravspeed)/4;
+        background_vspeed[5]=(view_object.vspeed+back_extravspeed)/5.5;
+        background_vspeed[6]=(view_object.vspeed+back_extravspeed)/8;
+    }
+    
+    background_vspeed[1]=view_object.vspeed/1.2;
 }
 else
 {
-background_vspeed[0]=0;
-background_vspeed[1]=0;
-background_vspeed[2]=back_extravspeed/3;
-background_vspeed[3]=back_extravspeed/4;
-background_vspeed[4]=back_extravspeed/5;
-background_vspeed[5]=0;
-background_hspeed[6]=back_extravspeed/12;
+    background_vspeed[0]=0;
+    background_vspeed[1]=0;
+    background_vspeed[2]=back_extravspeed/2;
+    background_vspeed[3]=back_extravspeed/3;
+    background_vspeed[4]=back_extravspeed/4;
+    background_vspeed[5]=back_extravspeed/5.5;
+    background_vspeed[6]=back_extravspeed/8;
 }
-
 
 
 //Rotate cursor parts

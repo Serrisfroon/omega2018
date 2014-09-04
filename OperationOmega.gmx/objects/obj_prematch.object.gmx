@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>if(global.musictoggle = 0)
-    audio_stop_music();
+    audio_stop_all();
 sprite_index = spr_beginoperation;
 step = 0;
 stagealpha = 0;
@@ -143,7 +143,7 @@ switch(floor(random(4)))
 }
 
 if(global.musictoggle = 0)
-    audio_play_music(global.bgm, 1);
+    audio_play_sound(global.bgm, 1, 1);
 
 room_goto(global.matchroom);
 </string>
@@ -267,92 +267,92 @@ omegadata_write();
        step = 3;
  break;
  case 3:
+        free_menuback();
       switch(global.matchroom)
       {
        case rm_deepspace:
-            global.background[0] = back_starfield;
-            global.background[2] = back_spacedust;
-            global.background[3] = back_space;
-            global.background[5] = back_frontspace;
+            global.background[0] = background_add("Backgrounds\back_starfield.png", 0, 0);
+            global.background[2] = background_add("Backgrounds\back_spacedust.png", 0, 0);
+            global.background[3] = background_add("Backgrounds\back_space.png", 0, 0);
+            global.background[5] = background_add("Backgrounds\back_frontspace.png", 0, 0);
        break;
        case rm_katrinbase:
-            global.background[0] = back_katrin_base_1;
-            global.backpiece_1 = back_katrin_base_2; 
-            global.backpiece_2 = back_katrin_base_3; 
-            global.backpiece_3 = back_katrin_base_4; 
+            global.background[0] = background_add("Backgrounds\back_katrin_base_1.png", 0, 0);
+            global.backpiece_1 = background_add("Backgrounds\back_katrin_base_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_katrin_base_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_katrin_base_4.png", 0, 0); 
        break;
        case rm_combatzone:
-            global.background[0] = back_nebula;
-            global.background[2] = back_nebuladust;
-            global.background[3] = back_space;
-            global.background[4] = back_combatzone_debris;
-            global.background[5] = back_frontspace;
-            global.background[7] = back_combatzone_walls_1;
-            global.backpiece_1 = back_combatzone_walls_2; 
-            global.backpiece_2 = back_combatzone_walls_3; 
-            global.backpiece_3 = back_combatzone_walls_4; 
-
+            global.background[0] = background_add("Backgrounds\back_nebula.png", 0, 0);
+            global.background[2] = background_add("Backgrounds\back_nebuladust.png", 0, 0);
+            global.background[3] = background_add("Backgrounds\back_space.png", 0, 0);
+            global.background[4] = background_add("Backgrounds\back_combatzone_debris.png", 0, 0);
+            global.background[5] = background_add("Backgrounds\back_frontspace.png", 0, 0);
+            global.background[7] = background_add("Backgrounds\back_combatzone_walls_1.png", 0, 0);
+            global.backpiece_1 = background_add("Backgrounds\back_combatzone_walls_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_combatzone_walls_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_combatzone_walls_4.png", 0, 0); 
        break;
        case rm_victatundra:
-            global.background[0] = back_victa_snow;
-            global.background[2] = back_snowfall;
-            global.background[4] = back_snowfall;
-            global.background[7] = back_victa_tundra_wall_1; 
-            global.backpiece_1 = back_victa_tundra_wall_2; 
-            global.backpiece_2 = back_victa_tundra_wall_3; 
-            global.backpiece_3 = back_victa_tundra_wall_4; 
-            global.cloudback = back_clouds;        
+            global.background[0] = background_add("Backgrounds\back_victa_snow.png", 0, 0);
+            global.background[2] = background_add("Backgrounds\back_snowfall.png", 0, 0);
+            global.background[4] = background_add("Backgrounds\back_snowfall.png", 0, 0);
+            global.background[7] = background_add("Backgrounds\back_victa_tundra_wall_1.png", 0, 0); 
+            global.backpiece_1 = background_add("Backgrounds\back_victa_tundra_wall_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_victa_tundra_wall_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_victa_tundra_wall_4.png", 0, 0); 
+            global.cloudback = background_add("Backgrounds\back_clouds.png", 0, 0);        
        break;
        case rm_barricade:
-            global.background[0] = back_victa_space;
-            global.background[1] = back_victa;
-            global.background[2] = back_victa_dust;
-            global.background[4] = back_space;
-            global.background[5] = back_frontspace;
-            global.background[7] = back_barricade_walls_1;      
-            global.backpiece_1 = back_barricade_walls_2; 
-            global.backpiece_2 = back_barricade_walls_3; 
-            global.backpiece_3 = back_barricade_walls_4; 
+            global.background[0] = background_add("Backgrounds\back_victa_space.png", 0, 0);
+            global.background[1] = background_add("Backgrounds\back_victa.png", 0, 0);
+            global.background[2] = background_add("Backgrounds\back_victa_dust.png", 0, 0);
+            global.background[4] = background_add("Backgrounds\back_space.png", 0, 0);
+            global.background[5] = background_add("Backgrounds\back_frontspace.png", 0, 0);
+            global.background[7] = background_add("Backgrounds\back_barricade_walls_1.png", 0, 0);      
+            global.backpiece_1 = background_add("Backgrounds\back_barricade_walls_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_barricade_walls_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_barricade_walls_4.png", 0, 0); 
        break;
        case rm_victabase:
-            global.background[0] = back_victa_base_1;
-            global.backpiece_1 = back_victa_base_2; 
-            global.backpiece_2 = back_victa_base_3; 
-            global.backpiece_3 = back_victa_base_4;        
+            global.background[0] = background_add("Backgrounds\back_victa_base_1.png", 0, 0);
+            global.backpiece_1 = background_add("Backgrounds\back_victa_base_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_victa_base_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_victa_base_4.png", 0, 0);        
        break;
        case rm_satellite:
-            global.background[0] = back_katrin_space;
-            global.background[1] = back_katrin;
-            global.background[2] = back_katrin_dust;
-            global.background[4] = back_space;
-            global.background[5] = back_frontspace;
-            global.background[7] = back_satellite;      
+            global.background[0] = background_add("Backgrounds\back_katrin_space.png", 0, 0);
+            global.background[1] = background_add("Backgrounds\back_katrin.png", 0, 0);
+            global.background[2] = background_add("Backgrounds\back_katrin_dust.png", 0, 0);
+            global.background[4] = background_add("Backgrounds\back_space.png", 0, 0);
+            global.background[5] = background_add("Backgrounds\back_frontspace.png", 0, 0);
+            global.background[7] = background_add("Backgrounds\back_satellite.png", 0, 0);      
        break;
        case rm_katrincoast:
-            global.background[0] = back_katrin_coast_1;
-            global.backpiece_1 = back_katrin_coast_2; 
-            global.backpiece_2 = back_katrin_coast_3; 
-            global.backpiece_3 = back_katrin_coast_4;        
+            global.background[0] = background_add("Backgrounds\back_katrin_coast_1.png", 0, 0);
+            global.backpiece_1 = background_add("Backgrounds\back_katrin_coast_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_katrin_coast_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_katrin_coast_4.png", 0, 0);        
        break;
        case rm_spacedepot:
-            global.background[0] = back_victa_space;
-            global.background[2] = back_victa_dust;
-            global.background[4] = back_space;
-            global.background[5] = back_frontspace;
-            global.background[7] = back_spacedepot_walls_1;      
-            global.backpiece_1 = back_spacedepot_walls_2; 
-            global.backpiece_2 = back_spacedepot_walls_3; 
-            global.backpiece_3 = back_spacedepot_walls_4; 
+            global.background[0] = background_add("Backgrounds\back_victa_space.png", 0, 0);
+            global.background[2] = background_add("Backgrounds\back_victa_dust.png", 0, 0);
+            global.background[4] = background_add("Backgrounds\back_space.png", 0, 0);
+            global.background[5] = background_add("Backgrounds\back_frontspace.png", 0, 0);
+            global.background[7] = background_add("Backgrounds\back_spacedepot_walls_1.png", 0, 0);      
+            global.backpiece_1 = background_add("Backgrounds\back_spacedepot_walls_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_spacedepot_walls_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_spacedepot_walls_4.png", 0, 0); 
        break;
        case rm_orbitstation:
-            global.background[0] = back_katrin_space;
-            global.background[2] = back_katrin_dust;
-            global.background[4] = back_space;
-            global.background[5] = back_frontspace;
-            global.background[7] = back_orbit_station_1;      
-            global.backpiece_1 = back_orbit_station_2; 
-            global.backpiece_2 = back_orbit_station_3; 
-            global.backpiece_3 = back_orbit_station_4; 
+            global.background[0] = background_add("Backgrounds\back_katrin_space.png", 0, 0);
+            global.background[2] = background_add("Backgrounds\back_katrin_dust.png", 0, 0);
+            global.background[4] = background_add("Backgrounds\back_space.png", 0, 0);
+            global.background[5] = background_add("Backgrounds\back_frontspace.png", 0, 0);
+            global.background[7] = background_add("Backgrounds\back_orbit_station_1.png", 0, 0);      
+            global.backpiece_1 = background_add("Backgrounds\back_orbit_station_2.png", 0, 0); 
+            global.backpiece_2 = background_add("Backgrounds\back_orbit_station_3.png", 0, 0); 
+            global.backpiece_3 = background_add("Backgrounds\back_orbit_station_4.png", 0, 0); 
        break;
       } 
        loads += 1;
@@ -422,6 +422,7 @@ alarm[0] = 60;
           <argument>
             <kind>1</kind>
             <string>draw_texture_flush();
+cleanmem();
 
 </string>
           </argument>

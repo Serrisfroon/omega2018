@@ -13,12 +13,6 @@
   <code>dllfree();
 dllinit(0,true,true);
 background_alpha[1] = 0;
-background_replace(back_waiting, "back_waiting.png", 0, 0);
-background_replace(back_waiting_right, "back_waiting_right.png", 0, 0);
-background_replace(back_waiting_bottom, "back_waiting_bottom.png", 0, 0);
-global.resource = background_replace(back_newprofile, "back_newprofile.png", 0, 0);
-background_replace(back_newprofile_right, "back_newprofile_right.png", 0, 0);
-background_replace(back_gamelist, "back_gamelist.png", 0, 0);
 omegadata_write();</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
@@ -40,7 +34,7 @@ omegadata_write();</code>
     <yoffset>0</yoffset>
   </makerSettings>
   <backgrounds>
-    <background visible="0" foreground="0" name="back_menu" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
+    <background visible="0" foreground="0" name="&lt;undefined&gt;" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>

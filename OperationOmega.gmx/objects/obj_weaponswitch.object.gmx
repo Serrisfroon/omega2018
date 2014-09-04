@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>switching = 0;
-ychange = 130;
+ychange = 134;
 image = 0;
 icon = 0;
 areax = -1000;
@@ -119,10 +119,10 @@ image_yscale = scaling;
 switch(switching)
 {
  case 0:
-      if(ychange &gt; 80)
+      if(ychange &gt; 84)
        ychange -= 3;
-      if(ychange &lt;= 80)
-       ychange = 80; 
+      if(ychange &lt;= 84)
+       ychange = 84; 
  break;
  case 1:
       if(ychange &gt; 50)
@@ -181,185 +181,294 @@ switch(switching)
       switching = 1;
  break;
  case 1:
-      if(mouse_x &gt;= x-76*scaling &amp;&amp; mouse_x &lt;= x-52*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
+      if(mouse_x &gt;= x-76*scaling &amp;&amp; mouse_x &lt;= x-44*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
       {
-       image = 1;
+       image = 0;
        icon = 1;
        switching = 2;
       }
-      if(mouse_x &gt;= x-44*scaling &amp;&amp; mouse_x &lt;= x-20*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
+      if(mouse_x &gt;= x-36*scaling &amp;&amp; mouse_x &lt;= x-4*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
       {
-       image = 2;
+       switch(global.shipselect)
+       {
+        case 1:                
+            image = 1;
+            newslot = 1;           
+        break;
+        case 2:
+             image = 1;
+             newslot = 1;
+        break;
+        case 3:
+            image = 1;
+            newslot = 1;
+            if(global.spacetype = 0)
+                image = 2;
+        break;
+       }
        icon = 2;
        switching = 2;
       }
-      if(mouse_x &gt;= x-12*scaling &amp;&amp; mouse_x &lt;= x+12*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
+      if(mouse_x &gt;= x+4*scaling &amp;&amp; mouse_x &lt;= x+36*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
       {
        switch(global.shipselect)
        {
         case 1:
-             image = 2;
-             icon = 3;
+            if(global.spacetype = 0)
+            {
+                image = 2;
+                newslot = 1;
+            }
+            else
+            {
+                image = 1;
+                newslot = 2;
+            }            
         break;
         case 2:
-             image = 2;
-             icon = 3;
+             image = 1;
+             newslot = 2;
         break;
         case 3:
-             image = 3;
-             icon = 3;
+            if(global.spacetype = 0)
+            {
+                image = 2;
+                newslot = 2;
+            }
+            else
+            {
+                image = 2;
+                newslot = 1;
+            }            
         break;
        }
+       icon = 3;
        switching = 2;
       }
-      if(mouse_x &gt;= x+20*scaling &amp;&amp; mouse_x &lt;= x+44*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
+      if(mouse_x &gt;= x+44*scaling &amp;&amp; mouse_x &lt;= x+76*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
       {
        switch(global.shipselect)
        {
         case 1:
-             image = 3;
-             icon = 4;
+            if(global.spacetype = 0)
+            {
+                image = 2;
+                newslot = 2;
+            }
+            else
+            {
+                image = 2;
+                newslot = 1;
+            }            
         break;
         case 2:
-             image = 2;
-             icon = 4;
+            if(global.spacetype = 0)
+            {
+                image = 2;
+                newslot = 1;
+            }
+            else
+            {
+                image = 1;
+                newslot = 3;
+            }            
         break;
         case 3:
-             image = 3;
-             icon = 4;
+            if(global.spacetype = 0)
+            {
+                image = 2;
+                newslot = 3;
+            }
+            else
+            {
+                image = 2;
+                newslot = 2;
+            }            
         break;
        }
+       icon = 4;
        switching = 2;
       }
-      if(mouse_x &gt;= x+52*scaling &amp;&amp; mouse_x &lt;= x+76*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
-      {
-       image = 3;
-       icon = 5;
-       switching = 2;
-      }      
  break;
  case 2:
-      if(mouse_x &gt;= x-76*scaling &amp;&amp; mouse_x &lt;= x-52*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
+      if(mouse_x &gt;= x-76*scaling &amp;&amp; mouse_x &lt;= x-44*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
       {
-       soonimage = 1;
-       switching = 4;
+       soonimage = 0;
        icon = 1;
-      }
-      if(mouse_x &gt;= x-44*scaling &amp;&amp; mouse_x &lt;= x-20*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
-      {
-       soonimage = 2;
        switching = 4;
+      }
+      if(mouse_x &gt;= x-36*scaling &amp;&amp; mouse_x &lt;= x-4*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
+      {
+       switch(global.shipselect)
+       {
+        case 1:                
+            soonimage = 1;
+            newslot = 1;           
+        break;
+        case 2:
+             soonimage = 1;
+             newslot = 1;
+        break;
+        case 3:
+            soonimage = 1;
+            newslot = 1;
+            if(global.spacetype = 0)
+                soonimage = 2;
+        break;
+       }
        icon = 2;
+       switching = 4;
       }
-      if(mouse_x &gt;= x-12*scaling &amp;&amp; mouse_x &lt;= x+12*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
+      if(mouse_x &gt;= x+4*scaling &amp;&amp; mouse_x &lt;= x+36*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
       {
        switch(global.shipselect)
        {
         case 1:
-             soonimage = 2;
+            if(global.spacetype = 0)
+            {
+                soonimage = 2;
+                newslot = 1;
+            }
+            else
+            {
+                soonimage = 1;
+                newslot = 2;
+            }            
         break;
         case 2:
-             soonimage = 2;
+             soonimage = 1;
+             newslot = 2;
         break;
         case 3:
-             soonimage = 3;
+            if(global.spacetype = 0)
+            {
+                soonimage = 2;
+                newslot = 2;
+            }
+            else
+            {
+                soonimage = 2;
+                newslot = 1;
+            }            
         break;
        }
-       switching = 4;
        icon = 3;
+       switching = 4;
       }
-      if(mouse_x &gt;= x+20*scaling &amp;&amp; mouse_x &lt;= x+44*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
+      if(mouse_x &gt;= x+44*scaling &amp;&amp; mouse_x &lt;= x+76*scaling &amp;&amp; mouse_y &gt;= y-82*scaling &amp;&amp; mouse_y &lt;= y-50*scaling)
       {
        switch(global.shipselect)
        {
         case 1:
-             soonimage = 3;
+            if(global.spacetype = 0)
+            {
+                soonimage = 2;
+                newslot = 2;
+            }
+            else
+            {
+                soonimage = 2;
+                newslot = 1;
+            }            
         break;
         case 2:
-             soonimage = 2;
+            if(global.spacetype = 0)
+            {
+                soonimage = 2;
+                newslot = 1;
+            }
+            else
+            {
+                soonimage = 1;
+                newslot = 3;
+            }            
         break;
         case 3:
-             soonimage = 3;
+            if(global.spacetype = 0)
+            {
+                soonimage = 2;
+                newslot = 3;
+            }
+            else
+            {
+                soonimage = 2;
+                newslot = 2;
+            }            
         break;
        }
-       switching = 4;
        icon = 4;
-      }
-      if(mouse_x &gt;= x+52*scaling &amp;&amp; mouse_x &lt;= x+76*scaling &amp;&amp; mouse_y &gt;= y-76*scaling &amp;&amp; mouse_y &lt;= y-52*scaling)
-      {
-       soonimage = 3;
        switching = 4;
-       icon = 5;
-      }      
+      }
       switch(image)
       {
-       case 1:
+       case 0:
+       case 3:
             //255, 123
             //Needle
-            if(mouse_x &gt;= x-227*scaling &amp;&amp; mouse_x &lt;= x-203*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-232*scaling &amp;&amp; mouse_x &lt;= x-200*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 1;
              global.primaryimage =  spr_needle_icon;
             }  
             //Sonic           
-            if(mouse_x &gt;= x-179*scaling &amp;&amp; mouse_x &lt;= x-155*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-184*scaling &amp;&amp; mouse_x &lt;= x-152*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 2;
              global.primaryimage =  spr_sonic_icon;
             }             
             //Wave           
-            if(mouse_x &gt;= x-131*scaling &amp;&amp; mouse_x &lt;= x-107*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-136*scaling &amp;&amp; mouse_x &lt;= x-104*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 3;
              global.primaryimage =  spr_wave_icon;
             }             
             //Flank           
-            if(mouse_x &gt;= x-83*scaling &amp;&amp; mouse_x &lt;= x-59*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-88*scaling &amp;&amp; mouse_x &lt;= x-56*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 4;
              global.primaryimage =  spr_flank_icon;
             }             
             //Stasis           
-            if(mouse_x &gt;= x-35*scaling &amp;&amp; mouse_x &lt;= x-11*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-40*scaling &amp;&amp; mouse_x &lt;= x-8*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 5;
              global.primaryimage =  spr_stasis_icon;
             }             
             //Helix           
-            if(mouse_x &gt;= x+13*scaling &amp;&amp; mouse_x &lt;= x+37*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+8*scaling &amp;&amp; mouse_x &lt;= x+40*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 6;
              global.primaryimage =  spr_crossfire_icon;
             }             
             //Siphon           
-            if(mouse_x &gt;= x+61*scaling &amp;&amp; mouse_x &lt;= x+85*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+56*scaling &amp;&amp; mouse_x &lt;= x+88*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 7;
              global.primaryimage =  spr_siphon_icon;
             }             
             //Double           
-            if(mouse_x &gt;= x+109*scaling &amp;&amp; mouse_x &lt;= x+133*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+104*scaling &amp;&amp; mouse_x &lt;= x+136*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 8;
              global.primaryimage =  spr_double_icon;
             }             
             //Pierce           
-            if(mouse_x &gt;= x+157*scaling &amp;&amp; mouse_x &lt;= x+181*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+152*scaling &amp;&amp; mouse_x &lt;= x+184*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 9;
              global.primaryimage =  spr_pierce_icon;
             }             
             //Spread           
-            if(mouse_x &gt;= x+205*scaling &amp;&amp; mouse_x &lt;= x+229*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+200*scaling &amp;&amp; mouse_x &lt;= x+232*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              switching = 3;
              global.primary = 10;
@@ -377,10 +486,11 @@ switch(switching)
              sendmessage(global.host, 0, 0, 0);
          
        break;
-       case 2:
+       case 1:
+       case 4:
             //255, 123
             //Fusion
-            if(mouse_x &gt;= x-235*scaling &amp;&amp; mouse_x &lt;= x-211*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-240*scaling &amp;&amp; mouse_x &lt;= x-208*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 1)
               break;
@@ -389,11 +499,12 @@ switch(switching)
              if(global.esecond[3] = 1)
               break;
              switching = 3;
-             global.esecond[icon-1] = 1;
-             global.esecondimage[icon-1] =  spr_fusion_icon;              
+             global.esecond[newslot] = 1;
+             global.esecondimage[newslot] =  spr_fusion_icon;              
+             global.secondaryimage[icon-1] = spr_fusion_icon;          
             }  
             //Stardust
-            if(mouse_x &gt;= x-203*scaling &amp;&amp; mouse_x &lt;= x-179*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-208*scaling &amp;&amp; mouse_x &lt;= x-176*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 2)
               break;
@@ -402,11 +513,12 @@ switch(switching)
              if(global.esecond[3] = 2)
               break;
              switching = 3;
-             global.esecond[icon-1] = 2;
-             global.esecondimage[icon-1] =  spr_stardust_icon;              
+             global.esecond[newslot] = 2;
+             global.esecondimage[newslot] =  spr_stardust_icon;              
+             global.secondaryimage[icon-1] = spr_stardust_icon;                    
             }  
             //Barrier
-            if(mouse_x &gt;= x-171*scaling &amp;&amp; mouse_x &lt;= x-147*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-176*scaling &amp;&amp; mouse_x &lt;= x-144*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 3)
               break;
@@ -415,11 +527,12 @@ switch(switching)
              if(global.esecond[3] = 3)
               break;
              switching = 3;
-             global.esecond[icon-1] = 3;
-             global.esecondimage[icon-1] =  spr_barrier_icon;              
+             global.esecond[newslot] = 3;
+             global.esecondimage[newslot] =  spr_barrier_icon;              
+             global.secondaryimage[icon-1] = spr_barrier_icon;                    
             }  
             //Formation
-            if(mouse_x &gt;= x-139*scaling &amp;&amp; mouse_x &lt;= x-115*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-144*scaling &amp;&amp; mouse_x &lt;= x-112*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 5)
               break;
@@ -428,11 +541,12 @@ switch(switching)
              if(global.esecond[3] = 5)
               break;
              switching = 3;
-             global.esecond[icon-1] = 5;
-             global.esecondimage[icon-1] =  spr_formation_icon;              
+             global.esecond[newslot] = 5;
+             global.esecondimage[newslot] =  spr_formation_icon;              
+             global.secondaryimage[icon-1] = spr_formation_icon;                    
             }  
             //Beam
-            if(mouse_x &gt;= x-107*scaling &amp;&amp; mouse_x &lt;= x-83*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-112*scaling &amp;&amp; mouse_x &lt;= x-80*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 4)
               break;
@@ -441,11 +555,12 @@ switch(switching)
              if(global.esecond[3] = 4)
               break;
              switching = 3;
-             global.esecond[icon-1] = 4;
-             global.esecondimage[icon-1] =  spr_beam_icon;              
+             global.esecond[newslot] = 4;
+             global.esecondimage[newslot] =  spr_beam_icon;              
+             global.secondaryimage[icon-1] = spr_beam_icon;                    
             }  
             //Sparkline
-            if(mouse_x &gt;= x-75*scaling &amp;&amp; mouse_x &lt;= x-51*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-80*scaling &amp;&amp; mouse_x &lt;= x-48*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 6)
               break;
@@ -454,11 +569,12 @@ switch(switching)
              if(global.esecond[3] = 6)
               break;
              switching = 3;
-             global.esecond[icon-1] = 6;
-             global.esecondimage[icon-1] =  spr_sparkline_icon;              
+             global.esecond[newslot] = 6;
+             global.esecondimage[newslot] =  spr_sparkline_icon;              
+             global.secondaryimage[icon-1] = spr_sparkline_icon;                    
             }  
             //Burst
-            if(mouse_x &gt;= x-43*scaling &amp;&amp; mouse_x &lt;= x-19*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-48*scaling &amp;&amp; mouse_x &lt;= x-16*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 7)
               break;
@@ -467,11 +583,12 @@ switch(switching)
              if(global.esecond[3] = 7)
               break;
              switching = 3;
-             global.esecond[icon-1] = 7;
-             global.esecondimage[icon-1] =  spr_burst_icon;              
+             global.esecond[newslot] = 7;
+             global.esecondimage[newslot] =  spr_burst_icon;              
+             global.secondaryimage[icon-1] = spr_burst_icon;                              
             }  
             //Slash
-            if(mouse_x &gt;= x-11*scaling &amp;&amp; mouse_x &lt;= x+13*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-16*scaling &amp;&amp; mouse_x &lt;= x+16*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 8)
               break;
@@ -480,11 +597,12 @@ switch(switching)
              if(global.esecond[3] = 8)
               break;
              switching = 3;
-             global.esecond[icon-1] = 8;
-             global.esecondimage[icon-1] =  spr_slash_icon;              
+             global.esecond[newslot] = 8;
+             global.esecondimage[newslot] =  spr_slash_icon;              
+             global.secondaryimage[icon-1] = spr_slash_icon;                              
             }  
             //Horizon
-            if(mouse_x &gt;= x+21*scaling &amp;&amp; mouse_x &lt;= x+45*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+16*scaling &amp;&amp; mouse_x &lt;= x+48*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 9)
               break;
@@ -493,11 +611,12 @@ switch(switching)
              if(global.esecond[3] = 9)
               break;
              switching = 3;
-             global.esecond[icon-1] = 9;
-             global.esecondimage[icon-1] =  spr_horizon_icon;              
+             global.esecond[newslot] = 9;
+             global.esecondimage[newslot] =  spr_horizon_icon;              
+             global.secondaryimage[icon-1] = spr_horizon_icon;                              
             }  
             //Spiral
-            if(mouse_x &gt;= x+53*scaling &amp;&amp; mouse_x &lt;= x+77*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+48*scaling &amp;&amp; mouse_x &lt;= x+80*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 10)
               break;
@@ -506,11 +625,12 @@ switch(switching)
              if(global.esecond[3] = 10)
               break;
              switching = 3;
-             global.esecond[icon-1] = 10;
-             global.esecondimage[icon-1] =  spr_spiral_icon;              
+             global.esecond[newslot] = 10;
+             global.esecondimage[newslot] =  spr_spiral_icon;              
+             global.secondaryimage[icon-1] = spr_spiral_icon;                              
             }  
             //Whip
-            if(mouse_x &gt;= x+85*scaling &amp;&amp; mouse_x &lt;= x+109*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+80*scaling &amp;&amp; mouse_x &lt;= x+112*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 11)
               break;
@@ -519,11 +639,12 @@ switch(switching)
              if(global.esecond[3] = 11)
               break;
              switching = 3;
-             global.esecond[icon-1] = 11;
-             global.esecondimage[icon-1] =  spr_laser_icon;              
+             global.esecond[newslot] = 11;
+             global.esecondimage[newslot] =  spr_laser_icon;              
+             global.secondaryimage[icon-1] = spr_laser_icon;                              
             }  
             //Trail
-            if(mouse_x &gt;= x+117*scaling &amp;&amp; mouse_x &lt;= x+141*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+112*scaling &amp;&amp; mouse_x &lt;= x+144*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 12)
               break;
@@ -532,11 +653,12 @@ switch(switching)
              if(global.esecond[3] = 12)
               break;
              switching = 3;
-             global.esecond[icon-1] = 12;
-             global.esecondimage[icon-1] =  spr_trail_icon;              
+             global.esecond[newslot] = 12;
+             global.esecondimage[newslot] =  spr_trail_icon;              
+             global.secondaryimage[icon-1] = spr_trail_icon;                              
             }  
             //Reflection
-            if(mouse_x &gt;= x+149*scaling &amp;&amp; mouse_x &lt;= x+173*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+144*scaling &amp;&amp; mouse_x &lt;= x+176*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 13)
               break;
@@ -545,11 +667,12 @@ switch(switching)
              if(global.esecond[3] = 13)
               break;
              switching = 3;
-             global.esecond[icon-1] = 13;
-             global.esecondimage[icon-1] =  spr_reflection_icon;              
+             global.esecond[newslot] = 13;
+             global.esecondimage[newslot] =  spr_reflection_icon;              
+             global.secondaryimage[icon-1] = spr_reflection_icon;                              
             }  
             //Storm
-            if(mouse_x &gt;= x+181*scaling &amp;&amp; mouse_x &lt;= x+205*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+176*scaling &amp;&amp; mouse_x &lt;= x+208*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 14)
               break;
@@ -558,11 +681,12 @@ switch(switching)
              if(global.esecond[3] = 14)
               break;
              switching = 3;
-             global.esecond[icon-1] = 14;
-             global.esecondimage[icon-1] =  spr_storm_icon;              
+             global.esecond[newslot] = 14;
+             global.esecondimage[newslot] =  spr_storm_icon;              
+             global.secondaryimage[icon-1] = spr_storm_icon;                              
             }  
             //Trigger
-            if(mouse_x &gt;= x+213*scaling &amp;&amp; mouse_x &lt;= x+237*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+208*scaling &amp;&amp; mouse_x &lt;= x+240*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.esecond[1] = 15)
               break;
@@ -571,14 +695,16 @@ switch(switching)
              if(global.esecond[3] = 15)
               break;
              switching = 3;
-             global.esecond[icon-1] = 15;
-             global.esecondimage[icon-1] =  spr_trigger_icon;              
+             global.esecond[newslot] = 15;
+             global.esecondimage[newslot] =  spr_trigger_icon;              
+             global.secondaryimage[icon-1] = spr_trigger_icon;                              
             }  
        break;
-       case 3:
+       case 2:
+       case 5:
             //255, 123
             //Dual Missile
-            if(mouse_x &gt;= x-235*scaling &amp;&amp; mouse_x &lt;= x-211*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-240*scaling &amp;&amp; mouse_x &lt;= x-208*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 1)
               break;
@@ -587,24 +713,12 @@ switch(switching)
              if(global.deploy[3] = 1)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 1;
-                   global.deployimage[icon-3] =  spr_dualmissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 1;
-                   global.deployimage[icon-4] =  spr_dualmissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 1;
-                   global.deployimage[icon-2] =  spr_dualmissile_icon;  
-              break;   
-             }         
+             global.deploy[newslot] = 1;
+             global.deployimage[newslot] =  spr_dualmissile_icon;              
+             global.secondaryimage[icon-1] = spr_dualmissile_icon;                                                
             }  
             //Layer Missile
-            if(mouse_x &gt;= x-203*scaling &amp;&amp; mouse_x &lt;= x-179*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-208*scaling &amp;&amp; mouse_x &lt;= x-176*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 2)
               break;
@@ -613,24 +727,12 @@ switch(switching)
              if(global.deploy[3] = 2)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 2;
-                   global.deployimage[icon-3] =  spr_layermissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 2;
-                   global.deployimage[icon-4] =  spr_layermissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 2;
-                   global.deployimage[icon-2] =  spr_layermissile_icon;  
-              break;            
-            }  
+             global.deploy[newslot] = 2;
+             global.deployimage[newslot] =  spr_layermissile_icon;              
+             global.secondaryimage[icon-1] = spr_layermissile_icon;                                                
             }  
             //Locust Missile
-            if(mouse_x &gt;= x-171*scaling &amp;&amp; mouse_x &lt;= x-147*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-176*scaling &amp;&amp; mouse_x &lt;= x-144*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 4)
               break;
@@ -639,24 +741,12 @@ switch(switching)
              if(global.deploy[3] = 4)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 4;
-                   global.deployimage[icon-3] =  spr_locustmissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 4;
-                   global.deployimage[icon-4] =  spr_locustmissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 4;
-                   global.deployimage[icon-2] =  spr_locustmissile_icon;  
-              break;            
-            }  
+             global.deploy[newslot] = 4;
+             global.deployimage[newslot] =  spr_locustmissile_icon;              
+             global.secondaryimage[icon-1] = spr_locustmissile_icon;                                                
             }  
             //Trident Missile
-            if(mouse_x &gt;= x-139*scaling &amp;&amp; mouse_x &lt;= x-115*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-144*scaling &amp;&amp; mouse_x &lt;= x-112*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 7)
               break;
@@ -665,24 +755,12 @@ switch(switching)
              if(global.deploy[3] = 7)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 7;
-                   global.deployimage[icon-3] =  spr_tridentmissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 7;
-                   global.deployimage[icon-4] =  spr_tridentmissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 7;
-                   global.deployimage[icon-2] =  spr_tridentmissile_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 7;
+             global.deployimage[newslot] =  spr_tridentmissile_icon;              
+             global.secondaryimage[icon-1] = spr_tridentmissile_icon;                                                
             }  
             //Shock Missile
-            if(mouse_x &gt;= x-107*scaling &amp;&amp; mouse_x &lt;= x-83*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-112*scaling &amp;&amp; mouse_x &lt;= x-80*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 8)
               break;
@@ -691,24 +769,12 @@ switch(switching)
              if(global.deploy[3] = 8)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 8;
-                   global.deployimage[icon-3] =  spr_shockmissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 8;
-                   global.deployimage[icon-4] =  spr_shockmissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 8;
-                   global.deployimage[icon-2] =  spr_shockmissile_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 8;
+             global.deployimage[newslot] =  spr_shockmissile_icon;              
+             global.secondaryimage[icon-1] = spr_shockmissile_icon;                                                
             }  
             //Hermit Missile
-            if(mouse_x &gt;= x-75*scaling &amp;&amp; mouse_x &lt;= x-51*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-80*scaling &amp;&amp; mouse_x &lt;= x-48*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 10)
               break;
@@ -717,24 +783,12 @@ switch(switching)
              if(global.deploy[3] = 10)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 10;
-                   global.deployimage[icon-3] =  spr_hermitmissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 10;
-                   global.deployimage[icon-4] =  spr_hermitmissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 10;
-                   global.deployimage[icon-2] =  spr_hermitmissile_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 10;
+             global.deployimage[newslot] =  spr_hermitmissile_icon;              
+             global.secondaryimage[icon-1] = spr_hermitmissile_icon;                                                
             }  
             //Split Missile
-            if(mouse_x &gt;= x-43*scaling &amp;&amp; mouse_x &lt;= x-19*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-48*scaling &amp;&amp; mouse_x &lt;= x-16*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 14)
               break;
@@ -743,24 +797,12 @@ switch(switching)
              if(global.deploy[3] = 14)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 14;
-                   global.deployimage[icon-3] =  spr_splitmissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 14;
-                   global.deployimage[icon-4] =  spr_splitmissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 14;
-                   global.deployimage[icon-2] =  spr_splitmissile_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 14;
+             global.deployimage[newslot] =  spr_splitmissile_icon;              
+             global.secondaryimage[icon-1] = spr_splitmissile_icon;                                                
             }  
             //Strike Missile
-            if(mouse_x &gt;= x-11*scaling &amp;&amp; mouse_x &lt;= x+13*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x-16*scaling &amp;&amp; mouse_x &lt;= x+16*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 11)
               break;
@@ -769,24 +811,12 @@ switch(switching)
              if(global.deploy[3] = 11)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 11;
-                   global.deployimage[icon-3] =  spr_strikemissile_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 11;
-                   global.deployimage[icon-4] =  spr_strikemissile_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 11;
-                   global.deployimage[icon-2] =  spr_strikemissile_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 11;
+             global.deployimage[newslot] =  spr_strikemissile_icon;              
+             global.secondaryimage[icon-1] = spr_strikemissile_icon;                                                
             }  
             //Hunter Mine
-            if(mouse_x &gt;= x+21*scaling &amp;&amp; mouse_x &lt;= x+45*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+16*scaling &amp;&amp; mouse_x &lt;= x+48*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 3)
               break;
@@ -795,24 +825,12 @@ switch(switching)
              if(global.deploy[3] = 3)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 3;
-                   global.deployimage[icon-3] =  spr_huntermine_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 3;
-                   global.deployimage[icon-4] =  spr_huntermine_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 3;
-                   global.deployimage[icon-2] =  spr_huntermine_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 3;
+             global.deployimage[newslot] =  spr_huntermine_icon;              
+             global.secondaryimage[icon-1] = spr_huntermine_icon;                                                
             }  
             //Phantom Mine
-            if(mouse_x &gt;= x+53*scaling &amp;&amp; mouse_x &lt;= x+77*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+48*scaling &amp;&amp; mouse_x &lt;= x+80*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 5)
               break;
@@ -821,24 +839,12 @@ switch(switching)
              if(global.deploy[3] = 5)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 5;
-                   global.deployimage[icon-3] =  spr_phantommine_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 5;
-                   global.deployimage[icon-4] =  spr_phantommine_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 5;
-                   global.deployimage[icon-2] =  spr_phantommine_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 5;
+             global.deployimage[newslot] =  spr_phantommine_icon;              
+             global.secondaryimage[icon-1] = spr_phantommine_icon;                                                
             }  
             //Hacker Mine
-            if(mouse_x &gt;= x+85*scaling &amp;&amp; mouse_x &lt;= x+109*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+80*scaling &amp;&amp; mouse_x &lt;= x+112*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 9)
               break;
@@ -847,24 +853,12 @@ switch(switching)
              if(global.deploy[3] = 9)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 9;
-                   global.deployimage[icon-3] =  spr_hackermine_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 9;
-                   global.deployimage[icon-4] =  spr_hackermine_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 9;
-                   global.deployimage[icon-2] =  spr_hackermine_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 9;
+             global.deployimage[newslot] =  spr_hackermine_icon;              
+             global.secondaryimage[icon-1] = spr_hackermine_icon;                                                
             }  
             //Cluster Mine
-            if(mouse_x &gt;= x+117*scaling &amp;&amp; mouse_x &lt;= x+141*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+112*scaling &amp;&amp; mouse_x &lt;= x+144*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 15)
               break;
@@ -873,24 +867,12 @@ switch(switching)
              if(global.deploy[3] = 15)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 15;
-                   global.deployimage[icon-3] =  spr_clustermine_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 15;
-                   global.deployimage[icon-4] =  spr_clustermine_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 15;
-                   global.deployimage[icon-2] =  spr_clustermine_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 15;
+             global.deployimage[newslot] =  spr_clustermine_icon;              
+             global.secondaryimage[icon-1] = spr_clustermine_icon;                                                
             }  
             //Strike Mine
-            if(mouse_x &gt;= x+149*scaling &amp;&amp; mouse_x &lt;= x+173*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+144*scaling &amp;&amp; mouse_x &lt;= x+176*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 12)
               break;
@@ -899,24 +881,12 @@ switch(switching)
              if(global.deploy[3] = 12)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 12;
-                   global.deployimage[icon-3] =  spr_strikemine_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 12;
-                   global.deployimage[icon-4] =  spr_strikemine_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 12;
-                   global.deployimage[icon-2] =  spr_strikemine_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 12;
+             global.deployimage[newslot] =  spr_strikemine_icon;              
+             global.secondaryimage[icon-1] = spr_strikemine_icon;                                                
             }  
             //Solus
-            if(mouse_x &gt;= x+181*scaling &amp;&amp; mouse_x &lt;= x+205*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+176*scaling &amp;&amp; mouse_x &lt;= x+208*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 6)
               break;
@@ -925,24 +895,12 @@ switch(switching)
              if(global.deploy[3] = 6)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 6;
-                   global.deployimage[icon-3] =  spr_solus_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 6;
-                   global.deployimage[icon-4] =  spr_solus_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 6;
-                   global.deployimage[icon-2] =  spr_solus_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 6;
+             global.deployimage[newslot] =  spr_solus_icon;              
+             global.secondaryimage[icon-1] = spr_solus_icon;                                                
             }  
             //Turret
-            if(mouse_x &gt;= x+213*scaling &amp;&amp; mouse_x &lt;= x+237*scaling &amp;&amp; mouse_y &gt;= y-31*scaling &amp;&amp; mouse_y &lt;= y-7*scaling)
+            if(mouse_x &gt;= x+208*scaling &amp;&amp; mouse_x &lt;= x+240*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
              if(global.deploy[1] = 13)
               break;
@@ -951,26 +909,14 @@ switch(switching)
              if(global.deploy[3] = 13)
               break;
              switching = 3;
-             switch(global.shipselect)
-             {
-              case 1:
-                   global.deploy[icon-3] = 13;
-                   global.deployimage[icon-3] =  spr_turret_icon;  
-              break;            
-              case 2:
-                   global.deploy[icon-4] = 13;
-                   global.deployimage[icon-4] =  spr_turret_icon;  
-              break;            
-              case 3:
-                   global.deploy[icon-2] = 13;
-                   global.deployimage[icon-2] =  spr_turret_icon;  
-              break;            
-             }  
+             global.deploy[newslot] = 13;
+             global.deployimage[newslot] =  spr_turret_icon;              
+             global.secondaryimage[icon-1] = spr_turret_icon;                                                
             }  
        break;
       } 
-      obj_mod.dstock = 0;
-      obj_mod.selectx = 0;
+//      obj_mod.dstock = 0;
+//      obj_mod.selectx = 0;
       //Switch to the correct new attack
       switch(global.esecond[1])
       {
@@ -1020,117 +966,8 @@ switch(switching)
             global.secondary = 27; //Trigger      
        break;
       }
-      switch(global.spacehot)
-{
- case 1:
- case 2:
- case 3:
-      switch(global.esecond[global.spacehot])
-      {
-       case 1:
-            global.spacesecond = 1; //Fusion
-       break;
-       case 2:
-            global.spacesecond = 2; //Stardust
-       break;
-       case 3:
-            global.spacesecond = 5; //Barrier
-       break;
-       case 4:
-            global.spacesecond = 10; //Beam
-       break;
-       case 5:
-            global.spacesecond = 9; //Formation
-       break;
-       case 6:
-            global.spacesecond = 11; //Sparkline
-       break;
-       case 7:
-            global.spacesecond = 12; //Burst
-       break;
-       case 8:
-            global.spacesecond = 14; //Slash
-       break;
-       case 9:
-            global.spacesecond = 15; //Horizon
-       break;
-       case 10:
-            global.spacesecond = 22; //Spiral
-       break;
-       case 11:
-            global.spacesecond = 23; //Laser
-       break;
-       case 12:
-            global.spacesecond = 24; //Trail  
-       break;
-       case 13:
-            global.spacesecond = 25; //Reflection
-       break;
-       case 14:
-            global.spacesecond = 26; //Storm
-       break;
-       case 15:
-            global.spacesecond = 27; //Trigger
-       break;
-      }
-      spacex = -32+(global.spacehot*32);
- break;
- case 4:
- case 5:
- case 6:
-      switch(global.deploy[global.spacehot-3])
-      {
-       case 1:
-            global.spacesecond = 0; //Dual Missile
-       break;
-       case 2:
-            global.spacesecond = 4; //Layer Missile
-       break;
-       case 3:
-            global.spacesecond = 3; //Hunter Mine
-       break;
-       case 4:
-            global.spacesecond = 6; //Locust Missile
-       break;
-       case 5:
-            global.spacesecond = 7; //Phantom Mine
-       break;
-       case 6:
-            global.spacesecond = 8; //Solus
-       break;
-       case 7:
-            global.spacesecond = 13; //Trident Missile
-       break;
-       case 8:
-            global.spacesecond = 17; //Shock Missile
-       break;
-       case 9:
-            global.spacesecond = 16; //Hacker Mine
-       break;
-       case 10:
-            global.spacesecond = 18; //Hacker Mine
-       break;
-       case 11:
-            global.spacesecond = 19; //Hacker Mine
-       break;
-       case 12:
-            global.spacesecond = 20; //Hacker Mine
-       break;
-       case 13:
-            global.spacesecond = 21; //Hacker Mine
-       break;
-       case 14:
-            global.spacesecond = 28; //Split Missile
-       break;
-       case 15:
-            global.spacesecond = 29; //Cluster Mine
-       break;
-      }
  break;
 }
- break;
-}
-
 
 </string>
           </argument>
@@ -1157,54 +994,31 @@ switch(switching)
             <string>scaling = view_hview[0]/480;
 x = view_xview[0] + view_wview[0]/2
 y = view_yview[0] + view_hview[0] + ychange*scaling;
-draw_sprite_ext(sprite_index, image, x, y, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(sprite_index, 0, x, y, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(spr_weaponswitch_options, image*global.team[global.mymid], x, y, scaling, scaling, 0, c_white, 1);
 
-draw_sprite_ext(global.primaryimage, 0, x-76*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-draw_sprite_ext(global.esecondimage[1], 0, x-44*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-switch(global.shipselect)
-{
- case 1:
-      draw_sprite_ext(global.esecondimage[2], 0, x-12*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      draw_sprite_ext(global.deployimage[1], 0, x+20*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      draw_sprite_ext(global.deployimage[2], 0, x+52*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
- break;
- case 2:
-      draw_sprite_ext(global.esecondimage[2], 0, x-12*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      draw_sprite_ext(global.esecondimage[3], 0, x+20*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      draw_sprite_ext(global.deployimage[1], 0, x+52*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
- break;
- case 3:
-      draw_sprite_ext(global.deployimage[1], 0, x-12*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      draw_sprite_ext(global.deployimage[2], 0, x+20*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      draw_sprite_ext(global.deployimage[3], 0, x+52*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
- break;
-}
+draw_sprite_ext(global.primaryimage, obj_mod.teamcolorimg, x-76*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(global.secondaryimage[1], obj_mod.teamcolorimg, x-36*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(global.secondaryimage[2], obj_mod.teamcolorimg, x+4*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(global.secondaryimage[3], obj_mod.teamcolorimg, x+44*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+
 switch(icon)
 {
- case 1:
-      draw_sprite_ext(spr_numbers_selected, 0, x-76*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
- break;
- case 2:
-      draw_sprite_ext(spr_numbers_selected, 1, x-44*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
- break;
- case 3:
-      if(image = 2)
-       draw_sprite_ext(spr_numbers_selected, 1, x-12*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      else
-       draw_sprite_ext(spr_numbers_selected, 2, x-12*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);      
- break;
- case 4:
-      if(image = 2)
-       draw_sprite_ext(spr_numbers_selected, 1, x+20*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
-      else
-       draw_sprite_ext(spr_numbers_selected, 2, x+20*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);      
- break;
- case 5:
-      draw_sprite_ext(spr_numbers_selected, 2, x+52*scaling, y-76*scaling, scaling, scaling, 0, c_white, 1);
- break;
+    case 1:
+        draw_sprite_ext(spr_numbers_selected, 0, x-76*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+    break;
+    case 2:
+        draw_sprite_ext(spr_numbers_selected, 0, x-36*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+    break;
+    case 3:
+        draw_sprite_ext(spr_numbers_selected, 0, x+4*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);      
+    break;
+    case 4:
+        draw_sprite_ext(spr_numbers_selected, 0, x+44*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);      
+    break;
 } 
 if(mouseon = 1)
-    draw_sprite_ext(spr_icon_selectt, 0, x+areax*scaling, y+areay*scaling, scaling, scaling, 0, c_white, 1);
+    draw_sprite_ext(spr_icon_select, 0, x+areax*scaling, y+areay*scaling, scaling, scaling, 0, c_white, 1);
 if(nameimage != -1)
     draw_sprite_ext(spr_weaponswitch_infos, nameimage, x+areax*scaling, y+areay*scaling, scaling, scaling, 0, c_white, 0.8);
 

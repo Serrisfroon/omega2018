@@ -38,39 +38,6 @@ switch(room)
       liney[0] = 318;
       linewidth[0] = 298;
  break;
- case rm_profile:
-      //Profile card
-      timer[0] = 59;
-      linex[0] = 17;
-      liney[0] = 351;
-      linewidth[0] = 298;
-      //Customization
-      timer[1] = 75;
-      linex[1] = 0;
-      liney[1] = 0;
-      linewidth[1] = 375;
- break;
- case rm_voptions:
-      //Options
-      timer[0] = 230;
-      linex[0] = 0;
-      liney[0] = 0;
-      linewidth[0] = 405;
-      //Help text
-      timer[1] = 122;
-      linex[1] = 427;
-      switch(global.resolution)
-      {
-       case 3:
-            linex[1] += 214;
-       break;
-       case 4:
-            linex[1] += 128;
-       break;
-      }       
-      liney[1] = 0;
-      linewidth[1] = 213;
- break;
  case rm_waiting:
       //Chat
       timer[0] = 80;

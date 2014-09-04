@@ -78,7 +78,7 @@ newdir = 0;
 mid = global.mymid;
 beserk = 0;
 //Set a respawn time
-alarm[1] = 300/global.framerate;
+alarm[1] = 300;
 
 respawnable = 0;
 </string>

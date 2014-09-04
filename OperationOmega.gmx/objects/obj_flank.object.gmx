@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>//Set the auto-destroy time
 alarm[0] = 240;
+hit = 1;
 //Set time until curve stop
 seek = 0;
 go = 0;
@@ -55,7 +56,20 @@ alarm[2] = 1;
           <argument>
             <kind>1</kind>
             <string>//create an effect
-(instance_create(x, y, obj_flank_hit)).dir = direction;
+if(hit = 1)
+{
+    endeffect = instance_create(x, y, obj_generic_hit);
+    endeffect.mid = mid;
+    endeffect.direction = direction-180;
+}
+else
+{
+    endeffect = instance_create(x, y, obj_generic_fade);
+    endeffect.mid = mid;
+    endeffect.direction = direction;
+    endeffect.sprite_index = sprite_index;
+    endeffect.speed = speed;
+}
 </string>
           </argument>
         </arguments>

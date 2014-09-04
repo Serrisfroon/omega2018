@@ -28,6 +28,7 @@
             <string>//Set the blending color to match your team
 image_speed = 0;
 image_index = 0;
+hit = 1;
 if(global.allycolor = c_red)
     image_index = 1;
     
@@ -75,17 +76,25 @@ homing = noone;
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
-        <id>203</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_kill_object</functionname>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>hit = 0;
+instance_destroy();
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="3" enumb="0">
@@ -115,12 +124,8 @@ if(image_xscale &lt; 1)
 }
 if(irandom(30) == 1)
 {
-    if(global.allycolor != c_red)
-        part_type_color3(obj_partsystem.trailfade,make_color_rgb(255, 125, 125),c_red,c_red);
-    else
-        part_type_color3(obj_partsystem.trailfade,make_color_rgb(125, 125, 255),16711680,16711680);    
     part_type_orientation(obj_partsystem.trailfade,image_angle,image_angle,0,0,0);
-    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.trailfade, 1);
+    part_particles_create(obj_partsystem.system, x, y, obj_partsystem.trailfade[global.team[mid]-1], 1);
 }
 //Check if there is a homing target
 if(homing = noone)

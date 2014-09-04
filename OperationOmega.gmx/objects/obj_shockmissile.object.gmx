@@ -63,7 +63,6 @@ amplified = 0;
 create_explosion(1);
 repeat(8)
     effect_create_above(ef_spark, x-30+random(60), y-30+random(60), 1, c_teal);
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missileburst, 15);
 obj_mod.createcheck = id;
 with(obj_homingeffect)
     if(create = obj_mod.createcheck)

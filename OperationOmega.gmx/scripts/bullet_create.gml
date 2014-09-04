@@ -31,7 +31,7 @@ switch(type)
       after = obj_generic_hit;
       dmg = 10;
       mask = 5;
-      lolspeed = 6+speed;
+      lolspeed = 9.5+speed/2;
       sfx_play(snd_needle, lolx, loly);
  break;
  case "Sonic":
@@ -41,7 +41,7 @@ switch(type)
       after = obj_generic_hit;
       dmg = 4;
       mask = 3;
-      lolspeed = 10+speed;
+      lolspeed = 13.5+speed/2;
       sfx_play(snd_sonic, lolx, loly);
  break;
  case "Wave":
@@ -51,7 +51,7 @@ switch(type)
       after = obj_generic_hit;
       dmg = 16;
       mask = 14;
-      lolspeed = 4+speed;
+      lolspeed = 7.5+speed/2;
       sfx_play(snd_wave, lolx, loly);
  break;
  case "Crossfire":
@@ -73,7 +73,7 @@ switch(type)
        after = obj_enemystasis_field;      
       dmg = 1;
       mask = 7;
-      lolspeed = 6+speed;
+      lolspeed = 9.5+speed/2;
  break;
  case "Stasisb":
       name = "Stasis";
@@ -90,7 +90,7 @@ switch(type)
        after = obj_enemystasis_field;      
       dmg = 1;
       mask = 9;
-      lolspeed = 6+speed;
+      lolspeed = 9.5+speed/2;
  break;
  case "Burst":
       name = "Burst";
@@ -153,7 +153,7 @@ switch(type)
       after = obj_generic_hit;
       dmg = 8;
       mask = 7;
-      lolspeed = 6+speed;
+      lolspeed = 9.5+speed/2;
  break;
  case "Pierce":
       name = "Pierce";
@@ -162,7 +162,7 @@ switch(type)
       after = obj_generic_hit;
       dmg = 3;
       mask = 5;
-      lolspeed = 7+speed;
+      lolspeed = 10.5+speed/2;
       sfx_play(snd_pierce, lolx, loly);
  break;
  case "Spread":
@@ -172,7 +172,7 @@ switch(type)
       after = obj_generic_hit;
       dmg = 5;
       mask = 8;
-      lolspeed = 7+speed;
+      lolspeed = 10.5+speed/2;
  break;
  case "Turret":
       name = "Turret";
@@ -260,4 +260,3 @@ for(i = 1; i <= obj_bulletcontrol.bulletmax+1; i += 1)
 }
 obj_bulletcontrol.speed = 0;
  return i;
-

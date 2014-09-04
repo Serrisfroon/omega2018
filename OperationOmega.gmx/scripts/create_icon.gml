@@ -14,60 +14,68 @@ tile.owner = id;
 switch(tile.owner.object_index)
 {
     case obj_chooseprimary:
-    case obj_chooseenergy_1:
-    case obj_chooseenergy_2:
-    case obj_chooseenergy_3:
         tile.display = tile.giveselection-1;    
     break;
-    case obj_choosedeploy_1:
-    case obj_choosedeploy_2:
-    case obj_choosedeploy_3:
-        switch(tile.giveselection)
+    case obj_choosesecondary:
+        if(tile.owner.secondnumber = 4 && tile.giveselection > 30)
         {
+            tile.display = tile.giveselection-30;
+        }
+        else
+        switch(tile.owner.weapontype)
+        {
+            case 0:
+                tile.display = tile.giveselection-1;    
+            break;
             case 1:
-                tile.display = 0;            
-            break;
-            case 2:
-                tile.display = 1;            
-            break;
-            case 3:
-                tile.display = 8;            
-            break;
-            case 4:
-                tile.display = 2;            
-            break;
-            case 5:
-                tile.display = 9;            
-            break;
-            case 6:
-                tile.display = 13;            
-            break;
-            case 7:
-                tile.display = 3;            
-            break;
-            case 8:
-                tile.display = 4;            
-            break;
-            case 9:
-                tile.display = 10;            
-            break;
-            case 10:
-                tile.display = 5;            
-            break;
-            case 11:
-                tile.display = 7;            
-            break;
-            case 12:
-                tile.display = 12;            
-            break;
-            case 13:
-                tile.display = 14;            
-            break;
-            case 14:
-                tile.display = 6;            
-            break;
-            case 15:
-                tile.display = 11;            
+                switch(tile.giveselection)
+                {
+                    case 1:
+                        tile.display = 0;            
+                    break;
+                    case 2:
+                        tile.display = 1;            
+                    break;
+                    case 3:
+                        tile.display = 8;            
+                    break;
+                    case 4:
+                        tile.display = 2;            
+                    break;
+                    case 5:
+                        tile.display = 9;            
+                    break;
+                    case 6:
+                        tile.display = 13;            
+                    break;
+                    case 7:
+                        tile.display = 3;            
+                    break;
+                    case 8:
+                        tile.display = 4;            
+                    break;
+                    case 9:
+                        tile.display = 10;            
+                    break;
+                    case 10:
+                        tile.display = 5;            
+                    break;
+                    case 11:
+                        tile.display = 7;            
+                    break;
+                    case 12:
+                        tile.display = 12;            
+                    break;
+                    case 13:
+                        tile.display = 14;            
+                    break;
+                    case 14:
+                        tile.display = 6;            
+                    break;
+                    case 15:
+                        tile.display = 11;            
+                    break;
+                }
             break;
         }
     break;

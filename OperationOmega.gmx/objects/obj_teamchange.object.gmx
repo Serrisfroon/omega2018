@@ -173,7 +173,7 @@ if(changeable = 0)
      chatcolor[6] = chatcolor[7];
      chatline[7] = chatline[8];
      chatcolor[7] = chatcolor[8];
-     chatcolor[8] = c_red;
+     chatcolor[8] = c_maroon;
      chatline[8] = "Blue Team cannot accept any more players.";
     }
     //You can't change team
@@ -211,7 +211,7 @@ if(changeable = 0)
      chatcolor[6] = chatcolor[7];
      chatline[7] = chatline[8];
      chatcolor[7] = chatcolor[8];
-     chatcolor[8] = c_red;
+     chatcolor[8] = c_maroon;
      chatline[8] = "Red Team cannot accept any more players.";
     }
     //You can't change teams

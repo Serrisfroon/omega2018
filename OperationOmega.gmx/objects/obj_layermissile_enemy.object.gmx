@@ -81,9 +81,7 @@ else
 //Create a larger effect if the hit is more accurate
 repeat(hits*2)
 {
- explodecolor = make_color_rgb(255, random(255), 0);
- effect_create_above(ef_explosion, x-20+random(40), y-20+random(40), 0, explodecolor);
- part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missileburst, 7);
+    create_explosion(1);
 }
 obj_mod.createcheck = id;
 with(obj_homingeffect)

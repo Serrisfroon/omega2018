@@ -17,7 +17,7 @@ for(disi = 1; disi < 8; disi += 1)
         //Create a dud to intercept remaining messages
         global.playership[disi] = instance_create(-2000, -2000, obj_dud);
         //Send a notice to your chat
-        chatline_add(droppedname+" has been disconnected from the game.", c_red)
+        chatline_add(droppedname+" has been disconnected from the game.", c_maroon)
         
 
         //Add the player to the elimination count
@@ -27,7 +27,7 @@ for(disi = 1; disi < 8; disi += 1)
             if(global.redteam = global.redteamout)
             {
                 //Send it to your chat
-                chatline_add("Red Team has been eliminated.", c_red);
+                chatline_add("Red Team has been eliminated.", c_maroon);
                 lolcolor[3] = 1;
                 chatline_add("Blue Team has won the match.", c_navy);
                 lolcolor[4] = 2;
@@ -103,5 +103,4 @@ for(disi = 1; disi < 8; disi += 1)
         client_sendall(0, 0);     
     }
 }
-
 

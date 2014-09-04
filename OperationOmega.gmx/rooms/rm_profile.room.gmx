@@ -59,7 +59,7 @@ if(tile_exists(tile_layer_find(100, 630, 80)))
     <instance objName="obj_typename" x="16" y="256" name="inst_3B6FCCF3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_typeip" x="16" y="296" name="inst_A5DB27DA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_gotopractice" x="544" y="408" name="inst_4DA4EA04" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chooseenergy_1" x="224" y="24" name="inst_758C1F50" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_choosesecondary" x="224" y="24" name="inst_758C1F50" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_chooseenergy_2" x="256" y="24" name="inst_4FA00C66" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_choosedeploy_1" x="304" y="24" name="inst_73D8ECD3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_choosedeploy_2" x="336" y="24" name="inst_1C9A2DA6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
