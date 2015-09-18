@@ -158,7 +158,7 @@ growing = 1;
           <argument>
             <kind>1</kind>
             <string>//Check the animation switch
-if(moveimage = 1 || prnt_selection.path_speed &gt; 0 || global.tutorial = 1)
+if(moveimage = 1 || prnt_selection.speed != 0 || global.tutorial = 1)
     //Exit to stop functions when animating
     exit;
 if(global.creatinggame = 1)
@@ -197,10 +197,10 @@ if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
      case 1:
            global.shipselect = 2;
            //Set the bars' max sizes
-           obj_profilebox.amaxd = 0.2;
-           obj_profilebox.smaxd = 0.6;
-           obj_profilebox.mmaxd = 0.9;
-           obj_profilebox.cmaxd = 0.9;
+           obj_customizer.amaxd = 0.2;
+           obj_customizer.smaxd = 0.6;
+           obj_customizer.mmaxd = 0.9;
+           obj_customizer.cmaxd = 0.9;
            if(global.spacetype = 0)
            {
                 global.esecond[3] = global.esecond[2];
@@ -215,10 +215,10 @@ if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
      case 2:
            global.shipselect = 3;
           //Set the bars' max sizes
-           obj_profilebox.amaxd = 0.9;
-           obj_profilebox.smaxd = 0.9;
-           obj_profilebox.mmaxd = 0.3;
-           obj_profilebox.cmaxd = 0.3;
+           obj_customizer.amaxd = 0.9;
+           obj_customizer.smaxd = 0.9;
+           obj_customizer.mmaxd = 0.3;
+           obj_customizer.cmaxd = 0.3;
            if(global.spacetype = 0)
            {
                 global.esecond[1] = global.esecond[3];
@@ -234,10 +234,10 @@ if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
      case 3:
            global.shipselect = 1;
            //Set the bars' max sizes
-           obj_profilebox.amaxd = 0.6;
-           obj_profilebox.smaxd = 0.6;
-           obj_profilebox.mmaxd = 0.6;
-           obj_profilebox.cmaxd = 0.6;
+           obj_customizer.amaxd = 0.6;
+           obj_customizer.smaxd = 0.6;
+           obj_customizer.mmaxd = 0.6;
+           obj_customizer.cmaxd = 0.6;
            if(global.spacetype = 0)
            {
                 global.esecond[2] = global.esecond[1];

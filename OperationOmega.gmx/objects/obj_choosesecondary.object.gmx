@@ -361,6 +361,8 @@ if(growing = 0 &amp;&amp; growth &gt; 0)
             <kind>1</kind>
             <string>growing = 0;
 alarm[3] = -1;
+image_xscale = 1;
+image_yscale = 1;
 </string>
           </argument>
         </arguments>
@@ -387,6 +389,12 @@ alarm[3] = -1;
     audio_play_sound(snd_overcustom, 1, 0);
 alarm[3] = 20;
 growing = 2;
+prnt_selection.image_xscale = 1;
+prnt_selection.image_yscale = 1;
+prnt_selection.depth = -1;
+depth = -2;
+image_xscale = 1.35;
+image_yscale = 1.35;
 </string>
           </argument>
         </arguments>
