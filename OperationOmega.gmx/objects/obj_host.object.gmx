@@ -104,6 +104,8 @@ instance_create(384, 240, obj_creategamebox);
 global.maxplayers = 4;
 global.matchtype = "stock";
 global.matchvariable = 3;
+animation = 3;
+alarm[2] = 30;
 </string>
           </argument>
         </arguments>

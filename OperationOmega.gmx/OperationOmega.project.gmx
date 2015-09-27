@@ -1478,6 +1478,9 @@
       <sprite>sprites\spr_icon_selectt</sprite>
       <sprite>sprites\spr_weapon_active</sprite>
       <sprite>sprites\spr_weaponswitch_infos</sprite>
+      <sprite>sprites\spr_weaponicon_line</sprite>
+      <sprite>sprites\spr_weaponicon_pulse</sprite>
+      <sprite>sprites\spr_weaponicon_getpulse</sprite>
     </sprites>
     <sprites name="Effects">
       <sprites name="Particles">
@@ -1514,6 +1517,7 @@
       <sprite>sprites\spr_slasheffect</sprite>
       <sprite>sprites\spr_teleport_hole</sprite>
       <sprite>sprites\spr_singlestar</sprite>
+      <sprite>sprites\spr_gridout</sprite>
     </sprites>
     <sprites name="Menu">
       <sprites name="Background">
@@ -2044,6 +2048,8 @@
         <object>objects\obj_alphastar_select</object>
         <object>objects\prnt_selection</object>
         <object>objects\obj_emptyslot</object>
+        <object>objects\obj_weaponicon_line</object>
+        <object>objects\obj_weaponicon_pulse</object>
       </objects>
       <objects name="Title">
         <object>objects\obj_title</object>
@@ -2074,6 +2080,7 @@
       <object>objects\prnt_menubutton</object>
       <object>objects\obj_gridpass</object>
       <object>objects\obj_backpass</object>
+      <object>objects\obj_cursor_grid</object>
       <object>objects\obj_clickring</object>
       <object>objects\obj_scanline</object>
       <object>objects\obj_scanner</object>

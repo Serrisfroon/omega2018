@@ -213,37 +213,37 @@ switch(global.shipselect)
 switch(global.primary)
 {
  case 0:
-      draw_sprite_ext(spr_numbers_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_numbers_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 1:
-      draw_sprite_ext(spr_needle_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_needle_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 2:
-      draw_sprite_ext(spr_sonic_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_sonic_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 3:
-      draw_sprite_ext(spr_wave_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_wave_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 4:
-      draw_sprite_ext(spr_flank_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_flank_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 5:
-      draw_sprite_ext(spr_stasis_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_stasis_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 6:
-      draw_sprite_ext(spr_crossfire_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_crossfire_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 7:
-      draw_sprite_ext(spr_siphon_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_siphon_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 8:
-      draw_sprite_ext(spr_double_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_double_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 9:
-      draw_sprite_ext(spr_pierce_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_pierce_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
  case 10:
-      draw_sprite_ext(spr_spread_icon, 0, x-127, y-7, 1, 1, 0, c_white, display_alpha);
+      draw_sprite_ext(spr_spread_icon, 0, x-111, y+9, 1, 1, 0, c_white, display_alpha);
  break;
 }
 
@@ -258,52 +258,52 @@ for(i = 1; i &lt;= 4; i += 1)
         switch(global.esecond[energys])
         {
          case 0:
-              draw_sprite_ext(spr_numbers_icon, 1, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_numbers_icon, 1, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 1:
-              draw_sprite_ext(spr_fusion_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_fusion_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 2:
-              draw_sprite_ext(spr_stardust_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_stardust_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 3:
-              draw_sprite_ext(spr_barrier_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_barrier_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 4:
-              draw_sprite_ext(spr_beam_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_beam_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 5:
-              draw_sprite_ext(spr_formation_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_formation_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 6:
-              draw_sprite_ext(spr_sparkline_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_sparkline_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 7:
-              draw_sprite_ext(spr_burst_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_burst_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 8:
-              draw_sprite_ext(spr_slash_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_slash_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 9:
-              draw_sprite_ext(spr_horizon_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_horizon_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 10:
-              draw_sprite_ext(spr_spiral_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_spiral_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 11:
-              draw_sprite_ext(spr_laser_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_laser_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 12:
-              draw_sprite_ext(spr_trail_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_trail_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 13:
-              draw_sprite_ext(spr_reflection_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_reflection_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 14:
-              draw_sprite_ext(spr_storm_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_storm_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 15:
-              draw_sprite_ext(spr_trigger_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_trigger_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
         }
     }
@@ -313,57 +313,57 @@ for(i = 1; i &lt;= 4; i += 1)
         switch(global.deploy[deploys])
         {
          case 0:
-              draw_sprite_ext(spr_numbers_icon, 2, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_numbers_icon, 2, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 1:
-              draw_sprite_ext(spr_dualmissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_dualmissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 2:
-              draw_sprite_ext(spr_layermissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_layermissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 3:
-              draw_sprite_ext(spr_huntermine_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_huntermine_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 4:
-              draw_sprite_ext(spr_locustmissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_locustmissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 5:
-              draw_sprite_ext(spr_phantommine_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_phantommine_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 6:
-              draw_sprite_ext(spr_solus_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_solus_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 7:
-              draw_sprite_ext(spr_tridentmissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_tridentmissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 8:
-              draw_sprite_ext(spr_shockmissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_shockmissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 9:
-              draw_sprite_ext(spr_hackermine_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_hackermine_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 10:
-              draw_sprite_ext(spr_hermitmissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_hermitmissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 11:
-              draw_sprite_ext(spr_strikemissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_strikemissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 12:
-              draw_sprite_ext(spr_strikemine_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_strikemine_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 13:
-              draw_sprite_ext(spr_turret_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_turret_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 14:
-              draw_sprite_ext(spr_splitmissile_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_splitmissile_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
          case 15:
-              draw_sprite_ext(spr_clustermine_icon, 0, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+              draw_sprite_ext(spr_clustermine_icon, 0, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
          break;
         }    
     }
-    draw_sprite_ext(spr_numbers_icon, 3+weapontype[i], x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
-    draw_sprite_ext(spr_numbers_icon, i+4, x-113+(i*41), y-7, 1, 1, 0, c_white, display_alpha);
+    draw_sprite_ext(spr_numbers_icon, 3+weapontype[i], x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
+    draw_sprite_ext(spr_numbers_icon, i+4, x-97+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
 }
 </string>
           </argument>

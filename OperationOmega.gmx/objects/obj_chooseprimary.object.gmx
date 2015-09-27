@@ -31,7 +31,7 @@ growing = 0;
 selected = 0;
 
 empty = -1;
-if(global.esecond[1] = 0)
+if(global.primary = 0)
 {
     empty = instance_create(x, y, obj_emptyslot);
     empty.sprite_index = spr_selectprimary;
@@ -189,7 +189,6 @@ if(growing = 0 &amp;&amp; growth &gt; 0)
             <kind>1</kind>
             <string>growing = 0;
 alarm[3] = -1;
-growing = 0;
 image_xscale = 1;
 image_yscale = 1;
 </string>
@@ -214,7 +213,9 @@ image_yscale = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[3] = 20;
+            <string>if(speed != 0)
+    exit;
+alarm[3] = 20;
 growing = 2;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_overcustom, 1, 0);
@@ -770,7 +771,7 @@ switch(global.primary)
 }
 draw_sprite_ext(spr_weapons_infos, 0, x+12, y+12, growth, growth, 0, c_white, 0.6*growth+0.2);
 if(growing != 0)
-    draw_sprite_ext(spr_icon_select, image_index, x, y, 1, 1, 0, c_white, image_alpha);
+    draw_sprite_ext(spr_icon_select, 0, x, y, 1, 1, 0, c_white, image_alpha);
 </string>
           </argument>
         </arguments>

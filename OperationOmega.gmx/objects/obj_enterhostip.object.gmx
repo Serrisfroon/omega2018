@@ -189,7 +189,7 @@ draw_set_alpha(display_alpha);
 //Set the font
 draw_set_font(fnt_digital);
 //Draw your typed text
-draw_text(x-113, y-15, keyboard_string+flashing);
+draw_text(x-90, y-13, keyboard_string+flashing);
 </string>
           </argument>
         </arguments>

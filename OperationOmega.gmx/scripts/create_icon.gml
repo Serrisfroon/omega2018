@@ -1,4 +1,4 @@
-//create_icon(object, sprite, speed1, speed2, dist1, dist2, selection);
+//create_icon(sprite, speed1, speed2, dist1, dist2, selection);
 var tile;
 tile = instance_create(x, y, obj_icon_option);
 tile.sprite_index = argument0;

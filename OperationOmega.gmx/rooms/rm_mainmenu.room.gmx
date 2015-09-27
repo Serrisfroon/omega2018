@@ -55,9 +55,10 @@ background_alpha[1] = 0;</code>
   <instances>
     <instance objName="obj_endgame" x="630" y="432" name="inst_EDF89CF6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_menumod" x="0" y="0" name="inst_ACBA2582" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_singleplayer" x="630" y="270" name="inst_06FDFD7A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_multiplayer" x="630" y="324" name="inst_67725B7D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_options" x="630" y="378" name="inst_5888C494" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_server" x="630" y="270" name="inst_9B3A9721" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_private" x="630" y="324" name="inst_24B6E408" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_profile_connect" x="198" y="378" name="inst_12D03B8F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

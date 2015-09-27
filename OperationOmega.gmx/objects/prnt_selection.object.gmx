@@ -51,7 +51,8 @@ image_alpha = 0;
           <argument>
             <kind>1</kind>
             <string>//Make the tranparency follow taht of the background for transition effect
-image_alpha = obj_customizer.backbox.display_alpha;
+if(instance_exists(obj_customizer))
+    image_alpha = obj_customizer.backbox.display_alpha;
 </string>
           </argument>
         </arguments>

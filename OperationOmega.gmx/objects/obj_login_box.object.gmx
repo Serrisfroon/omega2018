@@ -43,7 +43,9 @@ image_yscale = 0.6;
 animation = 0;
 over_alpha = 0;
 display_alpha = 0;
-
+image_speed = 0;
+image_index = 1;
+mouseover = 0;
 </string>
           </argument>
         </arguments>
@@ -187,6 +189,52 @@ keyboard_string = string_copy(keyboard_string, 0, 15);
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>mouseover = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>mouseover = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="4">
       <action>
         <libid>1</libid>
@@ -268,7 +316,9 @@ draw_set_font(fnt_digital);
 //Draw the profile box
 draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, 0, c_white, image_alpha*over_alpha);
 if(image_alpha != 1)
-    draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, 0, c_white, (1-image_alpha)*over_alpha);
+    draw_sprite_ext(sprite_index, 2, x, y, image_xscale, image_yscale, 0, c_white, (1-image_alpha)*over_alpha);
+if(mouseover = 1)
+    draw_sprite_ext(sprite_index, 1, x, y, image_xscale, image_yscale, 0, c_white, image_alpha*over_alpha);
 draw_set_alpha(display_alpha);
 draw_set_color(c_black);
 //Draw the entered text

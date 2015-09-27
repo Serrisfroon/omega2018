@@ -68,6 +68,7 @@ game_end();
             <string>//Exit the script if a profile has not been made
 if(global.tutorial = 1)
  exit;
+obj_profile_connect.animation = 3;
  
 event_inherited();
 </string>

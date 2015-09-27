@@ -3,7 +3,7 @@
   <spriteName>spr_modbox</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-2</depth>
+  <depth>-3</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -164,7 +164,7 @@ draw_set_alpha(display_alpha);
 //Draw the selected game options
 draw_set_halign(fa_center);
 draw_text(x+110-161, y+60-90, "Stock: "+string(global.matchvariable));
-draw_text(x+110-161, y+13, global.matchlevel);
+draw_text(x+110-161, y+18, global.matchlevel);
 draw_set_halign(fa_left);
 
 </string>

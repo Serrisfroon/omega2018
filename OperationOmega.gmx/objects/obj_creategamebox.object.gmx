@@ -182,7 +182,8 @@ keyboard_string = string_replace(keyboard_string, ';', '');
 keyboard_string = string_replace(keyboard_string, '|', '');
 
 //Set the game name to the text entered
-obj_okaygame.servername = keyboard_string;
+if(instance_exists(obj_okaygame))
+    obj_okaygame.servername = keyboard_string;
 </string>
           </argument>
         </arguments>

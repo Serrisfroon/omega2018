@@ -33,6 +33,7 @@ liney[4] = -2;
 switch(room)
 {
  case rm_multiplayer:
+ case rm_mainmenu:
       timer[0] = 59;
       linex[0] = 48;
       liney[0] = 318;
@@ -48,7 +49,7 @@ switch(room)
       timer[1] = 75;
       linex[1] = 0;
       liney[1] = 0;
-      linewidth[1] = 375;
+      linewidth[1] = 427;
       //map
       timer[2] = 40;
       linex[2] = 0;

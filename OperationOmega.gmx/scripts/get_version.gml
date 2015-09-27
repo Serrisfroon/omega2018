@@ -2,7 +2,7 @@
 script will return your network ip address. It connects to whatismyip.com:80 which sends
 the ip address in the form of a http payload packet.
 */
-sockId = tcpconnect("insomniasoft.net", 80, 0, 0);
+sockId = tcpconnect("insomniasoft.com", 80, 0, 0);
 if(!sockId)
 {
  show_message("Unable to connect");
@@ -14,7 +14,7 @@ setformat(sockId, 1, chr(13) + chr(10));
 newLine = chr(13) + chr(10);
 clearbuffer(0);
 writechars("GET /version.html HTTP/1.0" + newLine, 0);
-writechars("Host: insomniasoft.net" + newLine, 0);
+writechars("Host: insomniasoft.com" + newLine, 0);
 sendmessage(sockId, 0, 0, 0);
 
 processHeader = true;

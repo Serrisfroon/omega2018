@@ -77,9 +77,9 @@ switch(global.shipselect)
 //Move the weapon slots according to the selected ship
 create_weaponslots();
 
-instance_create(48, 35, obj_armorstat);
-instance_create(48, 55, obj_shieldstat);
-instance_create(48, 75, obj_speedstat);
+instance_create(70, 45, obj_armorstat);
+instance_create(70, 75, obj_shieldstat);
+instance_create(70, 105, obj_speedstat);
 </string>
           </argument>
         </arguments>
@@ -157,14 +157,14 @@ draw_set_color(c_black);
 draw_set_alpha(backbox.display_alpha);
 
 //Draw stat icons
-draw_sprite_ext(spr_staticons, 0, 48, 35, 1, 1, 0, c_white, backbox.display_alpha);
-draw_sprite_ext(spr_staticons, 1, 48, 55, 1, 1, 0, c_white, backbox.display_alpha);
-draw_sprite_ext(spr_staticons, 2, 48, 75, 1, 1, 0, c_white, backbox.display_alpha);
+draw_sprite_ext(spr_staticons, 0, 70, 45, 1, 1, 0, c_white, backbox.display_alpha);
+draw_sprite_ext(spr_staticons, 1, 70, 75, 1, 1, 0, c_white, backbox.display_alpha);
+draw_sprite_ext(spr_staticons, 2, 70, 105, 1, 1, 0, c_white, backbox.display_alpha);
 
 //Draw the stat bars
-draw_sprite_ext(spr_statbar, -1, 72, 35, astretch, 1, 0, c_white, 0.7*backbox.display_alpha);
-draw_sprite_ext(spr_statbar, -1, 72, 55, sstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
-draw_sprite_ext(spr_statbar, -1, 72, 75, mstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
+draw_sprite_ext(spr_statbar, -1, 90, 45, astretch, 1, 0, c_white, 0.7*backbox.display_alpha);
+draw_sprite_ext(spr_statbar, -1, 90, 75, sstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
+draw_sprite_ext(spr_statbar, -1, 90, 105, mstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
 //Make the bars bigger if they are not yet at their max
 if(astretch &lt; amaxd)
  astretch += amaxd/15;
@@ -189,7 +189,7 @@ switch(global.shipselect)
 }
 
 //Draw guiding text
-draw_text(228, 4, 'Weapons');
+draw_text(258, 4, 'Weapons');
 draw_set_alpha(1);
 </string>
           </argument>

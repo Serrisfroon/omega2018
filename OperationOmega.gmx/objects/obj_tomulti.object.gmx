@@ -43,7 +43,7 @@
             <kind>1</kind>
             <string>//Stop 39dll and return to the main multiplayer menu
 dllfree();
-room_goto(rm_multiplayer);
+room_goto(rm_mainmenu);
 
 </string>
           </argument>

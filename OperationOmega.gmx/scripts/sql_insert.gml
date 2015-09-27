@@ -6,7 +6,7 @@ mode = argument3;
 map = argument4;
 */
 tempbuffer = createbuffer();
-sockId = tcpconnect("www.insomniasoft.net", 80, 0, 0);
+sockId = tcpconnect("www.insomniasoft.com", 80, 0, 0);
 if(!sockId)
 {
 show_message("Unable to connect to server");
@@ -18,7 +18,7 @@ setformat(sockId, 1, chr(13) + chr(10));
 newLine = chr(13) + chr(10);
 clearbuffer(tempbuffer);
 writechars("GET /placematch.php?time="+argument0+"&name="+argument1+"&user="+argument2+"&max=8&count=1&mode="+argument3+"&map="+argument4+"&status=Waiting+ HTTP/1.0" + newLine, tempbuffer);
-writechars("Host: www.insomniasoft.net"+ newLine, tempbuffer);
+writechars("Host: www.insomniasoft.com"+ newLine, tempbuffer);
 sendmessage(sockId, "", 0, tempbuffer);
 
 processHeader = true;

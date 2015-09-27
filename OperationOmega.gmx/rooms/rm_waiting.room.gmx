@@ -3,7 +3,7 @@
   <caption>Operation Omega</caption>
   <width>768</width>
   <height>480</height>
-  <vsnap>18</vsnap>
+  <vsnap>9</vsnap>
   <hsnap>9</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
@@ -56,8 +56,8 @@
     <instance objName="obj_readygo" x="630" y="378" name="inst_18B06CD9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_quit" x="630" y="432" name="inst_B0C1CE72" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_menumod" x="16" y="0" name="inst_B51F831C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_chooseprimary" x="153" y="18" name="inst_D95810C9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_alphastar_select" x="24" y="64" name="inst_A005C841" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_chooseprimary" x="171" y="36" name="inst_D95810C9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_alphastar_select" x="36" y="81" name="inst_A005C841" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
