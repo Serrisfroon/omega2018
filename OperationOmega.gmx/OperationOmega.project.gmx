@@ -1606,6 +1606,8 @@
         <sprite>sprites\spr_waiting_right</sprite>
         <sprite>sprites\spr_levelnames</sprite>
       </sprites>
+      <sprite>sprites\spr_cornerinfo</sprite>
+      <sprite>sprites\spr_infobox</sprite>
     </sprites>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_wall</sprite>

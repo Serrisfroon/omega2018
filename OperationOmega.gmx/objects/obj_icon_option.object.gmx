@@ -374,25 +374,25 @@ if(growing = 1)
 switch(owner.object_index)
 {
     case obj_chooseprimary:
-        draw_sprite_ext(spr_primary_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);    
+        draw_sprite_ext(spr_primary_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.75*growth+0.2);    
     break;
     case obj_choosesecondary:
         if(giveselection &gt; 30)
         {
-            draw_sprite_ext(spr_weapons_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2); 
+            draw_sprite_ext(spr_weapons_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.75*growth+0.2); 
             exit;       
         }
         if(owner.weapontype = 0)
         {
-            draw_sprite_ext(spr_energy_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);        
+            draw_sprite_ext(spr_energy_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.75*growth+0.2);        
             if(global.shipselect = 1 &amp;&amp; owner.secondnumber = 4)
-                draw_sprite_part_ext(spr_buff_infos, display, 0, 0, 200, 259*growth, x+16, y+16, growth, growth, c_white, 0.6*growth+0.2);
+                draw_sprite_part_ext(spr_buff_infos, display, 0, 0, 200, 259*growth, x+16, y+16, growth, growth, c_white, 0.75*growth+0.2);
         }
         else
         {
             draw_sprite_ext(spr_deploy_infos, display, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);        
             if(global.shipselect = 1 &amp;&amp; owner.secondnumber = 4)
-                draw_sprite_part_ext(spr_buff_infos, 15+display, 0, 0, 200, 259*growth, x+16, y+16, growth, growth, c_white, 0.6*growth+0.2);
+                draw_sprite_part_ext(spr_buff_infos, 15+display, 0, 0, 200, 259*growth, x+16, y+16, growth, growth, c_white, 0.75*growth+0.2);
         }
     break;
     

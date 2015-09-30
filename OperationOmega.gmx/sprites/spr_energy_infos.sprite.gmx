@@ -8,9 +8,9 @@
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
-  <bbox_right>199</bbox_right>
+  <bbox_right>188</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>199</bbox_bottom>
+  <bbox_bottom>238</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -18,7 +18,7 @@
   </TextureGroups>
   <For3D>0</For3D>
   <width>200</width>
-  <height>200</height>
+  <height>239</height>
   <frames>
     <frame index="0">images\spr_energy_infos_0.png</frame>
     <frame index="1">images\spr_energy_infos_1.png</frame>
@@ -36,5 +36,7 @@
     <frame index="13">images\spr_energy_infos_13.png</frame>
     <frame index="14">images\spr_energy_infos_14.png</frame>
     <frame index="15">images\spr_energy_infos_15.png</frame>
+    <frame index="16">images\spr_energy_infos_16.png</frame>
+    <frame index="17">images\spr_energy_infos_17.png</frame>
   </frames>
 </sprite>
