@@ -17,7 +17,7 @@
     <TextureGroup0>1</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>200</width>
+  <width>189</width>
   <height>239</height>
   <frames>
     <frame index="0">images\spr_energy_infos_0.png</frame>
@@ -37,6 +37,5 @@
     <frame index="14">images\spr_energy_infos_14.png</frame>
     <frame index="15">images\spr_energy_infos_15.png</frame>
     <frame index="16">images\spr_energy_infos_16.png</frame>
-    <frame index="17">images\spr_energy_infos_17.png</frame>
   </frames>
 </sprite>
