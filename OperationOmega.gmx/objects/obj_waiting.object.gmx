@@ -56,24 +56,12 @@ text = "";
 flashing = '|';
 alarm[0] = 12;
 
-switch(global.resolution)
-{
-case 3:
-     add = 214;
-break;
-case 4:
-     add = 128;
-break;
-default:
-        add = 0;
-break;
-}
 if(room = rm_waiting)
 {
 for(i = 0; i &lt; 8; i += 1)
 {
  global.playerprimary[i] = 0;
- global.playerslot[i] = instance_create(424+add, 24+(i*32), obj_playerslot);
+ global.playerslot[i] = instance_create(528, 27+(i*42), obj_playerslot);
  global.playerslot[i].mid = i;
  global.playerslot[i].active = 0;
  global.readied[i] = 1;

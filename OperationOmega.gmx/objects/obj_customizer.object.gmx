@@ -29,16 +29,14 @@
 if(global.master = true)
 {
  instance_create(0, 0, obj_waiting);
- instance_create(522, 396, obj_teamchange);
 }
 else
 {
  instance_create(0, 0, obj_waiting_client);
- instance_create(522, 396, obj_teamchange_client);
 }
 
 backbox = instance_create(0, 0, obj_waiting_boxes);
-rightbox = instance_create(768, 157, obj_waiting_boxes);
+rightbox = instance_create(632, 190, obj_waiting_boxes);
 bottombox = instance_create(0, 480, obj_waiting_boxes);
 backbox.sprite_index = spr_waiting;
 rightbox.sprite_index = spr_waiting_right;

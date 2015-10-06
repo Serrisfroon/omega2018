@@ -163,33 +163,12 @@ switch(global.matchlevel)
 
 black = 1;
 
-switch(global.resolution)
-{
- case 1:
-      increx = 20;
-      increy = 15;
-      viewheight = 660;
-      view_hview[0] = viewheight;
- break; 
- case 2:
-      increx = 20;
-      increy = 16;
-      viewheight = 704;
-      view_hview[0] = viewheight;
- break; 
- case 3:
-      increx = 24;
-      increy = 13.5;
-      viewheight = 642;
-      view_hview[0] = viewheight;
- break; 
- case 4:
-      increx = 24;
-      increy = 15;
-      viewheight = 750;
-      view_hview[0] = viewheight;
- break; 
-}
+
+increx = 24;
+increy = 15;
+viewheight = 750;
+view_hview[0] = viewheight;
+
 view_wview[0] += increx*18;
 view_xview[0] = room_width/2 - view_wview[0]/2;
 view_yview[0] = room_height/2 - view_hview[0]/2;

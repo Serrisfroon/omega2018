@@ -28,4 +28,3 @@ value -= divisor*8;
 //The remainder is the max players
 datamaxplayers[i] = value;
 
-

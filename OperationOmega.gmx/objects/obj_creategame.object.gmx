@@ -104,21 +104,8 @@ if(VERSION_NUMBER != newversion &amp;&amp; newversion != "0")
 //There is now a popup window
 global.creatinggame = 1;
 //Create the popup
-switch(global.resolution)
-{
- case 1:
-      instance_create(160, 120, obj_creategamebox); 
- break;
- case 2:
-      instance_create(160, 136, obj_creategamebox); 
- break;
- case 3:
-      instance_create(267, 120, obj_creategamebox); 
- break;
- case 4:
-      instance_create(224, 120, obj_creategamebox); 
- break;
-}       
+instance_create(224, 120, obj_creategamebox); 
+      
 //Set the default options for the popup
 global.maxplayers = 4;
 global.matchtype = "stock";

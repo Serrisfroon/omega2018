@@ -59,22 +59,11 @@ global.matchtype = "";
 global.matchvariable = 0;
 disconnectcheck = 0;
 
-switch(global.resolution)
-{
-case 3:
-     add = 214;
-break;
-case 4:
-     add = 128;
-break;
-default:
-        add = 0;
-break;
-}
+
 if(room = rm_waiting)
 for(i = 0; i &lt; 8; i += 1)
 {
- global.playerslot[i] = instance_create(424+add, 24+(i*32), obj_playerslot);
+ global.playerslot[i] = instance_create(528, 27+(i*42), obj_playerslot);
  global.playerslot[i].mid = i;
  global.readied[i] = 1;
 }
@@ -271,7 +260,13 @@ alarm[0] = 12;
          global.maxplayers = readbyte(0);
          global.matchtype = readstring(0);
          global.matchvariable = readbyte(0);
-         global.matchlevel = readstring(0);
+         anewlevel = readstring(0);
+         if(anewlevel != global.matchlevel)
+         {
+            global.matchlevel = anewlevel;
+            obj_viewmap.growing = 1;
+            obj_viewmap.alarm[0] = 60;
+         }
          for(i = 0; i &lt;= 7; i += 1)
          {
           global.activated[i] = readbyte(0);

@@ -37,4 +37,3 @@ if(lolmax <= abs(change))
 }
 else
  return argument1;
-

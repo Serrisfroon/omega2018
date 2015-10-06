@@ -24,4 +24,3 @@ switch(packet)
  break;
 }
 writebyte(output,0);
-

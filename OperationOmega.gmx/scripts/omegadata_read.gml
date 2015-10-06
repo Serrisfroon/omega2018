@@ -26,4 +26,3 @@ global.firingmode = ini_read_real("Data", "firingmode", 0);
 global.fromprofile = ini_read_real("Data", "fromprofile", 0);
 
 ini_close();
-

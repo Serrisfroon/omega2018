@@ -40,15 +40,7 @@ if(VERSION_NUMBER != newversion &amp;&amp; newversion != "0")
     exit;
 }
 
-switch(global.resolution)
-{
- case 3:
-      x += 109;
- break;
- case 4:
-      x += 64;
- break;
-}
+x += 64;
 
 //Reset activation variables
 for(i = 0; i &lt; 8; i += 1)

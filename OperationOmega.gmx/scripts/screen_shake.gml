@@ -22,4 +22,3 @@ if (viewpos < 0)
     }
 view_xview[0] = argument0.x-(view_wview[0]/2)+modify_x;
 view_yview[0] = argument0.y-(view_hview[0]/2)+modify_y;
-

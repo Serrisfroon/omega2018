@@ -121,6 +121,8 @@ image_single = 5;
             <string>//Check if the button has been pressed
 if(obj_modbox.creategamenow = 0)
 {
+    obj_viewmap.growing = 1;
+    obj_viewmap.alarm[0] = 60;
     //Fade out the popup
     if(global.sfxtoggle = 0)
         audio_play_sound(snd_clicktext, 1, 0);

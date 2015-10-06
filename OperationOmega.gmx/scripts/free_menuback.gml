@@ -20,4 +20,3 @@ background_delete(global.back_map_vbase);
 background_delete(global.back_map_vtundra1);
 background_delete(global.back_map_vtundra2);
 background_delete(global.back_map_vtundra3);
-

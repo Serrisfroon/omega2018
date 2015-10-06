@@ -25,4 +25,3 @@ ini_write_real("Data", "firingmode", global.firingmode);
 ini_write_real("Data", "fromprofile", global.fromprofile);
 
 ini_close();
-

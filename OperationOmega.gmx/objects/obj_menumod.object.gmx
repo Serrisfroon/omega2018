@@ -39,17 +39,8 @@ alarm[4] = 1;
 backalpha = 0;
 instance_create(0, 0, obj_scanner);
 if(room != rm_aftergame)
-switch(global.resolution)
-{
- case 3:
-      if(tile_layer_find(100, 620, 80) != -1)
-       tile_set_position(tile_layer_find(100, 620, 80), 214, 0); 
- break;
- case 4:
-      if(tile_layer_find(100, 620, 80) != -1)
+    if(tile_layer_find(100, 620, 80) != -1)
        tile_set_position(tile_layer_find(100, 620, 80), 128, 0); 
- break;
-}
 
 if(!instance_exists(obj_background))
  instance_create(0, 0, obj_background);

@@ -103,4 +103,3 @@ for(disi = 1; disi < 8; disi += 1)
         client_sendall(0, 0);     
     }
 }
-

@@ -1601,12 +1601,13 @@
         <sprite>sprites\spr_teamchange</sprite>
         <sprite>sprites\spr_modbox</sprite>
         <sprite>sprites\spr_playerslot</sprite>
+        <sprite>sprites\spr_playerslot_options</sprite>
+        <sprite>sprites\spr_playerslot_openeffect</sprite>
         <sprite>sprites\spr_waiting</sprite>
         <sprite>sprites\spr_waiting_bottom</sprite>
         <sprite>sprites\spr_waiting_right</sprite>
         <sprite>sprites\spr_levelnames</sprite>
       </sprites>
-      <sprite>sprites\spr_cornerinfo</sprite>
       <sprite>sprites\spr_infobox</sprite>
     </sprites>
     <sprite>sprites\spr_empty</sprite>
@@ -2040,8 +2041,9 @@
         <object>objects\obj_modbox</object>
         <object>objects\obj_okaymod</object>
         <object>objects\obj_playerslot</object>
-        <object>objects\obj_showpreview</object>
         <object>objects\obj_waiting_boxes</object>
+        <object>objects\obj_showpreview</object>
+        <object>objects\obj_playerslot_openeffect</object>
       </objects>
       <objects name="select">
         <object>objects\obj_chooseprimary</object>

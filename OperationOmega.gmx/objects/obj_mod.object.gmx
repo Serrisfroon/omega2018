@@ -311,34 +311,11 @@ switch(global.spacehot)
 
 
 //Set the view increments
-global.resolution = 4;
-switch(global.resolution)
-{
- case 1:
-      increx = 20;
-      increy = 15;
-      viewheight = 660;
-      view_hview[0] = viewheight;
- break; 
- case 2:
-      increx = 20;
-      increy = 16;
-      viewheight = 704;
-      view_hview[0] = viewheight;
- break; 
- case 3:
-      increx = 24;
-      increy = 13.5;
-      viewheight = 642;
-      view_hview[0] = viewheight;
- break; 
- case 4:
-      increx = 24;
-      increy = 15;
-      viewheight = 750;
-      view_hview[0] = viewheight;
- break; 
-}
+increx = 24;
+increy = 15;
+viewheight = 750;
+view_hview[0] = viewheight;
+
 </string>
           </argument>
         </arguments>

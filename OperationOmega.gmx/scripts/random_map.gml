@@ -36,4 +36,3 @@ for(i = 1; i <= numberofmaps; i += 1)
 
 //Return the map number
 return i;
-

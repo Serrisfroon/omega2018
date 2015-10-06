@@ -371,4 +371,3 @@ if(saveshield = 1 && global.playership[dummy].shieldup = 0)
         piece = instance_create(-30+random(60), -30+random(60), obj_shieldpart);
         piece.hurting = global.playership[dummy];
     }
-

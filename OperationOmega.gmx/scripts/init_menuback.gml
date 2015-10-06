@@ -20,4 +20,3 @@ global.back_map_vbase = background_add("Backgrounds\back_map_vbase.png", 0, 0);
 global.back_map_vtundra1 = background_add("Backgrounds\back_map_vtundra1.png", 0, 0);
 global.back_map_vtundra2 = background_add("Backgrounds\back_map_vtundra2.png", 0, 0);
 global.back_map_vtundra3 = background_add("Backgrounds\back_map_vtundra3.png", 0, 0);
-

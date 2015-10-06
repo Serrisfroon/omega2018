@@ -102,4 +102,3 @@ download_file("http://www.insomniasoft.net/version/Operation%20Omega.exe", "Oper
 
 
 show_message("Operation Omega has finished installing and updating. The game will now restart.");
-

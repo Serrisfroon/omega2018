@@ -55,34 +55,17 @@ switch(room)
       linex[2] = 0;
       liney[2] = 185;
       linewidth[2] = 200;
-      //Red Team
-      timer[3] = 143;
-      linex[3] = 423;
-      switch(global.resolution)
-      {
-       case 3:
-            linex[3] += 214;
-       break;
-       case 4:
-            linex[3] += 128;
-       break;
-      }       
-      liney[3] = 12;
-      linewidth[3] = 220;
+      //Players
+      timer[3] = 170;
+      linex[3] = 523;  
+      liney[3] = 20;
+      linewidth[3] = 219;
  break;
  case rm_gamelist:
       //Listing
       timer[0] = 195;
-      linex[0] = 62;
-      switch(global.resolution)
-      {
-       case 3:
-            linex[0] += 214;
-       break;
-       case 4:
-            linex[0] += 128;
-       break;
-      }       
+      linex[0] = 190;
+     
       liney[0] = 0;
       linewidth[0] = 578;
  break;
