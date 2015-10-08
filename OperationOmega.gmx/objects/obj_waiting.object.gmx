@@ -61,9 +61,10 @@ if(room = rm_waiting)
 for(i = 0; i &lt; 8; i += 1)
 {
  global.playerprimary[i] = 0;
- global.playerslot[i] = instance_create(528, 27+(i*42), obj_playerslot);
+ global.playerslot[i] = instance_create(562, 27+(i*42), obj_playerslot);
  global.playerslot[i].mid = i;
  global.playerslot[i].active = 0;
+ global.playerslot[i].alarm[1] = 20+i*5;
  global.readied[i] = 1;
 }
 }
