@@ -66,6 +66,10 @@ for(i = 0; i &lt; 8; i += 1)
  global.playerslot[i].active = 0;
  global.playerslot[i].alarm[1] = 20+i*5;
  global.readied[i] = 1;
+ option[i] = instance_create(494, 42+(i*42), obj_playerslot_option);
+ option[i].image_index = global.activated[i]+1;
+ option[i].mid = i;
+ option[i].owner = global.playerslot[i];
 }
 }
 global.readied[0] = 3;
@@ -76,7 +80,8 @@ global.playerslot[0].ship = global.shipselect;
 global.playerslot[0].ready = 1;
 global.playerslot[0].name = global.name;
 global.activated[0] = 1;
-
+option[0].image_index = 3;
+(instance_create(global.playerslot[0].x, global.playerslot[0].y, obj_playerslot_readied)).mid = 0;
 //Create a socket to listen for connections if the game has just been made
 if(global.newgame = 0)
 {
@@ -260,6 +265,7 @@ while(true)
          writebyte(0, 0);
          writedouble(chatcolor[8], 0);
          writestring(global.othername[mid]+" has joined the game.", 0);
+         writebyte(mid, 0);
          client_sendall(0, 0);
     break;
 
@@ -292,6 +298,12 @@ while(true)
          readystat = readbyte(0);
          global.readied[thisplayer] = readystat;
          audio_play_sound(snd_readyup, 1, 0);
+         if(readystat = 2)
+                (instance_create(global.playerslot[thisplayer].x, global.playerslot[thisplayer].y, obj_playerslot_readied)).mid = thisplayer;
+         else
+            with(obj_playerslot_readied)
+                if(mid = obj_waiting.readystat)
+                    instance_destroy();
          //Send a notice to everyone else
          clearbuffer(0);
          writebyte(11, 0);
@@ -306,6 +318,7 @@ while(true)
           global.redteam = readbyte(0);
           global.blueteam = readbyte(0);
           lolplayer = readbyte(0);
+          (instance_create(global.playerslot[lolplayer].x, global.playerslot[lolplayer].y, obj_playerslot_teamchange)).image_index = global.lolship[lolplayer]+((global.team[lolplayer]-1)*3)-1;
           global.team[lolplayer] = readbyte(0);
     break;
    
@@ -335,6 +348,7 @@ while(true)
          //Get info from leaving player
          mid = readbyte(0);
          droppedname = readstring(0);
+
          //Drop the player and add the drop to the count
          client_drop(mid);
          //Update the info on the games list
@@ -343,6 +357,17 @@ while(true)
             global.createtime = get_servertime();
             sql_modify(global.myipaddress, global.createtime, global.maxplayers, ds_list_size(global.clients)+1, global.matchtype, global.shortlevel, "Waiting");
          }
+        global.newmid = mid;    
+        with(obj_playerslot)
+        {
+            if(mid = global.newmid)
+            {
+                playerleave = instance_create(x, y, obj_playerslot_playerleave);
+                playerleave.owner = id;
+                playerleave.lastimage = global.lolship[mid]+((global.team[mid]-1)*3)-1;
+                visible = 0;
+            }
+        }         
          //Send a notice to your chat
          chatline[0] = chatline[1];
          chatcolor[0] = chatcolor[1];
@@ -366,8 +391,9 @@ while(true)
          clearbuffer(0);
          writebyte(11, 0);
          writebyte(0, 0);
-         writeshort(c_red, 0);
+         writedouble(c_maroon, 0);
          writestring(droppedname+" has left the game.", 0);
+         writebyte(global.newmid, 0);
          client_sendall(0, 0);
     break;
    }
@@ -411,36 +437,49 @@ newclient = tcpaccept(global.listen, true);
 //Accept new players if there is room
 if(global.maxplayers &gt; ds_list_size(global.clients)+1)
 {
- //Abort if no new player
- if(newclient &lt;= 0) exit;
- //Add the player to the client list
- mid = client_add(newclient);
- 
- //Activate their player slot and set their ready status
- global.activated[mid] = 1;
- global.readied[mid] = 1;
- 
- //Tell them they were accepted, give them their mid and other important info
- clearbuffer(0);
- writebyte(CLIENT_ACCEPT, 0);
- writebyte(mid, 0);
- writebyte(ds_list_size(global.clients)+1, 0);
- writebyte(global.maxplayers, 0);
- //Give them a team
- if(global.redteam &gt; global.blueteam) 
- {
-  writebyte(2, 0);
-  global.blueteam += 1;
-  global.team[mid] = 2;
- }
- else 
- {
-  writebyte(1, 0);
-  global.redteam += 1;
-  global.team[mid] = 1;
- }
- //send it all
- sendmessage(newclient, 0, 0, 0);
+    //Abort if no new player
+    if(newclient &lt;= 0) exit;
+    //Add the player to the client list
+    mid = client_add(newclient);
+    
+    //Activate their player slot and set their ready status
+    global.activated[mid] = 1;
+    global.readied[mid] = 1;
+    
+    global.newmid = mid;    
+    with(obj_playerslot)
+    {
+        if(mid = global.newmid)
+        {
+            showthisimage = 0;
+            (instance_create(x, y, obj_playerslot_addplayer)).owner = id;
+        }
+    }
+    
+    option[mid].nextimage = 2;
+    option[mid].scale_out = 1;
+    
+    //Tell them they were accepted, give them their mid and other important info
+    clearbuffer(0);
+    writebyte(CLIENT_ACCEPT, 0);
+    writebyte(mid, 0);
+    writebyte(ds_list_size(global.clients)+1, 0);
+    writebyte(global.maxplayers, 0);
+    //Give them a team
+    if(global.redteam &gt; global.blueteam) 
+    {
+        writebyte(2, 0);
+        global.blueteam += 1;
+        global.team[mid] = 2;
+    }
+    else 
+    {
+        writebyte(1, 0);
+        global.redteam += 1;
+        global.team[mid] = 1;
+    }
+    //send it all
+    sendmessage(newclient, 0, 0, 0);
 }
 else
 {

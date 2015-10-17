@@ -68,6 +68,11 @@ for(i = 0; i &lt; 8; i += 1)
     global.readied[i] = 1;
     global.playerslot[i].alarm[1] = 20+i*5;
 }
+(instance_create(global.playerslot[0].x, global.playerslot[0].y, obj_playerslot_readied)).mid = 0;
+option = instance_create(494, 42+(global.mymid*42), obj_playerslot_option);
+option.image_index = 3;
+option.mid = global.mymid;
+option.owner = global.playerslot[global.mymid];
 </string>
           </argument>
         </arguments>
@@ -120,16 +125,16 @@ alarm[0] = 12;
           <argument>
             <kind>1</kind>
             <string>while(true)
- {
-  var packet, size;
-  size = 0;
-  size = receivemessage(global.host, 0, 0);
-  if(size == 0 || disconnectcheck &gt;= 3000)
-  {
+{
+    var packet, size;
+    size = 0;
+    size = receivemessage(global.host, 0, 0);
+    if(size == 0 || disconnectcheck &gt;= 3000)
+    {
         if(global.musictoggle = 0)
         {
-        audio_stop_sound(music_lunation);
-        audio_play_sound(music_quasar, 1, 1);
+            audio_stop_sound(music_lunation);
+            audio_play_sound(music_quasar, 1, 1);
         }
         //If you are a client, send the disconnection message 
         //to the host, close the port, and return to the connecting
@@ -142,152 +147,212 @@ alarm[0] = 12;
         show_message("The host has disconnected.");
         closesocket(global.udpsock);
         dllfree();
-   if(global.gameslist = 1)
-    room_goto(rm_gamelist);
-   else
-    room_goto(rm_connect);
-   exit;
-  }
-  if(size &lt; 0) 
-  {
-   disconnectcheck += 1;
-   break;
-  }
-  disconnectcheck = 0;
-  packet = readbyte(0);
-   switch(packet)
-   {
-   
-    //Check for new chat messages
-    case 11:
-         //Update your own chat
-         chatline[0] = chatline[1];
-         chatcolor[0] = chatcolor[1];
-         chatline[1] = chatline[2];
-         chatcolor[1] = chatcolor[2];
-         chatline[2] = chatline[3];
-         chatcolor[2] = chatcolor[3];
-         chatline[3] = chatline[4];
-         chatcolor[3] = chatcolor[4];
-         chatline[4] = chatline[5];
-         chatcolor[4] = chatcolor[5];
-         chatline[5] = chatline[6];
-         chatcolor[5] = chatcolor[6];
-         chatline[6] = chatline[7];
-         chatcolor[6] = chatcolor[7];
-         chatline[7] = chatline[8];
-         chatcolor[7] = chatcolor[8];
-         audio_play_sound(snd_chatmessage, 1, 0);
-         hold = readbyte(0);
-         chatcolor[8] = readdouble(0);
-         if(chatcolor[8] != c_maroon)
-          chatcolor[8] = c_white;
-         chatline[8] = readstring(0);
-         //Un-ready if host has just finished changing settings
-         if(chatline[8] = "The host finished changing match settings.")
-          obj_readygo.image_index = 1;
-         //Receive kick
-         if(string_copy(chatline[8], 0, 19) = "The host has kicked")
-          if(global.mymid = readbyte(0))
-          {
-           show_message('You have been kicked from the game.');
-           closesocket(global.udpsock);
-           dllfree();
-           if(global.gameslist = 1)
+        if(global.gameslist = 1)
             room_goto(rm_gamelist);
-           else
+        else
             room_goto(rm_connect);
-           exit;
-          }
-    break;
+        exit;
+    }
+    if(size &lt; 0) 
+    {
+        disconnectcheck += 1;
+        break;
+    }
+    disconnectcheck = 0;
+    packet = readbyte(0);
+    switch(packet)
+    {
     
-   //The host starts the game
-   case 15:
-        global.randommap = readbyte(0); 
-        for(i = 0; i &lt; 8; i += 1)
-        {
-         global.lolship[i] = readbyte(0);
-         global.playerprimary[i] = readbyte(0);
-        }
-        obj_menumod.alarm[3] = 25;
-        obj_waiting_boxes.animation = 3;
-        prnt_menubutton.animation = 2;
-        obj_menumod.animation = 1;
-   break;
-   
-   //The host wants to start, but all players aren't ready
-   case 16:
-        //If you are not ready, send a message to your chat
-        if(obj_readygo.image_index = 1)
-        {
-         //Update your own chat
-         chatline[0] = chatline[1];
-         chatcolor[0] = chatcolor[1];
-         chatline[1] = chatline[2];
-         chatcolor[1] = chatcolor[2];
-         chatline[2] = chatline[3];
-         chatcolor[2] = chatcolor[3];
-         chatline[3] = chatline[4];
-         chatcolor[3] = chatcolor[4];
-         chatline[4] = chatline[5];
-         chatcolor[4] = chatcolor[5];
-         chatline[5] = chatline[6];
-         chatcolor[5] = chatcolor[6];
-         chatline[6] = chatline[7];
-         chatcolor[6] = chatcolor[7];
-         chatline[7] = chatline[8];
-         chatcolor[7] = chatcolor[8];
-         chatcolor[8] = c_maroon;
-         chatline[8] = "The host wants to start. Click ready.";
-        }
-   break;
-          
-    //Post-match stat send
-    case 18:
-        mid = readbyte(0);
-        for(i = 0; i &lt; 8; i += 1)
-        {
-            global.assists[i] += readbyte(0);
-            global.damagedealt[i] += readshort(0);
-        }
-        global.damagetaken[mid] = readshort(0);
-        global.walldeaths += readbyte(0);
-        global.walldamage += readshort(0);
-    break;
-
-    //perform the constant updates
-   case CLIENT_CHECK:
-         global.playercount = readbyte(0);
-         global.maxplayers = readbyte(0);
-         global.matchtype = readstring(0);
-         global.matchvariable = readbyte(0);
-         anewlevel = readstring(0);
-         if(anewlevel != global.matchlevel)
+        //Check for new chat messages
+        case 11:
+            //Update your own chat
+            chatline[0] = chatline[1];
+            chatcolor[0] = chatcolor[1];
+            chatline[1] = chatline[2];
+            chatcolor[1] = chatcolor[2];
+            chatline[2] = chatline[3];
+            chatcolor[2] = chatcolor[3];
+            chatline[3] = chatline[4];
+            chatcolor[3] = chatcolor[4];
+            chatline[4] = chatline[5];
+            chatcolor[4] = chatcolor[5];
+            chatline[5] = chatline[6];
+            chatcolor[5] = chatcolor[6];
+            chatline[6] = chatline[7];
+            chatcolor[6] = chatcolor[7];
+            chatline[7] = chatline[8];
+            chatcolor[7] = chatcolor[8];
+            audio_play_sound(snd_chatmessage, 1, 0);
+            hold = readbyte(0);
+            chatcolor[8] = readdouble(0);
+            if(chatcolor[8] != c_maroon)
+             chatcolor[8] = c_white;
+            chatline[8] = readstring(0);
+            //Animate player box if a player has joined
+            if(string_copy(chatline[8], string_length(chatline[8])-19, 20) = "has joined the game." &amp;&amp; chatcolor[8] = c_maroon) 
+            {
+                global.newmid = readbyte(0);    
+                with(obj_playerslot)
+                {
+                    if(mid = global.newmid)
+                    {   
+                        showthisimage = 0;                    
+                        (instance_create(x, y, obj_playerslot_addplayer)).owner = id;
+                    }
+                }             
+            }
+            //Animate player box if a player has left The host has kicked
+            if((string_copy(chatline[8], string_length(chatline[8])-17, 18) = "has left the game." || string_copy(chatline[8], 0, 19) = "The host has kicked") &amp;&amp; chatcolor[8] = c_maroon) 
+            {
+                global.newmid = readbyte(0);    
+                with(obj_playerslot)
+                {
+                    if(mid = global.newmid)
+                    {
+                        playerleave = instance_create(x, y, obj_playerslot_playerleave);
+                        playerleave.owner = id;
+                        playerleave.lastimage = global.lolship[mid]+((global.team[mid]-1)*3)-1;
+                        visible = 0;
+                    }
+                }
+            }
+            //Un-ready if host has just finished changing settings
+            if(chatline[8] = "The host finished changing match settings.")
+            {
+                obj_readygo.image_index = 1;
+                with(obj_playerslot_readied)
+                    if(mid != 0)
+                        instance_destroy();
+            }
+            //Receive kick
+            if(string_copy(chatline[8], 0, 19) = "The host has kicked")
+            if(global.mymid = readbyte(0))
+            {
+                show_message('You have been kicked from the game.');
+                closesocket(global.udpsock);
+                dllfree();
+                if(global.gameslist = 1)
+                    room_goto(rm_gamelist);
+                else
+                    room_goto(rm_connect);
+                exit;
+            }
+        break;
+     
+        //The host starts the game
+        case 15:
+             global.randommap = readbyte(0); 
+             for(i = 0; i &lt; 8; i += 1)
+             {
+                global.lolship[i] = readbyte(0);
+                global.playerprimary[i] = readbyte(0);
+             }
+             obj_menumod.alarm[3] = 25;
+             obj_waiting_boxes.animation = 3;
+             obj_playerslot_option.scale_out = 1;
+             prnt_menubutton.animation = 2;
+             obj_menumod.animation = 1;
+        break;
+    
+    //The host wants to start, but all players aren't ready
+    case 16:
+         //If you are not ready, send a message to your chat
+         if(obj_readygo.image_index = 1)
          {
+            //Update your own chat
+            chatline[0] = chatline[1];
+            chatcolor[0] = chatcolor[1];
+            chatline[1] = chatline[2];
+            chatcolor[1] = chatcolor[2];
+            chatline[2] = chatline[3];
+            chatcolor[2] = chatcolor[3];
+            chatline[3] = chatline[4];
+            chatcolor[3] = chatcolor[4];
+            chatline[4] = chatline[5];
+            chatcolor[4] = chatcolor[5];
+            chatline[5] = chatline[6];
+            chatcolor[5] = chatcolor[6];
+            chatline[6] = chatline[7];
+            chatcolor[6] = chatcolor[7];
+            chatline[7] = chatline[8];
+            chatcolor[7] = chatcolor[8];
+            chatcolor[8] = c_maroon;
+            chatline[8] = "The host wants to start. Click ready.";
+         }
+    break;
+           
+     //Post-match stat send
+     case 18:
+         mid = readbyte(0);
+         for(i = 0; i &lt; 8; i += 1)
+         {
+             global.assists[i] += readbyte(0);
+             global.damagedealt[i] += readshort(0);
+         }
+         global.damagetaken[mid] = readshort(0);
+         global.walldeaths += readbyte(0);
+         global.walldamage += readshort(0);
+     break;
+    
+     //perform the constant updates
+    case CLIENT_CHECK:
+        global.playercount = readbyte(0);
+        global.maxplayers = readbyte(0);
+        global.matchtype = readstring(0);
+        global.matchvariable = readbyte(0);
+        anewlevel = readstring(0);
+        if(anewlevel != global.matchlevel)
+        {
             global.matchlevel = anewlevel;
             obj_viewmap.growing = 1;
             obj_viewmap.alarm[0] = 60;
-         }
-         for(i = 0; i &lt;= 7; i += 1)
-         {
-          global.activated[i] = readbyte(0);
-          if(global.activated[i] = 1)
-          {          
-           if(i != global.mymid)
-            global.othername[i] = readstring(0);
-           else
-            useless = readstring(0);
-           global.team[i] = readbyte(0);
-           global.lolship[i] = readbyte(0);
-           global.readied[i] = readbyte(0);
-          }
-         } 
-          global.redteam = readbyte(0);
-          global.blueteam = readbyte(0);
- 
-   break;
-  }
- }
+        }
+        for(i = 0; i &lt;= 7; i += 1)
+        {
+            old_activated = global.activated[i]
+            global.activated[i] = readbyte(0);
+            if(global.activated[i] = 1)
+            {          
+                if(i != global.mymid)
+                    global.othername[i] = readstring(0);
+                else
+                    useless = readstring(0);
+                    
+                old_team = global.team[i];
+                global.team[i] = readbyte(0);
+                if(old_team != global.team[i])
+                    if(global.playerslot[i].hspeed = 0)
+                        (instance_create(global.playerslot[i].x, global.playerslot[i].y, obj_playerslot_teamchange)).image_index = global.lolship[i]+((old_team-1)*3)-1;  
+                                      
+                global.lolship[i] = readbyte(0);
+                
+                old_readied = global.readied[i];
+                global.readied[i] = readbyte(0);
+                if(old_readied != global.readied[i] &amp;&amp; global.playerslot[i].hspeed = 0)
+                {
+                    if(old_readied = 1)
+                        (instance_create(global.playerslot[i].x, global.playerslot[i].y, obj_playerslot_readied)).mid = i;
+                    else
+                    {
+                        global.newmid = i;
+                        with(obj_playerslot_readied)
+                            if(mid = global.newmid)
+                                instance_destroy();
+                    }
+                }
+                    
+                                      
+            }
+            else
+                if(old_activated != global.activated[i] &amp;&amp; old_activated != 1)
+                    global.playerslot[i].slideover = 0;            
+        } 
+         global.redteam = readbyte(0);
+         global.blueteam = readbyte(0);
+        
+    break;
+    }
+}
 </string>
           </argument>
         </arguments>

@@ -1601,8 +1601,10 @@
         <sprite>sprites\spr_teamchange</sprite>
         <sprite>sprites\spr_modbox</sprite>
         <sprite>sprites\spr_playerslot</sprite>
-        <sprite>sprites\spr_playerslot_options</sprite>
+        <sprite>sprites\spr_playerslot_readied</sprite>
+        <sprite>sprites\spr_playerslot_addplayer</sprite>
         <sprite>sprites\spr_playerslot_openeffect</sprite>
+        <sprite>sprites\spr_playerslot_options</sprite>
         <sprite>sprites\spr_waiting</sprite>
         <sprite>sprites\spr_waiting_bottom</sprite>
         <sprite>sprites\spr_waiting_right</sprite>
@@ -1854,6 +1856,8 @@
     <font>fonts\fnt_bigtext</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_teamchange_client</object>
+    <object>objects\obj_teamchange</object>
     <objects name="In Game">
       <object>objects\obj_ship</object>
       <object>objects\obj_ally</object>
@@ -2028,8 +2032,6 @@
       <objects name="Waiting Room">
         <object>objects\obj_readygo</object>
         <object>objects\obj_quit</object>
-        <object>objects\obj_teamchange</object>
-        <object>objects\obj_teamchange_client</object>
         <object>objects\obj_waiting</object>
         <object>objects\obj_waiting_client</object>
         <object>objects\obj_customizer</object>
@@ -2044,6 +2046,11 @@
         <object>objects\obj_waiting_boxes</object>
         <object>objects\obj_showpreview</object>
         <object>objects\obj_playerslot_openeffect</object>
+        <object>objects\obj_playerslot_addplayer</object>
+        <object>objects\obj_playerslot_playerleave</object>
+        <object>objects\obj_playerslot_teamchange</object>
+        <object>objects\obj_playerslot_readied</object>
+        <object>objects\obj_playerslot_option</object>
       </objects>
       <objects name="select">
         <object>objects\obj_chooseprimary</object>

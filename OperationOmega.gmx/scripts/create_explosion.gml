@@ -65,5 +65,3 @@ part_emitter_burst(obj_partsystem.system, explode_emit, obj_partsystem.explosion
 
 //Destroy Emitter
 part_emitter_destroy(obj_partsystem.system, explode_emit);
-
-

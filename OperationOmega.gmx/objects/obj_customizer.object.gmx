@@ -44,6 +44,7 @@ bottombox.sprite_index = spr_waiting_bottom;
 rightbox.animation = -1;
 bottombox.animation = -1;
 alarm[0] = 10;
+alarm[3] = 120;
 
 //Initialize the bars' current sizes
 astretch = 0;
@@ -84,17 +85,42 @@ changeslotpart = part_type_create();
 part_type_shape(changeslotpart,pt_shape_flare);
 part_type_size(changeslotpart,0.30,0.30,0,0);
 part_type_scale(changeslotpart,1,1);
-part_type_color1(changeslotpart,32768);
+part_type_color1(changeslotpart,7168);
 part_type_alpha2(changeslotpart,1,0);
 part_type_speed(changeslotpart,0,0,0,0);
 part_type_direction(changeslotpart,0,359,0,0);
 part_type_gravity(changeslotpart,0,270);
 part_type_orientation(changeslotpart,0,0,0,0,1);
 part_type_blend(changeslotpart,1);
-part_type_life(changeslotpart,25,25);
+part_type_life(changeslotpart,8,8);
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(instance_exists(obj_playerslot_readied))
+    obj_playerslot_readied.phase = 1;
+alarm[3] = 300;
 </string>
           </argument>
         </arguments>

@@ -61,6 +61,8 @@ for(i = 1; i &lt;= 10; i += 1)
 for(i = 0; i &lt; 8; i += 1)
 {
     global.lolship[i] = 0;
+    global.team[i] = 0;
+    global.readied[i] = 0;
 }
 
 for(i = 0; i &lt;= 7; i++)
