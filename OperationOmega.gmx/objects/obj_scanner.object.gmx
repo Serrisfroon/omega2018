@@ -53,7 +53,7 @@ switch(room)
       //map
       timer[2] = 40;
       linex[2] = 0;
-      liney[2] = 185;
+      liney[2] = 181;
       linewidth[2] = 200;
       //Players
       timer[3] = 170;
