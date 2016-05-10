@@ -187,7 +187,7 @@ if(image_alpha != 1)
 
 draw_set_alpha(display_alpha);
 //Set the font
-draw_set_font(fnt_digital);
+draw_set_font(fnt_chat);
 //Draw your typed text
 draw_text(x-90, y-13, keyboard_string+flashing);
 </string>

@@ -210,7 +210,7 @@ if(instance_exists(obj_okaygame))
 draw_set_alpha(image_alpha-0.5)
 draw_rectangle(0, 0, 768, 480, 0);
 
-draw_set_font(fnt_digital);
+draw_set_font(fnt_chat);
 //Draw the popup
 draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, 0, c_white, image_alpha*over_alpha);
 if(image_alpha != 1)

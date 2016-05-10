@@ -403,7 +403,7 @@ switch(global.matchlevel)
 }
 draw_background_ext(back_mappreview, 0, 172, 1, 1, 0, c_white, image_alpha); 
 for(i = 1; i &lt;= global.matchvariable; i += 1)
-    draw_sprite_ext(spr_lifecount, 0, x-18+(i*12), y+2, 1, 1, 0, c_white, image_alpha);    
+    draw_sprite_ext(spr_lifecount, 0, x-18+(i*12), y+5, 1, 1, 0, c_white, image_alpha);    
 if(growing = 1 &amp;&amp; global.master = true)
     draw_sprite_ext(spr_map_select, 0, x, y, 1, 1, 0, c_white, image_alpha);
 

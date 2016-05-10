@@ -29,7 +29,7 @@
 growth = 0;
 growing = 0;
 selected = 0;
-
+y += 4;
 empty = -1;
 if(global.primary = 0)
 {

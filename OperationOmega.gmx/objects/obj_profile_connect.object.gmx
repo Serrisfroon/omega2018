@@ -127,7 +127,7 @@ if(over_alpha &lt; 1 &amp;&amp; animation != 4)
           <argument>
             <kind>1</kind>
             <string>//Set the font and color
-draw_set_font(fnt_digital);
+draw_set_font(fnt_chat);
 draw_set_color(c_black);
 
 
