@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>
-cursorsize = 0.7;
+cursorsize = 0.8;
 oldmouse_x = mouse_x;
 oldmouse_y = mouse_y;
 //Initialize transition variable
@@ -667,7 +667,7 @@ if(dim = 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>cursorsize = 0.7;
+            <string>cursorsize = 0.8;
 </string>
           </argument>
         </arguments>
@@ -692,7 +692,7 @@ if(dim = 1)
             <kind>1</kind>
             <string>instance_create(mouse_x, mouse_y, obj_clickring);
 
-cursorsize = 0.6;
+cursorsize = 0.7;
 
 var thisgridx, thisgridy;
 repeat(4+irandom(6))

@@ -68,7 +68,6 @@ for(i = 0; i &lt; 8; i += 1)
 for(i = 0; i &lt;= 7; i++)
     global.background[i] = -1;
 
-view_sync(global.resolution);
 
 cleanmem();
 

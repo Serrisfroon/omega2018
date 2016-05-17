@@ -1562,6 +1562,7 @@
         <sprite>sprites\spr_private</sprite>
         <sprite>sprites\spr_back</sprite>
         <sprite>sprites\spr_profileslot</sprite>
+        <sprite>sprites\spr_profile_ship</sprite>
       </sprites>
       <sprites name="Options">
         <sprite>sprites\spr_musicon</sprite>
