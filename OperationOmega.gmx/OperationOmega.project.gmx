@@ -1543,8 +1543,6 @@
       <sprites name="Main Menu">
         <sprite>sprites\spr_singleplayer</sprite>
         <sprite>sprites\spr_multiplayer</sprite>
-        <sprite>sprites\spr_options</sprite>
-        <sprite>sprites\spr_quit</sprite>
       </sprites>
       <sprites name="Mouseover Info">
         <sprite>sprites\spr_ship_infos</sprite>
@@ -1560,6 +1558,8 @@
       <sprites name="Multiplayer">
         <sprite>sprites\spr_server</sprite>
         <sprite>sprites\spr_private</sprite>
+        <sprite>sprites\spr_options</sprite>
+        <sprite>sprites\spr_quit</sprite>
         <sprite>sprites\spr_back</sprite>
         <sprite>sprites\spr_profileslot</sprite>
         <sprite>sprites\spr_profile_ship</sprite>
@@ -1612,6 +1612,7 @@
         <sprite>sprites\spr_levelnames</sprite>
       </sprites>
       <sprite>sprites\spr_infobox</sprite>
+      <sprite>sprites\spr_menu_selection</sprite>
     </sprites>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_wall</sprite>
@@ -2071,14 +2072,14 @@
       <objects name="Multiplayer">
         <object>objects\obj_server</object>
         <object>objects\obj_private</object>
+        <object>objects\obj_options</object>
+        <object>objects\obj_endgame</object>
         <object>objects\obj_profile_connect</object>
         <object>objects\obj_tomain</object>
       </objects>
       <objects name="Main Menu">
         <object>objects\obj_singleplayer</object>
         <object>objects\obj_multiplayer</object>
-        <object>objects\obj_options</object>
-        <object>objects\obj_endgame</object>
       </objects>
       <objects name="Options">
         <object>objects\obj_music</object>

@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>image_alpha = 0;
-image_xscale = 0.6;
-image_yscale = 0.6;
+image_xscale = 0;
+image_yscale = 0;
 animation = 0;
 over_alpha = 0;
 display_alpha = 0;
@@ -75,8 +75,8 @@ switch(animation)
 {
     case 0:
         if(image_xscale &lt; 1.2)
-            image_xscale += 0.09;
-        image_yscale += 0.03;
+            image_xscale += 0.1;
+        image_yscale += 0.1;
         image_alpha += 0.053;
         if(image_yscale &gt;= 1.2)
             animation = 1;
