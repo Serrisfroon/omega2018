@@ -1612,7 +1612,10 @@
         <sprite>sprites\spr_levelnames</sprite>
       </sprites>
       <sprite>sprites\spr_infobox</sprite>
+      <sprite>sprites\spr_menu_selection_faded</sprite>
       <sprite>sprites\spr_menu_selection</sprite>
+      <sprite>sprites\spr_menu_box</sprite>
+      <sprite>sprites\spr_menu_box_background</sprite>
     </sprites>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_wall</sprite>
@@ -2075,6 +2078,8 @@
         <object>objects\obj_options</object>
         <object>objects\obj_endgame</object>
         <object>objects\obj_profile_connect</object>
+        <object>objects\obj_menu_box</object>
+        <object>objects\obj_menu_selection</object>
         <object>objects\obj_tomain</object>
       </objects>
       <objects name="Main Menu">
