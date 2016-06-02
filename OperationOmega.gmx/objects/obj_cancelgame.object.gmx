@@ -102,6 +102,8 @@ if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);
 //The popup is cancelled
 obj_creategamebox.animation = 3;
+obj_creategamebox.selection_reference.animation_step = 6;
+obj_menu_box.animation = 5;
 with(obj_lessplayers) instance_destroy();
 with(obj_moreplayers) instance_destroy();
 with(obj_lesstype) instance_destroy();

@@ -1621,6 +1621,7 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
     <sprite>sprites\spr_previewbound</sprite>
+    <sprite>sprites\sprite253</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Menu">
@@ -1861,8 +1862,31 @@
     <font>fonts\fnt_bigtext</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_teamchange_client</object>
-    <object>objects\obj_teamchange</object>
+    <objects name="Trash">
+      <object>objects\obj_teamchange</object>
+      <objects name="Main Menu">
+        <object>objects\obj_singleplayer</object>
+        <object>objects\obj_multiplayer</object>
+      </objects>
+      <object>objects\obj_creategame</object>
+      <object>objects\obj_host</object>
+      <object>objects\obj_connect</object>
+      <objects name="Options">
+        <object>objects\obj_music</object>
+        <object>objects\obj_sfx</object>
+        <object>objects\obj_firing</object>
+      </objects>
+      <object>objects\obj_joingame</object>
+      <object>objects\obj_refresher</object>
+      <object>objects\obj_selectgame</object>
+      <object>objects\obj_server</object>
+      <object>objects\obj_options</object>
+      <object>objects\obj_tomain</object>
+      <object>objects\obj_private</object>
+      <object>objects\obj_endgame</object>
+      <object>objects\obj_teamchange_client</object>
+      <object>objects\prnt_menubutton</object>
+    </objects>
     <objects name="In Game">
       <object>objects\obj_ship</object>
       <object>objects\obj_ally</object>
@@ -1876,6 +1900,46 @@
       <object>objects\prnt_enemyattack</object>
       <object>objects\prnt_allyattack</object>
       <object>objects\prnt_weaponattack</object>
+      <objects name="Deploy Secondary Attacks">
+        <object>objects\obj_dualmissile</object>
+        <object>objects\obj_dualmissile_enemy</object>
+        <object>objects\obj_layermissile</object>
+        <object>objects\obj_layermissile_enemy</object>
+        <object>objects\obj_huntermine</object>
+        <object>objects\obj_huntermine_enemy</object>
+        <object>objects\obj_locustmissile</object>
+        <object>objects\obj_locustmissile_enemy</object>
+        <object>objects\obj_phantommine</object>
+        <object>objects\obj_phantommine_enemy</object>
+        <object>objects\obj_solus</object>
+        <object>objects\obj_solus_shot</object>
+        <object>objects\obj_solus_enemy</object>
+        <object>objects\obj_solus_shot_enemy</object>
+        <object>objects\obj_tridentmissile</object>
+        <object>objects\obj_tridentmissile_enemy</object>
+        <object>objects\obj_shockmissile</object>
+        <object>objects\obj_shockmissile_enemy</object>
+        <object>objects\obj_hackermine</object>
+        <object>objects\obj_hackermine_enemy</object>
+        <object>objects\obj_hermitmissile</object>
+        <object>objects\obj_counterfield</object>
+        <object>objects\obj_hermitmissile_enemy</object>
+        <object>objects\obj_counterfield_enemy</object>
+        <object>objects\obj_strikemissile</object>
+        <object>objects\obj_strikemissile_enemy</object>
+        <object>objects\obj_strikemine</object>
+        <object>objects\obj_strikemine_enemy</object>
+        <object>objects\obj_turret</object>
+        <object>objects\obj_turret_enemy</object>
+        <object>objects\obj_splitmissile</object>
+        <object>objects\obj_splitmissile_enemy</object>
+        <object>objects\obj_clustermine</object>
+        <object>objects\obj_clustermine_small</object>
+        <object>objects\obj_clustermine_enemy</object>
+        <object>objects\obj_clustermine_small_enemy</object>
+        <object>objects\prnt_allydeploy</object>
+        <object>objects\prnt_enemydeploy</object>
+      </objects>
       <object>objects\prnt_allyenergy</object>
       <object>objects\prnt_enemyenergy</object>
       <objects name="Primary Weapons">
@@ -1937,46 +2001,6 @@
         <object>objects\obj_trigger</object>
         <object>objects\obj_trigger_enemy</object>
       </objects>
-      <objects name="Deploy Secondary Attacks">
-        <object>objects\obj_dualmissile</object>
-        <object>objects\obj_dualmissile_enemy</object>
-        <object>objects\obj_layermissile</object>
-        <object>objects\obj_layermissile_enemy</object>
-        <object>objects\obj_huntermine</object>
-        <object>objects\obj_huntermine_enemy</object>
-        <object>objects\obj_locustmissile</object>
-        <object>objects\obj_locustmissile_enemy</object>
-        <object>objects\obj_phantommine</object>
-        <object>objects\obj_phantommine_enemy</object>
-        <object>objects\obj_solus</object>
-        <object>objects\obj_solus_shot</object>
-        <object>objects\obj_solus_enemy</object>
-        <object>objects\obj_solus_shot_enemy</object>
-        <object>objects\obj_tridentmissile</object>
-        <object>objects\obj_tridentmissile_enemy</object>
-        <object>objects\obj_shockmissile</object>
-        <object>objects\obj_shockmissile_enemy</object>
-        <object>objects\obj_hackermine</object>
-        <object>objects\obj_hackermine_enemy</object>
-        <object>objects\obj_hermitmissile</object>
-        <object>objects\obj_counterfield</object>
-        <object>objects\obj_hermitmissile_enemy</object>
-        <object>objects\obj_counterfield_enemy</object>
-        <object>objects\obj_strikemissile</object>
-        <object>objects\obj_strikemissile_enemy</object>
-        <object>objects\obj_strikemine</object>
-        <object>objects\obj_strikemine_enemy</object>
-        <object>objects\obj_turret</object>
-        <object>objects\obj_turret_enemy</object>
-        <object>objects\obj_splitmissile</object>
-        <object>objects\obj_splitmissile_enemy</object>
-        <object>objects\obj_clustermine</object>
-        <object>objects\obj_clustermine_small</object>
-        <object>objects\obj_clustermine_enemy</object>
-        <object>objects\obj_clustermine_small_enemy</object>
-        <object>objects\prnt_allydeploy</object>
-        <object>objects\prnt_enemydeploy</object>
-      </objects>
       <objects name="Controllers">
         <object>objects\obj_gamestart</object>
         <object>objects\obj_mod</object>
@@ -2009,19 +2033,12 @@
       </objects>
     </objects>
     <objects name="Menus">
-      <objects name="Private Game">
-        <object>objects\obj_host</object>
-        <object>objects\obj_connect</object>
+      <objects name="Private Game Popups">
         <object>objects\obj_enterhostip</object>
         <object>objects\obj_connectbut</object>
+        <object>objects\obj_cancelbut</object>
       </objects>
-      <objects name="Games Server">
-        <object>objects\obj_creategame</object>
-        <object>objects\obj_joingame</object>
-        <object>objects\obj_refresher</object>
-        <object>objects\obj_selectgame</object>
-      </objects>
-      <objects name="Game Creation">
+      <objects name="Game Creation Popup">
         <object>objects\obj_creategamebox</object>
         <object>objects\obj_lessplayers</object>
         <object>objects\obj_moreplayers</object>
@@ -2072,42 +2089,29 @@
         <object>objects\obj_login_box</object>
         <object>objects\obj_gridmake</object>
       </objects>
-      <objects name="Multiplayer">
-        <object>objects\obj_server</object>
-        <object>objects\obj_private</object>
-        <object>objects\obj_options</object>
-        <object>objects\obj_endgame</object>
+      <objects name="Menu Navigation">
         <object>objects\obj_profile_connect</object>
         <object>objects\obj_menu_box</object>
         <object>objects\obj_menu_selection</object>
-        <object>objects\obj_tomain</object>
       </objects>
-      <objects name="Main Menu">
-        <object>objects\obj_singleplayer</object>
-        <object>objects\obj_multiplayer</object>
-      </objects>
-      <objects name="Options">
-        <object>objects\obj_music</object>
-        <object>objects\obj_sfx</object>
-        <object>objects\obj_firing</object>
+      <objects name="Menu Effects">
+        <object>objects\obj_scanner</object>
+        <object>objects\obj_gridpass</object>
+        <object>objects\obj_loadpass</object>
+        <object>objects\obj_backpass</object>
+        <object>objects\obj_cursor_grid</object>
+        <object>objects\obj_clickring</object>
+        <object>objects\obj_scanline</object>
       </objects>
       <object>objects\obj_messagebox</object>
       <object>objects\obj_tomulti</object>
       <object>objects\obj_playagain</object>
       <object>objects\obj_menumod</object>
-      <object>objects\prnt_menubutton</object>
-      <object>objects\obj_gridpass</object>
-      <object>objects\obj_backpass</object>
-      <object>objects\obj_cursor_grid</object>
-      <object>objects\obj_clickring</object>
-      <object>objects\obj_scanline</object>
-      <object>objects\obj_scanner</object>
       <object>objects\obj_background</object>
       <object>objects\obj_prematch</object>
       <object>objects\obj_aftermatch</object>
       <object>objects\obj_aftergame</object>
       <object>objects\obj_gotopractice</object>
-      <object>objects\obj_loadpass</object>
     </objects>
   </objects>
   <rooms name="rooms">

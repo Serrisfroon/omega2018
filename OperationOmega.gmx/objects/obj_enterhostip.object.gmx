@@ -26,15 +26,16 @@
           <argument>
             <kind>1</kind>
             <string>//Initialize textbox marker flash
-flashing = '';
+flashing = ' ';
 //Set time until flash
-alarm[0] = 10;
+alarm[0] = 15;
 //Empty the keyboard string
 keyboard_string = '';
 //Initialize creation check
 creategamenow = 0;
 //Create buttons
 instance_create(x, y, obj_connectbut);
+instance_create(x, y, obj_cancelbut);
 
 image_alpha = 0;
 image_xscale = 0.6;
@@ -65,12 +66,12 @@ display_alpha = 0;
           <argument>
             <kind>1</kind>
             <string>//Change the flashing text
-if(flashing = '')
+if(flashing = ' ')
  flashing = '|';
 else
- flashing = '';
+ flashing = ' ';
 //Set time until next flash
-alarm[0] = 10;
+alarm[0] = 15;
 </string>
           </argument>
         </arguments>
@@ -153,7 +154,6 @@ if(string_length(keyboard_string) &gt; 16)
 if(keyboard_check(vk_control) &amp;&amp; keyboard_check_pressed(ord('V')))
     keyboard_string = clipboard_get_text();
 //Set the ip to connect to to the text entered
-obj_connectbut.thisip = keyboard_string;
 </string>
           </argument>
         </arguments>
@@ -189,7 +189,10 @@ draw_set_alpha(display_alpha);
 //Set the font
 draw_set_font(fnt_chat);
 //Draw your typed text
-draw_text(x-90, y-13, keyboard_string+flashing);
+draw_set_color(c_aqua);
+draw_set_halign(fa_center);
+draw_text(x-5, y-2, keyboard_string+flashing);
+draw_set_color(c_black);
 </string>
           </argument>
         </arguments>

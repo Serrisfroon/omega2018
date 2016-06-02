@@ -30,6 +30,64 @@ text_sprite = spr_empty;
 mouse_over = 0;
 mouse_over_transition = 0;
 animation_step = 0;
+quit_option = 0;
+goto_room = -1;
+close_menu = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>animation_step = 5;
+obj_menu_box.animation = 7;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(quit_option = 1 || close_menu = 1)
+{
+    if(close_menu = 1)
+        obj_menu_box.close_menu = 1;
+    obj_menu_box.animation = 3;
+    exit;
+}
+room_goto(goto_room);
 </string>
           </argument>
         </arguments>
@@ -52,9 +110,7 @@ animation_step = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>        if(image_index &gt; 13 &amp;&amp; text_alpha &lt; 1) 
-            text_alpha += 0.05;
-switch(animation_step)
+            <string>switch(animation_step)
 {
     case 0:
         if(image_index &gt; 13 &amp;&amp; text_alpha &lt; 1) 
@@ -62,9 +118,8 @@ switch(animation_step)
         if(text_alpha = 1)
         {  
             animation_step += 1;
-            if(mouse_x &gt; x-104 &amp;&amp; mouse_x &lt; x+104 &amp;&amp; mouse_y &gt; y-19 &amp;&amp; mouse_y &lt; y+19)
-                break;
-            mouse_over = 1;
+            if!(mouse_x &gt; x-104 &amp;&amp; mouse_x &lt; x+104 &amp;&amp; mouse_y &gt; y-19 &amp;&amp; mouse_y &lt; y+19)
+                mouse_over = 1;
         }
     break;
     case 1:    
@@ -86,6 +141,55 @@ switch(animation_step)
                 image_yscale += 0.025;
             }        
         }   
+    break;
+    case 2:
+        image_alpha -= 0.1;
+        text_alpha -= 0.1;
+    break;
+    case 3:
+        if(y &gt; obj_menu_box.y+6)
+            y -= 6;
+        else
+            if(y &lt; obj_menu_box.y-6)
+                y += 6;
+            else
+            {
+                y = obj_menu_box.y;
+                animation_step = 4;
+                if(text_sprite != spr_host &amp;&amp; text_sprite != spr_connect)
+                    alarm[1] = 20;
+                else
+                {
+                    if(text_sprite = spr_host)
+                    {
+                        //Create the popup
+                        (instance_create(384, 240, obj_creategamebox)).selection_reference = id;                                
+                        
+                        //Set the default options for the popup
+                        global.maxplayers = 4;
+                        global.matchtype = "stock";
+                        global.matchvariable = 3;
+                    }
+                    else
+                    {
+                        //Create a popup
+                        (instance_create(384, 240, obj_enterhostip)).selection_reference = id;
+                    }
+                }
+            }
+    break;
+    case 5:
+        image_xscale += 0.08;
+        image_yscale -= 0.1;
+        if(image_yscale &lt;= 0)
+        {
+           alarm[0] = 10;
+           animation_step = 6;
+        }  
+    break;
+    case 6:
+        y -= 6;
+        
     break;
 }
 </string>
@@ -110,8 +214,7 @@ switch(animation_step)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(image_speed = 0 &amp;&amp; animation_step = 1)
-    mouse_over = 1;
+            <string>mouse_over = 1;
 </string>
           </argument>
         </arguments>
@@ -141,6 +244,80 @@ switch(animation_step)
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Exit unless the mouse is over this selection
+if(mouse_over_transition &gt; 0 || animation_step != 1 || animation_step = 4)
+    exit;
+switch(text_sprite)
+{
+    case spr_musicon:
+        global.musictoggle = 1;
+        text_sprite = spr_musicoff;
+        exit;
+    break;
+    case spr_musicoff:
+        global.musictoggle = 0;
+        text_sprite = spr_musicon;
+        exit;
+    
+    break;
+    case spr_sfxon:
+        global.sfxtoggle = 1;
+        text_sprite = spr_sfxoff;
+        exit;   
+    break;
+    case spr_sfxoff:
+        global.sfxtoggle = 0;
+        text_sprite = spr_sfxon;
+        exit;       
+    break;
+    case spr_firing:
+        global.firingmode = 1;
+        text_sprite = spr_firing2;
+        exit;   
+    break;
+    case spr_firing2:
+        global.firingmode = 0;
+        text_sprite = spr_firing;
+        exit;       
+    break;
+}
+//Fade out all selections
+with(obj_menu_selection)
+{
+    animation_step = 2;
+}
+//Move this selection to the center of the menu
+animation_step = 3;
+//Signal the menu box to close
+obj_menu_box.animation = 6;
+switch(room)
+{
+    case rm_mainmenu:
+        obj_profile_connect.animation = 3;
+    break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="7">
       <action>
         <libid>1</libid>
@@ -161,7 +338,6 @@ switch(animation_step)
             <string>image_speed = 0;
 image_index = 39;
 image_angle = 0;
-mouse_over = 1;
 </string>
           </argument>
         </arguments>
@@ -184,7 +360,13 @@ mouse_over = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(text_alpha &lt; 1)
+            <string>if(animation_step = 5)
+{
+    draw_sprite_ext(sprite_index, 14, x, y, image_xscale, image_yscale, 0, c_white, 1);
+    draw_sprite_ext(text_sprite, 0, x, y, image_xscale, image_yscale, 0, c_white, 1);    
+    exit;
+}
+if(text_alpha &lt; 1 || animation_step = 2)
 {
     draw_self();
     draw_sprite_ext(text_sprite, 0, x, y, image_xscale, image_yscale, 0, c_white, text_alpha);

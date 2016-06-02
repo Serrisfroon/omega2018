@@ -55,13 +55,13 @@ found = 0;
 text = "";
 flashing = '|';
 alarm[0] = 12;
-
+option[8] = 0;
 if(room = rm_waiting)
 {
 for(i = 0; i &lt; 8; i += 1)
 {
  global.playerprimary[i] = 0;
- global.playerslot[i] = instance_create(562, 27+(i*42), obj_playerslot);
+ global.playerslot[i] = instance_create(626, 27+(i*31), obj_playerslot);
  global.playerslot[i].mid = i;
  global.playerslot[i].active = 0;
  global.playerslot[i].alarm[1] = 20+i*5;

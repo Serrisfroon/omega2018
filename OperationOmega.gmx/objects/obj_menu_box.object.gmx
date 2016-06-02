@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>1</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -35,10 +35,36 @@ display_alpha = 0;
 menu_expand = 0;
 expand_alpha = 0;
 create_selections = 0;
+waiting_for_new_room = 0;
+close_menu = 0;
+dont_create = 0;
 
-
-
-
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(close_menu = 0)
+    game_end();
+else
+    instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -157,47 +183,213 @@ switch(animation)
         if(image_xscale &lt;= 1.1)
             over_alpha -= 0.1;
         if(image_xscale &lt;= 0.6)
+        {
             image_alpha = 0;
+            alarm[3] = 10;
+            animation = -1;
+        }
     break;
     case 5:
     //7 pixels on top and bottom
     //each menu selection needs 40 height
     //Main menu: 120-14 = 106 pixels needed to expand
-
-        if(menu_expand &lt; 78)
+        switch(room)
         {
-            menu_expand += 6;
+            case rm_mainmenu:
+                if(menu_expand &lt; 78)
+                {
+                    menu_expand += 6;
+                    if(expand_alpha &lt; 1)
+                        expand_alpha += 0.1;
+                }
+                else
+                {
+                    menu_expand = 80;
+                    if(expand_alpha &gt; 0)
+                        expand_alpha -= 0.1;
+                }
+                if(menu_expand &gt; 33 &amp;&amp; create_selections = 0)
+                {
+                    menu_privategame = instance_create(x, y-22, obj_menu_selection);
+                    menu_privategame.text_sprite = spr_private;
+                    menu_privategame.goto_room = rm_connect;
+                    menu_options = instance_create(x, y+22, obj_menu_selection);
+                    menu_options.image_angle = 180;
+                    menu_options.text_sprite = spr_options;
+                    menu_options.goto_room = rm_options;
+                    create_selections = 1;
+                }
+                if(menu_expand &gt; 73 &amp;&amp; create_selections = 1)
+                {
+                    menu_publicgame = instance_create(x, y-63, obj_menu_selection);
+                    menu_publicgame.text_sprite = spr_server;
+                    menu_publicgame.goto_room = rm_gamelist;
+                    menu_quitgame = instance_create(x, y+63, obj_menu_selection);
+                    menu_quitgame.text_sprite = spr_quit;
+                    menu_quitgame.image_angle = 180;
+                    menu_quitgame.quit_option = 1;
+                    create_selections = 2;
+                }
+            break;
+            case rm_options:
+                if(menu_expand &lt; 78)
+                {
+                    menu_expand += 6;
+                    if(expand_alpha &lt; 1)
+                        expand_alpha += 0.1;
+                }
+                else
+                {
+                    menu_expand = 80;
+                    if(expand_alpha &gt; 0)
+                        expand_alpha -= 0.1;
+                }
+                if(menu_expand &gt; 33 &amp;&amp; create_selections = 0)
+                {
+                    menu_privategame = instance_create(x, y-22, obj_menu_selection);
+                    if(global.sfxtoggle = 1)
+                        menu_privategame.text_sprite = spr_sfxoff;
+                    else
+                        menu_privategame.text_sprite = spr_sfxon;
+                    menu_options = instance_create(x, y+22, obj_menu_selection);
+                    menu_options.image_angle = 180;
+                    if(global.firingmode = 1)
+                        menu_options.text_sprite = spr_firing2;
+                    else
+                        menu_options.text_sprite = spr_firing;                    
+                    create_selections = 1;
+                }
+                if(menu_expand &gt; 73 &amp;&amp; create_selections = 1)
+                {
+                    menu_publicgame = instance_create(x, y-63, obj_menu_selection);
+                    if(global.musictoggle = 1)
+                        menu_publicgame.text_sprite = spr_musicoff;
+                    else
+                        menu_publicgame.text_sprite = spr_musicon;
+                    menu_quitgame = instance_create(x, y+63, obj_menu_selection);
+                    menu_quitgame.text_sprite = spr_back;
+                    menu_quitgame.image_angle = 180;
+                    menu_quitgame.goto_room = rm_mainmenu;
+                    create_selections = 2;
+                }
+            break;
+            case rm_connect:
+                if(menu_expand &lt; 58)
+                {
+                    menu_expand += 6;
+                    if(expand_alpha &lt; 1)
+                        expand_alpha += 0.1;
+                }
+                else
+                {
+                    menu_expand = 60;
+                    with(obj_menu_selection)
+                        if(animation_step &gt;= 6)
+                        {
+                            animation_step = 1;
+                            obj_menu_box.create_selections = 0;
+                            obj_menu_box.dont_create = animation_step-5;
+                        }
+                    if(expand_alpha &gt; 0)
+                        expand_alpha -= 0.1;
+                }
+                if(menu_expand &gt; 13 &amp;&amp; create_selections = 0)
+                {
+                    if(dont_create != 2)
+                    {
+                        menu_options = instance_create(x, y, obj_menu_selection);
+                        menu_options.image_angle = 180;
+                        menu_options.text_sprite = spr_connect;
+                        menu_options.goto_room = rm_options;
+                    }
+                    else
+                        dont_create = 0;
+                    create_selections = 1;
+                }
+                if(menu_expand &gt; 43 &amp;&amp; create_selections = 1)
+                {
+                    if(dont_create != 1)
+                    {
+                        menu_publicgame = instance_create(x, y-43, obj_menu_selection);
+                        menu_publicgame.text_sprite = spr_host;
+                        menu_publicgame.goto_room = rm_gamelist;
+                    }
+                    else
+                        dont_create = 0;
+                    menu_quitgame = instance_create(x, y+43, obj_menu_selection);
+                    menu_quitgame.text_sprite = spr_back;
+                    menu_quitgame.image_angle = 180;
+                    menu_quitgame.goto_room = rm_mainmenu;
+                    create_selections = 2;
+                }
+            break;
+        }
+    break;
+    case 6:
+        if(menu_expand &gt; 24)
+        {
+            menu_expand -= 6;
             if(expand_alpha &lt; 1)
                 expand_alpha += 0.1;
         }
         else
         {
-            menu_expand = 80;
+            menu_expand = 18;
             if(expand_alpha &gt; 0)
                 expand_alpha -= 0.1;
         }
-        if(menu_expand &gt; 33 &amp;&amp; create_selections = 0)
+    break;
+    case 7:
+        if(menu_expand &gt; 0)
         {
-            menu_privategame = instance_create(x, y-22, obj_menu_selection);
-            menu_privategame.text_sprite = spr_private;
-            menu_options = instance_create(x, y+22, obj_menu_selection);
-            menu_options.image_angle = 180;
-            menu_options.text_sprite = spr_options;
-            create_selections = 1;
+            menu_expand -= 3;
+            if(expand_alpha &lt; 1)
+                expand_alpha += 0.1;
         }
-        if(menu_expand &gt; 73 &amp;&amp; create_selections = 1)
+        else
         {
-            menu_publicgame = instance_create(x, y-63, obj_menu_selection);
-            menu_publicgame.text_sprite = spr_server;
-            menu_quitgame = instance_create(x, y+63, obj_menu_selection);
-            menu_quitgame.text_sprite = spr_quit;
-            menu_quitgame.image_angle = 180;
-            create_selections = 2;
+            menu_expand = 0;
+            if(expand_alpha &gt; 0)
+            {
+                expand_alpha -= 0.1;
+            }
+            else
+                waiting_for_new_room = 1;
         }
     break;
+
 }
 if(over_alpha &lt; 1 &amp;&amp; animation != 4)
     over_alpha += 0.1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(waiting_for_new_room = 1)
+{
+    waiting_for_new_room = 0;
+    animation = 5;
+    create_selections = 0;
+    dont_create = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -220,7 +412,9 @@ if(over_alpha &lt; 1 &amp;&amp; animation != 4)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set the font and color
+            <string>if(animation &lt; 0)
+    exit;
+//Set the font and color
 draw_set_font(fnt_chat);
 draw_set_color(c_aqua);
 

@@ -1047,201 +1047,6 @@ if(shoot &lt;= 0)
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="prnt_allydeploy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious)
-//If there is shield left, create effect
-if(shieldup = 1)
-{
- hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[deployhits];
- hurt.hurting = id;
-}
-
-//Create burning trail effect
-if(global.dflameseffect = 1)
-{
- emit[deployhits] = part_emitter_create(system);
- part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
- part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
- effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60/global.framerate;
- deployhits += 1;
-}
-
-//Shake the screen if in range
-if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
-
-//Destroy the attack
-with(other) instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_splitmissile">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Cancel if this ship was the last targeted
-if(other.oldmid = mid)
- exit;
-effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious)
-//If there is shield left, create effect
-if(shieldup = 1)
-{
- hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[deployhits];
- hurt.hurting = id;
-}
-
-//Create burning trail effect
-if(global.dflameseffect = 1)
-{
- emit[deployhits] = part_emitter_create(system);
- part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
- part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
- effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60/global.framerate;
- deployhits += 1;
-}
-
-//Shake the screen if in range
-if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
-
-//Split into two missiles.
-if(other.damage &gt; 4)
-{
- other.split = instance_create(other.x, other.y, obj_splitmissile);
- other.split.mid = other.mid;
- other.split.direction = other.direction-30;
- other.split.damage = other.damage-2+other.amplified*2;
- other.split.oldmid = mid;
- other.split = instance_create(other.x, other.y, obj_splitmissile);
- other.split.mid = other.mid;
- other.split.direction = other.direction+30;
- other.split.damage = other.damage-2+other.amplified*2;
- other.split.oldmid = mid;
-}
-
-//Destroy the attack
-with(other) instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_strikemine_enemy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(other.mid != mid || other.recollect = 0)
- exit;
-
-with(other)
-{
- collected = 1;
- sfx_play(snd_pickup, x, y);
- instance_destroy();
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_hermitmissile">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious);
-
-//If there is shield left, create effect
-if(shieldup = 1)
-{
- hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[deployhits];
- hurt.hurting = id;
-}
-
-//Create burning trail effect
-if(global.dflameseffect = 1)
-{
- emit[deployhits] = part_emitter_create(system);
- part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
- part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
- effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60/global.framerate;
- deployhits += 1;
-}
-
-//Shake the screen if in range
-if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
-
-//Destroy the attack
-with(other) instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="4" ename="obj_storm">
       <action>
         <libid>1</libid>
@@ -1443,6 +1248,201 @@ if(shieldup = 1)
  hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
  hurt.hurting = id;
 }
+
+//Destroy the attack
+with(other) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="prnt_allydeploy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious)
+//If there is shield left, create effect
+if(shieldup = 1)
+{
+ hurt = instance_create(0, 0, obj_hit);
+ hurt.hitdir = effectdir[deployhits];
+ hurt.hurting = id;
+}
+
+//Create burning trail effect
+if(global.dflameseffect = 1)
+{
+ emit[deployhits] = part_emitter_create(system);
+ part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
+ part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
+ effectdir[deployhits] =  direction-effectdir[deployhits];
+ alarm[7] = 60/global.framerate;
+ deployhits += 1;
+}
+
+//Shake the screen if in range
+if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+ obj_mod.viewpos = 4;
+
+//Destroy the attack
+with(other) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_splitmissile">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Cancel if this ship was the last targeted
+if(other.oldmid = mid)
+ exit;
+effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious)
+//If there is shield left, create effect
+if(shieldup = 1)
+{
+ hurt = instance_create(0, 0, obj_hit);
+ hurt.hitdir = effectdir[deployhits];
+ hurt.hurting = id;
+}
+
+//Create burning trail effect
+if(global.dflameseffect = 1)
+{
+ emit[deployhits] = part_emitter_create(system);
+ part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
+ part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
+ effectdir[deployhits] =  direction-effectdir[deployhits];
+ alarm[7] = 60/global.framerate;
+ deployhits += 1;
+}
+
+//Shake the screen if in range
+if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+ obj_mod.viewpos = 4;
+
+//Split into two missiles.
+if(other.damage &gt; 4)
+{
+ other.split = instance_create(other.x, other.y, obj_splitmissile);
+ other.split.mid = other.mid;
+ other.split.direction = other.direction-30;
+ other.split.damage = other.damage-2+other.amplified*2;
+ other.split.oldmid = mid;
+ other.split = instance_create(other.x, other.y, obj_splitmissile);
+ other.split.mid = other.mid;
+ other.split.direction = other.direction+30;
+ other.split.damage = other.damage-2+other.amplified*2;
+ other.split.oldmid = mid;
+}
+
+//Destroy the attack
+with(other) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_strikemine_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(other.mid != mid || other.recollect = 0)
+ exit;
+
+with(other)
+{
+ collected = 1;
+ sfx_play(snd_pickup, x, y);
+ instance_destroy();
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_hermitmissile">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious);
+
+//If there is shield left, create effect
+if(shieldup = 1)
+{
+ hurt = instance_create(0, 0, obj_hit);
+ hurt.hitdir = effectdir[deployhits];
+ hurt.hurting = id;
+}
+
+//Create burning trail effect
+if(global.dflameseffect = 1)
+{
+ emit[deployhits] = part_emitter_create(system);
+ part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
+ part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
+ effectdir[deployhits] =  direction-effectdir[deployhits];
+ alarm[7] = 60/global.framerate;
+ deployhits += 1;
+}
+
+//Shake the screen if in range
+if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+ obj_mod.viewpos = 4;
 
 //Destroy the attack
 with(other) instance_destroy();

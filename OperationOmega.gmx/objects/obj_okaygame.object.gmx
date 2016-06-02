@@ -207,18 +207,13 @@ alarm[1] = 20;
     exit;
 if(obj_creategamebox.creategamenow = 1)
     exit;
+selection_reference = obj_creategamebox.selection_reference;
+selection_reference.alarm[1] = 10;
+selection_reference.close_menu = 1;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);
-//Check if this is at the games list and the game name 
-//is too small
-if(global.gameslist = 1 &amp;&amp; string_length(servername) &lt; 2)
-{
- //Tell the player and exit the script
- show_message('The Game Name is too small.');
- exit;
-}
+
 //Check if the button has been pressed
-prnt_menubutton.animation = 2;
 obj_creategamebox.animation = 3;
 //The button has been pressed; a game will be made
 obj_creategamebox.creategamenow = 1;

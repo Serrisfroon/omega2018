@@ -246,9 +246,9 @@ if(obj_enterhostip.creategamenow = 0)
     mask_index = spr_empty;
     //Set time until action
     alarm[2] = 60;
-    prnt_menubutton.animation = 2;
     obj_enterhostip.animation = 3;
     sprite_index = -1;
+    thisip = keyboard_string;
 }
 
 </string>

@@ -21,6 +21,8 @@ init_menuback();
 global.fromprofile = 0;
 global.tutorial = 0;
 global.messageup = 0;
+global.gameslist = 0;
+global.newgame = 0;
 //Initialize winsock resart check variable
 global.needrestart = 0;
 //Initialize popup window control variable
@@ -63,6 +65,7 @@ for(i = 0; i &lt; 8; i += 1)
     global.lolship[i] = 0;
     global.team[i] = 0;
     global.readied[i] = 0;
+    global.activated[i] = 0;
 }
 
 for(i = 0; i &lt;= 7; i++)
