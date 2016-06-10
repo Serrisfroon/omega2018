@@ -66,7 +66,7 @@ for(i = 0; i &lt; 8; i += 1)
  global.playerslot[i].active = 0;
  global.playerslot[i].alarm[1] = 20+i*5;
  global.readied[i] = 1;
- option[i] = instance_create(494, 42+(i*42), obj_playerslot_option);
+ option[i] = instance_create(530, 42+(i*42), obj_playerslot_option);
  option[i].image_index = global.activated[i]+1;
  option[i].mid = i;
  option[i].owner = global.playerslot[i];
@@ -518,6 +518,8 @@ if(instance_exists(obj_customizer))
     draw_set_alpha(obj_customizer.backbox.display_alpha);
 else
     draw_set_alpha(1);
+keyboard_string = keyboard_string+flashing;
+
 //Stop more input if max is reached
 if(string_length(keyboard_string) &gt; 90)
  keyboard_string = string_copy(keyboard_string, 0, 90);
@@ -538,7 +540,8 @@ for(i = string_length(keyboard_string); i &gt;= 0; i -= 1)
   break;  
  }
 //Draw the text in the chat bar
-draw_text_transformed(6, 460, string_copy(keyboard_string, startchat, stopchat)+flashing, 1, 1, 0);
+draw_set_color(c_white);
+draw_text_transformed(6, 458, string_copy(keyboard_string, startchat, stopchat)+flashing, 1, 1, 0);
 
 //draw chat
 q = 0;
@@ -547,9 +550,8 @@ for(i = 0; i &lt;= 7-max(q, 0); i += 1)
  if(string_width(chatline[8-i]) &gt; 360)
   q += 1;
  draw_set_color(chatcolor[8-i]);
- draw_text_ext(2, 420-(i*18+q*14), chatline[8-i], 14, 370);
+ draw_text_ext(2, 410-(i*18+q*14), chatline[8-i], 14, 370);
 }
-draw_set_color(c_black);
 draw_set_alpha(1);
 
 </string>

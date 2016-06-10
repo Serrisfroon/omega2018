@@ -69,7 +69,7 @@ for(i = 0; i &lt; 8; i += 1)
     global.playerslot[i].alarm[1] = 20+i*5;
 }
 (instance_create(global.playerslot[0].x, global.playerslot[0].y, obj_playerslot_readied)).mid = 0;
-option = instance_create(494, 42+(global.mymid*42), obj_playerslot_option);
+option = instance_create(530, 42+(global.mymid*42), obj_playerslot_option);
 option.image_index = 3;
 option.mid = global.mymid;
 option.owner = global.playerslot[global.mymid];
@@ -397,7 +397,7 @@ for(i = string_length(keyboard_string); i &gt;= 0; i -= 1)
   break;  
  }
 //Draw the text in the chat bar
-draw_text_transformed(6, 460, string_copy(keyboard_string, startchat, stopchat)+flashing, 1, 1, 0);
+draw_text_transformed(6, 458, string_copy(keyboard_string, startchat, stopchat)+flashing, 1, 1, 0);
 //draw chat
 q = 0;
 for(i = 0; i &lt;= 7-max(q, 0); i += 1)
@@ -405,7 +405,7 @@ for(i = 0; i &lt;= 7-max(q, 0); i += 1)
  if(string_width(chatline[8-i]) &gt; 360)
   q += 1;
  draw_set_color(chatcolor[8-i]);
- draw_text_ext(2, 420-(i*18+q*14), chatline[8-i], 14, 360);
+ draw_text_ext(2, 410-(i*18+q*14), chatline[8-i], 14, 360);
 }
 draw_set_color(c_black);
 

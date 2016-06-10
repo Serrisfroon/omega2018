@@ -237,7 +237,7 @@ room_goto(goto_room);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(image_speed = 0 &amp;&amp; animation_step = 1)
+            <string>//if(image_speed = 0 &amp;&amp; animation_step = 1)
     mouse_over = 0;
 </string>
           </argument>

@@ -8,17 +8,17 @@
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
-  <bbox_right>439</bbox_right>
+  <bbox_right>491</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>164</bbox_bottom>
+  <bbox_bottom>213</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>1</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>440</width>
-  <height>165</height>
+  <width>492</width>
+  <height>214</height>
   <frames>
     <frame index="0">images\spr_waiting_0.png</frame>
     <frame index="1">images\spr_waiting_1.png</frame>

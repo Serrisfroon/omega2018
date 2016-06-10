@@ -36,7 +36,7 @@ else
 }
 
 backbox = instance_create(0, 0, obj_waiting_boxes);
-rightbox = instance_create(632, 190, obj_waiting_boxes);
+rightbox = instance_create(664, 150, obj_waiting_boxes);
 bottombox = instance_create(0, 480, obj_waiting_boxes);
 backbox.sprite_index = spr_waiting;
 rightbox.sprite_index = spr_waiting_right;
@@ -76,9 +76,9 @@ switch(global.shipselect)
 //Move the weapon slots according to the selected ship
 create_weaponslots();
 
-instance_create(70, 45, obj_armorstat);
-instance_create(70, 75, obj_shieldstat);
-instance_create(70, 105, obj_speedstat);
+instance_create(70, 60, obj_armorstat);
+instance_create(70, 90, obj_shieldstat);
+instance_create(70, 120, obj_speedstat);
 
 playerslot_particles = part_system_create();
 changeslotpart = part_type_create();
@@ -196,18 +196,18 @@ alarm[1] = 10;
 
 //Set the font and color
 draw_set_font(fnt_chat);
-draw_set_color(c_black);
+draw_set_color(c_aqua);
 draw_set_alpha(backbox.display_alpha);
 
 //Draw stat icons
-draw_sprite_ext(spr_staticons, 0, 70, 45, 1, 1, 0, c_white, backbox.display_alpha);
-draw_sprite_ext(spr_staticons, 1, 70, 75, 1, 1, 0, c_white, backbox.display_alpha);
-draw_sprite_ext(spr_staticons, 2, 70, 105, 1, 1, 0, c_white, backbox.display_alpha);
+draw_sprite_ext(spr_staticons, 0, 70, 60, 1, 1, 0, c_white, backbox.display_alpha);
+draw_sprite_ext(spr_staticons, 1, 70, 90, 1, 1, 0, c_white, backbox.display_alpha);
+draw_sprite_ext(spr_staticons, 2, 70, 120, 1, 1, 0, c_white, backbox.display_alpha);
 
 //Draw the stat bars
-draw_sprite_ext(spr_statbar, -1, 90, 45, astretch, 1, 0, c_white, 0.7*backbox.display_alpha);
-draw_sprite_ext(spr_statbar, -1, 90, 75, sstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
-draw_sprite_ext(spr_statbar, -1, 90, 105, mstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
+draw_sprite_ext(spr_statbar, -1, 90, 60, astretch, 1, 0, c_white, 0.7*backbox.display_alpha);
+draw_sprite_ext(spr_statbar, -1, 90, 90, sstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
+draw_sprite_ext(spr_statbar, -1, 90, 120, mstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
 //Make the bars bigger if they are not yet at their max
 if(astretch &lt; amaxd)
  astretch += amaxd/15;
@@ -219,25 +219,26 @@ if(mstretch &lt; mmaxd)
  
 //Draw Ship Names
 draw_set_halign(fa_center);
-draw_set_font(fnt_digital);
+draw_set_font(fnt_chat);
 switch(global.shipselect)
 {
  case 1:
-      draw_text(100, 5, 'Alphastar');
+      draw_text(100, 14, 'Alphastar');
  break;
  case 2:
-      draw_text(100, 5, 'Swiftwing');
+      draw_text(100, 14, 'Swiftwing');
  break;
  case 3:
-      draw_text(100, 5, 'Goliath');
+      draw_text(100, 14, 'Goliath');
  break;
 }
 draw_set_halign(fa_left);
-draw_set_font(fnt_chat);
 
 //Draw guiding text
-draw_text(258, 2, 'Weapons');
+draw_text(300, 14, 'Weapons');
 draw_set_alpha(1);
+draw_set_font(fnt_chat);
+
 </string>
           </argument>
         </arguments>

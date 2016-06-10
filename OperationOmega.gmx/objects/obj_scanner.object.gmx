@@ -42,30 +42,26 @@ switch(room)
  break;
  case rm_waiting:
       //Chat
-      timer[0] = 74;
+      timer[0] = 75;
       linex[0] = 0;
-      liney[0] = 292;
+      liney[0] = 280;
       linewidth[0] = 375;
       //Customization
-      timer[1] = 75;
+      timer[1] = 97;
       linex[1] = 0;
       liney[1] = 0;
-      linewidth[1] = 427;
+      linewidth[1] = 474;
       //map
-      timer[2] = 40;
-      linex[2] = 0;
-      liney[2] = 181;
-      linewidth[2] = 200;
+      //timer[2] = 40;
+      //linex[2] = 0;
+      //liney[2] = 181;
+      //linewidth[2] = 200;
       //Players
-      timer[3] = 170;
-      linex[3] = 523;  
+      timer[3] = 128;
+      linex[3] = 583;  
       liney[3] = 20;
-      linewidth[3] = 219;
-      //Chat entry
-      timer[5] = 12;
-      linex[5] = 0;
-      liney[5] = 456;
-      linewidth[5] = 375;      
+      linewidth[3] = 161;
+
  break;
  case rm_gamelist:
       //Listing
@@ -82,10 +78,10 @@ switch(room)
       liney[0] = 320;
       linewidth[0] = 375;
       //Red Team
-      timer[3] = 141;
+      timer[3] = 145;
       linex[3] = 214;
       liney[3] = 8;
-      linewidth[3] = 543;
+      linewidth[3] = 545;
  break;
  
 }

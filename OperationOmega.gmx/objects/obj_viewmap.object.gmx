@@ -341,18 +341,18 @@ switch(global.matchlevel)
             draw_preview(global.back_map_dspace1, back[0]);
             draw_preview(global.back_map_dspace2, back[2]);
             draw_preview(global.back_map_stars, back[3]);
-            draw_sprite_ext(spr_previewnames, 1, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 1, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Katrin Base":
             draw_preview(global.back_map_kbase, back[2]);
-            draw_sprite_ext(spr_previewnames, 5, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 5, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Combat Zone":
             draw_preview(global.back_map_czone1, back[0]);
             draw_preview(global.back_map_czone2, back[2]);
             draw_preview(global.back_map_stars, back[3]);
             draw_preview(global.back_map_czone3, back[4]);
-            draw_sprite_ext(spr_previewnames, 2, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 2, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Victa Tundra":
             back[2] = backspeed/1.5;
@@ -360,48 +360,48 @@ switch(global.matchlevel)
             draw_preview(global.back_map_vtundra1, back[0]);
             draw_preview(global.back_map_vtundra2, back[2]);
             draw_preview(global.back_map_vtundra3, back[3]);
-            draw_sprite_ext(spr_previewnames, 7, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 7, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Barricade":
             draw_preview(global.back_map_barricade1, back[0]);
             draw_preview(global.back_map_barricade2, back[2]);
             draw_preview(global.back_map_stars, back[3]);
-            draw_sprite_ext(spr_previewnames, 3, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 3, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Victa Base":
             draw_preview(global.back_map_vbase, back[2]);
-            draw_sprite_ext(spr_previewnames, 8, 0, 172, 1, 1, 0, c_white, image_alpha);       
+            draw_sprite_ext(spr_previewnames, 8, 410, 375, 1, 1, 0, c_white, image_alpha);       
        break;
        case "Satellite":
             draw_preview(global.back_map_sat1, back[0]);
             draw_preview(global.back_map_sat2, back[2]);
             draw_preview(global.back_map_stars, back[3]);
-            draw_sprite_ext(spr_previewnames, 4, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 4, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Orbit Station":
             draw_preview(global.back_map_ostation2, back[0]);
             draw_preview(global.back_map_sat2, back[2]);
             draw_preview(global.back_map_stars, back[3]);
             draw_preview(global.back_map_ostation, back[4]);
-            draw_sprite_ext(spr_previewnames, 11, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 11, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Katrin Coast":
             draw_preview(global.back_map_kcoast, back[2]);
-            draw_sprite_ext(spr_previewnames, 6, 0, 172, 1, 1, 0, c_white, image_alpha);       
+            draw_sprite_ext(spr_previewnames, 6, 410, 375, 1, 1, 0, c_white, image_alpha);       
        break;
        case "Space Depot":
             draw_preview(global.back_map_barricade1, back[0]);
             draw_preview(global.back_map_barricade2, back[2]);
             draw_preview(global.back_map_stars, back[3]);
             draw_preview(global.back_map_sdepot, back[4]);
-            draw_sprite_ext(spr_previewnames, 10, 0, 172, 1, 1, 0, c_white, image_alpha);
+            draw_sprite_ext(spr_previewnames, 10, 410, 375, 1, 1, 0, c_white, image_alpha);
        break;
        case "Random":
             draw_preview(global.back_map_random, back[2]);
-            draw_sprite_ext(spr_previewnames, 9, 0, 172, 1, 1, 0, c_white, image_alpha);       
+            draw_sprite_ext(spr_previewnames, 9, 410, 375, 1, 1, 0, c_white, image_alpha);       
        break;
 }
-draw_background_ext(back_mappreview, 0, 172, 1, 1, 0, c_white, image_alpha); 
+draw_background_ext(back_mappreview, 410, 375, 1, 1, 0, c_white, image_alpha); 
 for(i = 1; i &lt;= global.matchvariable; i += 1)
     draw_sprite_ext(spr_lifecount, 0, x-18+(i*12), y+5, 1, 1, 0, c_white, image_alpha);    
 if(growing = 1 &amp;&amp; global.master = true)
