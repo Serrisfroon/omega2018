@@ -1598,6 +1598,7 @@
           <sprite>sprites\spr_viewmap_mask</sprite>
           <sprite>sprites\spr_map_select</sprite>
           <sprite>sprites\spr_previewnames</sprite>
+          <sprite>sprites\spr_map_box</sprite>
         </sprites>
         <sprite>sprites\spr_teamchange</sprite>
         <sprite>sprites\spr_modbox</sprite>
@@ -1610,6 +1611,7 @@
         <sprite>sprites\spr_waiting_bottom</sprite>
         <sprite>sprites\spr_waiting_right</sprite>
         <sprite>sprites\spr_levelnames</sprite>
+        <sprite>sprites\spr_playerslot_selected</sprite>
       </sprites>
       <sprite>sprites\spr_infobox</sprite>
       <sprite>sprites\spr_menu_selection_faded</sprite>
@@ -2071,6 +2073,7 @@
         <object>objects\obj_playerslot_addplayer</object>
         <object>objects\obj_playerslot_playerleave</object>
         <object>objects\obj_playerslot_teamchange</object>
+        <object>objects\obj_playerslot_selected</object>
         <object>objects\obj_playerslot_readied</object>
         <object>objects\obj_playerslot_option</object>
       </objects>

@@ -38,9 +38,12 @@ else
 backbox = instance_create(0, 0, obj_waiting_boxes);
 rightbox = instance_create(664, 150, obj_waiting_boxes);
 bottombox = instance_create(0, 480, obj_waiting_boxes);
+mapbox = instance_create(768, 480, obj_waiting_boxes);
+mapbox.sprite_index = spr_map_box;
 backbox.sprite_index = spr_waiting;
 rightbox.sprite_index = spr_waiting_right;
 bottombox.sprite_index = spr_waiting_bottom;
+mapbox.animation = -1;
 rightbox.animation = -1;
 bottombox.animation = -1;
 alarm[0] = 10;
@@ -126,6 +129,30 @@ alarm[3] = 300;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>mapbox.animation = 0
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -144,7 +171,7 @@ alarm[3] = 300;
           <argument>
             <kind>1</kind>
             <string>bottombox.animation = 0
-
+alarm[2] = 10;
 </string>
           </argument>
         </arguments>

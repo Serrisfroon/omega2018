@@ -35,7 +35,54 @@ startalpha = 0;
 slideover = 220;
 showthisimage = 1;
 readyalpha = 0;
-
+changeable = 0;
+confirm_kick = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>confirm_kick = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>changeable = 0;
 </string>
           </argument>
         </arguments>
@@ -93,6 +140,58 @@ alarm[0] = 180+random(300);
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(!instance_exists(obj_playerslot_selected))
+    exit;
+global.othermid = mid;
+with(obj_playerslot_selected)
+    if(mid = global.othermid)
+        instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.master = 1 || mid = global.mymid)
+    (instance_create(x, y, obj_playerslot_selected)).mid = mid;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="4">
       <action>
         <libid>1</libid>
@@ -110,121 +209,248 @@ alarm[0] = 180+random(300);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
-if(global.master = false)
- exit;
- 
-slideover = 0;
+            <string>if(global.creatinggame = 1)
+    exit;
+if(global.sfxtoggle = 0)
+    audio_play_sound(snd_clicktext, 1, 0);
 switch(global.activated[mid])
 {
- case -1:
-      global.activated[mid] = -10;
-      global.maxplayers += 1;
-      if(global.gameslist = 1)
-      {
-          if(global.playercount = global.maxplayers)
-            roomstatus = "Full";
-          else
-            roomstatus = "Waiting";
-          sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, roomstatus);
-      }
-
- break;
- case 0:
-      global.activated[mid] = 10;
-      global.maxplayers -= 1;
-      if(global.gameslist = 1)
-      {
-          if(global.playercount = global.maxplayers)
-            roomstatus = "Full";
-          else
-            roomstatus = "Waiting";
-          sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, roomstatus);
-      }
- break;
- case 1:
-      if(confirm = 0)
-      {
-       confirm = 1;
-       with(obj_waiting)
-       {
-        //Send a message to only your chat
-        chatline[0] = chatline[1];
-        chatcolor[0] = chatcolor[1];
-        chatline[1] = chatline[2];
-        chatcolor[1] = chatcolor[2];
-        chatline[2] = chatline[3];
-        chatcolor[2] =chatcolor[3];
-        chatline[3] = chatline[4];
-        chatcolor[3] = chatcolor[4];
-        chatline[4] = chatline[5];
-        chatcolor[4] = chatcolor[5];
-        chatline[5] = chatline[6];
-        chatcolor[5] = chatcolor[6];
-        chatline[6] = chatline[7];
-        chatcolor[6] = chatcolor[7];
-        chatline[7] = chatline[8];
-        chatcolor[7] = chatcolor[8];
-        chatcolor[8] = c_maroon;
-        chatline[8] = "Click this slot again to kick the player from the game.";
-       }
-      }
-      else
-      {
-       global.activated[mid] = 0;
-       global.playercount -= 1;
-       confirm = 0;
-       with(obj_waiting)
-       {
-        //Update the info on the games list
+    //Open the slot
+    case -1:
+        global.activated[mid] = 0;
+        global.maxplayers += 1;
+        slideover = 0;
         if(global.gameslist = 1)
-            sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, "Waiting");
-        //send a notice to your chat and exit
-        chatline[0] = chatline[1];
-        chatcolor[0] = chatcolor[1];
-        chatline[1] = chatline[2];
-        chatcolor[1] = chatcolor[2];
-        chatline[2] = chatline[3];
-        chatcolor[2] = chatcolor[3];
-        chatline[3] = chatline[4];
-        chatcolor[3] = chatcolor[4];
-        chatline[4] = chatline[5];
-        chatcolor[4] = chatcolor[5];
-        chatline[5] = chatline[6];
-        chatcolor[5] = chatcolor[6];
-        chatline[6] = chatline[7];
-        chatcolor[6] = chatcolor[7];
-        chatline[7] = chatline[8];
-        chatcolor[7] = chatcolor[8];
-        chatline[8] = "The host has kicked "+global.othername[mid]+" from the game.";
-        chatcolor[8] = c_maroon;
-       }
-       global.newmid = mid;    
-        with(obj_playerslot)
         {
-            if(mid = global.newmid)
+            if(global.playercount = global.maxplayers)
+              roomstatus = "Full";
+            else
+              roomstatus = "Waiting";
+            sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, roomstatus);
+        }
+        
+    break;
+    //Close the slot
+    case 0:
+        slideover = 0;
+        global.activated[mid] = -1;
+        global.maxplayers -= 1;
+        if(global.gameslist = 1)
+        {
+            if(global.playercount = global.maxplayers)
+              roomstatus = "Full";
+            else
+              roomstatus = "Waiting";
+            sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, roomstatus);
+        }    
+    break;
+    //Confirm a kick; kick the player
+    case 1:
+        if(mid != global.mymid)
+        {
+            if(confirm_kick = 0)
             {
-                playerleave = instance_create(x, y, obj_playerslot_playerleave);
-                playerleave.owner = id;
-                playerleave.lastimage = global.lolship[mid]+((global.team[mid]-1)*3)-1;
-                visible = 0;
+                confirm_kick = 1;
+                with(obj_waiting)
+                {
+                    //send a notice to your chat and exit
+                    chatline[0] = chatline[1];
+                    chatcolor[0] = chatcolor[1];
+                    chatline[1] = chatline[2];
+                    chatcolor[1] = chatcolor[2];
+                    chatline[2] = chatline[3];
+                    chatcolor[2] = chatcolor[3];
+                    chatline[3] = chatline[4];
+                    chatcolor[3] = chatcolor[4];
+                    chatline[4] = chatline[5];
+                    chatcolor[4] = chatcolor[5];
+                    chatline[5] = chatline[6];
+                    chatcolor[5] = chatcolor[6];
+                    chatline[6] = chatline[7];
+                    chatcolor[6] = chatcolor[7];
+                    chatline[7] = chatline[8];
+                    chatcolor[7] = chatcolor[8];
+                    chatline[8] = "Click on this slot again to kick "+global.othername[mid]+" from the game.";
+                    chatcolor[8] = c_maroon;
+                }       
+                alarm[3] = 120;         
+                exit;
             }
-        }         
+            global.activated[mid] = 0;
+            global.playercount -= 1;
+            with(obj_waiting)
+            {
+                //Update the info on the games list
+                if(global.gameslist = 1)
+                    sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, "Waiting");
+                //send a notice to your chat and exit
+                chatline[0] = chatline[1];
+                chatcolor[0] = chatcolor[1];
+                chatline[1] = chatline[2];
+                chatcolor[1] = chatcolor[2];
+                chatline[2] = chatline[3];
+                chatcolor[2] = chatcolor[3];
+                chatline[3] = chatline[4];
+                chatcolor[3] = chatcolor[4];
+                chatline[4] = chatline[5];
+                chatcolor[4] = chatcolor[5];
+                chatline[5] = chatline[6];
+                chatcolor[5] = chatcolor[6];
+                chatline[6] = chatline[7];
+                chatcolor[6] = chatcolor[7];
+                chatline[7] = chatline[8];
+                chatcolor[7] = chatcolor[8];
+                chatline[8] = "The host has kicked "+global.othername[mid]+" from the game.";
+                chatcolor[8] = c_maroon;
+            }
+            
+            //Create an effect over the player slot
+            global.newmid = mid;    
+            playerleave = instance_create(x, y, obj_playerslot_playerleave);
+            playerleave.owner = id;
+            playerleave.lastimage = global.lolship[mid]+((global.team[mid]-1)*3)-1;
+            visible = 0;
+                
+            //Send the message to clients
+            clearbuffer(0);        
+            writebyte(11, 0);
+            writebyte(global.mymid, 0);
+            writedouble(obj_waiting.chatcolor[8], 0);
+            writestring(obj_waiting.chatline[8], 0);
+            writebyte(mid, 0);
+            client_sendall(0, 0);
+            droppedname = global.othername[mid];
+            //Drop the player and add the drop to the count
+            client_drop(mid);
+               
+        }
+        else
+        {
+            if(changeable = 0)
+             {
+                //Flag it and set a time until next change allowed
+                changeable = 1;
+                alarm[2] = 30;
+                //If you are set as ready
+                if(obj_readygo.image_index = 3)
+                {
+                    with(obj_waiting_client)
+                    {
+                        //Send a notice to your chat
+                        chatline[0] = chatline[1];
+                        chatcolor[0] = chatcolor[1];
+                        chatline[1] = chatline[2];
+                        chatcolor[1] = chatcolor[2];
+                        chatline[2] = chatline[3];
+                        chatcolor[2] =chatcolor[3];
+                        chatline[3] = chatline[4];
+                        chatcolor[3] = chatcolor[4];
+                        chatline[4] = chatline[5];
+                        chatcolor[4] = chatcolor[5];
+                        chatline[5] = chatline[6];
+                        chatcolor[5] = chatcolor[6];
+                        chatline[6] = chatline[7];
+                        chatcolor[6] = chatcolor[7];
+                        chatline[7] = chatline[8];
+                        chatcolor[7] = chatcolor[8];
+                        chatcolor[8] = c_maroon;
+                        chatline[8]="You cannot change teams when you are ready.";
+                    }
+                    exit;
+                }         
+                //Red team going blue
+                if(global.team[global.mymid] = 1) 
+                {
+                    //Check if blue team has too many
+                    if(global.blueteam &gt;= ceil(global.playercount/2)+1)
+                    {
+                        with(obj_waiting)
+                        {
+                            //Send a message to only your chat
+                            chatline[0] = chatline[1];
+                            chatcolor[0] = chatcolor[1];
+                            chatline[1] = chatline[2];
+                            chatcolor[1] = chatcolor[2];
+                            chatline[2] = chatline[3];
+                            chatcolor[2] =chatcolor[3];
+                            chatline[3] = chatline[4];
+                            chatcolor[3] = chatcolor[4];
+                            chatline[4] = chatline[5];
+                            chatcolor[4] = chatcolor[5];
+                            chatline[5] = chatline[6];
+                            chatcolor[5] = chatcolor[6];
+                            chatline[6] = chatline[7];
+                            chatcolor[6] = chatcolor[7];
+                            chatline[7] = chatline[8];
+                            chatcolor[7] = chatcolor[8];
+                            chatcolor[8] = c_maroon;
+                            chatline[8] = "Blue Team cannot accept any more players.";
+                        }
+                        //You can't change team
+                        exit;
+                    }
+                    (instance_create(global.playerslot[global.mymid].x, global.playerslot[global.mymid].y, obj_playerslot_teamchange)).image_index = global.lolship[global.mymid]+((global.team[global.mymid]-1)*3)-1;           
+               
+                    //If blue team has room, change team
+                    global.team[global.mymid] = 2;
+                    //Update team numbers
+                    global.redteam -= 1;
+                    global.blueteam += 1;
+                }
+                else 
+                {
+                    //Blue team going red
+                    //Check to see if red team has room
+                    if(global.redteam &gt;= ceil(global.playercount/2)+1)
+                    {
+                        with(obj_waiting)
+                        {
+                            //Send a message to your chat
+                            chatline[0] = chatline[1];
+                            chatcolor[0] = chatcolor[1];
+                            chatline[1] = chatline[2];
+                            chatcolor[1] = chatcolor[2];
+                            chatline[2] = chatline[3];
+                            chatcolor[2] = chatcolor[3];
+                            chatline[3] = chatline[4];
+                            chatcolor[3] = chatcolor[4];
+                            chatline[4] = chatline[5];
+                            chatcolor[4] = chatcolor[5];
+                            chatline[5] = chatline[6];
+                            chatcolor[5] = chatcolor[6];
+                            chatline[6] = chatline[7];
+                            chatcolor[6] = chatcolor[7];
+                            chatline[7] = chatline[8];
+                            chatcolor[7] = chatcolor[8];
+                            chatcolor[8] = c_maroon;
+                            chatline[8] = "Red Team cannot accept any more players.";
+                        }
+                        //You can't change teams
+                        exit;
+                    }
+                    (instance_create(global.playerslot[global.mymid].x, global.playerslot[global.mymid].y, obj_playerslot_teamchange)).image_index = global.lolship[global.mymid]+((global.team[global.mymid]-1)*3)-1;           
+                    //If red team has room, change team
+                    global.team[global.mymid] = 1;
+                    //Update team numbers
+                    global.redteam += 1;
+                    global.blueteam -= 1;
+                }
+                if(global.master = false)
+                {            
+                    //Send Team Change info to host
+                    clearbuffer(0);
+                    writebyte(14, 0);
+                    writebyte(global.redteam, 0);
+                    writebyte(global.blueteam, 0);
+                    writebyte(global.mymid, 0);
+                    writebyte(global.team[global.mymid], 0);
+                    sendmessage(global.host, 0, 0, 0);
+                }
+    
+            }           
+        }
+    break;
 
-       //Send the message to clients
-       clearbuffer(0);        
-       writebyte(11, 0);
-       writebyte(global.mymid, 0);
-       writedouble(obj_waiting.chatcolor[8], 0);
-       writestring(obj_waiting.chatline[8], 0);
-       writebyte(mid, 0);
-       client_sendall(0, 0);
-       droppedname = global.othername[mid];
-       //Drop the player and add the drop to the count
-       client_drop(mid);
-       
-      }
- break;
 }
 </string>
           </argument>

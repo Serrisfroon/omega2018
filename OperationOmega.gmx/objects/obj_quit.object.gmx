@@ -131,7 +131,7 @@ alarm[4] = 4;
  
 event_inherited();
 obj_waiting_boxes.animation = 3;
-obj_playerslot_option.scale_out = 1;
+
 </string>
           </argument>
         </arguments>
