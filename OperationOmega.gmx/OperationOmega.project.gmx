@@ -1599,6 +1599,7 @@
           <sprite>sprites\spr_map_select</sprite>
           <sprite>sprites\spr_previewnames</sprite>
           <sprite>sprites\spr_map_box</sprite>
+          <sprite>sprites\spr_modify_button</sprite>
         </sprites>
         <sprite>sprites\spr_teamchange</sprite>
         <sprite>sprites\spr_modbox</sprite>

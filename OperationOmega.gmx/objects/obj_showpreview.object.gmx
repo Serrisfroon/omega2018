@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_map_previews, obj_viewmap.display, obj_viewmap.x+100, obj_viewmap.y+51, obj_viewmap.growth, obj_viewmap.growth, 0, c_white, 0.6*obj_viewmap.growth+0.2);
+            <string>draw_sprite_ext(spr_map_previews, obj_viewmap.display, obj_viewmap.x-200, obj_viewmap.y-70, obj_viewmap.growth, obj_viewmap.growth, 0, c_white, 0.6*obj_viewmap.growth+0.2);
 
 </string>
           </argument>
