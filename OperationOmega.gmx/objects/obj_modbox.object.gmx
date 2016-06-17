@@ -152,6 +152,7 @@ if(over_alpha &lt; 1 &amp;&amp; animation != 4)
             <kind>1</kind>
             <string>//Draw dimming
 draw_set_alpha(image_alpha-0.5)
+draw_set_color(c_black);
 draw_rectangle(0, 0, 768, 480, 0);
 
 //Draw the popup
@@ -162,8 +163,10 @@ draw_set_alpha(display_alpha);
 
 //Draw the selected game options
 draw_set_halign(fa_center);
-draw_text(x+110-161, y+60-90, "Stock: "+string(global.matchvariable));
-draw_text(x+110-161, y+18, global.matchlevel);
+draw_set_color(c_aqua);
+draw_text(x-160+108, y-70+58, "Stock: "+string(global.matchvariable));
+draw_text(x-160+108, y-70+111, global.matchlevel);
+
 draw_set_halign(fa_left);
 
 </string>

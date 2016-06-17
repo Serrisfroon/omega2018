@@ -1590,6 +1590,7 @@
       </sprites>
       <sprites name="Waiting Room">
         <sprite>sprites\spr_readygo</sprite>
+        <sprite>sprites\spr_quit_waiting</sprite>
         <sprite>sprites\spr_staticons</sprite>
         <sprite>sprites\spr_statbar</sprite>
         <sprite>sprites\spr_alphastar_select</sprite>
@@ -1889,6 +1890,7 @@
       <object>objects\obj_endgame</object>
       <object>objects\obj_teamchange_client</object>
       <object>objects\prnt_menubutton</object>
+      <object>objects\obj_playerslot_option</object>
     </objects>
     <objects name="In Game">
       <object>objects\obj_ship</object>
@@ -2076,7 +2078,7 @@
         <object>objects\obj_playerslot_teamchange</object>
         <object>objects\obj_playerslot_selected</object>
         <object>objects\obj_playerslot_readied</object>
-        <object>objects\obj_playerslot_option</object>
+        <object>objects\obj_modify_button</object>
       </objects>
       <objects name="select">
         <object>objects\obj_chooseprimary</object>

@@ -250,7 +250,9 @@ alarm[0] = 18;
              obj_menumod.alarm[3] = 25;
              obj_waiting_boxes.animation = 3;
              obj_playerslot_option.scale_out = 1;
-             prnt_menubutton.animation = 2;
+             obj_readygo.animation_step = 2;
+             obj_quit.animation_step = 2;
+             obj_modify_button.animation_step = 2;
              obj_menumod.animation = 1;
         break;
     
