@@ -1398,26 +1398,33 @@
       <sprite>sprites\spr_turretshot</sprite>
     </sprites>
     <sprites name="HUD">
-      <sprite>sprites\spr_ammobar</sprite>
-      <sprite>sprites\spr_armorbar</sprite>
-      <sprite>sprites\spr_beserkbar</sprite>
-      <sprite>sprites\spr_chatinput</sprite>
-      <sprite>sprites\spr_cursor</sprite>
-      <sprite>sprites\spr_energybar</sprite>
-      <sprite>sprites\spr_extchat</sprite>
-      <sprite>sprites\spr_gauges</sprite>
-      <sprite>sprites\spr_weaponicons</sprite>
-      <sprite>sprites\spr_homingcursor</sprite>
-      <sprite>sprites\spr_lifecount</sprite>
-      <sprite>sprites\spr_matchbox</sprite>
-      <sprite>sprites\spr_matchstart_text</sprite>
-      <sprite>sprites\spr_pscores</sprite>
+      <sprites name="Guages">
+        <sprite>sprites\spr_gauges</sprite>
+        <sprite>sprites\spr_ammobar</sprite>
+        <sprite>sprites\spr_armorbar</sprite>
+        <sprite>sprites\spr_beserkbar</sprite>
+        <sprite>sprites\spr_energybar</sprite>
+        <sprite>sprites\spr_weaponicons</sprite>
+        <sprite>sprites\spr_shieldbar</sprite>
+        <sprite>sprites\spr_lifecount</sprite>
+      </sprites>
+      <sprites name="Popups">
+        <sprite>sprites\spr_extchat</sprite>
+        <sprite>sprites\spr_chatinput</sprite>
+        <sprite>sprites\spr_pscores</sprite>
+        <sprite>sprites\spr_matchstart_text</sprite>
+        <sprite>sprites\spr_matchbox</sprite>
+        <sprite>sprites\spr_weaponswitch_box</sprite>
+        <sprite>sprites\spr_weaponswitch_options</sprite>
+        <sprite>sprites\spr_weaponswitch_infos</sprite>
+      </sprites>
+      <sprites name="Cursors">
+        <sprite>sprites\spr_cursor</sprite>
+        <sprite>sprites\spr_homingcursor</sprite>
+        <sprite>sprites\spr_targetcursor</sprite>
+      </sprites>
       <sprite>sprites\spr_radar</sprite>
       <sprite>sprites\spr_radar_player</sprite>
-      <sprite>sprites\spr_shieldbar</sprite>
-      <sprite>sprites\spr_targetcursor</sprite>
-      <sprite>sprites\spr_weaponswitch_box</sprite>
-      <sprite>sprites\spr_weaponswitch_options</sprite>
     </sprites>
     <sprites name="Icons">
       <sprites name="Deploy Secondary">
@@ -1475,9 +1482,7 @@
       <sprite>sprites\spr_selectprimary</sprite>
       <sprite>sprites\spr_selectsecondary</sprite>
       <sprite>sprites\spr_icon_select</sprite>
-      <sprite>sprites\spr_icon_selectt</sprite>
       <sprite>sprites\spr_weapon_active</sprite>
-      <sprite>sprites\spr_weaponswitch_infos</sprite>
       <sprite>sprites\spr_weaponicon_line</sprite>
       <sprite>sprites\spr_weaponicon_pulse</sprite>
       <sprite>sprites\spr_weaponicon_getpulse</sprite>
@@ -1501,14 +1506,18 @@
         <sprite>sprites\spr_ringeffect</sprite>
         <sprite>sprites\spr_trail_particle</sprite>
       </sprites>
-      <sprite>sprites\spr_alphastar_enemy_teleport</sprite>
-      <sprite>sprites\spr_alphastar_teleport</sprite>
-      <sprite>sprites\spr_goliath_enemy_teleport</sprite>
-      <sprite>sprites\spr_goliath_teleport</sprite>
-      <sprite>sprites\spr_swiftwing_teleport</sprite>
-      <sprite>sprites\spr_swiftwing_enemy_teleport</sprite>
-      <sprite>sprites\spr_homingeffect</sprite>
-      <sprite>sprites\spr_lockon_cursor</sprite>
+      <sprites name="Teleports">
+        <sprite>sprites\spr_alphastar_teleport</sprite>
+        <sprite>sprites\spr_alphastar_enemy_teleport</sprite>
+        <sprite>sprites\spr_goliath_teleport</sprite>
+        <sprite>sprites\spr_goliath_enemy_teleport</sprite>
+        <sprite>sprites\spr_swiftwing_teleport</sprite>
+        <sprite>sprites\spr_swiftwing_enemy_teleport</sprite>
+      </sprites>
+      <sprites name="Cursor Effects">
+        <sprite>sprites\spr_homingeffect</sprite>
+        <sprite>sprites\spr_lockon_cursor</sprite>
+      </sprites>
       <sprite>sprites\spr_overheatbar</sprite>
       <sprite>sprites\spr_overheatshine</sprite>
       <sprite>sprites\spr_paladinshield</sprite>
@@ -1528,11 +1537,10 @@
         <sprite>sprites\spr_backpass</sprite>
       </sprites>
       <sprites name="Games Server">
-        <sprite>sprites\spr_creategame</sprite>
-        <sprite>sprites\spr_joingame</sprite>
-        <sprite>sprites\spr_refresher</sprite>
-        <sprite>sprites\spr_selectgame</sprite>
         <sprite>sprites\spr_creategamebox</sprite>
+        <sprite>sprites\spr_quickplay</sprite>
+        <sprite>sprites\spr_searchforgame</sprite>
+        <sprite>sprites\spr_groupsettings</sprite>
       </sprites>
       <sprites name="Loading Screen">
         <sprite>sprites\spr_matchnames</sprite>
@@ -1614,6 +1622,8 @@
         <sprite>sprites\spr_waiting_right</sprite>
         <sprite>sprites\spr_levelnames</sprite>
         <sprite>sprites\spr_playerslot_selected</sprite>
+        <sprite>sprites\spr_weapons_title</sprite>
+        <sprite>sprites\spr_title_bar</sprite>
       </sprites>
       <sprite>sprites\spr_infobox</sprite>
       <sprite>sprites\spr_menu_selection_faded</sprite>
@@ -1626,6 +1636,14 @@
     <sprite>sprites\spr_shipmask</sprite>
     <sprite>sprites\spr_previewbound</sprite>
     <sprite>sprites\sprite253</sprite>
+    <sprites name="Trash">
+      <sprite>sprites\spr_icon_selectt</sprite>
+      <sprite>sprites\spr_joingroup</sprite>
+      <sprite>sprites\spr_creategame</sprite>
+      <sprite>sprites\spr_selectgame</sprite>
+      <sprite>sprites\spr_joingame</sprite>
+      <sprite>sprites\spr_refresher</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Menu">
@@ -1864,6 +1882,7 @@
     <font>fonts\fnt_digital</font>
     <font>fonts\fnt_chat</font>
     <font>fonts\fnt_bigtext</font>
+    <font>fonts\fnt_titles</font>
   </fonts>
   <objects name="objects">
     <objects name="Trash">
@@ -1891,6 +1910,8 @@
       <object>objects\obj_teamchange_client</object>
       <object>objects\prnt_menubutton</object>
       <object>objects\obj_playerslot_option</object>
+      <object>objects\obj_tomulti</object>
+      <object>objects\obj_modsettings</object>
     </objects>
     <objects name="In Game">
       <object>objects\obj_ship</object>
@@ -2038,7 +2059,7 @@
       </objects>
     </objects>
     <objects name="Menus">
-      <objects name="Private Game Popups">
+      <objects name="Connect to IP Popup">
         <object>objects\obj_enterhostip</object>
         <object>objects\obj_connectbut</object>
         <object>objects\obj_cancelbut</object>
@@ -2062,23 +2083,28 @@
         <object>objects\obj_waiting</object>
         <object>objects\obj_waiting_client</object>
         <object>objects\obj_customizer</object>
-        <object>objects\obj_armorstat</object>
-        <object>objects\obj_shieldstat</object>
-        <object>objects\obj_speedstat</object>
-        <object>objects\obj_modsettings</object>
-        <object>objects\obj_viewmap</object>
-        <object>objects\obj_modbox</object>
-        <object>objects\obj_okaymod</object>
-        <object>objects\obj_playerslot</object>
-        <object>objects\obj_waiting_boxes</object>
-        <object>objects\obj_showpreview</object>
-        <object>objects\obj_playerslot_openeffect</object>
-        <object>objects\obj_playerslot_addplayer</object>
-        <object>objects\obj_playerslot_playerleave</object>
-        <object>objects\obj_playerslot_teamchange</object>
-        <object>objects\obj_playerslot_selected</object>
-        <object>objects\obj_playerslot_readied</object>
-        <object>objects\obj_modify_button</object>
+        <objects name="Playerslot">
+          <object>objects\obj_playerslot</object>
+          <object>objects\obj_playerslot_playerleave</object>
+          <object>objects\obj_playerslot_addplayer</object>
+          <object>objects\obj_playerslot_teamchange</object>
+          <object>objects\obj_playerslot_openeffect</object>
+          <object>objects\obj_playerslot_selected</object>
+          <object>objects\obj_playerslot_readied</object>
+        </objects>
+        <objects name="Stats">
+          <object>objects\obj_armorstat</object>
+          <object>objects\obj_shieldstat</object>
+          <object>objects\obj_speedstat</object>
+        </objects>
+        <objects name="Menu Effects and boxes">
+          <object>objects\obj_waiting_boxes</object>
+          <object>objects\obj_modify_button</object>
+          <object>objects\obj_modbox</object>
+          <object>objects\obj_okaymod</object>
+          <object>objects\obj_showpreview</object>
+          <object>objects\obj_viewmap</object>
+        </objects>
       </objects>
       <objects name="select">
         <object>objects\obj_chooseprimary</object>
@@ -2110,7 +2136,6 @@
         <object>objects\obj_scanline</object>
       </objects>
       <object>objects\obj_messagebox</object>
-      <object>objects\obj_tomulti</object>
       <object>objects\obj_playagain</object>
       <object>objects\obj_menumod</object>
       <object>objects\obj_background</object>

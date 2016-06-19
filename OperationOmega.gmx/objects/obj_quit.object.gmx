@@ -183,7 +183,9 @@ else
 obj_readygo.animation_step = 2;
 obj_quit.animation_step = 2;
 obj_waiting_boxes.animation = 3;
-obj_modify_button.animation_step = 2;
+if(global.master = 1)
+    obj_modify_button.animation_step = 2;
+obj_playerslot_readied.y = -100;
 //If you are the host, close the port, return to
 //the connecting room, and exit the script
 global.needrestart = 1;

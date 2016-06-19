@@ -250,7 +250,7 @@ alarm[1] = 10;
             <string>part_system_drawit(playerslot_particles);
 
 //Set the font and color
-draw_set_font(fnt_chat);
+draw_set_font(fnt_titles);
 draw_set_color(c_aqua);
 draw_set_alpha(backbox.display_alpha);
 
@@ -273,24 +273,22 @@ if(mstretch &lt; mmaxd)
 
  
 //Draw Ship Names
-draw_set_halign(fa_center);
-draw_set_font(fnt_chat);
+draw_sprite_ext(spr_title_bar, 0, 33, 16, 1, 1, 0, c_white, backbox.display_alpha);
 switch(global.shipselect)
 {
  case 1:
-        draw_text_bordered(100, 14, 'Alphastar', 1, 1, c_black, c_aqua)
+        draw_text_bordered(50, 9, 'Alphastar', 1, 1, c_black, c_aqua)
  break;
  case 2:
-        draw_text_bordered(100, 14, 'Swiftwing', 1, 1, c_black, c_aqua)
+        draw_text_bordered(50, 9, 'Swiftwing', 1, 1, c_black, c_aqua)
  break;
  case 3:
-        draw_text_bordered(100, 14, 'Goliath', 1, 1, c_black, c_aqua)
+        draw_text_bordered(50, 9, 'Goliath', 1, 1, c_black, c_aqua)
  break;
 }
-draw_set_halign(fa_left);
 
 //Draw guiding text
-draw_text_bordered(300, 14, 'Weapons', 1, 1, c_black, c_aqua)
+draw_sprite_ext(spr_weapons_title, 0, 328, 25, 1, 1, 0, c_white, backbox.display_alpha);
 draw_set_alpha(1);
 draw_set_font(fnt_chat);
 

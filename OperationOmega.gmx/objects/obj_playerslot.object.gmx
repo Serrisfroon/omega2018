@@ -520,7 +520,11 @@ case 1:
         else
             readyalpha = 0;
         draw_set_alpha(usealpha);
-        draw_text(x+10, y+6, global.othername[mid]);
+        if(global.team[mid] = 1)
+            text_color = c_red;
+        else
+            text_color = c_blue;
+        draw_text_bordered(x+10, y+6, global.othername[mid], 1, 1, c_black, text_color);
         draw_set_alpha(1);
     }
 break;

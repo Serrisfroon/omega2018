@@ -522,26 +522,17 @@ keyboard_string = string_replace(keyboard_string, lastletter+lastletter+lastlett
 //Undo '#'
 keyboard_string = string_replace(keyboard_string, '#', '');
       
-//Find the correct text to fit into the bar
-for(i = string_length(keyboard_string); i &gt;= 0; i -= 1)
- if(string_width(string_copy(keyboard_string, i, string_length(keyboard_string)-i)) &gt; 360 || i = 0)
- {
-  startchat = i;
-  stopchat = string_length(keyboard_string)+2-i;
-  break;  
- }
+//Limit the length of the message
+while(string_width(global.myname+": "+keyboard_string) &gt; 350)
+    keyboard_string = string_copy(keyboard_string, 0, string_length(keyboard_string)-1);
+
 //Draw the text in the chat bar
-draw_set_color(c_white);
-draw_text(6, 457, string_copy(keyboard_string+flashing, startchat, stopchat));
+draw_text_bordered(6, 455, keyboard_string+flashing, 1, 1, c_black, c_white);
 
 //draw chat
-q = 0;
-for(i = 0; i &lt;= 7-max(q, 0); i += 1)
+for(i = 0; i &lt;= 7; i += 1)
 {
- if(string_width(chatline[8-i]) &gt; 360)
-  q += 1;
- draw_set_color(chatcolor[8-i]);
- draw_text_ext(2, 410-(i*18+q*14), chatline[8-i], 14, 370);
+ draw_text_bordered(2, 407-(i*18), chatline[8-i], 1, 1, c_black, chatcolor[8-i]);
 }
 draw_set_alpha(1);
 
@@ -568,8 +559,8 @@ draw_set_alpha(1);
           <argument>
             <kind>1</kind>
             <string>text = keyboard_string;
-if(ds_list_size(global.clients) &gt; 0)
-{
+//if(ds_list_size(global.clients) &gt; 0)
+
   if(keyboard_string = '') exit;
   audio_play_sound(snd_chatmessage, 1, 0);
   //create the new chat line and take note of its middle
@@ -598,7 +589,7 @@ if(ds_list_size(global.clients) &gt; 0)
   chatcolor[7] = chatcolor[8];
   chatline[8] = sendline;
   chatcolor[8] = c_white;
-}
+
 
  //Send the message to clients
  clearbuffer(0);

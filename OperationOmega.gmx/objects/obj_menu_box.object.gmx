@@ -231,6 +231,42 @@ switch(animation)
                     create_selections = 2;
                 }
             break;
+            case rm_gamelist:
+                if(menu_expand &lt; 78)
+                {
+                    menu_expand += 6;
+                    if(expand_alpha &lt; 1)
+                        expand_alpha += 0.1;
+                }
+                else
+                {
+                    menu_expand = 80;
+                    if(expand_alpha &gt; 0)
+                        expand_alpha -= 0.1;
+                }
+                if(menu_expand &gt; 33 &amp;&amp; create_selections = 0)
+                {
+                    menu_searchgame = instance_create(x, y-22, obj_menu_selection);
+                    menu_searchgame.text_sprite = spr_searchforgame;
+                    menu_searchgame.goto_room = rm_connect;
+                    menu_groupsettings = instance_create(x, y+22, obj_menu_selection);
+                    menu_groupsettings.image_angle = 180;
+                    menu_groupsettings.text_sprite = spr_groupsettings;
+                    menu_groupsettings.goto_room = rm_options;
+                    create_selections = 1;
+                }
+                if(menu_expand &gt; 73 &amp;&amp; create_selections = 1)
+                {
+                    menu_quickplay = instance_create(x, y-63, obj_menu_selection);
+                    menu_quickplay.text_sprite = spr_quickplay;
+                    menu_quickplay.goto_room = rm_gamelist;
+                    menu_quitgame = instance_create(x, y+63, obj_menu_selection);
+                    menu_quitgame.text_sprite = spr_back;
+                    menu_quitgame.image_angle = 180;
+                    menu_quitgame.goto_room = rm_mainmenu;
+                    create_selections = 2;
+                }
+            break;
             case rm_options:
                 if(menu_expand &lt; 78)
                 {

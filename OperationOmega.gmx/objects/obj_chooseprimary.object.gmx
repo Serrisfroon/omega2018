@@ -264,7 +264,7 @@ with(obj_icon_option)
 //Disselect all other slots
 with(prnt_selection) selected = 0;
 //Select this slot
-if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
+if(obj_readygo.readied = 0)
 {
     create_icon(spr_needle_icon, 4, 0, 32, 0, 1);    
     create_icon(spr_sonic_icon, 4, 4, 32, 32, 2);    

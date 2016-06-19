@@ -191,8 +191,10 @@ draw_set_font(fnt_chat);
 //Draw your typed text
 draw_set_color(c_aqua);
 draw_set_halign(fa_center);
-draw_text(x-5, y-2, keyboard_string+flashing);
+draw_text_bordered(x-5, y-2, keyboard_string+flashing, 1, 1, c_black, c_aqua)
 draw_set_color(c_black);
+draw_set_halign(fa_left);
+
 </string>
           </argument>
         </arguments>

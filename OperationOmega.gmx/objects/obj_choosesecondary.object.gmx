@@ -437,7 +437,7 @@ with(obj_icon_option)
 //Disselect all other slots
 with(prnt_selection) selected = 0;
 //Select this slot
-if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
+if(obj_readygo.readied = 0)
 {
     if(secondnumber != 4)
     {

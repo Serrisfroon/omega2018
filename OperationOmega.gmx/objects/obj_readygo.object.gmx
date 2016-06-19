@@ -110,9 +110,9 @@ changeable = 0;
             else
             {
                 if(readied = 0)
-                    image_index = 3;
+                    image_index = 2;
                 else
-                    image_index = 4;
+                    image_index = 3;
             }
         }
         else
@@ -122,9 +122,9 @@ changeable = 0;
             else
             {
                 if(readied = 0)
-                    image_index = 4;
-                else
                     image_index = 3;
+                else
+                    image_index = 2;
             }
         }
          
@@ -210,7 +210,7 @@ changeable = 1;
 alarm[3] = 30;
 
 //Check if the button is full size
-if(animation != -1)
+if(animation_step != 1)
     exit;
 //Check if your weapons are equipped
 if(global.primary = 0 || global.esecond[1] = 0 || global.deploy[1] = 0 ||
@@ -259,7 +259,7 @@ if(global.master = false)
                 audio_play_sound(snd_readyup, 1, 0);
             clearbuffer(0);
             writebyte(13, 0);
-            writestring(global.name+" is ready.", 0);
+            writestring(string_insert(global.name," is ready.", 0), 0);
             writebyte(global.mymid, 0);
             writebyte(global.shipselect, 0);
             writebyte(global.primary, 0);
@@ -274,7 +274,7 @@ if(global.master = false)
             readied = 0;
             clearbuffer(0);
             writebyte(13, 0);
-            writestring(global.name+" is not ready.", 0);
+            writestring(string_insert(global.name," is not ready.", 0), 0);
             writebyte(global.mymid, 0);
             writebyte(global.shipselect, 0);
             writebyte(global.primary, 0);
@@ -348,9 +348,9 @@ else
         client_sendall(0, 0);
         obj_menumod.alarm[3] = 25;
         obj_waiting_boxes.animation = 3;
-        obj_playerslot_option.scale_out = 1;
         obj_readygo.animation_step = 2;
         obj_quit.animation_step = 2;
+        obj_playerslot_readied.y = -100;
         obj_modify_button.animation_step = 2;
         alarm[3] = 60;
 

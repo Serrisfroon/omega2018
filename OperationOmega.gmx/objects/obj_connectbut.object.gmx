@@ -249,6 +249,9 @@ if(obj_enterhostip.creategamenow = 0)
     obj_enterhostip.animation = 3;
     sprite_index = -1;
     thisip = keyboard_string;
+    selection_reference = obj_enterhostip.selection_reference;
+    selection_reference.alarm[1] = 10;
+    selection_reference.close_menu = 1;
 }
 
 </string>

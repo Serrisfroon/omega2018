@@ -154,7 +154,7 @@ draw_set_alpha(display_alpha);
 
 
 //Draw your name
-draw_text(x-87, y-56, global.myname);
+draw_text_bordered(x-87, y-56, global.myname, 1, 1, c_black, c_aqua)
 
 
 //Rating animation
@@ -177,8 +177,8 @@ if(rating_display != rating_true &amp;&amp; animation = 2 &amp;&amp; next_animat
 }
 next_animate -= 1;
 
-draw_text(x+60, y-55+19, rating_display);
-draw_text(x-81, y-55+92, "Wins: "+string(global.playermatchwin)+"     Losses: "+string(global.playermatchloss));
+draw_text_bordered(x+60, y-55+19, rating_display, 1, 1, c_black, c_aqua);
+draw_text_bordered(x-81, y-55+92, "Wins: "+string(global.playermatchwin)+"     Losses: "+string(global.playermatchloss), 1, 1, c_black, c_aqua);
 //draw_text(x-81, y-55+92, "Kills: "+string(global.playerkills)+"     Deaths: "+string(global.playerdeaths));
 
 //Draw the selected ship and find the starting x for drawing deploys

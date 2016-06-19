@@ -127,6 +127,7 @@ for(i = 0; i &lt;= 30; i += 1)
             draw_sprite_ext(sprite_index, 0, flamex[i], flamey[i], scale, 1, 0, c_white, 0.05*flamelife[i]*obj_customizer.bottombox.display_alpha);
         break;
         case rm_multiplayer:
+        case rm_mainmenu:
             if(sprite_index = spr_whitepixel)
                 draw_sprite_ext(sprite_index, 0, flamex[i], flamey[i], scale, 1, 0, c_white, 0.05*flamelife[i]*obj_profile_connect.display_alpha); 
             else
