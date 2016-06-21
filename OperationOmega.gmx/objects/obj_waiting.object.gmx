@@ -64,6 +64,7 @@ for(i = 0; i &lt; 8; i += 1)
  global.playerslot[i].mid = i;
  global.playerslot[i].active = 0;
  global.playerslot[i].alarm[1] = 20+i*5;
+ global.othername[i] = "";
  global.readied[i] = 1;
 }
 }
