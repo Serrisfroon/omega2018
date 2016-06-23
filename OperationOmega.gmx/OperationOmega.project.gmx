@@ -1328,7 +1328,6 @@
     <sprite>sprites\spr_swiftwing_enemy</sprite>
     <sprite>sprites\spr_goliath</sprite>
     <sprite>sprites\spr_goliath_enemy</sprite>
-    <sprite>sprites\spr_swiftwing_beserkglow</sprite>
     <sprite>sprites\spr_swiftwing_warp</sprite>
     <sprite>sprites\spr_swiftwing_warp_enemy</sprite>
     <sprite>sprites\spr_goliath_hyperrush</sprite>
@@ -1340,9 +1339,7 @@
       <sprite>sprites\spr_stasis</sprite>
       <sprite>sprites\spr_stasis_field</sprite>
       <sprite>sprites\spr_helix</sprite>
-      <sprite>sprites\spr_helix2</sprite>
       <sprite>sprites\spr_bluehelix</sprite>
-      <sprite>sprites\spr_bluehelix2</sprite>
       <sprite>sprites\spr_double</sprite>
       <sprite>sprites\spr_pierce</sprite>
       <sprite>sprites\spr_spread</sprite>
@@ -1548,10 +1545,6 @@
         <sprite>sprites\spr_loadingnumbers</sprite>
         <sprite>sprites\spr_beginoperation</sprite>
       </sprites>
-      <sprites name="Main Menu">
-        <sprite>sprites\spr_singleplayer</sprite>
-        <sprite>sprites\spr_multiplayer</sprite>
-      </sprites>
       <sprites name="Mouseover Info">
         <sprite>sprites\spr_ship_infos</sprite>
         <sprite>sprites\spr_primary_infos</sprite>
@@ -1589,7 +1582,6 @@
         <sprite>sprites\spr_enterhostip</sprite>
       </sprites>
       <sprite>sprites\spr_breakline</sprite>
-      <sprite>sprites\spr_gotopractice</sprite>
       <sprites name="Title">
         <sprite>sprites\spr_insomniasoft</sprite>
         <sprite>sprites\spr_title</sprite>
@@ -1605,7 +1597,6 @@
         <sprite>sprites\spr_ships_mouseon</sprite>
         <sprites name="Map Preview">
           <sprite>sprites\spr_viewmap_mask</sprite>
-          <sprite>sprites\spr_map_select</sprite>
           <sprite>sprites\spr_previewnames</sprite>
           <sprite>sprites\spr_map_box</sprite>
           <sprite>sprites\spr_modify_button</sprite>
@@ -1616,7 +1607,6 @@
         <sprite>sprites\spr_playerslot_readied</sprite>
         <sprite>sprites\spr_playerslot_addplayer</sprite>
         <sprite>sprites\spr_playerslot_openeffect</sprite>
-        <sprite>sprites\spr_playerslot_options</sprite>
         <sprite>sprites\spr_waiting</sprite>
         <sprite>sprites\spr_waiting_bottom</sprite>
         <sprite>sprites\spr_waiting_right</sprite>
@@ -1638,19 +1628,28 @@
     <sprite>sprites\sprite253</sprite>
     <sprites name="Trash">
       <sprite>sprites\spr_icon_selectt</sprite>
+      <sprite>sprites\spr_playerslot_options</sprite>
+      <sprite>sprites\spr_map_select</sprite>
+      <sprite>sprites\spr_gotopractice</sprite>
+      <sprites name="Main Menu">
+        <sprite>sprites\spr_singleplayer</sprite>
+        <sprite>sprites\spr_multiplayer</sprite>
+      </sprites>
       <sprite>sprites\spr_joingroup</sprite>
       <sprite>sprites\spr_creategame</sprite>
       <sprite>sprites\spr_selectgame</sprite>
       <sprite>sprites\spr_joingame</sprite>
       <sprite>sprites\spr_refresher</sprite>
+      <sprite>sprites\spr_swiftwing_beserkglow</sprite>
+      <sprite>sprites\spr_helix2</sprite>
+      <sprite>sprites\spr_bluehelix2</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
-    <backgrounds name="Menu">
-      <background>background\back_messagebox</background>
-      <background>background\back_mappreview</background>
-    </backgrounds>
     <background>background\tile_wall</background>
+    <backgrounds name="Deep Space">
+      <background>background\background3</background>
+    </backgrounds>
   </backgrounds>
   <paths name="paths">
     <path>paths\path_spiral90</path>
