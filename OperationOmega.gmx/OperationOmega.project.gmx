@@ -1524,6 +1524,7 @@
       <sprite>sprites\spr_teleport_hole</sprite>
       <sprite>sprites\spr_singlestar</sprite>
       <sprite>sprites\spr_gridout</sprite>
+      <sprite>sprites\spr_name_lineeffect</sprite>
     </sprites>
     <sprites name="Menu">
       <sprites name="Background">
@@ -1613,7 +1614,9 @@
         <sprite>sprites\spr_levelnames</sprite>
         <sprite>sprites\spr_playerslot_selected</sprite>
         <sprite>sprites\spr_weapons_title</sprite>
+        <sprite>sprites\spr_attributes_title</sprite>
         <sprite>sprites\spr_title_bar</sprite>
+        <sprite>sprites\spr_stat_divider</sprite>
       </sprites>
       <sprite>sprites\spr_infobox</sprite>
       <sprite>sprites\spr_menu_selection_faded</sprite>
@@ -1626,9 +1629,9 @@
     <sprite>sprites\spr_shipmask</sprite>
     <sprite>sprites\spr_previewbound</sprite>
     <sprite>sprites\sprite253</sprite>
+    <sprite>sprites\spr_playerslot_options</sprite>
     <sprites name="Trash">
       <sprite>sprites\spr_icon_selectt</sprite>
-      <sprite>sprites\spr_playerslot_options</sprite>
       <sprite>sprites\spr_map_select</sprite>
       <sprite>sprites\spr_gotopractice</sprite>
       <sprites name="Main Menu">
@@ -1873,6 +1876,7 @@
       <script>scripts\client_udpip.gml</script>
       <script>scripts\getip.gml</script>
     </scripts>
+    <script>scripts\effect_name.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
@@ -1882,6 +1886,7 @@
     <font>fonts\fnt_chat</font>
     <font>fonts\fnt_bigtext</font>
     <font>fonts\fnt_titles</font>
+    <font>fonts\fnt_stats</font>
   </fonts>
   <objects name="objects">
     <objects name="Trash">
@@ -1892,6 +1897,11 @@
       </objects>
       <object>objects\obj_creategame</object>
       <object>objects\obj_host</object>
+      <objects name="Stats">
+        <object>objects\obj_armorstat</object>
+        <object>objects\obj_shieldstat</object>
+        <object>objects\obj_speedstat</object>
+      </objects>
       <object>objects\obj_connect</object>
       <objects name="Options">
         <object>objects\obj_music</object>
@@ -2082,6 +2092,7 @@
         <object>objects\obj_waiting</object>
         <object>objects\obj_waiting_client</object>
         <object>objects\obj_customizer</object>
+        <object>objects\obj_statbar</object>
         <objects name="Playerslot">
           <object>objects\obj_playerslot</object>
           <object>objects\obj_playerslot_playerleave</object>
@@ -2091,11 +2102,6 @@
           <object>objects\obj_playerslot_selected</object>
           <object>objects\obj_playerslot_readied</object>
         </objects>
-        <objects name="Stats">
-          <object>objects\obj_armorstat</object>
-          <object>objects\obj_shieldstat</object>
-          <object>objects\obj_speedstat</object>
-        </objects>
         <objects name="Menu Effects and boxes">
           <object>objects\obj_waiting_boxes</object>
           <object>objects\obj_modify_button</object>
@@ -2103,6 +2109,7 @@
           <object>objects\obj_okaymod</object>
           <object>objects\obj_showpreview</object>
           <object>objects\obj_viewmap</object>
+          <object>objects\obj_effect_line</object>
         </objects>
       </objects>
       <objects name="select">

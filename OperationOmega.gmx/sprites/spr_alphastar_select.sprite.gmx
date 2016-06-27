@@ -9,8 +9,8 @@
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
   <bbox_right>41</bbox_right>
-  <bbox_top>5</bbox_top>
-  <bbox_bottom>119</bbox_bottom>
+  <bbox_top>10</bbox_top>
+  <bbox_bottom>114</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -44,5 +44,30 @@
     <frame index="21">images\spr_alphastar_select_21.png</frame>
     <frame index="22">images\spr_alphastar_select_22.png</frame>
     <frame index="23">images\spr_alphastar_select_23.png</frame>
+    <frame index="24">images\spr_alphastar_select_24.png</frame>
+    <frame index="25">images\spr_alphastar_select_25.png</frame>
+    <frame index="26">images\spr_alphastar_select_26.png</frame>
+    <frame index="27">images\spr_alphastar_select_27.png</frame>
+    <frame index="28">images\spr_alphastar_select_28.png</frame>
+    <frame index="29">images\spr_alphastar_select_29.png</frame>
+    <frame index="30">images\spr_alphastar_select_30.png</frame>
+    <frame index="31">images\spr_alphastar_select_31.png</frame>
+    <frame index="32">images\spr_alphastar_select_32.png</frame>
+    <frame index="33">images\spr_alphastar_select_33.png</frame>
+    <frame index="34">images\spr_alphastar_select_34.png</frame>
+    <frame index="35">images\spr_alphastar_select_35.png</frame>
+    <frame index="36">images\spr_alphastar_select_36.png</frame>
+    <frame index="37">images\spr_alphastar_select_37.png</frame>
+    <frame index="38">images\spr_alphastar_select_38.png</frame>
+    <frame index="39">images\spr_alphastar_select_39.png</frame>
+    <frame index="40">images\spr_alphastar_select_40.png</frame>
+    <frame index="41">images\spr_alphastar_select_41.png</frame>
+    <frame index="42">images\spr_alphastar_select_42.png</frame>
+    <frame index="43">images\spr_alphastar_select_43.png</frame>
+    <frame index="44">images\spr_alphastar_select_44.png</frame>
+    <frame index="45">images\spr_alphastar_select_45.png</frame>
+    <frame index="46">images\spr_alphastar_select_46.png</frame>
+    <frame index="47">images\spr_alphastar_select_47.png</frame>
+    <frame index="48">images\spr_alphastar_select_48.png</frame>
   </frames>
 </sprite>

@@ -35,6 +35,27 @@ else
  instance_create(0, 0, obj_waiting_client);
 }
 
+
+weaponslots_alpha = 1;
+attributes_alpha = 0;
+
+
+animate_name = 0;
+current_shipname = "";
+alarm[5] = 27;
+alarm[6] = 20;
+switch(global.shipselect)
+{
+    case 1:
+        entire_shipname = "Alpha";
+    break;
+    case 2:
+        entire_shipname = "Hornet";
+    break;
+    case 3:
+        entire_shipname = "Goliath";
+    break;
+}
 backbox = instance_create(0, 0, obj_waiting_boxes);
 rightbox = instance_create(664, 150, obj_waiting_boxes);
 bottombox = instance_create(0, 480, obj_waiting_boxes);
@@ -54,34 +75,59 @@ astretch = 0;
 sstretch = 0;
 mstretch = 0;
 cstretch = 0;
-//Initialize the bars' max sizes
-switch(global.shipselect)
-{
- case 1:
-       amaxd = 0.6;
-       smaxd = 0.6;
-       mmaxd = 0.6;
-       cmaxd = 0.6;
- break;
- case 2:
-       amaxd = 0.2;
-       smaxd = 0.6;
-       mmaxd = 0.9;
-       cmaxd = 0.9;
- break;
- case 3:
-       amaxd = 0.9;
-       smaxd = 0.9;
-       mmaxd = 0.3;
-       cmaxd = 0.3;
- break;
-}
 //Move the weapon slots according to the selected ship
 create_weaponslots();
 
 instance_create(70, 60, obj_armorstat);
 instance_create(70, 90, obj_shieldstat);
 instance_create(70, 120, obj_speedstat);
+
+stat_power = instance_create(231, 48, obj_statbar);
+stat_power.stat_name = "Power";
+stat_power.stat_percent = 0.6;
+stat_power.alarm[0] = 15;
+stat_armor = instance_create(231, 70, obj_statbar);
+stat_armor.stat_name = "Armor";
+stat_armor.stat_percent = 0.5;
+stat_armor.alarm[0] = 22;
+stat_shield = instance_create(231, 92, obj_statbar);
+stat_shield.stat_name = "Shield";
+stat_shield.stat_percent = 0.5;
+stat_shield.alarm[0] = 29;
+stat_mobility = instance_create(231, 114, obj_statbar);
+stat_mobility.stat_name = "Mobility";
+stat_mobility.stat_percent = 0.4;
+stat_mobility.alarm[0] = 36;
+stat_skill = instance_create(231, 136, obj_statbar);
+stat_skill.stat_name = "Skill";
+stat_skill.stat_percent = 0.3;
+stat_skill.alarm[0] = 43;
+
+//Initialize the bars' max sizes
+switch(global.shipselect)
+{
+    case 1:
+        stat_power.stat_percent = 0.6;
+        stat_armor.stat_percent = 0.5;
+        stat_shield.stat_percent = 0.5;
+        stat_mobility.stat_percent = 0.4;
+        stat_skill.stat_percent = 0.3;
+    break;
+    case 2:
+        stat_power.stat_percent = 0.44;
+        stat_armor.stat_percent = 0.23;
+        stat_shield.stat_percent = 0.5;
+        stat_mobility.stat_percent = 0.94;
+        stat_skill.stat_percent = 0.67;
+    break;
+    case 3:
+        stat_power.stat_percent = 0.82;
+        stat_armor.stat_percent = 0.95;
+        stat_shield.stat_percent = 0.88;
+        stat_mobility.stat_percent = 0.21;
+        stat_skill.stat_percent = 0.19;
+    break;
+}
 
 playerslot_particles = part_system_create();
 changeslotpart = part_type_create();
@@ -99,6 +145,52 @@ part_type_life(changeslotpart,8,8);
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>effect_name();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>animate_name = 1;
 </string>
           </argument>
         </arguments>
@@ -230,6 +322,36 @@ alarm[1] = 10;
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(animate_name = 1)
+{
+    animate_name = 0;
+    if(string_length(current_shipname) = string_length(entire_shipname))
+        exit;
+    current_shipname = string_copy(entire_shipname, 0, string_length(current_shipname)+1);
+    alarm[5] = 7;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -254,41 +376,13 @@ draw_set_font(fnt_titles);
 draw_set_color(c_aqua);
 draw_set_alpha(backbox.display_alpha);
 
-//Draw stat icons
-draw_sprite_ext(spr_staticons, 0, 70, 60, 1, 1, 0, c_white, backbox.display_alpha);
-draw_sprite_ext(spr_staticons, 1, 70, 90, 1, 1, 0, c_white, backbox.display_alpha);
-draw_sprite_ext(spr_staticons, 2, 70, 120, 1, 1, 0, c_white, backbox.display_alpha);
-
-//Draw the stat bars
-draw_sprite_ext(spr_statbar, -1, 90, 60, astretch, 1, 0, c_white, 0.7*backbox.display_alpha);
-draw_sprite_ext(spr_statbar, -1, 90, 90, sstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
-draw_sprite_ext(spr_statbar, -1, 90, 120, mstretch, 1, 0, c_white, 0.7*backbox.display_alpha);
-//Make the bars bigger if they are not yet at their max
-if(astretch &lt; amaxd)
- astretch += amaxd/15;
-if(sstretch &lt; smaxd)
- sstretch += smaxd/15;
-if(mstretch &lt; mmaxd)
- mstretch += mmaxd/15;
-
  
 //Draw Ship Names
 draw_sprite_ext(spr_title_bar, 0, 33, 16, 1, 1, 0, c_white, backbox.display_alpha);
-switch(global.shipselect)
-{
- case 1:
-        draw_text_bordered(50, 9, 'Alphastar', 1, 1, c_black, c_aqua)
- break;
- case 2:
-        draw_text_bordered(50, 9, 'Swiftwing', 1, 1, c_black, c_aqua)
- break;
- case 3:
-        draw_text_bordered(50, 9, 'Goliath', 1, 1, c_black, c_aqua)
- break;
-}
-
+draw_text_bordered(50, 9, current_shipname, 1, 1, c_black, c_aqua)
 //Draw guiding text
-draw_sprite_ext(spr_weapons_title, 0, 328, 25, 1, 1, 0, c_white, backbox.display_alpha);
+draw_sprite_ext(spr_weapons_title, 0, 328, 25, 1, 1, 0, c_white, backbox.display_alpha*weaponslots_alpha);
+draw_sprite_ext(spr_attributes_title, 0, 328, 25, 1, 1, 0, c_white, backbox.display_alpha*attributes_alpha);
 draw_set_alpha(1);
 draw_set_font(fnt_chat);
 

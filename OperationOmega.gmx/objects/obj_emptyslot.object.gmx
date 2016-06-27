@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_alpha = obj_customizer.backbox.display_alpha;
+            <string>//Make the tranparency follow taht of the background for transition effect
+if(instance_exists(obj_customizer))
+    image_alpha = obj_customizer.backbox.display_alpha*obj_customizer.weaponslots_alpha;
 </string>
           </argument>
         </arguments>

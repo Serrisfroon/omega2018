@@ -323,23 +323,13 @@ if(growing = 1 &amp;&amp; growth &lt; 1)
  growth += 0.1;
 if(growing = 0 &amp;&amp; growth &gt; 0)
  growth -= 0.1;
+ 
+//Make the tranparency follow taht of the background for transition effect
+if(instance_exists(obj_customizer))
+    image_alpha = obj_customizer.backbox.display_alpha*obj_customizer.weaponslots_alpha;
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="6" enumb="11">
