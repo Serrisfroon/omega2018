@@ -1539,6 +1539,13 @@
         <sprite>sprites\spr_quickplay</sprite>
         <sprite>sprites\spr_searchforgame</sprite>
         <sprite>sprites\spr_groupsettings</sprite>
+        <sprite>sprites\spr_serverinfo</sprite>
+        <sprite>sprites\spr_server_message</sprite>
+        <sprite>sprites\spr_searchforgame_box</sprite>
+        <sprite>sprites\spr_join_group_box</sprite>
+        <sprite>sprites\spr_group_box</sprite>
+        <sprite>sprites\spr_create_group</sprite>
+        <sprite>sprites\spr_join_group</sprite>
       </sprites>
       <sprites name="Loading Screen">
         <sprite>sprites\spr_matchnames</sprite>
@@ -1628,9 +1635,8 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
     <sprite>sprites\spr_previewbound</sprite>
-    <sprite>sprites\sprite253</sprite>
-    <sprite>sprites\spr_playerslot_options</sprite>
     <sprites name="Trash">
+      <sprite>sprites\sprite253</sprite>
       <sprite>sprites\spr_icon_selectt</sprite>
       <sprite>sprites\spr_map_select</sprite>
       <sprite>sprites\spr_gotopractice</sprite>
@@ -1646,6 +1652,7 @@
       <sprite>sprites\spr_swiftwing_beserkglow</sprite>
       <sprite>sprites\spr_helix2</sprite>
       <sprite>sprites\spr_bluehelix2</sprite>
+      <sprite>sprites\spr_playerslot_options</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -2140,6 +2147,9 @@
         <object>objects\obj_cursor_grid</object>
         <object>objects\obj_clickring</object>
         <object>objects\obj_scanline</object>
+      </objects>
+      <objects name="Public Game Room">
+        <object>objects\obj_public_mod</object>
       </objects>
       <object>objects\obj_messagebox</object>
       <object>objects\obj_playagain</object>

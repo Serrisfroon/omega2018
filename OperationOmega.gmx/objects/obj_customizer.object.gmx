@@ -58,15 +58,15 @@ switch(global.shipselect)
 }
 backbox = instance_create(0, 0, obj_waiting_boxes);
 rightbox = instance_create(664, 150, obj_waiting_boxes);
-bottombox = instance_create(0, 480, obj_waiting_boxes);
 mapbox = instance_create(768, 480, obj_waiting_boxes);
 mapbox.sprite_index = spr_map_box;
 backbox.sprite_index = spr_waiting;
 rightbox.sprite_index = spr_waiting_right;
+bottombox = instance_create(0, 480, obj_waiting_boxes);
 bottombox.sprite_index = spr_waiting_bottom;
+bottombox.animation = -1;
 mapbox.animation = -1;
 rightbox.animation = -1;
-bottombox.animation = -1;
 alarm[0] = 10;
 alarm[3] = 120;
 
