@@ -103,6 +103,8 @@ if(global.sfxtoggle = 0)
 obj_enterhostip.animation = 3;
 obj_enterhostip.selection_reference.animation_step = 7;
 obj_menu_box.animation = 5;
+obj_menu_box.create_selections = 0;
+
 with(obj_connectbut) instance_destroy();
 instance_destroy();
 </string>

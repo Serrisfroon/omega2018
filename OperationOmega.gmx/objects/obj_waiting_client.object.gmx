@@ -32,24 +32,7 @@ if(global.musictoggle = 0)
         audio_play_sound(music_lunation, 1, 1);
 }
 //Initialize chat
-chatline[0] = "";
-chatcolor[0] = c_black;
-chatline[1] = "";
-chatcolor[1] = c_black;
-chatline[2] = "";
-chatcolor[2] = c_black;
-chatline[3] = "";
-chatcolor[3] = c_black;
-chatline[4] = "";
-chatcolor[4] = c_black;
-chatline[5] = "";
-chatcolor[5] = c_black;
-chatline[6] = "";
-chatcolor[6] = c_black;
-chatline[7] = "";
-chatcolor[7] = c_black;
-chatline[8] = "";
-chatcolor[8] = c_black;
+chat_init(8);
 found = 0;
 text = "";
 alarm[0] = 12;
@@ -164,35 +147,17 @@ alarm[0] = 18;
         //Check for new chat messages
         case 11:
             //Update your own chat
-            chatline[0] = chatline[1];
-            chatcolor[0] = chatcolor[1];
-            chatline[1] = chatline[2];
-            chatcolor[1] = chatcolor[2];
-            chatline[2] = chatline[3];
-            chatcolor[2] = chatcolor[3];
-            chatline[3] = chatline[4];
-            chatcolor[3] = chatcolor[4];
-            chatline[4] = chatline[5];
-            chatcolor[4] = chatcolor[5];
-            chatline[5] = chatline[6];
-            chatcolor[5] = chatcolor[6];
-            chatline[6] = chatline[7];
-            chatcolor[6] = chatcolor[7];
-            chatline[7] = chatline[8];
-            chatcolor[7] = chatcolor[8];
-            audio_play_sound(snd_chatmessage, 1, 0);
-            hold = readbyte(0);
-            chatcolor[8] = readdouble(0);
-            if(chatcolor[8] != c_maroon)
-             chatcolor[8] = c_white;
-            chatline[8] = readstring(0);
+            mid = readbyte(0);
+            if(mid = global.mymid)
+                break;
+            chat_addline(readstring(0), readbyte(0), 0, mid);
+
             //Animate player box if a player has joined
-            if(string_copy(chatline[8], string_length(chatline[8])-19, 20) = "has joined the game." &amp;&amp; chatcolor[8] = c_maroon) 
-            {
-                global.newmid = readbyte(0);    
+            if(string_copy(chat_line[chat_length], string_length(chat_line[chat_length])-19, 20) = "has joined the game." &amp;&amp; chat_color[chat_length] = c_red) 
+            {    
                 with(obj_playerslot)
                 {
-                    if(mid = global.newmid)
+                    if(mid = obj_waiting.mid)
                     {   
                         showthisimage = 0;                    
                         (instance_create(x, y, obj_playerslot_addplayer)).owner = id;
@@ -200,12 +165,11 @@ alarm[0] = 18;
                 }             
             }
             //Animate player box if a player has left The host has kicked
-            if((string_copy(chatline[8], string_length(chatline[8])-17, 18) = "has left the game." || string_copy(chatline[8], 0, 19) = "The host has kicked") &amp;&amp; chatcolor[8] = c_maroon) 
+            if((string_copy(chat_line[chat_length], string_length(chat_line[chat_length])-17, 18) = "has left the game." || string_copy(chat_line[chat_length], 0, 19) = "The host has kicked") &amp;&amp; chat_color[chat_length] = c_red) 
             {
-                global.newmid = readbyte(0);    
                 with(obj_playerslot)
                 {
-                    if(mid = global.newmid)
+                    if(mid = obj_waiting.mid)
                     {
                         playerleave = instance_create(x, y, obj_playerslot_playerleave);
                         playerleave.owner = id;
@@ -215,7 +179,7 @@ alarm[0] = 18;
                 }
             }
             //Un-ready if host has just finished changing settings
-            if(chatline[8] = "The host finished changing match settings.")
+            if(chat_line[chat_length] = "The host finished changing match settings.")
             {
                 obj_readygo.image_index = 1;
                 with(obj_playerslot_readied)
@@ -223,7 +187,7 @@ alarm[0] = 18;
                         instance_destroy();
             }
             //Receive kick
-            if(string_copy(chatline[8], 0, 19) = "The host has kicked")
+            if(string_copy(chat_line[chat_length], 0, 19) = "The host has kicked")
             if(global.mymid = readbyte(0))
             {
                 show_message('You have been kicked from the game.');
@@ -259,24 +223,7 @@ alarm[0] = 18;
          if(obj_readygo.image_index = 1)
          {
             //Update your own chat
-            chatline[0] = chatline[1];
-            chatcolor[0] = chatcolor[1];
-            chatline[1] = chatline[2];
-            chatcolor[1] = chatcolor[2];
-            chatline[2] = chatline[3];
-            chatcolor[2] = chatcolor[3];
-            chatline[3] = chatline[4];
-            chatcolor[3] = chatcolor[4];
-            chatline[4] = chatline[5];
-            chatcolor[4] = chatcolor[5];
-            chatline[5] = chatline[6];
-            chatcolor[5] = chatcolor[6];
-            chatline[6] = chatline[7];
-            chatcolor[6] = chatcolor[7];
-            chatline[7] = chatline[8];
-            chatcolor[7] = chatcolor[8];
-            chatcolor[8] = c_maroon;
-            chatline[8] = "The host wants to start. Click ready.";
+            chat_addline("The host wants to start. Click ready.", 1, 0, 0);
          }
     break;
            
@@ -397,7 +344,7 @@ draw_text_bordered(6, 455, keyboard_string+flashing, 1, 1, c_black, c_white);
 //draw chat
 for(i = 0; i &lt;= 7; i += 1)
 {
- draw_text_bordered(2, 407-(i*18), chatline[8-i], 1, 1, c_black, chatcolor[8-i]);
+ draw_text_bordered(2, 407-(i*18), chat_line[8-i], 1, 1, c_black, chat_color[8-i]);
 }
 draw_set_alpha(1);
 
@@ -431,30 +378,8 @@ audio_play_sound(snd_chatmessage, 1, 0);
 sendline = string_insert(global.name,": "+ keyboard_string, 0);
 
 //If a rule change is not typed, send what you typed to clients
-chatline[0] = chatline[1];
-chatcolor[0] = chatcolor[1];
-chatline[1] = chatline[2];
-chatcolor[1] = chatcolor[2];
-chatline[2] = chatline[3];
-chatcolor[2] = chatcolor[3];
-chatline[3] = chatline[4];
-chatcolor[3] = chatcolor[4];
-chatline[4] = chatline[5];
-chatcolor[4] = chatcolor[5];
-chatline[5] = chatline[6];
-chatcolor[5] = chatcolor[6];
-chatline[6] = chatline[7];
-chatcolor[6] = chatcolor[7];
-chatline[7] = chatline[8];
-chatcolor[7] = chatcolor[8];
-chatline[8] = sendline;
-chatcolor[8] = c_white;
-clearbuffer(0);
-writebyte(11, 0);
-writebyte(global.mymid, 0);
-writedouble(c_black, 0);
-writestring(sendline, 0);
-sendmessage(global.host, "", 0, 0);
+
+chat_addline(sendline, 0, 2, global.mymid);
 
 keyboard_string = "";
 </string>

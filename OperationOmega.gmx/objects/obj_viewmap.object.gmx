@@ -29,6 +29,7 @@
 y = 480;
 instance_create(x, y, obj_showpreview);
 //Background preview
+holdframe = 0;
 backspeed = 0;
 back[0] = backspeed/10;
 back[2] = backspeed/3;
@@ -124,6 +125,7 @@ switch(global.matchlevel)
             <string>//Make the tranparency follow taht of the background for transition effect
 if(instance_exists(obj_customizer))
     image_alpha = obj_customizer.mapbox.display_alpha;
+
 //Set display variable according to selected map
 switch(global.matchlevel)
 {

@@ -28,13 +28,7 @@
             <string>cyber_window[0] = instance_create(120, 100, obj_waiting_boxes);
 cyber_window[0].sprite_index = spr_serverinfo;
 
-cyber_window[1] = instance_create(0, 480, obj_waiting_boxes);
-cyber_window[1].sprite_index = spr_waiting_bottom;
-cyber_window[1].animation = -1;
 
-next_cyber_window = 1;
-
-alarm[0] = 10;
 
 
 //////////////////////////////////////////////////////////////////////
@@ -68,6 +62,50 @@ total_players = 0;
           <argument>
             <kind>1</kind>
             <string>cyber_window[next_cyber_window].animation = 0;
+next_cyber_window++;
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(room != rm_gamelist &amp;&amp; room != rm_groupsettings)
+{
+    persistent = 0;
+    instance_destroy();
+}
+if(global.in_group = 1)
+{
+    cyber_window[2] = instance_create(658, 110, obj_waiting_boxes);
+    cyber_window[2].sprite_index = spr_group_box;
+    cyber_window[1] = instance_create(0, 480, obj_waiting_boxes);
+    cyber_window[1].sprite_index = spr_waiting_bottom;
+    cyber_window[1].animation = -1;
+    
+    next_cyber_window = 1;
+    alarm[0] = 10;
+    ////////////////////////////////////////////////////////////
+    //Group creation netcode
+    ///////////////////////////////////////////////////////////
+}
 </string>
           </argument>
         </arguments>

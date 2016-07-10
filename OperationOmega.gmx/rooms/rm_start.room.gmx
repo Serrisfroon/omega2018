@@ -17,7 +17,8 @@ initpack();
 cleanmem_init(0);
 init_menuback();
 
-
+global.in_group = 0;
+global.groupsize = 1;
 global.fromprofile = 0;
 global.tutorial = 0;
 global.messageup = 0;

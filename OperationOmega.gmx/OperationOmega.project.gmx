@@ -1539,13 +1539,14 @@
         <sprite>sprites\spr_quickplay</sprite>
         <sprite>sprites\spr_searchforgame</sprite>
         <sprite>sprites\spr_groupsettings</sprite>
-        <sprite>sprites\spr_serverinfo</sprite>
         <sprite>sprites\spr_server_message</sprite>
+        <sprite>sprites\spr_serverinfo</sprite>
         <sprite>sprites\spr_searchforgame_box</sprite>
         <sprite>sprites\spr_join_group_box</sprite>
         <sprite>sprites\spr_group_box</sprite>
         <sprite>sprites\spr_create_group</sprite>
         <sprite>sprites\spr_join_group</sprite>
+        <sprite>sprites\spr_leave_group</sprite>
       </sprites>
       <sprites name="Loading Screen">
         <sprite>sprites\spr_matchnames</sprite>
@@ -1874,6 +1875,11 @@
       <script>scripts\free_menuback.gml</script>
       <script>scripts\random_map.gml</script>
     </scripts>
+    <scripts name="Chat System">
+      <script>scripts\chat_init.gml</script>
+      <script>scripts\chat_addline.gml</script>
+      <script>scripts\script154.gml</script>
+    </scripts>
     <script>scripts\select_tip.gml</script>
     <script>scripts\view_sync.gml</script>
     <scripts name="Trash">
@@ -2138,6 +2144,7 @@
         <object>objects\obj_profile_connect</object>
         <object>objects\obj_menu_box</object>
         <object>objects\obj_menu_selection</object>
+        <object>objects\obj_publicgame_search</object>
       </objects>
       <objects name="Menu Effects">
         <object>objects\obj_scanner</object>
@@ -2150,6 +2157,21 @@
       </objects>
       <objects name="Public Game Room">
         <object>objects\obj_public_mod</object>
+        <objects name="Search Box">
+          <object>objects\obj_searchforgame_box</object>
+          <object>objects\obj_moremode</object>
+          <object>objects\obj_lessmode</object>
+          <object>objects\obj_moremap</object>
+          <object>objects\obj_lessmap</object>
+          <object>objects\obj_okaysearch</object>
+          <object>objects\obj_cancelsearch</object>
+        </objects>
+        <objects name="Join Group Box">
+          <object>objects\obj_group_search</object>
+          <object>objects\obj_joingroup_box</object>
+          <object>objects\obj_joinbut</object>
+          <object>objects\obj_undobut</object>
+        </objects>
       </objects>
       <object>objects\obj_messagebox</object>
       <object>objects\obj_playagain</object>
@@ -2169,6 +2191,7 @@
     <room>rooms\rm_connect</room>
     <room>rooms\rm_waiting</room>
     <room>rooms\rm_gamelist</room>
+    <room>rooms\rm_groupsettings</room>
     <room>rooms\rm_prematch</room>
     <room>rooms\rm_aftermatch</room>
     <room>rooms\rm_aftergame</room>

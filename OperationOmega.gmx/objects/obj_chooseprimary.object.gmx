@@ -255,16 +255,16 @@ with(prnt_selection) selected = 0;
 //Select this slot
 if(obj_readygo.readied = 0)
 {
-    create_icon(spr_needle_icon, 4, 0, 32, 0, 1);    
-    create_icon(spr_sonic_icon, 4, 4, 32, 32, 2);    
-    create_icon(spr_wave_icon, 4, 4, 32, 64, 3);    
-    create_icon(spr_flank_icon, 4, 4, 32, 96, 4);    
-    create_icon(spr_stasis_icon, 4, 4, 32, 128, 5);    
-    create_icon(spr_crossfire_icon, 4, 0, 64, 0, 6);    
-    create_icon(spr_siphon_icon, 4, 4, 64, 32, 7);    
-    create_icon(spr_double_icon, 4, 4, 64, 64, 8);    
-    create_icon(spr_pierce_icon, 4, 4, 64, 96, 9);    
-    create_icon(spr_spread_icon, 4, 4, 64, 128, 10);        
+    create_icon(spr_needle_icon, 4, 0, 40, 0, 1);    
+    create_icon(spr_sonic_icon, 4, 4, 40, 32, 2);    
+    create_icon(spr_wave_icon, 4, 4, 40, 64, 3);    
+    create_icon(spr_flank_icon, 4, 4, 40, 96, 4);    
+    create_icon(spr_stasis_icon, 4, 4, 40, 128, 5);    
+    create_icon(spr_crossfire_icon, 4, 0, 72, 0, 6);    
+    create_icon(spr_siphon_icon, 4, 4, 72, 32, 7);    
+    create_icon(spr_double_icon, 4, 4, 72, 64, 8);    
+    create_icon(spr_pierce_icon, 4, 4, 72, 96, 9);    
+    create_icon(spr_spread_icon, 4, 4, 72, 128, 10);        
     alarm[2] = 1;
 }
 else

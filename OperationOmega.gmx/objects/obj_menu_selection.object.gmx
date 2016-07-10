@@ -156,12 +156,10 @@ room_goto(goto_room);
             {
                 y = obj_menu_box.y;
                 animation_step = 4;
-                if(text_sprite != spr_host &amp;&amp; text_sprite != spr_connect)
-                    alarm[1] = 20;
-                else
+
+                switch(text_sprite)
                 {
-                    if(text_sprite = spr_host)
-                    {
+                    case spr_host:
                         //Create the popup
                         (instance_create(384, 240, obj_creategamebox)).selection_reference = id;                                
                         
@@ -169,12 +167,27 @@ room_goto(goto_room);
                         global.maxplayers = 4;
                         global.matchtype = "stock";
                         global.matchvariable = 3;
-                    }
-                    else
-                    {
+                    break;
+                    case spr_connect:
                         //Create a popup
                         (instance_create(384, 240, obj_enterhostip)).selection_reference = id;
-                    }
+                    break;
+                    case spr_quickplay:
+                        (instance_create(384, 240, obj_publicgame_search)).selection_reference = id;
+                    break;
+                    case spr_searchforgame:
+                        (instance_create(384, 240, obj_searchforgame_box)).selection_reference = id;                        
+                    break;
+                    case spr_joingroup:
+                        (instance_create(384, 240, obj_joingroup_box)).selection_reference = id;                                            
+                    break;
+                    case spr_leave_group:
+                    ////////////////////////////////////////////////////////////////////////////////////////////
+                    //Group leaving netcode
+                    ///////////////////////////////////////////////////////////////////////////////////////////
+                    default:
+                        alarm[1] = 20;
+                    break;
                 }
             }
     break;
@@ -183,13 +196,42 @@ room_goto(goto_room);
         image_yscale -= 0.1;
         if(image_yscale &lt;= 0)
         {
+           visible = 0;
            alarm[0] = 10;
            animation_step = 6;
         }  
     break;
     case 6:
-        y -= 6;
-        
+        if(y &lt;= ystart+6)
+        {
+            y = ystart;
+            animation_step = 1;
+        }
+        else
+            y -= 6;
+    break;
+    case 7:
+        if(y &lt; ystart)
+        {
+            if(y &gt;= ystart-6)
+            {
+                y = ystart;
+                animation_step = 1;
+            }
+            else
+                y += 6;
+        }
+        if(y &gt; ystart)
+        {
+            if(y &lt;= ystart+6)
+            {
+                y = ystart;
+                animation_step = 1;
+            }
+            else
+                y -= 6;
+        }
+    
     break;
 }
 </string>
@@ -297,6 +339,28 @@ switch(text_sprite)
         text_sprite = spr_firing;
         exit;       
     break;
+    case spr_groupsettings:
+        obj_public_mod.persistent = 1;
+        obj_public_mod.cyber_window[0].persistent = 1;
+    break;
+    case spr_leave_group:
+        obj_public_mod.persistent = 1;
+        obj_public_mod.cyber_window[0].persistent = 1;    
+        obj_public_mod.cyber_window[1].animation = 3;    
+        obj_public_mod.cyber_window[2].animation = 3;    
+        global.in_group = 0;
+    break;
+    case spr_back:
+        if(global.in_group = 1)
+        {
+            global.in_group = 0;
+            obj_waiting_boxes.persistent = 0;
+        }
+    break;
+    case spr_create_group:
+        global.in_group = 1;
+        global.group_placement = 1;
+    break;
 }
 //Fade out all selections
 with(obj_menu_selection)
@@ -311,6 +375,11 @@ switch(room)
 {
     case rm_mainmenu:
         obj_profile_connect.animation = 3;
+    break;
+    case rm_gamelist:
+        if(text_sprite = spr_back)
+            with(obj_waiting_boxes)
+                animation = 3;
     break;
 }
 </string>
