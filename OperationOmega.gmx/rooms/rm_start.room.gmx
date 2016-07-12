@@ -45,7 +45,7 @@ global.musictoggle = 0;
 global.sfxtoggle = 0;
 global.firingmode = 0;
 
-global.framerate = 1;
+
 global.resolution = 4;
 global.msmokeeffect = 1;
 global.fbursteffect = 1;

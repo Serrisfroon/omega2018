@@ -193,7 +193,7 @@ switch(location)
       form.priority = 1;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 1;
       form.amplified = amplified;
@@ -202,7 +202,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -211,7 +211,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1; 
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -222,7 +222,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 5;
       form.amplified = amplified;
@@ -233,7 +233,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -242,7 +242,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 3;
       form.amplified = amplified;
@@ -251,7 +251,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1; 
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -262,7 +262,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 6;
       form.amplified = amplified;
@@ -273,7 +273,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -282,7 +282,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -291,7 +291,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1; 
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -302,7 +302,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -311,7 +311,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1;
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;
@@ -320,7 +320,7 @@ switch(location)
       form.image_angle = form.direction;
       form.part = part+1; 
       form.control = control;
-      form.alarm[1] = (45*(3-part))/global.framerate/(amplified+1);
+      form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
       form.amplified = amplified;

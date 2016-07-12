@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>sfx_play(snd_formation, x, y);
 //Set speed
-speed = 12*global.framerate;
+speed = 12;
 
 amplified = 0;
 
@@ -162,7 +162,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.part = 1;
  form.location = 1;
  form.control = id;
- form.alarm[1] = 135/global.framerate/(amplified+1);
+ form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb);
@@ -171,7 +171,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.part = 1;
  form.location = 2;
  form.control = id;
- form.alarm[1] = 135/global.framerate/(amplified+1);
+ form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb);
@@ -180,7 +180,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.part = 1;
  form.location = 3;
  form.control = id;
- form.alarm[1] = 135/global.framerate/(amplified+1);
+ form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb);
@@ -189,13 +189,13 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.part = 1; 
  form.location = 4;
  form.control = id;
- form.alarm[1] = 135/global.framerate/(amplified+1);
+ form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
  form.amplified = amplified;
  //Set mask to empty to prevent error due to collision
  mask_index = spr_empty;
  //Set time until attack
- alarm[1] = 180/global.framerate/(amplified+1);
+ alarm[1] = 180/(amplified+1);
 }
 if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 {

@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>//Set the speed
-speed = 17*global.framerate;
+speed = 17;
 //Initialize variable for keeping track of a second node
 second = -1;
 //Initialize variable controlling drawing between nodes
@@ -36,7 +36,7 @@ stage = 0;
 //Set damage to the base
 damage = 0;
 //Set auto-destroy time
-alarm[0] = 660/global.framerate;
+alarm[0] = 660;
 sfx_play(snd_sparkline, x, y);
 
 </string>
@@ -166,7 +166,7 @@ instance_destroy();
 if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
  instance_destroy();
 //Check if the target point has been reached
-if(point_distance(x, y, targetx, targety) &lt;= 17*global.framerate &amp;&amp; speed = 17*global.framerate &amp;&amp; stage = 0)
+if(point_distance(x, y, targetx, targety) &lt;= 17 &amp;&amp; speed = 17 &amp;&amp; stage = 0)
  //Stop moving
  speed = 0;
 if(final = 1 &amp;&amp; speed = 0)
@@ -194,9 +194,9 @@ if(final = 1 &amp;&amp; speed = 0)
  second.hit = hit;
  second.second.hit = hit;
  //Set the speed for all three nodes
- speed = 17*global.framerate;
- second.speed = 17*global.framerate;
- second.second.speed = 17*global.framerate;
+ speed = 17;
+ second.speed = 17;
+ second.second.speed = 17;
  //Set damage to max for all three nodes
  damage = 2;
  second.damage = 2;
@@ -216,11 +216,11 @@ if(instance_exists(second) &amp;&amp; stage = 0 &amp;&amp; second != -1)
  if(hit &gt;= 0)
  {
   //Increase speed and damage
-  speed = 17*global.framerate;
+  speed = 17;
   damage = 1;
   stage = 1;
   //Increase the second node's speed and damage
-  second.speed = 17*global.framerate;
+  second.speed = 17;
   second.damage = 1;
   //Move the node to the next stage and tell it the collision
   second.stage = 1;
@@ -232,7 +232,7 @@ if(instance_exists(second) &amp;&amp; stage = 0 &amp;&amp; second != -1)
    if(second.second.speed = 0)
    {
    //Increase the third node's speed and damage
-   second.second.speed = 17*global.framerate;
+   second.second.speed = 17;
    second.second.damage = 1;
    //Move the node to the next stage and tell it the collision
    second.second.stage = 1;

@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 15*global.framerate;
+            <string>speed = 15;
 image_speed = 0;
 image_index = 0;
 if(global.allycolor != c_red)

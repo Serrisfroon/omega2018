@@ -169,7 +169,7 @@ switch(step)
       {
        point = point_direction(x, y, target.x, target.y);
        //Move the missile's current direction towards the target
-       step_towards_direction(point, 4*global.framerate);
+       step_towards_direction(point, 4);
        image_angle = direction;
       } 
  break;

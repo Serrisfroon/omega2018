@@ -29,7 +29,7 @@
 //Set image speed for masking
 image_speed = 0;
 //Set auto destroy time
-alarm[0] = 400/global.framerate;
+alarm[0] = 400;
 //Set base explosion
 hits = 1;
 image_blend = global.allycolor;

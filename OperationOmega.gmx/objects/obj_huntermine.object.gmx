@@ -27,9 +27,9 @@
             <kind>1</kind>
             <string>sfx_play(snd_mine, x, y);
 //Set time until smoke trail effect
-alarm[0] = 30/global.framerate;
+alarm[0] = 30;
 //Set auto-destroy time
-alarm[1] = 1200/global.framerate;
+alarm[1] = 1200;
 hit = 1;
 image_blend = global.allycolor;
 alarm[2] = 60;
@@ -62,7 +62,7 @@ create_explosion(1);
 if(hit = 1 &amp;&amp; mid = global.mymid)
 {
  obj_mod.targethit = 3;
- obj_mod.alarm[3] = 5/global.framerate;
+ obj_mod.alarm[3] = 5;
 }
 </string>
           </argument>
@@ -151,7 +151,7 @@ instance_destroy();
             <kind>1</kind>
             <string>//create effect and set time until next effect
 effect_create_below(ef_smoke, x, y, 0, c_gray);
-alarm[0] = 30/global.framerate;
+alarm[0] = 30;
 </string>
           </argument>
         </arguments>
@@ -184,39 +184,39 @@ dist = point_distance(x, y, target.x, target.y);
 //Set movement speed to match how close to target
 if(amplified = 0)
 {
-speed = 1.5*global.framerate;
+speed = 1.5;
 if(dist &lt; 800)
 {
- speed = 2.5*global.framerate;
+ speed = 2.5;
  exit;
 }
 if(dist &lt; 600)
 {
- speed = 3.5*global.framerate;
+ speed = 3.5;
  exit;
 }
 if(dist &lt; 200)
 {
- speed = 4*global.framerate;
+ speed = 4;
  exit;
 }
 }
 else 
 {
-speed = 2*global.framerate;
+speed = 2;
 if(dist &lt; 800)
 {
- speed = 3.5*global.framerate;
+ speed = 3.5;
  exit;
 }
 if(dist &lt; 600)
 {
- speed = 4.5*global.framerate;
+ speed = 4.5;
  exit;
 }
 if(dist &lt; 200)
 {
- speed = 6*global.framerate;
+ speed = 6;
  exit;
 }
 }

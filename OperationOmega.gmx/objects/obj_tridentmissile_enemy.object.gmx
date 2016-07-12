@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>//Set time until homing
-alarm[0] = 20/global.framerate;
+alarm[0] = 20;
 //Initialize stage variable
 go = 0;
 image_blend = global.enemycolor;
@@ -192,11 +192,11 @@ instance_destroy();
 go = 1;
 //Give the missile its correct startin direction and speed
 direction = startdir;
-speed = 14*global.framerate;
+speed = 14;
 //Set time until homing wears off
-alarm[2] = 80/global.framerate;
+alarm[2] = 80;
 //Set time until auto destruct
-alarm[1] = 120/global.framerate;
+alarm[1] = 120;
 cursor = instance_create(0, 0, obj_homingeffect);
 cursor.target = target;    
 cursor.create = id;
@@ -213,12 +213,12 @@ switch(trio)
       part_type_scale(particle1,1,1);
       part_type_color1(particle1,8421504);
       part_type_alpha2(particle1,1,0);
-      part_type_speed(particle1,0,0,1*global.framerate,0);
+      part_type_speed(particle1,0,0,1,0);
       part_type_direction(particle1,direction+90,direction+90,0,0);
       part_type_gravity(particle1,0,270);
       part_type_orientation(particle1,0,0,0,0,1);
       part_type_blend(particle1,0);
-      part_type_life(particle1,10/global.framerate,10/global.framerate);
+      part_type_life(particle1,10,10);
       part_emitter_region(obj_partsystem.system,emitter1,x-8,x+8,y-8,y+8,1,1);
       part_emitter_stream(obj_partsystem.system,emitter1,particle1,5);
  break;
@@ -230,12 +230,12 @@ switch(trio)
       part_type_scale(particle1,1,1);
       part_type_color1(particle1,8421504);
       part_type_alpha2(particle1,1,0);
-      part_type_speed(particle1,0,0,1*global.framerate,0);
+      part_type_speed(particle1,0,0,1,0);
       part_type_direction(particle1,direction-90,direction-90,0,0);
       part_type_gravity(particle1,0,270);
       part_type_orientation(particle1,0,0,0,0,1);
       part_type_blend(particle1,0);
-      part_type_life(particle1,10/global.framerate,10/global.framerate);
+      part_type_life(particle1,10,10);
       part_emitter_region(obj_partsystem.system,emitter1,x-8,x+8,y-8,y+8,1,1);
       part_emitter_stream(obj_partsystem.system,emitter1,particle1,5);
  break;
@@ -268,7 +268,7 @@ switch(go)
  case 0:
      //Slow the missile down to a stop if it hasnt started homing yet
      if(speed &gt; 0)
-       speed -= 0.2*global.framerate;
+       speed -= 0.2;
  break;
  case 1:
       //If the target still exists, take note of the direction to it
@@ -283,7 +283,7 @@ switch(go)
               step_towards_direction(point, 3.5);
              else
               if(amplified = 1)
-               step_towards_direction(point, 10*global.framerate);                           
+               step_towards_direction(point, 10);                           
         break;
         case 2:
              if(instance_exists(middle))
@@ -294,7 +294,7 @@ switch(go)
              }
              else
              {
-              step_towards_direction(point, 10*global.framerate);             
+              step_towards_direction(point, 10);             
              }
         break;
         case 3:
@@ -306,7 +306,7 @@ switch(go)
              }
              else
              {
-              step_towards_direction(point, 10*global.framerate);             
+              step_towards_direction(point, 10);             
              }
         break;
       }

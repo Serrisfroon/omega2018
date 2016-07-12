@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>//Set auto-destroy time
-alarm[1] = 1600/global.framerate;
+alarm[1] = 1600;
 hit = 1;
 image_blend = global.enemycolor;
 image_xscale = 0.75;

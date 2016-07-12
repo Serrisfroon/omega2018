@@ -65,11 +65,11 @@ shooting = 0;
 smoke = 6;
 alarm[2] = 1;
 //Set default movement values to prevent error
-autoturn = 2*global.framerate;
-forceturn = 5*global.framerate;
-minspeed = 2*global.framerate;
-maxspeed = 7*global.framerate; 
-controlturn = 0.75*global.framerate;
+autoturn = 2;
+forceturn = 5;
+minspeed = 2;
+maxspeed = 7; 
+controlturn = 0.75;
 
 //Initialize Chain control
 chain = 0;
@@ -200,27 +200,27 @@ else
          {
           case 1: //Alphastar
                sprite_index = spr_alphastar;
-               autoturn = 2*global.framerate;
-               forceturn = 5*global.framerate;
-               minspeed = 2*global.framerate;
-               maxspeed = 7*global.framerate;
-               controlturn = 0.75*global.framerate;
+               autoturn = 2;
+               forceturn = 5;
+               minspeed = 2;
+               maxspeed = 7;
+               controlturn = 0.75;
           break;
           case 2: //Swiftwing
                sprite_index = spr_swiftwing;
-               autoturn = 3*global.framerate;
-               forceturn = 8*global.framerate;
-               minspeed = 4*global.framerate;
-               maxspeed = 10*global.framerate;               
-               controlturn = 1.2*global.framerate;
+               autoturn = 3;
+               forceturn = 8;
+               minspeed = 4;
+               maxspeed = 10;               
+               controlturn = 1.2;
           break;
           case 3: //Goliath
                sprite_index = spr_goliath;
-               autoturn = 1*global.framerate;
-               forceturn = 3*global.framerate;
-               minspeed = 1*global.framerate;
-               maxspeed = 5*global.framerate;
-               controlturn = 0.5*global.framerate;
+               autoturn = 1;
+               forceturn = 3;
+               minspeed = 1;
+               maxspeed = 5;
+               controlturn = 0.5;
           break;
          }
         else
@@ -230,27 +230,27 @@ else
          {
           case 1: //Alphastar
                sprite_index = spr_alphastar_enemy;
-               autoturn = 2*global.framerate;
-               forceturn = 5*global.framerate;
-               minspeed = 2*global.framerate;
-               maxspeed = 7*global.framerate;               
-               controlturn = 0.75*global.framerate;
+               autoturn = 2;
+               forceturn = 5;
+               minspeed = 2;
+               maxspeed = 7;               
+               controlturn = 0.75;
           break;
           case 2: //Swiftwing
                sprite_index = spr_swiftwing_enemy;
-               autoturn = 3*global.framerate;
-               forceturn = 8*global.framerate;
-               minspeed = 4*global.framerate;
-               maxspeed = 10*global.framerate;               
-               controlturn = 1.2*global.framerate;
+               autoturn = 3;
+               forceturn = 8;
+               minspeed = 4;
+               maxspeed = 10;               
+               controlturn = 1.2;
           break;
           case 3: //Goliath
                sprite_index = spr_goliath_enemy;
-               autoturn = 1*global.framerate;
-               forceturn = 3*global.framerate;
-               minspeed = 1*global.framerate;
-               maxspeed = 5*global.framerate;               
-               controlturn = 0.5*global.framerate;
+               autoturn = 1;
+               forceturn = 3;
+               minspeed = 1;
+               maxspeed = 5;               
+               controlturn = 0.5;
           break;
          }
 
@@ -282,8 +282,7 @@ else
 if(global.sfxtoggle = 0)
     audio_emitter_position(emit_whip, (view_xview[0]+view_wview[0]/2)-x, y-(view_yview[0]+view_hview[0]/2), 0);
 
-repeat(global.framerate)
-{
+
 if(whips &gt; 0)
 {
 alarm[8] = 1;
@@ -301,68 +300,67 @@ aim = point_direction(x, y, hitx, hity);
 switch(whips)
 {
  case 19:
-      whipspeed = 12*global.framerate;
+      whipspeed = 12;
  break;
  case 18:
-      whipspeed = 10*global.framerate;
+      whipspeed = 10;
  break;
  case 17:
-      whipspeed = 8*global.framerate;
+      whipspeed = 8;
  break;
  case 16:
-      whipspeed = 6*global.framerate;
+      whipspeed = 6;
  break;
  case 15:
-      whipspeed = 4*global.framerate;
+      whipspeed = 4;
  break;
  case 14:
-      whipspeed = 2*global.framerate;
+      whipspeed = 2;
  break;
  case 13:
-      whipspeed = 3*global.framerate;
+      whipspeed = 3;
  break;
  case 12:
-      whipspeed = 4*global.framerate;
+      whipspeed = 4;
  break;
  case 11:
-      whipspeed = 5.5*global.framerate;
+      whipspeed = 5.5;
  break;
  case 10:
-      whipspeed = 7*global.framerate;
+      whipspeed = 7;
  break;
  case 9:
-      whipspeed = 8.5*global.framerate;
+      whipspeed = 8.5;
  break;
  case 8:
-      whipspeed = 10*global.framerate;
+      whipspeed = 10;
  break;
  case 7:
-      whipspeed = 12*global.framerate;
+      whipspeed = 12;
  break;
  case 6:
-      whipspeed = 14*global.framerate;
+      whipspeed = 14;
  break;
  case 5:
-      whipspeed = 16*global.framerate;
+      whipspeed = 16;
  break;
  case 4:
-      whipspeed = 19*global.framerate;
+      whipspeed = 19;
  break;
  case 3:
-      whipspeed = 18*global.framerate;
+      whipspeed = 18;
  break;
  case 2:
-      whipspeed = 16*global.framerate;
+      whipspeed = 16;
  break;
  case 1:
-      whipspeed = 14.5*global.framerate;
+      whipspeed = 14.5;
  break;
  case 0:
-      whipspeed = 13*global.framerate;
+      whipspeed = 13;
  break;
 }
 bullet = bullet_create(x, y, "Whip", aim, mid, whipspeed);
-}
 
 </string>
           </argument>
@@ -487,7 +485,7 @@ if(speed &gt; 5)
         }
 }
 //Set the time until the next smoke effect, dependant on how bad smoking is
-alarm[2]=(6*smoke+10)/global.framerate;
+alarm[2]=(6*smoke+10);
 
 </string>
           </argument>
@@ -515,8 +513,7 @@ alarm[2]=(6*smoke+10)/global.framerate;
 //If there are parts of the attack left, reset the alarm
 //to create them
 
-repeat(global.framerate)
-{
+
 if(stardust &gt; 0)
 {
 alarm[1] = 1;
@@ -533,107 +530,107 @@ fuse.amplified = staramp;
 switch(stardust)
 {
  case 24:
-      fuse.speed = 11*global.framerate;
+      fuse.speed = 11;
       fuse.direction = aim;
  break;
  case 23:
-      fuse.speed = 13*global.framerate;
+      fuse.speed = 13;
       fuse.direction = aim+11;
  break;
  case 22:
-      fuse.speed = 7*global.framerate;
+      fuse.speed = 7;
       fuse.direction = aim-17;
  break;
  case 21:
-      fuse.speed = 9*global.framerate;
+      fuse.speed = 9;
       fuse.direction = aim+7;
  break;
  case 20:
-      fuse.speed = 15*global.framerate;
+      fuse.speed = 15;
       fuse.direction = aim+21;
  break;
  case 19:
-      fuse.speed = 10*global.framerate;
+      fuse.speed = 10;
       fuse.direction = aim-9;
  break;
  case 18:
-      fuse.speed = 12*global.framerate;
+      fuse.speed = 12;
       fuse.direction = aim+1;
  break;
  case 17:
-      fuse.speed = 8*global.framerate;
+      fuse.speed = 8;
       fuse.direction = aim-13;
  break;
  case 16:
-      fuse.speed = 14*global.framerate;
+      fuse.speed = 14;
       fuse.direction = aim+19;
  break;
  case 15:
-      fuse.speed = 13*global.framerate;
+      fuse.speed = 13;
       fuse.direction = aim-25;
  break;
  case 14:
-      fuse.speed = 10*global.framerate;
+      fuse.speed = 10;
       fuse.direction = aim+5;
  break;
  case 13:
-      fuse.speed = 14*global.framerate;
+      fuse.speed = 14;
       fuse.direction = aim-15;
  break;
  case 12:
-      fuse.speed = 12*global.framerate;
+      fuse.speed = 12;
       fuse.direction = aim+17;
  break;
  case 11:
-      fuse.speed = 15*global.framerate;
+      fuse.speed = 15;
       fuse.direction = aim-5;
  break;
  case 10:
-      fuse.speed = 10*global.framerate;
+      fuse.speed = 10;
       fuse.direction = aim+13;
  break;
  case 9:
-      fuse.speed = 8*global.framerate;
+      fuse.speed = 8;
       fuse.direction = aim-23;
  break;
  case 8:
-      fuse.speed = 13*global.framerate;
+      fuse.speed = 13;
       fuse.direction = aim+9;
  break;
  case 7:
-      fuse.speed = 9*global.framerate;
+      fuse.speed = 9;
       fuse.direction = aim-1;
  break;
  case 6:
-      fuse.speed = 12*global.framerate;
+      fuse.speed = 12;
       fuse.direction = aim+15;
  break;
  case 5:
-      fuse.speed = 15*global.framerate;
+      fuse.speed = 15;
       fuse.direction = aim-11;
  break;
  case 4:
-      fuse.speed = 10*global.framerate;
+      fuse.speed = 10;
       fuse.direction = aim-19;
  break;
  case 3:
-      fuse.speed = 11*global.framerate;
+      fuse.speed = 11;
       fuse.direction = aim-7;
  break;
  case 2:
-      fuse.speed = 9*global.framerate;
+      fuse.speed = 9;
       fuse.direction = aim+3;
  break;
  case 1:
-      fuse.speed = 14*global.framerate;
+      fuse.speed = 14;
       fuse.direction = aim-21;
  break;
  case 0:
-      fuse.speed = 8*global.framerate;
+      fuse.speed = 8;
       fuse.direction = aim+25;
  break;
 }
-}
+
 
 </string>
           </argument>
@@ -662,13 +659,13 @@ switch(stardust)
 //to create them
 if(fusions &gt; 0)
 {
-alarm[0] = 5/global.framerate;
+alarm[0] = 5;
 }
 fusions -= 1;
 //Create a fusion part
 fuse = instance_create(x, y, obj_fusion);
 //Set its movement
-fuse.speed = 10*global.framerate;
+fuse.speed = 10;
 fuse.direction = 60*fusions;
 //Set its target location
 fuse.targetx = hitx;
@@ -828,8 +825,7 @@ switch(speeding)
 if(speed &gt; speedmin) 
 {
  speed -= 0.04;
- if(global.framerate = 2)
-  speed -= 0.12;
+
 }      
 else 
  speed = speedmin;
@@ -1272,7 +1268,7 @@ if(global.dflameseffect = 1)
  part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
  part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
  effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60/global.framerate;
+ alarm[7] = 60;
  deployhits += 1;
 }
 
@@ -1323,7 +1319,7 @@ if(global.dflameseffect = 1)
  part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
  part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
  effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60/global.framerate;
+ alarm[7] = 60;
  deployhits += 1;
 }
 
@@ -1417,7 +1413,7 @@ if(global.dflameseffect = 1)
  part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
  part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
  effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60/global.framerate;
+ alarm[7] = 60;
  deployhits += 1;
 }
 

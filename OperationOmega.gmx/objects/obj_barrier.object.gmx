@@ -26,13 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>//Set destroy time
-alarm[0] = 200/global.framerate;
+alarm[0] = 200;
 //Initialize stage variable
 full = 0;
 //Set scale
 image_yscale = 0;
 //Set time until sparkle effect
-alarm[1] = 20/global.framerate;
+alarm[1] = 20;
 image = 0;
 //Set rotation
 alarm[3] = 1;

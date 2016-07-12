@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>//Set speed
-speed = 12*global.framerate;
+speed = 12;
 image_xscale = 2;
 image_yscale = 2;
 alarm[0] = 1;

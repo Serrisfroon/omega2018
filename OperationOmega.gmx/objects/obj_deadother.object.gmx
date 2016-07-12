@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>sfx_play(snd_explode2, x, y);
 //Set explosion time
-alarm[0]=60/global.framerate;
+alarm[0]=60;
 smokenow = 0;
 //Set ability to shoot
 shoot = 0;

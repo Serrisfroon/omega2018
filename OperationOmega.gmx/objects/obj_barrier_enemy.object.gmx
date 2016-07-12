@@ -26,14 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>//Set destroy time
-alarm[0] = 200/global.framerate;
+alarm[0] = 200;
 //Initialize stage variable
 full = 0;
 alarm[2] = 1;
 //Set scale
 scale = 0;
 //Set time until sparkle effect
-alarm[1] = 20/global.framerate;
+alarm[1] = 20;
 image = 0;
 amplified = 0;
 fullscale = 1;
@@ -132,7 +132,7 @@ if(amplified = 0)
 else
  effect_create_above(ef_flare, x-lengthdir_x(40, direction)-lengthdir_x(110, direction-90)+lengthdir_x(random1, direction)+lengthdir_x(random2, direction-90), y-lengthdir_y(40, direction)-lengthdir_y(110, direction-90)+lengthdir_y(random1, direction)+lengthdir_y(random2, direction-90), 0, c_white);
 //Set time until next effect
-alarm[1] = 5/global.framerate;
+alarm[1] = 5;
 </string>
           </argument>
         </arguments>

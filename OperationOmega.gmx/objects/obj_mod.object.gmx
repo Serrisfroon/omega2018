@@ -60,8 +60,8 @@ announcing = 0;
 //Initialize chat check
 global.chatting = false;
 flashing = '';
-alarm[5] = 10/global.framerate;
-alarm[11] = 180/global.framerate;
+alarm[5] = 10;
+alarm[11] = 180;
 
 //initialize ping count
 pinged = 0;
@@ -360,42 +360,6 @@ magnify2 = surface_create(view_wport[0], view_hport[0]);
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="11">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//change fps to match the framerate of the slowest player
-/*
-//Find the current lowest framerate
-lowestrate = min(global.playerfps[0], global.playerfps[1], global.playerfps[2], global.playerfps[3], global.playerfps[4], global.playerfps[5], global.playerfps[6], global.playerfps[7]);
-
-//Do not limit your framerate if your framerate is lowest, and below the current framerate limit
-if(lowestrate = global.playerfps[global.mymid])
- room_speed = 60/global.framerate;
-else
- room_speed = round(lowestrate/global.framerate);
-
- 
-alarm[11] = 180/global.framerate;
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="2" enumb="10">
       <action>
         <libid>1</libid>
@@ -472,7 +436,7 @@ if(flashing = '')
 else
  flashing = '';
 //Set time until next flash
-alarm[5] = 10/global.framerate;
+alarm[5] = 10;
 </string>
           </argument>
         </arguments>
@@ -694,7 +658,7 @@ else
     writestring(chatline[4], 0);
     client_sendall(0, 0);
     //Set time until return to waiting room
-    alarm[2] = 180/global.framerate;
+    alarm[2] = 180;
    }
   }
   else
@@ -722,7 +686,7 @@ else
     writestring(chatline[4], 0);
     client_sendall(0, 0);
     //Set time until return to waiting room    
-    alarm[2] = 180/global.framerate;
+    alarm[2] = 180;
    }
   }
  }
@@ -2032,7 +1996,7 @@ for(i = 0; i &lt; 8; i += 1)
 draw_set_font(fnt_chat);
 //Draw the framerate
 draw_set_color(c_white);
-draw_text_transformed(10, view_hport[0]-20, string(fps*global.framerate), 1, 1, 0);
+draw_text_transformed(10, view_hport[0]-20, string(fps), 1, 1, 0);
 
 //Draw the chat bar if chatting
 switch(global.chatting)

@@ -30,7 +30,7 @@
 //obj_ship, the parent. It must have obj_ship as a parent to avoid error, but
 //these empty events mus exists to avoid error as well.
 //Set explosion time
-alarm[0]=60/global.framerate;
+alarm[0]=60;
 smokenow = 0;
 //Set ability to shoot
 shoot = 0;

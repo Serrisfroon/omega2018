@@ -146,7 +146,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  obj_bulletcontrol.bulletblend[i] = global.enemycolor;
  obj_bulletcontrol.bulletsingle[i] = image;
  //The bullet's life. Each step, it is lowered by one. At 0, this index is freed.
- obj_bulletcontrol.bulletlife[i] = 120/global.framerate;
+ obj_bulletcontrol.bulletlife[i] = 120;
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 6;
  //The bullet's death object. When a bullet has a collision, this object is created.
@@ -179,7 +179,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  obj_bulletcontrol.bulletblend[i] = global.enemycolor;
  obj_bulletcontrol.bulletsingle[i] = image;
  //The bullet's life. Each step, it is lowered by one. At 0, this index is freed.
- obj_bulletcontrol.bulletlife[i] = 120/global.framerate;
+ obj_bulletcontrol.bulletlife[i] = 120;
  //The bullet's damage. Stored to make loops much easier
  obj_bulletcontrol.bulletdamage[i] = 6;
  //The bullet's death object. When a bullet has a collision, this object is created.

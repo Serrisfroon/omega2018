@@ -27,15 +27,10 @@
             <kind>1</kind>
             <string>sfx_play(snd_mine, x, y);
 //Set time until auto-destroy
-alarm[1] = 1800/global.framerate;
+alarm[1] = 1800;
 image_blend = global.enemycolor;
 outspeed = 0.25;
 inspeed = 0.125; 
-if(global.framerate = 2)
-{
- outspeed = 1;
- inspeed = 0.5;
-} 
 amplified = 0;
 </string>
           </argument>
@@ -123,7 +118,7 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle += 3*global.framerate;
+            <string>image_angle += 3;
 target = instance_nearest(x, y, prnt_ally);
 if(target != noone)
 {

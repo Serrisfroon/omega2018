@@ -1838,6 +1838,7 @@
       <script>scripts\primary_random.gml</script>
     </scripts>
     <scripts name="Effects">
+      <script>scripts\effect_name.gml</script>
       <script>scripts\screen_shake.gml</script>
       <script>scripts\random_message.gml</script>
       <script>scripts\draw_text_bordered.gml</script>
@@ -1889,7 +1890,6 @@
       <script>scripts\client_udpip.gml</script>
       <script>scripts\getip.gml</script>
     </scripts>
-    <script>scripts\effect_name.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>

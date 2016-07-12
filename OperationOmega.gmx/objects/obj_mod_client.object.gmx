@@ -670,9 +670,9 @@ else
 
 
 //Rotate cursor parts
-global.rot1 += 2.5*global.framerate;
-global.rot2 -= 4*global.framerate;
-global.rot3 += 6*global.framerate;
+global.rot1 += 2.5;
+global.rot2 -= 4;
+global.rot3 += 6;
 
 //Handle Goliath Weaponsmith Bay
 if(global.lolship[global.mymid] = 3)

@@ -2328,7 +2328,7 @@ switch(global.secondary)
         missile = instance_create(x, y, obj_dualmissile);
         missile.startdir = facedir;
         missile.direction = facedir-90;
-        missile.speed = 4*global.framerate;
+        missile.speed = 4;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -2337,7 +2337,7 @@ switch(global.secondary)
         missile = instance_create(x, y, obj_dualmissile);
         missile.startdir = facedir;
         missile.direction = facedir+90;
-        missile.speed = 4*global.framerate;
+        missile.speed = 4;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -2500,7 +2500,7 @@ switch(global.secondary)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_layermissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 12*global.framerate;
+        missile.speed = 12;
         missile.mid = global.mymid;
         missile.amplified = amplified;
         //Take the missiles away from your missile count
@@ -2927,7 +2927,7 @@ switch(global.secondary)
         missile1 = instance_create(x, y, obj_tridentmissile);
         missile1.startdir = facedir;
         missile1.direction = facedir;
-        missile1.speed = 4*global.framerate;
+        missile1.speed = 4;
         missile1.target = obj_mod.foundtarget;
         missile1.mid = global.mymid;
         missile1.trio = 1;
@@ -2937,7 +2937,7 @@ switch(global.secondary)
         missile2 = instance_create(x, y, obj_tridentmissile);
         missile2.startdir = facedir;
         missile2.direction = facedir-90;
-        missile2.speed = 4*global.framerate;
+        missile2.speed = 4;
         missile2.target = obj_mod.foundtarget;
         missile2.mid = global.mymid;
         missile2.trio = 2;
@@ -2948,7 +2948,7 @@ switch(global.secondary)
         missile3 = instance_create(x, y, obj_tridentmissile);
         missile3.startdir = facedir;
         missile3.direction = facedir+90;
-        missile3.speed = 4*global.framerate;
+        missile3.speed = 4;
         missile3.target = obj_mod.foundtarget;
         missile3.mid = global.mymid;
         missile3.trio = 3;
@@ -3110,7 +3110,7 @@ switch(global.secondary)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_shockmissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 12*global.framerate;
+        missile.speed = 12;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -3161,7 +3161,7 @@ switch(global.secondary)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_hermitmissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 13*global.framerate;
+        missile.speed = 13;
         missile.mid = global.mymid;
         missile.amplified = amplified;
         missile.target = obj_mod.foundtarget;
@@ -3205,7 +3205,7 @@ switch(global.secondary)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_strikemissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 13*global.framerate;
+        missile.speed = 13;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -3613,7 +3613,7 @@ switch(global.secondary)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_splitmissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 13*global.framerate;
+        missile.speed = 13;
         missile.mid = global.mymid;
         missile.oldmid = -1;
         missile.damage = 11;
@@ -4152,7 +4152,7 @@ switch(global.spacesecond)
         missile = instance_create(x, y, obj_dualmissile);
         missile.startdir = facedir;
         missile.direction = facedir-90;
-        missile.speed = 4*global.framerate;
+        missile.speed = 4;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -4161,7 +4161,7 @@ switch(global.spacesecond)
         missile = instance_create(x, y, obj_dualmissile);
         missile.startdir = facedir;
         missile.direction = facedir+90;
-        missile.speed = 4*global.framerate;
+        missile.speed = 4;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -4324,7 +4324,7 @@ switch(global.spacesecond)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_layermissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 12*global.framerate;
+        missile.speed = 12;
         missile.mid = global.mymid;
         missile.amplified = amplified;
         //Take the missiles away from your missile count
@@ -4750,7 +4750,7 @@ switch(global.spacesecond)
         missile1 = instance_create(x, y, obj_tridentmissile);
         missile1.startdir = facedir;
         missile1.direction = facedir;
-        missile1.speed = 4*global.framerate;
+        missile1.speed = 4;
         missile1.target = obj_mod.foundtarget;
         missile1.mid = global.mymid;
         missile1.trio = 1;
@@ -4760,7 +4760,7 @@ switch(global.spacesecond)
         missile2 = instance_create(x, y, obj_tridentmissile);
         missile2.startdir = facedir;
         missile2.direction = facedir-90;
-        missile2.speed = 4*global.framerate;
+        missile2.speed = 4;
         missile2.target = obj_mod.foundtarget;
         missile2.mid = global.mymid;
         missile2.trio = 2;
@@ -4771,7 +4771,7 @@ switch(global.spacesecond)
         missile3 = instance_create(x, y, obj_tridentmissile);
         missile3.startdir = facedir;
         missile3.direction = facedir+90;
-        missile3.speed = 4*global.framerate;
+        missile3.speed = 4;
         missile3.target = obj_mod.foundtarget;
         missile3.mid = global.mymid;
         missile3.trio = 3;
@@ -4932,7 +4932,7 @@ switch(global.spacesecond)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_shockmissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 12*global.framerate;
+        missile.speed = 12;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -4983,7 +4983,7 @@ switch(global.spacesecond)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_hermitmissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 13*global.framerate;
+        missile.speed = 13;
         missile.mid = global.mymid;
         missile.amplified = amplified;
         missile.target = obj_mod.foundtarget;
@@ -5027,7 +5027,7 @@ switch(global.spacesecond)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_strikemissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 13*global.framerate;
+        missile.speed = 13;
         missile.target = obj_mod.foundtarget;
         missile.mid = global.mymid;
         missile.amplified = amplified;
@@ -5436,7 +5436,7 @@ switch(global.spacesecond)
         //Create the first missile and give it its properties
         missile = instance_create(x, y, obj_splitmissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
-        missile.speed = 13*global.framerate;
+        missile.speed = 13;
         missile.mid = global.mymid;
         missile.oldmid = -1;
         missile.damage = 11;

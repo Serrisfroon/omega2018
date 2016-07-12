@@ -26,11 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>//Set time until homing
-alarm[0] = 10/global.framerate;
+alarm[0] = 10;
 //Initialize stage variable
 go = 0;
 //Set speed
-speed = 14*global.framerate;
+speed = 14;
 image_blend = global.enemycolor;
 alarm[3] = 1;
 </string>
@@ -169,9 +169,9 @@ with(obj_homingeffect)
             <string>//Move to stage 1
 go = 1;
 //Set time until homing wears off
-alarm[1] = 120/global.framerate;
+alarm[1] = 120;
 //Set time until auto destruct
-alarm[2] = 130/global.framerate;
+alarm[2] = 130;
 cursor = instance_create(0, 0, obj_homingeffect);
 cursor.target = target;    
 cursor.create = id;

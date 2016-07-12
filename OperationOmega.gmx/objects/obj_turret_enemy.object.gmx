@@ -175,7 +175,7 @@ cannon = -cannon;
 dusted = 0;
 shocked = false;
 if(scale &lt; 1)
- scale += 0.1*global.framerate;
+ scale += 0.1;
 if(shieldscale &lt; 1)
  shieldscale += 0.02;
 if(armor &lt;= 0)

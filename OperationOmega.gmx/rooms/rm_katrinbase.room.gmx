@@ -10,9 +10,7 @@
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>0</showcolour>
-  <code>if(global.framerate = 2)
- room_speed = 30;
-background_index[0] = global.background[0];</code>
+  <code>background_index[0] = global.background[0];</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

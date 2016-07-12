@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>sfx_play(snd_mine, x, y);
 //Set time until auto-destroy
-alarm[1] = 3000/global.framerate;
+alarm[1] = 3000;
 image_blend = global.enemycolor;
 amplified = 0;
 alarm[2] = 1;
@@ -95,7 +95,7 @@ create_explosion(1);
           <argument>
             <kind>1</kind>
             <string>if(amplified = 1)
- alarm[1] = 4500/global.framerate;
+ alarm[1] = 4500;
 
 </string>
           </argument>

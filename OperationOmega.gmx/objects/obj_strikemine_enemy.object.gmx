@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>sfx_play(snd_mine, x, y);
 //Set auto-destroy time
-alarm[1] = 1500/global.framerate;
+alarm[1] = 1500;
 hit = 1;
 image_blend = global.enemycolor;
 amplified = 0;

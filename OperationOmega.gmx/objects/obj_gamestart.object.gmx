@@ -474,7 +474,7 @@ if(packet = 0)
           <argument>
             <kind>1</kind>
             <string>if(black &gt; 0)
- black -= 0.0125*global.framerate;
+ black -= 0.0125;
 </string>
           </argument>
         </arguments>

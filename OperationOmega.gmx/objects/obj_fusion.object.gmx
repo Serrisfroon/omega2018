@@ -39,11 +39,7 @@ cycleimage = 2;
 
 outspeed = 0.3;
 inspeed = 0.5; 
-if(global.framerate = 2)
-{
- outspeed = 1.2;
- inspeed = 2;
-}
+
 sfx_play(snd_fusion, x, y);
 
 nextflame = 0;

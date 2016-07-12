@@ -29,12 +29,12 @@
 //Set image speed for masking
 image_speed = 0;
 //Set auto destroy time
-alarm[0] = 200/global.framerate;
+alarm[0] = 200;
 //Set base explosion
 hits = 1;
 image_blend = global.allycolor;
 alarm[1] = 1;
-speed = 13*global.framerate;
+speed = 13;
 go = 0;
 buildup = 0;
 amplified = 0;
@@ -172,7 +172,7 @@ switch(go)
        {
         target = closeby;
         go = 1;
-        alarm[2] = 120/global.framerate;
+        alarm[2] = 120;
         cursor = instance_create(0, 0, obj_homingeffect);
         cursor.target = target;    
         cursor.create = id;
@@ -185,7 +185,7 @@ switch(go)
       {
        point = point_direction(x, y, target.x, target.y);
        //Move the missile's current direction towards the target
-       step_towards_direction(point, 4*global.framerate);
+       step_towards_direction(point, 4);
       }
  break;
 }
