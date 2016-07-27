@@ -109,7 +109,7 @@ display_alpha = 0;
         if(image_xscale &lt;= 0.6)
         {
             //A popup no loner exists
-            global.creatinggame = 0;
+            global.popup_active = false;
             //Destroy all buttons except for the "Okay" button
             with(obj_lessplayers) instance_destroy();
             with(obj_moreplayers) instance_destroy();

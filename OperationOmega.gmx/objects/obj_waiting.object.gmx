@@ -25,18 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>updatenow = 10;
+            <string>//Match info update timer
+updatenow = 10;
+
+//Restart the correct music
 audio_stop_all();
 if(global.musictoggle = 0)
 {
         audio_stop_sound(music_lunation);
         audio_play_sound(music_lunation, 1, 1);
 }
+
 //Initilize chat
 chat_init(8);
 
-found = 0;
-text = "";
 flashing = '|';
 alarm[0] = 12;
 if(room = rm_waiting)
@@ -64,29 +66,12 @@ global.activated[0] = 1;
 (instance_create(global.playerslot[0].x, global.playerslot[0].y, obj_playerslot_readied)).mid = 0;
 
 
-//Create a socket to listen for connections if the game has just been made
-if(global.newgame = 0)
-{
- global.listen = tcplisten(14800, 2, true, 0);
- if(global.listen &lt;= 0)
- {
-  show_message("Failed to listen on port 14800.");
-  global.master = false;
-  dllfree();
-  if(global.gameslist = 0)
-   room_goto(rm_connect);
-  else
-   room_goto(rm_gamelist);
- }
- setnagle(global.listen, true);
- global.newgame = 1;
-}
 
 //Set stock match elimination values
 global.redteamout = 0;
 global.blueteamout = 0;
 
-         if(global.gameslist = 1)
+         if(global.public_game = true)
          {
  
           if(global.playercount = global.maxplayers)
@@ -147,7 +132,7 @@ alarm[0] = 18;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.lolship[0] = global.shipselect;
+            <string>global.selected_ship[0] = global.shipselect;
 global.playerprimary[0] = global.primary;
 //Calculate max players
 global.maxplayers = 0;
@@ -188,9 +173,9 @@ while(true)
          mid = readbyte(0);
          newteam = readbyte(0);
          global.othername[mid] = readstring(0);
-         global.lolship[mid] = readbyte(0);
+         global.selected_ship[mid] = readbyte(0);
          //Update the info on the games list
-         if(global.gameslist = 1)
+         if(global.public_game = true)
          {
           if(ds_list_size(global.clients)+1 = global.maxplayers)
             roomstatus = "Full";
@@ -211,7 +196,7 @@ while(true)
          var newchat = readstring(0);
          //Update the players' ready status
          var thisplayer = readbyte(0);
-         global.lolship[thisplayer] = readbyte(0);
+         global.selected_ship[thisplayer] = readbyte(0);
          global.playerprimary[thisplayer] = readbyte(0);
          var readystat = readbyte(0);
          global.readied[thisplayer] = readystat;
@@ -232,14 +217,14 @@ while(true)
           global.redteam = readbyte(0);
           global.blueteam = readbyte(0);
           lolplayer = readbyte(0);
-          (instance_create(global.playerslot[lolplayer].x, global.playerslot[lolplayer].y, obj_playerslot_teamchange)).image_index = global.lolship[lolplayer]+((global.team[lolplayer]-1)*3)-1;
+          (instance_create(global.playerslot[lolplayer].x, global.playerslot[lolplayer].y, obj_playerslot_teamchange)).image_index = global.selected_ship[lolplayer]+((global.team[lolplayer]-1)*3)-1;
           global.team[lolplayer] = readbyte(0);
     break;
    
     //A player changes ships
     case 17:
          mid = readbyte(0);
-         global.lolship[mid] = readbyte(0);
+         global.selected_ship[mid] = readbyte(0);
     break;
     
     //Post-match stat send
@@ -266,7 +251,7 @@ while(true)
          //Drop the player and add the drop to the count
          client_drop(mid);
          //Update the info on the games list
-         if(global.gameslist = 1)
+         if(global.public_game = true)
          {
             global.createtime = get_servertime();
             sql_modify(global.myipaddress, global.createtime, global.maxplayers, ds_list_size(global.clients)+1, global.matchtype, global.shortlevel, "Waiting");
@@ -278,7 +263,7 @@ while(true)
             {
                 playerleave = instance_create(x, y, obj_playerslot_playerleave);
                 playerleave.owner = id;
-                playerleave.lastimage = global.lolship[mid]+((global.team[mid]-1)*3)-1;
+                playerleave.lastimage = global.selected_ship[mid]+((global.team[mid]-1)*3)-1;
                 visible = 0;
             }
         }         
@@ -307,7 +292,7 @@ if(updatenow = 0)
      {
       writestring(global.othername[i], 0);
       writebyte(global.team[i], 0);
-      writebyte(global.lolship[i], 0);
+      writebyte(global.selected_ship[i], 0);
       writebyte(global.readied[i], 0);
      }
     }
@@ -452,9 +437,7 @@ draw_set_alpha(1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>text = keyboard_string;
-
-  if(keyboard_string = '') exit;
+            <string>  if(keyboard_string = '') exit;
   audio_play_sound(snd_chatmessage, 1, 0);
   //create the new chat line and take note of its middle
   sendline = global.name+": "+ keyboard_string;

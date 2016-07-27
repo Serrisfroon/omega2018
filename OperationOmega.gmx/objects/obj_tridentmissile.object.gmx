@@ -301,8 +301,7 @@ switch(go)
       switch(trio)
       {
        case 1:
-            if(global.msmokeeffect = 1)
-             effect_create_below(ef_smoke, x, y, 0, c_gray);
+            effect_create_below(ef_smoke, x, y, 0, c_gray);
        break;
        case 2:
             part_type_direction(particle1,direction+90,direction+90,0,0);

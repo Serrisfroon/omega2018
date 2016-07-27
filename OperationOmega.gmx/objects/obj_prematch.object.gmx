@@ -98,10 +98,10 @@ if(global.master = false)
 //End 39dll
 dllfree();
 //Return to the appropriate room
-if(global.gameslist = 1)
- room_goto(rm_gamelist);
+if(global.public_game = true)
+ room_goto(rm_public_game);
 else
- room_goto(rm_connect);
+ room_goto(rm_private_game);
 </string>
           </argument>
         </arguments>
@@ -271,10 +271,7 @@ omegadata_write();
       switch(global.matchroom)
       {
        case rm_deepspace:
-            global.background[0] = background_add("Backgrounds\back_starfield.png", 0, 0);
-            global.background[2] = background_add("Backgrounds\back_spacedust.png", 0, 0);
-            global.background[3] = background_add("Backgrounds\back_space.png", 0, 0);
-            global.background[5] = background_add("Backgrounds\back_frontspace.png", 0, 0);
+
        break;
        case rm_katrinbase:
             global.background[0] = background_add("Backgrounds\back_katrin_base_1.png", 0, 0);
@@ -488,7 +485,7 @@ draw_rectangle(0, 0, room_width, room_height, 0);
 if(global.master = true)
 {
  //Remove the game from the games list if you made the game on it
- if(global.gameslist = 1)
+ if(global.public_game = true)
     sql_remove(global.myipaddress); 
  //Set time until exiting the game
  alarm[4]=2;

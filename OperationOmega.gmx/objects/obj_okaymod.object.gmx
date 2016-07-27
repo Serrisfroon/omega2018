@@ -130,7 +130,7 @@ if(obj_modbox.creategamenow = 0)
     //The button has been pressed; a game will be made
     obj_modbox.creategamenow = 1;
   //Update the info on the games list
-    if(global.gameslist = 1)
+    if(global.public_game = true)
     {
         if(ds_list_size(global.clients)+1 = global.maxplayers)
             roomstatus = "Full";

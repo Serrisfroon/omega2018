@@ -123,7 +123,7 @@ if(alpha != 1)
           <argument>
             <kind>1</kind>
             <string>//Exit the script if a popup exists
-if(global.creatinggame = 1)
+if(global.popup_active = true)
  exit;
 if(doubleclick = 0)
 {

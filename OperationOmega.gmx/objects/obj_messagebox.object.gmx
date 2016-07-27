@@ -30,7 +30,6 @@ image_single = 0;
 //Create this object invisible
 image_alpha = 0;
 cancel = 0;
-global.messageup = 1;
 
 </string>
           </argument>
@@ -64,7 +63,6 @@ if(image_alpha &gt; 0 &amp;&amp; cancel = 1)
 if(image_alpha = 0 &amp;&amp; cancel = 1)
 {
  //A popup no loner exists
- global.messageup = 0;
  //Destroy this object
  instance_destroy();
 }

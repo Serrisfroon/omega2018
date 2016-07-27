@@ -60,7 +60,7 @@ if(server &lt;= 0)
  //Inform the player
  show_message("Unable to connect to the server.");
  //A popup no longer exists
- global.creatinggame = 0;
+ global.popup_active = false;
  //Restart the room
  room_restart();
  exit;
@@ -91,7 +91,7 @@ alarm[0] = 2;
           <argument>
             <kind>1</kind>
             <string>//A popup no longer exists
-global.creatinggame = 0;
+global.popup_active = false;
 //Set the host tcp value
 global.host = server;
 setnagle(global.host, true);

@@ -384,7 +384,7 @@ with(obj_icon_option)
     if(speed != 0)
         exit;
 //Exit if mod box is open
-if(global.creatinggame = 1)
+if(global.popup_active = true)
     exit;
 growing = 0;
 if(global.sfxtoggle = 0)

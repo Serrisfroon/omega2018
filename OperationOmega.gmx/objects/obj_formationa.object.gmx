@@ -151,8 +151,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  //Stop moving
  speed = 0;
  //Create an effect
- if(global.fbursteffect = 1)
-  part_particles_create(obj_partsystem.system, x, y, obj_partsystem.formsplit, 6);
+ part_particles_create(obj_partsystem.system, x, y, obj_partsystem.formsplit, 6);
  //Create smaller shots. Give them their direction. Give them a branch number.
  //Keep track of this instance in them. Set the time until they attack.
  form = instance_create(x, y, obj_formationb);

@@ -202,7 +202,7 @@ changeable = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.creatinggame = 1 &amp;&amp; global.master = true)
+            <string>if(global.popup_active = true &amp;&amp; global.master = true)
     exit;
 
 if(changeable = 1 || obj_menumod.dimalpha &gt; 0) exit;
@@ -330,7 +330,7 @@ else
     //all clients to start the game
     if(go = 7)
     {
-        if(global.gameslist = 1)
+        if(global.public_game = true)
         {
             global.createtime = get_servertime();
             sql_modify(global.myipaddress, global.createtime, global.maxplayers, global.playercount, global.matchtype, global.shortlevel, "In%20Game");
@@ -342,7 +342,7 @@ else
         writebyte(global.randommap, 0); 
         for(i = 0; i &lt; 8; i += 1)
         {
-            writebyte(global.lolship[i], 0);
+            writebyte(global.selected_ship[i], 0);
             writebyte(global.playerprimary[i], 0);
         }
         client_sendall(0, 0);

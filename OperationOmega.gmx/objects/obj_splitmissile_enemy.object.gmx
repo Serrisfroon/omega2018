@@ -173,8 +173,7 @@ buildup = 1;
             <string>//Set image for masking
 image_angle = direction;
 //Create a smoke trail effect
-if(global.msmokeeffect = 1)
- effect_create_below(ef_smoke, x, y, 0, c_gray);
+effect_create_below(ef_smoke, x, y, 0, c_gray);
 
 switch(go)
 {

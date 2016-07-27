@@ -47,7 +47,6 @@ global.othername[7] = "";
 global.othername[8] = "";
 global.redteam = 0;
 global.blueteam = 0;
-global.newgame = 0;
 //Reset activation variables
 for(i = 0; i &lt; 8; i += 1)
 {
@@ -90,12 +89,12 @@ for(i = 0; i &lt; 8; i += 1)
           <argument>
             <kind>1</kind>
             <string>//Check if there is a popup window. Exit if there is.
-if(global.creatinggame = 1)
+if(global.popup_active = true)
  exit;
 //There is now a popup window
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);
-global.creatinggame = 1;
+global.popup_active = true;
 //Create the popup
 instance_create(384, 240, obj_creategamebox); 
        

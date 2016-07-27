@@ -42,7 +42,7 @@
           <argument>
             <kind>1</kind>
             <string>//Move to te private game connection room
-room_goto(rm_mainmenu);
+room_goto(rm_main_menu);
 </string>
           </argument>
         </arguments>

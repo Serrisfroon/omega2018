@@ -160,10 +160,10 @@ while(true)
    closesocket(global.host);
    dllfree();
    //Return to the appropriate room
-   if(global.gameslist = 1)
-    room_goto(rm_gamelist);
+   if(global.public_game = true)
+    room_goto(rm_public_game);
    else
-    room_goto(rm_connect);   
+    room_goto(rm_private_game);   
    exit;
   }
   //If there was no message, break the loop
@@ -675,7 +675,7 @@ global.rot2 -= 4;
 global.rot3 += 6;
 
 //Handle Goliath Weaponsmith Bay
-if(global.lolship[global.mymid] = 3)
+if(global.selected_ship[global.mymid] = 3)
  weaponsmith(dstock);
 
 //Find the player farthest from you, but within view range

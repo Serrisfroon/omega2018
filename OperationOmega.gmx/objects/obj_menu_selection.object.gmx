@@ -373,10 +373,10 @@ animation_step = 3;
 obj_menu_box.animation = 6;
 switch(room)
 {
-    case rm_mainmenu:
+    case rm_main_menu:
         obj_profile_connect.animation = 3;
     break;
-    case rm_gamelist:
+    case rm_public_game:
         if(text_sprite = spr_back)
             with(obj_waiting_boxes)
                 animation = 3;

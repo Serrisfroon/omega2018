@@ -151,7 +151,7 @@ if(over_alpha &lt; 1 &amp;&amp; animation != 4 &amp;&amp; animation != -1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(room != rm_gamelist &amp;&amp; room != rm_groupsettings &amp;&amp; persistent = 1)
+            <string>if(room != rm_public_game &amp;&amp; room != rm_groupsettings &amp;&amp; persistent = 1)
 {
     persistent = 0;
     instance_destroy();

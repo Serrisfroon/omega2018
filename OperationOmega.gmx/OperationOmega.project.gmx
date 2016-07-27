@@ -1658,8 +1658,11 @@
   </sprites>
   <backgrounds name="background">
     <background>background\tile_wall</background>
+    <background>background\back_space</background>
+    <background>background\back_space_front</background>
     <backgrounds name="Deep Space">
-      <background>background\background3</background>
+      <background>background\back_dspace</background>
+      <background>background\back_dspace_dust</background>
     </backgrounds>
   </backgrounds>
   <paths name="paths">
@@ -2184,19 +2187,19 @@
     </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_start</room>
+    <room>rooms\rm_game_setup</room>
     <room>rooms\rm_title</room>
-    <room>rooms\rm_mainmenu</room>
-    <room>rooms\rm_multiplayer</room>
-    <room>rooms\rm_connect</room>
-    <room>rooms\rm_waiting</room>
-    <room>rooms\rm_gamelist</room>
+    <room>rooms\rm_main_menu</room>
+    <room>rooms\rm_private_game</room>
+    <room>rooms\rm_public_game</room>
     <room>rooms\rm_groupsettings</room>
+    <room>rooms\rm_waiting</room>
     <room>rooms\rm_prematch</room>
     <room>rooms\rm_aftermatch</room>
     <room>rooms\rm_aftergame</room>
     <room>rooms\rm_options</room>
     <room>rooms\rm_practice</room>
+    <room>rooms\rm_multiplayer</room>
     <rooms name="Multiplayer Maps">
       <room>rooms\rm_deepspace</room>
       <room>rooms\rm_katrinbase</room>

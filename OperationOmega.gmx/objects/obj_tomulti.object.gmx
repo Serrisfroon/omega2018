@@ -43,7 +43,7 @@
             <kind>1</kind>
             <string>//Stop 39dll and return to the main multiplayer menu
 dllfree();
-room_goto(rm_mainmenu);
+room_goto(rm_main_menu);
 
 </string>
           </argument>
@@ -68,7 +68,7 @@ room_goto(rm_mainmenu);
           <argument>
             <kind>1</kind>
             <string>//Exit is a popup window exists
-if(global.creatinggame = 1 || global.tutorial = 1)
+if(global.popup_active = true)
  exit;
  
 event_inherited();

@@ -66,8 +66,7 @@ room_goto(rm_multiplayer);
           <argument>
             <kind>1</kind>
             <string>//Exit the script if a profile has not been made
-if(global.createprofile = 0 || global.tutorial = 1)
- exit;
+
 
 event_inherited();
 </string>

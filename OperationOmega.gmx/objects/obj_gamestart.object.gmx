@@ -438,10 +438,10 @@ if(packet = 0)
    show_message("The host has disconnected.");
    closesocket(global.udpsock);
    dllfree();
-   if(global.gameslist = 1)
-    room_goto(rm_gamelist);
+   if(global.public_game = true)
+    room_goto(rm_public_game);
    else
-    room_goto(rm_connect);
+    room_goto(rm_private_game);
    exit;
   }
   if(size &lt; 0) 

@@ -217,6 +217,8 @@ derp = 0;
           <argument>
             <kind>1</kind>
             <string>//Turn the growth switch on
+if(image_alpha &lt; 1)
+    exit;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_overcustom, 1, 0);
 growing = 1;

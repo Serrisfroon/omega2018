@@ -196,7 +196,7 @@ else
           <argument>
             <kind>1</kind>
             <string>        if(global.team[mid] = 1)
-         switch(global.lolship[mid])
+         switch(global.selected_ship[mid])
          {
           case 1: //Alphastar
                sprite_index = spr_alphastar;
@@ -226,7 +226,7 @@ else
         else
         //If the player is on blue team, set choose a blue ship and set
         //the right values
-         switch(global.lolship[mid])
+         switch(global.selected_ship[mid])
          {
           case 1: //Alphastar
                sprite_index = spr_alphastar_enemy;
@@ -700,7 +700,7 @@ image_angle = facedir;
 //update the direction of this ship
 prespeed = speed;
 //Handle abilities
-if(global.lolship[mid] = 1)
+if(global.selected_ship[mid] = 1)
  if(abilityactive = 1)
  {
   controlturn = 0.1
@@ -1262,15 +1262,13 @@ if(shieldup = 1)
 }
 
 //Create burning trail effect
-if(global.dflameseffect = 1)
-{
- emit[deployhits] = part_emitter_create(system);
- part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
- part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
- effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60;
- deployhits += 1;
-}
+emit[deployhits] = part_emitter_create(system);
+part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
+effectdir[deployhits] =  direction-effectdir[deployhits];
+alarm[7] = 60;
+deployhits += 1;
+
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
@@ -1313,15 +1311,13 @@ if(shieldup = 1)
 }
 
 //Create burning trail effect
-if(global.dflameseffect = 1)
-{
- emit[deployhits] = part_emitter_create(system);
- part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
- part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
- effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60;
- deployhits += 1;
-}
+emit[deployhits] = part_emitter_create(system);
+part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
+effectdir[deployhits] =  direction-effectdir[deployhits];
+alarm[7] = 60;
+deployhits += 1;
+
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
@@ -1407,15 +1403,12 @@ if(shieldup = 1)
 }
 
 //Create burning trail effect
-if(global.dflameseffect = 1)
-{
- emit[deployhits] = part_emitter_create(system);
- part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
- part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
- effectdir[deployhits] =  direction-effectdir[deployhits];
- alarm[7] = 60;
- deployhits += 1;
-}
+emit[deployhits] = part_emitter_create(system);
+part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
+effectdir[deployhits] =  direction-effectdir[deployhits];
+alarm[7] = 60;
+deployhits += 1;
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)

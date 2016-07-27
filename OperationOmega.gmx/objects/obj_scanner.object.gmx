@@ -34,7 +34,7 @@ liney[5] = -2;
 switch(room)
 {
  case rm_multiplayer:
- case rm_mainmenu:
+ case rm_main_menu:
       timer[0] = 59;
       linex[0] = 48;
       liney[0] = 318;
@@ -63,7 +63,7 @@ switch(room)
       linewidth[3] = 161;
 
  break;
- case rm_gamelist:
+ case rm_public_game:
 
  break;
  case rm_aftergame:

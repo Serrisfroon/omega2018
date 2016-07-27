@@ -239,7 +239,7 @@ image_yscale = 1.35;
 with(prnt_selection)
     if(speed != 0)
         exit;
-if(selected = 1 || global.creatinggame = 1)
+if(selected = 1 || global.popup_active = true)
     exit;
 
 if(global.sfxtoggle = 0)

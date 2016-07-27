@@ -128,10 +128,10 @@ alarm[0] = 18;
         show_message("The host has disconnected.");
         closesocket(global.udpsock);
         dllfree();
-        if(global.gameslist = 1)
-            room_goto(rm_gamelist);
+        if(global.public_game = true)
+            room_goto(rm_public_game);
         else
-            room_goto(rm_connect);
+            room_goto(rm_private_game);
         exit;
     }
     if(size &lt; 0) 
@@ -173,7 +173,7 @@ alarm[0] = 18;
                     {
                         playerleave = instance_create(x, y, obj_playerslot_playerleave);
                         playerleave.owner = id;
-                        playerleave.lastimage = global.lolship[mid]+((global.team[mid]-1)*3)-1;
+                        playerleave.lastimage = global.selected_ship[mid]+((global.team[mid]-1)*3)-1;
                         visible = 0;
                     }
                 }
@@ -193,10 +193,10 @@ alarm[0] = 18;
                 show_message('You have been kicked from the game.');
                 closesocket(global.udpsock);
                 dllfree();
-                if(global.gameslist = 1)
-                    room_goto(rm_gamelist);
+                if(global.public_game = true)
+                    room_goto(rm_public_game);
                 else
-                    room_goto(rm_connect);
+                    room_goto(rm_private_game);
                 exit;
             }
         break;
@@ -206,7 +206,7 @@ alarm[0] = 18;
              global.randommap = readbyte(0); 
              for(i = 0; i &lt; 8; i += 1)
              {
-                global.lolship[i] = readbyte(0);
+                global.selected_ship[i] = readbyte(0);
                 global.playerprimary[i] = readbyte(0);
              }
              obj_menumod.alarm[3] = 25;
@@ -268,9 +268,9 @@ alarm[0] = 18;
                 global.team[i] = readbyte(0);
                 if(old_team != global.team[i])
                     if(global.playerslot[i].hspeed = 0)
-                        (instance_create(global.playerslot[i].x, global.playerslot[i].y, obj_playerslot_teamchange)).image_index = global.lolship[i]+((old_team-1)*3)-1;  
+                        (instance_create(global.playerslot[i].x, global.playerslot[i].y, obj_playerslot_teamchange)).image_index = global.selected_ship[i]+((old_team-1)*3)-1;  
                                       
-                global.lolship[i] = readbyte(0);
+                global.selected_ship[i] = readbyte(0);
                 
                 old_readied = global.readied[i];
                 global.readied[i] = readbyte(0);

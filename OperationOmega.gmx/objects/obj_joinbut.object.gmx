@@ -51,7 +51,7 @@ image_single = 1;
           <argument>
             <kind>1</kind>
             <string>//A popup no longer exists
-global.creatinggame = 0;
+global.popup_active = false;
 //Set the host tcp value
 global.host = server;
 setnagle(global.host, true);

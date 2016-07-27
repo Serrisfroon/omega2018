@@ -45,7 +45,6 @@ global.othername[7] = "";
 global.othername[8] = "";
 global.redteam = 0;
 global.blueteam = 0;
-global.newgame = 0;
 
 </string>
           </argument>
@@ -84,9 +83,9 @@ global.newgame = 0;
           <argument>
             <kind>1</kind>
             <string>//This game is from game list
-global.gameslist = 1;
+global.public_game = true;
 //Check if there is a popup window. Exit if there is.
-if(global.creatinggame = 1)
+if(global.popup_active = true)
  exit;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);
@@ -102,7 +101,7 @@ if(VERSION_NUMBER != newversion &amp;&amp; newversion != "0")
 }
 
 //There is now a popup window
-global.creatinggame = 1;
+global.popup_active = true;
 //Create the popup
 instance_create(224, 120, obj_creategamebox); 
       

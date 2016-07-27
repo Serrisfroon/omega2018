@@ -23,6 +23,4 @@ global.playerdodge = ini_read_real("Data", "playerdodge", 0);
 global.musictoggle = ini_read_real("Data", "musictoggle", 0);
 global.sfxtoggle = ini_read_real("Data", "sfxtoggle", 0);
 global.firingmode = ini_read_real("Data", "firingmode", 0);
-global.fromprofile = ini_read_real("Data", "fromprofile", 0);
-
 ini_close();

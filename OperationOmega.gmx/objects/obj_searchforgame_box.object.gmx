@@ -115,7 +115,7 @@ display_alpha = 0;
         if(image_xscale &lt;= 0.6)
         {
              //A popup no loner exists
-             global.creatinggame = 0;
+             global.popup_active = false;
              with(obj_lessmode) instance_destroy();
              with(obj_moremode) instance_destroy();
              with(obj_lessmap) instance_destroy();

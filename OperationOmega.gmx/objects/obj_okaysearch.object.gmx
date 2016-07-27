@@ -132,7 +132,7 @@ var search_game = instance_create(384, 240, obj_publicgame_search);
 search_game.selection_reference = obj_searchforgame_box.selection_reference;
 search_game.searchfor_map = obj_searchforgame_box.search_map;
 search_game.searchfor_mode = obj_searchforgame_box.search_mode;
-search_game.group_size = global.groupsize;
+search_game.group_size = global.group_size;
 search_game.refer_from_search = 1;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);

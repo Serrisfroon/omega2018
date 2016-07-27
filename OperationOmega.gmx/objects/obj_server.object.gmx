@@ -41,10 +41,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set the MySQL connection check variable for later checks
-global.serverconnect = 1;
-//Go to the games list room
-room_goto(rm_gamelist);
+            <string>//Go to the games list room
+room_goto(rm_public_game);
 </string>
           </argument>
         </arguments>

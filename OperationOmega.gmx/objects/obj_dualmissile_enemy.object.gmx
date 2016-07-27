@@ -218,8 +218,7 @@ switch(go)
       }
  case 2:
       //If the rocket is moving, create a smoke trail effect
-      if(global.msmokeeffect = 1)
-       effect_create_below(ef_smoke, x, y, 0, c_gray);
+      effect_create_below(ef_smoke, x, y, 0, c_gray);
       image_angle = direction;
  break;
 }

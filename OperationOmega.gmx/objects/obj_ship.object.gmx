@@ -4127,7 +4127,7 @@ if(global.chatting = true || hacked = true) exit;
 
 //Trigger Alphastar passive
 amplified = 0;
-if(global.lolship[global.mymid] = 1)
+if(global.selected_ship[global.mymid] = 1)
     amplified = 1;
 
 switch(global.spacesecond)

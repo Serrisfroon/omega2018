@@ -42,7 +42,7 @@
             <string>//This object exists only in the private game room. Set
 //the public-private variable to 0 to return here when 
 //exiting a game.
-global.gameslist = 0;
+global.public_game = false;
 
 </string>
           </argument>
@@ -67,7 +67,7 @@ global.gameslist = 0;
           <argument>
             <kind>1</kind>
             <string>//If a popup window exists, exit this script
-if(global.creatinggame = 1)
+if(global.popup_active = true)
  exit;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);
@@ -75,7 +75,7 @@ if(global.sfxtoggle = 0)
 instance_create(384, 240, obj_enterhostip);
      
 //A popup now exists
-global.creatinggame = 1;
+global.popup_active = true;
 
 animation = 3;
 alarm[2] = 30;

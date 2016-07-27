@@ -50,7 +50,20 @@ image_single = 5;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto(rm_waiting);
+            <string>global.listen = tcplisten(14800, 2, true, 0);
+if(global.listen &lt;= 0)
+{
+    show_message("Failed to listen on port 14800.");
+    global.master = false;
+    dllfree();
+    if(global.public_game = false)
+        room_goto(rm_private_game);
+    else
+        room_goto(rm_public_game);
+}
+setnagle(global.listen, true);
+
+room_goto(rm_waiting);
 
 
 </string>
@@ -94,7 +107,7 @@ until(string_pos(" ", servername) = 0)
 global.maxplayers = 8;
 
 //If this game is from he games list, send data to the list
-if(global.gameslist = 1)
+if(global.public_game = true)
 {
     global.createtime = get_servertime();
     global.myipaddress = sql_insert(global.createtime, servername, global.name, global.matchtype, global.shortlevel);
@@ -104,7 +117,7 @@ alarm[2] = 2;
 //Create the client list
 client_init();
 //A popup no longer exists
-global.creatinggame = 0;
+global.popup_active = false;
 
 </string>
           </argument>

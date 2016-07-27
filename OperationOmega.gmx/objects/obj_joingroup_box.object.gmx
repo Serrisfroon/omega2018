@@ -137,7 +137,7 @@ alarm[0] = 15;
             over_alpha -= 0.1;
         if(image_xscale &lt;= 0.6)
         {
-            global.creatinggame = 0;
+            global.popup_active = false;
             if(creategamenow = 0)
                 with(obj_joinbut) 
                     instance_destroy();

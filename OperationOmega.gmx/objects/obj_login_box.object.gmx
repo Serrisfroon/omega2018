@@ -73,8 +73,7 @@ if(flashing = '')
  flashing = '|';
 else
  flashing = '';
-if(global.messageup = 1)
- flashing = '';
+
 //Set time until next flash
 alarm[0] = 10;
 </string>
@@ -144,7 +143,6 @@ alarm[0] = 10;
         {
             with(obj_title)
             {
-                global.createprofile = 1;
                 global.myipaddress = get_externalip();
                 global.shipselect = 1;
                 global.primary = 0;
@@ -166,12 +164,11 @@ alarm[0] = 10;
                 global.musictoggle = 0;         
                 global.sfxtoggle = 0;         
                 global.firingmode = 0;          
-                global.fromprofile = 0;
                 omegadata_write();   
              
             }
             //A popup no loner exists
-            global.creatinggame = 0;
+            global.popup_active = false;
             //Destroy this object
             instance_destroy();
         }
@@ -323,7 +320,8 @@ draw_set_alpha(display_alpha);
 draw_set_color(c_black);
 //Draw the entered text
 draw_set_alpha(image_alpha);
-draw_text(x-112, y+5, keyboard_string+flashing);
+draw_text_bordered(x-112, y+5, keyboard_string+flashing, 1, 1, c_black, c_aqua)
+
 draw_set_alpha(1);
 
 </string>

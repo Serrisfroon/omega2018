@@ -61,10 +61,10 @@ if(global.musictoggle = 0)
         audio_play_sound(music_quasar, 1, 1);
 }
 //Return to the appropriate room
-if(global.gameslist = 1)
- room_goto(rm_gamelist);
+if(global.public_game = true)
+ room_goto(rm_public_game);
 else
- room_goto(rm_connect);
+ room_goto(rm_private_game);
 </string>
           </argument>
         </arguments>
@@ -178,7 +178,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.creatinggame = 1 || animation_step != 1)
+            <string>if(global.popup_active = true || animation_step != 1)
  exit;
 obj_readygo.animation_step = 2;
 obj_quit.animation_step = 2;
@@ -188,7 +188,6 @@ if(global.master = 1)
 obj_playerslot_readied.y = -100;
 //If you are the host, close the port, return to
 //the connecting room, and exit the script
-global.needrestart = 1;
 if(global.musictoggle = 0)
 {
         audio_stop_sound(music_quasar);
@@ -197,7 +196,7 @@ if(global.musictoggle = 0)
 
 if(global.master = true)
 {
-    if(global.gameslist = 1)
+    if(global.public_game = true)
         sql_remove(global.myipaddress); 
     host_quit();
  alarm[4] = 60;

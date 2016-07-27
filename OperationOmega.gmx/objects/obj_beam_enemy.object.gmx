@@ -58,8 +58,7 @@ stream = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.bsparkseffect = 0) exit;
-part_emitter_destroy(obj_partsystem.system, emit);
+            <string>part_emitter_destroy(obj_partsystem.system, emit);
 </string>
           </argument>
         </arguments>

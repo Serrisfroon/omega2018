@@ -268,7 +268,7 @@ for(i=0; i&lt;20; i+=1)
           <argument>
             <kind>1</kind>
             <string>//Exit the script if a popup exists
-if(global.creatinggame = 1)
+if(global.popup_active = true)
  exit;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);

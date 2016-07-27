@@ -136,7 +136,7 @@ changeable = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.creatinggame = 1)
+            <string>if(global.popup_active = true)
  exit;
 //Check to see if you had changed recently
 if(changeable = 0)

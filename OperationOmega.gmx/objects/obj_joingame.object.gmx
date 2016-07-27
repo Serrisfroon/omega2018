@@ -63,7 +63,7 @@
           <argument>
             <kind>1</kind>
             <string>//This game is from the games list
-global.gameslist = 1;
+global.public_game = true;
 //You are a client
 global.master = false;
 //Try connecting to the server
@@ -74,7 +74,7 @@ if(server &lt;= 0)
  //Inform the player
  show_message("Unable to connect to the server.");
  //A popup no longer exists
- global.creatinggame = 0;
+ global.popup_active = false;
  //Restart the room
  room_restart();
  exit;
@@ -202,7 +202,7 @@ room_goto(rm_waiting);
           <argument>
             <kind>1</kind>
             <string>//Exit is a popup window exists
-if(global.creatinggame = 1)
+if(global.popup_active = true)
  exit;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);

@@ -22,6 +22,4 @@ ini_write_real("Data", "playerdodge", global.playerdodge);
 ini_write_real("Data", "musictoggle", global.musictoggle);
 ini_write_real("Data", "sfxtoggle", global.sfxtoggle);
 ini_write_real("Data", "firingmode", global.firingmode);
-ini_write_real("Data", "fromprofile", global.fromprofile);
-
 ini_close();

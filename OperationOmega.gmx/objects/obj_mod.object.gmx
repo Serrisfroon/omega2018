@@ -580,10 +580,10 @@ if(global.master = false)
 //End 39dll
 dllfree();
 //Return to the appropriate room
-if(global.gameslist = 1)
- room_goto(rm_gamelist);
+if(global.public_game = true)
+ room_goto(rm_public_game);
 else
- room_goto(rm_connect);
+ room_goto(rm_private_game);
 </string>
           </argument>
         </arguments>
@@ -1436,7 +1436,7 @@ global.rot2 -= 4;
 global.rot3 += 6;
 
 //Handle Goliath Weaponsmith Bay
-if(global.lolship[global.mymid] = 3)
+if(global.selected_ship[global.mymid] = 3)
  weaponsmith(dstock);
 
 //Find the player farthest from you, but within view range
@@ -2920,7 +2920,7 @@ if(global.firingmode = 1)
 if(global.master = true)
 {
  //Remove the game from the games list if you made the game on it
- if(global.gameslist = 1)
+ if(global.public_game = true)
         sql_remove(global.myipaddress); 
  host_quit();
  //Set time until exiting the game

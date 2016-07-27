@@ -154,7 +154,7 @@ nowshoot = 0;
             <kind>1</kind>
             <string>//Change to correct ship image
 if(global.team[mid] = 1)
- switch(global.lolship[mid])
+ switch(global.selected_ship[mid])
  {
   case 1: //Alphastar
        sprite_index = spr_alphastar_teleport;
@@ -169,7 +169,7 @@ if(global.team[mid] = 1)
 else
  //If the player is on blue team, set choose a blue ship and set
  //the right values
- switch(global.lolship[mid])
+ switch(global.selected_ship[mid])
  {
   case 1: //Alphastar
        sprite_index = spr_alphastar_enemy_teleport;

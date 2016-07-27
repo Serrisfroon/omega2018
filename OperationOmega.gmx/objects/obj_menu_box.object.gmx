@@ -195,7 +195,7 @@ switch(animation)
     //Main menu: 120-14 = 106 pixels needed to expand
         switch(room)
         {
-            case rm_mainmenu:
+            case rm_main_menu:
                 if(menu_expand &lt; 78)
                 {
                     menu_expand += 6;
@@ -212,7 +212,7 @@ switch(animation)
                 {
                     menu_privategame = instance_create(x, y-22, obj_menu_selection);
                     menu_privategame.text_sprite = spr_private;
-                    menu_privategame.goto_room = rm_connect;
+                    menu_privategame.goto_room = rm_private_game;
                     menu_options = instance_create(x, y+22, obj_menu_selection);
                     menu_options.image_angle = 180;
                     menu_options.text_sprite = spr_options;
@@ -223,7 +223,7 @@ switch(animation)
                 {
                     menu_publicgame = instance_create(x, y-63, obj_menu_selection);
                     menu_publicgame.text_sprite = spr_server;
-                    menu_publicgame.goto_room = rm_gamelist;
+                    menu_publicgame.goto_room = rm_public_game;
                     menu_quitgame = instance_create(x, y+63, obj_menu_selection);
                     menu_quitgame.text_sprite = spr_quit;
                     menu_quitgame.image_angle = 180;
@@ -231,7 +231,7 @@ switch(animation)
                     create_selections = 2;
                 }
             break;
-            case rm_gamelist:
+            case rm_public_game:
                 if(menu_expand &lt; 78)
                 {
                     menu_expand += 6;
@@ -256,7 +256,7 @@ switch(animation)
                     {
                         menu_searchgame = instance_create(x, y-22, obj_menu_selection);
                         menu_searchgame.text_sprite = spr_searchforgame;
-                        menu_searchgame.goto_room = rm_connect;
+                        menu_searchgame.goto_room = rm_private_game;
                     }
                     else
                         dont_create = 0;   
@@ -272,7 +272,7 @@ switch(animation)
                         menu_groupsettings = instance_create(x, y+22, obj_menu_selection);
                         menu_groupsettings.image_angle = 180;
                         menu_groupsettings.text_sprite = spr_leave_group;
-                        menu_groupsettings.goto_room = rm_gamelist;
+                        menu_groupsettings.goto_room = rm_public_game;
                     }
                     create_selections = 1;
                 }
@@ -282,14 +282,14 @@ switch(animation)
                     {
                         menu_quickplay = instance_create(x, y-63, obj_menu_selection);
                         menu_quickplay.text_sprite = spr_quickplay;
-                        menu_quickplay.goto_room = rm_gamelist;
+                        menu_quickplay.goto_room = rm_public_game;
                     }
                     else
                         dont_create = 0;
                     menu_quitgame = instance_create(x, y+63, obj_menu_selection);
                     menu_quitgame.text_sprite = spr_back;
                     menu_quitgame.image_angle = 180;
-                    menu_quitgame.goto_room = rm_mainmenu;
+                    menu_quitgame.goto_room = rm_main_menu;
                     create_selections = 2;
                 }
             break;
@@ -337,11 +337,11 @@ switch(animation)
                     menu_quitgame = instance_create(x, y+63, obj_menu_selection);
                     menu_quitgame.text_sprite = spr_back;
                     menu_quitgame.image_angle = 180;
-                    menu_quitgame.goto_room = rm_mainmenu;
+                    menu_quitgame.goto_room = rm_main_menu;
                     create_selections = 2;
                 }
             break;
-            case rm_connect:
+            case rm_private_game:
                 if(menu_expand &lt; 58)
                 {
                     menu_expand += 6;
@@ -383,7 +383,7 @@ switch(animation)
                     {
                         menu_publicgame = instance_create(x, y-43, obj_menu_selection);
                         menu_publicgame.text_sprite = spr_host;
-                        menu_publicgame.goto_room = rm_gamelist;
+                        menu_publicgame.goto_room = rm_public_game;
                     }
                     else
                     {
@@ -393,7 +393,7 @@ switch(animation)
                     menu_quitgame = instance_create(x, y+43, obj_menu_selection);
                     menu_quitgame.text_sprite = spr_back;
                     menu_quitgame.image_angle = 180;
-                    menu_quitgame.goto_room = rm_mainmenu;
+                    menu_quitgame.goto_room = rm_main_menu;
                     create_selections = 2;
                 }
             break;
@@ -438,11 +438,11 @@ switch(animation)
 
                     menu_publicgame = instance_create(x, y-43, obj_menu_selection);
                     menu_publicgame.text_sprite = spr_create_group;
-                    menu_publicgame.goto_room = rm_gamelist;
+                    menu_publicgame.goto_room = rm_public_game;
                     menu_quitgame = instance_create(x, y+43, obj_menu_selection);
                     menu_quitgame.text_sprite = spr_back;
                     menu_quitgame.image_angle = 180;
-                    menu_quitgame.goto_room = rm_gamelist;
+                    menu_quitgame.goto_room = rm_public_game;
                     create_selections = 2;
                 }
             break;

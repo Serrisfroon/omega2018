@@ -65,11 +65,7 @@ room_goto(rm_singleplayer);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>exit;
-//Exit the script if a profile has not been made
-if(global.tutorial = 1)
- exit;
- 
+            <string> 
 event_inherited();
 </string>
           </argument>
