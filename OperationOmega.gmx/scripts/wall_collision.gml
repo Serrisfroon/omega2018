@@ -17,7 +17,7 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
         if(shielddown = 0)
             shielded = 0;
         //Check if under shock effect
-        if(shocked = false)
+        if(ship_status_shocked = false)
             shield -= 2;
         else
         {
@@ -93,7 +93,7 @@ else
         if(beserk = 0)
         {
             //Check if under shock effect
-            if(shocked = false)
+            if(ship_status_shocked = false)
                 shield -= 2;
             else
             {

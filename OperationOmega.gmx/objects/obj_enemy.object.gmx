@@ -32,8 +32,8 @@ shield=100;
 armor=100;
 maxshield = 100;
 shieldup = 1;
-abilityactive = 0;
-warping = -1;
+ship_ability_active_flag = false;
+hornet_warp = -1;
 beserk = 0;
 beserking= 0;
 heat = 50;
@@ -46,7 +46,7 @@ totalturnblur = 0;
 
 //Initialize primary firing variables
 shoot = 0;
-shooting = 0;
+multiplayer_primary_fire_flag = false;
 newdir = 0;
 flankcurve = 0;
 stasislife = 0;
@@ -58,7 +58,6 @@ oldspeeding = 0;
 thisturn = 0;
 turning = 0;
 speeding = 0;
-shooting = 0;
 //Set damage smoke and initialize smoke alarm(lol)
 smoke = 6;
 alarm[2] = 1;
@@ -69,17 +68,17 @@ minspeed = 2;
 maxspeed = 7; 
 controlturn = 0.75;
 //Initialize Hacker Mine hack variable
-hacked = false;
+ship_status_hacked = false;
 //Initialize Shock Missile shock variable
-shocked = false;
+ship_status_shocked = false;
 //Initialize facedir. This is your target direction
 facedir = direction;
 
 dusted = 0;
 controlling = true;
 //Initialize flame trail particles
-deployhits = 0;
-system = part_system_create();
+flame_smoke_trails = 0;
+flame_smoke_system = part_system_create();
 
 //Initialize Chain control
 chain = 0;
@@ -129,8 +128,8 @@ with(obj_hit)
 if(obj_mod.foundtarget = id)
  obj_mod.foundtarget = -1;
 //Destroy all flame trails
-for(i = 0; i &lt; deployhits; i += 1)
- part_emitter_destroy(system, emit[i]);
+for(i = 0; i &lt; flame_smoke_trails; i += 1)
+ part_emitter_destroy(flame_smoke_system, emit[i]);
 </string>
           </argument>
         </arguments>
@@ -162,7 +161,7 @@ if(!instance_exists(chainer))
 if(chainer = obj_ship)
  if(chainer.chaining = 0)
   chained = 0;
-if(chainer.shooting = 1 &amp;&amp; chained = 1)
+if(chainer.multiplayer_primary_fire_flag = true &amp;&amp; chained = 1)
 {
  //If there is shield left, create effect
  if(shieldup = 1)
@@ -412,9 +411,9 @@ bullet = bullet_create(x, y, "Whip", aim, mid, whipspeed);
           <argument>
             <kind>1</kind>
             <string>//Destroy all burn trail effects ad reset effect counter
-for(i = 0; i &lt; deployhits; i += 1)
- part_emitter_destroy(system, emit[i]);
-depoyhits = 0;
+for(i = 0; i &lt; flame_smoke_trails; i += 1)
+ part_emitter_destroy(flame_smoke_system, emit[i]);
+flame_smoke_trails = 0;
 
 
 </string>
@@ -440,7 +439,7 @@ depoyhits = 0;
           <argument>
             <kind>1</kind>
             <string>//Reset hack variable
-hacked = false;
+ship_status_hacked = false;
 
 </string>
           </argument>
@@ -464,7 +463,7 @@ hacked = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>abilityactive = 0;
+            <string>ship_ability_active_flag = false;
 maxspeed = 5;
 forceturn = 3;
 if(speed &gt; 5)
@@ -729,7 +728,7 @@ image_angle = facedir;
 prespeed = speed;
 //Handle abilities
 if(global.selected_ship[mid] = 1)
- if(abilityactive = 1)
+ if(ship_ability_active_flag = true)
  {
   controlturn = 0.1
  }
@@ -740,32 +739,32 @@ if(global.selected_ship[mid] = 1)
 hspeed += lengthdir_x(controlturn, facedir);
 vspeed += lengthdir_y(controlturn, facedir);
 speed = prespeed;
-//Handle swiftwing warping
-if(warping &gt; -1)
+//Handle hornet warping
+if(hornet_warp &gt; -1)
 {
  //Perform the warp at the 15th frame
- if(warping = 30)
+ if(hornet_warp = 30)
  {
   x = warpx;
   y = warpy;
  }
  //Return to the normal sprite at the last frame
- if(warping = 0)
+ if(hornet_warp = 0)
  {
   sprite_index = spr_swiftwing_enemy;
   if(global.team[global.mymid] = 2)
    sprite_index = spr_swiftwing;
  }
  //Count toward the next frame
- warping -= 1;
+ hornet_warp -= 1;
 } 
 if(beserk = 1) beserking += 1;
 
 //Update burn trail effect positions
-for(i = 0; i &lt; deployhits; i += 1)
- part_emitter_region(system, emit[i], x+lengthdir_x(8, facedir+effectdir[i]), x+lengthdir_x(8, facedir+effectdir[i]), y+lengthdir_y(8, facedir+effectdir[i]), y+lengthdir_y(8, facedir+effectdir[i]), ps_shape_ellipse, ps_distr_linear);
+for(i = 0; i &lt; flame_smoke_trails; i += 1)
+ part_emitter_region(flame_smoke_system, emit[i], x+lengthdir_x(8, facedir+effectdir[i]), x+lengthdir_x(8, facedir+effectdir[i]), y+lengthdir_y(8, facedir+effectdir[i]), y+lengthdir_y(8, facedir+effectdir[i]), ps_shape_ellipse, ps_distr_linear);
 
-if(hacked = true)
+if(ship_status_hacked = true)
 {
  thisturn = 0;
  turning = 0;
@@ -856,7 +855,7 @@ else
 shoot -= 1;
 
 //Disbale shooting if hacked
-if(hacked = true || shooting = 0) exit;
+if(ship_status_hacked = true || multiplayer_primary_fire_flag = false) exit;
 
 if(shoot &lt;= 0)
 {
@@ -1270,22 +1269,22 @@ with(other) instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious)
+            <string>effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
 //If there is shield left, create effect
 if(shieldup = 1)
 {
  hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[deployhits];
+ hurt.hitdir = effectdir[flame_smoke_trails];
  hurt.hurting = id;
 }
 
 //Create burning trail effect
-emit[deployhits] = part_emitter_create(system);
-part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
-part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
-effectdir[deployhits] =  direction-effectdir[deployhits];
+emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
+part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
+effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
 alarm[7] = 60;
-deployhits += 1;
+flame_smoke_trails += 1;
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
@@ -1318,22 +1317,22 @@ with(other) instance_destroy();
             <string>//Cancel if this ship was the last targeted
 if(other.oldmid = mid)
  exit;
-effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious)
+effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
 //If there is shield left, create effect
 if(shieldup = 1)
 {
  hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[deployhits];
+ hurt.hitdir = effectdir[flame_smoke_trails];
  hurt.hurting = id;
 }
 
 //Create burning trail effect
-emit[deployhits] = part_emitter_create(system);
-part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
-part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
-effectdir[deployhits] =  direction-effectdir[deployhits];
+emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
+part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
+effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
 alarm[7] = 60;
-deployhits += 1;
+flame_smoke_trails += 1;
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
@@ -1410,23 +1409,23 @@ with(other)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious);
+            <string>effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious);
 
 //If there is shield left, create effect
 if(shieldup = 1)
 {
  hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[deployhits];
+ hurt.hitdir = effectdir[flame_smoke_trails];
  hurt.hurting = id;
 }
 
 //Create burning trail effect
-emit[deployhits] = part_emitter_create(system);
-part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
-part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
-effectdir[deployhits] =  direction-effectdir[deployhits];
+emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
+part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
+effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
 alarm[7] = 60;
-deployhits += 1;
+flame_smoke_trails += 1;
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
@@ -1523,15 +1522,15 @@ draw_text((x-view_xview[0])/obj_mod.scaling, (y-48-view_yview[0])/obj_mod.scalin
 draw_turnblur();
 //Draw the ship
 draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, 1);
-if(abilityactive = 1 &amp;&amp; (sprite_index = spr_goliath || sprite_index = spr_goliath_enemy))
+if(ship_ability_active_flag = true &amp;&amp; (sprite_index = spr_goliath || sprite_index = spr_goliath_enemy))
     draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, 1);
-if(shocked = true)
+if(ship_status_shocked = true)
  draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);
-if(beserk = true &amp;&amp; warping = -1)
+if(beserk = true &amp;&amp; hornet_warp = -1)
  draw_sprite_ext(spr_swiftwing_beserkglow, beserking, x, y, 1, 1, image_angle, c_white, 1);
 
 //Draw the flame trail particles
-part_system_drawit(system);
+part_system_drawit(flame_smoke_system);
  
 
 

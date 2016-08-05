@@ -28,49 +28,99 @@
             <string>//Start following this object
 view_object = id;
 
-nextturnblur = 0;
-totalturnblur = 0;
+//Initialize primary variables
+aiming_direction = 0;       //Holds the angle to fire at
+primary_cooldown = 0;       //Hold the time(in frames) until the next primary shot
+primary_overheat = 1;       //Holds the cooldown multiplier to modify the cooldown to a lower value
 
-snapdir = 0;
+//Initialize unique primary variables
+//primary_name                  Holds the name of the primary to be passed to the bullet_create() function
+//primary_overheat_scaling      Holds the value to scale the overheat multiplier by each shot
+//primary_cooldown_base         Holds the base cooldown time(in frames) between shots
+switch(global.primary)
+{
+    case 1:
+        primary_name = "Needle";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 7;
+    break;
+    case 2:
+        primary_name = "Sonic";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 4;
+    break;
+    case 3:
+        primary_name = "Wave";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 15;
+    break;
+    case 4:
+        primary_name = "Seeker";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 10;
+    break;
+    case 5:
+        primary_name = "Statis";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 25;
+    break;
+    case 6:
+        primary_name = "Helix";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 9;
+    break;
+    case 7:
+        primary_name = "Siphon";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 12;
+    break;
+    case 8:
+        primary_name = "Double";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 10;
+    break;
+    case 9:
+        primary_name = "Pierce";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 7;
+    break;
+    case 10:
+        primary_name = "Spread";
+        primary_overheat_scaling = 0.05;
+        primary_cooldown_base = 20;
+    break;
+}
+
+//Initialize Energy related variables
+energy = 100;                                   //Set the energy to its maximum
+energy_regeneration_base = 0.20833;             //Base regen of 12.5 energy per second, 100 energy over 8 seconds
+energy_regeneration = energy_regeneration_base; //Set the regeneration rate to the base rate
+energy_regeneration_scaling = 0.00167;          //Scaling to add to the regen rate to regen faster over time; 
 
 
-
-
-//Set invincibility time
-invincible = 0.6;
+//Set spawn invincibility and its timer
+invincible = 0.5;
 alarm[10] = 120;
 
-//Set all barriers to ignore you
-with(obj_barrier_enemy)
- ignore = 1;
+//Initialize ability variables
+ship_ability_active_flag = false;   //Ship active ability flag
+hornet_warp = -1;                   //Hornet's warp variable
 
-//Set ability to shoot
-shoot = 0;
-nowshoot = 0;
-ship_ability_active_flag = false;
-global.playership[global.mymid] = obj_ship;
+//This is your player's ship
+global.playership[global.mymid] = id;
 
-hornet_warp = -1;
-
-//Set initial target values
-target = -1;
-targetx = 0;
-targety = 0;
-
-controlling = true;
 
 //Initialize flame trail particles
-flame_smoke_trails = 0;
-system = part_system_create();
+flame_smoke_trails = 0;                     //Holds the value of the number of trails currently shown
+flame_smoke_system = part_system_create();  //Initialize the particle system that will display the trails
 
 //Intialize weapon-specific variables
-stardust= 0;
-whips = 0;
-extraslow = 0;
-dusted = 0;
-hacked = false;
-shocked = false;
-chained = 0;
+fusion_spawner_existing = false;            //Holds whether or not fusion is currently being used. Stops multiple simultaneous uses.
+stardust_spawner_existing = false;          //Holds whether or not stardust is currently being used. Stops multiple simultaneous uses.
+whip_spawner_existing = false;              //Holds whether or not stardust is currently being used. Stops multiple simultaneous uses.
+stasis_slow_timer = 0;                      //Holds the time(in frames) that a Stasis hit will continue to slow for
+ship_status_hacked = false;                 //Holds whether or not the ship is under the hacked status, aka stunned.
+ship_status_shocked = false;                //Holds whether or not the ship is under the shocked status, which causes the shield to be 50% effective.
 
 //Initialize sparkline node tracking
 node = -1;
@@ -88,49 +138,10 @@ for(i = 0; i &lt;= 11; i += 1)
 }
 nextflame = 0;
 
-//Set energy to max
-energy = 100;
 heat = 50;
 cooldown = 1;
 beserk = 0;
 
-//Initialize energy regenration and set time until regen speeds up
-switch(global.primary)
-{
-    case 1:
-        basegain = 26/60;
-    break;
-    case 2:
-        basegain = 18/60;
-    break;
-    case 3:
-        basegain = 29/60;
-    break;
-    case 4:
-        basegain = 22/60;
-    break;
-    case 5:
-        basegain = 19/60;
-    break;
-    case 6:
-        basegain = 24/60;
-    break;
-    case 7:
-        basegain = 23/60;
-    break;
-    case 8:
-        basegain = 28/60;
-    break;
-    case 9:
-        basegain = 21/60;
-    break;
-    case 10:
-        basegain = 20/60;
-    break;
-}    
-    
-energygain = basegain;
-reduceregen = 2/3600;
 
 //Initialize shield regen
 alarm[4] = 1;
@@ -148,8 +159,6 @@ switch(global.shipselect)
         forceturn = 5;
         maxspeed = 7;
         lowspeed = 2;
-        regentime = 300;
-        regenrate = 0.05;
         controlturn = 0.75;
     break;
     case 2: //Swiftwing
@@ -160,8 +169,6 @@ switch(global.shipselect)
         forceturn = 8;
         maxspeed = 10;
         lowspeed = 4;
-        regentime = 300;
-        regenrate = 0.05;
         controlturn = 1.2;
     break;
     case 3: //Goliath
@@ -172,8 +179,6 @@ switch(global.shipselect)
         forceturn = 3;
         maxspeed = 5;
         lowspeed = 1;
-        regentime = 300;
-        regenrate = 0.05;
         controlturn = 0.5;      
     break;
 }
@@ -409,6 +414,28 @@ mid = global.mymid;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Initialize multiplayer aspects of the object
+multiplayer_primary_fire_flag = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -446,7 +473,7 @@ with(obj_trigger)
 
 //Destroy all flame trails
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
- part_emitter_destroy(system, emit[i]);
+ part_emitter_destroy(flame_smoke_system, emit[i]);
  
 //Update score
 if(defeatmid != 20)
@@ -617,115 +644,7 @@ invincible = 1;
           <argument>
             <kind>1</kind>
             <string>//Reset stardust hit limiter
-dusted = 0;
 threshold = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="8">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Whip
-//If there are parts of the attack left, reset the alarm
-//to create them
-if(global.sfxtoggle = 0)
-    audio_emitter_position(emit_whip, (view_xview[0]+view_wview[0]/2)-x, y-(view_yview[0]+view_hview[0]/2), 0);
-    
-if(whips &gt; 0)
-{
-    alarm[8] = 1;
-    whips -= 1;
-}
-else
-    if(global.sfxtoggle = 0)
-    {
-        audio_stop_sound(sound_whip);
-        audio_emitter_free(emit_whip);
-    }
-    
-//Set target direction
-aim = point_direction(x, y, hitx, hity);
-//Get movement speed of the current bullet
-switch(whips)
-{
-    case 19:
-         whipspeed = 12;
-    break;
-    case 18:
-         whipspeed = 10;
-    break;
-    case 17:
-         whipspeed = 8;
-    break;
-    case 16:
-         whipspeed = 6;
-    break;
-    case 15:
-         whipspeed = 4;
-    break;
-    case 14:
-         whipspeed = 2;
-    break;
-    case 13:
-         whipspeed = 3;
-    break;
-    case 12:
-         whipspeed = 4;
-    break;
-    case 11:
-         whipspeed = 5.5;
-    break;
-    case 10:
-         whipspeed = 7;
-    break;
-    case 9:
-         whipspeed = 8.5;
-    break;
-    case 8:
-         whipspeed = 10;
-    break;
-    case 7:
-         whipspeed = 12;
-    break;
-    case 6:
-         whipspeed = 14;
-    break;
-    case 5:
-         whipspeed = 16;
-    break;
-    case 4:
-         whipspeed = 19;
-    break;
-    case 3:
-         whipspeed = 18;
-    break;
-    case 2:
-         whipspeed = 16;
-    break;
-    case 1:
-         whipspeed = 14.5;
-    break;
-    case 0:
-         whipspeed = 13;
-    break;
-}
-bullet = bullet_create(x, y, "Whip", aim, global.mymid, whipspeed);
 </string>
           </argument>
         </arguments>
@@ -750,7 +669,7 @@ bullet = bullet_create(x, y, "Whip", aim, global.mymid, whipspeed);
             <kind>1</kind>
             <string>//Destroy all burn trail effects ad reset effect counter
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
-    part_emitter_destroy(system, emit[i]);
+    part_emitter_destroy(flame_smoke_system, emit[i]);
 flame_smoke_trails = 0;
 
 
@@ -777,7 +696,7 @@ flame_smoke_trails = 0;
           <argument>
             <kind>1</kind>
             <string>//Reset shock variable
-shocked = false;
+ship_status_shocked = false;
 basegain *= 3;
 </string>
           </argument>
@@ -802,7 +721,7 @@ basegain *= 3;
           <argument>
             <kind>1</kind>
             <string>//Reset hack variable
-hacked = false;
+ship_status_hacked = false;
 
 </string>
           </argument>
@@ -826,7 +745,7 @@ hacked = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(shocked = true || beserk = 1)
+            <string>if(ship_status_shocked = true || beserk = 1)
 {
     alarm[4] = 120;
     exit;
@@ -918,189 +837,6 @@ alarm[2]=(6*smoke+10);
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Stardust
-//If there are parts of the attack left, reset the alarm
-//to create them
-
-if(stardust &gt; 0)
-{
-alarm[1] = 1;
-stardust -= 1;
-}
-
-//Set target direction
-aim = point_direction(x, y, hitx, hity);
-//Create a stardust part
-fuse = instance_create(x, y, obj_stardust);
-fuse.mid = global.mymid;
-fuse.amplified = staramp;
-//Set movement dependant on which part it is
-switch(stardust)
-{
-     case 24:
-          fuse.speed = 11;
-          fuse.direction = aim;
-     break;
-     case 23:
-          fuse.speed = 13;
-          fuse.direction = aim+11;
-     break;
-     case 22:
-          fuse.speed = 7;
-          fuse.direction = aim-17;
-     break;
-     case 21:
-          fuse.speed = 9;
-          fuse.direction = aim+7;
-     break;
-     case 20:
-          fuse.speed = 15;
-          fuse.direction = aim+21;
-     break;
-     case 19:
-          fuse.speed = 10;
-          fuse.direction = aim-9;
-     break;
-     case 18:
-          fuse.speed = 12;
-          fuse.direction = aim+1;
-     break;
-     case 17:
-          fuse.speed = 8;
-          fuse.direction = aim-13;
-     break;
-     case 16:
-          fuse.speed = 14;
-          fuse.direction = aim+19;
-     break;
-     case 15:
-          fuse.speed = 13;
-          fuse.direction = aim-25;
-     break;
-     case 14:
-          fuse.speed = 10;
-          fuse.direction = aim+5;
-     break;
-     case 13:
-          fuse.speed = 14;
-          fuse.direction = aim-15;
-     break;
-     case 12:
-          fuse.speed = 12;
-          fuse.direction = aim+17;
-     break;
-     case 11:
-          fuse.speed = 15;
-          fuse.direction = aim-5;
-     break;
-     case 10:
-          fuse.speed = 10;
-          fuse.direction = aim+13;
-     break;
-     case 9:
-          fuse.speed = 8;
-          fuse.direction = aim-23;
-     break;
-     case 8:
-          fuse.speed = 13;
-          fuse.direction = aim+9;
-     break;
-     case 7:
-          fuse.speed = 9;
-          fuse.direction = aim-1;
-     break;
-     case 6:
-          fuse.speed = 12;
-          fuse.direction = aim+15;
-     break;
-     case 5:
-          fuse.speed = 15;
-          fuse.direction = aim-11;
-     break;
-     case 4:
-          fuse.speed = 10;
-          fuse.direction = aim-19;
-     break;
-     case 3:
-          fuse.speed = 11;
-          fuse.direction = aim-7;
-     break;
-     case 2:
-          fuse.speed = 9;
-          fuse.direction = aim+3;
-     break;
-     case 1:
-          fuse.speed = 14;
-          fuse.direction = aim-21;
-     break;
-     case 0:
-          fuse.speed = 8;
-          fuse.direction = aim+25;
-     break;
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Fusion
-//If there are parts of the attack left, reset the alarm
-//to create them
-if(fusions &gt; 0)
-{
-    alarm[0] = 5;
-}
-fusions -= 1;
-//Create a fusion part
-fuse = instance_create(x, y, obj_fusion);
-//Set its movement
-fuse.speed = 10;
-fuse.direction = 60*fusions;
-//Set its target location
-fuse.targetx = hitx;
-fuse.targety = hity;
-fuse.mid = global.mymid;
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -1118,9 +854,13 @@ fuse.mid = global.mymid;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-//Primary weapon fire delay
-shoot -= 1;
+            <string>//Perform action based on if the primary is being fired
+if(primary_cooldown &lt;= 0)
+    //Reduce the overheat multiplier since the primary isn't being fired
+    primary_overheat = max(1, primary_overheat-0.003);
+else
+    //Reduce the cooldown until the next primary shot is possible
+    primary_cooldown -= 1;
 
 //Change the angle of the ship
 image_angle = facedir;
@@ -1128,7 +868,7 @@ image_angle = facedir;
 //update the direction of this ship
 prespeed = speed;
 //update the direction of this ship
- if(abilityactive = 1 &amp;&amp; global.shipselect = 1)
+ if(ship_ability_active_flag = true &amp;&amp; global.shipselect = 1)
  {
   controlturn = 0.1
  }
@@ -1140,51 +880,50 @@ hspeed += lengthdir_x(controlturn, facedir);
 vspeed += lengthdir_y(controlturn, facedir);
 speed = prespeed;
 
-//Handle swiftwing warping
-if(warping &gt; -1)
+//Handle hornet warping
+if(hornet_warp &gt; -1)
 {
     //Perform the warp at the 15th frame
-    if(warping = 30)
+    if(hornet_warp = 30)
     {
         x = warpx;
         y = warpy;
         view_object = id;
     }
     //Return to the normal sprite at the last frame
-    if(warping = 0)
+    if(hornet_warp = 0)
     {
         sprite_index = spr_swiftwing;
         if(global.team[global.mymid] = 2)
             sprite_index = spr_swiftwing_enemy;
     }
     //Count toward the next frame
-    warping -= 1;
+    hornet_warp -= 1;
 } 
 
 //Update burn trail effect positions
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
-    part_emitter_region(system, emit[i], x+lengthdir_x(8, direction+effectdir[i]), x+lengthdir_x(8, direction+effectdir[i]), y+lengthdir_y(8, direction+effectdir[i]), y+lengthdir_y(8, direction+effectdir[i]), ps_shape_ellipse, ps_distr_linear);
+    part_emitter_region(flame_smoke_system, emit[i], x+lengthdir_x(8, direction+effectdir[i]), x+lengthdir_x(8, direction+effectdir[i]), y+lengthdir_y(8, direction+effectdir[i]), y+lengthdir_y(8, direction+effectdir[i]), ps_shape_ellipse, ps_distr_linear);
 
 //Set the minimum speed. If braking, change
 //the minimum to 0.
 //Brake if S is pressed, if you are chatting, or if you were hacked
 speedmin = lowspeed;
-if(keyboard_check(ord('S')) || global.chatting = true || hacked = true) 
+if(keyboard_check(ord('S')) || global.chatting = true || ship_status_hacked = true) 
 {
     speedmin = 0;
     speed -= 0.2;
 }
 
 //Lower speed
-if(speed &gt; speedmin) 
-    speed -= 0.04;
-else 
-    speed = speedmin;
-
+speed = max(speedmin, speed - 0.04);
  
-//Constantly recover energy the current energy regen rate
-if(energy &lt; 100) energy += energygain;
-if(nowshoot = 0 &amp;&amp; energygain &lt; basegain) energygain += reduceregen;
+//Constantly recover energy if not at full energy
+if(energy &lt; 100) 
+    energy += energy_regeneration;
+energy_regeneration += energy_regeneration_scaling; //Scale the regen rate over time
+
+
 if(heat &lt; 50) 
     heat += 0.2;
 else 
@@ -1228,7 +967,7 @@ wall_collision();
 
 //Autoturn
 //Check if autoturn is enabled or if you are chatting
-if(speed &gt; 0.1 || global.chatting = true || hacked = true)
+if(speed &gt; 0.1 || global.chatting = true || ship_status_hacked = true)
  exit;
 
 //Set the direction to the cursor
@@ -1463,7 +1202,7 @@ if(thisturn != lastturn)
             <kind>1</kind>
             <string>if(speed &gt; 3)
     speed = 3;
-extraslow = 20; 
+stasis_slow_timer = 20; 
 chained = 1;
 other.slowing = 1;
 other.alarm[2] = 3;
@@ -1475,7 +1214,7 @@ other.damaged[global.mymid] = 1;
 sfx_play(snd_hit, x, y);
 
 //Take damage
-if(shocked = false)
+if(ship_status_shocked = false)
  shield -= 1;
 else
 {
@@ -1770,7 +1509,7 @@ with(other)
             <kind>1</kind>
             <string>if(attack_collision(6, 11, 0, 8, "Hacker Mine") = 1)
 {
-    hacked = true;
+    ship_status_hacked = true;
     alarm[5] = 90;
     //Send the information
     clearbuffer(0);
@@ -1806,9 +1545,9 @@ with(other)
             <kind>1</kind>
             <string>if(attack_collision(10, 10, 0, 8, "Shock Missile") = 1)
 {
-    if(shocked = false)
+    if(ship_status_shocked = false)
     {
-        shocked = true;
+        ship_status_shocked = true;
         basegain /= 3;
         if(energygain &gt; basegain)
             energygain = basegain;
@@ -1902,7 +1641,7 @@ if(beserk = 0)
     if(invincible = 1)
     {
         //Check if under shock effect
-       if(shocked = false)
+       if(ship_status_shocked = false)
             shield -= 3/shielded;
         else
         {
@@ -2085,7 +1824,7 @@ attack_collision(regdmg, penedmg, 0, 8, "Layer Missile");
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
 //Accelerate- increse speed until a max speed is reached
 bonusspeed = 0;
 if(shield &gt; maxshield-0.2)
@@ -2099,9 +1838,9 @@ if(speed &gt; maxspeed+0.2 &amp;&amp; predictspeed = 1)
     obj_mod.refreshing = 0;
 }
 //Disable acceleration if under stasis effect
-if(extraslow &gt; 0)
+if(stasis_slow_timer &gt; 0)
 {
-    extraslow -= 1;
+    stasis_slow_timer -= 1;
     if(speed &gt; 3)
         speed = 3;    
     exit;
@@ -2131,7 +1870,7 @@ chained = 0;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
 //Turn clockwise at the right speed
 facedir -= forceturn;
 if(facedir &lt; 0) facedir += 360;
@@ -2158,7 +1897,7 @@ if(facedir &lt; 0) facedir += 360;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
 
 facedir += forceturn;
 if(facedir &gt; 360) facedir -= 360;
@@ -2209,7 +1948,7 @@ event_perform(ev_keyboard, vk_control);
           <argument>
             <kind>1</kind>
             <string>//Exit if the ability isn't active
-if(abilityactive = 0 || global.shipselect != 1)
+if(ship_ability_active_flag = false || global.shipselect != 1)
     exit;
     
 //Drain energy to use drift ability
@@ -2219,7 +1958,7 @@ if(energy &lt;= 0)
     energy = 0;
     //Switch controlturn to make Alpha Drift ability
     controlturn = 0.75;
-    abilityactive = 0;
+    ship_ability_active_flag = false;
 }      
 </string>
           </argument>
@@ -2267,8 +2006,7 @@ event_perform(ev_keyboard, vk_control);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>nowshoot = 0;
-shooting = 0;
+            <string>multiplayer_primary_fire_flag = false;
 obj_mod.refreshing = 0;
 
 </string>
@@ -2294,7 +2032,8 @@ obj_mod.refreshing = 0;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
+
 
 //Trigger Alphastar passive
 amplified = 0;
@@ -2372,22 +2111,23 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        //Initialize the attack
-        alarm[0] = 1;
-        fusions = 5;
-        if(amplified = 1)
-            fusions = 7;
-        //Set the targetted coordinates
-        hitx = mouse_x;
-        hity = mouse_y;
         //Reduce energy
         energy -= 25;
+        
+        //Create a fusion spawner for the attack
+        var fusion_spawner = instance_create(0, 0, obj_fusion_attack);
+        fusion_spawner.target_x = mouse_x;        //Set the x value of the target location
+        fusion_spawner.target_y = mouse_y;        //Set the y value of the target location
+        fusion_spawner.mid = global.mymid;        //Set the mid to your mid
+        fusion_spawner.amplified = amplified;     //Set the amplified correctly
+        fusion_spawner_existing = true;           //Set the spawner flag to true
+
         //Send the information
         clearbuffer(0);
         packet_label_write(2, global.mymid);
         writebyte(2, 0)//Fusion secondary
-        writeshort(hitx, 0);
-        writeshort(hity, 0);
+        writeshort(mouse_x, 0);
+        writeshort(mouse_y, 0);
         writebyte(amplified, 0);
         //Send to everyone if host
         if(global.master = true)
@@ -2405,30 +2145,31 @@ switch(global.secondary)
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        //Check if still shooting out stardust
-        if(stardust &gt; 0)
-            exit;
-        //Initialize the attack
-                  
-        if(global.sfxtoggle = 0)  
-            sfx_play(snd_swifttele, x, y);
         
-        alarm[1] = 1;
-        stardust = 25;
-        staramp = 0;
-        if(amplified = 1)
-            staramp = 1;
-        //Set the targetted coordinates
-        hitx = mouse_x;
-        hity = mouse_y;
+        //Check if still shooting out stardust
+        if(stardust_spawner_existing = true)
+            exit;
+            
+        //Play a sound if SFX are enabled
+        sfx_play(snd_swifttele, x, y);
+
+        //Create a stardust spawner for the attack
+        var stardust_spawner = instance_create(0, 0, obj_stardust_attack);
+        stardust_spawner.target_x = mouse_x;        //Set the x value of the target location
+        stardust_spawner.target_y = mouse_y;        //Set the y value of the target location
+        stardust_spawner.mid = global.mymid;        //Set the mid to your mid
+        stardust_spawner.amplified = amplified;     //Set the amplified correctly
+        stardust_spawner_existing = true;           //Set the spawner flag to true
+        
         //Reduce energy
         energy -= 25;
+        
         //Send the information
         clearbuffer(0);
         packet_label_write(2, global.mymid);
         writebyte(3, 0)//Stardust secondary
-        writeshort(hitx, 0);
-        writeshort(hity, 0);
+        writeshort(mouse_x, 0);
+        writeshort(mouse_y, 0);
         writebyte(amplified, 0);
         //Send to everyone if host
         if(global.master = true)
@@ -2760,100 +2501,75 @@ switch(global.secondary)
             sendmessage(global.host, 0, 0, 0);
     break;
     
-    //Sparkline
-    case 11:
+    case 11:    //Sparkline
         //Check if you have enough energy
         if(energy &lt; 15)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
         }
-        //Check if three nodes already exist
-        if(instance_exists(node3) &amp;&amp; node3 != -1)
-            exit;
-        //Check if existing nodes are attacking
-        if(instance_exists(node2) &amp;&amp; node2 != -1)
-            if(node2.stage = 1)
-                exit;
-        if(instance_exists(node) &amp;&amp; node != -1)
-            if(node.stage = 1)
-                exit;
-        //Reduce Energy
-        energy -= 15;
+        
+        //Change the max distance between sparkline nodes depending on if the attack is amplified
         if(amplified = 0)
-            maxdist = 480;
+            var max_sparkline_distance = 480;
         else
-            maxdist = 680;
-        //Create an infinite loop to section off this code
-        while(true)
-        {
-            //Destroy existing nodes if this node is fired too far away
-            if(instance_exists(node) &amp;&amp; node != -1)
-                if(point_distance(mouse_x, mouse_y, node.x, node.y) &gt; maxdist)
-                {
-                    with(node) instance_destroy();
-                    if(instance_exists(node2) &amp;&amp; node2 != -1)
-                        with(node2) instance_destroy();
-                }
-            if(instance_exists(node2) &amp;&amp; node2 != -1)
-                if(point_distance(mouse_x, mouse_y, node2.x, node2.y) &gt; maxdist || amplified = 0)
-                {
-                    with(node) instance_destroy();
-                    with(node2) instance_destroy();
-                }
-            //Check if a node exists
-            if(instance_exists(node) &amp;&amp; node != -1)
+            var max_sparkline_distance = 680;
+        
+        //Loop through to check all 3 possible sparkline nodes
+        for(i = 1; i &lt;= 3; i ++)
+            //Check if the current node exists
+            if(sparkline_node[i] = -1)
             {
-                //Check if a second node exists
-                if(instance_exists(node2) &amp;&amp; node2 != -1)
+                //Perform action depending on which node
+                switch(i)
                 {
-                    //Create a third node
-                    node3 = instance_create(x, y, obj_sparkline);
-                    node3.direction = point_direction(x, y, mouse_x, mouse_y);
-                    node3.targetx = mouse_x;
-                    node3.targety = mouse_y;
-                    node3.final = 1;
-                    node3.mid = global.mymid;
-                    //Make the second node connect to this node
-                    node2.second = node3;
-                    //Connect to the first node
-                    node3.second = node;
-                    //Note this is the third node
-                    nodecount = 3;
-                    //Break the loop
+                    case 2:     //This is the second node. One node exists already.
+                        //Check if the distance between the new node's end point and the existing node is too large
+                        if(point_distance(mouse_x, mouse_y, sparkline_node[1].target_x, sparkline_node[1].target_y) &gt; max_sparkline_distance)
+                        {
+                            i = 1;                      //This is now the first node
+                            with(sparkline_node[i])     //Destroy the previously existing node
+                                instance_destroy();
+                            sparkline_node[1] = -1;
+                        }
+                    break;
+                    case 3:     //This is the third node. Two nodes exist already
+                        //Check if the distance between the new node's end point and the existing nodes is too large
+                        if(point_distance(mouse_x, mouse_y, sparkline_node[1].target_x, sparkline_node[1].target_y) &gt; max_sparkline_distance ||
+                            point_distance(mouse_x, mouse_y, sparkline_node[2].target_x, sparkline_node[2].target_y) &gt; max_sparkline_distance)
+                            {
+                                i = 1;                      //This is now the first node
+                                with(sparkline_node[1])     //Destroy the previously existing first node
+                                    instance_destroy();
+                                with(sparkline_node[2])     //Destroy the previously existing second node
+                                    instance_destroy();
+                                sparkline_node[1] = -1;
+                                sparkline_node[2] = -1;
+                            }
                     break;
                 }
-                //Create a second node
-                node2 = instance_create(x, y, obj_sparkline);
-                node2.direction = point_direction(x, y, mouse_x, mouse_y);
-                node2.targetx = mouse_x;
-                node2.targety = mouse_y;
-                node2.final = 0;
-                node2.mid = global.mymid;
-                //Make the first node connect to this node
-                node.second = node2;
-                //Note this is the third node
-                nodecount = 2;
-                //Break the loop
-                break;
-            }
-            //Create a node
-            node = instance_create(x, y, obj_sparkline);
-            node.direction = point_direction(x, y, mouse_x, mouse_y);
-            node.targetx = mouse_x;
-            node.targety = mouse_y;
-            node.final = 0;
-            node.mid = global.mymid;
-            //Note this is the third node
-            nodecount = 1;
-            //Break the loop
-            break;
-        }
+                
+                //Reduce Energy
+                energy -= 15;
+
+                //Create the new node
+                sparkline_node[i] = instance_create(x, y, obj_sparkline);
+                sparkline_node[i].direction = point_direction(x, y, mouse_x, mouse_y);  //Set the node's direction to its end point
+                sparkline_node[i].target_x = mouse_x;                                   //Set the node's end point x value
+                sparkline_node[i].target_y = mouse_y;                                   //Set the node's end point y value
+                sparkline_node[i].mid = global.mymid;                                   //Give the node your mid
+                sparkline_node[i].node_order = i;                                       //Label the node with its order number. This is used
+                                                                                        //  to determine how it interacts with the other nodes
+                //Exit the loop since a node has been created                                                                        
+                break;                                                                                              
+            }                                                                           
+        
+
         //Send the information
         clearbuffer(0);
         packet_label_write(2, global.mymid);
         writebyte(13, 0)//Sparkline secondary
-        writebyte(nodecount, 0);
+        writebyte(i, 0);
         writeshort(x, 0);
         writeshort(y, 0);
         writeshort(mouse_x, 0);
@@ -3329,7 +3045,7 @@ switch(global.secondary)
     //Whip
     case 23:
         //Check to see if you have enough energy to use it
-        if(energy &lt; 20 || whips &gt; 0)
+        if(energy &lt; 20)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -3341,23 +3057,23 @@ switch(global.secondary)
             sound_whip = audio_play_sound_on(emit_whip, snd_whip, 1, 1);
             audio_emitter_position(emit_whip, x, y, 0);
         }
-        alarm[8] = 1;
+
+        //Create a stardust spawner for the attack
+        var whip_spawner = instance_create(0, 0, obj_whip_attack);
+        whip_spawner.target_x = mouse_x;        //Set the x value of the target location
+        whip_spawner.target_y = mouse_y;        //Set the y value of the target location
+        whip_spawner.mid = global.mymid;        //Set the mid to your mid
+        whip_spawner.amplified = amplified;     //Set the amplified correctly
+        whip_spawner_existing = true;           //Set the spawner flag to true
         
-        if(amplified = 0)
-         whips = 15;
-        else
-         whips = 20;
-        //Set the targetted coordinates
-        hitx = mouse_x;
-        hity = mouse_y;
         //Reduce energy
         energy -= 20;
         //Send the information
         clearbuffer(0);
         packet_label_write(2, global.mymid);
         writebyte(27, 0)//Whip secondary
-        writeshort(hitx, 0);
-        writeshort(hity, 0);
+        writeshort(mouse_x, 0);
+        writeshort(mouse_y, 0);
         writebyte(amplified, 0);
         //Send to everyone if host
         if(global.master = true)
@@ -3696,8 +3412,7 @@ switch(global.secondary)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>nowshoot = 1;
-shooting = 1;
+            <string>multiplayer_primary_fire_flag = true;
 obj_mod.refreshing = 0;
 
 clearbuffer(0);
@@ -3733,213 +3448,25 @@ else
           <argument>
             <kind>1</kind>
             <string>//Disable chatting if currently in chat mode
-if(global.chatting = true)
-    global.chatting = false;
- 
+global.chatting = false;
 
 //Disbale shooting if hacked or overheated
-if(hacked = true) 
+if(ship_disabled = true) 
     exit;
+
     
-energygain -= reduceregen;
-if(energygain &lt; 0)
-energygain = 0;
-    
-if(shoot &lt;= 0)
+if(primary_cooldown &lt;= 0)
 {
-
-    nowshoot = 1;
-    
-    switch(global.primary)
-    {
-        
-        //Needle Primary
-        case 1:
-            //set a fire rate
-            shoot = 7;            
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;        
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
-            snapdir = (newdir-direction)/5;
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Needle", newdir-3+primary_random(6, global.mymid), global.mymid, 0);
-        break;
-        
-        //Sonic
-        case 2:
-            shoot = 4;            
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
-            snapdir = (newdir-direction)/5;
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Sonic", newdir-7+primary_random(14, global.mymid), global.mymid, 0);
-        break;
-        
-        //Wave
-        case 3:
-            shoot = 15;            
-            //Create the shot and give it speed and facedir
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 15);
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;        
-            snapdir = (newdir-direction)/5;
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Wave", newdir-1+primary_random(2, global.mymid), global.mymid, 0);
-        break;
-        
-        //Seeker
-        case 4:
-            shoot = 10;
-            sfx_play(snd_flank, x, y);
-            //Create the shot and give it speed and facedir
-            flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank);
-            flank.speed = 10.5+speed/2;
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
-            snapdir = (newdir-direction)/5;
-            flank.direction = newdir-7+primary_random(14, global.mymid);
-            flank.mid = global.mymid;
-        break;
-        
-        //Stasis
-        case 5:
-            shoot = 25;
-            //Create the shot and give it speed and facedir
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;      
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
-            snapdir = (newdir-direction)/5;
-            bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew);
-            sfx_play(snd_stasis, x, y);
-            bullet.direction = newdir;
-            bullet.speed = 7+speed;
-            bullet.mid = global.mymid;
-        break;
-        
-        //Helix
-        case 6:
-            shoot = 9;
-            //Create the shot and give it speed and facedir
-            sfx_play(snd_helix, x, y);
-            cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
-            cross.speed = 11.5+speed/2;
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
-            snapdir = (newdir-direction)/5;
-            crossdir = newdir-7+primary_random(14, global.mymid);
-            cross.direction = crossdir;
-            cross.mid = global.mymid;
-            cross.side = 1;
-            //Create the shot and give it speed and facedir
-            cross = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
-            cross.speed = 11.5+speed/2;
-            cross.direction = crossdir;
-            cross.mid = global.mymid;
-            cross.side = 2;
-        break;
-        
-        //Siphon
-        case 7:
-            nowshoot = 0;
-            shoot = 12;
-            newdir = 0;
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],facedir-50,facedir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_partsystem.primarypart[global.team[mid]-1], 5);
-            //Check if the target is nearby
-            if(obj_mod.foundtarget &lt; 0 || point_distance(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y) &gt; 400) 
-            {
-                heat -= 2;
-                break;
-            }
-            //Check if the target is withing firing angle
-            point = point_direction(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y);
-            if(aim_limit(facedir, point, 30) != point)
-            {
-                heat -= 2;
-                break;
-            }
-            //Create the shot and give it speed and facedir
-            nowshoot = 1;
-            siphon = instance_create(0, 0, obj_siphon);
-            siphon.mid = global.mymid;
-            siphon.targetmid = obj_mod.foundtarget.mid;
-            sfx_play(snd_siphon, x, y);
-            //Absorb shield
-            if(obj_mod.foundtarget.shield &gt; 0) shield += 2;
-            if(shield &gt; maxshield) shield = maxshield;
-        break;
-        
-        //Double Primary
-        case 8:
-            shoot = 10;
-            sfx_play(snd_double, x, y);
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5; 
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
-            snapdir = (newdir-direction)/5;
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Double", newdir-5+primary_random(10, global.mymid), global.mymid, 0);
-            //Fire the second shot at the closest enemy
-            enemynear = instance_nearest(x, y, prnt_enemy);
-            if(instance_exists(enemynear))
-                bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", aim_limit(facedir-180, point_direction(x, y, enemynear.x, enemynear.y), 30), global.mymid, 0);
-            else
-                bullet = bullet_create(x+lengthdir_x(9, facedir-180), y+lengthdir_y(9, facedir-180), "Double", newdir-180, global.mymid, 0);
-        break;
-        
-        //Pierce Primary
-        case 9:
-            shoot = 7;
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;        
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 10);
-            snapdir = (newdir-direction)/5;
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Pierce", newdir-4+primary_random(8, global.mymid), global.mymid, 0);
-        break;
-        
-        //Spread Primary
-        case 10:
-            shoot = 20;
-            sfx_play(snd_spread, x, y);
-            //Find the newdir and create the bullets
-            newdir = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
-            //Create an effect
-            part_type_speed(obj_partsystem.primarypart[global.team[mid]-1],speed+1.68,speed+2.80,-0.04,0);
-            part_type_direction(obj_partsystem.primarypart[global.team[mid]-1],newdir-50,newdir+50,0,0);
-            part_particles_create(obj_partsystem.system, x+lengthdir_x(9, newdir), y+lengthdir_y(9, newdir), obj_partsystem.primarypart[global.team[mid]-1], 20);
-            snapdir = (newdir-direction)/5;
-            spreaddir = newdir-5+primary_random(10, global.mymid);  
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir, global.mymid, 0);
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-15, global.mymid, 0);
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-30, global.mymid, 0);
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir-45, global.mymid, 0);
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+15, global.mymid, 0);
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+30, global.mymid, 0);
-            bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), "Spread", spreaddir+45, global.mymid, 0);
-        break;
-    
-    }
-    
-} 
-
+    primary_overheat += primary_overheat_scaling;
+    primary_cooldown = primary_cooldown_base * primary_overheat;
+    var mouse_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
+    //Create an effect
+    part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], speed+1.68, speed+2.80, -0.04,0);
+    part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], mouse_direction-50, mouse_direction+50, 0, 0);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(9, mouse_direction), y+lengthdir_y(9, mouse_direction), obj_partsystem.primarypart[global.team[mid]-1], 10);
+    aiming_direction = (mouse_direction-direction)/5;
+    bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_name, mouse_direction, global.mymid, 0);
+}
 </string>
           </argument>
         </arguments>
@@ -3967,15 +3494,15 @@ draw_turnblur();
 //Draw the ship
 draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, invincible);
 
-if(abilityactive = 1 &amp;&amp; global.shipselect = 3)
+if(ship_ability_active_flag = true &amp;&amp; global.shipselect = 3)
     draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, invincible);
 
-if(shocked = true)
+if(ship_status_shocked = true)
     draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);
-if(beserk = true &amp;&amp; warping = -1)
+if(beserk = true &amp;&amp; hornet_warp = -1)
     draw_sprite_ext(spr_swiftwing_beserkglow, beserkeffect.image_index, x, y, 1, 1, image_angle, c_white, 1);
 //Draw the flame trail particles
-part_system_drawit(system);
+part_system_drawit(flame_smoke_system);
 </string>
           </argument>
         </arguments>
@@ -3999,7 +3526,7 @@ part_system_drawit(system);
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true || extraslow &gt; 0) exit;
+if(global.chatting = true || ship_status_hacked = true || stasis_slow_timer &gt; 0) exit;
 
 predictspeed = 1;
 
@@ -4031,7 +3558,7 @@ obj_mod.refreshing = 0;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
 
 predictspeed = 2;
 obj_mod.refreshing = 0;
@@ -4059,7 +3586,7 @@ obj_mod.refreshing = 0;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
 
 predictturn = 1;
 obj_mod.refreshing = 0;
@@ -4087,7 +3614,7 @@ obj_mod.refreshing = 0;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
 
 predictturn = 2;
 obj_mod.refreshing = 0;
@@ -4116,7 +3643,7 @@ obj_mod.refreshing = 0;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true) exit;
+if(global.chatting = true || ship_status_hacked = true) exit;
 
 //Trigger Alphastar passive
 amplified = 0;
@@ -5552,7 +5079,7 @@ switch(global.shipselect)
     case 1:
         //Switch controlturn to make Alpha Drift ability
         controlturn = 0.1;
-        abilityactive = 1;
+        ship_ability_active_flag = true;
         //Send the information
         clearbuffer(0);
         packet_label_write(2, global.mymid);
@@ -5567,7 +5094,7 @@ switch(global.shipselect)
     break;
     case 2:
         //Exit if already warping, not enough energy, or overheated
-        if(warping != -1 || cooldown = 0)
+        if(hornet_warp != -1 || cooldown = 0)
             exit;
             
         //Find the distance to the cursor
@@ -5584,7 +5111,7 @@ switch(global.shipselect)
         sfx_play(snd_swifttele, x, y);
 
         //Begin warp, use energy and heat
-        warping = 40;
+        hornet_warp = 40;
         heat -= 30;
         cooldown = 0;
         //swiftteled = instance_create(x, y, obj_swifttele);
@@ -5621,7 +5148,7 @@ switch(global.shipselect)
         forceturn = 8;
         maxspeed = 10;
         speed = 10;
-        abilityactive = 1;
+        ship_ability_active_flag = true;
         alarm[3] = 60;
         //Send the information
         clearbuffer(0);
@@ -5683,7 +5210,7 @@ switch(global.shipselect)
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true || hacked = true || extraslow &gt; 0) exit;
+if(global.chatting = true || ship_status_hacked = true || stasis_slow_timer &gt; 0) exit;
 
 predictspeed = 0;
 
@@ -5814,7 +5341,7 @@ obj_mod.refreshing = 0;
     
 //Switch controlturn to make Alpha Drift ability
 controlturn = 0.75;
-abilityactive = 0;
+ship_ability_active_flag = false;
 //Send the information
 clearbuffer(0);
 packet_label_write(2, global.mymid);

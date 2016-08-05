@@ -31,7 +31,7 @@ shield = 0;
 //Initialize primary firing variables
 shieldup = 0;
 shoot = 0;
-shooting = 0;
+multiplayer_primary_fire_flag = false;
 newdir = 0;
 flankcurve = 0;
 stasislife = 0;
@@ -46,9 +46,9 @@ speeding = 0;
 facedir = 0;
 
 //Initialize Hacker Mine hack variable
-hacked = false;
+ship_status_hacked = false;
 //Initialize Shock Missile shock variable
-shocked = false;
+ship_status_shocked = false;
 </string>
           </argument>
         </arguments>

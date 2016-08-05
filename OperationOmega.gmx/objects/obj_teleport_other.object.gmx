@@ -99,9 +99,9 @@ deploystock[2] = 0;
 deploystock[3] = 0;
 controlling = false;
 //Initialize Hacker Mine hack variable
-hacked = false;
+ship_status_hacked = false;
 //Initialize Shock Missile shock variable
-shocked = false;
+ship_status_shocked = false;
 facedir = direction;;
 thisturn = 0;
 predictturn = 0;

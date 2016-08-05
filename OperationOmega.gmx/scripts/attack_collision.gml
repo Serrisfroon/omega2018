@@ -14,7 +14,7 @@ if(invincible = 0.7)
     pene = 0;
 }
 if(sprite_index = spr_goliath || sprite_index = spr_goliath_enemy)
-    if(abilityactive = 1)
+    if(ship_ability_active_flag = true)
     {
         dmg *= 0.4;
         pene /= 2;
@@ -45,7 +45,7 @@ if(beserk = 0)
         //Take damage
         armor -= pene/shielded;
         //Check if under shock effect
-        if(shocked = false)
+        if(ship_status_shocked = false)
             shield -= dmg/shielded;
         else
         {
@@ -60,7 +60,7 @@ if(beserk = 0)
         //Take damage
         armor -= pene*threshold/shielded;
         //Check if under shock effect
-        if(shocked = false)
+        if(ship_status_shocked = false)
             shield -= dmg*threshold/shielded;
         else
         {
@@ -93,13 +93,13 @@ if(beserk = 0)
 //Create burning trail effect
 if(pene > 0)
 {
-    effectdir[deployhits] = point_direction(x, y, other.xprevious, other.yprevious)
-    emit[deployhits] = part_emitter_create(system);
-    part_emitter_region(system, emit[deployhits], x+lengthdir_x(8, effectdir[deployhits]), x+lengthdir_x(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), y+lengthdir_y(8, effectdir[deployhits]), ps_shape_ellipse, ps_distr_linear);
-    part_emitter_stream(system, emit[deployhits], obj_partsystem.deployhit, 2);
-    effectdir[deployhits] =  direction-effectdir[deployhits];
+    effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious);
+    emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
+    part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
+    part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
+    effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
     alarm[7] = 60;
-    deployhits += 1;
+    flame_smoke_trails += 1;
 }
     
 

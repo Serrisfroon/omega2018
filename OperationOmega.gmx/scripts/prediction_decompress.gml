@@ -5,17 +5,17 @@
 //global.playership[dummy].thisturn = auto-turn prediction
 //global.playership[dummy].turning = force turn prediction
 //global.playership[dummy].speeding = speed prediction
-//global.playership[dummy].shooting = Primary firing variable
+//global.playership[dummy].multiplayer_primary_fire_flag = Primary firing variable
 //////////////////////////////////////////////////////////////////////////////////
 var compress;
 compress = argument0
 global.playership[dummy].thisturn = 0;
 global.playership[dummy].turning = 0;
 global.playership[dummy].speeding = 0;
-global.playership[dummy].shooting = 0;
+global.playership[dummy].multiplayer_primary_fire_flag = false;
 if(compress > 36)
 {
-      global.playership[dummy].shooting = 1;
+      global.playership[dummy].multiplayer_primary_fire_flag = true;
       compress -= 36;
 }
 if(compress > 24)

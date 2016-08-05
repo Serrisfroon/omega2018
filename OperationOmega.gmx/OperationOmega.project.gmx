@@ -1905,6 +1905,7 @@
     <font>fonts\fnt_stats</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_ship_main</object>
     <objects name="Trash">
       <object>objects\obj_teamchange</object>
       <objects name="Main Menu">
@@ -1937,6 +1938,7 @@
       <object>objects\obj_playerslot_option</object>
       <object>objects\obj_tomulti</object>
       <object>objects\obj_modsettings</object>
+      <object>objects\object235</object>
     </objects>
     <objects name="In Game">
       <object>objects\obj_ship</object>
@@ -2009,11 +2011,18 @@
         <object>objects\obj_stasisnew_enemy</object>
       </objects>
       <objects name="Energy Secondy Attacks">
-        <object>objects\obj_fusion</object>
-        <object>objects\obj_fusion_enemy</object>
-        <object>objects\obj_stardust</object>
-        <object>objects\obj_stardust_enemy</object>
-        <object>objects\obj_stardust_end</object>
+        <objects name="Fusion">
+          <object>objects\obj_fusion_attack</object>
+          <object>objects\obj_fusion</object>
+          <object>objects\obj_fusion_enemy</object>
+        </objects>
+        <objects name="Stardust">
+          <object>objects\obj_stardust_attack</object>
+          <object>objects\obj_stardust</object>
+          <object>objects\obj_stardust_enemy</object>
+          <object>objects\obj_stardust_end</object>
+        </objects>
+        <object>objects\obj_whip_attack</object>
         <object>objects\obj_barrier</object>
         <object>objects\obj_barrier_enemy</object>
         <object>objects\obj_formationa</object>

@@ -38,7 +38,7 @@ alarm[1] = 20;
 cannon = 6;
 controlling = true;
 dusted = 0;
-shocked = false;
+ship_status_shocked = false;
 maxarmor = 60;
 regentime = -1;
 amplified = 0;
@@ -175,7 +175,7 @@ cannon = -cannon;
             <kind>1</kind>
             <string>//Increase the image size if it isnt at normal size
 dusted = 0;
-shocked = false;
+ship_status_shocked = false;
 if(scale &lt; 1)
  scale += 0.1;
 if(shieldscale &lt; 1)

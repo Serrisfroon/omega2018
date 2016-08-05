@@ -325,7 +325,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         }
                         //Goliath Hyper Rush damage reduction
                         if(possihit.sprite_index = spr_goliath || possihit.sprite_index = spr_goliath_enemy)
-                            if(possihit.abilityactive = 1)
+                            if(possihit.ship_ability_active_flag = true)
                             {
                                 bulletdamage[i] *= 0.4;
                             }
@@ -333,7 +333,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         if((bullettype[i] = spr_burst || bullettype[i] = spr_slash || bullettype[i] = spr_whip || bulletname[i] = "Formation"))
                         {
                             //Check if under shock effect
-                            if(possihit.shocked = false)
+                            if(possihit.ship_status_shocked = false)
                                 possihit.shield -= bulletdamage[i]*possihit.threshold/shielded;
                             else
                             {
@@ -361,7 +361,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         else
                         {
                             //Check if under shock effect
-                            if(possihit.shocked = false)
+                            if(possihit.ship_status_shocked = false)
                                 possihit.shield -= bulletdamage[i]/shielded;
                             else
                             {

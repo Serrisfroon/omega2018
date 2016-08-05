@@ -27,17 +27,16 @@
             <kind>1</kind>
             <string>//Set the speed
 speed = 17;
-//Initialize variable for keeping track of a second node
-second = -1;
-//Initialize variable controlling drawing between nodes
-drawline = 0;
-//Initialize stage variable
-stage = 0;
-//Set damage to the base
-damage = 0;
-//Set auto-destroy time
-alarm[0] = 660;
+
 sfx_play(snd_sparkline, x, y);
+
+target_x = 0;
+target_y = 0;
+mid = 0;
+node_order = 0;
+hitbox_check = -1;
+function_stage = -1;
+alarm[0] = 1;
 
 </string>
           </argument>
@@ -61,7 +60,26 @@ sfx_play(snd_sparkline, x, y);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//create an effect
+            <string>//Shift other nodes' order down if this node is still being tracked by the player
+if(global.playership[mid].sparkline_node[node_order] = id)
+    //Perform action depending on which node this is
+    switch(node_order)    
+    {
+        case 1:     //If this is the first node, move the second and third nodes down.
+            global.playership[mid].sparkline_node[1] = global.playership[mid].sparkline_node[2];    
+            global.playership[mid].sparkline_node[2] = global.playership[mid].sparkline_node[3];    
+            global.playership[mid].sparkline_node[3] = -1;  //Reset the third node because one doesn't exist     
+        break;
+        case 2:     //If this is the second node, move the third node down
+            global.playership[mid].sparkline_node[2] = global.playership[mid].sparkline_node[3];    
+            global.playership[mid].sparkline_node[3] = -1;  //Reset the third node because one doesn't exist
+        break;
+        case 3:     //If this is the third node, just reset it
+            global.playership[mid].sparkline_node[3] = -1;  //Reset the third node because one doesn't exist
+        break;
+    }
+    
+//create an effect
 effect_create_above(ef_ring, x, y, 0, c_aqua);
 effect_create_above(ef_flare, x, y, 1, c_aqua);
 part_type_color1(obj_partsystem.primarypart, c_aqua);
@@ -93,6 +111,22 @@ spark.speed = 2+random(3);
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -110,20 +144,13 @@ spark.speed = 2+random(3);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if a second node exists
-if(instance_exists(second) &amp;&amp; second != -1)
-{
- //Check if a third node exists
- if(instance_exists(second.second) &amp;&amp; second.second != -1)
-  //Destroy the third node
-  with(second.second)
-   instance_destroy();
- //Destroy the second node
- with(second)
-  instance_destroy();
-}
-//Destroy this node
-instance_destroy();
+            <string>//Set the auto-destroy time and update other existing nodes' auto-destroy time
+if(global.playership[mid].sparkline_node[1] != -1)
+    global.playership[mid].sparkline_node[1].alarm[1] = 660;
+if(global.playership[mid].sparkline_node[2] != -1)
+    global.playership[mid].sparkline_node[2].alarm[1] = 659;
+if(global.playership[mid].sparkline_node[3] != -1)
+    global.playership[mid].sparkline_node[3].alarm[1] = 658;
 </string>
           </argument>
         </arguments>
@@ -146,111 +173,94 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
+            <string>//Destroy this node if it goes outside the room
+if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 {
- instance_destroy();
- exit;
+    instance_destroy();
+    exit;
 }
+//Destroy this node if it hits a wall
 if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
- instance_destroy();
-//Check if the target point has been reached
-if(point_distance(x, y, targetx, targety) &lt;= 17 &amp;&amp; speed = 17 &amp;&amp; stage = 0)
- //Stop moving
- speed = 0;
-if(final = 1 &amp;&amp; speed = 0)
+    instance_destroy();
+
+//Perform action based on the function stage
+switch(function_stage)
 {
- //Move all three nodes to the next stage
- stage = 1;
- second.stage = 1;
- second.second.stage = 1;
- //Find lengths of the sides of the triangle made
- sidea = point_distance(x, y, second.x, second.y);
- sideb = point_distance(second.x, second.y, second.second.x, second.second.y);
- sidec = point_distance(x, y, second.second.x, second.second.y);
- //Find the incenter of the triangle made
- hitx = ((sidea*x)+(sideb*second.x)+(sidec*second.second.x))/(sidea+sideb+sidec);
- hity = ((sidea*y)+(sideb*second.y)+(sidec*second.second.y))/(sidea+sideb+sidec);
- //Find the enemy closest to the incenter
- near = instance_nearest(hitx, hity, prnt_enemy);
- //Find out if the enemy is inside the triangle and target it if so
- if(point_in_triangle(near.x+lengthdir_x(10, near.direction), near.y+lengthdir_y(10, near.direction), x, y, second.x, second.y, second.second.x, second.second.y))
-  hit = near;
- else
-  //Create a target at the incenter if there is no enemy
-  hit = instance_create(hitx, hity, obj_nodetarget);
- //Make the other two nodes target this
- second.hit = hit;
- second.second.hit = hit;
- //Set the speed for all three nodes
- speed = 17;
- second.speed = 17;
- second.second.speed = 17;
- //Set damage to max for all three nodes
- damage = 2;
- second.damage = 2;
- second.second.damage = 2;
+    case 0:     //The node was just created and needs to go to its target point
+        //Check if the target point has been reached
+        if(point_distance(x, y, target_x, target_y) &lt;= 17 &amp;&amp; speed = 17)
+        {
+            speed = 0;              //Stop moving
+            function_stage = 1;     //Move to the next function stage
+        }
+    break;
+    case 1:     //The node has reached its target point
+        //Perform action based on which node this is
+        switch(node_order)
+        {
+            //The first node does nothing
+            case 2:     //The second node creates a tripline between the first node and itself
+                //The second node does nothing if there is a third node
+                if(global.playership[mid].sparkline_node[3] != -1)
+                    break;
+                    
+                //Check to see if an enemy has hit the tripline
+                hitbox_check = collision_line(x, y, global.playership[mid].sparkline_node[1].x, global.playership[mid].sparkline_node[1].y, prnt_enemy, 1, 1);
+                if(hitbox_check != -1)
+                {
+                    function_stage = 2;                                                     //Move to the next function stage
+                    global.playership[mid].sparkline_node[1].function_stage = 2;            //Move this first node to the next function stage as well
+                    global.playership[mid].sparkline_node[1].hitbox_check = hitbox_check;   //Tell the first node which enemy hit the tripline
+                    
+                    //Reset the first and second nodes for their respective player
+                    global.playership[mid].sparkline_node[1] = -1;
+                    global.playership[mid].sparkline_node[2] = -1;
+                }
+            break;
+            case 3:     //The third node creates a triangle with the other two points that closes in on any enemy inside
+                //Initialize the needed variables for trigonometry calculations
+                var triangle_side, incenter_x, incenter_y;
+                
+                //Calculate the lengths of the triangle sides
+                triangle_side[1] = point_distance(x, y, global.playership[mid].sparkline_node[1].x, global.playership[mid].sparkline_node[1].y);
+                triangle_side[2] = point_distance(global.playership[mid].sparkline_node[1].x, global.playership[mid].sparkline_node[1].y, global.playership[mid].sparkline_node[2].x, global.playership[mid].sparkline_node[2].y);
+                triangle_side[3] = point_distance(x, y, global.playership[mid].sparkline_node[2].x, global.playership[mid].sparkline_node[2].y);
+                
+                //Find the incenter of the triangle made
+                incenter_x = ((triangle_side[1]*x)+(triangle_side[2]*global.playership[mid].sparkline_node[1].x)+(triangle_side[3]*global.playership[mid].sparkline_node[2].x))/
+                                    (triangle_side[1]+triangle_side[2]+triangle_side[3]);
+                incenter_y = ((triangle_side[1]*y)+(triangle_side[2]*global.playership[mid].sparkline_node[1].y)+(triangle_side[3]*global.playership[mid].sparkline_node[2].y))/
+                                    (triangle_side[1]+triangle_side[2]+triangle_side[3]);
+                                    
+                //Find the enemy closest to the incenter
+                var nearest_enemy = instance_nearest(incenter_x, incenter_y, prnt_enemy);
+                //Find out if the enemy is inside the triangle and target it if so
+                if(point_in_triangle(nearest_enemy.x, nearest_enemy.y, x, y, global.playership[mid].sparkline_node[1].x, global.playership[mid].sparkline_node[1].y, global.playership[mid].sparkline_node[2].x, global.playership[mid].sparkline_node[2].y))
+                    hitbox_check = nearest_enemy;
+                else
+                    //Create a target at the incenter if there is no enemy
+                    hitbox_check = instance_create(incenter_x, incenter_y, obj_nodetarget);
+                 
+                 //Tell the other two nodes what to target
+                 global.playership[mid].sparkline_node[1].hitbox_check = hitbox_check;
+                 global.playership[mid].sparkline_node[2].hitbox_check = hitbox_check;
+                 //Move all nodes to the next function stage
+                 global.playership[mid].sparkline_node[1].function_stage = 2;
+                 global.playership[mid].sparkline_node[2].function_stage = 2;
+                 global.playership[mid].sparkline_node[3].function_stage = 2;
+                 //Reset all nodes for their respective player
+                 global.playership[mid].sparkline_node[1] = -1;
+                 global.playership[mid].sparkline_node[2] = -1;
+                 global.playership[mid].sparkline_node[3] = -1;
+            break;
+        }    
+    break;
+    case 2:     //The node has detected a target and is homing in on it
+        speed = 17;                                                         //Set the speed of the node
+        mask_index = sprite_index;                                          //Allow collisions to happen with this node
+        direction = point_direction(x, y, hitbox_check.x, hitbox_check.y);  //Move this node toward the target
+    break;
 }
-//Check if a second node exists
-if(instance_exists(second) &amp;&amp; stage = 0 &amp;&amp; second != -1)
-{
- //If the second node is in place, begin drawing the connection
- if(second.speed = 0)
-  drawline = 1;
- else
-  exit;
- //Check for collisions in the connection
- hit = collision_line(x, y, second.x, second.y, prnt_enemy, 1, 1);
- //If there is a collision, move to the next stage
- if(hit &gt;= 0)
- {
-  //Increase speed and damage
-  speed = 17;
-  damage = 1;
-  stage = 1;
-  //Increase the second node's speed and damage
-  second.speed = 17;
-  second.damage = 1;
-  //Move the node to the next stage and tell it the collision
-  second.stage = 1;
-  second.hit = hit;
-  //Check for a third node
-  if(instance_exists(second.second) &amp;&amp; second.second != -1)
-  {
-   //Check if the third node is in place
-   if(second.second.speed = 0)
-   {
-   //Increase the third node's speed and damage
-   second.second.speed = 17;
-   second.second.damage = 1;
-   //Move the node to the next stage and tell it the collision
-   second.second.stage = 1;
-   second.second.hit = hit;
-   }
-   else
-    //If the node isn't in place, destroy it.
-    with(second.second)
-     instance_destroy();
-  }   
- }
-}
-//A collision has occured in the connection
-if(stage = 1)
-{
- mask_index = sprite_index;
- //Disable auto-destroy
- alarm[0] = -1;
- //Check to make sure the collision source still exists
- if(!instance_exists(hit))
-  //Destroy this node if it doesn't
-  instance_destroy();
- else
- //Move towards the collision source
- if(hit = obj_nodetarget)
-  direction = point_direction(x, y, hit.x, hit.y); 
- else
-  direction = point_direction(x, y, hit.x+lengthdir_x(10, hit.direction), hit.y+lengthdir_y(10, hit.direction));
-}
- 
 
 </string>
           </argument>
@@ -275,7 +285,7 @@ if(stage = 1)
           <argument>
             <kind>1</kind>
             <string>//Destroy this node if this is the target
-if(other.id = hit)
+if(other.id = hitbox_check)
  instance_destroy();
 </string>
           </argument>

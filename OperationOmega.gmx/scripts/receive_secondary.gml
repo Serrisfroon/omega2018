@@ -556,7 +556,7 @@
                 global.playership[dummy].alarm[3] = 60;
             }
 
-            global.playership[dummy].abilityactive = readbyte(0);
+            global.playership[dummy].ship_ability_active_flag = readbyte(0);
             if(global.master = true)
                client_sendall(0, dummy);
         break; 
@@ -988,7 +988,7 @@
              global.playership[dummy].sprite_index = spr_swiftwing_warp_enemy;
              global.playership[dummy].warpx = readshort(0);
              global.playership[dummy].warpy = readshort(0);
-             global.playership[dummy].warping = 60;
+             global.playership[dummy].hornet_warp = 60;
              if(global.master = true)
                client_sendall(0, dummy);
         break;

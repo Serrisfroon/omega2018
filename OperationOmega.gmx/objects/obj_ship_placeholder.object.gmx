@@ -66,9 +66,9 @@ maxdstock[3] = 1;
 controlling = false;
 heat = 50;
 //Initialize Hacker Mine hack variable
-hacked = false;
+ship_status_hacked = false;
 //Initialize Shock Missile shock variable
-shocked = false;
+ship_status_shocked = false;
 facedir = 0;
 thisturn = 0;
 predictturn = 0;

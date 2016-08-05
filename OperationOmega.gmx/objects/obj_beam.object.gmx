@@ -143,7 +143,7 @@ if(scale = 1 &amp;&amp; stage = 0)
      obj_mod.viewpos = 4;
     part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
     //Take damage
-    if(shocked = false)
+    if(ship_status_shocked = false)
      shield -= 60;
     else
     {

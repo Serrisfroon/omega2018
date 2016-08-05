@@ -31,7 +31,7 @@
       clearbuffer(0);
       packet_label_write(1, global.mymid);
       if(obj_ship.armor &gt; 0 || obj_ship.beserk = 1)
-       writebyte(status_compress(obj_ship.smoke, obj_ship.hacked, obj_ship.shocked, obj_ship.chained, obj_ship.beserk), 0);
+       writebyte(status_compress(obj_ship.smoke, obj_ship.ship_status_hacked, obj_ship.ship_status_shocked, obj_ship.chained, obj_ship.beserk), 0);
       else
        writebyte(0, 0);
       writebyte(floor(global.ping[global.mymid]/20), 0);
@@ -58,8 +58,8 @@ switch(refreshing)
       crush(round(obj_ship.x*10), 65000, 0);
       crush(round(obj_ship.y*10), 65000, 0);      
       crush(round(obj_ship.speed*100), 2500, 0);
-      crush(prediction_compress(0, obj_ship.predictturn, obj_ship.predictspeed, obj_ship.nowshoot), 72, 0);
-      if(obj_ship.nowshoot = 1)
+      crush(prediction_compress(0, obj_ship.predictturn, obj_ship.predictspeed, obj_ship.multiplayer_primary_fire_flag), 72, 0);
+      if(obj_ship.multiplayer_primary_fire_flag = true)
       {
        refreshing = 3;
        crush(round(obj_ship.newdir*10), 3600, 0);
@@ -232,7 +232,7 @@ while(true)
          dummy = i;
          decomp = uncrush(72, 0);
          prediction_decompress(decomp);
-         if(global.playership[i].shooting = 1)
+         if(global.playership[i].multiplayer_primary_fire_flag = true)
          {
           global.playership[i].newdir = uncrush(3600, 0)/10;
           switch(global.playerprimary[i])
@@ -262,7 +262,7 @@ while(true)
         }
         lolstatuses = readbyte(0);
         status_decompress(lolstatuses);
-        if(global.playership[dummy].hacked = true)
+        if(global.playership[dummy].ship_status_hacked = true)
         {
          global.playership[dummy].thisturn = 0;
          global.playership[dummy].turning = 0;
@@ -540,7 +540,7 @@ while(true)
    
    //Begin Firing Primary weapon
    case 15:
-        global.playership[dummy].hacked = true;
+        global.playership[dummy].ship_status_hacked = true;
         global.playership[dummy].alarm[5] = 90;        
    break;
 
