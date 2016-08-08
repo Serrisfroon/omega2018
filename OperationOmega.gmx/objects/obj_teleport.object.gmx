@@ -104,7 +104,6 @@ snapdir = 0;
 //Set values of ship to avoid error
 cooldown = 0;
 energy = 100;
-heat = 50;
 shield = 100;
 armor = 100;
 maxshield = 100;

@@ -41,10 +41,6 @@ outspeed = 0.3;
 inspeed = 0.5; 
 
 sfx_play(snd_fusion, x, y);
-
-nextflame = 0;
-for(i = 0; i &lt;= 11 i++)
-    flamelife[i] = 0;
     
 image_xscale = 0.1;
 image_yscale = 0.1;

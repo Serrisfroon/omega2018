@@ -418,7 +418,6 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                             possihit.beserk = 1;
                             possihit.energygain = 0.8;
                             possihit.energy = 100;
-                            possihit.heat = 50;
                             possihit.cooldown = 1;
                             obj_mod.sendping = 0;
                             possihit.beserkeffect = instance_create(x, y, obj_beserkeffect);
@@ -533,9 +532,6 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                 obj_ship.energy += 4;
                 if(obj_ship.energy &gt; 100)
                     obj_ship.energy = 100;
-                obj_ship.heat += 2;
-                if(obj_ship.heat &gt; 50)
-                    obj_ship.heat = 50;
                 repeat(3)
                     effect_create_below(ef_spark, bulletx[i]-7+random(14), bullety[i]-7+random(14), 0, c_aqua);
                 sfx_play(snd_graze, bulletx[i], bullety[i]);

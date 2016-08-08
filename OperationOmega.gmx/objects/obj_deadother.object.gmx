@@ -44,7 +44,6 @@ hit = 0;
 secondary = 0;
 ismine = 0;
 facedir = direction;;
-heat = 50;
 invincible = 1;
 
 //Shake the screen if in range

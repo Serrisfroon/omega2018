@@ -137,7 +137,6 @@ if(armor <= 0 && beserk = 0)
         beserk = 1;
         energygain = 0.8;
         energy = 100;
-        heat = 50;
         cooldown = 1;
         beserkeffect = instance_create(x, y, obj_beserkeffect);
         obj_mod.sendping = 0;

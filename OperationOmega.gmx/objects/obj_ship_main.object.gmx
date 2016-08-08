@@ -123,20 +123,9 @@ ship_status_hacked = false;                 //Holds whether or not the ship is u
 ship_status_shocked = false;                //Holds whether or not the ship is under the shocked status, which causes the shield to be 50% effective.
 
 //Initialize sparkline node tracking
-node = -1;
-node2 = -1;
-node3 = -1;
-
-//Initialize flame effect
-for(i = 0; i &lt;= 11; i += 1)
-{
-    flamelife[i] = 0;
-    flamex[i] = 0;
-    flamey[i] = 0;
-    flamedir[i] = 0;
-    flameimage[i] = 0;
-}
-nextflame = 0;
+sparkline_node[1] = -1;
+sparkline_node[2] = -1;
+sparkline_node[3] = -1;
 
 heat = 50;
 cooldown = 1;
@@ -780,7 +769,8 @@ alarm[4] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ship_ability_active_flag = false;
+            <string>//End the Goliath active ability Hyper Rush
+ship_ability_active_flag = false;
 maxspeed = 5;
 forceturn = 3;
 if(speed &gt; 5)
@@ -1699,7 +1689,6 @@ if(armor &lt;= 0 &amp;&amp; beserk = 0)
         beserk = 1;
         energygain = 0.8;
         energy = 100;
-        heat = 50;
         cooldown = 1;
         beserkeffect = instance_create(x, y, obj_beserkeffect);
         obj_mod.sendping = 0;

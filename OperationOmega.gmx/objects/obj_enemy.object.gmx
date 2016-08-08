@@ -36,7 +36,6 @@ ship_ability_active_flag = false;
 hornet_warp = -1;
 beserk = 0;
 beserking= 0;
-heat = 50;
 maxarmor = 100
 stasismark = 100;
 snapdir = 0;

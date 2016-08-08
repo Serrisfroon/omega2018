@@ -1926,8 +1926,7 @@ else
  shieldpart = 0;
 if(obj_ship.energy &gt; 0)
 {
-    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, obj_ship.heat/50);
-    draw_sprite_part_ext(spr_energybar, 1, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1-obj_ship.heat/50); 
+    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1);
 }
 if(obj_ship.cooldown = 0)
     draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
