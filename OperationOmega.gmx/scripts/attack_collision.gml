@@ -30,65 +30,64 @@ if(instance_exists(obj_turret))
         shielded = 2;
         
 //Activate the limiter and set time until deactivation
-if(beserk = 0)
+
+shielddown = 1;
+if(shield = 0)
+    shielddown = 0;
+threshold -= thresh;
+alarm[9] = 60;
+if(threshold < 0.1)
+ threshold = 0.1;
+
+if(thresh = 0)
 {
-    shielddown = 1;
-    if(shield = 0)
-        shielddown = 0;
-    threshold -= thresh;
-    alarm[9] = 60;
-    if(threshold < 0.1)
-     threshold = 0.1;
-    
-    if(thresh = 0)
-    {
-        //Take damage
-        armor -= pene/shielded;
-        //Check if under shock effect
-        if(ship_status_shocked = false)
-            shield -= dmg/shielded;
-        else
-        {
-            shield -= dmg/2;
-            armor -= dmg/2;
-        }
-        global.damagetaken[global.mymid] += (pene+dmg)/shielded;
-        global.damagedealt[other.mid] += (pene+dmg)/shielded;
-    }
+    //Take damage
+    armor -= pene/shielded;
+    //Check if under shock effect
+    if(ship_status_shocked = false)
+        shield -= dmg/shielded;
     else
     {
-        //Take damage
-        armor -= pene*threshold/shielded;
-        //Check if under shock effect
-        if(ship_status_shocked = false)
-            shield -= dmg*threshold/shielded;
-        else
-        {
-            shield -= dmg*threshold/2;
-            armor -= dmg*threshold/2;
-        }
-        global.damagetaken[global.mymid] += (pene+dmg)*threshold/shielded;
-        global.damagedealt[other.mid] += (pene+dmg)*threshold/shielded;
+        shield -= dmg/2;
+        armor -= dmg/2;
     }
-    
-    
-    //If there is no more shield, transfer damage to armor
-    if(shield < 0) 
-    {
-        armor += shield;
-        shield = 0;
-        if(shielddown = 1)
-            obj_mod.sendping = 0;
-    }
-    
-    //If there is shield left, create effect
-    if(shield > 0)
-    {
-        hurt = instance_create(0, 0, obj_hit);
-        hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
-        hurt.hurting = id;
-    }
+    global.damagetaken[global.mymid] += (pene+dmg)/shielded;
+    global.damagedealt[other.mid] += (pene+dmg)/shielded;
 }
+else
+{
+    //Take damage
+    armor -= pene*threshold/shielded;
+    //Check if under shock effect
+    if(ship_status_shocked = false)
+        shield -= dmg*threshold/shielded;
+    else
+    {
+        shield -= dmg*threshold/2;
+        armor -= dmg*threshold/2;
+    }
+    global.damagetaken[global.mymid] += (pene+dmg)*threshold/shielded;
+    global.damagedealt[other.mid] += (pene+dmg)*threshold/shielded;
+}
+
+
+//If there is no more shield, transfer damage to armor
+if(shield < 0) 
+{
+    armor += shield;
+    shield = 0;
+    if(shielddown = 1)
+        obj_mod.sendping = 0;
+}
+
+//If there is shield left, create effect
+if(shield > 0)
+{
+    hurt = instance_create(0, 0, obj_hit);
+    hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
+    hurt.hurting = id;
+}
+
     
 //Create burning trail effect
 if(pene > 0)
@@ -110,13 +109,13 @@ obj_mod.viewpos += shake;
 with(other) instance_destroy();
 
 //Update smoking
-smoke = floor(armor/(maxarmor/10));
+smoke = floor(armor/(armor_maximum/10));
  
 //Reset shield regen time
 alarm[4] = regentime;
 
 //Check if your ship has been defeated
-if(armor <= 0 && beserk = 0)
+if(armor <= 0)
 {
     //Take note of the player that defeated you
     defeatmid = other.mid;
@@ -125,22 +124,9 @@ if(armor <= 0 && beserk = 0)
         random_message(global.othername[other.mid], global.name, weaponname);
     else
         message = global.othername[other.mid]+" ELIMINATED "+global.name+".("+weaponname+")";
-    if(global.shipselect != 2)
-    {
-        //Destroy this object
-        instance_destroy();
-    }
-    else
-    {
-        armor = 0;
-        shield = 0;
-        beserk = 1;
-        energygain = 0.8;
-        energy = 100;
-        cooldown = 1;
-        beserkeffect = instance_create(x, y, obj_beserkeffect);
-        obj_mod.sendping = 0;
-        alarm[11] = 300;
-    }
+
+    //Destroy this object
+    instance_destroy();
+
 }
 return 1;

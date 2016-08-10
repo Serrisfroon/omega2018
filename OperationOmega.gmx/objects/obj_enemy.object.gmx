@@ -30,13 +30,11 @@
 //will be shown dependant on it.
 shield=100;
 armor=100;
-maxshield = 100;
+shield_maximum = 100;
 shieldup = 1;
 ship_ability_active_flag = false;
 hornet_warp = -1;
-beserk = 0;
-beserking= 0;
-maxarmor = 100
+armor_maximum = 100
 stasismark = 100;
 snapdir = 0;
 nextturnblur = 0;
@@ -757,7 +755,6 @@ if(hornet_warp &gt; -1)
  //Count toward the next frame
  hornet_warp -= 1;
 } 
-if(beserk = 1) beserking += 1;
 
 //Update burn trail effect positions
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
@@ -1525,8 +1522,6 @@ if(ship_ability_active_flag = true &amp;&amp; (sprite_index = spr_goliath || spr
     draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, 1);
 if(ship_status_shocked = true)
  draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);
-if(beserk = true &amp;&amp; hornet_warp = -1)
- draw_sprite_ext(spr_swiftwing_beserkglow, beserking, x, y, 1, 1, image_angle, c_white, 1);
 
 //Draw the flame trail particles
 part_system_drawit(flame_smoke_system);

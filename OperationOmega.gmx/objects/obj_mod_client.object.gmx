@@ -30,8 +30,8 @@
  case 0:
       clearbuffer(0);
       packet_label_write(1, global.mymid);
-      if(obj_ship.armor &gt; 0 || obj_ship.beserk = 1)
-       writebyte(status_compress(obj_ship.smoke, obj_ship.ship_status_hacked, obj_ship.ship_status_shocked, obj_ship.chained, obj_ship.beserk), 0);
+      if(obj_ship.armor &gt; 0)
+       writebyte(status_compress(obj_ship.smoke, obj_ship.ship_status_hacked, obj_ship.ship_status_shocked), 0);
       else
        writebyte(0, 0);
       writebyte(floor(global.ping[global.mymid]/20), 0);
@@ -45,7 +45,7 @@
  break;
 }
 
-if((obj_ship.armor &lt;= 0 &amp;&amp; obj_ship.beserk = 0) || instance_number(obj_teleport) &gt; 0) exit;
+if((obj_ship.armor &lt;= 0) || instance_number(obj_teleport) &gt; 0) exit;
 
 switch(refreshing)
 {
@@ -444,24 +444,21 @@ while(true)
          {
           case 1: //Alphastar
                global.playership[dummy].sprite_index = spr_alphastar;
-               global.playership[dummy].forceturn = 5;
+               global.playership[dummy].ship_turning_rate = 5;
                global.playership[dummy].minspeed = 2;
-               global.playership[dummy].maxspeed = 7;               
-               global.playership[dummy].controlturn = 0.75;
+               global.playership[dummy].velocity_maximum = 7;               
           break;
           case 2: //Swiftwing
                global.playership[dummy].sprite_index = spr_swiftwing;
-               global.playership[dummy].forceturn = 8;
+               global.playership[dummy].ship_turning_rate = 8;
                global.playership[dummy].minspeed = 4;
-               global.playership[dummy].maxspeed = 10;               
-               global.playership[dummy].controlturn = 1.2;
+               global.playership[dummy].velocity_maximum = 10;               
           break;
           case 3: //Goliath
                global.playership[dummy].sprite_index = spr_goliath;
-               global.playership[dummy].forceturn = 3;
+               global.playership[dummy].ship_turning_rate = 3;
                global.playership[dummy].minspeed = 1;
-               global.playership[dummy].maxspeed = 5;
-               global.playership[dummy].controlturn = 0.5;
+               global.playership[dummy].velocity_maximum = 5;
           break;
          }
         else
@@ -471,24 +468,21 @@ while(true)
          {
           case 1: //Alphastar
                global.playership[dummy].sprite_index = spr_alphastar_enemy;
-               global.playership[dummy].forceturn = 5;
+               global.playership[dummy].ship_turning_rate = 5;
                global.playership[dummy].minspeed = 2;
-               global.playership[dummy].maxspeed = 7;               
-               global.playership[dummy].controlturn = 0.75;
+               global.playership[dummy].velocity_maximum = 7;               
           break;
           case 2: //Swiftwing
                global.playership[dummy].sprite_index = spr_swiftwing_enemy;
-               global.playership[dummy].forceturn = 8;
+               global.playership[dummy].ship_turning_rate = 8;
                global.playership[dummy].minspeed = 4;
-               global.playership[dummy].maxspeed = 10;               
-               global.playership[dummy].controlturn = 1.2;
+               global.playership[dummy].velocity_maximum = 10;               
           break;
           case 3: //Goliath
                global.playership[dummy].sprite_index = spr_goliath_enemy;
-               global.playership[dummy].forceturn = 3;
+               global.playership[dummy].ship_turning_rate = 3;
                global.playership[dummy].minspeed = 1;
-               global.playership[dummy].maxspeed = 5;               
-               global.playership[dummy].controlturn = 0.5;
+               global.playership[dummy].velocity_maximum = 5;               
           break;
          }
    break;
@@ -503,12 +497,7 @@ while(true)
    case 11:
         global.playerprimary[dummy] = readbyte(0);
    break;
-   
-   //Beserk Activated
-   case 12:
-        global.playership[dummy].beserk = 1;
-   break;
-   
+      
    //Change snapdir
    case 13:
         global.playership[dummy].snapdir = readbyte(0)-100;

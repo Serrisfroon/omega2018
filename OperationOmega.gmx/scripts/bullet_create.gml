@@ -307,7 +307,7 @@ switch(type)
         sfx_play(snd_siphon, x, y);
         //Absorb shield
         if(obj_mod.foundtarget.shield > 0) shield += 2;
-        if(shield > maxshield) shield = maxshield;
+        if(shield > shield_maximum) shield = shield_maximum;
     break;
 }
 

@@ -35,7 +35,7 @@ switch(global.esecond[i])
         }
  break;
  case 4: //Beam
-    if(obj_ship.energy < 60 || obj_ship.speed > 0 || obj_ship.cooldown = 0)
+    if(obj_ship.energy < 60 || obj_ship.speed > 0)
         esecondfade[i] = c_dkgray;        
     else
         if(esecondfade[i] = c_dkgray)

@@ -40,12 +40,11 @@ targety = 0;
 invincible = 1;
 shieldup = 0;
 //Set values of ship
-cooldown = 0;
 energy = 0;
 shield = 0;
 armor = 0;
-maxshield = 100;
-maxarmor = 100;
+shield_maximum = 100;
+armor_maximum = 100;
 autoturn = 0;
 dualmissile = 0;
 snapdir = 0;
@@ -75,7 +74,6 @@ predictspeed = 0;
 nowshoot = 0;
 newdir = 0;
 mid = global.mymid;
-beserk = 0;
 //Set a respawn time
 alarm[1] = 300;
 

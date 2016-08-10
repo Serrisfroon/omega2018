@@ -55,9 +55,7 @@ switch(targetmid)
 {
  case global.mymid:
       target = obj_ship;
-      if(target.beserk = 0)
-        {
-       target.shield -= 4;
+      target.shield -= 4;
       //If there is no more shield, transfer damage to armor
       if(target.shield &lt; 0) 
       {
@@ -74,10 +72,9 @@ switch(targetmid)
        hurt.hurting = target;
       }
       //Update smoking
-      if(target.armor &lt;= (target.maxarmor*100)/60)
-       target.smoke = floor(target.armor/(target.maxarmor/10));
+      if(target.armor &lt;= (target.armor_maximum*100)/60)
+       target.smoke = floor(target.armor/(target.armor_maximum/10));
 
-       }
       //Check if your ship has been defeated
       if(target.armor &lt;= 0)
       {
@@ -87,30 +84,17 @@ switch(targetmid)
        with(target)
        {
             //Check if your ship has been defeated
-            if(armor &lt;= 0 &amp;&amp; beserk = 0)
+            if(armor &lt;= 0)
             {
                 //Make a defeat message
                 if(global.ships &gt; 1)
                     random_message(global.othername[other.mid], global.name, "Siphon");
                 else
                     message = global.othername[other.mid]+" ELIMINATED "+global.name+".(Siphon)";
-                if(global.shipselect != 2)
-                {
-                    //Destroy this object
-                    instance_destroy();
-                }
-                else
-                {
-                    armor = 0;
-                    shield = 0;
-                    beserk = 1;
-                    energygain = 0.8;
-                    energy = 100;
-                    cooldown = 1;
-                    beserkeffect = instance_create(x, y, obj_beserkeffect);
-                    obj_mod.sendping = 0;
-                    alarm[11] = 300;
-                }
+
+                //Destroy this object
+                instance_destroy();
+
             }       
         }
       }

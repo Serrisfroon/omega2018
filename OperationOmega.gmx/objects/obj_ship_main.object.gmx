@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Start following this object
+            <string> //Start following this object
 view_object = id;
 
 //Initialize primary variables
@@ -127,51 +127,45 @@ sparkline_node[1] = -1;
 sparkline_node[2] = -1;
 sparkline_node[3] = -1;
 
-heat = 50;
-cooldown = 1;
-beserk = 0;
-
 
 //Initialize shield regen
 alarm[4] = 1;
 
-
-//Set ship-dependant values: shield, armor, max shield, max armor, and how 
-//fast you turn automatically
+//Set ship-dependant values: max shield, max armor, turn speed, speed values, and ability cooldown
 switch(global.shipselect)
 {
     case 1: //Alphastar
-        shield = 30;
-        armor = 100;
-        maxshield = 30;
-        maxarmor = 100;
-        forceturn = 5;
-        maxspeed = 7;
-        lowspeed = 2;
-        controlturn = 0.75;
+        shield_maximum = 30;    //The max value of the ship's shield
+        armor_maximum = 100;    //The max value of the ship's armor
+        ship_turning_rate = 5;  //The rate(per frame) that the ship turns
+        velocity_maximum = 7;   //The max speed of the ship
+        velocity_minimum = 2;   //The minimum speed of the ship(without braking)
+        ability_cooldown = 60;  //The cooldown time(in frames) of the ships' active ability
     break;
     case 2: //Swiftwing
-        shield = 30;
-        armor = 55;
-        maxshield = 30;
-        maxarmor = 55;
-        forceturn = 8;
-        maxspeed = 10;
-        lowspeed = 4;
-        controlturn = 1.2;
+        shield_maximum = 30;
+        armor_maximum = 55;
+        ship_turning_rate = 8;
+        velocity_maximum = 10;
+        velocity_minimum = 4;
+        ability_cooldown = 120;
     break;
     case 3: //Goliath
-        shield = 50;
-        armor = 130;
-        maxshield = 50;
-        maxarmor = 130;
-        forceturn = 3;
-        maxspeed = 5;
-        lowspeed = 1;
-        controlturn = 0.5;      
+        shield_maximum = 50;
+        armor_maximum = 130;
+        ship_turning_rate = 3;
+        velocity_maximum = 5;
+        velocity_minimum = 1;
+        ability_cooldown = 120;
     break;
 }
 
+//Set the shield and armor to their maximums
+shield = shield_maximum;
+armor = armor_maximum;
+
+//Initialize the ability cooldown timer
+ability_cooldown_timer = 0;
 
 //Set deploy values
 deploystock[1] = 0;
@@ -734,14 +728,14 @@ ship_status_hacked = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(ship_status_shocked = true || beserk = 1)
+            <string>if(ship_status_shocked = true)
 {
     alarm[4] = 120;
     exit;
 }
-if(shield &lt; maxshield)
+if(shield &lt; shield_maximum)
 {
-    if(armor/maxarmor &gt; shield/maxshield)
+    if(armor/armor_maximum &gt; shield/shield_maximum)
         shield += regenrate;
     else
         shield += regenrate/2;
@@ -771,8 +765,8 @@ alarm[4] = 1;
             <kind>1</kind>
             <string>//End the Goliath active ability Hyper Rush
 ship_ability_active_flag = false;
-maxspeed = 5;
-forceturn = 3;
+velocity_maximum = 5;
+ship_turning_rate = 3;
 if(speed &gt; 5)
     speed = 5;
 </string>
@@ -855,19 +849,13 @@ else
 //Change the angle of the ship
 image_angle = facedir;
 
-//update the direction of this ship
-prespeed = speed;
-//update the direction of this ship
- if(ship_ability_active_flag = true &amp;&amp; global.shipselect = 1)
- {
-  controlturn = 0.1
- }
- else
- {
-  controlturn = prespeed/7
- }
+//Update the movement direction of the ship
+var prespeed = speed;                           //Save the speed of the ship
+var controlturn = prespeed/7;                   //Set the rate to update the direction of the ship
+//Add the direction update rate to the hspeed and vspeed proportionately
 hspeed += lengthdir_x(controlturn, facedir);
 vspeed += lengthdir_y(controlturn, facedir);
+//Reset the speed to scale the hspeed and vspeed changes back down
 speed = prespeed;
 
 //Handle hornet warping
@@ -898,7 +886,7 @@ for(i = 0; i &lt; flame_smoke_trails; i += 1)
 //Set the minimum speed. If braking, change
 //the minimum to 0.
 //Brake if S is pressed, if you are chatting, or if you were hacked
-speedmin = lowspeed;
+speedmin = velocity_minimum;
 if(keyboard_check(ord('S')) || global.chatting = true || ship_status_hacked = true) 
 {
     speedmin = 0;
@@ -913,44 +901,39 @@ if(energy &lt; 100)
     energy += energy_regeneration;
 energy_regeneration += energy_regeneration_scaling; //Scale the regen rate over time
 
-
-if(heat &lt; 50) 
-    heat += 0.2;
-else 
-{
-    if(cooldown = 0)
-        instance_create(x, y, obj_overheatshine);
-    cooldown = 1;
-}
+ability_cooldown_timer -= 1;
 //Bounce back into the map if you move out of it
-if(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
+while(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
 {
+    obj_mod.refreshing = 0;
     if(x &lt; 16)
     {
         x += 10;
         hspeed = -hspeed;
         facedir = direction;
+        exit;
     }
     if(x &gt; room_width-16)
     {
         x -= 10;
         hspeed = -hspeed;
         facedir = direction;
+        exit;
     }
     if(y &lt; 16)
     {
         vspeed = -vspeed;
         y += 10;
         facedir = direction;
+        exit;
     }
     if(y &gt; room_height-16)
     {
         vspeed = -vspeed;
         y -= 10;
         facedir = direction;
+        exit;
     }
-    obj_mod.refreshing = 0;
-    exit;
 }
 
 wall_collision();
@@ -1227,8 +1210,8 @@ if(shield &gt; 0)
 }
 
 //Update smoking
-if(armor &lt;= (maxarmor*100)/60)
- smoke = floor(armor/(maxarmor/10));
+if(armor &lt;= (armor_maximum*100)/60)
+ smoke = floor(armor/(armor_maximum/10));
 
 //Reset shield regen time
 alarm[4] = regentime;
@@ -1619,56 +1602,55 @@ with(other)
     exit;
 
 
-if(beserk = 0)
+
+//Check if there's a nearby paladin turret
+var shielded;
+shielded = 1;
+if(instance_exists(obj_turret))
+    if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
+        shielded = 2;
+//Take damage
+if(invincible = 1)
 {
-    //Check if there's a nearby paladin turret
-    var shielded;
-    shielded = 1;
-    if(instance_exists(obj_turret))
-        if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
-            shielded = 2;
-    //Take damage
-    if(invincible = 1)
+    //Check if under shock effect
+   if(ship_status_shocked = false)
+        shield -= 3/shielded;
+    else
     {
-        //Check if under shock effect
-       if(ship_status_shocked = false)
-            shield -= 3/shielded;
-        else
-        {
-            shield -= 1;
-            armor -= 2;
-        }
-    
-        //If there is no more shield, transfer damage to armor
-        if(shield &lt; 0) 
-        {
-            //Do double damage to armor
-            armor += shield*1.167;
-            shield = 0;
-        }
+        shield -= 1;
+        armor -= 2;
     }
-    
-    //If there is shield left, create effect
-    if(shield &gt; 0)
+
+    //If there is no more shield, transfer damage to armor
+    if(shield &lt; 0) 
     {
-     hurt = instance_create(0, 0, obj_hit);
-     hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
-     hurt.hurting = id;
+        //Do double damage to armor
+        armor += shield*1.167;
+        shield = 0;
     }
 }
+
+//If there is shield left, create effect
+if(shield &gt; 0)
+{
+ hurt = instance_create(0, 0, obj_hit);
+ hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
+ hurt.hurting = id;
+}
+
 
 //Destroy the attack
 with(other) instance_destroy();
 
 //Update smoking
-if(armor &lt;= (maxarmor*100)/60)
- smoke = floor(armor/(maxarmor/10));
+if(armor &lt;= (armor_maximum*100)/60)
+ smoke = floor(armor/(armor_maximum/10));
 
 //Reset shield regen time
 alarm[4] = regentime;
 
 //Check if your ship has been defeated
-if(armor &lt;= 0 &amp;&amp; beserk = 0)
+if(armor &lt;= 0)
 {
     //Take note of the player that defeated you
     defeatmid = other.mid;
@@ -1677,23 +1659,10 @@ if(armor &lt;= 0 &amp;&amp; beserk = 0)
         random_message(global.othername[other.mid], global.name, "Locust Missile");
     else
         message = global.othername[other.mid]+" ELIMINATED "+global.name+".(Locust Missile)";
-    if(global.shipselect != 2)
-    {
-        //Destroy this object
-        instance_destroy();
-    }
-    else
-    {
-        armor = 0;
-        shield = 0;
-        beserk = 1;
-        energygain = 0.8;
-        energy = 100;
-        cooldown = 1;
-        beserkeffect = instance_create(x, y, obj_beserkeffect);
-        obj_mod.sendping = 0;
-        alarm[11] = 300;
-    }
+
+    //Destroy this object
+    instance_destroy();
+
 }
 
 </string>
@@ -1816,12 +1785,12 @@ attack_collision(regdmg, penedmg, 0, 8, "Layer Missile");
 if(global.chatting = true || ship_status_hacked = true) exit;
 //Accelerate- increse speed until a max speed is reached
 bonusspeed = 0;
-if(shield &gt; maxshield-0.2)
+if(shield &gt; shield_maximum-0.2)
     bonusspeed = 3;
-if(speed &lt; maxspeed+bonusspeed)
+if(speed &lt; velocity_maximum+bonusspeed)
     speed += 0.2;
 
-if(speed &gt; maxspeed+0.2 &amp;&amp; predictspeed = 1)
+if(speed &gt; velocity_maximum+0.2 &amp;&amp; predictspeed = 1)
 {
     predictspeed = 3;
     obj_mod.refreshing = 0;
@@ -1861,7 +1830,7 @@ chained = 0;
             <string>//Check if you are chatting
 if(global.chatting = true || ship_status_hacked = true) exit;
 //Turn clockwise at the right speed
-facedir -= forceturn;
+facedir -= ship_turning_rate;
 if(facedir &lt; 0) facedir += 360;
 </string>
           </argument>
@@ -1888,7 +1857,7 @@ if(facedir &lt; 0) facedir += 360;
             <string>//Check if you are chatting
 if(global.chatting = true || ship_status_hacked = true) exit;
 
-facedir += forceturn;
+facedir += ship_turning_rate;
 if(facedir &gt; 360) facedir -= 360;
 </string>
           </argument>
@@ -1945,8 +1914,6 @@ energy -= 0.45;
 if(energy &lt;= 0)
 {
     energy = 0;
-    //Switch controlturn to make Alpha Drift ability
-    controlturn = 0.75;
     ship_ability_active_flag = false;
 }      
 </string>
@@ -3488,8 +3455,6 @@ if(ship_ability_active_flag = true &amp;&amp; global.shipselect = 3)
 
 if(ship_status_shocked = true)
     draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);
-if(beserk = true &amp;&amp; hornet_warp = -1)
-    draw_sprite_ext(spr_swiftwing_beserkglow, beserkeffect.image_index, x, y, 1, 1, image_angle, c_white, 1);
 //Draw the flame trail particles
 part_system_drawit(flame_smoke_system);
 </string>
@@ -5060,14 +5025,13 @@ switch(global.spacesecond)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(energy &lt;= 1)
+            <string>if(ability_cooldown_timer &gt; 0)
     exit;
- 
+ability_cooldown_timer = ability_cooldown;
+
 switch(global.shipselect)
 {
     case 1:
-        //Switch controlturn to make Alpha Drift ability
-        controlturn = 0.1;
         ship_ability_active_flag = true;
         //Send the information
         clearbuffer(0);
@@ -5083,7 +5047,7 @@ switch(global.shipselect)
     break;
     case 2:
         //Exit if already warping, not enough energy, or overheated
-        if(hornet_warp != -1 || cooldown = 0)
+        if(hornet_warp != -1)
             exit;
             
         //Find the distance to the cursor
@@ -5101,8 +5065,6 @@ switch(global.shipselect)
 
         //Begin warp, use energy and heat
         hornet_warp = 40;
-        heat -= 30;
-        cooldown = 0;
         //swiftteled = instance_create(x, y, obj_swifttele);
         view_object[0] = swiftteled;
         swiftteled.hspeed = (warpx-x)/10;
@@ -5127,15 +5089,9 @@ switch(global.shipselect)
             sendmessage(global.host, 0, 0, 0);
     break;
     case 3:
-        //Create pulse if not overheated
-        if(cooldown = 0)
-            exit;
-        //Use heat
-        heat -= 25;
-        cooldown = 0;
         //Create pulse
-        forceturn = 8;
-        maxspeed = 10;
+        ship_turning_rate = 8;
+        velocity_maximum = 10;
         speed = 10;
         ship_ability_active_flag = true;
         alarm[3] = 60;
@@ -5328,8 +5284,7 @@ obj_mod.refreshing = 0;
             <string>if(global.shipselect != 1)
     exit;
     
-//Switch controlturn to make Alpha Drift ability
-controlturn = 0.75;
+
 ship_ability_active_flag = false;
 //Send the information
 clearbuffer(0);

@@ -102,12 +102,11 @@ smoke = 6;
 snapdir = 0;
 
 //Set values of ship to avoid error
-cooldown = 0;
 energy = 100;
 shield = 100;
 armor = 100;
-maxshield = 100;
-maxarmor = 100;
+shield_maximum = 100;
+armor_maximum = 100;
 autoturn = 0;
 dualmissile = 0;
 hit = 0;
@@ -128,8 +127,6 @@ ship_status_hacked = false;
 //Initialize Shock Missile shock variable
 ship_status_shocked = false;
 facedir = direction;;
-beserk = 0;
-beserking= 0;
 thisturn = 0;
 predictturn = 0;
 predictspeed = 0;

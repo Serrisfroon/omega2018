@@ -45,12 +45,11 @@ snapdir = 0;
 invincible = 1;
 
 //Set values of ship to avoid error
-cooldown = 0;
 energy = 0;
 shield = 0;
 armor = 0;
-maxshield = 100;
-maxarmor = 100;
+shield_maximum = 100;
+armor_maximum = 100;
 autoturn = 0;
 dualmissile = 0;
 hit = 0;
@@ -76,7 +75,6 @@ predictturn = 0;
 predictspeed = 0;
 nowshoot = 0;
 mid = global.mymid;
-beserk = 0;
 //Shake the screen
 obj_mod.viewpos = 8;
 </string>

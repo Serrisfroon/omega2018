@@ -145,7 +145,7 @@ switch(global.shipselect)
         armor = 100;
         maxshield = 30;
         maxarmor = 100;
-        forceturn = 5;
+        ship_turning_rate = 5;
         maxspeed = 7;
         lowspeed = 2;
         regentime = 300;

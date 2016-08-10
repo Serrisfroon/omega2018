@@ -550,9 +550,9 @@
         case 21:
             if(global.playership[dummy].sprite_index = spr_goliath || global.playership[dummy].sprite_index = spr_goliath_enemy)
             {
-                global.playership[dummy].maxspeed = 10;
+                global.playership[dummy].velocity_maximum = 10;
                 global.playership[dummy].speed = 10;
-                global.playership[dummy].forceturn = 8;
+                global.playership[dummy].ship_turning_rate = 8;
                 global.playership[dummy].alarm[3] = 60;
             }
 

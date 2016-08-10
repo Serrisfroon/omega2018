@@ -240,7 +240,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         
             //Update smoking
             if(possihit.sprite_index != spr_turretbase &amp;&amp; room = rm_practice)
-                possihit.smoke = floor(possihit.armor/(possihit.maxarmor/10));
+                possihit.smoke = floor(possihit.armor/(possihit.armor_maximum/10));
 
             //If there is shield left, create effect
             if(possihit.shieldup = 1)
@@ -309,7 +309,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                     if(instance_exists(obj_turret))
                         if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
                             shielded = 2;
-                    if(possihit.invincible = 1 &amp;&amp; possihit.beserk = 0)
+                    if(possihit.invincible = 1)
                     {
                             shielddown = 1;
                             if(possihit.shield = 0)
@@ -387,13 +387,13 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         hurt.hurting = possihit;
                     }
                     //Update smoking
-                    possihit.smoke = floor(possihit.armor/(possihit.maxarmor/10));
+                    possihit.smoke = floor(possihit.armor/(possihit.armor_maximum/10));
          
                     //Reset shield regen time
                         possihit.alarm[4] = possihit.regentime;
 
                     //Check if your ship has been defeated
-                    if(possihit.armor &lt;= 0 &amp;&amp; possihit.beserk = 0)
+                    if(possihit.armor &lt;= 0)
                     {
                         if(!instance_exists(obj_practicemod))
                         {
@@ -415,10 +415,8 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         {
                             possihit.armor = 0;
                             possihit.shield = 0;
-                            possihit.beserk = 1;
                             possihit.energygain = 0.8;
                             possihit.energy = 100;
-                            possihit.cooldown = 1;
                             obj_mod.sendping = 0;
                             possihit.beserkeffect = instance_create(x, y, obj_beserkeffect);
                             possihit.alarm[11] = 300;

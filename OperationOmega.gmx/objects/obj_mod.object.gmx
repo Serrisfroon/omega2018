@@ -725,8 +725,8 @@ else
  case 0:
       clearbuffer(0);
       packet_label_write(1, global.mymid);
-      if(obj_ship.armor &gt; 0 || obj_ship.beserk = 1)
-       writebyte(status_compress(obj_ship.smoke, obj_ship.ship_status_hacked, obj_ship.ship_status_shocked, obj_ship.chained, obj_ship.beserk), 0);
+      if(obj_ship.armor &gt; 0)
+       writebyte(status_compress(obj_ship.smoke, obj_ship.ship_status_hacked, obj_ship.ship_status_shocked), 0);
       else
        writebyte(0, 0);
       writebyte(0, 0);
@@ -747,7 +747,7 @@ switch(refreshing)
       packet_label_write(0, global.mymid);
       crush(round(obj_ship.direction*10), 3600, 0);
       crush(round(obj_ship.facedir*10), 3600, 0);
-      if(obj_ship.armor &gt; 0 || obj_ship.beserk = 1)
+      if(obj_ship.armor &gt; 0)
       {
        crush(round(obj_ship.x*10), 65000, 0);
        crush(round(obj_ship.y*10), 65000, 0);
@@ -1135,24 +1135,21 @@ while(true)
          {
           case 1: //Alphastar
                global.playership[dummy].sprite_index = spr_alphastar;
-               global.playership[dummy].forceturn = 5;
+               global.playership[dummy].ship_turning_rate = 5;
                global.playership[dummy].minspeed = 2;
-               global.playership[dummy].maxspeed = 7;
-               global.playership[dummy].controlturn = 0.75;
+               global.playership[dummy].velocity_maximum = 7;
           break;
           case 2: //Swiftwing
                global.playership[dummy].sprite_index = spr_swiftwing;
-               global.playership[dummy].forceturn = 8;
+               global.playership[dummy].ship_turning_rate = 8;
                global.playership[dummy].minspeed = 4;
-               global.playership[dummy].maxspeed = 10;               
-               global.playership[dummy].controlturn = 1.2;
+               global.playership[dummy].velocity_maximum = 10;               
           break;
           case 3: //Goliath
                global.playership[dummy].sprite_index = spr_goliath;
-               global.playership[dummy].forceturn = 3;
+               global.playership[dummy].ship_turning_rate = 3;
                global.playership[dummy].minspeed = 1;
-               global.playership[dummy].maxspeed = 5;
-               global.playership[dummy].controlturn = 0.5;
+               global.playership[dummy].velocity_maximum = 5;
           break;
          }
         else
@@ -1162,24 +1159,21 @@ while(true)
          {
           case 1: //Alphastar
                global.playership[dummy].sprite_index = spr_alphastar_enemy;
-               global.playership[dummy].forceturn = 5;
+               global.playership[dummy].ship_turning_rate = 5;
                global.playership[dummy].minspeed = 2;
-               global.playership[dummy].maxspeed = 7;               
-               global.playership[dummy].controlturn = 0.75;
+               global.playership[dummy].velocity_maximum = 7;               
           break;
           case 2: //Swiftwing
                global.playership[dummy].sprite_index = spr_swiftwing_enemy;
-               global.playership[dummy].forceturn = 8;
+               global.playership[dummy].ship_turning_rate = 8;
                global.playership[dummy].minspeed = 4;
-               global.playership[dummy].maxspeed = 10;               
-               global.playership[dummy].controlturn = 1.2;
+               global.playership[dummy].velocity_maximum = 10;               
           break;
           case 3: //Goliath
                global.playership[dummy].sprite_index = spr_goliath_enemy;
-               global.playership[dummy].forceturn = 3;
+               global.playership[dummy].ship_turning_rate = 3;
                global.playership[dummy].minspeed = 1;
-               global.playership[dummy].maxspeed = 5;               
-               global.playership[dummy].controlturn = 0.5;
+               global.playership[dummy].velocity_maximum = 5;               
           break;
          }
         client_sendall(0, dummy);
@@ -1197,12 +1191,6 @@ while(true)
    //Primary Switched
    case 11:
         global.playerprimary[dummy] = readbyte(0);
-        client_sendall(0, dummy);
-   break;
-   
-   //Beserk Activated
-   case 12:
-        global.playership[dummy].beserk = 1;
         client_sendall(0, dummy);
    break;
    
@@ -1620,7 +1608,7 @@ screen_shake(view_object);
           <argument>
             <kind>1</kind>
             <string>//Exit if the player is alive
-if(obj_ship.armor &gt; 0 || obj_ship.beserk = 1)
+if(obj_ship.armor &gt; 0)
  exit;
 
 //Loop to find the mid value of the currently viewed player
@@ -1681,7 +1669,7 @@ view_object = global.object_view;
           <argument>
             <kind>1</kind>
             <string>//Exit if the player is alive
-if(obj_ship.armor &gt; 0 || obj_ship.beserk = 1)
+if(obj_ship.armor &gt; 0)
  exit;
 
 //Loop to find the mid value of the currently viewed player
@@ -1903,24 +1891,21 @@ draw_sprite_ext(spr_numbers_selected, 0, selectx, 73, 1, 1, 0, c_white, 1);
 //Draw Armor, Shield, Energy, and Ammo bars
 if(obj_ship.armor &gt; 0)
 {
- armorratio = obj_ship.armor/obj_ship.maxarmor;
+ armorratio = obj_ship.armor/obj_ship.armor_maximum;
  if(armorratio &lt; armorpart)
   armorpart -= 0.02;
  else
   armorpart = armorratio;
  draw_sprite_part_ext(spr_armorbar, 0, 0, 0, 4+armorpart*233, 86, 0, 0, 1, 1, c_white, 1);
 }
-else
-    if(global.shipselect = 2 &amp;&amp; obj_ship.beserk = 1)
-        draw_sprite_part_ext(spr_beserkbar, obj_ship.beserkeffect.image_index, 0, 0, 4+(obj_ship.alarm[11]/300)*233, 86, 0, 0, 1, 1, c_white, 1);    
 if(obj_ship.shield &gt; 0)
 {
- shieldratio = obj_ship.shield/obj_ship.maxshield;
+ shieldratio = obj_ship.shield/obj_ship.shield_maximum;
  if(shieldratio &lt; shieldpart)
   shieldpart -= 0.02;
  else
   shieldpart = shieldratio;
- draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+shieldpart*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*(obj_ship.shield/obj_ship.maxshield)));
+ draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+shieldpart*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*shieldratio));
 }
 else
  shieldpart = 0;
@@ -1928,8 +1913,7 @@ if(obj_ship.energy &gt; 0)
 {
     draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1);
 }
-if(obj_ship.cooldown = 0)
-    draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
+draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
 if(instance_exists(obj_overheatshine))
     draw_sprite_ext(spr_overheatshine, obj_overheatshine.image_index, 0, 0, 1, 1, 0, c_white, 1);
    
