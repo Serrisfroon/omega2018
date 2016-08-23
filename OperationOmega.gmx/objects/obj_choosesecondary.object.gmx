@@ -30,7 +30,6 @@ growth = 0;
 growing = 0;
 selected = 0;
 weapontype = 0;
-weaponnumber = 1;
 secondnumber = 0;
 
 empty = -1;
@@ -98,9 +97,9 @@ alarm[0] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(changeselect = 31)
+            <string>//Check to see if the energy icon was selected for the hotkey slot
+if(changeselect = 31)
 {
-    global.spacetype = 0;
     with(obj_choosesecondary)
     {
             alarm[1] = 60;
@@ -112,28 +111,27 @@ alarm[0] = 1;
     create_weaponslots();
     with(obj_customizer.weaponslot[4])
     {
-        create_icon(spr_fusion_icon, 4, -4, 40, 128, 1);    
-        create_icon(spr_stardust_icon, 4, -4, 40, 96, 2);    
-        create_icon(spr_barrier_icon, 4, -4, 40, 64, 3);    
-        create_icon(spr_formation_icon, 4, -4, 40, 32, 5);    
-        create_icon(spr_beam_icon, 4, 0, 40, 0, 4);                    
-        create_icon(spr_sparkline_icon, 4, -4, 72, 128, 6);    
-        create_icon(spr_burst_icon, 4, -4, 72, 96, 7);    
-        create_icon(spr_slash_icon, 4, -4, 72, 64, 8);    
-        create_icon(spr_horizon_icon, 4, -4, 72, 32, 9);    
-        create_icon(spr_spiral_icon, 4, 0, 72, 0, 10);                        
-        create_icon(spr_laser_icon, 4, -4, 104, 128, 11);    
-        create_icon(spr_trail_icon, 4, -4, 104, 96, 12);    
-        create_icon(spr_reflection_icon, 4, -4, 104, 64, 13);    
-        create_icon(spr_storm_icon, 4, -4, 104, 32, 14);    
-        create_icon(spr_trigger_icon, 4, 0, 104, 0, 15);       
+        create_icon(spr_fusion_icon, 4);    
+        create_icon(spr_stardust_icon, 4);    
+        create_icon(spr_barrier_icon, 4);    
+        create_icon(spr_formation_icon, 4);    
+        create_icon(spr_beam_icon, 4);                    
+        create_icon(spr_sparkline_icon, 4);    
+        create_icon(spr_burst_icon, 4);    
+        create_icon(spr_slash_icon, 4);    
+        create_icon(spr_horizon_icon, 4);    
+        create_icon(spr_spiral_icon, 4);                        
+        create_icon(spr_laser_icon, 4);    
+        create_icon(spr_trail_icon, 4);    
+        create_icon(spr_reflection_icon, 4);    
+        create_icon(spr_storm_icon, 4);    
+        create_icon(spr_trigger_icon, 4);       
         selected = 1; 
     }             
     exit;
 }
 if(changeselect = 32)
 {
-    global.spacetype = 1;
     with(obj_choosesecondary)
     {
             alarm[1] = 60;
@@ -145,29 +143,33 @@ if(changeselect = 32)
     create_weaponslots();    
     with(obj_customizer.weaponslot[4])
     {
-        create_icon(spr_dualmissile_icon, 4, -4, 40, 128, 1);    
-        create_icon(spr_layermissile_icon, 4, -4, 40, 96, 2);    
-        create_icon(spr_locustmissile_icon, 4, -4, 40, 64, 4);    
-        create_icon(spr_tridentmissile_icon, 4, -4, 40, 32, 7);    
-        create_icon(spr_shockmissile_icon, 4, 0, 40, 0, 8);                 
-        create_icon(spr_hermitmissile_icon, 4, -4, 72, 128, 10);    
-        create_icon(spr_splitmissile_icon, 4, -4, 72, 96, 14);    
-        create_icon(spr_strikemissile_icon, 4, -4, 72, 64, 11);    
-        create_icon(spr_huntermine_icon, 4, -4, 72, 32, 3);    
-        create_icon(spr_phantommine_icon, 4, 0, 72, 0, 5);                        
-        create_icon(spr_hackermine_icon, 4, -4, 104, 128, 9);    
-        create_icon(spr_clustermine_icon, 4, -4, 104, 96, 15);    
-        create_icon(spr_strikemine_icon, 4, -4, 104, 64, 12);    
-        create_icon(spr_solus_icon, 4, -4, 104, 32, 6);    
-        create_icon(spr_turret_icon, 4, 0, 104, 0, 13);          
+        create_icon(spr_dualmissile_icon, 4);    
+        create_icon(spr_layermissile_icon, 4);    
+        create_icon(spr_locustmissile_icon, 4);    
+        create_icon(spr_tridentmissile_icon, 4);    
+        create_icon(spr_shockmissile_icon, 4);                 
+        create_icon(spr_hermitmissile_icon, 4);    
+        create_icon(spr_splitmissile_icon, 4);    
+        create_icon(spr_strikemissile_icon, 4);    
+        create_icon(spr_huntermine_icon, 4);    
+        create_icon(spr_phantommine_icon, 4);                        
+        create_icon(spr_hackermine_icon, 4);    
+        create_icon(spr_clustermine_icon, 4);    
+        create_icon(spr_strikemine_icon, 4);    
+        create_icon(spr_solus_icon, 4);    
+        create_icon(spr_turret_icon, 4);          
         selected = 1;       
     }
     exit;
 }
-if(weapontype = 0)
-    global.esecond[weaponnumber] = changeselect;
-else
-    global.deploy[weaponnumber] = changeselect;
+
+global.secondary[secondnumber] = changeselect;
+global.secondary_type[secondnumber] = new_selection_type;
+global.secondary_cost[secondnumber] = new_selection_cost;
+global.secondary_stock[secondnumber] = new_selection_stock;
+global.secondary_object[secondnumber] = new_selection_object;
+
+
 
 if(empty != -1)
     with(empty)
@@ -179,16 +181,11 @@ obj_customizer.checktype = weapontype;
 
 with(obj_choosesecondary)
 {
-    if(id != obj_customizer.checkid &amp;&amp; 
-    ((global.esecond[weaponnumber] = obj_customizer.checkselect &amp;&amp; weapontype = 0) || (global.deploy[weaponnumber] = obj_customizer.checkselect &amp;&amp; weapontype = 1))
+    if(id != obj_customizer.checkid &amp;&amp; global.secondary[secondnumber] = obj_customizer.checkselect
     &amp;&amp; weapontype = obj_customizer.checktype)
     {
         newslot = instance_create(x, y, obj_choosesecondary);
-        if(weapontype = 0)
-            global.esecond[weaponnumber] = 0;
-        else
-            global.deploy[weaponnumber] = 0;
-        newslot.weaponnumber = weaponnumber;
+        global.secondary[secondnumber] = 0;
         newslot.weapontype = weapontype;
         newslot.secondnumber = secondnumber;
         newslot = obj_customizer.weaponslot[secondnumber];
@@ -285,16 +282,9 @@ with(obj_choosesecondary)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(weapontype = 0)
-{
-    if(global.esecond[weaponnumber] = 0)
-        empty = instance_create(x, y, obj_emptyslot);
-}
-else
-{
-    if(global.deploy[weaponnumber] = 0)
-        empty = instance_create(x, y, obj_emptyslot);
-}
+            <string>if(global.secondary[secondnumber] = 0)
+    empty = instance_create(x, y, obj_emptyslot);
+
 
 </string>
           </argument>
@@ -433,157 +423,45 @@ if(obj_readygo.readied = 0)
     {
         if(weapontype == 0)
         {
-            switch(secondnumber)
-            {
-                case 1:
-                    create_icon(spr_fusion_icon, 4, 0, 40, 0, 1);    
-                    create_icon(spr_stardust_icon, 4, 4, 40, 32, 2);    
-                    create_icon(spr_barrier_icon, 4, 4, 40, 64, 3);    
-                    create_icon(spr_formation_icon, 4, 4, 40, 96, 5);    
-                    create_icon(spr_beam_icon, 4, 4, 40, 128, 4);    
-                    create_icon(spr_sparkline_icon, 4, 0, 72, 0, 6);    
-                    create_icon(spr_burst_icon, 4, 4, 72, 32, 7);    
-                    create_icon(spr_slash_icon, 4, 4, 72, 64, 8);    
-                    create_icon(spr_horizon_icon, 4, 4, 72, 96, 9);    
-                    create_icon(spr_spiral_icon, 4, 4, 72, 128, 10);        
-                    create_icon(spr_laser_icon, 4, 0, 104, 0, 11);    
-                    create_icon(spr_trail_icon, 4, 4, 104, 32, 12);    
-                    create_icon(spr_reflection_icon, 4, 4, 104, 64, 13);    
-                    create_icon(spr_storm_icon, 4, 4, 104, 96, 14);    
-                    create_icon(spr_trigger_icon, 4, 4, 104, 128, 15);                    
-                break;
-                case 2:
-                    create_icon(spr_fusion_icon, 4, -4, 40, 32, 1);    
-                    create_icon(spr_stardust_icon, 4, 0, 40, 0, 2);    
-                    create_icon(spr_barrier_icon, 4, 4, 40, 32, 3);    
-                    create_icon(spr_formation_icon, 4, 4, 40, 64, 5);    
-                    create_icon(spr_beam_icon, 4, 4, 40, 96, 4);    
-                    create_icon(spr_sparkline_icon, 4, -4, 72, 32, 6);    
-                    create_icon(spr_burst_icon, 4, 0, 72, 0, 7);    
-                    create_icon(spr_slash_icon, 4, 4, 72, 32, 8);    
-                    create_icon(spr_horizon_icon, 4, 4, 72, 64, 9);    
-                    create_icon(spr_spiral_icon, 4, 4, 72, 96, 10);        
-                    create_icon(spr_laser_icon, 4, -4, 104, 32, 11);    
-                    create_icon(spr_trail_icon, 4, 0, 104, 0, 12);    
-                    create_icon(spr_reflection_icon, 4, 4, 104, 32, 13);    
-                    create_icon(spr_storm_icon, 4, 4, 104, 64, 14);    
-                    create_icon(spr_trigger_icon, 4, 4, 104, 96, 15);                    
-                break;
-                case 3:
-                    create_icon(spr_fusion_icon, 4, -4, 40, 64, 1);    
-                    create_icon(spr_stardust_icon, 4, -4, 40, 32, 2);    
-                    create_icon(spr_barrier_icon, 4, 0, 40, 0, 3);    
-                    create_icon(spr_formation_icon, 4, 4, 40, 32, 5);    
-                    create_icon(spr_beam_icon, 4, 4, 40, 64, 4);    
-                    create_icon(spr_sparkline_icon, 4, -4, 72, 64, 6);    
-                    create_icon(spr_burst_icon, 4, -4, 72, 32, 7);    
-                    create_icon(spr_slash_icon, 4, 0, 72, 0, 8);    
-                    create_icon(spr_horizon_icon, 4, 4, 72, 32, 9);    
-                    create_icon(spr_spiral_icon, 4, 4, 72, 64, 10);        
-                    create_icon(spr_laser_icon, 4, -4, 104, 64, 11);    
-                    create_icon(spr_trail_icon, 4, -4, 104, 32, 12);    
-                    create_icon(spr_reflection_icon, 4, 0, 104, 0, 13);    
-                    create_icon(spr_storm_icon, 4, 4, 104, 32, 14);    
-                    create_icon(spr_trigger_icon, 4, 4, 104, 64, 15);                    
-                break;
-                case 4:
-                    create_icon(spr_fusion_icon, 4, -4, 40, 128, 1);    
-                    create_icon(spr_stardust_icon, 4, -4, 40, 96, 2);    
-                    create_icon(spr_barrier_icon, 4, -4, 40, 64, 4);    
-                    create_icon(spr_formation_icon, 4, -4, 40, 32, 7);    
-                    create_icon(spr_beam_icon, 4, 0, 40, 0, 8);                    
-                    create_icon(spr_sparkline_icon, 4, -4, 72, 128, 10);    
-                    create_icon(spr_burst_icon, 4, -4, 72, 96, 14);    
-                    create_icon(spr_slash_icon, 4, -4, 72, 64, 11);    
-                    create_icon(spr_horizon_icon, 4, -4, 72, 32, 3);    
-                    create_icon(spr_spiral_icon, 4, 0, 72, 0, 5);                        
-                    create_icon(spr_laser_icon, 4, -4, 104, 128, 9);    
-                    create_icon(spr_trail_icon, 4, -4, 104, 96, 15);    
-                    create_icon(spr_reflection_icon, 4, -4, 104, 64, 12);    
-                    create_icon(spr_storm_icon, 4, -4, 104, 32, 6);    
-                    create_icon(spr_trigger_icon, 4, 0, 104, 0, 13);                 
-                break;
-            }
+            create_icon(spr_fusion_icon, secondnumber);    
+            create_icon(spr_stardust_icon, secondnumber);    
+            create_icon(spr_barrier_icon, secondnumber);    
+            create_icon(spr_formation_icon, secondnumber);    
+            create_icon(spr_beam_icon, secondnumber);    
+            create_icon(spr_sparkline_icon, secondnumber);    
+            create_icon(spr_burst_icon, secondnumber);    
+            create_icon(spr_slash_icon, secondnumber);    
+            create_icon(spr_horizon_icon, secondnumber);    
+            create_icon(spr_spiral_icon, secondnumber);        
+            create_icon(spr_laser_icon, secondnumber);    
+            create_icon(spr_trail_icon, secondnumber);    
+            create_icon(spr_reflection_icon, secondnumber);    
+            create_icon(spr_storm_icon, secondnumber);    
+            create_icon(spr_trigger_icon, secondnumber);                    
         }
         else
         {
-            switch(secondnumber)
-            {
-                case 1:
-                    create_icon(spr_dualmissile_icon, 4, 0, 40, 0, 1);    
-                    create_icon(spr_layermissile_icon, 4, 4, 40, 32, 2);    
-                    create_icon(spr_locustmissile_icon, 4, 4, 40, 64, 3);    
-                    create_icon(spr_tridentmissile_icon, 4, 4, 40, 96, 5);    
-                    create_icon(spr_shockmissile_icon, 4, 4, 40, 128, 4);    
-                    create_icon(spr_hermitmissile_icon, 4, 0, 72, 0, 6);    
-                    create_icon(spr_splitmissile_icon, 4, 4, 72, 32, 7);    
-                    create_icon(spr_strikemissile_icon, 4, 4, 72, 64, 8);    
-                    create_icon(spr_huntermine_icon, 4, 4, 72, 96, 9);    
-                    create_icon(spr_phantommine_icon, 4, 4, 72, 128, 10);        
-                    create_icon(spr_hackermine_icon, 4, 0, 104, 0, 11);    
-                    create_icon(spr_clustermine_icon, 4, 4, 104, 32, 12);    
-                    create_icon(spr_strikemine_icon, 4, 4, 104, 64, 13);    
-                    create_icon(spr_solus_icon, 4, 4, 104, 96, 14);    
-                    create_icon(spr_turret_icon, 4, 4, 104, 128, 15);                                
-                break;
-                case 2:
-                    create_icon(spr_dualmissile_icon, 4, -4, 40, 64, 1);    
-                    create_icon(spr_layermissile_icon, 4, -4, 40, 32, 2);    
-                    create_icon(spr_locustmissile_icon, 4, 0, 40, 0, 4);    
-                    create_icon(spr_tridentmissile_icon, 4, 4, 40, 32, 7);    
-                    create_icon(spr_shockmissile_icon, 4, 4, 40, 64, 8);                
-                    create_icon(spr_hermitmissile_icon, 4, -4, 72, 64, 10);    
-                    create_icon(spr_splitmissile_icon, 4, -4, 72, 32, 14);    
-                    create_icon(spr_strikemissile_icon, 4, 0, 72, 0, 11);    
-                    create_icon(spr_huntermine_icon, 4, 4, 72, 32, 3);    
-                    create_icon(spr_phantommine_icon, 4, 4, 72, 64, 5);                    
-                    create_icon(spr_hackermine_icon, 4, -4, 104, 64, 9);    
-                    create_icon(spr_clustermine_icon, 4, -4, 104, 32, 15);    
-                    create_icon(spr_strikemine_icon, 4, 0, 104, 0, 12);    
-                    create_icon(spr_solus_icon, 4, 4, 104, 32, 6);    
-                    create_icon(spr_turret_icon, 4, 4, 104, 64, 13);                 
-                break;
-                case 3:
-                    create_icon(spr_dualmissile_icon, 4, -4, 40, 96, 1);    
-                    create_icon(spr_layermissile_icon, 4, -4, 40, 64, 2);    
-                    create_icon(spr_locustmissile_icon, 4, -4, 40, 32, 4);    
-                    create_icon(spr_tridentmissile_icon, 4, 0, 40, 0, 7);    
-                    create_icon(spr_shockmissile_icon, 4, 4, 40, 32, 8);                    
-                    create_icon(spr_hermitmissile_icon, 4, -4, 72, 96, 10);    
-                    create_icon(spr_splitmissile_icon, 4, -4, 72, 64, 14);    
-                    create_icon(spr_strikemissile_icon, 4, -4, 72, 32, 11);    
-                    create_icon(spr_huntermine_icon, 4, 0, 72, 0, 3);    
-                    create_icon(spr_phantommine_icon, 4, 4, 72, 32, 5);                        
-                    create_icon(spr_hackermine_icon, 4, -4, 104, 96, 9);    
-                    create_icon(spr_clustermine_icon, 4, -4, 104, 64, 15);    
-                    create_icon(spr_strikemine_icon, 4, -4, 104, 32, 12);    
-                    create_icon(spr_solus_icon, 4, 0, 104, 0, 6);    
-                    create_icon(spr_turret_icon, 4, 4, 104, 32, 13);                 
-                break;
-                case 4:
-                    create_icon(spr_dualmissile_icon, 4, -4, 40, 128, 1);    
-                    create_icon(spr_layermissile_icon, 4, -4, 40, 96, 2);    
-                    create_icon(spr_locustmissile_icon, 4, -4, 40, 64, 4);    
-                    create_icon(spr_tridentmissile_icon, 4, -4, 40, 32, 7);    
-                    create_icon(spr_shockmissile_icon, 4, 0, 40, 0, 8);                 
-                    create_icon(spr_hermitmissile_icon, 4, -4, 72, 128, 10);    
-                    create_icon(spr_splitmissile_icon, 4, -4, 72, 96, 14);    
-                    create_icon(spr_strikemissile_icon, 4, -4, 72, 64, 11);    
-                    create_icon(spr_huntermine_icon, 4, -4, 72, 32, 3);    
-                    create_icon(spr_phantommine_icon, 4, 0, 72, 0, 5);                        
-                    create_icon(spr_hackermine_icon, 4, -4, 104, 128, 9);    
-                    create_icon(spr_clustermine_icon, 4, -4, 104, 96, 15);    
-                    create_icon(spr_strikemine_icon, 4, -4, 104, 64, 12);    
-                    create_icon(spr_solus_icon, 4, -4, 104, 32, 6);    
-                    create_icon(spr_turret_icon, 4, 0, 104, 0, 13);                 
-                break;
-            }
+            create_icon(spr_dualmissile_icon, secondnumber);    
+            create_icon(spr_layermissile_icon, secondnumber);    
+            create_icon(spr_locustmissile_icon, secondnumber);    
+            create_icon(spr_tridentmissile_icon, secondnumber);    
+            create_icon(spr_shockmissile_icon, secondnumber);    
+            create_icon(spr_hermitmissile_icon, secondnumber);    
+            create_icon(spr_splitmissile_icon, secondnumber);    
+            create_icon(spr_strikemissile_icon, secondnumber);    
+            create_icon(spr_huntermine_icon, secondnumber);    
+            create_icon(spr_phantommine_icon, secondnumber);        
+            create_icon(spr_hackermine_icon, secondnumber);    
+            create_icon(spr_clustermine_icon, secondnumber);    
+            create_icon(spr_strikemine_icon, secondnumber);    
+            create_icon(spr_solus_icon, secondnumber);    
+            create_icon(spr_turret_icon, secondnumber);                                
         }
     }
     else
     {
-        create_icon(spr_chooseenergy_icon, 4, 0, 40, 0, 31);    
-        create_icon(spr_choosedeploy_icon, 4, 0, 72, 0, 32);        
+        create_icon(spr_chooseenergy_icon, 1);    
+        create_icon(spr_choosedeploy_icon, 1);        
     }
             
     alarm[2] = 1;
@@ -645,114 +523,106 @@ if(selected = 1)
  draw_sprite_ext(spr_numbers_selected, 1+weapontype, x, y, 1, 1, 0, c_white, image_alpha);
 //Display the correct icon in this slot
 var teamcolorimg = global.team[global.mymid]-1;
-if(weapontype = 0)
+switch(global.secondary[secondnumber])
 {
-    switch(global.esecond[weaponnumber])
-    {
-        case 0:
-             draw_sprite_ext(spr_numbers_icon, 1, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 1:
-             draw_sprite_ext(spr_fusion_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 2:
-             draw_sprite_ext(spr_stardust_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 3:
-             draw_sprite_ext(spr_barrier_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 4:
-             draw_sprite_ext(spr_beam_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 5:
-             draw_sprite_ext(spr_formation_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 6:
-             draw_sprite_ext(spr_sparkline_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 7:
-             draw_sprite_ext(spr_burst_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 8:
-             draw_sprite_ext(spr_slash_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 9:
-             draw_sprite_ext(spr_horizon_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 10:
-             draw_sprite_ext(spr_spiral_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 11:
-             draw_sprite_ext(spr_laser_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 12:
-             draw_sprite_ext(spr_trail_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 13:
-             draw_sprite_ext(spr_reflection_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 14:
-             draw_sprite_ext(spr_storm_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 15:
-             draw_sprite_ext(spr_trigger_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-    }
+    case 0:
+        if(weapontype = 0)
+            draw_sprite_ext(spr_numbers_icon, 1, x, y, 1, 1, 0, c_white, image_alpha);
+        else
+            draw_sprite_ext(spr_numbers_icon, 2, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 1:
+         draw_sprite_ext(spr_fusion_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 2:
+         draw_sprite_ext(spr_stardust_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 3:
+         draw_sprite_ext(spr_barrier_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 4:
+         draw_sprite_ext(spr_formation_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 5:
+         draw_sprite_ext(spr_beam_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 6:
+         draw_sprite_ext(spr_sparkline_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 7:
+         draw_sprite_ext(spr_burst_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 8:
+         draw_sprite_ext(spr_slash_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 9:
+         draw_sprite_ext(spr_horizon_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 10:
+         draw_sprite_ext(spr_spiral_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 11:
+         draw_sprite_ext(spr_laser_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 12:
+         draw_sprite_ext(spr_trail_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 13:
+         draw_sprite_ext(spr_reflection_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 14:
+         draw_sprite_ext(spr_storm_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 15:
+         draw_sprite_ext(spr_trigger_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 16:
+         draw_sprite_ext(spr_dualmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 17:
+         draw_sprite_ext(spr_layermissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 18:
+         draw_sprite_ext(spr_locustmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 19:
+         draw_sprite_ext(spr_tridentmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 20:
+         draw_sprite_ext(spr_shockmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 21:
+         draw_sprite_ext(spr_hermitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 22:
+         draw_sprite_ext(spr_splitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 23:
+         draw_sprite_ext(spr_strikemissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 24:
+         draw_sprite_ext(spr_huntermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 25:
+         draw_sprite_ext(spr_phantommine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 26:
+         draw_sprite_ext(spr_hackermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 27:
+         draw_sprite_ext(spr_clustermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 28:
+         draw_sprite_ext(spr_strikemine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 29:
+         draw_sprite_ext(spr_solus_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 30:
+         draw_sprite_ext(spr_turret_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
 }
-else
-{
-    switch(global.deploy[weaponnumber])
-    {
-        case 0:
-             draw_sprite_ext(spr_numbers_icon, 2, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 1:
-             draw_sprite_ext(spr_dualmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 2:
-             draw_sprite_ext(spr_layermissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 3:
-             draw_sprite_ext(spr_huntermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 4:
-             draw_sprite_ext(spr_locustmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 5:
-             draw_sprite_ext(spr_phantommine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 6:
-             draw_sprite_ext(spr_solus_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 7:
-             draw_sprite_ext(spr_tridentmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 8:
-             draw_sprite_ext(spr_shockmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 9:
-             draw_sprite_ext(spr_hackermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 10:
-             draw_sprite_ext(spr_hermitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 11:
-             draw_sprite_ext(spr_strikemissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 12:
-             draw_sprite_ext(spr_strikemine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 13:
-             draw_sprite_ext(spr_turret_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 14:
-             draw_sprite_ext(spr_splitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-        case 15:
-             draw_sprite_ext(spr_clustermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-        break;
-    }
-}
+
 draw_sprite_ext(spr_numbers_icon, 3+weapontype, x, y, 1, 1, 0, c_white, image_alpha);
 draw_sprite_ext(spr_numbers_icon, 4+secondnumber, x, y, 1, 1, 0, c_white, image_alpha);
 if(growing != 0)

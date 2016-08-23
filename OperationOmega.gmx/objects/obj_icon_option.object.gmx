@@ -397,6 +397,10 @@ if(owner.selected = 1)
     obj_icon_option.action = 1;
     obj_icon_option.alarm[1] = 1;
     owner.changeselect = giveselection;
+    owner.new_selection_type = selection_type;
+    owner.new_selection_cost = selection_cost;
+    owner.new_selection_stock = selection_stock;
+    owner.new_selection_object = selection_object;   
     owner.alarm[4] = 1;
 }
 

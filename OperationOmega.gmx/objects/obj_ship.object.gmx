@@ -2299,7 +2299,7 @@ if(global.chatting = true || hacked = true) exit;
 //Trigger Alphastar passive
 amplified = 0;
 
-switch(global.secondary)
+switch(global.secondary_selected)
 {
     
     //Dual Missile

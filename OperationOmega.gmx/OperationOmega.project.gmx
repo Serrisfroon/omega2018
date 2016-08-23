@@ -2023,8 +2023,11 @@
           <object>objects\obj_stardust_end</object>
         </objects>
         <object>objects\obj_whip_attack</object>
-        <object>objects\obj_barrier</object>
-        <object>objects\obj_barrier_enemy</object>
+        <objects name="Barrier">
+          <object>objects\obj_barrier_attack</object>
+          <object>objects\obj_barrier</object>
+          <object>objects\obj_barrier_enemy</object>
+        </objects>
         <object>objects\obj_formationa</object>
         <object>objects\obj_formationb</object>
         <object>objects\obj_formationa_enemy</object>

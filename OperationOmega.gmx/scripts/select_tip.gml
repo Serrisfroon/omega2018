@@ -25,7 +25,7 @@ switch(tiptype)
         possitip[4] = "Primaries will fire slightly toward the cursor from the front of your ship. Different primaries have different limits on this.";   
     break;
     case "secondary":
-        switch(global.secondary)
+        switch(global.secondary_selected)
         {
             case 1:
             case 2:
@@ -127,7 +127,7 @@ switch(tiptype)
         }
     break;
     case "secondary":
-        switch(global.secondary)
+        switch(global.secondary_selected)
         {
             case 0:
                 possitip[5] = "Dual Missiles are a very standard missile Deploy Secondary.They do decent damage and has average homing, making it a good pick for most setups.";

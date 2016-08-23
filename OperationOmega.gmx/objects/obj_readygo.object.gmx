@@ -213,10 +213,8 @@ alarm[3] = 30;
 if(animation_step != 1)
     exit;
 //Check if your weapons are equipped
-if(global.primary = 0 || global.esecond[1] = 0 || global.deploy[1] = 0 ||
-(global.shipselect = 1 &amp;&amp; (global.esecond[2] = 0 || global.deploy[2] = 0) ) ||
-(global.shipselect = 2 &amp;&amp; (global.esecond[2] = 0 || global.esecond[3] = 0) ) ||
-(global.shipselect = 3 &amp;&amp; (global.deploy[2] = 0 || global.deploy[3] = 0) ) )
+if(global.primary = 0 || global.secondary[1] = 0 || global.secondary[2] = 0
+ || global.secondary[3] = 0 || global.secondary[4] = 0)
 {
  with(obj_waiting)
  {

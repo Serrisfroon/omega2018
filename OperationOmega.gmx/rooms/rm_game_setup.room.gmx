@@ -53,6 +53,16 @@ for(i = 0; i &lt; 8; i += 1)
     global.activated[i] = 0;
 }
 
+//Initialize Secondary variables
+for(i = 1; i &lt;= 4; i++)
+{
+    global.secondary[i] = 0;
+    global.secondary_type[i] = 0;
+    global.secondary_cost[i] = 0;
+    global.secondary_stock[i] = 0;
+    global.secondary_object[i] = 0;
+}
+
 //Initialize background loading variables
 for(i = 0; i &lt;= 7; i++)
     global.background[i] = -1;

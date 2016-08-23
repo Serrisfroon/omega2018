@@ -202,7 +202,7 @@ switch(switching)
         case 3:
             image = 1;
             newslot = 1;
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
                 image = 2;
         break;
        }
@@ -214,7 +214,7 @@ switch(switching)
        switch(global.shipselect)
        {
         case 1:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 image = 2;
                 newslot = 1;
@@ -230,7 +230,7 @@ switch(switching)
              newslot = 2;
         break;
         case 3:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 image = 2;
                 newslot = 2;
@@ -250,7 +250,7 @@ switch(switching)
        switch(global.shipselect)
        {
         case 1:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 image = 2;
                 newslot = 2;
@@ -262,7 +262,7 @@ switch(switching)
             }            
         break;
         case 2:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 image = 2;
                 newslot = 1;
@@ -274,7 +274,7 @@ switch(switching)
             }            
         break;
         case 3:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 image = 2;
                 newslot = 3;
@@ -312,7 +312,7 @@ switch(switching)
         case 3:
             soonimage = 1;
             newslot = 1;
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
                 soonimage = 2;
         break;
        }
@@ -324,7 +324,7 @@ switch(switching)
        switch(global.shipselect)
        {
         case 1:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 soonimage = 2;
                 newslot = 1;
@@ -340,7 +340,7 @@ switch(switching)
              newslot = 2;
         break;
         case 3:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 soonimage = 2;
                 newslot = 2;
@@ -360,7 +360,7 @@ switch(switching)
        switch(global.shipselect)
        {
         case 1:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 soonimage = 2;
                 newslot = 2;
@@ -372,7 +372,7 @@ switch(switching)
             }            
         break;
         case 2:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 soonimage = 2;
                 newslot = 1;
@@ -384,7 +384,7 @@ switch(switching)
             }            
         break;
         case 3:
-            if(global.spacetype = 0)
+            if(global.secondary_type[4] = 0)
             {
                 soonimage = 2;
                 newslot = 3;
@@ -492,11 +492,13 @@ switch(switching)
             //Fusion
             if(mouse_x &gt;= x-240*scaling &amp;&amp; mouse_x &lt;= x-208*scaling &amp;&amp; mouse_y &gt;= y-37*scaling &amp;&amp; mouse_y &lt;= y-5*scaling)
             {
-             if(global.esecond[1] = 1)
+             if(global.secondary[1] = 1)
               break;
-             if(global.esecond[2] = 1)
+             if(global.secondary[2] = 1)
               break;
-             if(global.esecond[3] = 1)
+             if(global.secondary[3] = 1)
+              break;
+             if(global.secondary[4] = 1)
               break;
              switching = 3;
              global.esecond[newslot] = 1;
@@ -921,49 +923,49 @@ switch(switching)
       switch(global.esecond[1])
       {
        case 1:
-            global.secondary = 1; //Fusion
+            global.secondary_selected = 1; //Fusion
        break;
        case 2:
-            global.secondary = 2; //Stardust
+            global.secondary_selected = 2; //Stardust
        break;
        case 3:
-            global.secondary = 5; //Barrier
+            global.secondary_selected = 5; //Barrier
        break;
        case 4:
-            global.secondary = 10; //Beam
+            global.secondary_selected = 10; //Beam
        break;
        case 5:
-            global.secondary = 9; //Formation
+            global.secondary_selected = 9; //Formation
        break;
        case 6:
-            global.secondary = 11; //Sparkline
+            global.secondary_selected = 11; //Sparkline
        break;
        case 7:
-            global.secondary = 12; //Burst
+            global.secondary_selected = 12; //Burst
        break;
        case 8:
-            global.secondary = 14; //Slash
+            global.secondary_selected = 14; //Slash
        break;
        case 9:
-            global.secondary = 15; //Horizon
+            global.secondary_selected = 15; //Horizon
        break;
        case 10:
-            global.secondary = 22; //Spiral
+            global.secondary_selected = 22; //Spiral
        break;
        case 11:
-            global.secondary = 23; //Laser
+            global.secondary_selected = 23; //Laser
        break;
        case 12:
-            global.secondary = 24; //Trail  
+            global.secondary_selected = 24; //Trail  
        break;
        case 13:
-            global.secondary = 25; //Reflection
+            global.secondary_selected = 25; //Reflection
        break;
        case 14:
-            global.secondary = 26; //Storm
+            global.secondary_selected = 26; //Storm
        break;
        case 15:
-            global.secondary = 27; //Trigger      
+            global.secondary_selected = 27; //Trigger      
        break;
       }
  break;
