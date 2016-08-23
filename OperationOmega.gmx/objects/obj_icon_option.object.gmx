@@ -400,7 +400,8 @@ if(owner.selected = 1)
     owner.new_selection_type = selection_type;
     owner.new_selection_cost = selection_cost;
     owner.new_selection_stock = selection_stock;
-    owner.new_selection_object = selection_object;   
+    owner.new_selection_object = selection_object; 
+    owner.new_selection_lockon_required = selection_lockon_required;  
     owner.alarm[4] = 1;
 }
 

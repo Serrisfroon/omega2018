@@ -117,7 +117,6 @@ for(i = 0; i &lt;= 8; i += 1)
 }
 
 //Start the match with your first energy secondary_selected selected
-global.secondary_selected = global.secondary[1];
 selectx = 2;
 
 //Set the view increments
@@ -1986,8 +1985,7 @@ audio_play_sound(snd_changeweapon, 1, 0);
 
 selectx = 82;
 //Switch to the correct new attack
-global.secondary_selected = global.secondary[3];
-
+global.playership[global.mymid].secondary_selected = 3;
 </string>
           </argument>
         </arguments>
@@ -2015,8 +2013,7 @@ if(global.chatting = true) exit;
 audio_play_sound(snd_changeweapon, 1, 0);
 selectx = 42;
 //Switch to the correct new attack
-global.secondary_selected = global.secondary[2];
-
+global.playership[global.mymid].secondary_selected = 2;
 </string>
           </argument>
         </arguments>
@@ -2045,7 +2042,7 @@ audio_play_sound(snd_changeweapon, 1, 0);
 dstock = 0;
 selectx = 2;
 //Switch to the correct new attack
-global.secondary_selected = global.secondary[1];
+global.playership[global.mymid].secondary_selected = 1;
 
 </string>
           </argument>

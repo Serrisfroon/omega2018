@@ -98,7 +98,11 @@ effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, dire
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = direction;
+            <string>//Rotate the barrier as needed
+image_angle = direction;
+//Increase the duration if amplified
+if(amplified = true)
+    alarm[0] +=  75;
 </string>
           </argument>
         </arguments>

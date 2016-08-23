@@ -168,7 +168,7 @@ global.secondary_type[secondnumber] = new_selection_type;
 global.secondary_cost[secondnumber] = new_selection_cost;
 global.secondary_stock[secondnumber] = new_selection_stock;
 global.secondary_object[secondnumber] = new_selection_object;
-
+global.secondary_lockon_required[secondnumber] = new_selection_lockon_required;
 
 
 if(empty != -1)
