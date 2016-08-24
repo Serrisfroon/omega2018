@@ -1,4 +1,4 @@
-//create_icon(sprite, slot_number);
+ //create_icon(sprite, slot_number);
 var tile, slot_number;
 tile = instance_create(x, y, obj_icon_option);
 slot_number = argument1
@@ -75,6 +75,7 @@ switch(tile.owner.object_index)
                     tile.selection_stock = 0;
                     tile.selection_object = obj_fusion_attack;
                     tile.display = 0;
+                break;
                 case spr_stardust_icon:
                     var icon_order = 2;
                     tile.giveselection = 2;
@@ -355,7 +356,7 @@ tile.alarm[0] = tile.actiondist[0]/4;           //Set the time until the second 
 
 //Calculate this tile's position in its row
 var row_order = icon_order-floor(icon_order/5.1)*5;
-
+    
 //Set the secondary movement of the tile
 tile.actionspeed[1] = 0;                                //Set the default speed
 tile.actiondist[1] = 0;                                 //Set the default distance

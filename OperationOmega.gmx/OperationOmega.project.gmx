@@ -1953,6 +1953,112 @@
       <object>objects\prnt_enemyattack</object>
       <object>objects\prnt_allyattack</object>
       <object>objects\prnt_weaponattack</object>
+      <object>objects\prnt_allyenergy</object>
+      <object>objects\prnt_enemyenergy</object>
+      <objects name="Primary Weapons">
+        <object>objects\obj_generic_hit</object>
+        <object>objects\obj_generic_fade</object>
+        <object>objects\obj_flank</object>
+        <object>objects\obj_flank_enemy</object>
+        <object>objects\obj_crossfire</object>
+        <object>objects\obj_crossfire_enemy</object>
+        <object>objects\obj_siphon</object>
+        <object>objects\obj_siphon_enemy</object>
+        <object>objects\prnt_primary</object>
+        <object>objects\obj_stasis_field</object>
+        <object>objects\obj_enemystasis_field</object>
+        <object>objects\obj_stasisnew</object>
+        <object>objects\obj_stasisnew_enemy</object>
+      </objects>
+      <objects name="Energy Secondy Attacks">
+        <objects name="Fusion">
+          <object>objects\obj_fusion_attack</object>
+          <object>objects\obj_fusion</object>
+          <object>objects\obj_fusion_enemy</object>
+        </objects>
+        <objects name="Stardust">
+          <object>objects\obj_stardust_attack</object>
+          <object>objects\obj_stardust</object>
+          <object>objects\obj_stardust_enemy</object>
+          <object>objects\obj_stardust_end</object>
+        </objects>
+        <objects name="Barrier">
+          <object>objects\obj_barrier_attack</object>
+          <object>objects\obj_barrier</object>
+          <object>objects\obj_barrier_enemy</object>
+        </objects>
+        <objects name="Formation">
+          <object>objects\obj_formation_attack</object>
+          <object>objects\obj_formationa</object>
+          <object>objects\obj_formationb</object>
+          <object>objects\obj_formationa_enemy</object>
+          <object>objects\obj_formationb_enemy</object>
+        </objects>
+        <objects name="Beam">
+          <object>objects\obj_beam_attack</object>
+          <object>objects\obj_beamflare</object>
+          <object>objects\obj_beam</object>
+          <object>objects\obj_beam_enemy</object>
+        </objects>
+        <objects name="Sparkline">
+          <object>objects\obj_sparkline_attack</object>
+          <object>objects\obj_sparkline</object>
+          <object>objects\obj_sparkline_enemy</object>
+          <object>objects\obj_nodetarget</object>
+          <object>objects\obj_sparkline_spark</object>
+        </objects>
+        <objects name="Burst">
+          <object>objects\obj_burst_attack</object>
+          <object>objects\obj_burst</object>
+          <object>objects\obj_burst_enemy</object>
+        </objects>
+        <objects name="Slash">
+          <object>objects\obj_slash_attack</object>
+          <object>objects\obj_slash</object>
+          <object>objects\obj_slash_enemy</object>
+        </objects>
+        <objects name="Horizon">
+          <object>objects\obj_horizon_attack</object>
+          <object>objects\obj_horizon</object>
+          <object>objects\obj_horizon_enemy</object>
+        </objects>
+        <objects name="Spiral">
+          <object>objects\obj_spiral_attack</object>
+          <object>objects\obj_spiral</object>
+          <object>objects\obj_spiralout</object>
+          <object>objects\obj_spiral_enemy</object>
+          <object>objects\obj_spiralout_enemy</object>
+        </objects>
+        <objects name="Whip">
+          <object>objects\obj_whip_attack</object>
+          <object>objects\obj_whip_hit</object>
+        </objects>
+        <objects name="Trail">
+          <object>objects\obj_trail_attack</object>
+          <object>objects\obj_trail</object>
+          <object>objects\obj_follower</object>
+          <object>objects\obj_trail_enemy</object>
+          <object>objects\obj_follower_enemy</object>
+        </objects>
+        <objects name="Serpent">
+          <object>objects\obj_serpent_attack</object>
+          <object>objects\obj_serpent</object>
+          <object>objects\obj_serpent_enemy</object>
+          <object>objects\obj_serpent_hit</object>
+        </objects>
+        <objects name="Storm">
+          <object>objects\obj_storm_attack</object>
+          <object>objects\obj_storm</object>
+          <object>objects\obj_storm_wall</object>
+          <object>objects\obj_storm_enemy</object>
+          <object>objects\obj_storm_enemy_wall</object>
+        </objects>
+        <objects name="Direct">
+          <object>objects\obj_direct_attack</object>
+          <object>objects\obj_trigger</object>
+          <object>objects\obj_trigger_enemy</object>
+        </objects>
+      </objects>
       <objects name="Deploy Secondary Attacks">
         <object>objects\obj_dualmissile</object>
         <object>objects\obj_dualmissile_enemy</object>
@@ -1992,77 +2098,6 @@
         <object>objects\obj_clustermine_small_enemy</object>
         <object>objects\prnt_allydeploy</object>
         <object>objects\prnt_enemydeploy</object>
-      </objects>
-      <object>objects\prnt_allyenergy</object>
-      <object>objects\prnt_enemyenergy</object>
-      <objects name="Primary Weapons">
-        <object>objects\obj_generic_hit</object>
-        <object>objects\obj_generic_fade</object>
-        <object>objects\obj_flank</object>
-        <object>objects\obj_flank_enemy</object>
-        <object>objects\obj_crossfire</object>
-        <object>objects\obj_crossfire_enemy</object>
-        <object>objects\obj_siphon</object>
-        <object>objects\obj_siphon_enemy</object>
-        <object>objects\prnt_primary</object>
-        <object>objects\obj_stasis_field</object>
-        <object>objects\obj_enemystasis_field</object>
-        <object>objects\obj_stasisnew</object>
-        <object>objects\obj_stasisnew_enemy</object>
-      </objects>
-      <objects name="Energy Secondy Attacks">
-        <objects name="Fusion">
-          <object>objects\obj_fusion_attack</object>
-          <object>objects\obj_fusion</object>
-          <object>objects\obj_fusion_enemy</object>
-        </objects>
-        <objects name="Stardust">
-          <object>objects\obj_stardust_attack</object>
-          <object>objects\obj_stardust</object>
-          <object>objects\obj_stardust_enemy</object>
-          <object>objects\obj_stardust_end</object>
-        </objects>
-        <objects name="Barrier">
-          <object>objects\obj_barrier_attack</object>
-          <object>objects\obj_barrier</object>
-          <object>objects\obj_barrier_enemy</object>
-        </objects>
-        <object>objects\obj_whip_attack</object>
-        <object>objects\obj_formationa</object>
-        <object>objects\obj_formationb</object>
-        <object>objects\obj_formationa_enemy</object>
-        <object>objects\obj_formationb_enemy</object>
-        <object>objects\obj_beamflare</object>
-        <object>objects\obj_beam</object>
-        <object>objects\obj_beam_enemy</object>
-        <object>objects\obj_sparkline</object>
-        <object>objects\obj_sparkline_enemy</object>
-        <object>objects\obj_sparkline_spark</object>
-        <object>objects\obj_nodetarget</object>
-        <object>objects\obj_burst</object>
-        <object>objects\obj_burst_enemy</object>
-        <object>objects\obj_slash</object>
-        <object>objects\obj_slash_enemy</object>
-        <object>objects\obj_horizon</object>
-        <object>objects\obj_horizon_enemy</object>
-        <object>objects\obj_spiral</object>
-        <object>objects\obj_spiralout</object>
-        <object>objects\obj_spiral_enemy</object>
-        <object>objects\obj_spiralout_enemy</object>
-        <object>objects\obj_serpent</object>
-        <object>objects\obj_serpent_enemy</object>
-        <object>objects\obj_serpent_hit</object>
-        <object>objects\obj_trail</object>
-        <object>objects\obj_follower</object>
-        <object>objects\obj_trail_enemy</object>
-        <object>objects\obj_follower_enemy</object>
-        <object>objects\obj_whip_hit</object>
-        <object>objects\obj_storm</object>
-        <object>objects\obj_storm_wall</object>
-        <object>objects\obj_storm_enemy</object>
-        <object>objects\obj_storm_enemy_wall</object>
-        <object>objects\obj_trigger</object>
-        <object>objects\obj_trigger_enemy</object>
       </objects>
       <objects name="Controllers">
         <object>objects\obj_gamestart</object>

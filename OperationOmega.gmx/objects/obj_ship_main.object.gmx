@@ -168,6 +168,10 @@ armor = armor_maximum;
 ability_cooldown_timer = 0;
 
 secondary_selected = 1;
+direct_node = -1;
+
+
+
 //Set deploy values
 deploystock[1] = 0;
 deploystock[2] = 0;
@@ -2122,6 +2126,20 @@ if(global.chatting = true || ship_status_hacked = true) exit;
 //Make checks to ensure the weapon can be fired
 if(current_secondary_type = 0)  //Energy Weapons
 {
+    //Beam checks
+    if(current_secondary = 5)
+    {
+        //Make sure the ship is stopped if using beam
+        if(speed &gt; 0)
+        {
+                //Play an audio cue and exit the script
+                audio_play_sound(snd_unable, 1, 0);
+                exit;
+        }    
+        //Reduce the energy cost if amplified
+        if(amplified = 1)
+            current_secondary_cost -= 15;
+    }
     //Make sure there is enough energy to fire the energy weapon
     if(energy &lt; current_secondary_cost)                     
     {
@@ -2129,7 +2147,7 @@ if(current_secondary_type = 0)  //Energy Weapons
             audio_play_sound(snd_unable, 1, 0);
             exit;
     }
-    energy -= current_secondaru_cost;   //Reduce energy by the necessary amount
+    energy -= current_secondary_cost;   //Reduce energy by the necessary amount
 }
 else                    //Heavy Weapons
 {
