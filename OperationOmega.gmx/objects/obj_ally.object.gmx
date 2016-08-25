@@ -1006,6 +1006,192 @@ if(shoot &lt;= 0)
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="prnt_enemydeploy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
+//If there is shield left, create effect
+if(shieldup = 1)
+{
+ hurt = instance_create(0, 0, obj_hit);
+ hurt.hitdir = effectdir[flame_smoke_trails];
+ hurt.hurting = id;
+}
+
+//Create burning trail effect
+emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
+part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
+effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
+alarm[7] = 60;
+flame_smoke_trails += 1;
+
+
+//Shake the screen if in range
+if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+ obj_mod.viewpos = 4;
+
+//Destroy the attack
+with(other) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_splitmissile_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Cancel if this ship was the last targeted
+if(other.oldmid = mid)
+ exit;
+effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
+//If there is shield left, create effect
+if(shieldup = 1)
+{
+ hurt = instance_create(0, 0, obj_hit);
+ hurt.hitdir = effectdir[flame_smoke_trails];
+ hurt.hurting = id;
+}
+
+//Create burning trail effect
+emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
+part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
+effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
+alarm[7] = 60;
+flame_smoke_trails += 1;
+
+
+//Shake the screen if in range
+if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+ obj_mod.viewpos = 4;
+ 
+//Split into two missiles.
+if(other.damage &gt; 4)
+{
+ other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
+ other.split.mid = other.mid;
+ other.split.direction = other.direction-30;
+ other.split.damage = other.damage-2+other.amplified*2;
+ other.split.oldmid = mid;
+ other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
+ other.split.mid = other.mid;
+ other.split.direction = other.direction+30;
+ other.split.damage = other.damage-2+other.amplified*2;
+ other.split.oldmid = mid;
+}
+
+//Destroy the attack
+with(other) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_strikemine">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(other.mid != mid || other.recollect = 0)
+ exit;
+
+with(other)
+{
+ collected = 1;
+ instance_destroy();
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_hermitmissile_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
+//If there is shield left, create effect
+if(shieldup = 1)
+{
+ hurt = instance_create(0, 0, obj_hit);
+ hurt.hitdir = effectdir[flame_smoke_trails];
+ hurt.hurting = id;
+}
+
+//Create burning trail effect
+emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
+part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
+part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
+effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
+alarm[7] = 60;
+flame_smoke_trails += 1;
+
+//Shake the screen if in range
+if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+ obj_mod.viewpos = 4;
+
+//Destroy the attack
+with(other) instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_storm_enemy">
       <action>
         <libid>1</libid>
@@ -1216,192 +1402,6 @@ if(shieldup = 1)
  hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
  hurt.hurting = id;
 }
-
-//Destroy the attack
-with(other) instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="prnt_enemydeploy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
-//If there is shield left, create effect
-if(shieldup = 1)
-{
- hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[flame_smoke_trails];
- hurt.hurting = id;
-}
-
-//Create burning trail effect
-emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
-part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
-part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
-effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
-alarm[7] = 60;
-flame_smoke_trails += 1;
-
-
-//Shake the screen if in range
-if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
-
-//Destroy the attack
-with(other) instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_splitmissile_enemy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Cancel if this ship was the last targeted
-if(other.oldmid = mid)
- exit;
-effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
-//If there is shield left, create effect
-if(shieldup = 1)
-{
- hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[flame_smoke_trails];
- hurt.hurting = id;
-}
-
-//Create burning trail effect
-emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
-part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
-part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
-effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
-alarm[7] = 60;
-flame_smoke_trails += 1;
-
-
-//Shake the screen if in range
-if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
- 
-//Split into two missiles.
-if(other.damage &gt; 4)
-{
- other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
- other.split.mid = other.mid;
- other.split.direction = other.direction-30;
- other.split.damage = other.damage-2+other.amplified*2;
- other.split.oldmid = mid;
- other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
- other.split.mid = other.mid;
- other.split.direction = other.direction+30;
- other.split.damage = other.damage-2+other.amplified*2;
- other.split.oldmid = mid;
-}
-
-//Destroy the attack
-with(other) instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_strikemine">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(other.mid != mid || other.recollect = 0)
- exit;
-
-with(other)
-{
- collected = 1;
- instance_destroy();
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_hermitmissile_enemy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>effectdir[flame_smoke_trails] = point_direction(x, y, other.xprevious, other.yprevious)
-//If there is shield left, create effect
-if(shieldup = 1)
-{
- hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = effectdir[flame_smoke_trails];
- hurt.hurting = id;
-}
-
-//Create burning trail effect
-emit[flame_smoke_trails] = part_emitter_create(flame_smoke_system);
-part_emitter_region(flame_smoke_system, emit[flame_smoke_trails], x+lengthdir_x(8, effectdir[flame_smoke_trails]), x+lengthdir_x(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), y+lengthdir_y(8, effectdir[flame_smoke_trails]), ps_shape_ellipse, ps_distr_linear);
-part_emitter_stream(flame_smoke_system, emit[flame_smoke_trails], obj_partsystem.deployhit, 2);
-effectdir[flame_smoke_trails] =  direction-effectdir[flame_smoke_trails];
-alarm[7] = 60;
-flame_smoke_trails += 1;
-
-//Shake the screen if in range
-if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
 
 //Destroy the attack
 with(other) instance_destroy();

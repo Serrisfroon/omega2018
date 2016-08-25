@@ -39,7 +39,8 @@ scaling = view_hview[0]/480;
 modify_x = 0;
 modify_y = 0;
 
-
+for(i = 1; i &lt;= 4; i++)
+    max_secondary_stock[i] = global.secondary_stock[i];
 
 teamcolorimg = global.team[global.mymid]-1;
 
@@ -1770,11 +1771,7 @@ for(i = 0; i &lt; 8; i += 1)
  //Check to make sure the current number is not your own if you are not master
  if(global.mymid != i &amp;&amp; (global.activated[i] = 1 || i = 0))
  {
-  //Set radar point color
-  if(global.playership[i].ally = true)
-   radarpoint = global.redblue;
-  else
-   radarpoint = global.bluered;
+  radarpoint = global.team[i]-1;
   //Set radar point position
   //radardist = point_distance(obj_ship.x, obj_ship.y, global.playership[radarplayer].x, global.playership[radarplayer].y);
   radarx = ((global.playership[i].x-obj_ship.x)*50)/1500;

@@ -132,10 +132,6 @@ predictturn = 0;
 predictspeed = 0;
 nowshoot = 0;
 mid = global.mymid;
-//Set the correct colors to be displayed on radar
-global.redblue = 0;
-global.bluered = 1;
-
 </string>
           </argument>
         </arguments>
@@ -197,9 +193,6 @@ switch(global.shipselect)
 //Change color if on blue team
 if(global.team[global.mymid] = 2)
 {
- //Set the correct colors to be displayed on radar
- global.redblue = 1;
- global.bluered = 0;
  switch(global.shipselect)
  {
   case 1:

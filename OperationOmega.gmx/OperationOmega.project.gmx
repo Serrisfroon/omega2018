@@ -1908,6 +1908,7 @@
     <object>objects\obj_ship_main</object>
     <objects name="Trash">
       <object>objects\obj_teamchange</object>
+      <object>objects\obj_solus_shot</object>
       <objects name="Main Menu">
         <object>objects\obj_singleplayer</object>
         <object>objects\obj_multiplayer</object>
@@ -1932,6 +1933,7 @@
       <object>objects\obj_options</object>
       <object>objects\obj_tomain</object>
       <object>objects\obj_private</object>
+      <object>objects\obj_solus_shot_enemy</object>
       <object>objects\obj_endgame</object>
       <object>objects\obj_teamchange_client</object>
       <object>objects\prnt_menubutton</object>
@@ -1953,8 +1955,6 @@
       <object>objects\prnt_enemyattack</object>
       <object>objects\prnt_allyattack</object>
       <object>objects\prnt_weaponattack</object>
-      <object>objects\prnt_allyenergy</object>
-      <object>objects\prnt_enemyenergy</object>
       <objects name="Primary Weapons">
         <object>objects\obj_generic_hit</object>
         <object>objects\obj_generic_fade</object>
@@ -2058,44 +2058,89 @@
           <object>objects\obj_trigger</object>
           <object>objects\obj_trigger_enemy</object>
         </objects>
+        <object>objects\prnt_allyenergy</object>
+        <object>objects\prnt_enemyenergy</object>
       </objects>
       <objects name="Deploy Secondary Attacks">
-        <object>objects\obj_dualmissile</object>
-        <object>objects\obj_dualmissile_enemy</object>
-        <object>objects\obj_layermissile</object>
-        <object>objects\obj_layermissile_enemy</object>
-        <object>objects\obj_huntermine</object>
-        <object>objects\obj_huntermine_enemy</object>
-        <object>objects\obj_locustmissile</object>
-        <object>objects\obj_locustmissile_enemy</object>
-        <object>objects\obj_phantommine</object>
-        <object>objects\obj_phantommine_enemy</object>
-        <object>objects\obj_solus</object>
-        <object>objects\obj_solus_shot</object>
-        <object>objects\obj_solus_enemy</object>
-        <object>objects\obj_solus_shot_enemy</object>
-        <object>objects\obj_tridentmissile</object>
-        <object>objects\obj_tridentmissile_enemy</object>
-        <object>objects\obj_shockmissile</object>
-        <object>objects\obj_shockmissile_enemy</object>
-        <object>objects\obj_hackermine</object>
-        <object>objects\obj_hackermine_enemy</object>
-        <object>objects\obj_hermitmissile</object>
-        <object>objects\obj_counterfield</object>
-        <object>objects\obj_hermitmissile_enemy</object>
-        <object>objects\obj_counterfield_enemy</object>
-        <object>objects\obj_strikemissile</object>
-        <object>objects\obj_strikemissile_enemy</object>
-        <object>objects\obj_strikemine</object>
-        <object>objects\obj_strikemine_enemy</object>
-        <object>objects\obj_turret</object>
-        <object>objects\obj_turret_enemy</object>
-        <object>objects\obj_splitmissile</object>
-        <object>objects\obj_splitmissile_enemy</object>
-        <object>objects\obj_clustermine</object>
-        <object>objects\obj_clustermine_small</object>
-        <object>objects\obj_clustermine_enemy</object>
-        <object>objects\obj_clustermine_small_enemy</object>
+        <objects name="Dual Missile">
+          <object>objects\obj_dualmissile_attack</object>
+          <object>objects\obj_dualmissile</object>
+          <object>objects\obj_dualmissile_enemy</object>
+        </objects>
+        <objects name="Layer Missile">
+          <object>objects\obj_layermissile_attack</object>
+          <object>objects\obj_layermissile</object>
+          <object>objects\obj_layermissile_enemy</object>
+        </objects>
+        <objects name="Hunter Mine">
+          <object>objects\obj_huntermine_attack</object>
+          <object>objects\obj_huntermine</object>
+          <object>objects\obj_huntermine_enemy</object>
+        </objects>
+        <objects name="Locust Missile">
+          <object>objects\obj_locustmissile_attack</object>
+          <object>objects\obj_locustmissile</object>
+          <object>objects\obj_locustmissile_enemy</object>
+        </objects>
+        <objects name="Phantom Mine">
+          <object>objects\obj_phantommine_attack</object>
+          <object>objects\obj_phantommine</object>
+          <object>objects\obj_phantommine_enemy</object>
+        </objects>
+        <objects name="Solus">
+          <object>objects\obj_solus_attack</object>
+          <object>objects\obj_solus</object>
+          <object>objects\obj_solus_enemy</object>
+        </objects>
+        <objects name="Trident Missile">
+          <object>objects\obj_tridentmissile_attack</object>
+          <object>objects\obj_tridentmissile</object>
+          <object>objects\obj_tridentmissile_enemy</object>
+        </objects>
+        <objects name="Shock Missile">
+          <object>objects\obj_shockmissile_attack</object>
+          <object>objects\obj_shockmissile</object>
+          <object>objects\obj_shockmissile_enemy</object>
+        </objects>
+        <objects name="Hacker Mine">
+          <object>objects\obj_hackermine_attack</object>
+          <object>objects\obj_hackermine</object>
+          <object>objects\obj_hackermine_enemy</object>
+        </objects>
+        <objects name="Hermit Missile">
+          <object>objects\obj_hermitmissile_attack</object>
+          <object>objects\obj_hermitmissile</object>
+          <object>objects\obj_counterfield</object>
+          <object>objects\obj_hermitmissile_enemy</object>
+          <object>objects\obj_counterfield_enemy</object>
+        </objects>
+        <objects name="Strike Missile">
+          <object>objects\obj_strikemissile_attack</object>
+          <object>objects\obj_strikemissile</object>
+          <object>objects\obj_strikemissile_enemy</object>
+        </objects>
+        <objects name="Strike Mine">
+          <object>objects\obj_strikemine_attack</object>
+          <object>objects\obj_strikemine</object>
+          <object>objects\obj_strikemine_enemy</object>
+        </objects>
+        <objects name="Turret">
+          <object>objects\obj_turret_attack</object>
+          <object>objects\obj_turret</object>
+          <object>objects\obj_turret_enemy</object>
+        </objects>
+        <objects name="Split Missile">
+          <object>objects\obj_splitmissile_attack</object>
+          <object>objects\obj_splitmissile</object>
+          <object>objects\obj_splitmissile_enemy</object>
+        </objects>
+        <objects name="Cluster Mine">
+          <object>objects\obj_clustermine_attack</object>
+          <object>objects\obj_clustermine</object>
+          <object>objects\obj_clustermine_small</object>
+          <object>objects\obj_clustermine_enemy</object>
+          <object>objects\obj_clustermine_small_enemy</object>
+        </objects>
         <object>objects\prnt_allydeploy</object>
         <object>objects\prnt_enemydeploy</object>
       </objects>
