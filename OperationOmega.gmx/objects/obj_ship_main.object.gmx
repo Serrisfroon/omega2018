@@ -1980,47 +1980,51 @@ if(primary_cooldown &lt;= 0)
 if(global.chatting = true || ship_status_hacked = true) exit;
 
 //Make checks to ensure the weapon can be fired
-if(current_secondary_type = 0)  //Energy Weapons
+//Perform the checks only if this is your ship
+if(mid = global.mymid)
 {
-    //Beam checks
-    if(current_secondary = 5)
+    if(current_secondary_type = 0)  //Energy Weapons
     {
-        //Make sure the ship is stopped if using beam
-        if(speed &gt; 0)
+        //Beam checks
+        if(current_secondary = 5)
+        {
+            //Make sure the ship is stopped if using beam
+            if(speed &gt; 0)
+            {
+                    //Play an audio cue and exit the script
+                    audio_play_sound(snd_unable, 1, 0);
+                    exit;
+            }    
+            //Reduce the energy cost if amplified
+            if(amplified = 1)
+                current_secondary_cost -= 15;
+        }
+        //Make sure there is enough energy to fire the energy weapon
+        if(energy &lt; current_secondary_cost)                     
         {
                 //Play an audio cue and exit the script
                 audio_play_sound(snd_unable, 1, 0);
                 exit;
-        }    
-        //Reduce the energy cost if amplified
-        if(amplified = 1)
-            current_secondary_cost -= 15;
+        }
+        energy -= current_secondary_cost;   //Reduce energy by the necessary amount
     }
-    //Make sure there is enough energy to fire the energy weapon
-    if(energy &lt; current_secondary_cost)                     
+    else                    //Heavy Weapons
     {
-            //Play an audio cue and exit the script
-            audio_play_sound(snd_unable, 1, 0);
-            exit;
+        //Make sure there is a use left to the weapon
+        if(current_secondary_stock &lt; 1)
+        {
+                //Play an audio cue and exit the script
+                audio_play_sound(snd_unable, 1, 0);
+                exit;
+        }
+        global.secondary_stock[current_secondary_selected] -= 1 //Take away a use from this secondary
     }
-    energy -= current_secondary_cost;   //Reduce energy by the necessary amount
-}
-else                    //Heavy Weapons
-{
-    //Make sure there is a use left to the weapon
-    if(current_secondary_stock &lt; 1)
-    {
-            //Play an audio cue and exit the script
-            audio_play_sound(snd_unable, 1, 0);
-            exit;
-    }
-    global.secondary_stock[current_secondary_selected] -= 1 //Take away a use from this secondary
-}
-
+    
 //Make sure there is a target if this weapon requires lockon
 if(current_secondary_lockon_required = true)
     if(obj_mod.foundtarget = -1)
         exit;                   //Exit the script if there is no target
+}
 
 //Create the attack handling object    
 var secondary_attack = instance_create(0, 0, current_secondary_object);
