@@ -36,6 +36,13 @@ alarm[2] = 2;
 alarm[1] = 240;
 hit = 1;
 age = 0;
+
+//Set attack variable values
+attack_damage = 4;              //Set the damage for the attack
+attack_burst = 0;               //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;           //Set the threshold reduction per hit
+attack_shake = 0;               //Set the screen shake intensity of the attack
+attack_name = "Storm";          //Set the name of the attack
 </string>
           </argument>
         </arguments>

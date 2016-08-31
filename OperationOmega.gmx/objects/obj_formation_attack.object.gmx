@@ -34,6 +34,7 @@ mid = 0;                        //mid of this ship to shoot from
 amplified = false;              //Whether or not the amplified version is used
 
 alarm[1] = 1;   //Set time until attack creation
+
 </string>
           </argument>
         </arguments>

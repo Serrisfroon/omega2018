@@ -33,6 +33,13 @@ image_blend = global.allycolor;
 alarm[4] = 1;
 emitter1 = part_emitter_create(obj_partsystem.system);
 amplified = 0;
+
+//Set attack variable values
+attack_damage = 4;                      //Set the damage for the attack
+attack_burst = 4;                       //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;                   //Set the threshold reduction per hit
+attack_shake = 4;                       //Set the screen shake intensity of the attack
+attack_name = "Trident Missile";        //Set the name of the attack
 </string>
           </argument>
         </arguments>
@@ -96,9 +103,9 @@ with(obj_homingeffect)
             <string>image_angle = startdir;
 visible = 1;
 if(trio != 1)
-    dmg = 4;
+    attack_burst = 4;
 else
-    dmg = 16;
+    attack_burst = 16;
 </string>
           </argument>
         </arguments>

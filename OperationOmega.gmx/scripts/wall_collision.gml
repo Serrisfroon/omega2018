@@ -58,8 +58,8 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
         x = x+lengthdir_x(speed+2, direction-180);
         y = y+lengthdir_y(speed+2, direction-180); 
         //Destroy this object
-        instance_destroy();
- 
+        player_defeated = true;
+        event_perform(ev_other, ev_user2); 
     }
     obj_mod.refreshing = 0;
 }
@@ -112,8 +112,8 @@ else
             x = x+lengthdir_x(speed+2, direction);
             y = y+lengthdir_y(speed+2, direction); 
             //Destroy this object
-            instance_destroy();
-
+            player_defeated = true;
+            event_perform(ev_other, ev_user2);
         }
         obj_mod.refreshing = 0;
 

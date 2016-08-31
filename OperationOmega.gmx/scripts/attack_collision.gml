@@ -126,7 +126,7 @@ if(armor <= 0)
         message = global.othername[other.mid]+" ELIMINATED "+global.name+".("+weaponname+")";
 
     //Destroy this object
-    instance_destroy();
-
+    player_defeated = true;
+    event_perform(ev_other, ev_user2);
 }
 return 1;

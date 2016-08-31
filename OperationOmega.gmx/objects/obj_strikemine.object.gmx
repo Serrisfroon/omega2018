@@ -34,6 +34,14 @@ amplified = 0;
 collected = 0;
 recollect = 0;
 alarm[0] = 60;
+alarm[2] = 1;
+
+//Set attack variable values
+attack_damage = 12;                          //Set the damage for the attack
+attack_burst = 15;                          //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;                       //Set the threshold reduction per hit
+attack_shake = 8;                           //Set the screen shake intensity of the attack
+attack_name = "Strike Mine";             //Set the name of the attack
 </string>
           </argument>
         </arguments>
@@ -65,6 +73,33 @@ if(collected = 0)
 else
     effect_create_above(ef_smoke, x, y, 0, global.allycolor);
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(amplified = 1)
+{
+    attack_damage = 0;                          //Set the damage for the attack
+    attack_burst = 27;                          //Set the bonus damage of the attack that ignores shield
+}
 </string>
           </argument>
         </arguments>

@@ -1905,7 +1905,11 @@
     <font>fonts\fnt_stats</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_ship_main</object>
+    <object>objects\prnt_ship</object>
+    <object>objects\obj_player</object>
+    <object>objects\prnt_dummy</object>
+    <object>objects\obj_dummy_ally</object>
+    <object>objects\obj_dummy_enemy</object>
     <objects name="Trash">
       <object>objects\obj_teamchange</object>
       <object>objects\obj_solus_shot</object>

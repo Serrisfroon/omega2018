@@ -101,7 +101,8 @@ with(other)
     instance_destroy();
     
 owner.absorb += 0.20;
-
+owner.attack_damage += 0.6;
+owner.attack_burst += 0.6;
 </string>
           </argument>
         </arguments>

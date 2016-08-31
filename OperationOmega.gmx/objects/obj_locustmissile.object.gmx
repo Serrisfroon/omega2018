@@ -34,6 +34,13 @@ speed = 14;
 hit = 1;
 image_blend = global.allycolor;
 alarm[3] = 1;
+
+//Set attack variable values
+attack_damage = 3;                  //Set the damage for the attack
+attack_burst = 0;                   //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;               //Set the threshold reduction per hit
+attack_shake = 0;                   //Set the screen shake intensity of the attack
+attack_name = "Locust Missile";     //Set the name of the attack
 </string>
           </argument>
         </arguments>

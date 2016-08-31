@@ -36,6 +36,13 @@ if(global.allycolor = c_blue)
     image_index = 0;
 else
     image_index = 1;
+    
+//Set attack variable values
+attack_damage = 5;              //Set the damage for the attack
+attack_burst = 0;               //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0.07;        //Set the threshold reduction per hit
+attack_shake = 0;               //Set the screen shake intensity of the attack
+attack_name = "Stardust";       //Set the name of the attack
 </string>
           </argument>
         </arguments>

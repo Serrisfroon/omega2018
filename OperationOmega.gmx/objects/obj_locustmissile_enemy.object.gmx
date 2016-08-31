@@ -33,23 +33,16 @@ go = 0;
 speed = 14;
 image_blend = global.enemycolor;
 alarm[3] = 1;
+
+//Set attack variable values
+attack_damage = 3;                  //Set the damage for the attack
+attack_burst = 0;                   //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;               //Set the threshold reduction per hit
+attack_shake = 0;                   //Set the screen shake intensity of the attack
+attack_name = "Locust Missile";     //Set the name of the attack
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="1" enumb="0">

@@ -32,6 +32,13 @@ image_blend = global.allycolor;
 outspeed = 0.25;
 inspeed = 0.125; 
 amplified = 0;
+
+//Set attack variable values
+attack_damage = 6;                      //Set the damage for the attack
+attack_burst = 11;                      //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;                   //Set the threshold reduction per hit
+attack_shake = 8;                       //Set the screen shake intensity of the attack
+attack_name = "Hacker Mine";            //Set the name of the attack
 </string>
           </argument>
         </arguments>

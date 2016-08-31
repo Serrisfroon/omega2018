@@ -39,23 +39,15 @@ damage = 0;
 alarm[0] = 660;
 sfx_play(snd_sparkline, x, y);
 
+//Set attack variable values
+attack_damage = 10;             //Set the damage for the attack
+attack_burst = 0;               //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;           //Set the threshold reduction per hit
+attack_shake = 6;               //Set the screen shake intensity of the attack
+attack_name = "Sparkline";      //Set the name of the attack
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="1" enumb="0">

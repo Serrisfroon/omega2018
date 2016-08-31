@@ -35,6 +35,12 @@ alarm[0] = 1;
 amplified = 0;
 sfx_play(snd_burst, x, y);
 
+//Set attack variable values
+attack_damage = 8;              //Set the damage for the attack
+attack_burst = 0;               //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;           //Set the threshold reduction per hit
+attack_shake = 0;               //Set the screen shake intensity of the attack
+attack_name = "Spiral";         //Set the name of the attack
 </string>
           </argument>
         </arguments>
