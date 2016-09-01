@@ -62,6 +62,7 @@ switch(refreshing)
       if(obj_ship.multiplayer_primary_fire_flag = true)
       {
        refreshing = 3;
+       crush(global.primaryRNG[global.mymid], 15, 0);
        crush(round(obj_ship.newdir*10), 3600, 0);
        switch(global.primary)
        {
@@ -206,6 +207,7 @@ while(true)
            //Check if the compressed prediction holds shooting as 1
            if(holdvar &gt; 36)
            {
+            holdvar = uncrush(15, 0);
             holdvar = uncrush(3600, 0);
             switch(global.primary)
             {          
@@ -234,6 +236,7 @@ while(true)
          prediction_decompress(decomp);
          if(global.playership[i].multiplayer_primary_fire_flag = true)
          {
+          global.primaryRNG[global.mymid] = uncrush(15, 0);
           global.playership[i].newdir = uncrush(3600, 0)/10;
           switch(global.playerprimary[i])
           {          

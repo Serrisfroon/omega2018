@@ -152,6 +152,7 @@ with(other)
             <string>if(attack_collision(6, 11, 0, 8, "Hacker Mine") = 1)
 {
     ship_status_hacked = true;
+    ship_disabled = true;
     alarm[5] = 90;
     //Send the information
     clearbuffer(0);
@@ -460,8 +461,9 @@ if(armor &lt;= 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true) exit;
+            <string>//Do nothing if the ship is disabled from hacked status or chatting
+if(ship_disabled = true) 
+    exit;
 
 //Accelerate- increse speed until a max speed is reached
 if(speed &lt; velocity_maximum)
@@ -473,8 +475,9 @@ if(stasis_slow_timer &gt; 0)
     stasis_slow_timer -= 1;
     if(speed &gt; 3)
         speed = 3;    
-    exit;
 }
+
+
 </string>
           </argument>
         </arguments>
@@ -497,11 +500,15 @@ if(stasis_slow_timer &gt; 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true) exit;
-//Turn clockwise at the right speed
+            <string>//Do nothing if the ship is disabled from hacked status or chatting
+if(ship_disabled = true) 
+    exit;
+
+//Rotate the ship clockwise by its turning rate
 facedir -= ship_turning_rate;
+//Keep facedir at or below 360
 if(facedir &lt; 0) facedir += 360;
+
 </string>
           </argument>
         </arguments>
@@ -524,92 +531,14 @@ if(facedir &lt; 0) facedir += 360;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true) exit;
-
-facedir += ship_turning_rate;
-if(facedir &gt; 360) facedir -= 360;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="5" enumb="18">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Do the same as ctrl
-event_perform(ev_keyboard, vk_control);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="5" enumb="17">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Exit if the ability isn't active
-if(ship_ability_active_flag = false || global.shipselect != 1)
+            <string>//Do nothing if the ship is disabled from hacked status or chatting
+if(ship_disabled = true) 
     exit;
-    
-//Drain energy to use drift ability
-energy -= 0.45;
-if(energy &lt;= 0)
-{
-    energy = 0;
-    ship_ability_active_flag = false;
-}      
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="5" enumb="16">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Do the same as ctrl
-event_perform(ev_keyboard, vk_control);
+
+//Rotate the ship counter-clockwise by its turning rate
+facedir += ship_turning_rate;
+//Keep facedir at or below 360
+if(facedir &gt; 360) facedir -= 360;
 </string>
           </argument>
         </arguments>
@@ -632,9 +561,11 @@ event_perform(ev_keyboard, vk_control);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>multiplayer_primary_fire_flag = false;
-obj_mod.refreshing = 0;
+            <string>//Switch the primary firing flag to false
+multiplayer_primary_fire_flag = false;
 
+//Have to controller object send a refresh packet
+obj_mod.refreshing = 0;
 </string>
           </argument>
         </arguments>
@@ -701,19 +632,11 @@ event_perform(ev_other, ev_user0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>multiplayer_primary_fire_flag = true;
+            <string>//Switch the primary firing flag to true
+multiplayer_primary_fire_flag = true;
+
+//Have to controller object send a refresh packet
 obj_mod.refreshing = 0;
-
-clearbuffer(0);
-packet_label_write(14, global.mymid);
-writeushort(global.primaryRNG[global.mymid], 0);
-//Send to everyone if host
-if(global.master = true)
-    client_sendall(0, 0);
-else
-    //Send to host if client
-    sendmessage(global.host, 0, 0, 0);
-
 </string>
           </argument>
         </arguments>
@@ -736,7 +659,8 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_perform(ev_other, ev_user1);
+            <string>//Perform the primary firing event
+event_perform(ev_other, ev_user1);
 </string>
           </argument>
         </arguments>
@@ -759,16 +683,20 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true || stasis_slow_timer &gt; 0) exit;
+            <string>//Do nothing if the ship is disabled from hacked status or chatting
+if(ship_disabled = true || stasis_slow_timer &gt; 0) 
+    exit;
 
+//Adjust the acceleration prediction variable
 predictspeed = 1;
 
+//Create a boosting effect
 boosteffect = instance_create(x+lengthdir_x(8, image_angle-180), y+lengthdir_y(8, image_angle-180), obj_boosteffect)
 boosteffect.image_angle = image_angle;
 boosteffect.source = obj_ship;
-obj_mod.refreshing = 0;
 
+//Have the controller object send a refresh packet
+obj_mod.refreshing = 0;
 </string>
           </argument>
         </arguments>
@@ -791,12 +719,14 @@ obj_mod.refreshing = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true) exit;
+            <string>//Do nothing if the ship is disabled from hacked status or chatting
+if(ship_disabled = true) 
+    exit;
 
+//Adjust the acceleration prediction variable
 predictspeed = 2;
+//Have the controller object send a refresh packet
 obj_mod.refreshing = 0;
-
 </string>
           </argument>
         </arguments>
@@ -819,12 +749,14 @@ obj_mod.refreshing = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true) exit;
+            <string> //Do nothing if the ship is disabled from hacked status or chatting
+if(ship_disabled = true) 
+    exit;
 
+//Adjust the turning prediction variable
 predictturn = 1;
+//Have the controller object send a refresh packet
 obj_mod.refreshing = 0;
-
 </string>
           </argument>
         </arguments>
@@ -847,13 +779,16 @@ obj_mod.refreshing = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true) exit;
+            <string> //Do nothing if the ship is disabled from hacked status or chatting
+if(ship_disabled = true) 
+    exit;
 
+//Adjust the turning prediction variable
 predictturn = 2;
+//Have the controller object send a refresh packet
 obj_mod.refreshing = 0;
 
- 
+
 </string>
           </argument>
         </arguments>
@@ -1072,11 +1007,13 @@ switch(global.shipselect)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Check if you are chatting
-if(global.chatting = true || ship_status_hacked = true || stasis_slow_timer &gt; 0) exit;
+            <string>//Do nothing if the ship is disabled from hacked status or chatting, or is affected by stasis
+if(ship_disabled = true || stasis_slow_timer &gt; 0) exit;
 
-predictspeed = 0;
-
+//Adjust the accelration prediction variable
+predictspeed = 2;
+//Have to controller object send a refresh packet
+obj_mod.refreshing = 0;
 </string>
           </argument>
         </arguments>
@@ -1099,9 +1036,10 @@ predictspeed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>predictspeed = 0;
+            <string>//Adjust the acceleration prediction variable
+predictspeed = 0;
+//Have the controller object send a refresh packet
 obj_mod.refreshing = 0;
-
 </string>
           </argument>
         </arguments>
@@ -1124,10 +1062,10 @@ obj_mod.refreshing = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>predictturn = 0;
-thisturn = 0;
+            <string>//Adjust the turning prediction variable
+predictturn = 0;
+//Have the controller object send a refresh packet
 obj_mod.refreshing = 0;
-
 </string>
           </argument>
         </arguments>
@@ -1150,96 +1088,10 @@ obj_mod.refreshing = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>predictturn = 0;
-thisturn = 0;
+            <string>//Adjust the turning prediction variable
+predictturn = 0;
+//Have the controller object send a refresh packet
 obj_mod.refreshing = 0;
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="10" enumb="18">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>event_perform(ev_keyrelease, vk_control);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="10" enumb="17">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(global.shipselect != 1)
-    exit;
-    
-
-ship_ability_active_flag = false;
-//Send the information
-clearbuffer(0);
-packet_label_write(2, global.mymid);
-writebyte(21, 0);//Treat pulse as a secondary
-writebyte(0, 0);
-//Send to everyone if host
-if(global.master = true)
-    client_sendall(0, 0);
-else
-    //Send to host if client
-    sendmessage(global.host, 0, 0, 0);
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="10" enumb="16">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>event_perform(ev_keyrelease, vk_control);
 </string>
           </argument>
         </arguments>

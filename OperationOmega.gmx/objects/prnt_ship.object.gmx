@@ -115,6 +115,7 @@ whip_spawner_existing = false;              //Holds whether or not stardust is c
 stasis_slow_timer = 0;                      //Holds the time(in frames) that a Stasis hit will continue to slow for
 ship_status_hacked = false;                 //Holds whether or not the ship is under the hacked status, aka stunned.
 ship_status_shocked = false;                //Holds whether or not the ship is under the shocked status, which causes the shield to be 50% effective.
+ship_disabled = false;                      //Holds the disable flag for the ship. This is used to consolidate if statements for faster processing.
 
 //Initialize the secondary selection variable
 secondary_selected = 1;
@@ -469,7 +470,9 @@ basegain *= 3;
             <kind>1</kind>
             <string>//Reset hack variable
 ship_status_hacked = false;
-
+if(mid = global.mymid)
+    if(global.chatting = false)
+        ship_disabled = false;
 </string>
           </argument>
         </arguments>
@@ -720,7 +723,7 @@ for(i = 0; i &lt; flame_smoke_trails; i += 1)
 //the minimum to 0.
 //Brake if S is pressed, if you are chatting, or if you were hacked
 speedmin = velocity_minimum;
-if(keyboard_check(ord('S')) || global.chatting = true || ship_status_hacked = true) 
+if(keyboard_check(ord('S')) || ship_disabled = true) 
 {
     speedmin = 0;
     speed -= 0.2;
@@ -978,9 +981,8 @@ if(mid = global.mymid)
             <kind>1</kind>
             <string>//Disable chatting if currently in chat mode
 global.chatting = false;
-
 //Disbale shooting if hacked or overheated
-if(ship_disabled = true) 
+if(ship_status_hacked = true) 
     exit;
 
     
@@ -1038,7 +1040,7 @@ if(primary_cooldown &lt;= 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.chatting = true || ship_status_hacked = true) exit;
+            <string>if(ship_disabled = true) exit;
 
 //Make checks to ensure the weapon can be fired
 //Perform the checks only if this is your ship
