@@ -210,7 +210,7 @@ direction = point_direction(x, y, room_width/2, room_height/2);
 facedir = direction;
 
 //Initialize refresh packet rate
-refreshing = 0;
+update_packet_timer = 0;
 
 //Ragequit variable
 ismine = 0;
@@ -471,7 +471,7 @@ basegain *= 3;
             <string>//Reset hack variable
 ship_status_hacked = false;
 if(mid = global.mymid)
-    if(global.chatting = false)
+    if(obj_mod.chat_open = false)
         ship_disabled = false;
 </string>
           </argument>
@@ -742,7 +742,7 @@ ability_cooldown_timer -= 1;
 //Bounce back into the map if you move out of it
 while(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
 {
-    obj_mod.refreshing = 0;
+    obj_mod.update_packet_timer = 0;
     if(x &lt; 16)
     {
         x += 10;
@@ -876,8 +876,8 @@ switch(global.matchtype)
 //Reset targetting
 with(obj_mod)
 { 
-    foundtarget = -1;
-    targetdist = 100000;
+    targeted_object = -1;
+    distance_to_target = 100000;
 }
 
 //Create a defeated ship in your place and give it your movement
@@ -907,10 +907,10 @@ with(obj_mod)
 }
 
 //Create an announcement
-if(obj_mod.announcing = 0 &amp;&amp; defeatmid != 20)
+if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
 {
-     obj_mod.announcing  = 1;
-     obj_mod.announcement = global.othername[defeatmid]+" defeated "+global.name;
+     obj_mod.announcement_stage  = 1;
+     obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.name;
      obj_mod.announcement_color = obj_mod.chatcolor[4];
 }
 
@@ -979,24 +979,17 @@ if(mid = global.mymid)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Disable chatting if currently in chat mode
-global.chatting = false;
-//Disbale shooting if hacked or overheated
-if(ship_status_hacked = true) 
-    exit;
-
-    
-if(primary_cooldown &lt;= 0)
+            <string>if(primary_cooldown &lt;= 0)
 {
     primary_overheat += primary_overheat_scaling;
     primary_cooldown = primary_cooldown_base * primary_overheat;
-    var mouse_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
+    primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
     //Create an effect
     part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], speed+1.68, speed+2.80, -0.04,0);
-    part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], mouse_direction-50, mouse_direction+50, 0, 0);
-    part_particles_create(obj_partsystem.system, x+lengthdir_x(9, mouse_direction), y+lengthdir_y(9, mouse_direction), obj_partsystem.primarypart[global.team[mid]-1], 10);
-    aiming_direction = (mouse_direction-direction)/5;
-    bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_name, mouse_direction, global.mymid, 0);
+    part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-50, primary_direction+50, 0, 0);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(9, primary_direction), y+lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 10);
+    aiming_direction = (primary_direction-direction)/5;
+    bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_name, primary_direction, global.mymid, 0);
 }
 </string>
           </argument>
@@ -1085,7 +1078,7 @@ if(mid = global.mymid)
     
 //Make sure there is a target if this weapon requires lockon
 if(current_secondary_lockon_required = true)
-    if(obj_mod.foundtarget = -1)
+    if(obj_mod.targeted_object = -1)
         exit;                   //Exit the script if there is no target
 }
 
@@ -1133,7 +1126,7 @@ switch(global.secondary_selected)
     //Dual Missile
     case 0:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
+        if(obj_mod.targeted_object &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -1150,7 +1143,7 @@ switch(global.secondary_selected)
         missile.startdir = facedir;
         missile.direction = facedir-90;
         missile.speed = 4;
-        missile.target = obj_mod.foundtarget;
+        missile.target = obj_mod.targeted_object;
         missile.mid = global.mymid;
         missile.amplified = amplified;
       
@@ -1159,7 +1152,7 @@ switch(global.secondary_selected)
         missile.startdir = facedir;
         missile.direction = facedir+90;
         missile.speed = 4;
-        missile.target = obj_mod.foundtarget;
+        missile.target = obj_mod.targeted_object;
         missile.mid = global.mymid;
         missile.amplified = amplified;
         
@@ -1171,7 +1164,7 @@ switch(global.secondary_selected)
         {
             testtarget+=1;
             if(testtarget != global.mymid)
-                if(global.playership[testtarget] = obj_mod.foundtarget)
+                if(global.playership[testtarget] = obj_mod.targeted_object)
                     break;
         }
         //Send the information
@@ -1382,7 +1375,7 @@ switch(global.secondary_selected)
     //Locust Missile
     case 6:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
+        if(obj_mod.targeted_object &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -1401,7 +1394,7 @@ switch(global.secondary_selected)
                 //Create the missile and give it its properties
                 missile = instance_create(x, y, obj_locustmissile);
                 missile.direction = facedir-90+(i*60);
-                missile.target = obj_mod.foundtarget;
+                missile.target = obj_mod.targeted_object;
                 missile.mid = global.mymid;
             }
         else
@@ -1410,7 +1403,7 @@ switch(global.secondary_selected)
                 //Create the missile and give it its properties
                 missile = instance_create(x, y, obj_locustmissile);
                 missile.direction = facedir-22.5+(i*45);
-                missile.target = obj_mod.foundtarget;
+                missile.target = obj_mod.targeted_object;
                 missile.mid = global.mymid;
             }
           
@@ -1422,7 +1415,7 @@ switch(global.secondary_selected)
         {
             testtarget+=1;
             if(testtarget != global.mymid)
-                if(global.playership[testtarget] = obj_mod.foundtarget)
+                if(global.playership[testtarget] = obj_mod.targeted_object)
                     break;
         }
         //Send the information
@@ -1511,7 +1504,7 @@ switch(global.secondary_selected)
     //Formation
     case 9:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1)
+        if(obj_mod.targeted_object &lt;= -1)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -1526,7 +1519,7 @@ switch(global.secondary_selected)
         energy -= 30;
         //Crete and send the initial shot at the cursor
         form = instance_create(x, y, obj_formationa);
-        form.target = obj_mod.foundtarget;
+        form.target = obj_mod.targeted_object;
         form.direction = point_direction(x, y, mouse_x, mouse_y);
         form.targetx = mouse_x;
         form.targety = mouse_y;
@@ -1538,7 +1531,7 @@ switch(global.secondary_selected)
         {
            testtarget+=1;
            if(testtarget != global.mymid)
-               if(global.playership[testtarget] = obj_mod.foundtarget)
+               if(global.playership[testtarget] = obj_mod.targeted_object)
                    break;
         }
         //Send the information
@@ -1709,7 +1702,7 @@ switch(global.secondary_selected)
     //Trident Missile
     case 13:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
+        if(obj_mod.targeted_object &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -1726,7 +1719,7 @@ switch(global.secondary_selected)
         missile1.startdir = facedir;
         missile1.direction = facedir;
         missile1.speed = 4;
-        missile1.target = obj_mod.foundtarget;
+        missile1.target = obj_mod.targeted_object;
         missile1.mid = global.mymid;
         missile1.trio = 1;
         missile1.amplified = amplified;
@@ -1736,7 +1729,7 @@ switch(global.secondary_selected)
         missile2.startdir = facedir;
         missile2.direction = facedir-90;
         missile2.speed = 4;
-        missile2.target = obj_mod.foundtarget;
+        missile2.target = obj_mod.targeted_object;
         missile2.mid = global.mymid;
         missile2.trio = 2;
         missile2.middle = missile1;
@@ -1747,7 +1740,7 @@ switch(global.secondary_selected)
         missile3.startdir = facedir;
         missile3.direction = facedir+90;
         missile3.speed = 4;
-        missile3.target = obj_mod.foundtarget;
+        missile3.target = obj_mod.targeted_object;
         missile3.mid = global.mymid;
         missile3.trio = 3;
         missile3.middle = missile1;
@@ -1765,7 +1758,7 @@ switch(global.secondary_selected)
         {
          testtarget+=1;
          if(testtarget != global.mymid)
-          if(global.playership[testtarget] = obj_mod.foundtarget)
+          if(global.playership[testtarget] = obj_mod.targeted_object)
            break;
         }
         //Send the information
@@ -1824,7 +1817,7 @@ switch(global.secondary_selected)
     //Horizon
     case 15:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1)
+        if(obj_mod.targeted_object &lt;= -1)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -1839,9 +1832,9 @@ switch(global.secondary_selected)
         //Reduce Energy
         energy -= 25;
         //Crete and send the initial shot at the cursor
-        loldir = point_direction(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y);
-        form = instance_create(obj_mod.foundtarget.x+lengthdir_x(500, loldir), obj_mod.foundtarget.y+lengthdir_y(500, loldir), obj_horizon);
-        form.target = obj_mod.foundtarget;
+        loldir = point_direction(x, y, obj_mod.targeted_object.x, obj_mod.targeted_object.y);
+        form = instance_create(obj_mod.targeted_object.x+lengthdir_x(500, loldir), obj_mod.targeted_object.y+lengthdir_y(500, loldir), obj_horizon);
+        form.target = obj_mod.targeted_object;
         form.direction = loldir-180;
         form.mid = global.mymid;
         form.amplified = amplified;
@@ -1893,7 +1886,7 @@ switch(global.secondary_selected)
     //Shock Missile
     case 17:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
+        if(obj_mod.targeted_object &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -1909,7 +1902,7 @@ switch(global.secondary_selected)
         missile = instance_create(x, y, obj_shockmissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
         missile.speed = 12;
-        missile.target = obj_mod.foundtarget;
+        missile.target = obj_mod.targeted_object;
         missile.mid = global.mymid;
         missile.amplified = amplified;
         //Take the missiles away from your missile count
@@ -1920,7 +1913,7 @@ switch(global.secondary_selected)
         {
             testtarget+=1;
             if(testtarget != global.mymid)
-                if(global.playership[testtarget] = obj_mod.foundtarget)
+                if(global.playership[testtarget] = obj_mod.targeted_object)
                     break;
         }
         //Send the information
@@ -1944,7 +1937,7 @@ switch(global.secondary_selected)
     //Hermit Missile
     case 18:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
+        if(obj_mod.targeted_object &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
         {
             audio_play_sound(snd_unable, 1, 0);
             exit;
@@ -1962,7 +1955,7 @@ switch(global.secondary_selected)
         missile.speed = 13;
         missile.mid = global.mymid;
         missile.amplified = amplified;
-        missile.target = obj_mod.foundtarget;
+        missile.target = obj_mod.targeted_object;
         //Take the missiles away from your missile count
         deploystock[obj_mod.dstock] -= 1;
         //Find out which ship you are targetting
@@ -1971,7 +1964,7 @@ switch(global.secondary_selected)
         {
             testtarget+=1;
             if(testtarget != global.mymid)
-                if(global.playership[testtarget] = obj_mod.foundtarget)
+                if(global.playership[testtarget] = obj_mod.targeted_object)
                     break;
         }
         //Send the information
@@ -1995,7 +1988,7 @@ switch(global.secondary_selected)
     //Strike Missile
     case 19:
         //Make sure you are targetting someone
-        if(obj_mod.foundtarget &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
+        if(obj_mod.targeted_object &lt;= -1 || deploystock[obj_mod.dstock] &lt; 1)
         {
           audio_play_sound(snd_unable, 1, 0);
           exit;
@@ -2004,7 +1997,7 @@ switch(global.secondary_selected)
         missile = instance_create(x, y, obj_strikemissile);
         missile.direction = aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 30);
         missile.speed = 13;
-        missile.target = obj_mod.foundtarget;
+        missile.target = obj_mod.targeted_object;
         missile.mid = global.mymid;
         missile.amplified = amplified;
         //Take the missiles away from your missile count
@@ -2015,7 +2008,7 @@ switch(global.secondary_selected)
         {
             testtarget+=1;
             if(testtarget != global.mymid)
-                if(global.playership[testtarget] = obj_mod.foundtarget)
+                if(global.playership[testtarget] = obj_mod.targeted_object)
                     break;
         }
         //Send the information

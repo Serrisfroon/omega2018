@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(sendping)
+            <string>switch(ping_send_timer)
 {
  case 0:
       clearbuffer(0);
@@ -36,21 +36,21 @@
        writebyte(0, 0);
       writebyte(floor(global.ping[global.mymid]/20), 0);
       writebyte(fps, 0);
-      pinged = 0;
+      ping_frame_count = 0;
       sendmessage(global.host, "", 0, 0);   
-      sendping = 120;   
+      ping_send_timer = 120;   
  break;
  default:
-         sendping -= 1;
+         ping_send_timer -= 1;
  break;
 }
 
 if((obj_ship.armor &lt;= 0) || instance_number(obj_teleport) &gt; 0) exit;
 
-switch(refreshing)
+switch(update_packet_timer)
 {
  case 0:
-      refreshing = 5;
+      update_packet_timer = 5;
       clearpack();
       packet_label_write(0, global.mymid);
       crush(round(obj_ship.direction*10), 3600, 0);
@@ -58,17 +58,17 @@ switch(refreshing)
       crush(round(obj_ship.x*10), 65000, 0);
       crush(round(obj_ship.y*10), 65000, 0);      
       crush(round(obj_ship.speed*100), 2500, 0);
-      crush(prediction_compress(0, obj_ship.predictturn, obj_ship.predictspeed, obj_ship.multiplayer_primary_fire_flag), 72, 0);
+      crush(prediction_compress(obj_ship.predictturn, obj_ship.predictspeed, obj_ship.multiplayer_primary_fire_flag), 72, 0);
       if(obj_ship.multiplayer_primary_fire_flag = true)
       {
-       refreshing = 3;
+       update_packet_timer = 3;
        crush(global.primaryRNG[global.mymid], 15, 0);
        crush(round(obj_ship.newdir*10), 3600, 0);
        switch(global.primary)
        {
         case 4:
             //Find out which ship you are targetting
-            if(obj_mod.foundtarget &lt;= -1)
+            if(obj_mod.targeted_object &lt;= -1)
              testtarget = 8;
             else
             {
@@ -77,7 +77,7 @@ switch(refreshing)
              {
               testtarget+=1;
              if(testtarget != global.mymid)
-               if(global.playership[testtarget] = obj_mod.foundtarget)
+               if(global.playership[testtarget] = obj_mod.targeted_object)
                break;
              }
             }
@@ -87,8 +87,8 @@ switch(refreshing)
              crush(min(100, round(point_distance(obj_ship.x, obj_ship.y, mouse_x, mouse_y)/10)), 100, 0);
         break;
         case 7:
-             if(foundtarget != -1)
-              crush(foundtarget.mid, 10, 0);
+             if(targeted_object != -1)
+              crush(targeted_object.mid, 10, 0);
              else
               crush(10, 10, 0);
         break;
@@ -100,7 +100,7 @@ switch(refreshing)
         sendmessage(global.host, "", 0, 0);
  break;
  default:
-    refreshing -= 1;
+    update_packet_timer -= 1;
  break;   
 }
 
@@ -147,7 +147,7 @@ while(true)
   //Check for a tcp message
   size = receivemessage(global.host, 0, 0);
   //If there was no response, the host disconnected
-  if(size == 0 || disconnectcheck &gt;= 300)
+  if(size == 0 || disconnect_timer &gt;= 300)
   {
    //Inform the player
    show_message("The host has disconnected.");
@@ -170,10 +170,10 @@ while(true)
   //If there was no message, break the loop
   if(size &lt; 0) 
   {
-   disconnectcheck += 1;
+   disconnect_timer += 1;
    break;
   }
-  disconnectcheck = 0;
+  disconnect_timer = 0;
   //Read the label byte to find the packet id and the player who sent it
   lollabel = readbyte(0);
   packet_label_read(lollabel);
@@ -260,7 +260,7 @@ while(true)
         {
          //Find your ms ping. Take the pined variable(added every step, 60/sec
          //Multiply by 16.67(60*16.67 ~ 1000), take the floor to remove decimal
-         global.ping[global.mymid] = floor((obj_mod.pinged)*16.67);
+         global.ping[global.mymid] = floor((obj_mod.ping_frame_count)*16.67);
          break;
         }
         lolstatuses = readbyte(0);
@@ -340,17 +340,17 @@ while(true)
          break;
         }
         chatline_add(readstring(0), newcolor);
-        if(obj_mod.announcing = 0 &amp;&amp; defeatmid != 20)
+        if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
         {
-         obj_mod.announcing  = 1;
-         obj_mod.announcement = global.othername[defeatmid]+" defeated "+global.othername[dummy];
+         obj_mod.announcement_stage  = 1;
+         obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
          obj_mod.announcement_color = newcolor;
         }
         //Reset targetting if currently targetting this ship
-        if(foundtarget = global.playership[dummy])
+        if(targeted_object = global.playership[dummy])
         {
-         foundtarget = -1;
-         targetdist = point_distance(obj_ship.x, obj_ship.y, -10000, -10000);
+         targeted_object = -1;
+         distance_to_target = point_distance(obj_ship.x, obj_ship.y, -10000, -10000);
         }
         //Destroy the designated ship
         with(global.playership[dummy])
@@ -378,13 +378,13 @@ while(true)
               newcolor = c_maroon;
               if(global.team[global.mymid] = 1)
               {
-               obj_mod.announcement = "Operation Failed";
+               obj_mod.announcement_message = "Operation Failed";
                obj_mod.announcement_color = c_navy;
                global.outcome = 1;
               }
               else
               {
-               obj_mod.announcement = "Operation Successful";
+               obj_mod.announcement_message = "Operation Successful";
                obj_mod.announcement_color = c_navy;
                global.outcome = 0;
               }
@@ -393,20 +393,20 @@ while(true)
               newcolor = c_navy;
               if(global.team[global.mymid] = 1)
               {
-               obj_mod.announcement = "Operation Successful";
+               obj_mod.announcement_message = "Operation Successful";
                obj_mod.announcement_color = c_maroon;
                global.outcome = 0;
               }
               else
               {
-               obj_mod.announcement = "Operation Failed";
+               obj_mod.announcement_message = "Operation Failed";
                obj_mod.announcement_color = c_maroon;
                global.outcome = 1;
               }
          break;
         }
-        obj_mod.announcing  = 1;
-        obj_mod.announcealpha = 0;
+        obj_mod.announcement_stage  = 1;
+        obj_mod.announcement_alpha = 0;
         
         chatline_add(readstring(0), newcolor);
         switch(readbyte(0))
@@ -579,32 +579,25 @@ while(true)
             <string>//This part of the step event is the personal checks
 //Things here will not be sent to/received by other players.
 
-pinged += 1;
-
-if(fadetoblack = 1)
-{
-    blackalpha += 0.04;
-    if(blackalpha &gt;= 1)
-        room_goto(rm_aftermatch);
-}
+ping_frame_count += 1;
 
 audio_listener_position(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, 0);
  
 //Handle announcements
-switch(announcing)
+switch(announcement_stage)
 {
  case 1:
-      announcealpha += 0.05;
-      if(announcealpha = 1)
+      announcement_alpha += 0.05;
+      if(announcement_alpha = 1)
       {
        alarm[10] = 240;
-       announcing = 2;
+       announcement_stage = 2;
       }
  break;
  case 3:
-      announcealpha -= 0.05;
-      if(announcealpha = 0)
-       announcing = 0;
+      announcement_alpha -= 0.05;
+      if(announcement_alpha = 0)
+       announcement_stage = 0;
  break;
 }
 
@@ -667,8 +660,8 @@ global.rot2 -= 4;
 global.rot3 += 6;
 
 //Handle Goliath Weaponsmith Bay
-if(global.selected_ship[global.mymid] = 3)
- weaponsmith(dstock);
+//if(global.selected_ship[global.mymid] = 3)
+// weaponsmith(dstock);
 
 //Find the player farthest from you, but within view range
 farthestdist = 0;
@@ -689,7 +682,7 @@ for(i = 0; i &lt; 8; i += 1)
 //Targetting
 //Target the enemy closest to the cursor
 if(obj_ship.armor &gt; 0)
- foundtarget = instance_nearest(mouse_x,mouse_y,prnt_enemy);
+ ftargeted_object = instance_nearest(mouse_x,mouse_y,prnt_enemy);
 
 //Check if there is a target
 if(farthesttarget &gt; -1)
@@ -737,14 +730,14 @@ else
    stall = 0;
    alarm[6] = 180;
  }
- foundtarget = -1;
+ targeted_object = -1;
 }
 
 //Convert the distance to target to be used by the targetting meter
-if(foundtarget != -1 &amp;&amp; instance_exists(foundtarget))
- targetdist = ceil(point_distance(view_object.x, view_object.y, foundtarget.x, foundtarget.y)/29.6);
+if(targeted_object != -1 &amp;&amp; instance_exists(targeted_object))
+ distance_to_target = ceil(point_distance(view_object.x, view_object.y, targeted_object.x, targeted_object.y)/29.6);
 else
- targetdist = 0;
+ distance_to_target = 0;
 //Center your ship
 screen_shake(view_object);
 //Update match time

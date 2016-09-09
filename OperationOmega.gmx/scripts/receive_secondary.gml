@@ -175,7 +175,7 @@ with(global.playership[mid])
     current_secondary_object = receive_current_secondary_object;
     current_secondary_lockon_required = receive_current_secondary_lockon_required;
     current_secondary_cost = 0;                                                             //Set the cost of the weapon to 0 because it shouldn't matter
-    current_secondary_stock = 99;                                                           //Set the stock to 99 for the same reason
+    current_secondary_stock = 0;                                                           //Set the stock to 99 for the same reason
     current_target_x = receive_current_target_x;
     current_target_y = receive_current_target_y;
     current_target_object = receive_current_target_object;

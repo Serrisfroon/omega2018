@@ -503,9 +503,6 @@ draw_background_tiled_ext(global.starback[0], 0, 0, 1, 1, c_white, 1);
 //Set the scaling value
 scaling = view_hview[0]/480;
 
-//Draw cloud layer on victa tundra
-if(room = rm_victatundra)
- draw_background_tiled(global.cloudback, background_x[6], background_y[6]);
 draw_sprite_ext(spr_matchbox, 0, view_xview[0]+50*scaling, view_yview[0]+50*scaling, scaling, scaling, 0, c_white, 1);
 draw_sprite_ext(spr_matchbox, 1, view_xview[0]+view_wview[0]-312*scaling, view_yview[0]+view_hview[0]-211*scaling, scaling, scaling, 0, c_white, 1);
 //draw_text(room_width/2-240+70, room_height/2-158+35, global.matchtype+': '+string(global.matchvariable));

@@ -40,7 +40,7 @@ flashing = '|';
 //Initialize match rule variable to avoid error
 global.matchtype = "";
 global.matchvariable = 0;
-disconnectcheck = 0;
+disconnect_timer = 0;
 
 
 if(room = rm_waiting)
@@ -110,7 +110,7 @@ alarm[0] = 18;
     var packet, size;
     size = 0;
     size = receivemessage(global.host, 0, 0);
-    if(size == 0 || disconnectcheck &gt;= 3000)
+    if(size == 0 || disconnect_timer &gt;= 3000)
     {
         if(global.musictoggle = 0)
         {
@@ -136,10 +136,10 @@ alarm[0] = 18;
     }
     if(size &lt; 0) 
     {
-        disconnectcheck += 1;
+        disconnect_timer += 1;
         break;
     }
-    disconnectcheck = 0;
+    disconnect_timer = 0;
     packet = readbyte(0);
     switch(packet)
     {

@@ -1043,7 +1043,7 @@ flame_smoke_trails += 1;
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
+ obj_mod.screen_shake_intensity = 4;
 
 //Destroy the attack
 with(other) instance_destroy();
@@ -1092,7 +1092,7 @@ flame_smoke_trails += 1;
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
+ obj_mod.screen_shake_intensity = 4;
  
 //Split into two missiles.
 if(other.damage &gt; 4)
@@ -1183,7 +1183,7 @@ flame_smoke_trails += 1;
 
 //Shake the screen if in range
 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
- obj_mod.viewpos = 4;
+ obj_mod.screen_shake_intensity = 4;
 
 //Destroy the attack
 with(other) instance_destroy();

@@ -122,8 +122,8 @@ with(obj_hit)
   instance_destroy();
 }
 //If this ship was targeted, reset targeting
-if(obj_mod.foundtarget = id)
- obj_mod.foundtarget = -1;
+if(obj_mod.targeted_object = id)
+ obj_mod.targeted_object = -1;
 //Destroy all flame trails
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
  part_emitter_destroy(flame_smoke_system, emit[i]);

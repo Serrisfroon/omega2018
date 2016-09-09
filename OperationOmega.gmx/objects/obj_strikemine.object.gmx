@@ -179,14 +179,15 @@ if(point_distance(x, y, ally.x, ally.y) &lt; 40)
     {
         //Take the mine away from your mine count
         //Take from the correct deploy count
-        for(i = 1; i &lt;= 3; i += 1)
+        for(i = 1; i &lt;= 4; i += 1)
         {
-            if(global.deploy[i] = 12)
-                if(obj_ship.deploystock[i] != obj_ship.maxdstock[i])
-                {
-                    obj_ship.deploystock[i] += 1;
-                }
-       }
+         if(global.secondary[i] = 28)
+            if(global.secondary_stock[i] != obj_mod.max_secondary_stock[i])
+            {
+                global.secondary_stock[i] += 1;
+            }
+        
+        }
     }
     sfx_play(snd_pickup, x, y);
     collected = 1;

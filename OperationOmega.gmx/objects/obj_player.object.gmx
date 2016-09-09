@@ -110,12 +110,12 @@ attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
  exit;
 //Take the mine away from your mine count
 //Take from the correct deploy count
-for(i = 1; i &lt;= 3; i += 1)
+for(i = 1; i &lt;= 4; i += 1)
 {
- if(global.deploy[i] = 12)
-    if(deploystock[i] != maxdstock[i])
+ if(global.secondary[i] = 28)
+    if(global.secondary_stock[i] != obj_mod.max_secondary_stock[i])
     {
-        deploystock[i] += 1;
+        global.secondary_stock[i] += 1;
     }
 
 }
@@ -565,7 +565,7 @@ if(facedir &gt; 360) facedir -= 360;
 multiplayer_primary_fire_flag = false;
 
 //Have to controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -601,7 +601,7 @@ current_target_y = mouse_y;
 current_target_object = -1;                                                    //Set a default for the target object
 //Loop through all of the player ships to see which ship is targeted
 for(i = 1; i &lt;= 8; i++)
-    if(global.playership[i] = obj_mod.foundtarget)
+    if(global.playership[i] = obj_mod.targeted_object)
     {
          current_target_object = global.playership[i];                         //Object to fire at(if applicable)
          break;
@@ -636,7 +636,7 @@ event_perform(ev_other, ev_user0);
 multiplayer_primary_fire_flag = true;
 
 //Have to controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -659,7 +659,16 @@ obj_mod.refreshing = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Perform the primary firing event
+            <string>//Disbale shooting if hacked or overheated
+if(ship_status_hacked = true) 
+    exit;
+//Disable chatting if currently in chat mode
+obj_mod.chat_open = false;
+
+//Set the direction to aim at
+primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
+ 
+//Perform the primary firing event
 event_perform(ev_other, ev_user1);
 </string>
           </argument>
@@ -696,7 +705,7 @@ boosteffect.image_angle = image_angle;
 boosteffect.source = obj_ship;
 
 //Have the controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -726,7 +735,7 @@ if(ship_disabled = true)
 //Adjust the acceleration prediction variable
 predictspeed = 2;
 //Have the controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -756,7 +765,7 @@ if(ship_disabled = true)
 //Adjust the turning prediction variable
 predictturn = 1;
 //Have the controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -786,7 +795,7 @@ if(ship_disabled = true)
 //Adjust the turning prediction variable
 predictturn = 2;
 //Have the controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 
 
 </string>
@@ -824,7 +833,7 @@ current_target_y = mouse_y;
 current_target_object = -1;                                                    //Set a default for the target object
 //Loop through all of the player ships to see which ship is targeted
 for(i = 1; i &lt;= 8; i++)
-    if(global.playership[i] = obj_mod.foundtarget)
+    if(global.playership[i] = obj_mod.targeted_object)
     {
          current_target_object = global.playership[i];                         //Object to fire at(if applicable)
          break;
@@ -1013,7 +1022,7 @@ if(ship_disabled = true || stasis_slow_timer &gt; 0) exit;
 //Adjust the accelration prediction variable
 predictspeed = 2;
 //Have to controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -1039,7 +1048,7 @@ obj_mod.refreshing = 0;
             <string>//Adjust the acceleration prediction variable
 predictspeed = 0;
 //Have the controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -1065,7 +1074,7 @@ obj_mod.refreshing = 0;
             <string>//Adjust the turning prediction variable
 predictturn = 0;
 //Have the controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -1091,7 +1100,7 @@ obj_mod.refreshing = 0;
             <string>//Adjust the turning prediction variable
 predictturn = 0;
 //Have the controller object send a refresh packet
-obj_mod.refreshing = 0;
+obj_mod.update_packet_timer = 0;
 </string>
           </argument>
         </arguments>

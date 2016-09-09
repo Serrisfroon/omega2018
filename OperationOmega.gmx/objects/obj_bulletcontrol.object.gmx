@@ -375,7 +375,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                             possihit.armor += possihit.shield;
                             possihit.shield = 0;
                             if(shielddown = 1)
-                                obj_mod.sendping = 0;
+                                obj_mod.ping_send_timer = 0;
 
                         }
                     }
@@ -417,7 +417,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                             possihit.shield = 0;
                             possihit.energygain = 0.8;
                             possihit.energy = 100;
-                            obj_mod.sendping = 0;
+                            obj_mod.ping_send_timer = 0;
                             possihit.beserkeffect = instance_create(x, y, obj_beserkeffect);
                             possihit.alarm[11] = 300;
                         }

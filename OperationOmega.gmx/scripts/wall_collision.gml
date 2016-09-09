@@ -27,7 +27,7 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
     if(shield < 0) 
     {
         if(shielddown = 1)
-            obj_mod.sendping = 0;
+            obj_mod.ping_send_timer = 0;
         armor += shield;
         shield = 0;
     }
@@ -41,7 +41,7 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
     //Update smoking
     smoke = floor(armor/(armor_maximum/10));
     
-    obj_mod.viewpos = 4;
+    obj_mod.screen_shake_intensity = 4;
     
     //Check if your ship has been defeated
     if(armor <= 0)
@@ -61,7 +61,7 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
         player_defeated = true;
         event_perform(ev_other, ev_user2); 
     }
-    obj_mod.refreshing = 0;
+    obj_mod.update_packet_timer = 0;
 }
 else
     
@@ -95,7 +95,7 @@ else
         //Update smoking
         smoke = floor(armor/(armor_maximum/10));
         
-        obj_mod.viewpos = 4;
+        obj_mod.screen_shake_intensity = 4;
         
         //Check if your ship has been defeated
         if(armor <= 0)
@@ -115,6 +115,6 @@ else
             player_defeated = true;
             event_perform(ev_other, ev_user2);
         }
-        obj_mod.refreshing = 0;
+        obj_mod.update_packet_timer = 0;
 
     }

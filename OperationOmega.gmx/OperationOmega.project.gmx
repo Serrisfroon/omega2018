@@ -2156,6 +2156,7 @@
         <object>objects\obj_partsystem</object>
         <object>objects\obj_weaponswitch</object>
         <object>objects\obj_starfield_mod</object>
+        <object>objects\obj_fade_screen</object>
       </objects>
       <objects name="Effects">
         <object>objects\obj_shippart</object>

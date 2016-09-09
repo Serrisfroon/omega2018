@@ -25,57 +25,84 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>display_set_gui_size(view_wport[0], view_hport[0]);
-audio_listener_position(0, 0, 0);
-iconbar = global.shipselect*(global.secondary_type[4]+1)-1;
-stall = 0;
-armorpart = 1;
-shieldpart = 1;
-fadetoblack = 0;
-blackalpha = 0;
-oldsnap = 0;
-scaling = view_hview[0]/480;
+            <string>//Set the size of the GUI to be the same as the screen port
+display_set_gui_size(view_wport[0], view_hport[0]);
 
+//Reset the position of the audio listener
+audio_listener_position(0, 0, 0);
+
+//Set the weapon icon HUD based on the icon order
+secondary_icon_order = global.shipselect*(global.secondary_type[4]+1)-1;
+
+//Start the match with your first energy secondary_selected selected
+secondary_selection_position = 2;
+
+//Hold the cursor rotations locally for faster lookup
+cursor_rotation[1] = 0;
+cursor_rotation[2] = 0;
+cursor_rotation[3] = 0;
+
+//Initialize the goliath flag- for handling its passive
+if(global.selected_ship[global.mymid] = 3)
+    goliath_selected = true;
+else
+    goliath_selected = false;
+
+//Store the activated flag and playership reference variables locally for faster lookup
+for(i = 0; i &lt; 8; i += 1)
+{
+    player_activated[i] = global.activated[i];
+    player_object[i] = global.playership[i]
+}
+
+//Initialize the variables used to draw the armor and shield bars
+draw_armor_bar = 1;
+draw_shield_bar = 1;
+
+//Initialize the variable that holds the previous value of the player's primary firing direction. For comparisons.
+previous_primary_direction = -1;
+
+//Initialize the variable that holds the scaling ratio of the screen
+screen_scaling_ratio = view_hview[0]/480;
+
+//Hold the map type locally for faster lookup
+map_type_space = global.spacemap;
+
+//Initialize the coordinate variables that control the screen offset to create a shaking effect
 modify_x = 0;
 modify_y = 0;
 
+//Loop through the four secondary weapons
 for(i = 1; i &lt;= 4; i++)
+{
+    //Hold the max stock for each secondary locally
     max_secondary_stock[i] = global.secondary_stock[i];
-
-teamcolorimg = global.team[global.mymid]-1;
-
-//Intialize weapon availability
-esecondfade[1] = c_white;
-esecondfade[2] = c_white;
-esecondfade[3] = c_white;
-deployfade[1] = c_white;
-deployfade[2] = c_white;
-deployfade[3] = c_white;
+    //Initialize the weapon availability coloring variables
+    weapon_avaialable_color[i] = c_white;
+}
+      
+//Hold the value of the image index of weapon icons corresponding to your team
+team_color_index = global.team[global.mymid]-1;
 
 //Initialize announcement variables
-announcement = "";
-announcealpha = 0;
-announcement_color = c_maroon;
-announcing = 0;
+announcement_message = "";      //Holds the message string
+announcement_alpha = 0;         //Holds the alpha value of the announcement
+announcement_color = c_maroon;  //Holds the text color of the announcement
+announcement_stage = 0;         //Holds the stage variable that controls what the announcement is doing
 
-//Initialize chat check
-global.chatting = false;
-flashing = '';
-alarm[5] = 10;
-alarm[11] = 180;
+//Initialize chat-related variables
+chat_open = false;      //Flag that says whether or not the extended chat window is open
+chat_flashing = '';                  //Holds the ending typing character
+alarm[5] = 10;                  //Set the time until the ending typing character changes
 
-//initialize ping count
-pinged = 0;
-sendping = 0;
-refreshing = 0;
-disconnectcheck = 0;
-
-//Initialize deploy stock variable 
-dstock = 0;
-maxdstock = 1;
+//Initialize netcode-related timer variables
+ping_frame_count = 0;       //Holds the number of frames that have passed since the last ping update
+ping_send_timer = 0;        //Holds the time(in frames) until the next ping packet is sent
+update_packet_timer = 0;    //Holds the time(in frames) until the next refresh packet is sent
+disconnect_timer = 0;       //Holds the time(in frames) since the last update packet was received by the host
 
 //Initialize view position
-viewpos = 0;
+screen_shake_intensity = 0;
 
 //Merge walls together
 global.wallsprite = spr_empty;
@@ -83,49 +110,31 @@ global.drawwallsprite = spr_empty;
 makenewwall = 0;
 alarm[4] = 2;
 
-//Initialize cursor flash
-targethit = 0;
-//Set rotation values for the cursor
-global.rot1 = 0;
-global.rot2 = 0;
-global.rot3 = 0;
 //Set the targetting values
-foundtarget = -1;
-targetdist = 0;
+targeted_object = -1;
+distance_to_target = 0;
 thisplayer = 0;
-//Initialize scaling
-scaling = 1;
+
 //Initialize the notice chat
 for(i = 0; i &lt;= 4; i += 1)
 {
- chatline[i] = "";
- chatcolor[i] = c_black;
- chatalpha[i] = 0;
+    chatline[i] = "";
+    chatcolor[i] = c_black;
+    chatalpha[i] = 0;
 }
 for(i = 0; i &lt;= 16; i += 1)
 {
- extchatline[i] = "";
+    extchatline[i] = "";
 }
 
-//Initialize sparkline nodes
-for(i = 0; i &lt;= 8; i += 1)
-{
- node[i] = -1;
- node2[i] = -1;
- node3[i] = -1;
- directthis[i] = -1;
- playerdisconnect[i] = 0;
-}
-
-//Start the match with your first energy secondary_selected selected
-selectx = 2;
+//Initialize the flag controlling when the vie zooms back in
+view_zoom_out_flag = false;
 
 //Set the view increments
-increx = 24;
-increy = 15;
-viewheight = 750;
-view_hview[0] = viewheight;
-
+view_x_increase = 24;
+view_y_increase = 15;
+view_height_base = 750;
+view_hview[0] = view_height_base;
 </string>
           </argument>
         </arguments>
@@ -173,6 +182,26 @@ magnify2 = surface_create(view_wport[0], view_hport[0]);
     <event eventtype="2" enumb="10">
       <action>
         <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Begin fading out the displayed announcement.</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -187,13 +216,33 @@ magnify2 = surface_create(view_wport[0], view_hport[0]);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>announcing = 3;
+            <string>announcement_stage = 3;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="2" enumb="6">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Zoom the view in slowly</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -211,11 +260,11 @@ magnify2 = surface_create(view_wport[0], view_hport[0]);
           <argument>
             <kind>1</kind>
             <string> //Check if the view is larger than normal
- if(view_hview[0] &gt; viewheight &amp;&amp; stall = 0)
+ if(view_hview[0] &gt; view_height_base &amp;&amp; view_zoom_out_flag = false)
  {
    alarm[6] = 1;
-   view_wview[0] -= increx/3;
-   view_hview[0] -= increy/3;
+   view_wview[0] -= view_x_increase/3;
+   view_hview[0] -= view_y_increase/3;
  }
 
 </string>
@@ -224,6 +273,26 @@ magnify2 = surface_create(view_wport[0], view_hport[0]);
       </action>
     </event>
     <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Change the ending typing character</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -241,10 +310,10 @@ magnify2 = surface_create(view_wport[0], view_hport[0]);
           <argument>
             <kind>1</kind>
             <string>//Change the flashing text
-if(flashing = '')
- flashing = '|';
+if(chat_flashing = '')
+ chat_flashing = '|';
 else
- flashing = '';
+ chat_flashing = '';
 //Set time until next flash
 alarm[5] = 10;
 </string>
@@ -253,6 +322,26 @@ alarm[5] = 10;
       </action>
     </event>
     <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Consolidate all the wall objects</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -270,7 +359,7 @@ alarm[5] = 10;
           <argument>
             <kind>1</kind>
             <string>//Create a surface large enough to hold all wall drawings
-global.wallsurface = surface_create(ceil(room_width/15), ceil(room_height/15));
+global.wallsurface = surface_create(ceil(room_width/16), ceil(room_height/16));
 
 //Begin drawing to the surface
 surface_set_target(global.wallsurface);
@@ -316,32 +405,29 @@ superwall.image_yscale = 16;
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="3">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>targethit = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="2" enumb="2">
       <action>
         <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Create a screen fading effect</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -356,15 +442,34 @@ superwall.image_yscale = 16;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//The game is over. Return to the waiting rooom
-fadetoblack = 1;
-blackalpha = 0;
+            <string>//Create the effect to fade the screen to black
+instance_create(0, 0, obj_fade_screen);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Force-Quit the game</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -384,22 +489,42 @@ blackalpha = 0;
             <string>//Close the udp stocket if you are a client
 if(global.master = false)
 {
- closesocket(global.udpsock);
- closesocket(global.host);
+    closesocket(global.udpsock);
+    closesocket(global.host);
 }
 //End 39dll
 dllfree();
 //Return to the appropriate room
 if(global.public_game = true)
- room_goto(rm_public_game);
+    room_goto(rm_public_game);
 else
- room_goto(rm_private_game);
+    room_goto(rm_private_game);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Respawn the player</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -453,10 +578,10 @@ else
     lolcolor[3] = 1;
     chatline_add("Blue Team has won the match.", c_navy);
     lolcolor[4] = 2;
-    obj_mod.announcing  = 1;
-    obj_mod.announcement = "Operation Failed";
+    obj_mod.announcement_stage  = 1;
+    obj_mod.announcement_message = "Operation Failed";
     obj_mod.announcement_color = c_navy;
-    obj_mod.announcealpha = 0;
+    obj_mod.announcement_alpha = 0;
     global.outcome = 1;
 
     //Send the message to all clients
@@ -482,10 +607,10 @@ else
     lolcolor[3] = 2;
     chatline_add("Red Team has won the match.", c_maroon);
     lolcolor[4] = 1;
-    obj_mod.announcing  = 1;
-    obj_mod.announcement = "Operation Failed";
+    obj_mod.announcement_stage  = 1;
+    obj_mod.announcement_message = "Operation Failed";
     obj_mod.announcement_color = c_red;
-    obj_mod.announcealpha = 0;
+    obj_mod.announcement_alpha = 0;
     global.outcome = 1;
     //Send the message to all clients
     clearbuffer(0);
@@ -530,7 +655,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(sendping)
+            <string>switch(ping_send_timer)
 {
  case 0:
       clearbuffer(0);
@@ -542,17 +667,17 @@ else
       writebyte(0, 0);
       writebyte(fps, 0);
       client_sendall(0, 0);   
-      sendping = 120;   
+      ping_send_timer = 120;   
  break;
  default:
-         sendping -= 1;
+         ping_send_timer -= 1;
  break;
 }
 
-switch(refreshing)
+switch(update_packet_timer)
 {
  case 0:
-      refreshing = 5;
+      update_packet_timer = 5;
       clearpack();
       packet_label_write(0, global.mymid);
       crush(round(obj_ship.direction*10), 3600, 0);
@@ -569,17 +694,17 @@ switch(refreshing)
       }
       
       crush(round(abs(obj_ship.speed*100)), 2500, 0);
-      crush(prediction_compress(0, obj_ship.predictturn, obj_ship.predictspeed, obj_ship.multiplayer_primary_fire_flag), 72, 0);
+      crush(prediction_compress(obj_ship.predictturn, obj_ship.predictspeed, obj_ship.multiplayer_primary_fire_flag), 72, 0);
       if(obj_ship.multiplayer_primary_fire_flag = true)
       {
-       refreshing = 3;
+       update_packet_timer = 3;
        crush(global.primaryRNG[global.mymid], 15, 0);
        crush(round(obj_ship.newdir*10), 3600, 0);
        switch(global.primary)
        {
         case 4:
             //Find out which ship you are targetting
-            if(obj_mod.foundtarget &lt;= -1)
+            if(obj_mod.targeted_object &lt;= -1)
              testtarget = 8;
             else
             {
@@ -588,7 +713,7 @@ switch(refreshing)
             {
              testtarget+=1;
             if(testtarget != global.mymid)
-              if(global.playership[testtarget] = obj_mod.foundtarget)
+              if(global.playership[testtarget] = obj_mod.targeted_object)
               break;
             }
             }
@@ -598,8 +723,8 @@ switch(refreshing)
              crush(min(100, round(point_distance(obj_ship.x, obj_ship.y, mouse_x, mouse_y)/10)), 100, 0);
         break;
         case 7:
-             if(foundtarget != -1)
-              crush(foundtarget.mid, 10, 0);
+             if(targeted_object != -1)
+              crush(targeted_object.mid, 10, 0);
              else
               crush(10, 10, 0);
         break;
@@ -614,10 +739,10 @@ switch(refreshing)
        crush(clamp(round(global.playership[i].x*10), 0, 65000), 65000, 0);
        crush(clamp(round(global.playership[i].y*10), 0, 65000), 65000, 0);
        crush(round(global.playership[i].speed*100), 2500, 0);
-       crush(prediction_compress(0, global.playership[i].turning, global.playership[i].speeding, global.playership[i].multiplayer_primary_fire_flag), 72, 0);
+       crush(prediction_compress(global.playership[i].turning, global.playership[i].speeding, global.playership[i].multiplayer_primary_fire_flag), 72, 0);
        if(global.playership[i].multiplayer_primary_fire_flag = true)
        {
-        refreshing = 3;
+        update_packet_timer = 3;
         crush(round(global.playership[i].newdir*10), 3601, 0);
         switch(global.playerprimary[i])
         {
@@ -638,16 +763,17 @@ switch(refreshing)
       client_sendall(0, 0);
  break;
  default:
-    refreshing -= 1;
+    update_packet_timer -= 1;
  break;   
  
 }
 
-if(obj_ship.snapdir != oldsnap)
+if(obj_player.primary_direction != previous_primary_direction)
 {
+    previous_primary_direction = obj_player.primary_direction;
     clearbuffer(0);
     packet_label_write(13, global.mymid);
-    writebyte(obj_ship.snapdir+100, 0);
+    crush(obj_player.primary_direction/5, 0, 73);
     client_sendall(0, 0);
 }
 </string>
@@ -820,18 +946,18 @@ while(true)
         }
         chatline_add(readstring(0), newcolor);
         //Create an announcement
-        if(obj_mod.announcing = 0 &amp;&amp; defeatmid != 20)
+        if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
         {
-         obj_mod.announcing  = 1;
-         obj_mod.announcement = global.othername[defeatmid]+" defeated "+global.othername[dummy];
+         obj_mod.announcement_stage  = 1;
+         obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
          obj_mod.announcement_color = newcolor;
         }
 
         //Reset targetting if currently targetting this ship
-        if(foundtarget = global.playership[dummy])
+        if(targeted_object = global.playership[dummy])
         {
-         foundtarget = -1;
-         targetdist = point_distance(obj_ship.x, obj_ship.y, -10000, -10000);
+         targeted_object = -1;
+         distance_to_target = point_distance(obj_ship.x, obj_ship.y, -10000, -10000);
         }
         //Destroy the designated ship
         with(global.playership[dummy])
@@ -858,17 +984,17 @@ while(true)
           lolcolor[3] = 1;
           chatline_add("Blue Team has won the match.", c_navy);
           lolcolor[4] = 2;
-          obj_mod.announcing  = 1;
-          obj_mod.announcealpha = 0;
+          obj_mod.announcement_stage  = 1;
+          obj_mod.announcement_alpha = 0;
           if(global.team[global.mymid] = 1)
           {
-           obj_mod.announcement = "Operation Failed";
+           obj_mod.announcement_message = "Operation Failed";
            global.outcome = 1;
            obj_mod.announcement_color = c_navy;
           }
           else
           {
-           obj_mod.announcement = "Operation Successful";
+           obj_mod.announcement_message = "Operation Successful";
            obj_mod.announcement_color = c_navy;
            global.outcome = 0;
           }         
@@ -896,17 +1022,17 @@ while(true)
           lolcolor[3] = 2;
           chatline_add("Red Team has won the match.", c_maroon);
           lolcolor[4] = 1;
-          obj_mod.announcing  = 1;
-          obj_mod.announcealpha = 0;
+          obj_mod.announcement_stage  = 1;
+          obj_mod.announcement_alpha = 0;
           if(global.team[global.mymid] = 1)
           {
-           obj_mod.announcement = "Operation Successful";
+           obj_mod.announcement_message = "Operation Successful";
            obj_mod.announcement_color = c_maroon;
            global.outcome = 0;
           }
           else
           {
-           obj_mod.announcement = "Operation Failed";
+           obj_mod.announcement_message = "Operation Failed";
            obj_mod.announcement_color = c_maroon;
            global.outcome = 1;
           }
@@ -1002,13 +1128,13 @@ while(true)
 
    //Primary Switched
    case 11:
-        global.playerprimary[dummy] = readbyte(0);
+        global.playerprimary[dummy] = uncrush(0, 73);
         client_sendall(0, dummy);
    break;
    
-   //Change snapdir
-   case 13:
-        global.playership[dummy].snapdir = readbyte(0)-100;
+   //Change primary direction
+   case 13:   
+        global.playership[dummy].primary_direction = uncrush(0, 73)*5;
         client_sendall(0, dummy);
    break;
    
@@ -1058,17 +1184,17 @@ while(true)
                 if(global.team[global.mymid] = 1)
                 {
                     global.outcome = 1;
-                    obj_mod.announcement = "Operation Failed";
+                    obj_mod.announcement_message = "Operation Failed";
                 }
                 else
                 {
                     global.outcome = 0;
-                    obj_mod.announcement = "Operation Successful";
+                    obj_mod.announcement_message = "Operation Successful";
                 }
                 
-                obj_mod.announcing  = 1;
+                obj_mod.announcement_stage  = 1;
                 obj_mod.announcement_color = c_navy;
-                obj_mod.announcealpha = 0;
+                obj_mod.announcement_alpha = 0;
             
                 //Send the message to all clients
                 clearbuffer(0);
@@ -1092,18 +1218,18 @@ while(true)
                 lolcolor[3] = 2;
                 chatline_add("Red Team has won the match.", c_maroon);
                 lolcolor[4] = 1;
-                obj_mod.announcing  = 1;
+                obj_mod.announcement_stage  = 1;
                 obj_mod.announcement_color = c_maroon;
-                obj_mod.announcealpha = 0;
+                obj_mod.announcement_alpha = 0;
                 if(global.team[global.mymid] = 2)
                 {
                     global.outcome = 1;
-                    obj_mod.announcement = "Operation Failed";
+                    obj_mod.announcement_message = "Operation Failed";
                 }
                 else
                 {
                     global.outcome = 0;
-                    obj_mod.announcement = "Operation Successful";
+                    obj_mod.announcement_message = "Operation Successful";
                 }
                 //Send the message to all clients
                 clearbuffer(0);
@@ -1153,37 +1279,27 @@ if(newclient &gt; 0)
             <string>//This part of the step event is the personal checks
 //Things here will not be sent to/received by other players.
 
-if(fadetoblack = 1)
-{
-    blackalpha += 0.04;
-    if(blackalpha &gt;= 1)
-        room_goto(rm_aftermatch);
-}
-
-
 //Handle announcements
-switch(announcing)
+switch(announcement_stage)
 {
- case 1:
-      announcealpha += 0.05;
-      if(announcealpha = 1)
-      {
-       alarm[10] = 240;
-       announcing = 2;
-      }
- break;
- case 3:
-      announcealpha -= 0.05;
-      if(announcealpha = 0)
-       announcing = 0;
- break;
+    case 1:
+        announcement_alpha += 0.05;
+        if(announcement_alpha = 1)
+        {
+            alarm[10] = 240;
+            announcement_stage = 2;
+        }
+    break;
+    case 3:
+        announcement_alpha -= 0.05;
+        if(announcement_alpha = 0)
+            announcement_stage = 0;
+    break;
 }
-if(!instance_exists(view_object[0]))
- view_object[0] = obj_ship;
 
-if((view_xview[0]&gt;0&amp;&amp;view_xview[0]+view_wview[0]&lt;room_width))
+if((view_xview[0] &gt; 0 &amp;&amp; view_xview[0]+view_wview[0] &lt; room_width))
 {
-    if(global.spacemap = 1)
+    if(map_type_space = 1)
     { 
         background_hspeed[0]=view_object.hspeed/1.2;
         background_hspeed[2]=(view_object.hspeed+back_extrahspeed)/2;
@@ -1192,7 +1308,7 @@ if((view_xview[0]&gt;0&amp;&amp;view_xview[0]+view_wview[0]&lt;room_width))
         background_hspeed[5]=(view_object.hspeed+back_extrahspeed)/5.5;
         background_hspeed[6]=(view_object.hspeed+back_extrahspeed)/8;
     }
-    
+    background_hspeed[6]=(view_object.hspeed+back_extrahspeed)/8;    
     background_hspeed[1]=view_object.hspeed/1.2;
 }
 else
@@ -1207,7 +1323,7 @@ else
 }
 if((view_yview[0]&gt;0&amp;&amp;view_yview[0]+view_hview[0]&lt;room_height))
 {
-    if(global.spacemap = 1)
+    if(map_type_space = 1)
     { 
         background_vspeed[0]=view_object.vspeed/1.2;
         background_vspeed[2]=(view_object.vspeed+back_extravspeed)/2;
@@ -1217,6 +1333,7 @@ if((view_yview[0]&gt;0&amp;&amp;view_yview[0]+view_hview[0]&lt;room_height))
         background_vspeed[6]=(view_object.vspeed+back_extravspeed)/8;
     }
     
+    background_hspeed[6]=(view_object.vspeed+back_extrahspeed)/8;
     background_vspeed[1]=view_object.vspeed/1.2;
 }
 else
@@ -1230,101 +1347,133 @@ else
     background_vspeed[6]=back_extravspeed/8;
 }
 
-//Rotate cursor parts
-global.rot1 += 2.5;
-global.rot2 -= 4;
-global.rot3 += 6;
+//Rotate the cursor parts
+cursor_rotation[1] += 2.5;
+cursor_rotation[2] -= 4;
+cursor_rotation[3] += 6;
 
 //Handle Goliath Weaponsmith Bay
-if(global.selected_ship[global.mymid] = 3)
- weaponsmith(dstock);
+//if(goliath_selected = true)
+//    weaponsmith(dstock);
 
-//Find the player farthest from you, but within view range
-farthestdist = 0;
-farthesttarget = -1;
+//Find the player farthest from you, but within target range
+//Initialize variables to hold the distance to the farthest possible target, and the farthest possible target
+var distance_to_farthest_target = 0;
+var farthest_target = -1;
+//Loop through all players
 for(i = 1; i &lt; 8; i += 1)
 {
- if(global.activated[i] = 0) continue;
- if(global.playership[i] = view_object) continue;
- loldist = point_distance(view_object.x, view_object.y, global.playership[i].x, global.playership[i].y);
- if(loldist &lt;= 900 &amp;&amp; loldist &gt; farthestdist)
- {
-  farthestdist = loldist;
-  farthesttarget = global.playership[i];
- }
+    //Skip this player if it isn't activated
+    if(player_activated[i] = 0) continue;
+    //Skip this player it it's you
+    if(i = global.mymid) continue;
+    //Calculate the distance to this player
+    var distance_to_target = point_distance(view_object.x, view_object.y, player_object[i].x, player_object[i].y);
+    //Check if the player is within view range
+    if(distance_to_target &lt;= 900)
+    { 
+        //Also check if this player is farther away then the player previous marked fartheest away
+        if(distance_to_target &gt; distance_to_farthest_target)
+        {
+            distance_to_farthest_target = distance_to_target;   //Save this distance as the farthest distance
+            farthest_target = player_object[i];                 //Save this player as the farthest possible target
+        }
+    }
 }
 
 //Targetting
-//Target the enemy closest to the cursor
-oldtarget = foundtarget;
-if(obj_ship.armor &gt; 0)
- foundtarget = instance_nearest(mouse_x,mouse_y,prnt_enemy);
+oldtarget = targeted_object;
+//Target the enemy closest to the cursor if you are still alive
+if(obj_player.armor &gt; 0)
+    targeted_object = instance_nearest(mouse_x, mouse_y, obj_dummy_enemy);
+else
+{
+    targeted_object = -1;
+    exit;
+}
 
 //Check if there is a target
-if(farthesttarget &gt; -1)
+if(farthest_target != -1)
 {
-    view_focusx = farthesttarget.x;
-    if(farthesttarget.x &lt; 64)
+    //Initialize the x value of the second focus point of the view
+    var view_focusx = farthest_target.x;
+    //Make sure that the focus point if not close the edges of the room
+    if(farthest_target.x &lt; 64)
         view_focusx = 66;
-    if(farthesttarget.x &gt; room_width-64)
-        view_focusx = room_width-66;
-    view_focusy = farthesttarget.y;
-    if(farthesttarget.y &lt; 64)
+    else
+        if(farthest_target.x &gt; room_width-64)
+            view_focusx = room_width-66;
+    //Initialize the y value of the second focus point of the view
+    var view_focusy = farthest_target.y;
+    //Make sure that the focus point if not close the edges of the room
+    if(farthest_target.y &lt; 64)
         view_focusy = 66;
-    if(farthesttarget.y &gt; room_height-64)
-        view_focusy = room_height-66;
-        
- //Check if the target is moving out of view
- if(view_hview[0] &lt; 1480 &amp;&amp; view_wview[0] &lt; room_width-increx &amp;&amp;
-  
- (view_focusx &lt; view_xview[0]+64 || view_focusx &gt; view_xview[0]+view_wview[0]-64 || view_focusy&lt;view_yview[0]+64 || view_focusy &gt; view_yview[0]+view_hview[0]-64))
- {
-  //Expand the view to keep it seen
-  view_wview[0] += increx;
-  view_hview[0] += increy;
-  stall = 1;
- }
- //Check if the view is larger than normal
- if(view_hview[0] &gt; viewheight)
- {
-  //Check if the target is moving closer
-  if(stall = 1 &amp;&amp; view_focusx &gt; view_xview[0]+128 &amp;&amp; view_focusx &lt; view_xview[0]+view_wview[0]-128 &amp;&amp; view_focusy &gt; view_yview[0]+128 &amp;&amp; view_focusy &lt; view_yview[0]+view_hview[0]-128)
-  {
-   //Shrink the view as needed
-   stall = 0;
-   alarm[6] = 180;
-  }
- }
+    else
+        if(farthest_target.y &gt; room_height-64)
+            view_focusy = room_height-66;
+    
+    //Check if the view has room to expand
+    if(view_hview[0] &lt; 1480)
+        if(view_wview[0] &lt; room_width-view_x_increase)
+            //Check if the target is moving out of view
+            if(view_focusx &lt; view_xview[0]+64 || view_focusx &gt; view_xview[0]+view_wview[0]-64 || view_focusy&lt;view_yview[0]+64 || view_focusy &gt; view_yview[0]+view_hview[0]-64)
+            {
+                //Expand the view to keep it seen
+                view_wview[0] += view_x_increase;
+                view_hview[0] += view_y_increase;
+                view_zoom_out_flag = true;
+            }
+            
+    //Check if the view is larger than normal
+    if(view_hview[0] &gt; view_height_base)
+    {
+        //Check if the target is moving closer
+        if(view_zoom_out_flag = true)
+            if(view_focusx &gt; view_xview[0]+128)
+                if(view_focusx &lt; view_xview[0]+view_wview[0]-128)
+                    if(view_focusy &gt; view_yview[0]+128)
+                        if(view_focusy &lt; view_yview[0]+view_hview[0]-128)
+                        {
+                            //Shrink the view as needed
+                            view_zoom_out_flag = false;
+                            alarm[6] = 180;
+                        }
+    }
 }
 else
 {
- //If there is no target, check to see if the view is larger
- //than normal
- if(stall = 1 &amp;&amp; view_hview[0] &gt; viewheight)
- {
-  //Shrink the view as needed
-   stall = 0;
-   alarm[6] = 180;
- }
- foundtarget = -1;
+    //If there is no target, check to see if the view is larger
+    //than normal
+    if(view_zoom_out_flag = true)
+        if(view_hview[0] &gt; view_height_base)
+        {
+            //Shrink the view as needed
+            view_zoom_out_flag = false;
+            alarm[6] = 180;
+        }
+    targeted_object = -1;
 }
 //Convert the distance to target to be used by the targetting meter
-if(foundtarget != -1 &amp;&amp; instance_exists(foundtarget))
- targetdist = ceil(point_distance(view_object.x, view_object.y, foundtarget.x, foundtarget.y)/33.33);
+if(targeted_object != -1)
+{
+    distance_to_target = ceil(point_distance(view_object.x, view_object.y, targeted_object.x, targeted_object.y)/33.33);
+    if(distance_to_target &gt; 27)
+        targeted_object = -1;
+}
 else
- targetdist = 0;
-if(targetdist &gt; 27)
- foundtarget = -1;
+    distance_to_target = 0;
+
 
 //Creeate a new cursor effect
-if(foundtarget != -1 &amp;&amp; foundtarget != oldtarget)
-{
-    with(obj_lockoncursor)
-        instance_destroy();
-    newlockon = instance_create(0, 0, obj_lockoncursor);
-    newlockon.target = foundtarget;
-    newlockon.direction = global.rot2;
-}
+if(targeted_object != -1)
+    if(targeted_object != oldtarget)
+    {
+        with(obj_lockoncursor)
+            instance_destroy();
+        newlockon = instance_create(0, 0, obj_lockoncursor);
+        newlockon.target = targeted_object;
+        newlockon.direction = global.rot2;
+    }
 
 //Center your ship
 screen_shake(view_object);
@@ -1351,7 +1500,7 @@ screen_shake(view_object);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(selectx)
+            <string>switch(secondary_selection_position)
 {
  case 2:
     event_perform(ev_keypress, ord('2'));
@@ -1385,7 +1534,7 @@ screen_shake(view_object);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(selectx)
+            <string>switch(secondary_selection_position)
 {
  case 2:
     event_perform(ev_keypress, ord('3'));
@@ -1662,65 +1811,125 @@ cleanmem();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scaling = view_hview[0]/480;
+            <string>var current_secondary = obj_player.secondary_selected;
+var current_secondary_stock = global.secondary_stock[current_secondary];
+
+screen_scaling_ratio = view_hview[0]/480;
 texture_set_interpolation(false);
 //If you are targeting an enemy, draw the targetting cursor
-if(foundtarget &gt; -1 &amp;&amp; !instance_exists(obj_lockoncursor))
- draw_sprite_ext(spr_targetcursor, targetdist, (foundtarget.x-view_xview[0])/scaling, (foundtarget.y-view_yview[0])/scaling, 1, 1, global.rot2, c_white, 0.7);
+if(targeted_object &gt; -1 &amp;&amp; !instance_exists(obj_lockoncursor))
+ draw_sprite_ext(spr_targetcursor, distance_to_target, (targeted_object.x-view_xview[0])/screen_scaling_ratio, (targeted_object.y-view_yview[0])/screen_scaling_ratio, 1, 1, global.rot2, c_white, 0.7);
  
 //Draw announcement text, if there is any
-if(announcealpha &gt; 0)
+if(announcement_alpha &gt; 0)
 {
  draw_set_halign(fa_center);
  draw_set_valign(fa_middle);
  draw_set_font(fnt_bigtext);
- draw_set_alpha(announcealpha);
- draw_text_bordered(view_wport[0]/2, 130, announcement, 1, 2, announcement_color, c_white);
+ draw_set_alpha(announcement_alpha);
+ draw_text_bordered(view_wport[0]/2, 130, announcement_message, 1, 2, announcement_color, c_white);
  draw_set_halign(fa_left);
  draw_set_valign(fa_top);
 }
+
 //Draw equipped weapons
 check_weapons();
-draw_sprite_ext(global.secondaryimage[1], teamcolorimg, 2, 73, 1, 1, 0, esecondfade[1], 1);
-if(global.isdeploy[1] &gt; 0)
-    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[1]]/obj_ship.maxdstock[global.isdeploy[1]])*26, 36, 2, 73, 1, 1, c_white, 1);
-draw_sprite_ext(global.secondaryimage[2], teamcolorimg, 42, 73, 1, 1, 0, deployfade[1], 1);
-if(global.isdeploy[2] &gt; 0)
-    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[2]]/obj_ship.maxdstock[global.isdeploy[2]])*26, 36, 42, 73, 1, 1, c_white, 1);
-draw_sprite_ext(global.secondaryimage[3], teamcolorimg, 82, 73, 1, 1, 0, deployfade[2], 1);
-if(global.isdeploy[3] &gt; 0)
-    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[3]]/obj_ship.maxdstock[global.isdeploy[3]])*26, 36, 82, 73, 1, 1, c_white, 1);
-draw_sprite_ext(global.secondaryimage[4], teamcolorimg, 122, 73, 1, 1, 0, deployfade[3], 1);
-if(global.isdeploy[4] &gt; 0)
-    draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (obj_ship.deploystock[global.isdeploy[4]]/obj_ship.maxdstock[global.isdeploy[4]])*26, 36, 122, 73, 1, 1, c_white, 1);
+
+//Draw the weapon icons and ammo bars depending on the icon order
+switch(secondary_icon_order)
+{
+    case 0: //The order is E-H-H-E
+        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
+        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
+        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+    break;
+    case 1: //The order is E-E-H-H
+        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        
+        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        
+        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
+        
+        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);    
+    break;
+    case 2: //The order is E-E-H-E
+        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        
+        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        
+        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
+        
+        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);    
+    break;
+    case 3: //The order is E-E-E-H
+        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        
+        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        
+        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        
+        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);        
+    break;
+    case 4: //The order is H-H-H-E
+        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[1]/max_secondary_stock[1])*26, 36, 2, 73, 1, 1, c_white, 1);
+        
+        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
+        
+        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
+        
+        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+    break;
+    case 5: //The order is E-H-H-H
+        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        
+        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
+        
+        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
+        
+        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);    
+    break;
+}
 
 with(obj_weaponflash)
     draw_sprite_ext(sprite_index, image_index, xstart, 73, 1, 1, 0, c_white, 1);
     
 //Draw the highlighter
-draw_sprite_ext(spr_numbers_selected, 0, selectx, 73, 1, 1, 0, c_white, 1);
+draw_sprite_ext(spr_numbers_selected, 0, secondary_selection_position, 73, 1, 1, 0, c_white, 1);
 
 //Draw Armor, Shield, Energy, and Ammo bars
 if(obj_ship.armor &gt; 0)
 {
  armorratio = obj_ship.armor/obj_ship.armor_maximum;
- if(armorratio &lt; armorpart)
-  armorpart -= 0.02;
+ if(armorratio &lt; draw_armor_bar)
+  draw_armor_bar -= 0.02;
  else
-  armorpart = armorratio;
- draw_sprite_part_ext(spr_armorbar, 0, 0, 0, 4+armorpart*233, 86, 0, 0, 1, 1, c_white, 1);
+  draw_armor_bar = armorratio;
+ draw_sprite_part_ext(spr_armorbar, 0, 0, 0, 4+draw_armor_bar*233, 86, 0, 0, 1, 1, c_white, 1);
 }
 if(obj_ship.shield &gt; 0)
 {
  shieldratio = obj_ship.shield/obj_ship.shield_maximum;
- if(shieldratio &lt; shieldpart)
-  shieldpart -= 0.02;
+ if(shieldratio &lt; draw_shield_bar)
+  draw_shield_bar -= 0.02;
  else
-  shieldpart = shieldratio;
- draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+shieldpart*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*shieldratio));
+  draw_shield_bar = shieldratio;
+ draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+draw_shield_bar*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*shieldratio));
 }
 else
- shieldpart = 0;
+ draw_shield_bar = 0;
 if(obj_ship.energy &gt; 0)
 {
     draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1);
@@ -1728,14 +1937,14 @@ if(obj_ship.energy &gt; 0)
 draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
 if(instance_exists(obj_overheatshine))
     draw_sprite_ext(spr_overheatshine, obj_overheatshine.image_index, 0, 0, 1, 1, 0, c_white, 1);
-   
 
-if(obj_ship.deploystock[dstock] &gt; 0)
- draw_sprite_part_ext(spr_ammobar, maxdstock, 0, 0, 81+(obj_ship.deploystock[dstock]/obj_ship.maxdstock[dstock])*157, 64, 0, 0, 1, 1, c_white, 1);
+
+if(current_secondary_stock &gt; 0)
+    draw_sprite_part_ext(spr_ammobar, max_secondary_stock[current_secondary], 0, 0, 81+(current_secondary_stock/max_secondary_stock[current_secondary])*157, 64, 0, 0, 1, 1, c_white, 1);
 
 //Draw the gauge backgrounds
 draw_sprite_ext(spr_gauges, 0, 0, 0, 1, 1, 0, c_white, 1);
-draw_sprite_ext(spr_weaponicons, iconbar, 0, 0, 1, 1, 0, c_white, 1);
+draw_sprite_ext(spr_weaponicons, secondary_icon_order, 0, 0, 1, 1, 0, c_white, 1);
 
 //Draw the match status
 switch(global.matchtype)
@@ -1790,7 +1999,7 @@ draw_set_color(c_white);
 draw_text_transformed(10, view_hport[0]-20, string(fps), 1, 1, 0);
 
 //Draw the chat bar if chatting
-switch(global.chatting)
+switch(obj_mod.chat_open)
 {
  case true:
       draw_set_color(c_white);
@@ -1811,7 +2020,7 @@ switch(global.chatting)
         break;  
        }
       //Draw the text in the chat bar
-      draw_text_transformed(14, 454, string_copy(keyboard_string, startchat, stopchat)+flashing, 1, 1, 0);
+      draw_text_transformed(14, 454, string_copy(keyboard_string, startchat, stopchat)+chat_flashing, 1, 1, 0);
       draw_sprite_ext(spr_extchat, 0, 0, 0, 1, 1, 0, c_white, 1);
       //draw chat
       draw_set_color(c_white);
@@ -1865,16 +2074,11 @@ if(keyboard_check_direct(vk_tab))
  draw_set_halign(fa_left);
 }
 
- 
-draw_set_alpha(blackalpha);
-draw_set_color(c_black);
-draw_rectangle(-30, -30, view_wport[0]+30, view_hport[0]+30, 0);
-
 
 //Draw the cursor
-draw_sprite_ext(spr_cursor, targethit, (mouse_x-view_xview[0])/scaling, (mouse_y-view_yview[0])/scaling, 0.7, 0.7, global.rot1, c_white, 0.7);
-draw_sprite_ext(spr_cursor, targethit+1, (mouse_x-view_xview[0])/scaling, (mouse_y-view_yview[0])/scaling, 0.7, 0.7, global.rot2, c_white, 0.7);
-draw_sprite_ext(spr_cursor, targethit+2, (mouse_x-view_xview[0])/scaling, (mouse_y-view_yview[0])/scaling, 0.7, 0.7, global.rot3, c_white, 0.7);
+draw_sprite_ext(spr_cursor, 0, (mouse_x-view_xview[0])/screen_scaling_ratio, (mouse_y-view_yview[0])/screen_scaling_ratio, 0.7, 0.7, cursor_rotation[1], c_white, 0.7);
+draw_sprite_ext(spr_cursor, 1, (mouse_x-view_xview[0])/screen_scaling_ratio, (mouse_y-view_yview[0])/screen_scaling_ratio, 0.7, 0.7, cursor_rotation[2], c_white, 0.7);
+draw_sprite_ext(spr_cursor, 2, (mouse_x-view_xview[0])/screen_scaling_ratio, (mouse_y-view_yview[0])/screen_scaling_ratio, 0.7, 0.7, cursor_rotation[3], c_white, 0.7);
 texture_set_interpolation(true);
 
 </string>
@@ -1900,32 +2104,6 @@ texture_set_interpolation(true);
           <argument>
             <kind>1</kind>
             <string>draw_stasis();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Draw cloud layer on victa tundra
-if(room = rm_victatundra)
- draw_background_tiled(global.cloudback, background_x[6], background_y[6]);
-
 </string>
           </argument>
         </arguments>
@@ -1979,10 +2157,10 @@ else
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true) exit;
+if(obj_mod.chat_open = true) exit;
 audio_play_sound(snd_changeweapon, 1, 0);
 
-selectx = 82;
+secondary_selection_position = 82;
 //Switch to the correct new attack
 global.playership[global.mymid].secondary_selected = 3;
 </string>
@@ -2008,9 +2186,9 @@ global.playership[global.mymid].secondary_selected = 3;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true) exit;
+if(obj_mod.chat_open = true) exit;
 audio_play_sound(snd_changeweapon, 1, 0);
-selectx = 42;
+secondary_selection_position = 42;
 //Switch to the correct new attack
 global.playership[global.mymid].secondary_selected = 2;
 </string>
@@ -2036,10 +2214,9 @@ global.playership[global.mymid].secondary_selected = 2;
           <argument>
             <kind>1</kind>
             <string>//Check if you are chatting
-if(global.chatting = true) exit;
+if(obj_mod.chat_open = true) exit;
 audio_play_sound(snd_changeweapon, 1, 0);
-dstock = 0;
-selectx = 2;
+secondary_selection_position = 2;
 //Switch to the correct new attack
 global.playership[global.mymid].secondary_selected = 1;
 
@@ -2116,10 +2293,10 @@ alarm[1]=4;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(global.chatting)
+            <string>switch(obj_mod.chat_open)
 {
  case false:
-      global.chatting = true;
+      obj_mod.chat_open = true;
       global.playership[global.mymid].ship_disabled = true;
       keyboard_string = '';
       //Send a prediction to show the stopping
@@ -2131,7 +2308,7 @@ alarm[1]=4;
        //Send the prediction
        clearbuffer(0);
        packet_label_write(6, global.mymid);
-       writebyte(prediction_compress(thisturn, predictturn, predictspeed, 0), 0);
+       writebyte(prediction_compress(predictturn, predictspeed, 0), 0);
        //Send to everyone if host
        if(global.master = true)
         client_sendall(1, 0);
@@ -2141,7 +2318,7 @@ alarm[1]=4;
       }
  break;
  case true:
-      global.chatting = false;
+      obj_mod.chat_open = false;
       global.playership[global.mymid].ship_disabled = true;
       //Check if text was typed
       if(keyboard_string = '') break;
@@ -2157,7 +2334,7 @@ alarm[1]=4;
        //Send the prediction
        clearbuffer(0);
        packet_label_write(6, global.mymid);
-       writebyte(prediction_compress(thisturn, predictturn, predictspeed, 0), 0);
+       writebyte(prediction_compress(predictturn, predictspeed, 0), 0);
        //Send to everyone if host
        if(global.master = true)
         client_sendall(1, 0);

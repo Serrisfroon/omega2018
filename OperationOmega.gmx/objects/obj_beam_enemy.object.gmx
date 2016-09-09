@@ -147,7 +147,7 @@ if(scale = 1 &amp;&amp; stage = 0)
                 armor -= 20;
                 //Shake the screen if in range
                 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
-                    obj_mod.viewpos = 4;
+                    obj_mod.screen_shake_intensity = 4;
                 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
             }
         }
@@ -173,7 +173,7 @@ if(scale = 1 &amp;&amp; stage = 0)
                     armor += shield;
                     shield = 0;
                     if(shielddown = 1)
-                        obj_mod.sendping = 0;
+                        obj_mod.ping_send_timer = 0;
 
                 }
 
@@ -191,7 +191,7 @@ if(scale = 1 &amp;&amp; stage = 0)
                     smoke = floor(armor/(armor_maximum/10));
                 //Shake the screen if in range
                 if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
-                    obj_mod.viewpos = 8;
+                    obj_mod.screen_shake_intensity = 8;
 
                 //Check if your ship has been defeated
                 if(armor &lt;= 0)

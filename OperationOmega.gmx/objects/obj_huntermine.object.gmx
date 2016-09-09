@@ -66,11 +66,6 @@ attack_name = "Hunter Mine";    //Set the name of the attack
             <string>sfx_play(snd_explode2, x, y);
 //Create an effect
 create_explosion(1);
-if(hit = 1 &amp;&amp; mid = global.mymid)
-{
- obj_mod.targethit = 3;
- obj_mod.alarm[3] = 5;
-}
 </string>
           </argument>
         </arguments>

@@ -123,7 +123,7 @@ if(scale = 1 &amp;&amp; stage = 0)
      {
       //Shake the screen if in range
       if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
-       obj_mod.viewpos = 4;
+       obj_mod.screen_shake_intensity = 4;
       part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
      }
     }
@@ -140,7 +140,7 @@ if(scale = 1 &amp;&amp; stage = 0)
     }
     //Shake the screen if in range
     if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
-     obj_mod.viewpos = 4;
+     obj_mod.screen_shake_intensity = 4;
     part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
     //Take damage
     if(ship_status_shocked = false)

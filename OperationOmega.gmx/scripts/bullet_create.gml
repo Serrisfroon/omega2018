@@ -288,13 +288,13 @@ switch(type)
     break;
     case "Siphon":
         //Check if the target is nearby
-        if(obj_mod.foundtarget < 0 || point_distance(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y) > 400) 
+        if(obj_mod.targeted_object < 0 || point_distance(x, y, obj_mod.targeted_object.x, obj_mod.targeted_object.y) > 400) 
         {
             return -1;
             exit;
         }
         //Check if the target is withing firing angle
-        var point = point_direction(x, y, obj_mod.foundtarget.x, obj_mod.foundtarget.y);
+        var point = point_direction(x, y, obj_mod.targeted_object.x, obj_mod.targeted_object.y);
         if(aim_limit(facedir, point, 30) != point)
         {
             return -1;
@@ -303,10 +303,10 @@ switch(type)
         //Create the shot and give it speed and facedir
         bullet = instance_create(0, 0, obj_siphon);
         bullet.mid = global.mymid;
-        bullet.targetmid = obj_mod.foundtarget.mid;
+        bullet.targetmid = obj_mod.targeted_object.mid;
         sfx_play(snd_siphon, x, y);
         //Absorb shield
-        if(obj_mod.foundtarget.shield > 0) shield += 2;
+        if(obj_mod.targeted_object.shield > 0) shield += 2;
         if(shield > shield_maximum) shield = shield_maximum;
     break;
 }

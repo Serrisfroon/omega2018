@@ -2,7 +2,7 @@
 
 
 //Script variables
-var dmg, pene, thresh, shak, weaponname;
+var dmg, pene, thresh, shake, weaponname;
 dmg = argument0;
 pene = argument1;
 thresh = argument2;
@@ -77,7 +77,7 @@ if(shield < 0)
     armor += shield;
     shield = 0;
     if(shielddown = 1)
-        obj_mod.sendping = 0;
+        obj_mod.ping_send_timer = 0;
 }
 
 //If there is shield left, create effect
@@ -103,7 +103,7 @@ if(pene > 0)
     
 
 //Shake the screen
-obj_mod.viewpos += shake;
+obj_mod.screen_shake_intensity += shake;
 
 //Destroy the attack
 with(other) instance_destroy();

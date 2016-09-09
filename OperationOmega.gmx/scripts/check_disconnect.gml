@@ -34,17 +34,17 @@ for(disi = 1; disi < 8; disi += 1)
                 if(global.team[global.mymid] = 1)
                 {
                     global.outcome = 1;
-                    obj_mod.announcement = "Operation Failed";
+                    obj_mod.announcement_message = "Operation Failed";
                 }
                 else
                 {
                     global.outcome = 0;
-                    obj_mod.announcement = "Operation Successful";
+                    obj_mod.announcement_message = "Operation Successful";
                 }
                 
-                obj_mod.announcing  = 1;
+                obj_mod.announcement_stage  = 1;
                 obj_mod.announcement_color = c_navy;
-                obj_mod.announcealpha = 0;
+                obj_mod.announcement_alpha = 0;
             
                 //Send the message to all clients
                 clearbuffer(0);
@@ -68,18 +68,18 @@ for(disi = 1; disi < 8; disi += 1)
                 lolcolor[3] = 2;
                 chatline_add("Red Team has won the match.", c_red);
                 lolcolor[4] = 1;
-                obj_mod.announcing  = 1;
+                obj_mod.announcement_stage  = 1;
                 obj_mod.announcement_color = c_red;
-                obj_mod.announcealpha = 0;
+                obj_mod.announcement_alpha = 0;
                 if(global.team[global.mymid] = 2)
                 {
                     global.outcome = 1;
-                    obj_mod.announcement = "Operation Failed";
+                    obj_mod.announcement_message = "Operation Failed";
                 }
                 else
                 {
                     global.outcome = 0;
-                    obj_mod.announcement = "Operation Successful";
+                    obj_mod.announcement_message = "Operation Successful";
                 }
                 //Send the message to all clients
                 clearbuffer(0);
