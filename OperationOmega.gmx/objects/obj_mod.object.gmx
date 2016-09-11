@@ -660,8 +660,8 @@ else
  case 0:
       clearbuffer(0);
       packet_label_write(1, global.mymid);
-      if(obj_ship.armor &gt; 0)
-       writebyte(status_compress(obj_ship.smoke, obj_ship.ship_status_hacked, obj_ship.ship_status_shocked), 0);
+      if(obj_player.armor &gt; 0)
+       writebyte(status_compress(obj_player.smoke, obj_player.ship_status_hacked, obj_player.ship_status_shocked), 0);
       else
        writebyte(0, 0);
       writebyte(0, 0);
@@ -676,96 +676,95 @@ else
 
 switch(update_packet_timer)
 {
- case 0:
-      update_packet_timer = 5;
-      clearpack();
-      packet_label_write(0, global.mymid);
-      crush(round(obj_ship.direction*10), 3600, 0);
-      crush(round(obj_ship.facedir*10), 3600, 0);
-      if(obj_ship.armor &gt; 0)
-      {
-       crush(round(obj_ship.x*10), 65000, 0);
-       crush(round(obj_ship.y*10), 65000, 0);
-      }
-      else
-      {
-       crush(65000, 65000, 0);
-       crush(65000, 65000, 0);
-      }
-      
-      crush(round(abs(obj_ship.speed*100)), 2500, 0);
-      crush(prediction_compress(obj_ship.predictturn, obj_ship.predictspeed, obj_ship.multiplayer_primary_fire_flag), 72, 0);
-      if(obj_ship.multiplayer_primary_fire_flag = true)
-      {
-       update_packet_timer = 3;
-       crush(global.primaryRNG[global.mymid], 15, 0);
-       crush(round(obj_ship.newdir*10), 3600, 0);
-       switch(global.primary)
-       {
-        case 4:
-            //Find out which ship you are targetting
-            if(obj_mod.targeted_object &lt;= -1)
-             testtarget = 8;
-            else
-            {
-            testtarget = -1;
-            while(true)
-            {
-             testtarget+=1;
-            if(testtarget != global.mymid)
-              if(global.playership[testtarget] = obj_mod.targeted_object)
-              break;
-            }
-            }
-            crush(testtarget, 8, 0);
-        break;
-        case 6:
-             crush(min(100, round(point_distance(obj_ship.x, obj_ship.y, mouse_x, mouse_y)/10)), 100, 0);
-        break;
-        case 7:
-             if(targeted_object != -1)
-              crush(targeted_object.mid, 10, 0);
-             else
-              crush(10, 10, 0);
-        break;
-       }
-      }
-      for(i = 1; i &lt; 8; i += 1)
-      {
-       if(global.activated[i] &lt;= 0) continue;
-       if(global.playership[i] = obj_dud) continue;
-       crush(round(global.playership[i].direction*10), 3600, 0);
-       crush(round(global.playership[i].facedir*10), 3600, 0);
-       crush(clamp(round(global.playership[i].x*10), 0, 65000), 65000, 0);
-       crush(clamp(round(global.playership[i].y*10), 0, 65000), 65000, 0);
-       crush(round(global.playership[i].speed*100), 2500, 0);
-       crush(prediction_compress(global.playership[i].turning, global.playership[i].speeding, global.playership[i].multiplayer_primary_fire_flag), 72, 0);
-       if(global.playership[i].multiplayer_primary_fire_flag = true)
-       {
-        update_packet_timer = 3;
-        crush(round(global.playership[i].newdir*10), 3601, 0);
-        switch(global.playerprimary[i])
+    case 0:
+        update_packet_timer = 5;
+        clearpack();
+        packet_label_write(0, global.mymid);
+        crush(round(obj_player.direction*10), 3600, 0);
+        crush(round(obj_player.facedir*10), 3600, 0);
+        if(obj_player.armor &gt; 0)
         {
-         case 4:
-              crush(global.playership[i].flankcurve, 8, 0);
-         break;
-         case 6:
-              crush(min(100, global.playership[i].crossfiredist), 100, 0);
-         break;
-         case 7:
-              crush(global.playership[i].siphontarget, 10, 0);
-         break;
+            crush(round(obj_player.x*10), 65000, 0);
+            crush(round(obj_player.y*10), 65000, 0);
         }
-       }
-      }
-      //Send to everyone
-      bufferpack();
-      client_sendall(0, 0);
- break;
- default:
-    update_packet_timer -= 1;
- break;   
- 
+        else
+        {
+            crush(65000, 65000, 0);
+            crush(65000, 65000, 0);
+        }
+        
+        crush(round(abs(obj_player.speed*100)), 2500, 0);
+        crush(prediction_compress(obj_player.predictturn, obj_player.predictspeed, obj_player.multiplayer_primary_fire_flag), 72, 0);
+        if(obj_player.multiplayer_primary_fire_flag = true)
+        {
+            update_packet_timer = 3;
+            crush(global.primaryRNG[global.mymid], 15, 0);
+            crush(round(obj_player.newdir*10), 3600, 0);
+            switch(global.primary)
+            {
+                case 4:
+                    //Find out which ship you are targetting
+                    if(obj_mod.targeted_object &lt;= -1)
+                     testtarget = 8;
+                    else
+                    {
+                    testtarget = -1;
+                    while(true)
+                    {
+                     testtarget+=1;
+                    if(testtarget != global.mymid)
+                      if(global.playership[testtarget] = obj_mod.targeted_object)
+                      break;
+                    }
+                    }
+                    crush(testtarget, 8, 0);
+                break;
+                case 6:
+                    crush(min(100, round(point_distance(obj_player.x, obj_player.y, mouse_x, mouse_y)/10)), 100, 0);
+                break;
+                case 7:
+                    if(targeted_object != -1)
+                        crush(targeted_object.mid, 10, 0);
+                    else
+                        crush(10, 10, 0);
+                break;
+            }
+        }
+        for(i = 1; i &lt; 8; i += 1)
+        {
+            if(global.activated[i] &lt;= 0) continue;
+            if(global.playership[i] = obj_dud) continue;
+            crush(round(global.playership[i].direction*10), 3600, 0);
+            crush(round(global.playership[i].facedir*10), 3600, 0);
+            crush(clamp(round(global.playership[i].x*10), 0, 65000), 65000, 0);
+            crush(clamp(round(global.playership[i].y*10), 0, 65000), 65000, 0);
+            crush(round(global.playership[i].speed*100), 2500, 0);
+            crush(prediction_compress(global.playership[i].turning, global.playership[i].speeding, global.playership[i].multiplayer_primary_fire_flag), 72, 0);
+            if(global.playership[i].multiplayer_primary_fire_flag = true)
+            {
+                update_packet_timer = 3;
+                crush(round(global.playership[i].newdir*10), 3601, 0);
+                switch(global.playerprimary[i])
+                {
+                    case 4:
+                        crush(global.playership[i].flankcurve, 8, 0);
+                    break;
+                    case 6:
+                        crush(min(100, global.playership[i].crossfiredist), 100, 0);
+                    break;
+                    case 7:
+                        crush(global.playership[i].siphontarget, 10, 0);
+                    break;
+                }
+            }
+        }
+        //Send to everyone
+        bufferpack();
+        client_sendall(0, 0);
+    break;
+    default:
+        update_packet_timer -= 1;
+    break;     
 }
 
 if(obj_player.primary_direction != previous_primary_direction)
@@ -1816,20 +1815,22 @@ var current_secondary_stock = global.secondary_stock[current_secondary];
 
 screen_scaling_ratio = view_hview[0]/480;
 texture_set_interpolation(false);
+
 //If you are targeting an enemy, draw the targetting cursor
-if(targeted_object &gt; -1 &amp;&amp; !instance_exists(obj_lockoncursor))
- draw_sprite_ext(spr_targetcursor, distance_to_target, (targeted_object.x-view_xview[0])/screen_scaling_ratio, (targeted_object.y-view_yview[0])/screen_scaling_ratio, 1, 1, global.rot2, c_white, 0.7);
+if(targeted_object != -1)
+    if(!instance_exists(obj_lockoncursor))
+        draw_sprite_ext(spr_targetcursor, distance_to_target, (targeted_object.x-view_xview[0])/screen_scaling_ratio, (targeted_object.y-view_yview[0])/screen_scaling_ratio, 1, 1, cursor_rotation[2], c_white, 0.7);
  
 //Draw announcement text, if there is any
 if(announcement_alpha &gt; 0)
 {
- draw_set_halign(fa_center);
- draw_set_valign(fa_middle);
- draw_set_font(fnt_bigtext);
- draw_set_alpha(announcement_alpha);
- draw_text_bordered(view_wport[0]/2, 130, announcement_message, 1, 2, announcement_color, c_white);
- draw_set_halign(fa_left);
- draw_set_valign(fa_top);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_font(fnt_bigtext);
+    draw_set_alpha(announcement_alpha);
+    draw_text_bordered(view_wport[0]/2, 130, announcement_message, 1, 2, announcement_color, c_white);
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
 }
 
 //Draw equipped weapons
@@ -1910,30 +1911,30 @@ with(obj_weaponflash)
 draw_sprite_ext(spr_numbers_selected, 0, secondary_selection_position, 73, 1, 1, 0, c_white, 1);
 
 //Draw Armor, Shield, Energy, and Ammo bars
-if(obj_ship.armor &gt; 0)
+if(obj_player.armor &gt; 0)
 {
- armorratio = obj_ship.armor/obj_ship.armor_maximum;
- if(armorratio &lt; draw_armor_bar)
-  draw_armor_bar -= 0.02;
- else
-  draw_armor_bar = armorratio;
- draw_sprite_part_ext(spr_armorbar, 0, 0, 0, 4+draw_armor_bar*233, 86, 0, 0, 1, 1, c_white, 1);
+    armorratio = obj_player.armor/obj_player.armor_maximum;
+    if(armorratio &lt; draw_armor_bar)
+        draw_armor_bar -= 0.02;
+    else
+        draw_armor_bar = armorratio;
+    draw_sprite_part_ext(spr_armorbar, 0, 0, 0, 4+draw_armor_bar*233, 86, 0, 0, 1, 1, c_white, 1);
 }
-if(obj_ship.shield &gt; 0)
+if(obj_player.shield &gt; 0)
 {
- shieldratio = obj_ship.shield/obj_ship.shield_maximum;
- if(shieldratio &lt; draw_shield_bar)
-  draw_shield_bar -= 0.02;
- else
-  draw_shield_bar = shieldratio;
- draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+draw_shield_bar*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*shieldratio));
+    shieldratio = obj_player.shield/obj_player.shield_maximum;
+    if(shieldratio &lt; draw_shield_bar)
+        draw_shield_bar -= 0.02;
+    else
+        draw_shield_bar = shieldratio;
+    draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+draw_shield_bar*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*shieldratio));
 }
-else
- draw_shield_bar = 0;
-if(obj_ship.energy &gt; 0)
+
+if(obj_player.energy &gt; 0)
 {
-    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_ship.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1);
+    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_player.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1);
 }
+
 draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
 if(instance_exists(obj_overheatshine))
     draw_sprite_ext(spr_overheatshine, obj_overheatshine.image_index, 0, 0, 1, 1, 0, c_white, 1);
@@ -1975,22 +1976,22 @@ switch(global.matchtype)
 //Draw the radar
 draw_sprite_ext(spr_radar, 0, view_wport[0], 0, 1, 1, 0, c_white, 1);
 //Draw the map of the walls
-draw_sprite_part_ext(global.wallsprite, 0, (obj_ship.x-1600)/16, (obj_ship.y-1600)/16, 200, 200, view_wport[0]-113, 11, 0.5, 0.5, c_white, 0.8);
+draw_sprite_part_ext(global.wallsprite, 0, (obj_player.x-1600)/16, (obj_player.y-1600)/16, 200, 200, view_wport[0]-113, 11, 0.5, 0.5, c_white, 0.8);
 //Check which loop to set to
 for(i = 0; i &lt; 8; i += 1)
 {
- //Check to make sure the current number is not your own if you are not master
- if(global.mymid != i &amp;&amp; (global.activated[i] = 1 || i = 0))
- {
-  radarpoint = global.team[i]-1;
-  //Set radar point position
-  //radardist = point_distance(obj_ship.x, obj_ship.y, global.playership[radarplayer].x, global.playership[radarplayer].y);
-  radarx = ((global.playership[i].x-obj_ship.x)*50)/1500;
-  radary = ((global.playership[i].y-obj_ship.y)*50)/1500;
-  //Draw radar point if it is in range
-  if(abs(radarx) &lt;51 &amp;&amp; abs(radary) &lt; 51)
-   draw_sprite_ext(spr_radar_player, radarpoint, view_wport[0]-65+radarx, 62+radary, 1, 1, global.playership[i].image_angle, c_white, 1);
- }
+    //Check to make sure the current number is not your own if you are not master
+    if(global.mymid != i &amp;&amp; (global.activated[i] = 1 || i = 0))
+    {
+        radarpoint = global.team[i]-1;
+        //Set radar point position
+        //radardist = point_distance(obj_player.x, obj_player.y, global.playership[radarplayer].x, global.playership[radarplayer].y);
+        radarx = ((global.playership[i].x-obj_player.x)*50)/1500;
+        radary = ((global.playership[i].y-obj_player.y)*50)/1500;
+        //Draw radar point if it is in range
+        if(abs(radarx) &lt;51 &amp;&amp; abs(radary) &lt; 51)
+            draw_sprite_ext(spr_radar_player, radarpoint, view_wport[0]-65+radarx, 62+radary, 1, 1, global.playership[i].image_angle, c_white, 1);
+    }
 }
   
 draw_set_font(fnt_chat);
@@ -2045,33 +2046,33 @@ switch(obj_mod.chat_open)
 draw_set_alpha(1);
 if(keyboard_check_direct(vk_tab))
 {
- global.playerfps[global.mymid] = fps;
- draw_sprite_ext(spr_pscores, 0, view_wport[0], view_hport[0], 1, 1, 0, c_white, 1);
- draw_set_font(fnt_chat);
- for(i = 0; i &lt; 8; i += 1)
- {
-  if(global.activated[i] = 0 &amp;&amp; i &gt; 0) continue;
-  switch(global.team[i])
-  {
-   case 1:
-        draw_set_color(c_red);
-   break;
-   case 2:
-        draw_set_color(c_navy);
-   break;
-  }
-  draw_set_halign(fa_left);
-  draw_text_transformed(view_wport[0]-247, view_hport[0]-(246-(i*20)), global.othername[i], 1, 1, 0);
-  draw_set_halign(fa_center);
-  draw_text_transformed(view_wport[0]-110, view_hport[0]-(246-(i*20)), string(global.playerfps[i]), 1, 1, 0);
-  draw_text_transformed(view_wport[0]-82, view_hport[0]-(246-(i*20)), string(global.ping[i]), 1, 1, 0);
-  draw_text_transformed(view_wport[0]-56, view_hport[0]-(246-(i*20)), string(global.kills[i]), 1, 1, 0);
-  draw_text_transformed(view_wport[0]-29, view_hport[0]-(246-(i*20)), string(global.deaths[i]), 1, 1, 0);
- }
- draw_set_color(c_black);
- draw_text_transformed(view_wport[0]-52, view_hport[0]-305, string(global.redscore), 1, 1, 0);
- draw_text_transformed(view_wport[0]-52, view_hport[0]-288, string(global.bluescore), 1, 1, 0); 
- draw_set_halign(fa_left);
+    global.playerfps[global.mymid] = fps;
+    draw_sprite_ext(spr_pscores, 0, view_wport[0], view_hport[0], 1, 1, 0, c_white, 1);
+    draw_set_font(fnt_chat);
+    for(i = 0; i &lt; 8; i += 1)
+    {
+        if(global.activated[i] = 0 &amp;&amp; i &gt; 0) continue;
+        switch(global.team[i])
+        {
+            case 1:
+                draw_set_color(c_red);
+            break;
+            case 2:
+                draw_set_color(c_navy);
+            break;
+        }
+        draw_set_halign(fa_left);
+        draw_text_transformed(view_wport[0]-247, view_hport[0]-(246-(i*20)), global.othername[i], 1, 1, 0);
+        draw_set_halign(fa_center);
+        draw_text_transformed(view_wport[0]-110, view_hport[0]-(246-(i*20)), string(global.playerfps[i]), 1, 1, 0);
+        draw_text_transformed(view_wport[0]-82, view_hport[0]-(246-(i*20)), string(global.ping[i]), 1, 1, 0);
+        draw_text_transformed(view_wport[0]-56, view_hport[0]-(246-(i*20)), string(global.kills[i]), 1, 1, 0);
+        draw_text_transformed(view_wport[0]-29, view_hport[0]-(246-(i*20)), string(global.deaths[i]), 1, 1, 0);
+    }
+    draw_set_color(c_black);
+    draw_text_transformed(view_wport[0]-52, view_hport[0]-305, string(global.redscore), 1, 1, 0);
+    draw_text_transformed(view_wport[0]-52, view_hport[0]-288, string(global.bluescore), 1, 1, 0); 
+    draw_set_halign(fa_left);
 }
 
 
