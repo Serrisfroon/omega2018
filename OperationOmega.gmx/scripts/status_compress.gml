@@ -5,12 +5,13 @@
 //argument0 = smoke
 //argument1 = ship_status_hacked
 //argument2 = ship_status_shocked
+//argument3 = mid of ship to send status of
 //////////////////////////////////////////////////////////////////////////////////
 var dmg, hack, shock, shieldstat, datchain, step;
 dmg = argument0;
 hack = argument1;
 shock = argument2;
-shieldstat = min(obj_ship.shield, 1);
+shieldstat = min(global.playership[argument3], 1);
 step = 0;
 
 //Compress the shield stat

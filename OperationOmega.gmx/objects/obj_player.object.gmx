@@ -598,15 +598,12 @@ current_secondary_selected = secondary_selected;
 current_target_x = mouse_x;
 current_target_y = mouse_y;
 
-current_target_object = -1;                                                    //Set a default for the target object
-//Loop through all of the player ships to see which ship is targeted
-for(i = 1; i &lt;= 8; i++)
-    if(global.playership[i] = obj_mod.targeted_object)
-    {
-         current_target_object = global.playership[i];                         //Object to fire at(if applicable)
-         break;
-    }
-    
+//Pull the mid from the targeted object if you are targeting a player
+if(obj_mod.targeted_object = -1)
+    current_target_object = -1;
+else
+    current_target_object = obj_mod.targeted_object.mid;
+
 amplified = 0;
 
 event_perform(ev_other, ev_user0);

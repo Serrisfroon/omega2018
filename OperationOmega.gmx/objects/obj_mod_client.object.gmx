@@ -25,92 +25,78 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(ping_send_timer)
-{
- case 0:
-      clearbuffer(0);
-      packet_label_write(1, global.mymid);
-      if(obj_ship.armor &gt; 0)
-       writebyte(status_compress(obj_ship.smoke, obj_ship.ship_status_hacked, obj_ship.ship_status_shocked), 0);
-      else
-       writebyte(0, 0);
-      writebyte(floor(global.ping[global.mymid]/20), 0);
-      writebyte(fps, 0);
-      ping_frame_count = 0;
-      sendmessage(global.host, "", 0, 0);   
-      ping_send_timer = 120;   
- break;
- default:
-         ping_send_timer -= 1;
- break;
-}
-
-if((obj_ship.armor &lt;= 0) || instance_number(obj_teleport) &gt; 0) exit;
-
+            <string>//Perform action based on the update packet timer
 switch(update_packet_timer)
 {
  case 0:
-      update_packet_timer = 5;
-      clearpack();
-      packet_label_write(0, global.mymid);
-      crush(round(obj_ship.direction*10), 3600, 0);
-      crush(round(obj_ship.facedir*10), 3600, 0);
-      crush(round(obj_ship.x*10), 65000, 0);
-      crush(round(obj_ship.y*10), 65000, 0);      
-      crush(round(obj_ship.speed*100), 2500, 0);
-      crush(prediction_compress(obj_ship.predictturn, obj_ship.predictspeed, obj_ship.multiplayer_primary_fire_flag), 72, 0);
-      if(obj_ship.multiplayer_primary_fire_flag = true)
-      {
-       update_packet_timer = 3;
-       crush(global.primaryRNG[global.mymid], 15, 0);
-       crush(round(obj_ship.newdir*10), 3600, 0);
-       switch(global.primary)
-       {
-        case 4:
-            //Find out which ship you are targetting
-            if(obj_mod.targeted_object &lt;= -1)
-             testtarget = 8;
-            else
+        //Reset the timer
+        update_packet_timer = 5;
+        
+        //Clear the packet and write the label of the new packet
+        clearpack();
+        packet_label_write(0, mid);             //0 label means this is the update packet
+        crush(global.activated[mid]+1, 3, 0);   //Send your ship's activated value
+        
+        //Check if your ship is currently alive
+        if(global.activated[mid] = 1)
+        {
+            //Send your ship's position, direction, and speed
+            crush(round(obj_player.direction*10), 3600, 0);     //Send your ship's direction
+            crush(round(obj_player.facedir*10), 3600, 0);       //Send your ship's facing direction
+            crush(round(obj_player.x*10), 65000, 0);            //Send your ship's x coordinate
+            crush(round(obj_player.y*10), 65000, 0);            //Send your ship's y coordinate
+            crush(round(abs(obj_player.speed*100)), 2500, 0);   ////Send your ship's speed
+            
+            //Send your ship's prediction variables
+            crush(prediction_compress(obj_player.predictturn, obj_player.predictspeed, obj_player.multiplayer_primary_fire_flag), 24, 0);
+            
+            //Send your ship's status variables
+            crush(status_compress(obj_player.smoke, obj_player.ship_status_hacked, obj_player.ship_status_shocked, mid), 64, 0);
+            
+            //Check if you are currently firing your primary weapon
+            if(obj_player.multiplayer_primary_fire_flag = true)
             {
-             testtarget = -1;
-             while(true)
-             {
-              testtarget+=1;
-             if(testtarget != global.mymid)
-               if(global.playership[testtarget] = obj_mod.targeted_object)
-               break;
-             }
+                //Lower the time until the next update
+                update_packet_timer = 3;
+                
+                //Send your RNG seed and firing direction
+                crush(global.primaryRNG[mid], 15, 0);
+                crush(round(obj_player.primary_direction), 360, 0);
+                
+                //Perform action based on the primary equipped
+                switch(global.primary)
+                {
+                    case 7: //Siphon
+                        //Send the appropriate mid
+                        if(obj_mod.targeted_object = -1)
+                            crush(0, 8, 0);                     //Send an empty mid
+                        else
+                            crush(targeted_object.mid+1, 8, 0); //Send to mid corresponding to the targeted player
+                    break;
+                }
             }
-            crush(testtarget, 8, 0);
-        break;
-        case 6:
-             crush(min(100, round(point_distance(obj_ship.x, obj_ship.y, mouse_x, mouse_y)/10)), 100, 0);
-        break;
-        case 7:
-             if(targeted_object != -1)
-              crush(targeted_object.mid, 10, 0);
-             else
-              crush(10, 10, 0);
-        break;
-       }
-      }
-      //Send to the host
-      //sendmessage(global.host, 0, 0, 0);   
+        }      
+        //Send the update packet to the host
         bufferpack();
         sendmessage(global.host, "", 0, 0);
  break;
- default:
+ default:       //The timer needs to count down
     update_packet_timer -= 1;
  break;   
 }
-
-if(obj_ship.snapdir != oldsnap)
-{
-    clearbuffer(0);
-    packet_label_write(13, global.mymid);
-    writebyte(obj_ship.snapdir+100, 0);
-    sendmessage(global.host, "", 0, 0);
-}
+//Send a packet immediately if the primary direction changes
+if(global.activated[mid] = 1)
+    if(obj_player.primary_direction != previous_primary_direction)
+    {
+        //Update the previous primary direction
+        previous_primary_direction = obj_player.primary_direction;
+        //Send a packet to everyone to update your aiming direction
+        clearpack();
+        packet_label_write(13, mid);
+        crush(obj_player.primary_direction/5, 0, 73);
+        bufferpack();
+        sendmessage(global.host, "", 0, 0);
+    }
 </string>
           </argument>
         </arguments>
@@ -140,119 +126,124 @@ if(obj_ship.snapdir != oldsnap)
 //Start an infinite while loop. It will be broken when there are no new messages
 //from the host. All other clients will relay messages to you through the host.
 while(true)
- {
-  //Initialize variables
-  var size;
-  size = 0;
-  //Check for a tcp message
-  size = receivemessage(global.host, 0, 0);
-  //If there was no response, the host disconnected
-  if(size == 0 || disconnect_timer &gt;= 300)
-  {
-   //Inform the player
-   show_message("The host has disconnected.");
-    if(global.musictoggle = 0)
+{
+    //Initialize variables
+    var size;
+    size = 0;
+    //Check for a tcp message
+    size = receivemessage(global.host, 0, 0);
+    //If there was no response, the host disconnected
+    if(size == 0 || disconnect_timer &gt;= 300)
     {
-        audio_stop_sound(music_quasar);
-        audio_play_sound(music_quasar, 1, 1);
-    }
-   //Close the udp socket and stop 39dll
-   closesocket(global.udpsock);
-   closesocket(global.host);
-   dllfree();
-   //Return to the appropriate room
-   if(global.public_game = true)
-    room_goto(rm_public_game);
-   else
-    room_goto(rm_private_game);   
-   exit;
-  }
-  //If there was no message, break the loop
-  if(size &lt; 0) 
-  {
-   disconnect_timer += 1;
-   break;
-  }
-  disconnect_timer = 0;
-  //Read the label byte to find the packet id and the player who sent it
-  lollabel = readbyte(0);
-  packet_label_read(lollabel);
-  
-  //Check to make sure some freak error didn't occur that made the host
-  //send your actions back to you to read
-  if((dummy != global.mymid || packet = 1) &amp;&amp; dummy &gt;= 0)
-  
-  //Perform the correct acton depending on what packet has been sent
-  switch(packet)
-  {
-  
-   //The player sends its refresh packet
-   case 0:
-        uncrushbegin();
-        for(i = 0; i &lt; 8; i += 1)
+        //Inform the player
+        show_message("The host has disconnected.");
+        if(global.musictoggle = 0)
         {
-         if(i != 0) 
-         {
-          //Ignore this cycle if the player slot is not activated
-          if(global.activated[i] &lt;= 0) continue;
-          //Read the cycle if it is your player slot, and put it into a junk variable.
-          if(i = global.mymid)
-          {
-           holdvar = uncrush(3600, 0);
-           holdvar = uncrush(3600, 0);
-           holdvar = uncrush(65000, 0);
-           holdvar = uncrush(65000, 0);
-           holdvar = uncrush(2500, 0);
-           holdvar = uncrush(72, 0);
-           //Check if the compressed prediction holds shooting as 1
-           if(holdvar &gt; 36)
-           {
-            holdvar = uncrush(15, 0);
-            holdvar = uncrush(3600, 0);
-            switch(global.primary)
-            {          
-             case 4:
-                  holdvar = uncrush(8, 0);
-             break;
-             case 6:
-                  holdvar = uncrush(100, 0);
-             break;
-             case 7:
-                  holdvar = uncrush(10, 0);
-             break;
-            }
-           }
-           continue;
-          }
-         }             
-         if(global.playership[i] = obj_dud) continue;
-        global.playership[i].direction = uncrush(3600, 0)/10;
-        global.playership[i].facedir = uncrush(3600, 0)/10;
-        global.playership[i].x = uncrush(65000, 0)/10;
-        global.playership[i].y = uncrush(65000, 0)/10;
-        global.playership[i].speed = uncrush(2500, 0)/100;
-         dummy = i;
-         decomp = uncrush(72, 0);
-         prediction_decompress(decomp);
-         if(global.playership[i].multiplayer_primary_fire_flag = true)
-         {
-          global.primaryRNG[global.mymid] = uncrush(15, 0);
-          global.playership[i].newdir = uncrush(3600, 0)/10;
-          switch(global.playerprimary[i])
-          {          
-           case 4:
-                global.playership[i].flankcurve = uncrush(8, 0);
-           break;
-           case 6:
-                global.playership[i].crossfiredist = uncrush(100, 0)*10;
-           break;
-           case 7:
-                global.playership[i].siphontarget = uncrush(10, 0);
-           break;
-          }
-         }
+            audio_stop_sound(music_quasar);
+            audio_play_sound(music_quasar, 1, 1);
         }
-   break;
+        //Close the udp socket and stop 39dll
+        closesocket(global.udpsock);
+        closesocket(global.host);
+        dllfree();
+        //Return to the appropriate room
+        if(global.public_game = true)
+            room_goto(rm_public_game);
+        else
+            room_goto(rm_private_game);   
+        exit;
+    }
+    //If there was no message, break the loop
+    if(size &lt; 0) 
+    {
+        disconnect_timer += 1;
+        break;
+    }
+    disconnect_timer = 0;
+    //Read the label byte to find the packet id and the player who sent it
+    var lollabel = readbyte(0);
+    packet_label_read(lollabel);
+  
+    //Check to make sure some freak error didn't occur that made the host
+    //send your actions back to you to read
+    if((dummy != mid || packet = 1) &amp;&amp; dummy &gt;= 0)
+  
+    //Perform the correct acton depending on what packet has been sent
+    switch(packet)
+    {
+        case 0: //The player sends its refresh packet
+            //Begin reading the packet information
+            uncrushbegin();
+            
+            //Loop through all players
+            for(i = 0; i &lt; 8; i += 1)
+            {
+                //Read the player's activation state
+                global.activated[i] = uncrush(3, 0)-1;
+                //Ignore this cycle if the player slot is not activated
+                if(global.activated[i] != 1) continue;
+                
+                //Read the cycle if it is your player slot, and put it into a junk variable.
+                if(i = mid)
+                {
+                    var holdvar = uncrush(3600, 0);         //Read the player's direction
+                    holdvar = uncrush(3600, 0);             //Read the player's facing direction
+                    holdvar = uncrush(65000, 0);            //Read the player's x coordinate
+                    holdvar = uncrush(65000, 0);            //Read the player's y coordinate
+                    holdvar = uncrush(2500, 0);             //Read the player's speed   
+                    var check_prediction = uncrush(24, 0);  //Read the player's prediction variables
+                    holdervar = uncrush(64, 0);             //Read the player's status variables
+                    
+                    //Check if the compressed prediction holds shooting as 1
+                    if(check_prediction &gt; 12)
+                    {
+                        //Read the player's RNG seed and firing direction
+                        holdvar = uncrush(15, 0);
+                        holdvar = uncrush(3600, 0);
+                        //Perform action based on the primary equipped
+                        switch(global.playerprimary[i])
+                        {          
+                            case 7: //Siphon
+                                holdvar = uncrush(8, 0);
+                            break;
+                        }
+                    }
+                    continue;
+                }   
+                
+                //Read this player's information and assign it to the appropriate ship         
+                global.playership[i].direction = uncrush(3600, 0)/10;       //Read the player's direction
+                global.playership[i].facedir = uncrush(3600, 0)/10;         //Read the player's facing direction
+                global.playership[i].x = uncrush(65000, 0)/10;              //Read the player's x coordinate
+                global.playership[i].y = uncrush(65000, 0)/10;              //Read the player's y coordinate
+                global.playership[i].speed = uncrush(2500, 0)/100;          //Read the player's speed
+         
+                dummy = i;
+                //Read the player's prediction variables
+                var decomp = uncrush(24, 0);
+                prediction_decompress(decomp);
+                
+                //Read the player's status variables
+                decomp = uncrush(64, 0);
+                status_decompress(decomp);
+                
+                //Check if the player is firing their primary weapon
+                if(global.playership[i].multiplayer_primary_fire_flag = true)
+                {
+                    //Read the player's RNG seed and firing direction
+                    global.primaryRNG[global.mymid] = uncrush(15, 0);
+                    global.playership[i].newdir = uncrush(3600, 0)/10;
+                    
+                    //Perform action based on the primary equipped
+                    switch(global.playerprimary[i])
+                    {          
+                        case 7: //Siphon
+                            global.playership[i].siphontarget = uncrush(10, 0);
+                        break;
+                    }
+                }
+            }
+        break;
    
    //The player sends its ping packet
    case 1:
@@ -580,8 +571,6 @@ while(true)
 //Things here will not be sent to/received by other players.
 
 ping_frame_count += 1;
-
-audio_listener_position(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, 0);
  
 event_inherited();
 </string>
