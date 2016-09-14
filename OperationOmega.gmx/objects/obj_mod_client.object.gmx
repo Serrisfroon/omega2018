@@ -245,306 +245,324 @@ while(true)
             }
         break;
    
-   //The player sends its ping packet
-   case 1:
-        if(dummy = global.mymid)
-        {
-         //Find your ms ping. Take the pined variable(added every step, 60/sec
-         //Multiply by 16.67(60*16.67 ~ 1000), take the floor to remove decimal
-         global.ping[global.mymid] = floor((obj_mod.ping_frame_count)*16.67);
-         break;
-        }
-        lolstatuses = readbyte(0);
-        status_decompress(lolstatuses);
-        if(global.playership[dummy].ship_status_hacked = true)
-        {
-         global.playership[dummy].thisturn = 0;
-         global.playership[dummy].turning = 0;
-         global.playership[dummy].speeding = 2;
-        }
-        global.ping[dummy] = readbyte(0)*20;
-        global.playerfps[dummy] = readbyte(0);
-   break;
-   
-   //The player uses a secondary weapon
-   case 2:
-        receive_secondary();
-   break;
-   
-   //The player is defeated
-   case 3:
-        defeatmid = readbyte(0);
-        anotherspawn[dummy] = readbyte(0);
-        with(obj_turret)
-            if(mid = obj_mod.dummy)
-                instance_destroy();
-        with(obj_turret_enemy)
-            if(mid = obj_mod.dummy)
-                instance_destroy();
-        //Update score
-        if(defeatmid != 20)
-         global.kills[defeatmid] += 1;
-        global.deaths[dummy] += 1;
-        switch(global.matchtype)
-        {
-         case "stock":
-              //Reduce your team's score by 1
-              switch(global.team[dummy])
-              {
-               case 1:
-                    global.redscore -= 1;
-               break;
-               case 2:
-                    global.bluescore -= 1;
-               break;
-              }
-         break;
-         case "death":
-              //Increase other team's score by 1
-              switch(global.team[dummy])
-              {
-               case 1:
-                    global.bluescore += 1;
-               break;
-               case 2:
-                    global.redscore += 1;
-               break;
-              }
-         break;
-        }
-        //Create a defeated ship in the player's place
-        defeat = instance_create(global.playership[dummy].x, global.playership[dummy].y, obj_deadother);
-        defeat.direction = global.playership[dummy].direction;
-        defeat.speed = global.playership[dummy].speed+1;
-        defeat.sprite_index = global.playership[dummy].sprite_index;
-        defeat.dummy = dummy;
-        if(global.playership[dummy] = view_object[0])
-         view_object[0] = defeat;
-        //Send a defeat notice to chat
-        switch(readbyte(0))
-        {
-         case 1:         
-              newcolor = c_maroon;
-         break;
-         case 2:
-              newcolor = c_navy;
-         break;
-        }
-        chatline_add(readstring(0), newcolor);
-        if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
-        {
-         obj_mod.announcement_stage  = 1;
-         obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
-         obj_mod.announcement_color = newcolor;
-        }
-        //Reset targetting if currently targetting this ship
-        if(targeted_object = global.playership[dummy])
-        {
-         targeted_object = -1;
-         distance_to_target = point_distance(obj_ship.x, obj_ship.y, -10000, -10000);
-        }
-        //Destroy the designated ship
-        with(global.playership[dummy])
-         instance_destroy();
-        //Create an object to intercept late info
-        global.playership[dummy] = instance_create(0, 0, obj_dud);         
-   break;
-   
-   //A player is eliminated in a stock match
-   case 4:
-        //Send it to your chat
-        if(global.team[dummy] = 1)
-         newcolor = c_red;
-        else
-         newcolor = c_blue;
-        chatline_add(global.othername[dummy]+" has been eliminated.", newcolor);
-   break;
-   
-   //The stock match is over
-   case 5:
-        //Send it to your chat
-        switch(readbyte(0))
-        {
-         case 1:         
-              newcolor = c_maroon;
-              if(global.team[global.mymid] = 1)
-              {
-               obj_mod.announcement_message = "Operation Failed";
-               obj_mod.announcement_color = c_navy;
-               global.outcome = 1;
-              }
-              else
-              {
-               obj_mod.announcement_message = "Operation Successful";
-               obj_mod.announcement_color = c_navy;
-               global.outcome = 0;
-              }
-         break;
-         case 2:
-              newcolor = c_navy;
-              if(global.team[global.mymid] = 1)
-              {
-               obj_mod.announcement_message = "Operation Successful";
-               obj_mod.announcement_color = c_maroon;
-               global.outcome = 0;
-              }
-              else
-              {
-               obj_mod.announcement_message = "Operation Failed";
-               obj_mod.announcement_color = c_maroon;
-               global.outcome = 1;
-              }
-         break;
-        }
-        obj_mod.announcement_stage  = 1;
-        obj_mod.announcement_alpha = 0;
+        //The player sends its ping packet
+        case 1:
+            if(dummy = global.mymid)
+            {
+                //Find your ms ping. Take the pined variable(added every step, 60/sec
+                //Multiply by 16.67(60*16.67 ~ 1000), take the floor to remove decimal
+                global.ping[global.mymid] = floor((obj_mod.ping_frame_count)*16.67);
+                break;
+            }
+            lolstatuses = readbyte(0);
+            status_decompress(lolstatuses);
+            if(global.playership[dummy].ship_status_hacked = true)
+            {
+                global.playership[dummy].thisturn = 0;
+                global.playership[dummy].turning = 0;
+                global.playership[dummy].speeding = 2;
+            }
+            global.ping[dummy] = readbyte(0)*20;
+            global.playerfps[dummy] = readbyte(0);
+        break;
         
-        chatline_add(readstring(0), newcolor);
-        switch(readbyte(0))
-        {
-         case 1:         
-              newcolor = c_maroon;
-         break;
-         case 2:
-              newcolor = c_navy;
-         break;
-        }
-        chatline_add(readstring(0), newcolor);
-        //Set time until returning to waiting room
-        alarm[2] = 180;
-   break;
-      
-   //Prediction Packet
-   case 6:
-        decomp = readbyte(0);
-        prediction_decompress(decomp);
-   break;  
+        //The player uses a secondary weapon
+        case 2:
+            receive_secondary();
+        break;
    
-   //Chat Message
-   case 7:
-        //Put the message in your chat
-        chatline_add(readstring(0), c_white);
-   break;
+        case 3: //The player is defeated            
+            //Hold the mid of the player that defeated this player
+            defeatmid = readbyte(0);
+            
+            //Read the ID of the next spawn location
+            respawn_location[dummy] = readbyte(0);
+            
+            //Destroy any turrets associated with the defeated player
+            with(obj_turret)
+                if(mid = obj_mod.dummy)
+                    instance_destroy();
+            with(obj_turret_enemy)
+                if(mid = obj_mod.dummy)
+                    instance_destroy();
+                    
+            //Update the match score
+            //Make sure the wall did not defeat the player
+            if(defeatmid != 20)
+                global.kills[defeatmid] += 1;       //Add the kill to the score for the player that defeated this player
+            global.deaths[dummy] += 1;              //Add to this player's death count
+            
+            //Perform action based on the game mode
+            switch(global.matchtype)
+            {
+                case "stock":
+                    //Reduce your team's score by 1
+                    switch(global.team[dummy])
+                    {
+                        case 1:
+                            global.redscore -= 1;
+                        break;
+                        case 2:
+                            global.bluescore -= 1;
+                        break;
+                    }
+                break;
+                case "death":
+                    //Increase other team's score by 1
+                    switch(global.team[dummy])
+                    {
+                        case 1:
+                            global.bluescore += 1;
+                        break;
+                        case 2:
+                            global.redscore += 1;
+                        break;
+                    }
+                break;
+            }
+            
+            //Hold the object of the defeated player locally
+            var defeated_player = global.playership[dummy];
+            //Create a defeated ship in the player's place
+            var defeat = instance_create(defeated_player.x, defeated_player.y, obj_deadship);
+            defeat.direction = defeated_player.direction;           //Pass on the defeated player's direction
+            defeat.speed = defeated_player.speed+1;                 //Pass on the defeated player's speed
+            defeat.sprite_index = defeated_player.sprite_index;     //Pass on the defeated player's image
+            defeat.dummy = dummy;                                   //Pass on the defeated player's mid
+            
+            //Update the viewed object if this player was being followed
+            if(global.playership[dummy] = view_object[0])
+                view_object[0] = defeat;
+                
+            //Send a defeat notice to chat
+            //Read the color sent
+            switch(readbyte(0))
+            {
+                case 1:         
+                    newcolor = c_maroon;
+                break;
+                case 2:
+                    newcolor = c_navy;
+                break;
+            }
+            chatline_add(readstring(0), newcolor);          //Add the line to the chat
+            
+            //Create an announcement
+            if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
+            {
+                obj_mod.announcement_stage  = 1;
+                obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
+                obj_mod.announcement_color = newcolor;
+            }
+            
+            //Reset targetting if currently targetting this ship
+            if(targeted_object = global.playership[dummy])
+            {
+                targeted_object = -1;
+                distance_to_target = 10000;
+            }
+        break;
+   
+        //A player is eliminated in a stock match
+        case 4:
+             //Send it to your chat
+             if(global.team[dummy] = 1)
+                var newcolor = c_red;
+             else
+                var newcolor = c_blue;
+             chatline_add(global.othername[dummy]+" has been eliminated.", newcolor);
+        break;
+   
+        //The stock match is over
+        case 5:
+            //Set variables appropriately depending on the outcome
+            switch(readbyte(0))
+            {
+                case 1: //Blue team won   
+                    newcolor = c_maroon;
+                    if(global.team[global.mymid] = 1)
+                    {
+                        obj_mod.announcement_message = "Operation Failed";
+                        obj_mod.announcement_color = c_navy;
+                        global.outcome = 1;
+                    }
+                    else
+                    {
+                        obj_mod.announcement_message = "Operation Successful";
+                        obj_mod.announcement_color = c_navy;
+                        global.outcome = 0;
+                    }
+                break;
+                case 2: //Red team won
+                    newcolor = c_navy;
+                    if(global.team[global.mymid] = 1)
+                    {
+                        obj_mod.announcement_message = "Operation Successful";
+                        obj_mod.announcement_color = c_maroon;
+                        global.outcome = 0;
+                    }
+                    else
+                    {
+                        obj_mod.announcement_message = "Operation Failed";
+                        obj_mod.announcement_color = c_maroon;
+                        global.outcome = 1;
+                    }
+                break;
+            }
+            //Send the announcement
+            obj_mod.announcement_stage  = 1;
+            obj_mod.announcement_alpha = 0;
+            
+            //Send the first chat line
+            chatline_add(readstring(0), newcolor);
+            
+            //Read the second chat line color
+            switch(readbyte(0))
+            {
+                case 1:         
+                    newcolor = c_maroon;
+                break;
+                case 2:
+                    newcolor = c_navy;
+                break;
+            }
+            //Send the second chat line
+            chatline_add(readstring(0), newcolor);
+            //Set time until returning to waiting room
+            alarm[2] = 180;
+        break;
+      
+        //Prediction Packet
+        case 6:
+            decomp = readbyte(0);
+            prediction_decompress(decomp);
+        break;  
+        
+        //Chat Message
+        case 7:
+            //Put the message in your chat
+            chatline_add(readstring(0), c_white);
+        break;
 
-   //Ship checkin. Sets the correct image and ship-dependant variables 
-   //for a player when it spawns
-   case 9:
-        global.playership[dummy].mid = readbyte(0);
-        ship = readbyte(0);
-        //If the player is on red team, set choose a red ship and set
-        //the right values
-        if(global.team[dummy] = 1)
-         switch(ship)
-         {
-          case 1: //Alphastar
-               global.playership[dummy].sprite_index = spr_alphastar;
-               global.playership[dummy].ship_turning_rate = 5;
-               global.playership[dummy].minspeed = 2;
-               global.playership[dummy].velocity_maximum = 7;               
-          break;
-          case 2: //Swiftwing
-               global.playership[dummy].sprite_index = spr_swiftwing;
-               global.playership[dummy].ship_turning_rate = 8;
-               global.playership[dummy].minspeed = 4;
-               global.playership[dummy].velocity_maximum = 10;               
-          break;
-          case 3: //Goliath
-               global.playership[dummy].sprite_index = spr_goliath;
-               global.playership[dummy].ship_turning_rate = 3;
-               global.playership[dummy].minspeed = 1;
-               global.playership[dummy].velocity_maximum = 5;
-          break;
-         }
-        else
-        //If the player is on blue team, set choose a blue ship and set
-        //the right values
-         switch(ship)
-         {
-          case 1: //Alphastar
-               global.playership[dummy].sprite_index = spr_alphastar_enemy;
-               global.playership[dummy].ship_turning_rate = 5;
-               global.playership[dummy].minspeed = 2;
-               global.playership[dummy].velocity_maximum = 7;               
-          break;
-          case 2: //Swiftwing
-               global.playership[dummy].sprite_index = spr_swiftwing_enemy;
-               global.playership[dummy].ship_turning_rate = 8;
-               global.playership[dummy].minspeed = 4;
-               global.playership[dummy].velocity_maximum = 10;               
-          break;
-          case 3: //Goliath
-               global.playership[dummy].sprite_index = spr_goliath_enemy;
-               global.playership[dummy].ship_turning_rate = 3;
-               global.playership[dummy].minspeed = 1;
-               global.playership[dummy].velocity_maximum = 5;               
-          break;
-         }
-   break;
+        //Ship checkin. Sets the correct image and ship-dependant variables 
+        //for a player when it spawns
+        case 9:
+            global.playership[dummy].mid = readbyte(0);
+            ship = readbyte(0);
+            //If the player is on red team, set choose a red ship and set
+            //the right values
+            if(global.team[dummy] = 1)
+                switch(ship)
+                {
+                    case 1: //Alphastar
+                        global.playership[dummy].sprite_index = spr_alphastar;
+                        global.playership[dummy].ship_turning_rate = 5;
+                        global.playership[dummy].minspeed = 2;
+                        global.playership[dummy].velocity_maximum = 7;               
+                    break;
+                    case 2: //Swiftwing
+                        global.playership[dummy].sprite_index = spr_swiftwing;
+                        global.playership[dummy].ship_turning_rate = 8;
+                        global.playership[dummy].minspeed = 4;
+                        global.playership[dummy].velocity_maximum = 10;               
+                    break;
+                    case 3: //Goliath
+                        global.playership[dummy].sprite_index = spr_goliath;
+                        global.playership[dummy].ship_turning_rate = 3;
+                        global.playership[dummy].minspeed = 1;
+                        global.playership[dummy].velocity_maximum = 5;
+                    break;
+                }
+            else
+                //If the player is on blue team, set choose a blue ship and set
+                //the right values
+                switch(ship)
+                {
+                    case 1: //Alphastar
+                        global.playership[dummy].sprite_index = spr_alphastar_enemy;
+                        global.playership[dummy].ship_turning_rate = 5;
+                        global.playership[dummy].minspeed = 2;
+                        global.playership[dummy].velocity_maximum = 7;               
+                    break;
+                    case 2: //Swiftwing
+                        global.playership[dummy].sprite_index = spr_swiftwing_enemy;
+                        global.playership[dummy].ship_turning_rate = 8;
+                        global.playership[dummy].minspeed = 4;
+                        global.playership[dummy].velocity_maximum = 10;               
+                    break;
+                    case 3: //Goliath
+                        global.playership[dummy].sprite_index = spr_goliath_enemy;
+                        global.playership[dummy].ship_turning_rate = 3;
+                        global.playership[dummy].minspeed = 1;
+                        global.playership[dummy].velocity_maximum = 5;               
+                    break;
+                }
+        break;
   
-   //Respawn Packet
-   case 10:
-        tele = instance_create(readushort(0), readushort(0), obj_teleport_other);
-        tele.mid = dummy;
-   break;  
+        //Respawn Packet
+        case 10:
+            tele = instance_create(readushort(0), readushort(0), obj_teleport_other);
+            tele.mid = dummy;
+        break;  
+        
+        //Primary Switched
+        case 11:
+            global.playerprimary[dummy] = readbyte(0);
+        break;
+           
+        //Change snapdir
+        case 13:
+            global.playership[dummy].snapdir = readbyte(0)-100;
+        break;
+        
+        //Begin Firing Primary weapon
+        case 14:
+            global.primaryRNG[dummy] = readushort(0);
+        break;
 
-   //Primary Switched
-   case 11:
-        global.playerprimary[dummy] = readbyte(0);
-   break;
-      
-   //Change snapdir
-   case 13:
-        global.playership[dummy].snapdir = readbyte(0)-100;
-   break;
+        //A Deathmatch is over
+        case TIME_UP:
+            chatline_add(readstring(0), c_maroon);
+            chatline_add(readstring(0), c_blue);
+            switch(readbyte(0))
+            {
+                case 0:
+                    chatline_add("The match has ended in a draw.", c_white);
+                break;
+                case 1:
+                    chatline_add("Red Team has won the match.", c_maroon);
+                break;
+                case 2:
+                    chatline_add("Blue Team has won the match.", c_navy);
+                break;
+            }
+            alarm[2] = 180;
+        break;
    
-   //Begin Firing Primary weapon
-   case 14:
-        global.primaryRNG[dummy] = readushort(0);
-   break;
+        //Begin Firing Primary weapon
+        case 15:
+             global.playership[dummy].ship_status_hacked = true;
+             global.playership[dummy].alarm[5] = 90;        
+        break;
 
-      //A Deathmatch is over
-   case TIME_UP:
-        chatline_add(readstring(0), c_maroon);
-        chatline_add(readstring(0), c_blue);
-        switch(readbyte(0))
-        {
-         case 0:
-              chatline_add("The match has ended in a draw.", c_white);
-         break;
-         case 1:
-              chatline_add("Red Team has won the match.", c_maroon);
-         break;
-         case 2:
-              chatline_add("Blue Team has won the match.", c_navy);
-         break;
-        }
-        alarm[2] = 180;
-   break;
-   
-   //Begin Firing Primary weapon
-   case 15:
-        global.playership[dummy].ship_status_hacked = true;
-        global.playership[dummy].alarm[5] = 90;        
-   break;
-
-    //A player leaves the game
-   case CLIENT_DROP:
-        //Get info from leaving player
-        droppedname = readstring(0);
-        //Destroy the removed player
-        with(global.playership[dummy])
-         instance_destroy();
-        //Create a dud to intercept remaining messages
-        global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
-        //Send a notice to your chat
-        chatline_add(readstring(0), c_maroon)        
-        if(global.team[dummy] = 0)
-         chatcolor[4] = c_maroon;
-        else
-         chatcolor[4] = c_navy;
-   break;
-  }
- }
+        //A player leaves the game
+        case CLIENT_DROP:
+            //Get info from leaving player
+            droppedname = readstring(0);
+            //Destroy the removed player
+            with(global.playership[dummy])
+                instance_destroy();
+            //Create a dud to intercept remaining messages
+            global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
+            //Send a notice to your chat
+            chatline_add(readstring(0), c_maroon)        
+            if(global.team[dummy] = 0)
+                chatcolor[4] = c_maroon;
+            else
+                chatcolor[4] = c_navy;
+        break;
+    }
+}
 </string>
           </argument>
         </arguments>

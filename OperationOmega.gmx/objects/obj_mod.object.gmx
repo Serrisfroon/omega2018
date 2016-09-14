@@ -868,388 +868,414 @@ while(true)
             }
         break;
    
-   //The player sends its ping packet
-   case 1:
-        lolstatuses = readbyte(0);
-        status_decompress(lolstatuses);
-        if(global.playership[dummy].ship_status_hacked = true)
-        {
-         global.playership[dummy].thisturn = 0;
-         global.playership[dummy].turning = 0;
-         global.playership[dummy].speeding = 2;
-        }
-        global.ping[dummy] = readbyte(0)*20;
-        global.playerfps[dummy] = readbyte(0);
-        client_sendall(0, 0);    
-   break;
-   
-   //The player uses a secondary weapon
-   case 2:
-        receive_secondary();
-   break;
-   
-   //The player is defeated
-   case 3:
-        playerdisconnect[dummy] = -600;
-        defeatmid = readbyte(0);
-        anotherspawn[dummy] = readbyte(0);
-        with(obj_turret)
-            if(mid = obj_mod.dummy)
-                instance_destroy();
-        with(obj_turret_enemy)
-            if(mid = obj_mod.dummy)
-                instance_destroy();
-        //Update score
-        if(defeatmid != 20)
-         global.kills[defeatmid] += 1;
-        global.deaths[dummy] += 1;
-        switch(global.matchtype)
-        {
-         case "stock":
-              //Reduce your team's score by 1
-              switch(global.team[dummy])
-              {
-               case 1:
-                    global.redscore -= 1;
-               break;
-               case 2:
-                    global.bluescore -= 1;
-               break;
-              }
-         break;
-         case "death":
-              //Increase other team's score by 1
-              switch(global.team[dummy])
-              {
-               case 1:
-                    global.bluescore += 1;
-               break;
-               case 2:
-                    global.redscore += 1;
-               break;
-              }
-         break;
-        }
-        //Create a defeated ship in the player's place
-        defeat = instance_create(global.playership[dummy].x, global.playership[dummy].y, obj_deadother);
-        defeat.direction = global.playership[dummy].direction;
-        defeat.speed = global.playership[dummy].speed+1;
-        defeat.sprite_index = global.playership[dummy].sprite_index;
-        defeat.dummy = dummy;
-        if(global.playership[dummy] = view_object[0])
-         view_object[0] = defeat;
-        //Send a defeat notice to chat
-        //Send it to your chat
-        switch(readbyte(0))
-        {
-         case 1:         
-              newcolor = c_maroon;
-         break;
-         case 2:
-              newcolor = c_navy;
-         break;
-        }
-        chatline_add(readstring(0), newcolor);
-        //Create an announcement
-        if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
-        {
-         obj_mod.announcement_stage  = 1;
-         obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
-         obj_mod.announcement_color = newcolor;
-        }
-
-        //Reset targetting if currently targetting this ship
-        if(targeted_object = global.playership[dummy])
-        {
-         targeted_object = -1;
-         distance_to_target = point_distance(obj_ship.x, obj_ship.y, -10000, -10000);
-        }
-        //Destroy the designated ship
-        with(global.playership[dummy])
-         instance_destroy();
-        //Create an object to intercept late info
-        global.playership[dummy] = instance_create(0, 0, obj_dud);                
-        client_sendall(0, dummy);
-   break;
-   
-   //A player is eliminated in a stock match
-   case 4:
-        if(alarm[2] &gt; 0)
-         exit;
-        playerdisconnect[dummy] = -700;
-        //Add the player to the elimination count
-        if(global.team[dummy] = 1)
-        {
-         global.redteamout += 1;
-         if(global.redteam = global.redteamout)
-         {
-          //Send it to your chat
-          //Send it to your chat
-          chatline_add("Red Team has been eliminated.", c_maroon);
-          lolcolor[3] = 1;
-          chatline_add("Blue Team has won the match.", c_navy);
-          lolcolor[4] = 2;
-          obj_mod.announcement_stage  = 1;
-          obj_mod.announcement_alpha = 0;
-          if(global.team[mid] = 1)
-          {
-           obj_mod.announcement_message = "Operation Failed";
-           global.outcome = 1;
-           obj_mod.announcement_color = c_navy;
-          }
-          else
-          {
-           obj_mod.announcement_message = "Operation Successful";
-           obj_mod.announcement_color = c_navy;
-           global.outcome = 0;
-          }         
-
-          //Send the message to all clients
-          clearbuffer(0);
-          packet_label_write(5, mid);
-          writebyte(lolcolor[3], 0);
-          writestring(chatline[3], 0);
-          writebyte(lolcolor[4], 0);
-          writestring(chatline[4], 0);
-          client_sendall(0, 0);
-          //Set time until returning to waiting room
-          alarm[2] = 180;
-         }
-        }
-        else
-        {
-         global.blueteamout += 1;
-         if(global.blueteam = global.blueteamout)
-         {
-          //Send it to your chat
-          //Send it to your chat
-          chatline_add("Blue Team has been eliminated.", c_navy);
-          lolcolor[3] = 2;
-          chatline_add("Red Team has won the match.", c_maroon);
-          lolcolor[4] = 1;
-          obj_mod.announcement_stage  = 1;
-          obj_mod.announcement_alpha = 0;
-          if(global.team[mid] = 1)
-          {
-           obj_mod.announcement_message = "Operation Successful";
-           obj_mod.announcement_color = c_maroon;
-           global.outcome = 0;
-          }
-          else
-          {
-           obj_mod.announcement_message = "Operation Failed";
-           obj_mod.announcement_color = c_maroon;
-           global.outcome = 1;
-          }
-          clearbuffer(0);
-          packet_label_write(5, mid);
-          writebyte(lolcolor[3], 0);
-          writestring(chatline[3], 0);
-          writebyte(lolcolor[4], 0);
-          writestring(chatline[4], 0);
-          client_sendall(0, 0);
-          //Set time until returning to waiting room
-          alarm[2] = 180;
-         }
-        }
-   break;
-   
-   //Prediction Packet
-   case 6:
-        client_sendall(1, dummy);
-   break;  
-   
-   //Chat Message
-   case 7:
-        //Put the message in your chat
-        chatline_add(readstring(0), c_white);
-        client_sendall(0, dummy);  
-   break;
-   
-   //Ship checkin. Sets the correct image and ship-dependant variables 
-   //for a player when it spawns
-   case 9:
-        global.playership[dummy].mid = readbyte(0);
-        ship = readbyte(0);
-        //If the player is on red team, set choose a red ship and set
-        //the right values
-        if(global.team[dummy] = 1)
-         switch(ship)
-         {
-          case 1: //Alphastar
-               global.playership[dummy].sprite_index = spr_alphastar;
-               global.playership[dummy].ship_turning_rate = 5;
-               global.playership[dummy].minspeed = 2;
-               global.playership[dummy].velocity_maximum = 7;
-          break;
-          case 2: //Swiftwing
-               global.playership[dummy].sprite_index = spr_swiftwing;
-               global.playership[dummy].ship_turning_rate = 8;
-               global.playership[dummy].minspeed = 4;
-               global.playership[dummy].velocity_maximum = 10;               
-          break;
-          case 3: //Goliath
-               global.playership[dummy].sprite_index = spr_goliath;
-               global.playership[dummy].ship_turning_rate = 3;
-               global.playership[dummy].minspeed = 1;
-               global.playership[dummy].velocity_maximum = 5;
-          break;
-         }
-        else
-        //If the player is on blue team, set choose a blue ship and set
-        //the right values
-         switch(ship)
-         {
-          case 1: //Alphastar
-               global.playership[dummy].sprite_index = spr_alphastar_enemy;
-               global.playership[dummy].ship_turning_rate = 5;
-               global.playership[dummy].minspeed = 2;
-               global.playership[dummy].velocity_maximum = 7;               
-          break;
-          case 2: //Swiftwing
-               global.playership[dummy].sprite_index = spr_swiftwing_enemy;
-               global.playership[dummy].ship_turning_rate = 8;
-               global.playership[dummy].minspeed = 4;
-               global.playership[dummy].velocity_maximum = 10;               
-          break;
-          case 3: //Goliath
-               global.playership[dummy].sprite_index = spr_goliath_enemy;
-               global.playership[dummy].ship_turning_rate = 3;
-               global.playership[dummy].minspeed = 1;
-               global.playership[dummy].velocity_maximum = 5;               
-          break;
-         }
-        client_sendall(0, dummy);
-   break;
-   
-   //Respawn Packet
-   case 10:
-        dummyx = readushort(0);
-        dummyy = readushort(0);
-        tele = instance_create(dummyx, dummyy, obj_teleport_other);
-        tele.mid = dummy;
-        client_sendall(0, dummy);        
-   break;  
-
-   //Primary Switched
-   case 11:
-        global.playerprimary[dummy] = uncrush(0, 73);
-        client_sendall(0, dummy);
-   break;
-   
-   //Change primary direction
-   case 13:   
-        global.playership[dummy].primary_direction = uncrush(0, 73)*5;
-        client_sendall(0, dummy);
-   break;
-   
-   //Begin Firing Primary weapon
-   case 14:
-        global.primaryRNG[dummy] = readushort(0);
-        client_sendall(0, dummy);
-   break;
-   
-   //Begin Firing Primary weapon
-   case 15:
-        global.playership[dummy].ship_status_hacked = true;
-        global.playership[dummy].alarm[5] = 90;        
-        client_sendall(0, dummy);
-   break;
-
-   //A player leaves the game
-   case CLIENT_DROP:
-        //Get info from leaving player
-        droppedname = readstring(0);
-        //Drop the player and add the drop to the count
-        client_drop(dummy);
-        //Destroy the removed player
-        with(global.playership[dummy])
-         instance_destroy();
-        //Create a dud to intercept remaining messages
-        global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
-        //Send a notice to your chat
-        chatline_add(readstring(0), c_maroon)
-        if(global.team[dummy] = 1)
-         chatcolor[4] = c_maroon;
-        else
-         chatcolor[4] = c_navy;
-        //Relay the info to other players
-        client_sendall(0, 0); 
-        //Add the player to the elimination count
-        if(global.team[dummy] = 1)
-        {
-            //Check if all of red team is eliminated
-            if(global.redteam = global.redteamout)
+        case 1: //The player sends its ping packet
+            var lolstatuses = readbyte(0);
+            status_decompress(lolstatuses);
+            if(global.playership[dummy].ship_status_hacked = true)
             {
-                //Send it to your chat
-                chatline_add("Red Team has been eliminated.", c_maroon);
-                lolcolor[3] = 1;
-                chatline_add("Blue Team has won the match.", c_navy);
-                lolcolor[4] = 2;
-                if(global.team[mid] = 1)
-                {
-                    global.outcome = 1;
-                    obj_mod.announcement_message = "Operation Failed";
-                }
-                else
-                {
-                    global.outcome = 0;
-                    obj_mod.announcement_message = "Operation Successful";
-                }
-                
-                obj_mod.announcement_stage  = 1;
-                obj_mod.announcement_color = c_navy;
-                obj_mod.announcement_alpha = 0;
+                global.playership[dummy].thisturn = 0;
+                global.playership[dummy].turning = 0;
+                global.playership[dummy].speeding = 2;
+            }
+            global.ping[dummy] = readbyte(0)*20;
+            global.playerfps[dummy] = readbyte(0);
+            client_sendall(0, 0);    
+        break;
+   
+        case 2: //The player uses a secondary weapon
+            receive_secondary();
+        break;
+   
+        case 3: //The player is defeated
+            //Push back the disconnection check
+            playerdisconnect[dummy] = -600;
             
-                //Send the message to all clients
-                clearbuffer(0);
-                packet_label_write(5, disi);
-                writebyte(lolcolor[3], 0);
-                writestring(chatline[3], 0);
-                writebyte(lolcolor[4], 0);
-                writestring(chatline[4], 0);
-                client_sendall(0, 0);
-                //Set time until return to waiting room
-                alarm[2] = 180;
-            }
-        }
-        else
-        {
-            //Check if all of blue team is eliminated
-            if(global.blueteam = global.blueteamout)
+            //Hold the mid of the player that defeated this player
+            defeatmid = readbyte(0);
+            
+            //Read the ID of the next spawn location
+            respawn_location[dummy] = readbyte(0);
+            
+            //Destroy any turrets associated with the defeated player
+            with(obj_turret)
+                if(mid = obj_mod.dummy)
+                    instance_destroy();
+            with(obj_turret_enemy)
+                if(mid = obj_mod.dummy)
+                    instance_destroy();
+                    
+            //Update the match score
+            //Make sure the wall did not defeat the player
+            if(defeatmid != 20)
+                global.kills[defeatmid] += 1;       //Add the kill to the score for the player that defeated this player
+            global.deaths[dummy] += 1;              //Add to this player's death count
+            
+            //Perform action based on the game mode
+            switch(global.matchtype)
             {
-                //Send it to your chat
-                chatline_add("Blue Team has been eliminated.", c_navy);
-                lolcolor[3] = 2;
-                chatline_add("Red Team has won the match.", c_maroon);
-                lolcolor[4] = 1;
-                obj_mod.announcement_stage  = 1;
-                obj_mod.announcement_color = c_maroon;
-                obj_mod.announcement_alpha = 0;
-                if(global.team[mid] = 2)
-                {
-                    global.outcome = 1;
-                    obj_mod.announcement_message = "Operation Failed";
-                }
-                else
-                {
-                    global.outcome = 0;
-                    obj_mod.announcement_message = "Operation Successful";
-                }
-                //Send the message to all clients
-                clearbuffer(0);
-                packet_label_write(5, dummy);
-                writebyte(lolcolor[3], 0);
-                writestring(chatline[3], 0);
-                writebyte(lolcolor[4], 0);
-                writestring(chatline[4], 0);
-                client_sendall(0, 0);
-                //Set time until return to waiting room    
-                alarm[2] = 180;
+                case "stock":
+                    //Reduce your team's score by 1
+                    switch(global.team[dummy])
+                    {
+                        case 1:
+                            global.redscore -= 1;
+                        break;
+                        case 2:
+                            global.bluescore -= 1;
+                        break;
+                    }
+                break;
+                case "death":
+                    //Increase other team's score by 1
+                    switch(global.team[dummy])
+                    {
+                        case 1:
+                            global.bluescore += 1;
+                        break;
+                        case 2:
+                            global.redscore += 1;
+                        break;
+                    }
+                break;
             }
-        }   break;
-  }
- }
+            
+            //Hold the object of the defeated player locally
+            var defeated_player = global.playership[dummy];
+            //Create a defeated ship in the player's place
+            var defeat = instance_create(defeated_player.x, defeated_player.y, obj_deadship);
+            defeat.direction = defeated_player.direction;           //Pass on the defeated player's direction
+            defeat.speed = defeated_player.speed+1;                 //Pass on the defeated player's speed
+            defeat.sprite_index = defeated_player.sprite_index;     //Pass on the defeated player's image
+            defeat.dummy = dummy;                                   //Pass on the defeated player's mid
+            
+            //Update the viewed object if this player was being followed
+            if(global.playership[dummy] = view_object[0])
+                view_object[0] = defeat;
+                
+            //Send a defeat notice to chat
+            //Read the color sent
+            switch(readbyte(0))
+            {
+                case 1:         
+                    newcolor = c_maroon;
+                break;
+                case 2:
+                    newcolor = c_navy;
+                break;
+            }
+            chatline_add(readstring(0), newcolor);          //Add the line to the chat
+            
+            //Create an announcement
+            if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
+            {
+                obj_mod.announcement_stage  = 1;
+                obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
+                obj_mod.announcement_color = newcolor;
+            }
+            
+            //Reset targetting if currently targetting this ship
+            if(targeted_object = global.playership[dummy])
+            {
+                targeted_object = -1;
+                distance_to_target = 10000;
+            }
+            
+            //Send the message to other players
+            client_sendall(0, dummy);
+        break;
+   
+        //A player is eliminated in a stock match
+        case 4:
+            //Skip this if the game is ending
+            if(alarm[2] &gt; 0)
+                exit;
+                
+            //Push back the disconnect check
+            playerdisconnect[dummy] = -700;
+            
+            //Perform action depending on the team
+            if(global.team[dummy] = 1)
+            {
+                //Add the player to the elimination count
+                global.redteamout += 1;
+                //Check if every red team member is eliminated
+                if(global.redteam = global.redteamout)
+                {
+                    //Send a message to your chat
+                    chatline_add("Red Team has been eliminated.", c_maroon);
+                    lolcolor[3] = 1;
+                    chatline_add("Blue Team has won the match.", c_navy);
+                    lolcolor[4] = 2;
+                    
+                    //Display an announcement
+                    obj_mod.announcement_stage  = 1;
+                    obj_mod.announcement_alpha = 0;
+                    if(global.team[mid] = 1)
+                    {
+                        obj_mod.announcement_message = "Operation Failed";
+                        global.outcome = 1;
+                        obj_mod.announcement_color = c_navy;
+                    }
+                    else
+                    {
+                        obj_mod.announcement_message = "Operation Successful";
+                        obj_mod.announcement_color = c_navy;
+                        global.outcome = 0;
+                    }         
+
+                    //Send the message to all clients
+                    clearbuffer(0);
+                    packet_label_write(5, mid);
+                    writebyte(lolcolor[3], 0);
+                    writestring(chatline[3], 0);
+                    writebyte(lolcolor[4], 0);
+                    writestring(chatline[4], 0);
+                    client_sendall(0, 0);
+                    //Set time until returning to waiting room
+                    alarm[2] = 180;
+                }
+            }
+            else
+            {
+                //Add the player to the elimination count
+                global.blueteamout += 1;
+                //Check if every blue team member is eliminated
+                if(global.blueteam = global.blueteamout)
+                {
+                    //Send a message to your chat
+                    chatline_add("Blue Team has been eliminated.", c_navy);
+                    lolcolor[3] = 2;
+                    chatline_add("Red Team has won the match.", c_maroon);
+                    lolcolor[4] = 1;
+                    
+                    //Display an announcement
+                    obj_mod.announcement_stage  = 1;
+                    obj_mod.announcement_alpha = 0;
+                    if(global.team[mid] = 1)
+                    {
+                        obj_mod.announcement_message = "Operation Successful";
+                        obj_mod.announcement_color = c_maroon;
+                        global.outcome = 0;
+                    }
+                    else
+                    {
+                        obj_mod.announcement_message = "Operation Failed";
+                        obj_mod.announcement_color = c_maroon;
+                        global.outcome = 1;
+                    }
+                    
+                    //Send the message to all clients
+                    clearbuffer(0);
+                    packet_label_write(5, mid);
+                    writebyte(lolcolor[3], 0);
+                    writestring(chatline[3], 0);
+                    writebyte(lolcolor[4], 0);
+                    writestring(chatline[4], 0);
+                    client_sendall(0, 0);
+                    //Set time until returning to waiting room
+                    alarm[2] = 180;
+                }
+            }
+        break;
+   
+        //Prediction Packet
+        case 6:
+            client_sendall(1, dummy);
+        break;  
+        
+        //Chat Message
+        case 7:
+            //Put the message in your chat
+            chatline_add(readstring(0), c_white);
+            client_sendall(0, dummy);  
+        break;
+   
+        //Ship checkin. Sets the correct image and ship-dependant variables 
+        //for a player when it spawns
+        case 9:
+            global.playership[dummy].mid = readbyte(0);
+            ship = readbyte(0);
+            //If the player is on red team, set choose a red ship and set
+            //the right values
+            if(global.team[dummy] = 1)
+                switch(ship)
+                {
+                    case 1: //Alphastar
+                        global.playership[dummy].sprite_index = spr_alphastar;
+                        global.playership[dummy].ship_turning_rate = 5;
+                        global.playership[dummy].minspeed = 2;
+                        global.playership[dummy].velocity_maximum = 7;
+                    break;
+                    case 2: //Swiftwing
+                        global.playership[dummy].sprite_index = spr_swiftwing;
+                        global.playership[dummy].ship_turning_rate = 8;
+                        global.playership[dummy].minspeed = 4;
+                        global.playership[dummy].velocity_maximum = 10;               
+                    break;
+                    case 3: //Goliath
+                        global.playership[dummy].sprite_index = spr_goliath;
+                        global.playership[dummy].ship_turning_rate = 3;
+                        global.playership[dummy].minspeed = 1;
+                        global.playership[dummy].velocity_maximum = 5;
+                    break;
+                }
+            else
+                //If the player is on blue team, set choose a blue ship and set
+                //the right values
+                switch(ship)
+                {
+                    case 1: //Alphastar
+                        global.playership[dummy].sprite_index = spr_alphastar_enemy;
+                        global.playership[dummy].ship_turning_rate = 5;
+                        global.playership[dummy].minspeed = 2;
+                        global.playership[dummy].velocity_maximum = 7;               
+                    break;
+                    case 2: //Swiftwing
+                        global.playership[dummy].sprite_index = spr_swiftwing_enemy;
+                        global.playership[dummy].ship_turning_rate = 8;
+                        global.playership[dummy].minspeed = 4;
+                        global.playership[dummy].velocity_maximum = 10;               
+                    break;
+                    case 3: //Goliath
+                        global.playership[dummy].sprite_index = spr_goliath_enemy;
+                        global.playership[dummy].ship_turning_rate = 3;
+                        global.playership[dummy].minspeed = 1;
+                        global.playership[dummy].velocity_maximum = 5;               
+                    break;
+                }
+            client_sendall(0, dummy);
+        break;
+   
+        //Respawn Packet
+        case 10:
+            dummyx = readushort(0);
+            dummyy = readushort(0);
+            tele = instance_create(dummyx, dummyy, obj_teleport_other);
+            tele.mid = dummy;
+            client_sendall(0, dummy);        
+        break;  
+
+        //Primary Switched
+        case 11:
+            global.playerprimary[dummy] = uncrush(0, 73);
+            client_sendall(0, dummy);
+        break;
+   
+        //Change primary direction
+        case 13:   
+            global.playership[dummy].primary_direction = uncrush(0, 73)*5;
+            client_sendall(0, dummy);
+        break;
+   
+        //Begin Firing Primary weapon
+        case 14:
+            global.primaryRNG[dummy] = readushort(0);
+            client_sendall(0, dummy);
+        break;
+   
+        //Begin Firing Primary weapon
+        case 15:
+            global.playership[dummy].ship_status_hacked = true;
+            global.playership[dummy].alarm[5] = 90;        
+            client_sendall(0, dummy);
+        break;
+
+        //A player leaves the game
+        case CLIENT_DROP:
+            //Get info from leaving player
+            droppedname = readstring(0);
+            //Drop the player and add the drop to the count
+            client_drop(dummy);
+            //Destroy the removed player
+            with(global.playership[dummy])
+             instance_destroy();
+            //Create a dud to intercept remaining messages
+            global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
+            //Send a notice to your chat
+            chatline_add(readstring(0), c_maroon)
+            if(global.team[dummy] = 1)
+                chatcolor[4] = c_maroon;
+            else
+                chatcolor[4] = c_navy;
+            //Relay the info to other players
+            client_sendall(0, 0); 
+            //Add the player to the elimination count
+            if(global.team[dummy] = 1)
+            {
+                //Check if all of red team is eliminated
+                if(global.redteam = global.redteamout)
+                {
+                    //Send it to your chat
+                    chatline_add("Red Team has been eliminated.", c_maroon);
+                    lolcolor[3] = 1;
+                    chatline_add("Blue Team has won the match.", c_navy);
+                    lolcolor[4] = 2;
+                    if(global.team[mid] = 1)
+                    {
+                        global.outcome = 1;
+                        obj_mod.announcement_message = "Operation Failed";
+                    }
+                    else
+                    {
+                        global.outcome = 0;
+                        obj_mod.announcement_message = "Operation Successful";
+                    }
+                
+                    obj_mod.announcement_stage  = 1;
+                    obj_mod.announcement_color = c_navy;
+                    obj_mod.announcement_alpha = 0;
+            
+                    //Send the message to all clients
+                    clearbuffer(0);
+                    packet_label_write(5, disi);
+                    writebyte(lolcolor[3], 0);
+                    writestring(chatline[3], 0);
+                    writebyte(lolcolor[4], 0);
+                    writestring(chatline[4], 0);
+                    client_sendall(0, 0);
+                    //Set time until return to waiting room
+                    alarm[2] = 180;
+                }
+            }
+            else
+            {
+                //Check if all of blue team is eliminated
+                if(global.blueteam = global.blueteamout)
+                {
+                    //Send it to your chat
+                    chatline_add("Blue Team has been eliminated.", c_navy);
+                    lolcolor[3] = 2;
+                    chatline_add("Red Team has won the match.", c_maroon);
+                    lolcolor[4] = 1;
+                    obj_mod.announcement_stage  = 1;
+                    obj_mod.announcement_color = c_maroon;
+                    obj_mod.announcement_alpha = 0;
+                    if(global.team[mid] = 2)
+                    {
+                        global.outcome = 1;
+                        obj_mod.announcement_message = "Operation Failed";
+                    }
+                    else
+                    {
+                        global.outcome = 0;
+                        obj_mod.announcement_message = "Operation Successful";
+                    }
+                    //Send the message to all clients
+                    clearbuffer(0);
+                    packet_label_write(5, dummy);
+                    writebyte(lolcolor[3], 0);
+                    writestring(chatline[3], 0);
+                    writebyte(lolcolor[4], 0);
+                    writestring(chatline[4], 0);
+                    client_sendall(0, 0);
+                    //Set time until return to waiting room    
+                    alarm[2] = 180;
+                }
+            }   
+        break;
+    }
+}
+ 
 //Listen for a new player
 newclient = tcpaccept(global.listen, true);
 if(newclient &gt; 0)

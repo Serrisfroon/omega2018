@@ -983,7 +983,6 @@ if(mid = global.mymid)
 {
     primary_overheat += primary_overheat_scaling;
     primary_cooldown = primary_cooldown_base * primary_overheat;
-    primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
     //Create an effect
     part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], speed+1.68, speed+2.80, -0.04,0);
     part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-50, primary_direction+50, 0, 0);

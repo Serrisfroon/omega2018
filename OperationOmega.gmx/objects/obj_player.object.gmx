@@ -664,7 +664,7 @@ obj_mod.chat_open = false;
 
 //Set the direction to aim at
 primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
- 
+
 //Perform the primary firing event
 event_perform(ev_other, ev_user1);
 </string>
