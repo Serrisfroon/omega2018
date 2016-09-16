@@ -6,7 +6,7 @@
   <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>prnt_ship</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_shipmask</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -285,7 +285,6 @@ if(armor &lt;= 0)
         message = global.othername[other.mid]+" ELIMINATED "+global.name+".(Locust Missile)";
 
     //Destroy this object
-    player_defeated = true;
     event_perform(ev_other, ev_user2);
 }
 
@@ -412,7 +411,6 @@ if(armor &lt;= 0)
     else
         message = global.othername[other.mid]+" ELIMINATED "+global.name+".(Stasis)"
     //Destroy this object
-    player_defeated = true;
     event_perform(ev_other, ev_user2);
 }
 </string>
@@ -561,7 +559,9 @@ if(facedir &gt; 360) facedir -= 360;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Switch the primary firing flag to false
+            <string>if(global.activated[mid] != 1) 
+    exit;
+//Switch the primary firing flag to false
 multiplayer_primary_fire_flag = false;
 
 //Have to controller object send a refresh packet
@@ -588,7 +588,9 @@ obj_mod.update_packet_timer = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>current_secondary = global.secondary[secondary_selected];
+            <string>if(global.activated[mid] != 1) 
+    exit;
+current_secondary = global.secondary[secondary_selected];
 current_secondary_type = global.secondary_type[secondary_selected];
 current_secondary_cost = global.secondary_cost[secondary_selected];
 current_secondary_stock = global.secondary_stock[secondary_selected];
@@ -629,7 +631,9 @@ event_perform(ev_other, ev_user0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Switch the primary firing flag to true
+            <string>if(global.activated[mid] != 1) 
+    exit;
+//Switch the primary firing flag to true
 multiplayer_primary_fire_flag = true;
 
 //Have to controller object send a refresh packet
@@ -657,7 +661,7 @@ obj_mod.update_packet_timer = 0;
           <argument>
             <kind>1</kind>
             <string>//Disbale shooting if hacked or overheated
-if(ship_status_hacked = true) 
+if(ship_status_hacked = true || global.activated[mid] = 2) 
     exit;
 //Disable chatting if currently in chat mode
 obj_mod.chat_open = false;
@@ -817,7 +821,9 @@ obj_mod.update_packet_timer = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>current_secondary = global.secondary[4];
+            <string>if(global.activated[mid] != 1) 
+    exit;
+current_secondary = global.secondary[4];
 current_secondary_type = global.secondary_type[4];
 current_secondary_cost = global.secondary_cost[4];
 current_secondary_stock = global.secondary_stock[4];
@@ -884,7 +890,9 @@ event_perform(ev_other, ev_user0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(ability_cooldown_timer &gt; 0)
+            <string>if(global.activated[mid] != 1) 
+    exit;
+if(ability_cooldown_timer &gt; 0)
     exit;
 ability_cooldown_timer = ability_cooldown;
 

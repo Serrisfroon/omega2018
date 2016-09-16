@@ -6,7 +6,7 @@
   <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>self</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_shipmask</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -220,8 +220,8 @@ predictturn = 0;
 predictspeed = 0;
 thisturn = 0;
 
-//Initialize the player defeat flag
-player_defeated = false;
+//Set the mask sprite
+mask_index = spr_shipmask;
 
 </string>
           </argument>
@@ -671,7 +671,7 @@ alarm[2]=(6*smoke+10);
           <argument>
             <kind>1</kind>
             <string>//Skip the step event if the player is defeated
-if(player_defeated = true)
+if(global.activated[mid] != 1)
     exit;
 
 //Perform action based on if the primary is being fired
@@ -822,79 +822,91 @@ audio_stop_sound(snd_whip);
 
 //Disable collisions
 mask_index = spr_empty;
-        
-//Destroy your turrets
+
+//Reset alarms and disable activity for the ship
+defeat_player();        
+
+//Hold this player's mid locally to compare it with other instances
+var player_mid = mid;
+
+//Destroy any turrets associated with the defeated player
 with(obj_turret)
-    if(mid = global.mymid)
+    if(mid = player_mid)
         instance_destroy();
                 
 with(obj_trigger)
-    if(mid = global.mymid)
+    if(mid = player_mid)
         instance_destroy();
 
 
-//Destroy all flame trails
+//Destroy all flame trail effects
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
- part_emitter_destroy(flame_smoke_system, emit[i]);
+    part_emitter_destroy(flame_smoke_system, emit[i]);
  
-//Update score
+//Update the match score
+//Make sure the wall did not defeat the player
 if(defeatmid != 20)
-    global.kills[defeatmid] += 1;
-global.deaths[global.mymid] += 1;
+    global.kills[defeatmid] += 1;       //Add the kill to the score for the player that defeated this player
+global.deaths[dummy] += 1;              //Add to this player's death count
 
-
+//Perform action based on the game mode
 switch(global.matchtype)
 {
-     case "stock":
-          //Take a ship from your lives
-          global.ships -= 1;
-          //Reduce your team's score by 1
-          switch(global.team[global.mymid])
-          {
-               case 1:
-                    global.redscore -= 1;
-               break;
-               case 2:
-                    global.bluescore -= 1;
-               break;
-          }
-     break;
-     case "death":
-          //Increase other team's score by 1
-          switch(global.team[global.mymid])
-          {
-               case 1:
-                    global.bluescore += 1;
-               break;
-               case 2:
-                    global.redscore += 1;
-               break;
-          }
-     break;
+    case "stock":
+        //Take a ship from your lives
+        global.ships -= 1;
+        //Reduce your team's score by 1
+        switch(global.team[dummy])
+        {
+            case 1:
+                global.redscore -= 1;
+            break;
+            case 2:
+                global.bluescore -= 1;
+            break;
+        }
+    break;
+    case "death":
+        //Increase other team's score by 1
+        switch(global.team[dummy])
+        {
+            case 1:
+                global.bluescore += 1;
+            break;
+            case 2:
+                global.redscore += 1;
+            break;
+        }
+    break;
 }
 
 //Reset targetting
 with(obj_mod)
 { 
-    targeted_object = -1;
-    distance_to_target = 100000;
+    if(player_mid = targeted_object.mid)
+    {
+        targeted_object = -1;
+        distance_to_target = 100000;
+    }
 }
 
-//Create a defeated ship in your place and give it your movement
-defeat = instance_create(x, y, obj_deadship);
-defeat.direction = direction;
-defeat.speed = speed+1;
-defeat.sprite_index = sprite_index;
+//Create a defeated ship in the player's place
+var defeat = instance_create(x, y, obj_deadship);
+defeat.direction = direction;           //Pass on the defeated player's direction
+defeat.speed = speed+1;                 //Pass on the defeated player's speed
+defeat.sprite_index = sprite_index;     //Pass on the defeated player's image
+defeat.mid = mid;                       //Pass on the defeated player's mid
 
-//Change the view's focus
-view_object[0] = defeat;
-defeat.alarm[1] = 1;
+//Update the viewed object if this player was being followed
+if(global.playership[dummy] = view_object[0])
+    view_object[0] = defeat;
+
 
 with(obj_mod)
 {
      //Send it to your chat
-     chatline_add(obj_ship.message, c_maroon);
-     if(global.team[global.mymid] = 1)
+     chatline_add(obj_player.message, c_maroon);
+     if(global.team[mid] = 1)
      {
           chatcolor[4] = c_navy;
           lolcolor[4] = 2;
@@ -914,22 +926,16 @@ if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
      obj_mod.announcement_color = obj_mod.chatcolor[4];
 }
 
-//Remove the instance from play until respawn
-x = -1000;
-y = -1000;
-speed = 0;
-for(i = 0; i &lt; 13; i++)
-    alarm[i] = -1;
 
 if(mid = global.mymid)
 {  
+    
     //Send the defeat to everyone
     clearbuffer(0);
-    packet_label_write(3, global.mymid);
-    writebyte(defeatmid, 0);
-    writebyte(nextspawn, 0);
+    packet_label_write(3, mid);
     writebyte(obj_mod.lolcolor[4], 0);
     writestring(obj_mod.chatline[4], 0);
+    writebyte(nextspawn, 0);
     //Send to everyone if host
     if(global.master = true)
         client_sendall(0, 0);

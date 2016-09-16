@@ -272,68 +272,6 @@ while(true)
         break;
    
         case 3: //The player is defeated            
-            //Hold the mid of the player that defeated this player
-            defeatmid = readbyte(0);
-            
-            //Read the ID of the next spawn location
-            respawn_location[dummy] = readbyte(0);
-            
-            //Destroy any turrets associated with the defeated player
-            with(obj_turret)
-                if(mid = obj_mod.dummy)
-                    instance_destroy();
-            with(obj_turret_enemy)
-                if(mid = obj_mod.dummy)
-                    instance_destroy();
-                    
-            //Update the match score
-            //Make sure the wall did not defeat the player
-            if(defeatmid != 20)
-                global.kills[defeatmid] += 1;       //Add the kill to the score for the player that defeated this player
-            global.deaths[dummy] += 1;              //Add to this player's death count
-            
-            //Perform action based on the game mode
-            switch(global.matchtype)
-            {
-                case "stock":
-                    //Reduce your team's score by 1
-                    switch(global.team[dummy])
-                    {
-                        case 1:
-                            global.redscore -= 1;
-                        break;
-                        case 2:
-                            global.bluescore -= 1;
-                        break;
-                    }
-                break;
-                case "death":
-                    //Increase other team's score by 1
-                    switch(global.team[dummy])
-                    {
-                        case 1:
-                            global.bluescore += 1;
-                        break;
-                        case 2:
-                            global.redscore += 1;
-                        break;
-                    }
-                break;
-            }
-            
-            //Hold the object of the defeated player locally
-            var defeated_player = global.playership[dummy];
-            //Create a defeated ship in the player's place
-            var defeat = instance_create(defeated_player.x, defeated_player.y, obj_deadship);
-            defeat.direction = defeated_player.direction;           //Pass on the defeated player's direction
-            defeat.speed = defeated_player.speed+1;                 //Pass on the defeated player's speed
-            defeat.sprite_index = defeated_player.sprite_index;     //Pass on the defeated player's image
-            defeat.dummy = dummy;                                   //Pass on the defeated player's mid
-            
-            //Update the viewed object if this player was being followed
-            if(global.playership[dummy] = view_object[0])
-                view_object[0] = defeat;
-                
             //Send a defeat notice to chat
             //Read the color sent
             switch(readbyte(0))
@@ -347,20 +285,12 @@ while(true)
             }
             chatline_add(readstring(0), newcolor);          //Add the line to the chat
             
-            //Create an announcement
-            if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
-            {
-                obj_mod.announcement_stage  = 1;
-                obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
-                obj_mod.announcement_color = newcolor;
-            }
-            
-            //Reset targetting if currently targetting this ship
-            if(targeted_object = global.playership[dummy])
-            {
-                targeted_object = -1;
-                distance_to_target = 10000;
-            }
+            //Perform the defeat function for the player
+            with(global.playership[dummy])
+                event_perform(ev_other, ev_user2);    
+                        
+            //Read the respawn location for the player
+            respawn_location[dummy] = readbyte(0);      
         break;
    
         //A player is eliminated in a stock match
@@ -501,7 +431,7 @@ while(true)
   
         //Respawn Packet
         case 10:
-            tele = instance_create(readushort(0), readushort(0), obj_teleport_other);
+            tele = instance_create(global.spawnx[respawn_location[dummy]], global.spawny[respawn_location[dummy]], obj_teleport_other);
             tele.mid = dummy;
         break;  
         

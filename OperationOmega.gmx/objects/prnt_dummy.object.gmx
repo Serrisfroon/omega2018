@@ -6,7 +6,7 @@
   <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>prnt_ship</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_shipmask</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -55,7 +55,7 @@ event_inherited();
           <argument>
             <kind>1</kind>
             <string>//Skip the step event if the player is defeated
-if(player_defeated = true)
+if(global.activated[mid] != 1) 
     exit;
 
 //Perform action based on if the primary is being fired

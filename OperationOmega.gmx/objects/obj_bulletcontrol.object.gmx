@@ -202,10 +202,9 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         //Check enemies if this is an allied bullet
         case global.allycolor:
             //Find the closest enemy to the bullet
-            possihit = instance_nearest(bulletx[i], bullety[i], prnt_allenemy);
+            possihit = instance_nearest(bulletx[i], bullety[i], obj_dummy_enemy);
             //Break the switch statement if there are no allys
             if(possihit = noone) break;
-            if(possihit.object_index = obj_ship_placeholder || possihit.object_index = obj_teleport || possihit.object_index = obj_deadship) break;
             //Check if the nearest enemy is close to a collision
             if(abs(possihit.x-bulletx[i]) &gt; bulletmask[i] || abs(possihit.y-bullety[i]) &gt; bulletmask[i]) break;
             
@@ -273,11 +272,11 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         break;
         //Check allies if this is an enemy bullet
         case global.enemycolor:
-            //Find the closest enemy to the bullet
+            //Find the closest ally to the bullet
             possihit = instance_nearest(bulletx[i], bullety[i], prnt_ally);
-            //Break the switch statement if there are no allys
-            if(possihit = noone) break;
-            if(possihit.object_index = obj_ship_placeholder || possihit.object_index = obj_teleport || possihit.object_index = obj_deadship) break;
+            //Check if the player is close than the nearest ally
+            if(point_distance(bulletx[i], bullety[i], obj_player.x, obj_player.y) &lt; point_distance(bulletx[i], bullety[i], possihit.x, possihit.y))
+                possihit = obj_player;
             //Check if the nearest enemy is close to a collision
             //Also check if the closest ally is actually an error check
             //Check if the nearest enemy is close to a collision
@@ -403,7 +402,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                             if(global.ships &gt; 1)
                                 random_message(global.othername[bulletmid[i]], global.name, bulletname[i]);
                             else
-                                obj_ship.message = global.othername[bulletmid[i]]+" ELIMINATED "+global.name+".("+bulletname[i]+")";
+                                obj_player.message = global.othername[bulletmid[i]]+" ELIMINATED "+global.name+".("+bulletname[i]+")";
                         }
                         if(global.shipselect != 2)
                         {
@@ -527,9 +526,9 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             bulletfree[i] = true;
             if(bulletgraze[i] = 1)
             {
-                obj_ship.energy += 4;
-                if(obj_ship.energy &gt; 100)
-                    obj_ship.energy = 100;
+                obj_player.energy += 4;
+                if(obj_player.energy &gt; 100)
+                    obj_player.energy = 100;
                 repeat(3)
                     effect_create_below(ef_spark, bulletx[i]-7+random(14), bullety[i]-7+random(14), 0, c_aqua);
                 sfx_play(snd_graze, bulletx[i], bullety[i]);

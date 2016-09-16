@@ -1893,6 +1893,7 @@
       <script>scripts\client_udpip.gml</script>
       <script>scripts\getip.gml</script>
     </scripts>
+    <script>scripts\defeat_player.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
@@ -1911,6 +1912,11 @@
     <object>objects\obj_dummy_ally</object>
     <object>objects\obj_dummy_enemy</object>
     <objects name="Trash">
+      <object>objects\obj_deadother</object>
+      <objects name="Error Prevention">
+        <object>objects\obj_ship_placeholder</object>
+        <object>objects\obj_dud</object>
+      </objects>
       <object>objects\obj_teamchange</object>
       <object>objects\obj_solus_shot</object>
       <objects name="Main Menu">
@@ -1945,6 +1951,7 @@
       <object>objects\obj_tomulti</object>
       <object>objects\obj_modsettings</object>
       <object>objects\object235</object>
+      <object>objects\obj_teleport_other</object>
     </objects>
     <objects name="In Game">
       <object>objects\obj_ship</object>
@@ -2157,16 +2164,15 @@
         <object>objects\obj_weaponswitch</object>
         <object>objects\obj_starfield_mod</object>
         <object>objects\obj_fade_screen</object>
+        <object>objects\obj_respawn_timer</object>
       </objects>
       <objects name="Effects">
         <object>objects\obj_shippart</object>
         <object>objects\obj_hit</object>
         <object>objects\obj_shieldpart</object>
         <object>objects\obj_deadship</object>
-        <object>objects\obj_deadother</object>
         <object>objects\obj_flareburst</object>
         <object>objects\obj_teleport</object>
-        <object>objects\obj_teleport_other</object>
         <object>objects\obj_weaponflash</object>
         <object>objects\obj_lockoncursor</object>
         <object>objects\obj_homingeffect</object>
@@ -2174,10 +2180,6 @@
         <object>objects\obj_beserkeffect</object>
         <object>objects\obj_overheatshine</object>
         <object>objects\obj_boosteffect</object>
-      </objects>
-      <objects name="Error Prevention">
-        <object>objects\obj_ship_placeholder</object>
-        <object>objects\obj_dud</object>
       </objects>
     </objects>
     <objects name="Menus">

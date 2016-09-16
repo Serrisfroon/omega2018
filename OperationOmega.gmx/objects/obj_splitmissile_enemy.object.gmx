@@ -165,7 +165,7 @@ switch(go)
 {
  case 0:
       closeby = instance_nearest(x, y, prnt_ally);
-      if(closeby != noone &amp;&amp; closeby != obj_deadship &amp;&amp; closeby != obj_ship_placeholder)
+      if(closeby != noone)
       {
        if(point_distance(x, y, closeby.x, closeby.y) &lt; 240 &amp;&amp; closeby.mid != oldmid)
        {

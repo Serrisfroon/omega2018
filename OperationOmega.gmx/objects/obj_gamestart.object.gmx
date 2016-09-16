@@ -230,6 +230,9 @@ if(global.master = true)
     instance_create(0, 0, obj_mod);
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
+    tele.activate_all = true;
+    (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
+    global.activated[0] = 2;
     instance_create(0, 0, obj_bulletcontrol);
     instance_create(0, 0, obj_partsystem);
     instance_create(0, 0, obj_starfield_mod);
@@ -254,6 +257,7 @@ if(global.master = true)
                 global.playership[i].thisname = global.othername[i];
             }
             global.playership[i].mid = i;
+            global.activated[i] = 2;
         }
     }
 }
@@ -264,6 +268,9 @@ else
     instance_create(0, 0, obj_mod_client);
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
+    tele.activate_all = true;
+    global.activated[0] = 2;
+    (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     instance_create(0, 0, obj_bulletcontrol);
     instance_create(0, 0, obj_partsystem);
     instance_create(0, 0, obj_starfield_mod);
@@ -288,6 +295,7 @@ else
                 global.playership[i].thisname = global.othername[i];
             }
             global.playership[i].mid = i;
+            global.activated[i] = 2;
         }
     }
 }

@@ -138,6 +138,11 @@ view_x_increase = 24;
 view_y_increase = 15;
 view_height_base = 750;
 view_hview[0] = view_height_base;
+
+//Initialize the respawn locations of all players
+for(i = 0; i &lt; 8; i++)
+    respawn_location[i] = i;      
+
 </string>
           </argument>
         </arguments>
@@ -547,22 +552,20 @@ else
             <string>//respawn if there is stock left
 if(global.ships &gt; 0)
 {
- tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
- tele.mid = global.mymid;
- //destroy the error stopper
- with(obj_ship_placeholder)
-    instance_destroy();
-  //Send respawn to host
-  clearbuffer(0);
-  packet_label_write(10, global.mymid);
-  writeushort(global.myspawnx, 0);
-  writeushort(global.myspawny, 0);
-  //Send to everyone if host
-  if(global.master = true)
-   client_sendall(0, 0);
-  else
-  //Send to host if client
-   sendmessage(global.host, 0, 0, 0);
+    tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
+    tele.mid = global.mymid;
+    //destroy the error stopper
+    with(obj_respawn_timer)
+       instance_destroy();
+    //Send respawn to host
+    clearbuffer(0);
+    packet_label_write(10, global.mymid);
+    //Send to everyone if host
+    if(global.master = true)
+        client_sendall(0, 0);
+    else
+        //Send to host if client
+        sendmessage(global.host, 0, 0, 0);
 }
 else
 {
@@ -889,69 +892,7 @@ while(true)
         case 3: //The player is defeated
             //Push back the disconnection check
             playerdisconnect[dummy] = -600;
-            
-            //Hold the mid of the player that defeated this player
-            defeatmid = readbyte(0);
-            
-            //Read the ID of the next spawn location
-            respawn_location[dummy] = readbyte(0);
-            
-            //Destroy any turrets associated with the defeated player
-            with(obj_turret)
-                if(mid = obj_mod.dummy)
-                    instance_destroy();
-            with(obj_turret_enemy)
-                if(mid = obj_mod.dummy)
-                    instance_destroy();
-                    
-            //Update the match score
-            //Make sure the wall did not defeat the player
-            if(defeatmid != 20)
-                global.kills[defeatmid] += 1;       //Add the kill to the score for the player that defeated this player
-            global.deaths[dummy] += 1;              //Add to this player's death count
-            
-            //Perform action based on the game mode
-            switch(global.matchtype)
-            {
-                case "stock":
-                    //Reduce your team's score by 1
-                    switch(global.team[dummy])
-                    {
-                        case 1:
-                            global.redscore -= 1;
-                        break;
-                        case 2:
-                            global.bluescore -= 1;
-                        break;
-                    }
-                break;
-                case "death":
-                    //Increase other team's score by 1
-                    switch(global.team[dummy])
-                    {
-                        case 1:
-                            global.bluescore += 1;
-                        break;
-                        case 2:
-                            global.redscore += 1;
-                        break;
-                    }
-                break;
-            }
-            
-            //Hold the object of the defeated player locally
-            var defeated_player = global.playership[dummy];
-            //Create a defeated ship in the player's place
-            var defeat = instance_create(defeated_player.x, defeated_player.y, obj_deadship);
-            defeat.direction = defeated_player.direction;           //Pass on the defeated player's direction
-            defeat.speed = defeated_player.speed+1;                 //Pass on the defeated player's speed
-            defeat.sprite_index = defeated_player.sprite_index;     //Pass on the defeated player's image
-            defeat.dummy = dummy;                                   //Pass on the defeated player's mid
-            
-            //Update the viewed object if this player was being followed
-            if(global.playership[dummy] = view_object[0])
-                view_object[0] = defeat;
-                
+                            
             //Send a defeat notice to chat
             //Read the color sent
             switch(readbyte(0))
@@ -965,21 +906,13 @@ while(true)
             }
             chatline_add(readstring(0), newcolor);          //Add the line to the chat
             
-            //Create an announcement
-            if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
-            {
-                obj_mod.announcement_stage  = 1;
-                obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.othername[dummy];
-                obj_mod.announcement_color = newcolor;
-            }
-            
-            //Reset targetting if currently targetting this ship
-            if(targeted_object = global.playership[dummy])
-            {
-                targeted_object = -1;
-                distance_to_target = 10000;
-            }
-            
+            //Perform the defeat function for the player
+            with(global.playership[dummy])
+                event_perform(ev_other, ev_user2);      
+                
+            //Read the respawn location for the player
+            respawn_location[dummy] = readbyte(0);      
+                
             //Send the message to other players
             client_sendall(0, dummy);
         break;
@@ -1148,9 +1081,7 @@ while(true)
    
         //Respawn Packet
         case 10:
-            dummyx = readushort(0);
-            dummyy = readushort(0);
-            tele = instance_create(dummyx, dummyy, obj_teleport_other);
+            tele = instance_create(global.spawnx[respawn_location[dummy]], global.spawny[respawn_location[dummy]], obj_teleport_other);
             tele.mid = dummy;
             client_sendall(0, dummy);        
         break;  
@@ -2333,7 +2264,7 @@ alarm[1]=4;
 {
  case false:
       obj_mod.chat_open = true;
-      global.playership[global.mymid].ship_disabled = true;
+      global.playership[mid].ship_disabled = true;
       keyboard_string = '';
       //Send a prediction to show the stopping
       with(obj_ship)
@@ -2343,7 +2274,7 @@ alarm[1]=4;
        thisturn = 0;
        //Send the prediction
        clearbuffer(0);
-       packet_label_write(6, global.mymid);
+       packet_label_write(6, mid);
        writebyte(prediction_compress(predictturn, predictspeed, 0), 0);
        //Send to everyone if host
        if(global.master = true)
@@ -2355,7 +2286,8 @@ alarm[1]=4;
  break;
  case true:
       obj_mod.chat_open = false;
-      global.playership[global.mymid].ship_disabled = true;
+      if(global.playership[mid].ship_status_hacked = false &amp;&amp; global.activated[mid] != 1)
+        global.playership[mid].ship_disabled = false;
       //Check if text was typed
       if(keyboard_string = '') break;
       
@@ -2369,7 +2301,7 @@ alarm[1]=4;
        thisturn = 0;
        //Send the prediction
        clearbuffer(0);
-       packet_label_write(6, global.mymid);
+       packet_label_write(6, mid);
        writebyte(prediction_compress(predictturn, predictspeed, 0), 0);
        //Send to everyone if host
        if(global.master = true)
@@ -2389,7 +2321,7 @@ alarm[1]=4;
       chatline_add(sendline, c_white);
       //Send the defeat to everyone
       clearbuffer(0);
-      packet_label_write(7, global.mymid);
+      packet_label_write(7, mid);
       writestring(chatline[4], 0);
       //Send to everyone if host
       if(global.master = true)

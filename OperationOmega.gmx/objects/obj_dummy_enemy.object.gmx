@@ -6,7 +6,7 @@
   <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>prnt_dummy</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_shipmask</maskName>
   <events>
     <event eventtype="4" ename="obj_splitmissile">
       <action>

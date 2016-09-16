@@ -137,7 +137,7 @@ if(scale = 1 &amp;&amp; stage = 0)
         //If there wasn't, check the center
         beamed = collision_line(x, y, x+lengthdir_x(1536, direction), y+lengthdir_y(1536, direction), prnt_ally, 1, 1);
     //Check if there was a collision and that it was your ship and not an error checker
-    if(beamed &gt;= 0 &amp;&amp; beamed != obj_deadship &amp;&amp; beamed != obj_ship_placeholder)
+    if(beamed &gt;= 0)
     {
         if(beamed.object_index = obj_turret)
         {

@@ -1238,8 +1238,8 @@ if(thisturn != lastturn)
     //Take note of the last direction sent
     lastturn = thisturn;
     clearbuffer(0);
-    packet_label_write(6, global.mymid);
-    writebyte(prediction_compress(thisturn, predictturn, predictspeed, 0), 0);
+    //packet_label_write(6, global.mymid);
+//    writebyte(prediction_compress(thisturn, predictturn, predictspeed, 0), 0);
     //Send to everyone if host
     if(global.master = true)
         client_sendall(0, 0);
