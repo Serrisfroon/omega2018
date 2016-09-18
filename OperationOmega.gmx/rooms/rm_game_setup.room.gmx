@@ -51,6 +51,7 @@ for(i = 0; i &lt; 8; i += 1)
     global.team[i] = 0;
     global.readied[i] = 0;
     global.activated[i] = 0;
+    global.playership[i] = -1;
 }
 
 //Initialize Secondary variables
@@ -61,6 +62,7 @@ for(i = 1; i &lt;= 4; i++)
     global.secondary_cost[i] = 0;
     global.secondary_stock[i] = 0;
     global.secondary_object[i] = 0;
+    global.lockon_required[i] = 0;
 }
 
 //Initialize background loading variables

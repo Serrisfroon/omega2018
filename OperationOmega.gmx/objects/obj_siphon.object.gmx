@@ -55,7 +55,7 @@ alarm[0] = 7;
  if(instance_exists(obj_practiceship))
   source = obj_practiceship;
  else 
-  source = obj_ship;
+  source = obj_player;
 }
 else
  source = global.playership[mid];

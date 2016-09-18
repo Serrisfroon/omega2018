@@ -144,6 +144,8 @@ alarm[1] = 70;
 //Initialize the variable that holds the alpha value of the white fide-in
 transition_fade_in = 1;
 
+packet = 0;
+
 //Set the view size and position
 view_hview[0] = 750;
 view_wview[0] = 1200;
@@ -231,13 +233,14 @@ if(global.master = true)
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
+    view_object = tele;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
-    global.activated[0] = 2;
+    global.activated[global.mymid] = 2;
     instance_create(0, 0, obj_bulletcontrol);
     instance_create(0, 0, obj_partsystem);
     instance_create(0, 0, obj_starfield_mod);
     //Create a ship for each additional player
-    for(i = 1; i &lt;= 7; i += 1)
+    for(i = 0; i &lt;= 7; i += 1)
     {
         //Check if this player is in game
         if(global.activated[i] = 1)
@@ -269,7 +272,8 @@ else
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    global.activated[0] = 2;
+    view_object = tele;
+    global.activated[global.mymid] = 2;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     instance_create(0, 0, obj_bulletcontrol);
     instance_create(0, 0, obj_partsystem);

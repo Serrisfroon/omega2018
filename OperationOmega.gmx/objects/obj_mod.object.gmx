@@ -49,10 +49,12 @@ else
     goliath_selected = false;
 
 //Store the activated flag and playership reference variables locally for faster lookup
+player_object[7] = -1;
 for(i = 0; i &lt; 8; i += 1)
 {
     player_activated[i] = global.activated[i];
     player_object[i] = global.playership[i]
+    playerdisconnect[i] = 0;
 }
 
 //Initialize the variables used to draw the armor and shield bars
@@ -78,7 +80,7 @@ for(i = 1; i &lt;= 4; i++)
     //Hold the max stock for each secondary locally
     max_secondary_stock[i] = global.secondary_stock[i];
     //Initialize the weapon availability coloring variables
-    weapon_avaialable_color[i] = c_white;
+    weapon_available_color[i] = c_white;
 }
       
 //Hold the value of the image index of weapon icons corresponding to your team
@@ -767,7 +769,7 @@ if(global.activated[mid] = 1)
         //Send a packet to everyone to update your aiming direction
         clearpack();
         packet_label_write(13, mid);
-        crush(obj_player.primary_direction/5, 0, 73);
+        crush(obj_player.primary_direction/5, 73, 0);
         bufferpack();
         client_sendall(0, 0);
     }
@@ -837,7 +839,7 @@ while(true)
             uncrushbegin();     
             global.activated[dummy] = uncrush(3, 0)-1;          //Read the player's activation status
             //Continue reading the packet if the player is active
-            if(global.activtaed[dummy] = 1)
+            if(global.activated[dummy] = 1)
             {
                 global.playership[dummy].direction = uncrush(3600, 0)/10;       //Read the player's direction
                 global.playership[dummy].facedir = uncrush(3600, 0)/10;         //Read the player's facing direction
@@ -1022,63 +1024,7 @@ while(true)
             chatline_add(readstring(0), c_white);
             client_sendall(0, dummy);  
         break;
-   
-        //Ship checkin. Sets the correct image and ship-dependant variables 
-        //for a player when it spawns
-        case 9:
-            global.playership[dummy].mid = readbyte(0);
-            ship = readbyte(0);
-            //If the player is on red team, set choose a red ship and set
-            //the right values
-            if(global.team[dummy] = 1)
-                switch(ship)
-                {
-                    case 1: //Alphastar
-                        global.playership[dummy].sprite_index = spr_alphastar;
-                        global.playership[dummy].ship_turning_rate = 5;
-                        global.playership[dummy].minspeed = 2;
-                        global.playership[dummy].velocity_maximum = 7;
-                    break;
-                    case 2: //Swiftwing
-                        global.playership[dummy].sprite_index = spr_swiftwing;
-                        global.playership[dummy].ship_turning_rate = 8;
-                        global.playership[dummy].minspeed = 4;
-                        global.playership[dummy].velocity_maximum = 10;               
-                    break;
-                    case 3: //Goliath
-                        global.playership[dummy].sprite_index = spr_goliath;
-                        global.playership[dummy].ship_turning_rate = 3;
-                        global.playership[dummy].minspeed = 1;
-                        global.playership[dummy].velocity_maximum = 5;
-                    break;
-                }
-            else
-                //If the player is on blue team, set choose a blue ship and set
-                //the right values
-                switch(ship)
-                {
-                    case 1: //Alphastar
-                        global.playership[dummy].sprite_index = spr_alphastar_enemy;
-                        global.playership[dummy].ship_turning_rate = 5;
-                        global.playership[dummy].minspeed = 2;
-                        global.playership[dummy].velocity_maximum = 7;               
-                    break;
-                    case 2: //Swiftwing
-                        global.playership[dummy].sprite_index = spr_swiftwing_enemy;
-                        global.playership[dummy].ship_turning_rate = 8;
-                        global.playership[dummy].minspeed = 4;
-                        global.playership[dummy].velocity_maximum = 10;               
-                    break;
-                    case 3: //Goliath
-                        global.playership[dummy].sprite_index = spr_goliath_enemy;
-                        global.playership[dummy].ship_turning_rate = 3;
-                        global.playership[dummy].minspeed = 1;
-                        global.playership[dummy].velocity_maximum = 5;               
-                    break;
-                }
-            client_sendall(0, dummy);
-        break;
-   
+
         //Respawn Packet
         case 10:
             tele = instance_create(global.spawnx[respawn_location[dummy]], global.spawny[respawn_location[dummy]], obj_teleport_other);
@@ -1534,7 +1480,7 @@ screen_shake(view_object);
           <argument>
             <kind>1</kind>
             <string>//Exit if the player is alive
-if(obj_ship.armor &gt; 0)
+if(obj_player.armor &gt; 0)
  exit;
 
 //Loop to find the mid value of the currently viewed player
@@ -1595,7 +1541,7 @@ view_object = global.object_view;
           <argument>
             <kind>1</kind>
             <string>//Exit if the player is alive
-if(obj_ship.armor &gt; 0)
+if(obj_player.armor &gt; 0)
  exit;
 
 //Loop to find the mid value of the currently viewed player
@@ -1806,66 +1752,66 @@ check_weapons();
 switch(secondary_icon_order)
 {
     case 0: //The order is E-H-H-E
-        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
-        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 2, 73, 1, 1, 0, weapon_available_color[1], 1);
+        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 42, 73, 1, 1, 0, weapon_available_color[2], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
-        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 82, 73, 1, 1, 0, weapon_available_color[3], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
-        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 122, 73, 1, 1, 0, weapon_available_color[4], 1);
     break;
     case 1: //The order is E-E-H-H
-        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 2, 73, 1, 1, 0, weapon_available_color[1], 1);
         
-        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 42, 73, 1, 1, 0, weapon_available_color[2], 1);
         
-        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 82, 73, 1, 1, 0, weapon_available_color[3], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
         
-        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 122, 73, 1, 1, 0, weapon_available_color[4], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);    
     break;
     case 2: //The order is E-E-H-E
-        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 2, 73, 1, 1, 0, weapon_available_color[1], 1);
         
-        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 42, 73, 1, 1, 0, weapon_available_color[2], 1);
         
-        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 82, 73, 1, 1, 0, weapon_available_color[3], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
         
-        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);    
+        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 122, 73, 1, 1, 0, weapon_available_color[4], 1);    
     break;
     case 3: //The order is E-E-E-H
-        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 2, 73, 1, 1, 0, weapon_available_color[1], 1);
         
-        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 42, 73, 1, 1, 0, weapon_available_color[2], 1);
         
-        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 82, 73, 1, 1, 0, weapon_available_color[3], 1);
         
-        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 122, 73, 1, 1, 0, weapon_available_color[4], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);        
     break;
     case 4: //The order is H-H-H-E
-        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 2, 73, 1, 1, 0, weapon_available_color[1], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[1]/max_secondary_stock[1])*26, 36, 2, 73, 1, 1, c_white, 1);
         
-        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 42, 73, 1, 1, 0, weapon_available_color[2], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
         
-        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 82, 73, 1, 1, 0, weapon_available_color[3], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
         
-        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 122, 73, 1, 1, 0, weapon_available_color[4], 1);
     break;
     case 5: //The order is E-H-H-H
-        draw_sprite_ext(global.secondaryimage[1], team_color_index, 2, 73, 1, 1, 0, weapon_avaialable_color[1], 1);
+        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 2, 73, 1, 1, 0, weapon_available_color[1], 1);
         
-        draw_sprite_ext(global.secondaryimage[2], team_color_index, 42, 73, 1, 1, 0, weapon_avaialable_color[2], 1);
+        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 42, 73, 1, 1, 0, weapon_available_color[2], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
         
-        draw_sprite_ext(global.secondaryimage[3], team_color_index, 82, 73, 1, 1, 0, weapon_avaialable_color[3], 1);
+        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 82, 73, 1, 1, 0, weapon_available_color[3], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
         
-        draw_sprite_ext(global.secondaryimage[4], team_color_index, 122, 73, 1, 1, 0, weapon_avaialable_color[4], 1);
+        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 122, 73, 1, 1, 0, weapon_available_color[4], 1);
         draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);    
     break;
 }
@@ -2232,7 +2178,7 @@ clearbuffer(0);
 writebyte(CLIENT_DROP, 0);
 writebyte(global.mymid, 0);
 writestring(global.name, 0);
-if(obj_ship.ismine = 1)
+if(obj_player.ismine = 1)
  writestring(global.name+" has RAGEQUIT the game.", 0)
 else
  writestring(global.name+" has left the game.", 0) 
@@ -2267,7 +2213,7 @@ alarm[1]=4;
       global.playership[mid].ship_disabled = true;
       keyboard_string = '';
       //Send a prediction to show the stopping
-      with(obj_ship)
+      with(obj_player)
       {
        predictspeed = 2;
        predictturn = 0;

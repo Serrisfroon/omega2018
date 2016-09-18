@@ -266,13 +266,19 @@ if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
             obj_customizer.stat_skill.stat_percent = 0.67;
            if(global.secondary_type[4] = 0)
            {
-                global.esecond[3] = global.esecond[2];
-                global.esecond[2] = 0;
+                global.secondary[3] = global.secondary[2];
+                global.secondary_type[3] = global.secondary_type[2];
+                global.secondary_cost[3] = global.secondary_cost[2];
+                global.secondary_stock[3] = global.secondary_stock[2];
+                global.secondary_object[3] = global.secondary_object[2];
+                global.secondary_lockon_required[3] = global.secondary_lockon_required[2];
+                global.secondary[2] = 0;
+                global.secondary_type[2] = 0;
            }
            else
            {
-                global.deploy[1] = global.deploy[2];
-                global.deploy[2] = 0;
+                global.secondary[3] = 0;
+                global.secondary_type[3] = 0;
            }           
      break;
      case 2:
@@ -287,14 +293,23 @@ if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
 
            if(global.secondary_type[4] = 0)
            {
-                global.esecond[1] =  global.esecond[3];
-                global.esecond[3] = 0;
-                global.esecond[2] = 0;
+                global.secondary[1] = global.secondary[3];
+                global.secondary_type[1] = global.secondary_type[3];
+                global.secondary_cost[1] = global.secondary_cost[3];
+                global.secondary_stock[1] = global.secondary_stock[3];
+                global.secondary_object[1] = global.secondary_object[3];
+                global.secondary_lockon_required[1] = global.secondary_lockon_required[3];
+                global.secondary[2] = 0;
+                global.secondary_type[2] = 1;
+                global.secondary[3] = 0;
+                global.secondary_type[3] = 1;
            }
            else
            {
-                global.deploy[3] = global.deploy[1];
-                global.deploy[1] = 0;
+                global.secondary[2] = 0;
+                global.secondary_type[2] = 1;
+                global.secondary[3] = 0;
+                global.secondary_type[3] = 1;
            }           
      break;
      case 3:
@@ -308,13 +323,13 @@ if(obj_readygo.image_index = 1 || obj_readygo.image_index = 0)
             obj_customizer.stat_skill.stat_percent = 0.3;
            if(global.secondary_type[4] = 0)
            {
-                global.esecond[2] = global.esecond[1];
-                global.esecond[1] = 0;
+                global.secondary[1] = 0;
+                global.secondary_type[1] = 0;
            }
            else
            {
-                global.deploy[2] = global.deploy[3];
-                global.deploy[3] = 0;
+                global.secondary[2] = 0;
+                global.secondary_type[2] = 0;
            }           
      break;
     }

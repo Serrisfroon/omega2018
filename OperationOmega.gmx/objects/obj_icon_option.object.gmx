@@ -402,6 +402,7 @@ if(owner.selected = 1)
     owner.new_selection_stock = selection_stock;
     owner.new_selection_object = selection_object; 
     owner.new_selection_lockon_required = selection_lockon_required;  
+    owner.new_selection_icon_image = sprite_index;
     owner.alarm[4] = 1;
 }
 

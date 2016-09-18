@@ -32,4 +32,4 @@ switch(reso)
 
 //Change the view properties of all rooms to this new size
 for(i = 0; i <= rooms; i += 1)
- room_set_view(i, 0, true, 0, 0, width, height, 0, 0, width, height, 32, 32, -1, -1, obj_ship);
+ room_set_view(i, 0, true, 0, 0, width, height, 0, 0, width, height, 32, 32, -1, -1, obj_player);

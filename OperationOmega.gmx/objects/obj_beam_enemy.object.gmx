@@ -146,12 +146,12 @@ if(scale = 1 &amp;&amp; stage = 0)
             {
                 armor -= 20;
                 //Shake the screen if in range
-                if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+                if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
                     obj_mod.screen_shake_intensity = 4;
                 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
             }
         }
-        if(beamed.object_index = obj_ship)
+        if(beamed.object_index = obj_player)
             //Do the following to the ship that was hit
             with(beamed)
             {
@@ -190,7 +190,7 @@ if(scale = 1 &amp;&amp; stage = 0)
                 if(armor &lt;= (armor_maximum*100)/60)
                     smoke = floor(armor/(armor_maximum/10));
                 //Shake the screen if in range
-                if(point_distance(x, y, obj_ship.x, obj_ship.y) &lt; view_wview[0]/2)
+                if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
                     obj_mod.screen_shake_intensity = 8;
 
                 //Check if your ship has been defeated

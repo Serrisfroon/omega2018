@@ -203,7 +203,7 @@ with(global.playership[mid])
               //Match up target and set object to be created
               if(targeted = global.mymid)
               {
-               lockon = obj_ship;
+               lockon = obj_player;
                align = obj_dualmissile_enemy;
               }
               else
@@ -334,7 +334,7 @@ with(global.playership[mid])
              //Match up target and set object to be created
              if(targeted = global.mymid)
              {
-              lockon = obj_ship;
+              lockon = obj_player;
               align = obj_locustmissile_enemy;
              }
              else
@@ -407,7 +407,7 @@ with(global.playership[mid])
              //Match up target and set object to be created
              if(targeted = global.mymid)
              {
-              lockon = obj_ship;
+              lockon = obj_player;
               align = obj_formationa_enemy;
              }
              else
@@ -606,7 +606,7 @@ with(global.playership[mid])
               //Match up target and set object to be created
               if(targeted = global.mymid)
               {
-               lockon = obj_ship;
+               lockon = obj_player;
                align = obj_tridentmissile_enemy;
               }
               else
@@ -710,7 +710,7 @@ with(global.playership[mid])
              //Match up target and set object to be created
              if(targeted = global.mymid)
              {
-              lockon = obj_ship;
+              lockon = obj_player;
               align = obj_shockmissile_enemy;
              }
              else
@@ -775,7 +775,7 @@ with(global.playership[mid])
              //Match up target and set object to be created
              if(targeted = global.mymid)
              {
-              lockon = obj_ship;
+              lockon = obj_player;
               align = obj_strikemissile_enemy;
              }
              else

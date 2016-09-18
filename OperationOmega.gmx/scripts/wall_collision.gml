@@ -1,3 +1,5 @@
+if(xprevious < 0)
+    exit;
 if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/32)] = true)
 {
     hspeed = -hspeed;

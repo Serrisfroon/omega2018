@@ -68,10 +68,10 @@
             <string>direction -= 4;
 if(!instance_exists(target))
     exit;
-draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.scaling, obj_mod.scaling, direction, c_white, 1);
-draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.scaling, obj_mod.scaling, direction+90, c_white, 1);
-draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.scaling, obj_mod.scaling, direction+180, c_white, 1);
-draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.scaling, obj_mod.scaling, direction+270, c_white, 1);
+draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.screen_scaling_ratio, obj_mod.screen_scaling_ratio, direction, c_white, 1);
+draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.screen_scaling_ratio, obj_mod.screen_scaling_ratio, direction+90, c_white, 1);
+draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.screen_scaling_ratio, obj_mod.screen_scaling_ratio, direction+180, c_white, 1);
+draw_sprite_ext(sprite_index, image_index, target.x, target.y, obj_mod.screen_scaling_ratio, obj_mod.screen_scaling_ratio, direction+270, c_white, 1);
 
 </string>
           </argument>

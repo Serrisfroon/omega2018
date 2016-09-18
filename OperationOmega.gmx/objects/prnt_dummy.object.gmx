@@ -30,6 +30,14 @@ first_acceleration = 0;
 
 //Initialize the player name variable
 thisname = "";
+
+mid = instance_number(prnt_dummy);
+current_primary = global.playerprimary[mid];
+current_ship = global.selected_ship[mid];
+
+turning = 0;
+speeding = 0;
+
 //Perform the parent event
 event_inherited();
 </string>
@@ -207,7 +215,7 @@ if(global.team[mid] = 1)
     draw_set_color(c_red);
 else
     draw_set_color(c_navy);
-draw_text((x-view_xview[0])/obj_mod.scaling, (y-48-view_yview[0])/obj_mod.scaling, thisname);
+draw_text((x-view_xview[0])/obj_mod.screen_scaling_ratio, (y-48-view_yview[0])/obj_mod.screen_scaling_ratio, thisname);
 </string>
           </argument>
         </arguments>

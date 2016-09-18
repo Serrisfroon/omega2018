@@ -93,7 +93,7 @@ if(global.activated[mid] = 1)
         //Send a packet to everyone to update your aiming direction
         clearpack();
         packet_label_write(13, mid);
-        crush(obj_player.primary_direction/5, 0, 73);
+        crush(obj_player.primary_direction/5, 73, 0);
         bufferpack();
         sendmessage(global.host, "", 0, 0);
     }
@@ -372,61 +372,6 @@ while(true)
         case 7:
             //Put the message in your chat
             chatline_add(readstring(0), c_white);
-        break;
-
-        //Ship checkin. Sets the correct image and ship-dependant variables 
-        //for a player when it spawns
-        case 9:
-            global.playership[dummy].mid = readbyte(0);
-            ship = readbyte(0);
-            //If the player is on red team, set choose a red ship and set
-            //the right values
-            if(global.team[dummy] = 1)
-                switch(ship)
-                {
-                    case 1: //Alphastar
-                        global.playership[dummy].sprite_index = spr_alphastar;
-                        global.playership[dummy].ship_turning_rate = 5;
-                        global.playership[dummy].minspeed = 2;
-                        global.playership[dummy].velocity_maximum = 7;               
-                    break;
-                    case 2: //Swiftwing
-                        global.playership[dummy].sprite_index = spr_swiftwing;
-                        global.playership[dummy].ship_turning_rate = 8;
-                        global.playership[dummy].minspeed = 4;
-                        global.playership[dummy].velocity_maximum = 10;               
-                    break;
-                    case 3: //Goliath
-                        global.playership[dummy].sprite_index = spr_goliath;
-                        global.playership[dummy].ship_turning_rate = 3;
-                        global.playership[dummy].minspeed = 1;
-                        global.playership[dummy].velocity_maximum = 5;
-                    break;
-                }
-            else
-                //If the player is on blue team, set choose a blue ship and set
-                //the right values
-                switch(ship)
-                {
-                    case 1: //Alphastar
-                        global.playership[dummy].sprite_index = spr_alphastar_enemy;
-                        global.playership[dummy].ship_turning_rate = 5;
-                        global.playership[dummy].minspeed = 2;
-                        global.playership[dummy].velocity_maximum = 7;               
-                    break;
-                    case 2: //Swiftwing
-                        global.playership[dummy].sprite_index = spr_swiftwing_enemy;
-                        global.playership[dummy].ship_turning_rate = 8;
-                        global.playership[dummy].minspeed = 4;
-                        global.playership[dummy].velocity_maximum = 10;               
-                    break;
-                    case 3: //Goliath
-                        global.playership[dummy].sprite_index = spr_goliath_enemy;
-                        global.playership[dummy].ship_turning_rate = 3;
-                        global.playership[dummy].minspeed = 1;
-                        global.playership[dummy].velocity_maximum = 5;               
-                    break;
-                }
         break;
   
         //Respawn Packet

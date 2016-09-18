@@ -29,6 +29,7 @@
 aiming_direction = 0;       //Holds the angle to fire at
 primary_cooldown = 0;       //Hold the time(in frames) until the next primary shot
 primary_overheat = 1;       //Holds the cooldown multiplier to modify the cooldown to a lower value
+primary_direction = 0;      //Holds the direction the primary will be fired in
 
 //Initialize unique primary variables
 //primary_name                  Holds the name of the primary to be passed to the bullet_create() function
@@ -163,6 +164,9 @@ switch(current_ship)
 //Set the shield and armor to their maximums
 shield = shield_maximum;
 armor = armor_maximum;
+
+//Set the shield as currently active
+shieldup = 1;
 
 //Initialize the ability cooldown timer
 ability_cooldown_timer = 0;
@@ -738,7 +742,10 @@ if(energy &lt; 100)
 energy_regeneration += energy_regeneration_scaling; //Scale the regen rate over time
 
 ability_cooldown_timer -= 1;
-    
+if(shield = 0)
+    shieldup = 0;
+else
+    shieldup = 1;
 //Bounce back into the map if you move out of it
 while(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
 {

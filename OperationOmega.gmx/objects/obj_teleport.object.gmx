@@ -25,9 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.object_view = obj_ship;
-view_object = global.object_view;
-
+            <string>
 //Set scales to 0, makes the object invisible
 image_xscale = 0;
 image_yscale = 0;
@@ -456,7 +454,7 @@ image += 1;
 var turn_to_player = global.playership[mid];
 turn_to_player.x = x;
 turn_to_player.y = y;
-if(global.chatting = false)
+if(obj_mod.chat_open = false)
     turn_to_player.ship_disabled = false;
 global.activated[mid] = 1;   
 if(activate_all = true)

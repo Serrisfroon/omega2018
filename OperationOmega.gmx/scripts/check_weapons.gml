@@ -4,31 +4,31 @@ for(i = 1; i <= 4; i += 1)
     {
         case 4:     
            if(obj_player.energy < global.secondary_cost[i] || obj_mod.targeted_object = -1)
-               weapon_avaialable_color[i] = c_dkgray;   
+               weapon_available_color[i] = c_dkgray;   
            else
-               if(weapon_avaialable_color[i] = c_dkgray)
+               if(weapon_available_color[i] = c_dkgray)
                {     
-                   weapon_avaialable_color[i] = c_white;
+                   weapon_available_color[i] = c_white;
                    instance_create((i-1)*40+2, 0, obj_weaponflash);
                }
         break;
         case 9:     
            if(obj_player.energy < global.secondary_cost[i] || obj_mod.targeted_object = -1)
-               weapon_avaialable_color[i] = c_dkgray;   
+               weapon_available_color[i] = c_dkgray;   
            else
-               if(weapon_avaialable_color[i] = c_dkgray)
+               if(weapon_available_color[i] = c_dkgray)
                {     
-                   weapon_avaialable_color[i] = c_white;
+                   weapon_available_color[i] = c_white;
                    instance_create((i-1)*40+2, 0, obj_weaponflash);
                }
         break;
         case 5:     
            if(obj_player.energy < global.secondary_cost[i] || obj_player.speed > 0)
-               weapon_avaialable_color[i] = c_dkgray;   
+               weapon_available_color[i] = c_dkgray;   
            else
-               if(weapon_avaialable_color[i] = c_dkgray)
+               if(weapon_available_color[i] = c_dkgray)
                {     
-                   weapon_avaialable_color[i] = c_white;
+                   weapon_available_color[i] = c_white;
                    instance_create((i-1)*40+2, 0, obj_weaponflash);
                }
         break;
@@ -45,11 +45,11 @@ for(i = 1; i <= 4; i += 1)
         case 14:     
         case 15:     
            if(obj_player.energy < global.secondary_cost[i])
-               weapon_avaialable_color[i] = c_dkgray;   
+               weapon_available_color[i] = c_dkgray;   
            else
-               if(weapon_avaialable_color[i] = c_dkgray)
+               if(weapon_available_color[i] = c_dkgray)
                {     
-                   weapon_avaialable_color[i] = c_white;
+                   weapon_available_color[i] = c_white;
                    instance_create((i-1)*40+2, 0, obj_weaponflash);
                }
         break;

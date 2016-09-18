@@ -139,10 +139,10 @@ if(target != noone)
   else
     speed = 0;
 }
-if(image_alpha &gt; 0 &amp;&amp; distance_to_object(obj_ship) &gt; 200)
+if(image_alpha &gt; 0 &amp;&amp; distance_to_object(obj_player) &gt; 200)
  image_alpha -= 0.07;
 //Show the mine if nearby
-if(image_alpha &lt; 0.7 &amp;&amp; distance_to_object(obj_ship) &lt;= 200)
+if(image_alpha &lt; 0.7 &amp;&amp; distance_to_object(obj_player) &lt;= 200)
  image_alpha += 0.07;
 
 </string>

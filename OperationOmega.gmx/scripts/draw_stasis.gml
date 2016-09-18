@@ -1,4 +1,4 @@
-scaling = view_hview[0]/480;
+screen_scaling_ratio = view_hview[0]/480;
 
 ///////////////////////////////////////
 //Stasis Field Shader
@@ -31,8 +31,8 @@ if(instance_exists(obj_stasis_field) || instance_exists(obj_enemystasis_field))
         //Apply the shader once for each instance of a stasis field
         with(obj_stasis_field)
         {
-            shader_set_uniform_f(obj_mod.uni_mouse_pos, (x-view_xview[0])/obj_mod.scaling, (y-view_yview[0])/obj_mod.scaling);
-            shader_set_uniform_f(obj_mod.uni_circle_radius, 0.12*image_xscale/obj_mod.scaling);
+            shader_set_uniform_f(obj_mod.uni_mouse_pos, (x-view_xview[0])/obj_mod.screen_scaling_ratio, (y-view_yview[0])/obj_mod.screen_scaling_ratio);
+            shader_set_uniform_f(obj_mod.uni_circle_radius, 0.12*image_xscale/obj_mod.screen_scaling_ratio);
             surface_set_target(obj_mod.current_surface);
             draw_surface(obj_mod.previous_surface,0,0);
             obj_mod.previous_surface = obj_mod.current_surface;
@@ -42,8 +42,8 @@ if(instance_exists(obj_stasis_field) || instance_exists(obj_enemystasis_field))
         }
         with(obj_enemystasis_field)
         {
-            shader_set_uniform_f(obj_mod.uni_mouse_pos, (x-view_xview[0])/obj_mod.scaling, (y-view_yview[0])/obj_mod.scaling);
-            shader_set_uniform_f(obj_mod.uni_circle_radius, 0.12*image_xscale/obj_mod.scaling);
+            shader_set_uniform_f(obj_mod.uni_mouse_pos, (x-view_xview[0])/obj_mod.screen_scaling_ratio, (y-view_yview[0])/obj_mod.screen_scaling_ratio);
+            shader_set_uniform_f(obj_mod.uni_circle_radius, 0.12*image_xscale/obj_mod.screen_scaling_ratio);
             surface_set_target(obj_mod.current_surface);
             draw_surface(obj_mod.previous_surface,0,0);
             obj_mod.previous_surface = obj_mod.current_surface;

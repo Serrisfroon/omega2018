@@ -54,7 +54,7 @@ alarm[0] = 7;
 switch(targetmid)
 {
  case global.mymid:
-      target = obj_ship;
+      target = obj_player;
       target.shield -= 4;
       //If there is no more shield, transfer damage to armor
       if(target.shield &lt; 0) 

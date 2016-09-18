@@ -703,7 +703,7 @@ predictspeed = 1;
 //Create a boosting effect
 boosteffect = instance_create(x+lengthdir_x(8, image_angle-180), y+lengthdir_y(8, image_angle-180), obj_boosteffect)
 boosteffect.image_angle = image_angle;
-boosteffect.source = obj_ship;
+boosteffect.source = obj_player;
 
 //Have the controller object send a refresh packet
 obj_mod.update_packet_timer = 0;
