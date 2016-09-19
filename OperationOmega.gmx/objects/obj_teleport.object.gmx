@@ -130,7 +130,7 @@ thisturn = 0;
 predictturn = 0;
 predictspeed = 0;
 nowshoot = 0;
-mid = global.mymid;
+
 </string>
           </argument>
         </arguments>
@@ -205,7 +205,8 @@ if(global.team[global.mymid] = 2)
   break;
  }
 }
-
+if(mid = global.mymid)
+    view_object = id;
 </string>
           </argument>
         </arguments>
@@ -457,11 +458,18 @@ turn_to_player.y = y;
 if(obj_mod.chat_open = false)
     turn_to_player.ship_disabled = false;
 global.activated[mid] = 1;   
-if(activate_all = true)
-    for(i = 0; i &lt;= 7 i++)
-        if(global.activated[i] = 2)
-            global.activated[i] = 1;
- 
+if(mid = global.mymid)
+{
+    if(activate_all = true)
+        for(i = 0; i &lt;= 7 i++)
+            if(global.activated[i] = 2)
+                global.activated[i] = 1;
+    //Face the center
+    turn_to_player.direction = point_direction(turn_to_player.x, turn_to_player.y, room_width/2, room_height/2);
+    //Initialize facedir. This is your target direction
+    turn_to_player.facedir = turn_to_player.direction;
+    view_object = turn_to_player;
+} 
 instance_destroy();
 </string>
           </argument>

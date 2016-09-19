@@ -31,12 +31,11 @@ first_acceleration = 0;
 //Initialize the player name variable
 thisname = "";
 
-mid = instance_number(prnt_dummy);
-current_primary = global.playerprimary[mid];
-current_ship = global.selected_ship[mid];
-
 turning = 0;
 speeding = 0;
+mid = obj_gamestart.pass_mid;
+current_primary = obj_gamestart.pass_current_primary;
+current_ship = obj_gamestart.pass_current_ship ;
 
 //Perform the parent event
 event_inherited();
@@ -122,13 +121,13 @@ if(ship_status_hacked = true)
 switch(turning)
 {
     case 1:    //Turn Clockwise
-        facedir -= forceturn;
+        facedir -= ship_turning_rate;
         //Stop facedir from going below 0
         if(facedir &lt; 0)
             facedir += 360;    
     break;
     case 2:    //Turn Counter-clockwise
-        facedir += forceturn;
+        facedir += ship_turning_rate;
         //Stop facedir from going over 360
         if(facedir &gt; 360)
             facedir -= 360; 

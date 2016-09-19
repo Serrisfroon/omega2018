@@ -60,7 +60,7 @@ switch(update_packet_timer)
                 update_packet_timer = 3;
                 
                 //Send your RNG seed and firing direction
-                crush(global.primaryRNG[mid], 15, 0);
+                crush(global.primaryRNG[mid], 65536, 0);
                 crush(round(obj_player.primary_direction), 360, 0);
                 
                 //Perform action based on the primary equipped
@@ -91,10 +91,9 @@ if(global.activated[mid] = 1)
         //Update the previous primary direction
         previous_primary_direction = obj_player.primary_direction;
         //Send a packet to everyone to update your aiming direction
-        clearpack();
+        clearbuffer(0);
         packet_label_write(13, mid);
-        crush(obj_player.primary_direction/5, 73, 0);
-        bufferpack();
+        writebyte(obj_player.primary_direction/5, 0);
         sendmessage(global.host, "", 0, 0);
     }
 </string>
@@ -179,9 +178,13 @@ while(true)
             for(i = 0; i &lt; 8; i += 1)
             {
                 //Read the player's activation state
-                global.activated[i] = uncrush(3, 0)-1;
+                var holdactivation = uncrush(3, 0)-1;
+                if(i != mid)
+                {
+                    global.activated[i] = holdactivation;
+                }
                 //Ignore this cycle if the player slot is not activated
-                if(global.activated[i] != 1) continue;
+                if(holdactivation != 1) continue;
                 
                 //Read the cycle if it is your player slot, and put it into a junk variable.
                 if(i = mid)
@@ -198,8 +201,8 @@ while(true)
                     if(check_prediction &gt; 12)
                     {
                         //Read the player's RNG seed and firing direction
-                        holdvar = uncrush(15, 0);
-                        holdvar = uncrush(3600, 0);
+                        holdvar = uncrush(65536, 0);
+                        holdvar = uncrush(360, 0);
                         //Perform action based on the primary equipped
                         switch(global.playerprimary[i])
                         {          
@@ -231,8 +234,8 @@ while(true)
                 if(global.playership[i].multiplayer_primary_fire_flag = true)
                 {
                     //Read the player's RNG seed and firing direction
-                    global.primaryRNG[global.mymid] = uncrush(15, 0);
-                    global.playership[i].newdir = uncrush(3600, 0)/10;
+                    global.primaryRNG[global.mymid] = uncrush(65536, 0);
+                    global.playership[i].newdir = uncrush(360, 0)/10;
                     
                     //Perform action based on the primary equipped
                     switch(global.playerprimary[i])
@@ -387,7 +390,7 @@ while(true)
            
         //Change snapdir
         case 13:
-            global.playership[dummy].snapdir = readbyte(0)-100;
+            global.playership[dummy].primary_direction = readbyte(0)*5;
         break;
         
         //Begin Firing Primary weapon

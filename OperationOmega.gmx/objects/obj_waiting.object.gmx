@@ -161,10 +161,12 @@ while(true)
    
     //Check for new chat messages
     case 11:
-         mid = readbyte(0);
-         if(mid = global.mymid)
+         var new_chat_mid = readbyte(0);
+         var new_chat_line = readstring(0);
+         var new_chat_color = readbyte(0);
+         if(new_chat_mid = global.mymid)
             break;
-         chat_addline(readstring(0), readbyte(0), 1, mid);
+         chat_addline(new_chat_line, new_chat_color, 1, new_chat_mid);
     break;
     
     //A new player joins
@@ -205,7 +207,7 @@ while(true)
                 (instance_create(global.playerslot[thisplayer].x, global.playerslot[thisplayer].y, obj_playerslot_readied)).mid = thisplayer;
          else
             with(obj_playerslot_readied)
-                if(mid = obj_waiting.readystat)
+                if(mid = readystat)
                     instance_destroy();
          //Send a notice to everyone else
          chat_addline(newchat, 1, 1, 0);

@@ -147,17 +147,19 @@ alarm[0] = 18;
         //Check for new chat messages
         case 11:
             //Update your own chat
-            mid = readbyte(0);
-            if(mid = global.mymid)
+            var new_chat_mid = readbyte(0);
+            if(new_chat_mid = global.mymid)
                 break;
-            chat_addline(readstring(0), readbyte(0), 0, mid);
+            var new_chat_line = readstring(0);
+            var new_chat_color = readbyte(0);
+            chat_addline(new_chat_line, new_chat_color, 0, new_chat_mid);
 
             //Animate player box if a player has joined
             if(string_copy(chat_line[chat_length], string_length(chat_line[chat_length])-19, 20) = "has joined the game." &amp;&amp; chat_color[chat_length] = c_red) 
             {    
                 with(obj_playerslot)
                 {
-                    if(mid = obj_waiting.mid)
+                    if(mid = new_chat_mid)
                     {   
                         showthisimage = 0;                    
                         (instance_create(x, y, obj_playerslot_addplayer)).owner = id;
@@ -169,7 +171,7 @@ alarm[0] = 18;
             {
                 with(obj_playerslot)
                 {
-                    if(mid = obj_waiting.mid)
+                    if(mid = new_chat_mid)
                     {
                         playerleave = instance_create(x, y, obj_playerslot_playerleave);
                         playerleave.owner = id;

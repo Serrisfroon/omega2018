@@ -107,7 +107,7 @@ else
 //Initialize score window values
 for(i = 0; i &lt; 8; i += 1)
 {
-    global.primaryRNG[i] = 1234;    //Also initialize the RNG seed for each player
+    global.primaryRNG[i] = 1;    //Also initialize the RNG seed for each player
     global.playerfps[i] = 60;
     global.ping[i] = 0;
     global.kills[i] = 0;
@@ -233,7 +233,7 @@ if(global.master = true)
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    view_object = tele;
+    view_object[0] = tele;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     global.activated[global.mymid] = 2;
     instance_create(0, 0, obj_bulletcontrol);
@@ -245,6 +245,9 @@ if(global.master = true)
         //Check if this player is in game
         if(global.activated[i] = 1)
         {
+            pass_mid = i;
+            pass_current_primary = global.playerprimary[i];
+            pass_current_ship = global.selected_ship[i];
             //Create an ally if this player is on your team
             if(global.team[i] = global.team[global.mymid])
             {
@@ -259,7 +262,6 @@ if(global.master = true)
                 global.playership[i].ally = false;
                 global.playership[i].thisname = global.othername[i];
             }
-            global.playership[i].mid = i;
             global.activated[i] = 2;
         }
     }
@@ -272,7 +274,7 @@ else
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    view_object = tele;
+    view_object[0] = tele;
     global.activated[global.mymid] = 2;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     instance_create(0, 0, obj_bulletcontrol);
@@ -284,6 +286,9 @@ else
         //Check if this player is in game
         if((global.activated[i] = 1 || i = 0) &amp;&amp; i != global.mymid)
         {
+            pass_mid = i;
+            pass_current_primary = global.playerprimary[i];
+            pass_current_ship = global.selected_ship[i];
             //Create an ally if this player is on your team
             if(global.team[i] = global.team[global.mymid])
             {
@@ -298,7 +303,6 @@ else
                 global.playership[i].ally = false;
                 global.playership[i].thisname = global.othername[i];
             }
-            global.playership[i].mid = i;
             global.activated[i] = 2;
         }
     }

@@ -28,7 +28,7 @@
             <string>//Perform code exclusive to the player-controlled ship
 
 //Start following this object
-view_object = id;
+view_object[0] = id;
 
 //Set the current primary to your selected primary
 current_primary = global.primary;

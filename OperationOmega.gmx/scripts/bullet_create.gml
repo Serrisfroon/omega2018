@@ -11,6 +11,7 @@ loly = argument1;
 type = argument2;
 loldir[1] = argument3;
 mid = argument4;
+is_primary = false;
 
 if(global.team[mid] = global.team[global.mymid])
  blend = global.allycolor;
@@ -35,6 +36,7 @@ switch(type)
          accuracy = 3;
          half_accuracy = 6;
          bullet_number = 1;
+         is_primary = true;
          sfx_play(snd_needle, lolx, loly);
     break;
     case "Sonic":
@@ -49,6 +51,7 @@ switch(type)
          half_accuracy = 7;
          bullet_number = 2;
          loldir[2] = loldir[1];
+         is_primary = true;
          sfx_play(snd_sonic, lolx, loly);
     break;
     case "Wave":
@@ -62,6 +65,7 @@ switch(type)
          accuracy = 2;
          half_accuracy = 1;      
          bullet_number = 1;
+         is_primary = true;
          sfx_play(snd_wave, lolx, loly);
     break;
     case "Seeker":
@@ -86,6 +90,7 @@ switch(type)
     case "Stasisb":
          name = "Stasis";
          sprite = spr_stasis;
+         is_primary = true;
          if(argument5 = 0)
           life = point_distance(x, y, mouse_x, mouse_y)/13;
          else
@@ -99,6 +104,7 @@ switch(type)
          dmg = 1;
          mask = 9;
          lolspeed = 9.5+speed/2;
+         is_primary = true;
          bullet_number = 1;
     break;
     case "Burst":
@@ -184,6 +190,7 @@ switch(type)
          accuracy = 0;
          half_accuracy = 0;
          bullet_number = 2;
+         is_primary = true;
          loldir[2] = loldir[1]-180;
     break;
     case "Pierce":
@@ -197,6 +204,7 @@ switch(type)
          sfx_play(snd_pierce, lolx, loly);
          accuracy = 8;
          half_accuracy = 4;
+         is_primary = true;
          bullet_number = 1;
     break;
     case "Spread":
@@ -210,6 +218,7 @@ switch(type)
          accuracy = 6;
          half_accuracy = 3;
          bullet_number = 7;
+         is_primary = true;
          loldir[2] = loldir[1] - 15;
          loldir[3] = loldir[1] - 30;
          loldir[4] = loldir[1] - 45;
@@ -308,6 +317,8 @@ switch(type)
         //Absorb shield
         if(current_target_object.shield > 0) shield += 2;
         if(shield > shield_maximum) shield = shield_maximum;
+        return -1;
+        exit;
     break;
 }
 

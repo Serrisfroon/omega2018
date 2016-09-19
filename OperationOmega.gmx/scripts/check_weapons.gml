@@ -63,11 +63,11 @@ for(i = 1; i <= 4; i += 1)
         case 29:
         case 30:
              if(global.secondary_stock[i] < 1)
-                 deployfade[i] = c_dkgray;        
+                 weapon_available_color[i] = c_dkgray;        
              else
-                 if(deployfade[i] = c_dkgray)
+                 if(weapon_available_color[i] = c_dkgray)
                  {     
-                     deployfade[i] = c_white;
+                     weapon_available_color[i] = c_white;
                      instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                  }
         break;
@@ -78,11 +78,11 @@ for(i = 1; i <= 4; i += 1)
         case 21: 
         case 23: 
              if(global.secondary_stock[i] < 1 || obj_mod.targeted_object = -1)
-                 deployfade[i] = c_dkgray;        
+                 weapon_available_color[i] = c_dkgray;        
              else
-                 if(deployfade[i] = c_dkgray)
+                 if(weapon_available_color[i] = c_dkgray)
                  {     
-                     deployfade[i] = c_white;
+                     weapon_available_color[i] = c_white;
                      instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
                  }
         break;

@@ -275,8 +275,11 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             //Find the closest ally to the bullet
             possihit = instance_nearest(bulletx[i], bullety[i], prnt_ally);
             //Check if the player is close than the nearest ally
-            if(point_distance(bulletx[i], bullety[i], obj_player.x, obj_player.y) &lt; point_distance(bulletx[i], bullety[i], possihit.x, possihit.y))
-                possihit = obj_player;
+            if(possihit = noone)
+                possihit = obj_player;            
+            else
+                if(point_distance(bulletx[i], bullety[i], obj_player.x, obj_player.y) &lt; point_distance(bulletx[i], bullety[i], possihit.x, possihit.y))
+                    possihit = obj_player;
             //Check if the nearest enemy is close to a collision
             //Also check if the closest ally is actually an error check
             //Check if the nearest enemy is close to a collision
