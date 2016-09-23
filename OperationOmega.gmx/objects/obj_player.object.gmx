@@ -28,7 +28,7 @@
             <string>//Perform code exclusive to the player-controlled ship
 
 //Start following this object
-view_object[0] = id;
+view_object = id;
 
 //Set the current primary to your selected primary
 current_primary = global.primary;
@@ -312,10 +312,10 @@ if(armor &lt;= 0)
             <kind>1</kind>
             <string>var directdir, regdmg, penedmg;
 //Find out ideal direction for a "direct hit"
-directdir = point_direction(other.x, other.y, x, y);
+var directdir = point_direction(other.x, other.y, x, y);
 //Base connection damage and explosion
-penedmg = 15;
-regdmg = 10+other.bonusdamage;
+var penedmg = 15;
+var regdmg = 10+other.bonusdamage;
 other.hits = 1;
 
 //If the missile's direction is near the ideal direction, add more damage and explosion
@@ -833,14 +833,12 @@ current_secondary_selected = 4;
 current_target_x = mouse_x;
 current_target_y = mouse_y;
 
-current_target_object = -1;                                                    //Set a default for the target object
-//Loop through all of the player ships to see which ship is targeted
-for(i = 1; i &lt;= 8; i++)
-    if(global.playership[i] = obj_mod.targeted_object)
-    {
-         current_target_object = global.playership[i];                         //Object to fire at(if applicable)
-         break;
-    }
+//Pull the mid from the targeted object if you are targeting a player
+if(obj_mod.targeted_object = -1)
+    current_target_object = -1;
+else
+    current_target_object = obj_mod.targeted_object.mid;
+
 
 amplified = 1;
 
@@ -890,7 +888,8 @@ event_perform(ev_other, ev_user0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.activated[mid] != 1) 
+            <string>/*
+if(global.activated[mid] != 1) 
     exit;
 if(ability_cooldown_timer &gt; 0)
     exit;
@@ -933,7 +932,7 @@ switch(global.shipselect)
         //Begin warp, use energy and heat
         hornet_warp = 40;
         //swiftteled = instance_create(x, y, obj_swifttele);
-        view_object[0] = swiftteled;
+        view_object = swiftteled;
         swiftteled.hspeed = (warpx-x)/10;
         swiftteled.vspeed = (warpy-y)/10;
         
@@ -1025,7 +1024,7 @@ switch(global.shipselect)
 if(ship_disabled = true || stasis_slow_timer &gt; 0) exit;
 
 //Adjust the accelration prediction variable
-predictspeed = 2;
+predictspeed = 0;
 //Have to controller object send a refresh packet
 obj_mod.update_packet_timer = 0;
 </string>

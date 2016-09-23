@@ -2,10 +2,10 @@
 <object>
   <spriteName>spr_beam</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_allyenergy</parentName>
+  <parentName>prnt_bloom_attack</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -103,31 +103,18 @@ if(stream = 1)
 if(scale = 1 &amp;&amp; stage = 0)
 {
  //Check right side of beam
- beamed = collision_line(x+lengthdir_x(24, direction-90), y+lengthdir_y(24, direction-90), x+lengthdir_x(24, direction-90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction-90)+lengthdir_y(1536, direction), prnt_allenemy, 1, 1);
+ beamed = collision_line(x+lengthdir_x(24, direction-90), y+lengthdir_y(24, direction-90), x+lengthdir_x(24, direction-90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction-90)+lengthdir_y(1536, direction), obj_dummy_enemy, 1, 1);
  //Check if there was a collision
  if(beamed &lt;0)
  //If there wasn't, check the left side
- beamed = collision_line(x+lengthdir_x(24, direction+90), y+lengthdir_y(24, direction+90), x+lengthdir_x(24, direction+90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction+90)+lengthdir_y(1536, direction), prnt_allenemy, 1, 1);
+ beamed = collision_line(x+lengthdir_x(24, direction+90), y+lengthdir_y(24, direction+90), x+lengthdir_x(24, direction+90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction+90)+lengthdir_y(1536, direction), obj_dummy_enemy, 1, 1);
  //Check if there was a collision
  if(beamed &lt;0)
  //If there wasn't, check the center
- beamed = collision_line(x, y, x+lengthdir_x(1536, direction), y+lengthdir_y(1536, direction), prnt_allenemy, 1, 1);
+ beamed = collision_line(x, y, x+lengthdir_x(1536, direction), y+lengthdir_y(1536, direction), obj_dummy_enemy, 1, 1);
  //Check if there was a collision and that it was your ship and not an error checker
  if(beamed &gt;= 0)
  {
-    if(beamed = obj_turret_enemy)
-    {
-     armor -= 20;
-     //Do the following to the ship that was hit
-     with(beamed)
-     {
-      //Shake the screen if in range
-      if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
-       obj_mod.screen_shake_intensity = 4;
-      part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
-     }
-    }
-    else
    //Do the following to the ship that was hit
    with(beamed)
    {

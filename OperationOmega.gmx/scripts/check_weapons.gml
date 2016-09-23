@@ -68,7 +68,7 @@ for(i = 1; i <= 4; i += 1)
                  if(weapon_available_color[i] = c_dkgray)
                  {     
                      weapon_available_color[i] = c_white;
-                     instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
+                     instance_create((i-1)*40+2, 0, obj_weaponflash);
                  }
         break;
         case 16: 
@@ -83,7 +83,7 @@ for(i = 1; i <= 4; i += 1)
                  if(weapon_available_color[i] = c_dkgray)
                  {     
                      weapon_available_color[i] = c_white;
-                     instance_create((i-1+moveover)*40+2, 0, obj_weaponflash);
+                     instance_create((i-1)*40+2, 0, obj_weaponflash);
                  }
         break;
     }

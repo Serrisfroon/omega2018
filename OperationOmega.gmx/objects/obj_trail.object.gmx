@@ -138,7 +138,7 @@ follower = instance_create(x, y, obj_follower);
 follower.direction = direction;
 follower.mid = mid;
 //Set its target to the nearest enemy
-follower.homing = instance_nearest(x, y, prnt_allenemy);
+follower.homing = instance_nearest(x, y, obj_dummy_enemy);
 //Exit if there is no enemy
 if(follower.homing = noone)
  exit;

@@ -36,6 +36,13 @@ image_speed = 0
 image_index = 0;
 if(global.allycolor != c_red)
     image_index = 1;
+    
+//Set attack variable values
+attack_damage = 5;          //Set the damage for the attack
+attack_burst = 0;           //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;       //Set the threshold reduction per hit
+attack_shake = 0;           //Set the screen shake intensity of the attack
+attack_name = "Burst";      //Set the name of the attack
 </string>
           </argument>
         </arguments>

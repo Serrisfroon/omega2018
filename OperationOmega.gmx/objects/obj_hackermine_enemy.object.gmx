@@ -112,7 +112,12 @@ instance_destroy();
           <argument>
             <kind>1</kind>
             <string>image_angle += 3;
-target = instance_nearest(x, y, prnt_ally);
+target = instance_nearest(x, y, obj_dummy_ally);
+if(target = noone)
+    target = global.playership[global.mymid];
+else
+    if(point_distance(x, y, target.x, target.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+        target = global.playership[global.mymid];
 if(target != noone)
 {
  if(amplified = 0)

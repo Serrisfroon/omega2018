@@ -91,12 +91,15 @@ repeat(4)
 //Create a error stopper
 if(mid = global.mymid)
 {
- instance_create(x, y, obj_respawn_timer);
- if(global.ships &gt; 0)
-  instance_create(-500, -500, obj_weaponswitch);
+    instance_create(x, y, obj_respawn_timer);
+    view_object = obj_respawn_timer; 
+    if(global.ships &gt; 0)
+        instance_create(-500, -500, obj_weaponswitch);
 }
 //Shake the screen
 obj_mod.viewpos = 12;
+
+
 </string>
           </argument>
         </arguments>

@@ -273,7 +273,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         //Check allies if this is an enemy bullet
         case global.enemycolor:
             //Find the closest ally to the bullet
-            possihit = instance_nearest(bulletx[i], bullety[i], prnt_ally);
+            possihit = instance_nearest(bulletx[i], bullety[i], obj_dummy_ally);
             //Check if the player is close than the nearest ally
             if(possihit = noone)
                 possihit = obj_player;            
@@ -397,32 +397,16 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                     //Check if your ship has been defeated
                     if(possihit.armor &lt;= 0)
                     {
-                        if(!instance_exists(obj_practicemod))
-                        {
                             //Take note of the player that defeated you
-                            possihit.defeatmid = bulletmid[i];
-                            //Make a defeat message
-                            if(global.ships &gt; 1)
-                                random_message(global.othername[bulletmid[i]], global.name, bulletname[i]);
-                            else
-                                obj_player.message = global.othername[bulletmid[i]]+" ELIMINATED "+global.name+".("+bulletname[i]+")";
-                        }
-                        if(global.shipselect != 2)
-                        {
-                            //Destroy this object
-                            with(possihit)
-                            instance_destroy();
-                        }
+                        possihit.defeatmid = bulletmid[i];
+                        //Make a defeat message
+                        if(global.ships &gt; 1)
+                            random_message(global.othername[bulletmid[i]], global.name, bulletname[i]);
                         else
-                        {
-                            possihit.armor = 0;
-                            possihit.shield = 0;
-                            possihit.energygain = 0.8;
-                            possihit.energy = 100;
-                            obj_mod.ping_send_timer = 0;
-                            possihit.beserkeffect = instance_create(x, y, obj_beserkeffect);
-                            possihit.alarm[11] = 300;
-                        }
+                            obj_player.message = global.othername[bulletmid[i]]+" ELIMINATED "+global.name+".("+bulletname[i]+")";
+                        //Destroy this object
+                        with(possihit)
+                            event_perform(ev_other, ev_user2);;
                     }
                 break;
                 default:
@@ -661,6 +645,8 @@ for(i = 1; i &lt;= bulletmax; i += 1)
 with(prnt_enemyenergy)
     draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);
 with(prnt_allyenergy)
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);
+with(prnt_bloom_attack)
     draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);
 with(obj_generic_fade)
     draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);

@@ -168,7 +168,7 @@ var receive_current_target_object = readbyte(0);        //Read the mid of the ta
 var receive_amplified = readbyte(0);                    //Read the amplified flag
 
 //Pass on the held variables to the appropriate player
-with(global.playership[mid])
+with(global.playership[dummy])
 {
     current_secondary = receive_current_secondary;
     current_secondary_type = receive_current_secondary_type;

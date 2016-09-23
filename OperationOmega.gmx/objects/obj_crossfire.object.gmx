@@ -101,13 +101,13 @@ if(global.allycolor = c_red)
 {
     sprite_index = spr_helix;
     if(side = 2)
-        sprite_index = spr_helix2;
+        image_speed = -1;
 }
 else
 {
     sprite_index = spr_bluehelix;
     if(side = 2)
-        sprite_index = spr_bluehelix2;
+        image_speed = -1;
 }
 
 image_index = 0;

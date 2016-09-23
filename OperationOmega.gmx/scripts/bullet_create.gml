@@ -5,15 +5,15 @@
 //possible argument5 for stasis: life
 //returns the id of the bullet
 ////////////////////////////////////////////////////////////////////////
-var lolx, loly, type, lolspeed, mid, name, sprite, life, after, dmg, mask, blend, i, image, accuracy, half_accuracy, is_primary, bullet_number, bullet_loop, bullet_check;
+var lolx, loly, type, lolspeed, current_bullet_mid, name, sprite, life, after, dmg, mask, blend, i, image, accuracy, half_accuracy, is_primary, bullet_number, bullet_loop, bullet_check;
 lolx = argument0;
 loly = argument1;
 type = argument2;
 loldir[1] = argument3;
-mid = argument4;
+current_bullet_mid = argument4;
 is_primary = false;
 
-if(global.team[mid] = global.team[global.mymid])
+if(global.team[current_bullet_mid] = global.team[global.mymid])
  blend = global.allycolor;
 else
  blend = global.enemycolor;
@@ -31,7 +31,7 @@ switch(type)
          life = 240;
          after = obj_generic_hit;
          dmg = 10;
-         mask = 5;
+         mask = 14;
          lolspeed = 9.5+speed/2;
          accuracy = 3;
          half_accuracy = 6;
@@ -45,7 +45,7 @@ switch(type)
          life = 180;
          after = obj_generic_hit;
          dmg = 4;
-         mask = 3;
+         mask = 12;
          lolspeed = 13.5+speed/2;
          accuracy = 14;
          half_accuracy = 7;
@@ -60,7 +60,7 @@ switch(type)
          life = 240;
          after = obj_generic_hit;
          dmg = 16;
-         mask = 14;
+         mask = 23;
          lolspeed = 7.5+speed/2;
          accuracy = 2;
          half_accuracy = 1;      
@@ -70,20 +70,28 @@ switch(type)
     break;
     case "Seeker":
            sfx_play(snd_flank, x, y);
+            if(blend = global.allycolor)
+                var primary_object = obj_flank;
+            else
+                var primary_object = obj_flank_enemy;
            //Create the shot and give it speed and facedir
-           flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_flank);
+           flank = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_object);
            flank.speed = 10.5+speed/2;
-           flank.direction = loldir[1]-7+primary_random(14, global.mymid);
-           flank.mid = global.mymid;
+           flank.direction = loldir[1]-7+primary_random(14, current_bullet_mid);
+           flank.mid = current_bullet_mid;
            return -1;
            exit;
     break;
     case "Stasis":
-           bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_stasisnew);
+            if(blend = global.allycolor)
+                var primary_object = obj_stasisnew;
+            else
+                var primary_object = obj_stasisnew_enemy;
+           bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_object);
            sfx_play(snd_stasis, x, y);
            bullet.direction = newdir;
            bullet.speed = 7+speed;
-           bullet.mid = global.mymid;
+           bullet.mid = current_bullet_mid;
            return -1;
            exit;
     break;
@@ -97,12 +105,12 @@ switch(type)
           life = argument5;
          if(life > 150)
           life = 150;
-         if(global.team[mid] = global.team[global.mymid])
+         if(global.team[current_bullet_mid] = global.team[global.mymid])
           after = obj_stasis_field;
          else
           after = obj_enemystasis_field;      
          dmg = 1;
-         mask = 9;
+         mask = 18;
          lolspeed = 9.5+speed/2;
          is_primary = true;
          bullet_number = 1;
@@ -113,7 +121,7 @@ switch(type)
          life = 250;
          after = obj_generic_hit;
          dmg = 5;
-         mask = 7;
+         mask = 16;
          lolspeed = 12;
          accuracy = 0;
          half_accuracy = 0;
@@ -125,7 +133,7 @@ switch(type)
          life = 240;
          after = obj_generic_hit;
          dmg = 5;
-         mask = 7;
+         mask = 16;
          lolspeed = 10;
          accuracy = 0;
          half_accuracy = 0;
@@ -137,7 +145,7 @@ switch(type)
          life = 100;
          after = obj_generic_hit;
          dmg = 4;
-         mask = 7;
+         mask = 16;
          lolspeed = 14;
          accuracy = 0;
          half_accuracy = 0;
@@ -149,7 +157,7 @@ switch(type)
          life = 120;
          after = obj_generic_hit;
          dmg = 8;
-         mask = 8;
+         mask = 17;
          lolspeed = 9;
          accuracy = 0;
          half_accuracy = 0;
@@ -161,7 +169,7 @@ switch(type)
          life = 200;
          after = obj_generic_hit;
          dmg = 5;
-         mask = 8;
+         mask = 17;
          lolspeed = 12;
          accuracy = 0;
          half_accuracy = 0;
@@ -173,7 +181,7 @@ switch(type)
          life = 200;
          after = obj_generic_hit;
          dmg = 5;
-         mask = 8;
+         mask = 17;
          lolspeed = 15;
          accuracy = 0;
          half_accuracy = 0;
@@ -185,7 +193,7 @@ switch(type)
          life = 140;
          after = obj_generic_hit;
          dmg = 8;
-         mask = 7;
+         mask = 16;
          lolspeed = 9.5+speed/2;
          accuracy = 0;
          half_accuracy = 0;
@@ -199,7 +207,7 @@ switch(type)
          life = 200;
          after = obj_generic_hit;
          dmg = 3;
-         mask = 5;
+         mask = 14;
          lolspeed = 10.5+speed/2;
          sfx_play(snd_pierce, lolx, loly);
          accuracy = 8;
@@ -213,7 +221,7 @@ switch(type)
          life = 200;
          after = obj_generic_hit;
          dmg = 5;
-         mask = 8;
+         mask = 17;
          lolspeed = 10.5+speed/2;
          accuracy = 6;
          half_accuracy = 3;
@@ -232,7 +240,7 @@ switch(type)
          life = 200;
          after = obj_generic_hit;
          dmg = 3;
-         mask = 4;
+         mask = 13;
          lolspeed = 10;
          bullet_number = 1;
          sfx_play(snd_sonic, lolx, loly);
@@ -243,7 +251,7 @@ switch(type)
          life = 200;
          after = obj_whip_hit;      
          dmg = 5;
-         mask = 8;
+         mask = 17;
          lolspeed = argument5;
          bullet_number = 1;
     break;
@@ -253,7 +261,7 @@ switch(type)
          life = 55;
          after = obj_generic_hit;
          dmg = 5;
-         mask = 7;
+         mask = 16;
          lolspeed = 14;
          bullet_number = 1;
     break;
@@ -263,7 +271,7 @@ switch(type)
          life = 28;
          after = obj_serpent_hit;      
          dmg = 6;
-         mask = 12;
+         mask = 21;
          lolspeed = 0;
          bullet_number = 1;
     break;
@@ -273,24 +281,28 @@ switch(type)
          life = 46;
          after = obj_serpent_hit;      
          dmg = 6;
-         mask = 12;
+         mask = 21;
          lolspeed = 0;
          bullet_number = 1;
     break;
     case "Helix":
         //Create the shot and give it speed and facedir
         sfx_play(snd_helix, x, y);
-        bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
+        if(blend = global.allycolor)
+            var primary_object = obj_crossfire;
+        else
+            var primary_object = obj_crossfire_enemy;
+        bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_object);
         bullet.speed = 11.5+speed/2;
-        crossdir = mouse_direction-7+primary_random(14, global.mymid);
+        crossdir = primary_direction-7+primary_random(14, current_bullet_mid);
         bullet.direction = crossdir;
-        bullet.mid = global.mymid;
+        bullet.mid = current_bullet_mid;
         bullet.side = 1;
         //Create the shot and give it speed and facedir
-        bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), obj_crossfire);
+        bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_object);
         bullet.speed = 11.5+speed/2;
         bullet.direction = crossdir;
-        bullet.mid = global.mymid;
+        bullet.mid = current_bullet_mid;
         bullet.side = 2;
         return -1;
         exit;
@@ -311,7 +323,7 @@ switch(type)
         }
         //Create the shot and give it speed and facedir
         bullet = instance_create(0, 0, obj_siphon);
-        bullet.mid = global.mymid;
+        bullet.mid = current_bullet_mid;
         bullet.targetmid = current_target_object.mid;
         sfx_play(snd_siphon, x, y);
         //Absorb shield
@@ -326,7 +338,7 @@ switch(type)
 for(bullet_loop = 1; bullet_loop <= bullet_number; bullet_loop++)
 {
     if(is_primary == true)
-        loldir[bullet_loop] = loldir[bullet_loop]-half_accuracy+primary_random(accuracy, global.mymid);
+        loldir[bullet_loop] = loldir[bullet_loop]-half_accuracy+primary_random(accuracy, current_bullet_mid);
     obj_bulletcontrol.speed = lolspeed;
     obj_bulletcontrol.direction = loldir[bullet_loop];
     for(bullet_check = 1; bullet_check <= obj_bulletcontrol.bulletmax+1; bullet_check += 1)

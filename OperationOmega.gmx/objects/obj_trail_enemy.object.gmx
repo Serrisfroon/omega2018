@@ -139,10 +139,12 @@ follower.direction = direction;
 follower.mid = mid;
 
 //Set its target to the nearest enemy
-follower.homing = instance_nearest(x, y, prnt_ally);
+follower.homing = instance_nearest(x, y, obj_dummy_ally);
 //Exit if there is no enemy
 if(follower.homing = noone)
  exit;
+if(point_distance(x, y, follower.homing.x, follower.homing.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+    follower.homing = global.playership[global.mymid];
 //Set the target to noone if the nearest enemy is not close
 if(amplified = 0)
 {

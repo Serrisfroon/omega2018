@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_allyenergy</parentName>
+  <parentName>prnt_bloom_attack</parentName>
   <maskName>spr_empty</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -53,7 +53,8 @@ amplified = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>direction = point_direction(x, y, targetx, targety);
+            <string>visible = true;
+direction = point_direction(x, y, targetx, targety);
 image_angle = direction;
 sfx_play(snd_slash, x, y);
 if(amplified = 0)

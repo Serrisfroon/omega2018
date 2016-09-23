@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyenergy</parentName>
+  <parentName>prnt_bloom_attack</parentName>
   <maskName>spr_empty</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -55,7 +55,8 @@ image_yscale = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sfx_play(snd_slash, x, y);
+            <string>visible = true;
+sfx_play(snd_slash, x, y);
 direction = point_direction(x, y, targetx, targety);
 image_angle = direction;
 if(amplified = 0)

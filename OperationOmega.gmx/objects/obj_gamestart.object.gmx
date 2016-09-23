@@ -229,11 +229,10 @@ if(room = rm_barricade)
 if(global.master = true)
 {
     //Create the controller and the player
-    instance_create(0, 0, obj_mod);
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    view_object[0] = tele;
+    view_object = tele;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     global.activated[global.mymid] = 2;
     instance_create(0, 0, obj_bulletcontrol);
@@ -265,16 +264,16 @@ if(global.master = true)
             global.activated[i] = 2;
         }
     }
+    instance_create(0, 0, obj_mod);
 }
 //Create objects for the client
 else
 {
     //Create the controller and the player
-    instance_create(0, 0, obj_mod_client);
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    view_object[0] = tele;
+    view_object = tele;
     global.activated[global.mymid] = 2;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     instance_create(0, 0, obj_bulletcontrol);
@@ -306,6 +305,7 @@ else
             global.activated[i] = 2;
         }
     }
+    instance_create(0, 0, obj_mod_client);
 }
 //Initialize match type
 switch(global.matchtype)

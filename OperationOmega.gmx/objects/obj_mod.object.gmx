@@ -53,7 +53,7 @@ player_object[7] = -1;
 for(i = 0; i &lt; 8; i += 1)
 {
     player_activated[i] = global.activated[i];
-    player_object[i] = global.playership[i]
+    player_object[i] = global.playership[i];
     playerdisconnect[i] = 0;
 }
 
@@ -556,6 +556,7 @@ if(global.ships &gt; 0)
 {
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
+    view_object = tele;
     //destroy the error stopper
     with(obj_respawn_timer)
        instance_destroy();
@@ -668,7 +669,7 @@ switch(update_packet_timer)
 {
     case 0:     //The timer is finished; send the update packet
         //Reset the timer
-        update_packet_timer = 5;
+        update_packet_timer = 10;
         
         //Clear the packet and write the label of the new packet
         clearpack();
@@ -695,7 +696,7 @@ switch(update_packet_timer)
             if(obj_player.multiplayer_primary_fire_flag = true)
             {
                 //Lower the time until the next update
-                update_packet_timer = 3;
+                //update_packet_timer = 3;
                 
                 //Send your RNG seed and firing direction
                 crush(global.primaryRNG[mid], 65536, 0);
@@ -737,7 +738,7 @@ switch(update_packet_timer)
             //Check if the player is currently firing their primary weapon
             if(global.playership[i].multiplayer_primary_fire_flag = true)
             {
-                update_packet_timer = 3;
+                //update_packet_timer = 3;
                 
                 //Send the players' RNG seed and firing direction
                 crush(global.primaryRNG[i], 65536, 0);
@@ -894,7 +895,10 @@ while(true)
         case 3: //The player is defeated
             //Push back the disconnection check
             playerdisconnect[dummy] = -600;
-                            
+            
+            //Send the mid of the player that defeated this player
+            global.playership[dummy].defeatmid = readbyte(0);
+            
             //Send a defeat notice to chat
             //Read the color sent
             switch(readbyte(0))
@@ -914,6 +918,13 @@ while(true)
                 
             //Read the respawn location for the player
             respawn_location[dummy] = readbyte(0);      
+            //Create an announcement
+            if(announcement_stage = 0 &amp;&amp; global.playership[dummy].defeatmid != 20)
+            {
+                 announcement_stage  = 1;
+                 announcement_message = readstring(0);
+                 announcement_color = chatcolor[4];
+            }
                 
             //Send the message to other players
             client_sendall(0, dummy);
@@ -1027,7 +1038,7 @@ while(true)
 
         //Respawn Packet
         case 10:
-            tele = instance_create(global.spawnx[respawn_location[dummy]], global.spawny[respawn_location[dummy]], obj_teleport_other);
+            tele = instance_create(global.spawnx[respawn_location[dummy]], global.spawny[respawn_location[dummy]], obj_teleport);
             tele.mid = dummy;
             client_sendall(0, dummy);        
         break;  
@@ -1266,126 +1277,127 @@ cursor_rotation[3] += 6;
 //Handle Goliath Weaponsmith Bay
 //if(goliath_selected = true)
 //    weaponsmith(dstock);
-
-//Find the player farthest from you, but within target range
-//Initialize variables to hold the distance to the farthest possible target, and the farthest possible target
-var distance_to_farthest_target = 0;
-var farthest_target = -1;
-//Loop through all players
-for(i = 1; i &lt; 8; i += 1)
+if(global.activated[mid] = 1)
 {
-    //Skip this player if it isn't activated
-    if(player_activated[i] = 0) continue;
-    //Skip this player it it's you
-    if(i = global.mymid) continue;
-    //Calculate the distance to this player
-    var distance_to_target = point_distance(view_object.x, view_object.y, player_object[i].x, player_object[i].y);
-    //Check if the player is within view range
-    if(distance_to_target &lt;= 900)
-    { 
-        //Also check if this player is farther away then the player previous marked fartheest away
-        if(distance_to_target &gt; distance_to_farthest_target)
-        {
-            distance_to_farthest_target = distance_to_target;   //Save this distance as the farthest distance
-            farthest_target = player_object[i];                 //Save this player as the farthest possible target
+    //Find the player farthest from you, but within target range
+    //Initialize variables to hold the distance to the farthest possible target, and the farthest possible target
+    var distance_to_farthest_target = 0;
+    var farthest_target = -1;
+    //Loop through all players
+    for(i = 0; i &lt; 8; i += 1)
+    {
+        //Skip this player if it isn't activated
+        if(player_activated[i] = 0) continue;
+        //Skip this player it it's you
+        if(i = global.mymid) continue;
+        //Calculate the distance to this player
+        var distance_to_target = point_distance(view_object.x, view_object.y, player_object[i].x, player_object[i].y);
+        //Check if the player is within view range
+        if(distance_to_target &lt;= 900)
+        { 
+            //Also check if this player is farther away then the player previous marked fartheest away
+            if(distance_to_target &gt; distance_to_farthest_target)
+            {
+                distance_to_farthest_target = distance_to_target;   //Save this distance as the farthest distance
+                farthest_target = player_object[i];                 //Save this player as the farthest possible target
+            }
         }
     }
-}
-
-//Targetting
-oldtarget = targeted_object;
-//Target the enemy closest to the cursor if you are still alive
-if(obj_player.armor &gt; 0)
-    targeted_object = instance_nearest(mouse_x, mouse_y, obj_dummy_enemy);
-else
-{
-    targeted_object = -1;
-    exit;
-}
-
-//Check if there is a target
-if(farthest_target != -1)
-{
-    //Initialize the x value of the second focus point of the view
-    var view_focusx = farthest_target.x;
-    //Make sure that the focus point if not close the edges of the room
-    if(farthest_target.x &lt; 64)
-        view_focusx = 66;
-    else
-        if(farthest_target.x &gt; room_width-64)
-            view_focusx = room_width-66;
-    //Initialize the y value of the second focus point of the view
-    var view_focusy = farthest_target.y;
-    //Make sure that the focus point if not close the edges of the room
-    if(farthest_target.y &lt; 64)
-        view_focusy = 66;
-    else
-        if(farthest_target.y &gt; room_height-64)
-            view_focusy = room_height-66;
     
-    //Check if the view has room to expand
-    if(view_hview[0] &lt; 1480)
-        if(view_wview[0] &lt; room_width-view_x_increase)
-            //Check if the target is moving out of view
-            if(view_focusx &lt; view_xview[0]+64 || view_focusx &gt; view_xview[0]+view_wview[0]-64 || view_focusy&lt;view_yview[0]+64 || view_focusy &gt; view_yview[0]+view_hview[0]-64)
-            {
-                //Expand the view to keep it seen
-                view_wview[0] += view_x_increase;
-                view_hview[0] += view_y_increase;
-                view_zoom_out_flag = true;
-            }
-            
-    //Check if the view is larger than normal
-    if(view_hview[0] &gt; view_height_base)
+    //Targetting
+    oldtarget = targeted_object;
+    //Target the enemy closest to the cursor if you are still alive
+    if(obj_player.armor &gt; 0)
+        targeted_object = instance_nearest(mouse_x, mouse_y, obj_dummy_enemy);
+    else
     {
-        //Check if the target is moving closer
-        if(view_zoom_out_flag = true)
-            if(view_focusx &gt; view_xview[0]+128)
-                if(view_focusx &lt; view_xview[0]+view_wview[0]-128)
-                    if(view_focusy &gt; view_yview[0]+128)
-                        if(view_focusy &lt; view_yview[0]+view_hview[0]-128)
-                        {
-                            //Shrink the view as needed
-                            view_zoom_out_flag = false;
-                            alarm[6] = 180;
-                        }
+        targeted_object = -1;
+        exit;
     }
-}
-else
-{
-    //If there is no target, check to see if the view is larger
-    //than normal
-    if(view_zoom_out_flag = true)
+    
+    //Check if there is a target
+    if(farthest_target != -1)
+    {
+        //Initialize the x value of the second focus point of the view
+        var view_focusx = farthest_target.x;
+        //Make sure that the focus point if not close the edges of the room
+        if(farthest_target.x &lt; 64)
+            view_focusx = 66;
+        else
+            if(farthest_target.x &gt; room_width-64)
+                view_focusx = room_width-66;
+        //Initialize the y value of the second focus point of the view
+        var view_focusy = farthest_target.y;
+        //Make sure that the focus point if not close the edges of the room
+        if(farthest_target.y &lt; 64)
+            view_focusy = 66;
+        else
+            if(farthest_target.y &gt; room_height-64)
+                view_focusy = room_height-66;
+        
+        //Check if the view has room to expand
+        if(view_hview[0] &lt; 1480)
+            if(view_wview[0] &lt; room_width-view_x_increase)
+                //Check if the target is moving out of view
+                if(view_focusx &lt; view_xview[0]+64 || view_focusx &gt; view_xview[0]+view_wview[0]-64 || view_focusy&lt;view_yview[0]+64 || view_focusy &gt; view_yview[0]+view_hview[0]-64)
+                {
+                    //Expand the view to keep it seen
+                    view_wview[0] += view_x_increase;
+                    view_hview[0] += view_y_increase;
+                    view_zoom_out_flag = true;
+                }
+                
+        //Check if the view is larger than normal
         if(view_hview[0] &gt; view_height_base)
         {
-            //Shrink the view as needed
-            view_zoom_out_flag = false;
-            alarm[6] = 180;
+            //Check if the target is moving closer
+            if(view_zoom_out_flag = true)
+                if(view_focusx &gt; view_xview[0]+128)
+                    if(view_focusx &lt; view_xview[0]+view_wview[0]-128)
+                        if(view_focusy &gt; view_yview[0]+128)
+                            if(view_focusy &lt; view_yview[0]+view_hview[0]-128)
+                            {
+                                //Shrink the view as needed
+                                view_zoom_out_flag = false;
+                                alarm[6] = 180;
+                            }
         }
-    targeted_object = -1;
-}
-//Convert the distance to target to be used by the targetting meter
-if(targeted_object != -1)
-{
-    distance_to_target = ceil(point_distance(view_object.x, view_object.y, targeted_object.x, targeted_object.y)/33.33);
-    if(distance_to_target &gt; 27)
-        targeted_object = -1;
-}
-else
-    distance_to_target = 0;
-
-
-//Creeate a new cursor effect
-if(targeted_object != -1)
-    if(targeted_object != oldtarget)
-    {
-        with(obj_lockoncursor)
-            instance_destroy();
-        newlockon = instance_create(0, 0, obj_lockoncursor);
-        newlockon.target = targeted_object;
-        newlockon.direction = global.rot2;
     }
-
+    else
+    {
+        //If there is no target, check to see if the view is larger
+        //than normal
+        if(view_zoom_out_flag = true)
+            if(view_hview[0] &gt; view_height_base)
+            {
+                //Shrink the view as needed
+                view_zoom_out_flag = false;
+                alarm[6] = 180;
+            }
+        targeted_object = -1;
+    }
+    //Convert the distance to target to be used by the targetting meter
+    if(targeted_object != -1)
+    {
+        distance_to_target = ceil(point_distance(view_object.x, view_object.y, targeted_object.x, targeted_object.y)/33.33);
+        if(distance_to_target &gt; 27)
+            targeted_object = -1;
+    }
+    else
+        distance_to_target = 0;
+    
+    
+    //Creeate a new cursor effect
+    if(targeted_object != -1)
+        if(targeted_object != oldtarget)
+        {
+            with(obj_lockoncursor)
+                instance_destroy();
+            newlockon = instance_create(0, 0, obj_lockoncursor);
+            newlockon.target = targeted_object;
+            newlockon.direction = global.rot2;
+        }
+}
 //Center your ship
 screen_shake(view_object);
 
@@ -1488,10 +1500,10 @@ for(i = 0; i &lt; 8; i += 1)
 {
  //Skip if not active
  if(global.activated[i] = 0 &amp;&amp; i &gt; 0) continue;
- if(global.playership[i] = global.object_view)
+ if(global.playership[i] = view_object)
  {
   //Reset view trigger
-  foundview = 0;
+  var foundview = 0;
   //Loop through the mids following the viewed mid
   for(ii = i+1; ii &lt; 8; ii += 1)
   {
@@ -1499,7 +1511,7 @@ for(i = 0; i &lt; 8; i += 1)
    if(global.activated[ii] = 0 &amp;&amp; ii &gt; 0) continue;  
    if(global.playership[ii].x &gt; room_width || global.playership[ii] = obj_dud) continue;
    //Set the view to follow the found player
-   global.object_view = global.playership[ii];
+   view_object = global.playership[ii];
    foundview = 1;
    break;
   }
@@ -1511,13 +1523,13 @@ for(i = 0; i &lt; 8; i += 1)
     if(global.activated[ii] = 0 &amp;&amp; ii &gt; 0) continue;  
     if(global.playership[ii].x &gt; room_width || global.playership[ii] = obj_dud) continue;
     //Set the view to follow the found player
-    global.object_view = global.playership[ii];
+    view_object = global.playership[ii];
     break;
    }
   break;
  }
 }
-view_object = global.object_view;
+//view_object = global.object_view;
 </string>
           </argument>
         </arguments>
@@ -2226,7 +2238,7 @@ alarm[1]=4;
  break;
  case true:
       obj_mod.chat_open = false;
-      if(global.playership[mid].ship_status_hacked = false &amp;&amp; global.activated[mid] != 1)
+      if(global.playership[mid].ship_status_hacked = false &amp;&amp; global.activated[mid] = 1)
         global.playership[mid].ship_disabled = false;
       //Check if text was typed
       if(keyboard_string = '') break;

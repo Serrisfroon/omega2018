@@ -30,7 +30,7 @@ switch(update_packet_timer)
 {
  case 0:
         //Reset the timer
-        update_packet_timer = 5;
+        update_packet_timer = 10;
         
         //Clear the packet and write the label of the new packet
         clearpack();
@@ -57,7 +57,7 @@ switch(update_packet_timer)
             if(obj_player.multiplayer_primary_fire_flag = true)
             {
                 //Lower the time until the next update
-                update_packet_timer = 3;
+                //update_packet_timer = 3;
                 
                 //Send your RNG seed and firing direction
                 crush(global.primaryRNG[mid], 65536, 0);
@@ -274,7 +274,11 @@ while(true)
             receive_secondary();
         break;
    
-        case 3: //The player is defeated            
+        case 3: //The player is defeated  
+                  
+            //Send the mid of the player that defeated this player
+            global.playership[dummy].defeatmid = readbyte(0);
+
             //Send a defeat notice to chat
             //Read the color sent
             switch(readbyte(0))
@@ -293,7 +297,14 @@ while(true)
                 event_perform(ev_other, ev_user2);    
                         
             //Read the respawn location for the player
-            respawn_location[dummy] = readbyte(0);      
+            respawn_location[dummy] = readbyte(0);     
+            if(announcement_stage = 0 &amp;&amp; global.playership[dummy].defeatmid != 20)
+            {
+                 announcement_stage  = 1;
+                 announcement_message = readstring(0);
+                 announcement_color = chatcolor[4];
+            }
+ 
         break;
    
         //A player is eliminated in a stock match
@@ -379,7 +390,7 @@ while(true)
   
         //Respawn Packet
         case 10:
-            tele = instance_create(global.spawnx[respawn_location[dummy]], global.spawny[respawn_location[dummy]], obj_teleport_other);
+            tele = instance_create(global.spawnx[respawn_location[dummy]], global.spawny[respawn_location[dummy]], obj_teleport);
             tele.mid = dummy;
         break;  
         

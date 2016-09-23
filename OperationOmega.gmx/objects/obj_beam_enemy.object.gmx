@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyenergy</parentName>
+  <parentName>prnt_bloom_attack</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -127,88 +127,76 @@ if(stream = 1)
 if(scale = 1 &amp;&amp; stage = 0)
 {
     //Check right side of beam
-    beamed = collision_line(x+lengthdir_x(24, direction-90), y+lengthdir_y(24, direction-90), x+lengthdir_x(24, direction-90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction-90)+lengthdir_y(1536, direction), prnt_ally, 1, 1);
+    beamed = collision_line(x+lengthdir_x(24, direction-90), y+lengthdir_y(24, direction-90), x+lengthdir_x(24, direction-90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction-90)+lengthdir_y(1536, direction), obj_player, 1, 1);
     //Check if there was a collision
     if(beamed &lt;0)
         //If there wasn't, check the left side
-        beamed = collision_line(x+lengthdir_x(24, direction+90), y+lengthdir_y(24, direction+90), x+lengthdir_x(24, direction+90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction+90)+lengthdir_y(1536, direction), prnt_ally, 1, 1);
+        beamed = collision_line(x+lengthdir_x(24, direction+90), y+lengthdir_y(24, direction+90), x+lengthdir_x(24, direction+90)+lengthdir_x(1536, direction), y+lengthdir_y(24, direction+90)+lengthdir_y(1536, direction), obj_player, 1, 1);
     //Check if there was a collision
     if(beamed &lt;0)
         //If there wasn't, check the center
-        beamed = collision_line(x, y, x+lengthdir_x(1536, direction), y+lengthdir_y(1536, direction), prnt_ally, 1, 1);
+        beamed = collision_line(x, y, x+lengthdir_x(1536, direction), y+lengthdir_y(1536, direction), obj_player, 1, 1);
+        
     //Check if there was a collision and that it was your ship and not an error checker
     if(beamed &gt;= 0)
     {
-        if(beamed.object_index = obj_turret)
+        //Do the following to the ship that was hit
+        with(beamed)
         {
-            //Do the following to the ship that was hit
-            with(beamed)
+            //Check if there's a nearby paladin turret
+            var shielded, shielddown;
+            shielded = 1;
+            if(instance_exists(obj_turret))
+                if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
+                    shielded = 2;
+            shielddown = 1;
+            if(shield = 0)
+                shielddown = 0;
+
+            //Take damage
+            shield -= 60/shielded;
+            //If there is no more shield, transfer damage to armor
+            if(shield &lt; 0) 
             {
-                armor -= 20;
-                //Shake the screen if in range
-                if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
-                    obj_mod.screen_shake_intensity = 4;
-                part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
+                armor += shield;
+                shield = 0;
+                if(shielddown = 1)
+                    obj_mod.ping_send_timer = 0;
+
             }
+
+            //If there is shield left, create effect
+            if(shield &gt; 0)
+            {
+                hurt = instance_create(0, 0, obj_hit);
+                hurt.hitdir = point_direction(x+lengthdir_x(16, direction), y+lengthdir_y(16, direction), other.xprevious, other.yprevious);
+                hurt.hurting = id;
+            }
+            part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
+
+            //Update smoking
+            if(armor &lt;= (armor_maximum*100)/60)
+                smoke = floor(armor/(armor_maximum/10));
+            //Shake the screen if in range
+            if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
+                obj_mod.screen_shake_intensity = 8;
+
+            //Check if your ship has been defeated
+            if(armor &lt;= 0)
+            {
+                //Take note of the player that defeated you
+                defeatmid = other.mid;
+                //Make a defeat message
+                if(global.ships &gt; 1)
+                    random_message(global.othername[other.mid], global.name, "Beam");
+                else
+                    message = global.othername[other.mid]+" ELIMINATED "+global.name+".(Beam)";
+
+                //Destroy this object
+                event_perform(ev_other, ev_user2);
+
+            }      
         }
-        if(beamed.object_index = obj_player)
-            //Do the following to the ship that was hit
-            with(beamed)
-            {
-                //Check if there's a nearby paladin turret
-                var shielded, shielddown;
-                shielded = 1;
-                if(instance_exists(obj_turret))
-                    if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
-                        shielded = 2;
-                shielddown = 1;
-                if(shield = 0)
-                    shielddown = 0;
-
-                //Take damage
-                shield -= 60/shielded;
-                //If there is no more shield, transfer damage to armor
-                if(shield &lt; 0) 
-                {
-                    armor += shield;
-                    shield = 0;
-                    if(shielddown = 1)
-                        obj_mod.ping_send_timer = 0;
-
-                }
-
-                //If there is shield left, create effect
-                if(shield &gt; 0)
-                {
-                    hurt = instance_create(0, 0, obj_hit);
-                    hurt.hitdir = point_direction(x+lengthdir_x(16, direction), y+lengthdir_y(16, direction), other.xprevious, other.yprevious);
-                    hurt.hurting = id;
-                }
-                part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
-
-                //Update smoking
-                if(armor &lt;= (armor_maximum*100)/60)
-                    smoke = floor(armor/(armor_maximum/10));
-                //Shake the screen if in range
-                if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
-                    obj_mod.screen_shake_intensity = 8;
-
-                //Check if your ship has been defeated
-                if(armor &lt;= 0)
-                {
-                    //Take note of the player that defeated you
-                    defeatmid = other.mid;
-                    //Make a defeat message
-                    if(global.ships &gt; 1)
-                        random_message(global.othername[other.mid], global.name, "Beam");
-                    else
-                        message = global.othername[other.mid]+" ELIMINATED "+global.name+".(Beam)";
-
-                    //Destroy this object
-                    instance_destroy();
-
-                }      
-            }
     }
     //Move to the next stage
     stage = 1;

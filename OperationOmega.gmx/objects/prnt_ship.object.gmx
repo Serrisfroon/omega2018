@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>//Initialize primary variables
-aiming_direction = 0;       //Holds the angle to fire at
 primary_cooldown = 0;       //Hold the time(in frames) until the next primary shot
 primary_overheat = 1;       //Holds the cooldown multiplier to modify the cooldown to a lower value
 primary_direction = 0;      //Holds the direction the primary will be fired in
@@ -165,8 +164,9 @@ switch(current_ship)
 shield = shield_maximum;
 armor = armor_maximum;
 
-//Set the shield as currently active
-shieldup = 1;
+//Initialize Shield variables
+shieldup = 1;     //Tells whether or not you have shield left.
+regentime = 300;  //Holds the time until the shield starts regenerating after being hit
 
 //Initialize the ability cooldown timer
 ability_cooldown_timer = 0;
@@ -681,7 +681,7 @@ if(global.activated[mid] != 1)
 //Perform action based on if the primary is being fired
 if(primary_cooldown &lt;= 0)
     //Reduce the overheat multiplier since the primary isn't being fired
-    primary_overheat = max(1, primary_overheat-0.003);
+    primary_overheat = max(1, primary_overheat-0.005);
 else
     //Reduce the cooldown until the next primary shot is possible
     primary_cooldown -= 1;
@@ -731,6 +731,8 @@ if(keyboard_check(ord('S')) || ship_disabled = true)
 {
     speedmin = 0;
     speed -= 0.2;
+    if(speed &lt;= 0)
+    direction = facedir;
 }
 
 //Lower speed
@@ -830,6 +832,13 @@ audio_stop_sound(snd_whip);
 //Disable collisions
 mask_index = spr_empty;
 
+//Create a defeated ship in the player's place
+var defeat = instance_create(x, y, obj_deadship);
+defeat.direction = direction;           //Pass on the defeated player's direction
+defeat.speed = speed+1;                 //Pass on the defeated player's speed
+defeat.sprite_index = sprite_index;     //Pass on the defeated player's image
+defeat.mid = mid;                       //Pass on the defeated player's mid
+
 //Reset alarms and disable activity for the ship
 defeat_player();        
 
@@ -854,7 +863,7 @@ for(i = 0; i &lt; flame_smoke_trails; i += 1)
 //Make sure the wall did not defeat the player
 if(defeatmid != 20)
     global.kills[defeatmid] += 1;       //Add the kill to the score for the player that defeated this player
-global.deaths[dummy] += 1;              //Add to this player's death count
+global.deaths[mid] += 1;              //Add to this player's death count
 
 //Perform action based on the game mode
 switch(global.matchtype)
@@ -863,7 +872,7 @@ switch(global.matchtype)
         //Take a ship from your lives
         global.ships -= 1;
         //Reduce your team's score by 1
-        switch(global.team[dummy])
+        switch(global.team[mid])
         {
             case 1:
                 global.redscore -= 1;
@@ -875,7 +884,7 @@ switch(global.matchtype)
     break;
     case "death":
         //Increase other team's score by 1
-        switch(global.team[dummy])
+        switch(global.team[mid])
         {
             case 1:
                 global.bluescore += 1;
@@ -897,52 +906,43 @@ with(obj_mod)
     }
 }
 
-//Create a defeated ship in the player's place
-var defeat = instance_create(x, y, obj_deadship);
-defeat.direction = direction;           //Pass on the defeated player's direction
-defeat.speed = speed+1;                 //Pass on the defeated player's speed
-defeat.sprite_index = sprite_index;     //Pass on the defeated player's image
-defeat.mid = mid;                       //Pass on the defeated player's mid
-
 //Update the viewed object if this player was being followed
-if(global.playership[dummy] = view_object[0])
-    view_object[0] = defeat;
-
-
-with(obj_mod)
-{
-     //Send it to your chat
-     chatline_add(obj_player.message, c_maroon);
-     if(global.team[mid] = 1)
-     {
-          chatcolor[4] = c_navy;
-          lolcolor[4] = 2;
-     }
-     else
-     {
-          chatcolor[4] = c_maroon;
-          lolcolor[4] = 1;
-     }
-}
-
-//Create an announcement
-if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
-{
-     obj_mod.announcement_stage  = 1;
-     obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.name;
-     obj_mod.announcement_color = obj_mod.chatcolor[4];
-}
+if(global.playership[mid] = view_object)
+    view_object = defeat;
 
 
 if(mid = global.mymid)
 {  
-    
+    //Create an announcement
+    if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
+    {
+         obj_mod.announcement_stage  = 1;
+         obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.name;
+         obj_mod.announcement_color = obj_mod.chatcolor[4];
+    }
+    with(obj_mod)
+    {
+         //Send it to your chat
+         chatline_add(obj_player.message, c_maroon);
+         if(global.team[mid] = 1)
+         {
+              chatcolor[4] = c_navy;
+              lolcolor[4] = 2;
+         }
+         else
+         {
+              chatcolor[4] = c_maroon;
+              lolcolor[4] = 1;
+         }
+    }    
     //Send the defeat to everyone
     clearbuffer(0);
     packet_label_write(3, mid);
+    writebyte(defeatmid, 0);
     writebyte(obj_mod.lolcolor[4], 0);
     writestring(obj_mod.chatline[4], 0);
     writebyte(nextspawn, 0);
+    writestring(obj_mod.announcement_message, 0);
     //Send to everyone if host
     if(global.master = true)
         client_sendall(0, 0);
@@ -1000,7 +1000,6 @@ if(mid = global.mymid)
     part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], speed+1.68, speed+2.80, -0.04,0);
     part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-50, primary_direction+50, 0, 0);
     part_particles_create(obj_partsystem.system, x+lengthdir_x(9, primary_direction), y+lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 10);
-    aiming_direction = (primary_direction-direction)/5;
     bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_name, primary_direction, mid, 0);
 }
 </string>
@@ -1080,6 +1079,7 @@ if(mid = global.mymid)
                 exit;
         }
         energy -= current_secondary_cost;   //Reduce energy by the necessary amount
+        energy_regeneration =energy_regeneration_base;
     }
     else                    //Heavy Weapons
     {

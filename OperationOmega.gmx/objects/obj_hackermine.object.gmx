@@ -112,7 +112,7 @@ instance_destroy();
           <argument>
             <kind>1</kind>
             <string>image_angle += 3;
-target = instance_nearest(x, y, prnt_enemy);
+target = instance_nearest(x, y, obj_dummy_enemy);
 if(target != noone)
 {
  if(amplified = 0)

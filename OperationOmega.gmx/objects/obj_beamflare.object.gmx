@@ -5,7 +5,7 @@
   <visible>0</visible>
   <depth>-1</depth>
   <persistent>0</persistent>
-  <parentName>prnt_allyenergy</parentName>
+  <parentName>prnt_bloom_attack</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -27,8 +27,32 @@
             <kind>1</kind>
             <string>alpha = 0;
 go = 0;
+alarm[1] = 1;
 image_xscale = 1.3;
 image_alpha = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visible = 1;
 </string>
           </argument>
         </arguments>

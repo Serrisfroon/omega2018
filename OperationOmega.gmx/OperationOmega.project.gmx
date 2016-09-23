@@ -1635,7 +1635,6 @@
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
-    <sprite>sprites\spr_previewbound</sprite>
     <sprites name="Trash">
       <sprite>sprites\sprite253</sprite>
       <sprite>sprites\spr_icon_selectt</sprite>
@@ -1654,6 +1653,7 @@
       <sprite>sprites\spr_helix2</sprite>
       <sprite>sprites\spr_bluehelix2</sprite>
       <sprite>sprites\spr_playerslot_options</sprite>
+      <sprite>sprites\spr_previewbound</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -1916,6 +1916,7 @@
       <objects name="Error Prevention">
         <object>objects\obj_ship_placeholder</object>
         <object>objects\obj_dud</object>
+        <object>objects\obj_ship</object>
       </objects>
       <object>objects\obj_teamchange</object>
       <object>objects\obj_solus_shot</object>
@@ -1947,22 +1948,21 @@
       <object>objects\obj_endgame</object>
       <object>objects\obj_teamchange_client</object>
       <object>objects\prnt_menubutton</object>
+      <object>objects\obj_ally</object>
+      <object>objects\prnt_ally</object>
       <object>objects\obj_playerslot_option</object>
+      <object>objects\prnt_allenemy</object>
+      <object>objects\prnt_enemy</object>
+      <object>objects\prnt_player</object>
+      <object>objects\obj_enemy</object>
       <object>objects\obj_tomulti</object>
       <object>objects\obj_modsettings</object>
       <object>objects\object235</object>
       <object>objects\obj_teleport_other</object>
     </objects>
     <objects name="In Game">
-      <object>objects\obj_ship</object>
-      <object>objects\obj_ally</object>
-      <object>objects\obj_enemy</object>
       <object>objects\obj_wall</object>
       <object>objects\obj_bigwall</object>
-      <object>objects\prnt_ally</object>
-      <object>objects\prnt_allenemy</object>
-      <object>objects\prnt_enemy</object>
-      <object>objects\prnt_player</object>
       <object>objects\prnt_enemyattack</object>
       <object>objects\prnt_allyattack</object>
       <object>objects\prnt_weaponattack</object>
@@ -2181,6 +2181,7 @@
         <object>objects\obj_overheatshine</object>
         <object>objects\obj_boosteffect</object>
       </objects>
+      <object>objects\prnt_bloom_attack</object>
     </objects>
     <objects name="Menus">
       <objects name="Connect to IP Popup">

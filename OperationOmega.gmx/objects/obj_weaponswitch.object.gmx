@@ -32,6 +32,7 @@ icon = 0;
 areax = -1000;
 areay = 1000;
 mouseon = 0;
+nameimage = -1;
 </string>
           </argument>
         </arguments>
@@ -999,10 +1000,10 @@ y = view_yview[0] + view_hview[0] + ychange*scaling;
 draw_sprite_ext(sprite_index, 0, x, y, scaling, scaling, 0, c_white, 1);
 draw_sprite_ext(spr_weaponswitch_options, image*global.team[global.mymid], x, y, scaling, scaling, 0, c_white, 1);
 
-draw_sprite_ext(global.primaryimage, obj_mod.teamcolorimg, x-76*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
-draw_sprite_ext(global.secondaryimage[1], obj_mod.teamcolorimg, x-36*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
-draw_sprite_ext(global.secondaryimage[2], obj_mod.teamcolorimg, x+4*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
-draw_sprite_ext(global.secondaryimage[3], obj_mod.teamcolorimg, x+44*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(global.primaryimage, obj_mod.team_color_index, x-76*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(global.secondary_icon_image[1], obj_mod.team_color_index, x-36*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(global.secondary_icon_image[2], obj_mod.team_color_index, x+4*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
+draw_sprite_ext(global.secondary_icon_image[3], obj_mod.team_color_index, x+44*scaling, y-82*scaling, scaling, scaling, 0, c_white, 1);
 
 switch(icon)
 {

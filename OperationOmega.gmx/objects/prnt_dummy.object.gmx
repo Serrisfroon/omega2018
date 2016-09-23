@@ -29,14 +29,15 @@
 first_acceleration = 0;
 
 //Initialize the player name variable
-thisname = "";
-
 turning = 0;
 speeding = 0;
-mid = obj_gamestart.pass_mid;
-current_primary = obj_gamestart.pass_current_primary;
-current_ship = obj_gamestart.pass_current_ship ;
-
+if(instance_exists(obj_gamestart))
+{
+    thisname = "";
+    mid = obj_gamestart.pass_mid;
+    current_primary = obj_gamestart.pass_current_primary;
+    current_ship = obj_gamestart.pass_current_ship ;
+}
 //Perform the parent event
 event_inherited();
 </string>
@@ -64,7 +65,7 @@ event_inherited();
             <string>//Skip the step event if the player is defeated
 if(global.activated[mid] != 1) 
     exit;
-
+armor = 100;
 //Perform action based on if the primary is being fired
 if(primary_cooldown &lt;= 0)
     //Reduce the overheat multiplier since the primary isn't being fired

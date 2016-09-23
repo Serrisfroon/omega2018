@@ -31,7 +31,7 @@ alarm[0] = 300;
 
 respawnable = 0;
 
-view_object[0] = id;
+view_object = id;
 
 </string>
           </argument>
@@ -116,9 +116,9 @@ draw_set_font(fnt_chat);
 draw_set_alpha(1);
 if(global.ships &gt; 0)
  if(respawnable = 0)
-  draw_text_transformed(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]-150*scaling, "You can respawn in "+string(ceil(alarm[1]/60))+" seconds.", scaling, scaling, 0);
+  draw_text_transformed(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]-150*scaling, "You can respawn in "+string(ceil(alarm[0]/60))+" seconds.", scaling, scaling, 0);
  else
-  draw_text_transformed(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]-150*scaling, "Press Space to respawn, or wait "+string(ceil(alarm[2]/60))+" seconds.", scaling, scaling, 0);
+  draw_text_transformed(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]-150*scaling, "Press Space to respawn, or wait "+string(ceil(alarm[1]/60))+" seconds.", scaling, scaling, 0);
 draw_set_halign(fa_left);
 
 </string>
