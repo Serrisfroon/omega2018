@@ -82,9 +82,9 @@ global.playership[mid].whip_spawner_existing = false;
             <kind>1</kind>
             <string>//Assign the correct object depending on if it's coming from an ally or an enemy
 if(global.team[mid] = global.team[global.mymid])
-    var created_object = obj_dualmissile;
+    var created_object = obj_locustmissile;
 else
-    var created_object = obj_dualmissile_enemy;
+    var created_object = obj_locustmissile_enemy;
 
 //Check for any existing attacks
 if(instance_exists(created_object))

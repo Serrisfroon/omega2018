@@ -34,6 +34,7 @@ alarm[0] = 200;
 hits = 1;
 image_blend = global.allycolor;
 alarm[1] = 1;
+alarm[3] = 5;
 speed = 13;
 go = 0;
 buildup = 0;
@@ -66,6 +67,30 @@ obj_mod.createcheck = id;
 with(obj_homingeffect)
     if(create = obj_mod.createcheck)
         instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visible = 1;
+
 </string>
           </argument>
         </arguments>
@@ -116,7 +141,6 @@ with(obj_homingeffect)
           <argument>
             <kind>1</kind>
             <string>image_angle = direction;
-visible = 1;
 buildup = 1;
 </string>
           </argument>
@@ -164,7 +188,7 @@ effect_create_below(ef_smoke, x, y, 0, c_gray);
 switch(go)
 {
  case 0:
-      closeby = instance_nearest(x, y, prnt_enemy);
+      closeby = instance_nearest(x, y, obj_dummy_enemy);
       if(closeby != noone)
       {
        if(point_distance(x, y, closeby.x, closeby.y) &lt; 240 &amp;&amp; closeby.mid != oldmid)

@@ -132,9 +132,9 @@ else
     exit;
 seek += 1;
 go = 0;
-if(instance_exists(prnt_enemy))
+if(instance_exists(obj_dummy_enemy))
 {
-    near = instance_nearest(x, y, prnt_enemy);
+    near = instance_nearest(x, y, obj_dummy_enemy);
     if(point_distance(x, y, near.x, near.y) &lt; 1000)
         direction = point_direction(x, y, near.x, near.y);
 }
@@ -184,9 +184,9 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(prnt_enemy) &amp;&amp; go = 0 &amp;&amp; seek &lt; 2)
+            <string>if(go = 0 &amp;&amp; seek &lt; 2)
 {
-    focus = instance_nearest(x, y, prnt_enemy);
+      focus = instance_nearest(x, y, obj_dummy_enemy);
     if(point_distance(x, y, focus.x, focus.y) &lt; 200)
     {
             go = 1;

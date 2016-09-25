@@ -38,6 +38,13 @@ go = 0;
 alarm[2] = 120;
 amplified = 0;
 bonusdamage = 0;
+
+//Set attack variable values
+attack_damage = 10;             //Set the damage for the attack
+attack_burst = 10;              //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;           //Set the threshold reduction per hit
+attack_shake = 8;               //Set the screen shake intensity of the attack
+attack_name = "Layer Missile";  //Set the name of the attack
 </string>
           </argument>
         </arguments>
@@ -183,7 +190,12 @@ effect_create_below(ef_smoke, x, y, 0, c_gray);
 //If the target still exists, take note of the direction to it
 if(go = 0)
 {
-    closeby = instance_nearest(x, y, prnt_ally);
+      closeby = instance_nearest(x, y, obj_dummy_ally);
+      if(closeby = noone)
+        closeby = global.playership[global.mymid];      
+      else
+          if(point_distance(x, y, closeby.x, closeby.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+            closeby = global.playership[global.mymid];
     if(closeby != noone)
     {
         if(point_distance(x, y, closeby.x, closeby.y) &lt; 400)

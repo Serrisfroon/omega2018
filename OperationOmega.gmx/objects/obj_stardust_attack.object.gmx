@@ -117,7 +117,7 @@ if(stardust_shots = 25)
 var stardust_direction = point_direction(global.playership[mid].x, global.playership[mid].y, target_x, target_y);
 
 //Create a stardust bullet
-var stardust_bullet = instance_create(x, y, stardust_object);
+var stardust_bullet = instance_create(global.playership[mid].x, global.playership[mid].y, stardust_object);
 stardust_bullet.mid = mid;                                  //Set the mid to the same is this object's
 stardust_bullet.amplified = amplified;                      //Same thing with amplified
 

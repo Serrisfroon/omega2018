@@ -252,6 +252,11 @@ if(global.master = false)
         //If you are not ready, change to ready and send the
         //info to the host
         case 0:
+            if(instance_exists(obj_icon_option))
+            {
+                obj_icon_option.action = 1;
+                obj_icon_option.alarm[1] = 1;
+            }
             readied = 1;
             if(global.sfxtoggle = 0)
                 audio_play_sound(snd_readyup, 1, 0);
@@ -295,24 +300,7 @@ else
         //Send a notice to your chat
         with(obj_waiting)
         {
-            chatline[0] = chatline[1];
-            chatcolor[0] = chatcolor[1];
-            chatline[1] = chatline[2];
-            chatcolor[1] = chatcolor[2];
-            chatline[2] = chatline[3];
-            chatcolor[2] = chatcolor[3];
-            chatline[3] = chatline[4];
-            chatcolor[3] = chatcolor[4];
-            chatline[4] = chatline[5];
-            chatcolor[4] = chatcolor[5];
-            chatline[5] = chatline[6];
-            chatcolor[5] = chatcolor[6];
-            chatline[6] = chatline[7];
-            chatcolor[6] = chatcolor[7];
-            chatline[7] = chatline[8];
-            chatcolor[7] = chatcolor[8];
-            chatcolor[8] = c_maroon;
-            chatline[8] = "You cannot start a game alone.";
+            chat_addline("You cannot start a game alone.", 1, 0, 0);
         }
         //Exit the script
         exit;
@@ -359,24 +347,7 @@ else
         //to your chat and all clients
         with(obj_waiting)
         {
-            chatline[0] = chatline[1];
-            chatcolor[0] = chatcolor[1];
-            chatline[1] = chatline[2];
-            chatcolor[1] = chatcolor[2];
-            chatline[2] = chatline[3];
-            chatcolor[2] = chatcolor[3];
-            chatline[3] = chatline[4];
-            chatcolor[3] = chatcolor[4];
-            chatline[4] = chatline[5];
-            chatcolor[4] = chatcolor[5];
-            chatline[5] = chatline[6];
-            chatcolor[5] = chatcolor[6];
-            chatline[6] = chatline[7];
-            chatcolor[6] = chatcolor[7];
-            chatline[7] = chatline[8];
-            chatcolor[7] = chatcolor[8];
-            chatcolor[8] = c_maroon;
-            chatline[8] = "All players are not yet ready.";
+            chat_addline("All players are not yet ready.", 1, 0, 0);
         }
         clearbuffer(0);
         writebyte(16, 0);

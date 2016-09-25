@@ -108,6 +108,7 @@ if(changeselect = 31)
                 with(empty)
                     instance_destroy();
     }
+    global.secondary_type[4] = 0;
     create_weaponslots();
     with(obj_customizer.weaponslot[4])
     {
@@ -140,6 +141,7 @@ if(changeselect = 32)
                 with(empty)
                     instance_destroy();
     }
+    global.secondary_type[4] = 1;
     create_weaponslots();    
     with(obj_customizer.weaponslot[4])
     {
@@ -476,24 +478,7 @@ else
     with(send)
     {
         //Send a message to your chat
-        chatline[0] = chatline[1];
-        chatcolor[0] = chatcolor[1];
-        chatline[1] = chatline[2];
-        chatcolor[1] = chatcolor[2];
-        chatline[2] = chatline[3];
-        chatcolor[2] = chatcolor[3];
-        chatline[3] = chatline[4];
-        chatcolor[3] = chatcolor[4];
-        chatline[4] = chatline[5];
-        chatcolor[4] = chatcolor[5];
-        chatline[5] = chatline[6];
-        chatcolor[5] = chatcolor[6];
-        chatline[6] = chatline[7];
-        chatcolor[6] = chatcolor[7];
-        chatline[7] = chatline[8];
-        chatcolor[7] = chatcolor[8];
-        chatcolor[8] = c_red;
-        chatline[8] = "You cannot configure your ship when ready.";
+        chat_addline("You cannot configure your ship when ready.", 1, 0, 0);
     }
 }
 

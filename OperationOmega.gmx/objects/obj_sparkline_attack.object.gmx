@@ -82,9 +82,9 @@ global.playership[mid].whip_spawner_existing = false;
             <kind>1</kind>
             <string>//Assign the correct object depending on if it's coming from an ally or an enemy
 if(global.team[mid] = global.team[global.mymid])
-    var created_object = obj_formationa;
+    var created_object = obj_sparkline;
 else
-    var created_object = obj_formationa_enemy;
+    var created_object = obj_sparkline_enemy;
 
 //Hold the value of the origin object locally for faster reference    
 var origin_object = global.playership[mid];
@@ -110,7 +110,7 @@ for(i = 1; i &lt;= 3; i ++)
         {
             case 2:     //This is the second node. One node exists already.
                 //Check if the distance between the new node's end point and the existing node is too large
-                if(point_distance(mouse_x, mouse_y, sparkline_node[1].target_x, sparkline_node[1].target_y) &gt; max_sparkline_distance)
+                if(point_distance(target_x, target_y, sparkline_node[1].target_x, sparkline_node[1].target_y) &gt; max_sparkline_distance)
                 {
                     i = 1;                      //This is now the first node
                     with(sparkline_node[i])     //Destroy the previously existing node
@@ -119,8 +119,8 @@ for(i = 1; i &lt;= 3; i ++)
             break;
             case 3:     //This is the third node. Two nodes exist already
                 //Check if the distance between the new node's end point and the existing nodes is too large
-                if(point_distance(mouse_x, mouse_y, sparkline_node[1].target_x, sparkline_node[1].target_y) &gt; max_sparkline_distance ||
-                    point_distance(mouse_x, mouse_y, sparkline_node[2].target_x, sparkline_node[2].target_y) &gt; max_sparkline_distance)
+                if(point_distance(target_x, target_y, sparkline_node[1].target_x, sparkline_node[1].target_y) &gt; max_sparkline_distance ||
+                    point_distance(target_x, target_y, sparkline_node[2].target_x, sparkline_node[2].target_y) &gt; max_sparkline_distance)
                     {
                         i = 1;                      //This is now the first node
                         with(sparkline_node[1])     //Destroy the previously existing first node

@@ -134,6 +134,8 @@ mid = global.mymid;
 
 //Initialize the flag controlling when the vie zooms back in
 view_zoom_out_flag = false;
+//Initialize the targeting variable
+current_target_object = -1;
 
 //Set the view increments
 view_x_increase = 24;
@@ -700,19 +702,7 @@ switch(update_packet_timer)
                 
                 //Send your RNG seed and firing direction
                 crush(global.primaryRNG[mid], 65536, 0);
-                crush(round(obj_player.primary_direction), 360, 0);
-                
-                //Perform action based on the primary equipped
-                switch(global.primary)
-                {
-                    case 7: //Siphon
-                        //Send the appropriate mid
-                        if(obj_mod.targeted_object = -1)
-                            crush(0, 8, 0);                     //Send an empty mid
-                        else
-                            crush(targeted_object.mid+1, 8, 0); //Send to mid corresponding to the targeted player
-                    break;
-                }
+                crush(round(obj_player.primary_direction), 360, 0);                
             }
         }
         //Loop through the other players to add their updates as well
@@ -742,15 +732,7 @@ switch(update_packet_timer)
                 
                 //Send the players' RNG seed and firing direction
                 crush(global.primaryRNG[i], 65536, 0);
-                crush(round(global.playership[i].primary_direction), 360, 0);
-                
-                //Perform action based on the primary equipped
-                switch(global.playerprimary[i])
-                {
-                    case 7: //Siphon
-                        crush(global.playership[i].current_target_object+1, 8, 0);       //Send the mid of the targeted player
-                    break;
-                }
+                crush(round(global.playership[i].primary_direction), 360, 0);                
             }
         }
         //Send the update packet to everyone
@@ -862,14 +844,6 @@ while(true)
                     //Read the player's RNG seed and firing direction
                     global.primaryRNG[dummy] = uncrush(65536, 0);
                     global.playership[dummy].primary_direction = uncrush(360, 0);
-                    
-                    //Perform action based on the primary equipped
-                    switch(global.playerprimary[dummy])
-                    {
-                        case 7: //Siphon
-                            global.playership[dummy].targeted_object = uncrush(8, 0)-1;
-                        break;
-                    }         
                 }
             }
         break;
@@ -1847,6 +1821,8 @@ if(obj_player.shield &gt; 0)
         draw_shield_bar = shieldratio;
     draw_sprite_part_ext(spr_shieldbar, 0, 0, 0, 4+draw_shield_bar*233, 86, 0, 0, 1, 1, c_white, 0.4+(0.6*shieldratio));
 }
+else
+    draw_shield_bar = 0;    
 
 if(obj_player.energy &gt; 0)
 {
@@ -1995,10 +1971,12 @@ if(keyboard_check_direct(vk_tab))
 
 
 //Draw the cursor
-draw_sprite_ext(spr_cursor, 0, (mouse_x-view_xview[0])/screen_scaling_ratio, (mouse_y-view_yview[0])/screen_scaling_ratio, 0.7, 0.7, cursor_rotation[1], c_white, 0.7);
-draw_sprite_ext(spr_cursor, 1, (mouse_x-view_xview[0])/screen_scaling_ratio, (mouse_y-view_yview[0])/screen_scaling_ratio, 0.7, 0.7, cursor_rotation[2], c_white, 0.7);
-draw_sprite_ext(spr_cursor, 2, (mouse_x-view_xview[0])/screen_scaling_ratio, (mouse_y-view_yview[0])/screen_scaling_ratio, 0.7, 0.7, cursor_rotation[3], c_white, 0.7);
 texture_set_interpolation(true);
+var mouse_cursor_x = (mouse_x-view_xview[0])/screen_scaling_ratio;
+var mouse_cursor_y = (mouse_y-view_yview[0])/screen_scaling_ratio;
+draw_sprite_ext(spr_cursor, 0, mouse_cursor_x, mouse_cursor_y, 0.7, 0.7, cursor_rotation[1], c_white, 0.7);
+draw_sprite_ext(spr_cursor, 1, mouse_cursor_x, mouse_cursor_y, 0.7, 0.7, cursor_rotation[2], c_white, 0.7);
+draw_sprite_ext(spr_cursor, 2, mouse_cursor_x, mouse_cursor_y, 0.7, 0.7, cursor_rotation[3], c_white, 0.7);
 
 </string>
           </argument>

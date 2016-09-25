@@ -164,6 +164,8 @@ if(scale = 1 &amp;&amp; stage = 0)
                     obj_mod.ping_send_timer = 0;
 
             }
+            //Reset shield regen time
+            alarm[4] = regentime;
 
             //If there is shield left, create effect
             if(shield &gt; 0)

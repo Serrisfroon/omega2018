@@ -276,24 +276,7 @@ else
     with(send)
     {
         //Send a message to your chat
-        chatline[0] = chatline[1];
-        chatcolor[0] = chatcolor[1];
-        chatline[1] = chatline[2];
-        chatcolor[1] = chatcolor[2];
-        chatline[2] = chatline[3];
-        chatcolor[2] = chatcolor[3];
-        chatline[3] = chatline[4];
-        chatcolor[3] = chatcolor[4];
-        chatline[4] = chatline[5];
-        chatcolor[4] = chatcolor[5];
-        chatline[5] = chatline[6];
-        chatcolor[5] = chatcolor[6];
-        chatline[6] = chatline[7];
-        chatcolor[6] = chatcolor[7];
-        chatline[7] = chatline[8];
-        chatcolor[7] = chatcolor[8];
-        chatcolor[8] = c_red;
-        chatline[8] = "You cannot configure your ship when ready.";
+        chat_addline("You cannot configure your ship when ready.", 1, 0, 0);
     }
 }
 </string>
@@ -319,10 +302,10 @@ else
           <argument>
             <kind>1</kind>
             <string>global.primaryimage = spr_empty;
-global.secondary_image[1] = spr_empty;
-global.secondary_image[2] = spr_empty;
-global.secondary_image[3] = spr_empty;
-global.secondary_image[4] = spr_empty;
+global.secondary_icon_image[1] = spr_empty;
+global.secondary_icon_image[2] = spr_empty;
+global.secondary_icon_image[3] = spr_empty;
+global.secondary_icon_image[4] = spr_empty;
 
 switch(global.primary)
 {
@@ -362,94 +345,94 @@ for(i = 1; i &lt;= 4; i++)
     switch(global.secondary[i])
     {
         case 1:
-             global.secondary_image[i] = spr_fusion_icon;
+             global.secondary_icon_image[i] = spr_fusion_icon;
         break;
         case 2:
-             global.secondary_image[i] = spr_stardust_icon;
+             global.secondary_icon_image[i] = spr_stardust_icon;
         break;
         case 3:
-             global.secondary_image[i] = spr_barrier_icon;
+             global.secondary_icon_image[i] = spr_barrier_icon;
         break;
         case 5:
-             global.secondary_image[i] = spr_beam_icon;
+             global.secondary_icon_image[i] = spr_beam_icon;
         break;
         case 4:
-             global.secondary_image[i] = spr_formation_icon;
+             global.secondary_icon_image[i] = spr_formation_icon;
         break;
         case 6:
-             global.secondary_image[i] = spr_sparkline_icon;
+             global.secondary_icon_image[i] = spr_sparkline_icon;
         break;
         case 7:
-             global.secondary_image[i] = spr_burst_icon;
+             global.secondary_icon_image[i] = spr_burst_icon;
         break;
         case 8:
-             global.secondary_image[i] = spr_slash_icon;
+             global.secondary_icon_image[i] = spr_slash_icon;
         break;
         case 9:
-             global.secondary_image[i] = spr_horizon_icon;
+             global.secondary_icon_image[i] = spr_horizon_icon;
         break;
         case 10:
-             global.secondary_image[i] = spr_spiral_icon;
+             global.secondary_icon_image[i] = spr_spiral_icon;
         break;
         case 11:
-             global.secondary_image[i] = spr_laser_icon;
+             global.secondary_icon_image[i] = spr_laser_icon;
         break;
         case 12:
-             global.secondary_image[i] = spr_trail_icon;
+             global.secondary_icon_image[i] = spr_trail_icon;
         break;
         case 13:
-             global.secondary_image[i] = spr_reflection_icon;
+             global.secondary_icon_image[i] = spr_reflection_icon;
         break;
         case 14:
-             global.secondary_image[i] = spr_storm_icon;
+             global.secondary_icon_image[i] = spr_storm_icon;
         break;
         case 15:
-             global.secondary_image[i] = spr_trigger_icon;
+             global.secondary_icon_image[i] = spr_trigger_icon;
         break;
         case 16:
-             global.secondary_image[i] = spr_dualmissile_icon;
+             global.secondary_icon_image[i] = spr_dualmissile_icon;
         break;
         case 17:
-             global.secondary_image[i] = spr_layermissile_icon;
+             global.secondary_icon_image[i] = spr_layermissile_icon;
         break;
         case 24:
-             global.secondary_image[i] = spr_huntermine_icon;
+             global.secondary_icon_image[i] = spr_huntermine_icon;
         break;
         case 18:
-             global.secondary_image[i] = spr_locustmissile_icon;
+             global.secondary_icon_image[i] = spr_locustmissile_icon;
         break;
         case 25:
-             global.secondary_image[i] = spr_phantommine_icon;
+             global.secondary_icon_image[i] = spr_phantommine_icon;
         break;
         case 29:
-             global.secondary_image[i] = spr_solus_icon;
+             global.secondary_icon_image[i] = spr_solus_icon;
         break;
         case 19:
-             global.secondary_image[i] = spr_tridentmissile_icon;
+             global.secondary_icon_image[i] = spr_tridentmissile_icon;
         break;
         case 20:
-             global.secondary_image[i] = spr_shockmissile_icon;
+             global.secondary_icon_image[i] = spr_shockmissile_icon;
         break;
         case 26:
-             global.secondary_image[i] = spr_hackermine_icon;
+             global.secondary_icon_image[i] = spr_hackermine_icon;
         break;
         case 21:
-             global.secondary_image[i] = spr_hermitmissile_icon;
+             global.secondary_icon_image[i] = spr_hermitmissile_icon;
         break;
         case 23:
-             global.secondary_image[i] = spr_strikemissile_icon;
+             global.secondary_icon_image[i] = spr_strikemissile_icon;
         break;
         case 28:
-             global.secondary_image[i] = spr_strikemine_icon;
+             global.secondary_icon_image[i] = spr_strikemine_icon;
         break;
         case 30:
-             global.secondary_image[i] = spr_turret_icon;
+             global.secondary_icon_image[i] = spr_turret_icon;
         break;
         case 22:
-             global.secondary_image[i] = spr_splitmissile_icon;
+             global.secondary_icon_image[i] = spr_splitmissile_icon;
         break;
         case 27:
-             global.secondary_image[i] = spr_clustermine_icon;
+             global.secondary_icon_image[i] = spr_clustermine_icon;
         break;
     }
 }

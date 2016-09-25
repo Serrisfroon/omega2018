@@ -89,7 +89,7 @@ switch(type)
                 var primary_object = obj_stasisnew_enemy;
            bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_object);
            sfx_play(snd_stasis, x, y);
-           bullet.direction = newdir;
+           bullet.direction = loldir[1];
            bullet.speed = 7+speed;
            bullet.mid = current_bullet_mid;
            return -1;
@@ -308,27 +308,15 @@ switch(type)
         exit;
     break;
     case "Siphon":
-        //Check if the target is nearby
-        if(current_target_object < 0 || point_distance(x, y, current_target_object.x, current_target_object.y) > 400) 
-        {
-            return -1;
-            exit;
-        }
-        //Check if the target is withing firing angle
-        var point = point_direction(x, y, current_target_object.x, current_target_object.y);
-        if(aim_limit(facedir, point, 30) != point)
-        {
-            return -1;
-            exit;
-        }
+        if(blend = global.allycolor)
+            var primary_object = obj_siphon;
+        else
+            var primary_object = obj_siphon_enemy;
+        
         //Create the shot and give it speed and facedir
         bullet = instance_create(0, 0, obj_siphon);
         bullet.mid = current_bullet_mid;
-        bullet.targetmid = current_target_object.mid;
         sfx_play(snd_siphon, x, y);
-        //Absorb shield
-        if(current_target_object.shield > 0) shield += 2;
-        if(shield > shield_maximum) shield = shield_maximum;
         return -1;
         exit;
     break;

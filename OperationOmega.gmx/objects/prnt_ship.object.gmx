@@ -57,7 +57,7 @@ switch(current_primary)
         primary_cooldown_base = 10;
     break;
     case 5:
-        primary_name = "Statis";
+        primary_name = "Stasis";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 25;
     break;
@@ -116,7 +116,7 @@ stasis_slow_timer = 0;                      //Holds the time(in frames) that a S
 ship_status_hacked = false;                 //Holds whether or not the ship is under the hacked status, aka stunned.
 ship_status_shocked = false;                //Holds whether or not the ship is under the shocked status, which causes the shield to be 50% effective.
 ship_disabled = false;                      //Holds the disable flag for the ship. This is used to consolidate if statements for faster processing.
-
+shock_image = 0;                            //Holds the image index of the shock effect
 //Initialize the secondary selection variable
 secondary_selected = 1;
 
@@ -429,7 +429,7 @@ flame_smoke_trails = 0;
             <kind>1</kind>
             <string>//Reset shock variable
 ship_status_shocked = false;
-basegain *= 3;
+energy_regeneration_base *= 3;
 </string>
           </argument>
         </arguments>
@@ -2512,11 +2512,15 @@ draw_turnblur();
 draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, invincible);
 
 if(ship_ability_active_flag = true &amp;&amp; current_ship = 3)
-    draw_sprite_ext(spr_goliath_hyperrush, nextflame, x, y, 1, 1, image_angle, c_white, invincible);
+    draw_sprite_ext(spr_goliath_hyperrush, -1, x, y, 1, 1, image_angle, c_white, invincible);
 
 if(ship_status_shocked = true)
-    draw_sprite_ext(spr_shocksparks, nextflame, x, y, 1, 1, 0, c_white, 0.8);
-    
+{
+    shock_image += 1;
+    if(shock_image &gt; 30)
+        shcok_image = 0;
+    draw_sprite_ext(spr_shocksparks, shock_image, x, y, 1, 1, 0, c_white, 0.8);
+}    
 //Draw the flame trail particles
 part_system_drawit(flame_smoke_system);
 </string>

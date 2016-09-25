@@ -62,18 +62,6 @@ switch(update_packet_timer)
                 //Send your RNG seed and firing direction
                 crush(global.primaryRNG[mid], 65536, 0);
                 crush(round(obj_player.primary_direction), 360, 0);
-                
-                //Perform action based on the primary equipped
-                switch(global.primary)
-                {
-                    case 7: //Siphon
-                        //Send the appropriate mid
-                        if(obj_mod.targeted_object = -1)
-                            crush(0, 8, 0);                     //Send an empty mid
-                        else
-                            crush(targeted_object.mid+1, 8, 0); //Send to mid corresponding to the targeted player
-                    break;
-                }
             }
         }      
         //Send the update packet to the host
@@ -203,13 +191,6 @@ while(true)
                         //Read the player's RNG seed and firing direction
                         holdvar = uncrush(65536, 0);
                         holdvar = uncrush(360, 0);
-                        //Perform action based on the primary equipped
-                        switch(global.playerprimary[i])
-                        {          
-                            case 7: //Siphon
-                                holdvar = uncrush(8, 0);
-                            break;
-                        }
                     }
                     continue;
                 }   

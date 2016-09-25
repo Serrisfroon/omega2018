@@ -30,7 +30,12 @@ alarm[0] = 150;
 alarm[1] = 1;
 go = 0;
 hitting = 0;
-
+//Set attack variable values
+attack_damage = 2;          //Set the damage for the attack
+attack_burst = 0;           //Set the bonus damage of the attack that ignores shield
+attack_threshold = 0;       //Set the threshold reduction per hit
+attack_shake = 0;           //Set the screen shake intensity of the attack
+attack_name = "Stasis";     //Set the name of the attack
 </string>
           </argument>
         </arguments>
@@ -124,9 +129,9 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(prnt_enemy) &amp;&amp; go = 0)
+            <string>if(go = 0)
 {
-    focus = instance_nearest(x, y, prnt_enemy);
+    focus = instance_nearest(x, y, obj_dummy_enemy);
     if(point_distance(x, y, focus.x, focus.y) &lt; 80)
     {
             hitting = 1;

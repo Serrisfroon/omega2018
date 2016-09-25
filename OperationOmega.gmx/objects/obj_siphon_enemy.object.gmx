@@ -51,6 +51,22 @@ alarm[0] = 7;
           <argument>
             <kind>1</kind>
             <string>source = global.playership[mid];
+
+target_object = instance_nearest(source.x, source.y, obj_dummy_enemy);
+if(target_object = noone)
+    target_object = global.playership[global.mymid];
+else
+    if(point_distance(source.x, source.y, target_object.x, target_object.y) &gt; point_distance(source.x, source.y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+        target_object = global.playership[global.mymid];
+
+shooting_direction = point_direction(source.x, source.y, target_object.x, target_object.y);
+
+if(aim_limit(source.direction, shooting_direction, 60) != shooting_direction)
+    instance_destroy();
+if(point_distance(source.x, source.y, target_object.x, target_object.y) &gt; 300)
+    instance_destroy();
+    
+    
 switch(targetmid)
 {
  case global.mymid:

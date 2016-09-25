@@ -70,7 +70,9 @@ event_inherited();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(other.damage &gt; 4)
+            <string>if(other.visible = 0)
+    exit;
+if(other.damage &gt; 4)
 {
  other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
  other.split.mid = other.mid;
@@ -191,9 +193,9 @@ with(other)
     if(ship_status_shocked = false)
     {
         ship_status_shocked = true;
-        basegain /= 3;
-        if(energygain &gt; basegain)
-            energygain = basegain;
+        energy_regeneration_base /= 3;
+        if(energy_regeneration &gt; energy_regeneration_base)
+            energy_regeneration = energy_regeneration_base;
     }
     if(other.amplified = 0)
         alarm[6] = 600;

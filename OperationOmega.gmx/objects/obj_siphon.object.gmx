@@ -28,6 +28,7 @@
             <string>show = 0;
 alarm[1] = 1;
 alarm[0] = 7;
+
 </string>
           </argument>
         </arguments>
@@ -52,25 +53,34 @@ alarm[0] = 7;
             <kind>1</kind>
             <string>if(mid = global.mymid)
 {
- if(instance_exists(obj_practiceship))
-  source = obj_practiceship;
- else 
-  source = obj_player;
+ source = obj_player;
 }
 else
  source = global.playership[mid];
 
+target_object = instance_nearest(x, y, obj_dummy_enemy);
+shooting_direction = point_direction(source.x, source.y, target_object.x, target_object.y);
+
+if(aim_limit(source.direction, shooting_direction, 60) != shooting_direction)
+    instance_destroy();
+if(point_distance(source.x, source.y, target_object.x, target_object.y) &gt; 300)
+    instance_destroy();
+        
 //If there is shield left, create effect
-if(global.playership[targetmid].shieldup = 1)
+if(target_object.shieldup = 1)
 {
  hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = point_direction(global.playership[targetmid].x, global.playership[targetmid].y, source.x, source.y);
- hurt.hurting = global.playership[targetmid];
+ hurt.hitdir = point_direction(target_object.x, target_object.y, source.x, source.y);
+ hurt.hurting = target_object;
 }
+//Absorb shield
+if(target_object.shield &gt; 0) source.shield += 2;
+if(source.shield &gt; source.shield_maximum) source.shield = source.shield_maximum;
+
 show = 1;
 effect_create_above(ef_ring, source.x, source.y, 0, c_aqua);
-effect_create_above(ef_ring, global.playership[targetmid].x, global.playership[targetmid].y, 0, c_aqua);
-part_particles_create(obj_partsystem.system, global.playership[targetmid].x, global.playership[targetmid].y, obj_partsystem.elecspark, 7);
+effect_create_above(ef_ring, target_object.x, target_object.y, 0, c_aqua);
+part_particles_create(obj_partsystem.system, target_object.x, target_object.y, obj_partsystem.elecspark, 7);
 
 </string>
           </argument>
@@ -113,10 +123,10 @@ part_particles_create(obj_partsystem.system, global.playership[targetmid].x, glo
             <string>if(show = 0) exit;
 if(!instance_exists(source)) exit;
 var pointdist, pointdir;
-draw_electricity(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y, c_blue, 3, 3, 6, true)//3-random(6) is equall in either way
+draw_electricity(source.x, source.y, target_object.x, target_object.y, c_blue, 3, 3, 6, true)//3-random(6) is equall in either way
 
-pointdist = irandom(point_distance(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y));
-pointdir = point_direction(source.x, source.y, global.playership[targetmid].x, global.playership[targetmid].y);
+pointdist = irandom(point_distance(source.x, source.y, target_object.x, target_object.y));
+pointdir = point_direction(source.x, source.y, target_object.x, target_object.y);
 part_particles_create(obj_partsystem.system, source.x+lengthdir_x(pointdist, pointdir), source.y+lengthdir_y(pointdist, pointdir), obj_partsystem.elecspark, 1);
 </string>
           </argument>

@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(other.damage &gt; 4)
+            <string>if(other.visible = 0)
+    exit;
+if(other.damage &gt; 4)
 {
  other.split = instance_create(other.x, other.y, obj_splitmissile_enemy);
  other.split.mid = other.mid;
@@ -160,7 +162,7 @@ other.slowing = 1;
 other.alarm[2] = 3;
 
 
-if(other.damaged[ymid] = 1)
+if(other.damaged[mid] = 1)
     exit;
 other.damaged[mid] = 1;
 sfx_play(snd_hit, x, y);

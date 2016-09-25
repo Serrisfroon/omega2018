@@ -88,7 +88,7 @@ else
 
 //Create the attack and give pass on the properties
 var attack = instance_create(target_x, target_y, created_object);
-attack.direction = target_direction;    //Pass on the direction
+attack.direction = point_direction(global.playership[mid].x, global.playership[mid].y, target_x, target_y);    //Pass on the direction
 attack.amplified = amplified;           //Pass on the amplified flag
 attack.mid = mid;
 
