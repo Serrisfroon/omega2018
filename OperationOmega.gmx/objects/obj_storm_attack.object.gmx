@@ -39,30 +39,6 @@ alarm[1] = 1;   //Set time until attack creation
         </arguments>
       </action>
     </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Set the flag to note there is no stardust being used now
-global.playership[mid].whip_spawner_existing = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -81,7 +57,7 @@ global.playership[mid].whip_spawner_existing = false;
           <argument>
             <kind>1</kind>
             <string>//Assign the correct object depending on if it's coming from an ally or an enemy
-if(global.team[mid] = global.team[mid])
+if(global.team[mid] = global.team[global.mymid])
 {
     var created_object = obj_storm;
     var wall_object = obj_storm_wall;
@@ -98,8 +74,8 @@ var origin_object = global.playership[mid];
 var target_direction = point_direction(origin_object.x, origin_object.y, target_x, target_y);
 var target_distance = point_distance(origin_object.x, origin_object.y, target_x, target_y);
 
+var mid_check = mid;
 //Compare the mid of existing storm objects 
-created_object.mid_check = mid;
 with(created_object)
 {
     if(mid = mid_check)
@@ -109,7 +85,6 @@ with(created_object)
 }
 
 //Compare the mid of existing storm wall objects 
-wall_object.mid_check = mid;
 with(wall_object)
 {
     if(mid = mid_check)

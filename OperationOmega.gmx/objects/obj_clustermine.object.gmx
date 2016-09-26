@@ -111,11 +111,8 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Stop script if there is no enemies alive
-if(!instance_exists(prnt_enemy))
- exit;
-//Update targetting
-target = instance_nearest(x, y, prnt_enemy);
+            <string>//Update targetting
+target = instance_nearest(x, y, obj_dummy_enemy);
 dist = point_distance(x, y, target.x, target.y);
 //Explode if there is a nearby enemy
 if(amplified = 0)

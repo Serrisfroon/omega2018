@@ -314,7 +314,7 @@ switch(type)
             var primary_object = obj_siphon_enemy;
         
         //Create the shot and give it speed and facedir
-        bullet = instance_create(0, 0, obj_siphon);
+        bullet = instance_create(0, 0, primary_object);
         bullet.mid = current_bullet_mid;
         sfx_play(snd_siphon, x, y);
         return -1;

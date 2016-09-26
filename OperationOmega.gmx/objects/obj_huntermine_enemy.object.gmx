@@ -168,30 +168,27 @@ alarm[0] = 30;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Stop script if there is no allies alive
-if(!instance_exists(prnt_ally))
- exit;
-//Update targetting
-target = instance_nearest(x, y, prnt_ally);
+            <string>//Update targetting
+target = instance_nearest(x, y, obj_dummy_ally);
+if(target = noone)
+  target = global.playership[global.mymid];      
+else
+    if(point_distance(x, y, target.x, target.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+      target = global.playership[global.mymid];
 direction = point_direction(x, y, target.x, target.y);
 dist = point_distance(x, y, target.x, target.y);
 //Set movement speed to match how close to target
-speed = 1.5;
-if(dist &lt; 800)
+if(amplified = 0)
 {
- speed = 2.5;
- exit;
+    speed = min(4, 2000/dist);
 }
-if(dist &lt; 600)
+else 
 {
- speed = 3.5;
- exit;
+    speed = min(5, 2400/dist);
 }
-if(dist &lt; 200)
-{
- speed = 4;
- exit;
-}
+if(dist &gt; 1500)
+    speed = 0;
+
 </string>
           </argument>
         </arguments>

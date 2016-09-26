@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_enemyattack</parentName>
+  <parentName>prnt_bloom_attack</parentName>
   <maskName>spr_empty</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -56,6 +56,7 @@ altershot = 0;
           <argument>
             <kind>1</kind>
             <string>effect_create_below(ef_flare, x, y, 1, c_yellow);
+global.playership[mid].direct_node = -1;
 </string>
           </argument>
         </arguments>

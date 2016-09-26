@@ -214,9 +214,9 @@ switch(function_stage)
                     
                 //Check to see if an enemy has hit the tripline
                 hitbox_check = collision_line(x, y, first_node.x, first_node.y, obj_dummy_enemy, 1, 1);
-                if(hitbox_check != -1)
+                if(hitbox_check != noone)
                 {
-                    function_stage = 2;                                                     //Move to the next function stage
+                    function_stage = 2;                       //Move to the next function stage
                     first_node.function_stage = 2;            //Move this first node to the next function stage as well
                     first_node.hitbox_check = hitbox_check;   //Tell the first node which enemy hit the tripline
                     
@@ -245,7 +245,7 @@ switch(function_stage)
                                     (triangle_side[1]+triangle_side[2]+triangle_side[3]);
                                     
                 //Find the enemy closest to the incenter
-                var nearest_enemy = instance_nearest(incenter_x, incenter_y, prnt_enemy);
+                var nearest_enemy = instance_nearest(incenter_x, incenter_y, obj_dummy_enemy);
                 //Find out if the enemy is inside the triangle and target it if so
                 if(point_in_triangle(nearest_enemy.x, nearest_enemy.y, x, y, first_node.x, first_node.y, second_node.x, second_node.y))
                     hitbox_check = nearest_enemy;

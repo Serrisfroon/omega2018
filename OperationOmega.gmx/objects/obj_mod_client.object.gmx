@@ -217,14 +217,6 @@ while(true)
                     //Read the player's RNG seed and firing direction
                     global.primaryRNG[global.mymid] = uncrush(65536, 0);
                     global.playership[i].newdir = uncrush(360, 0)/10;
-                    
-                    //Perform action based on the primary equipped
-                    switch(global.playerprimary[i])
-                    {          
-                        case 7: //Siphon
-                            global.playership[i].siphontarget = uncrush(10, 0);
-                        break;
-                    }
                 }
             }
         break;

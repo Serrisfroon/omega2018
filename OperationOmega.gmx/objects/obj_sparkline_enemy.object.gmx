@@ -210,7 +210,12 @@ switch(function_stage)
                                     (triangle_side[1]+triangle_side[2]+triangle_side[3]);
                                     
                 //Find the enemy closest to the incenter
-                var nearest_enemy = instance_nearest(incenter_x, incenter_y, prnt_enemy);
+                var nearest_enemy = instance_nearest(incenter_x, incenter_y, obj_dummy_ally);
+                if(nearest_enemy = noone)
+                    nearest_enemy = global.playership[global.mymid];
+                else
+                    if(point_distance(x, y, nearest_enemy.x, nearest_enemy.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+                        nearest_enemy = global.playership[global.mymid];
                 //Find out if the enemy is inside the triangle and target it if so
                 if(point_in_triangle(nearest_enemy.x, nearest_enemy.y, x, y, first_node.x, first_node.y, second_node.x, second_node.y))
                     hitbox_check = nearest_enemy;

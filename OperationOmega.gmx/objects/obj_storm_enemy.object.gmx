@@ -233,8 +233,6 @@ if(autokill = 0)
  y = yprevious+lengthdir_y(12, other.direction);
  image_angle = direction;
 }
-else
- instance_destroy();
 </string>
           </argument>
         </arguments>
