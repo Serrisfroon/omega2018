@@ -142,7 +142,7 @@ with(obj_homingeffect)
           <argument>
             <kind>1</kind>
             <string>image_angle = direction;
-buildup = 1;
+
 </string>
           </argument>
         </arguments>
@@ -235,6 +235,7 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
  visible = 0;
  explodecolor = make_color_rgb(255, random(255), 0);
  effect_create_above(ef_explosion, x, y, 0, explodecolor);
+    buildup = 1;
 }
 else
  if(visible = 0 &amp;&amp; buildup = 1)

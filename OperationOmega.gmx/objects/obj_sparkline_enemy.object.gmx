@@ -266,7 +266,7 @@ switch(function_stage)
           <argument>
             <kind>1</kind>
             <string>//Destroy this node if this is the target
-if(other.id = hit)
+if(other.id = hitbox_check)
  instance_destroy();
 </string>
           </argument>
@@ -291,7 +291,7 @@ if(other.id = hit)
           <argument>
             <kind>1</kind>
             <string>//Draw electricity if the node is beyond the initial shot out
-if(function_stage != 0)
+if(function_stage &gt; 0)
     //Perform action depending on which node this is
     switch(node_order)
     {

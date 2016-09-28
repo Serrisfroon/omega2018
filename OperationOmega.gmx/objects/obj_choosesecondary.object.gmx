@@ -109,6 +109,27 @@ if(changeselect = 31)
                     instance_destroy();
     }
     global.secondary_type[4] = 0;
+    switch(global.shipselect)
+    {
+        case 1:
+            global.secondary_type[2] = 1;        
+        break;
+        case 2:
+            global.secondary_type[3] = 1;        
+        
+        break;
+        case 3:
+            global.secondary_type[1] = 1;                
+        break;
+    }
+    for(i = 1; i &lt;= 4; i++)
+    {
+        if(global.secondary[i] &gt; 15 &amp;&amp; global.secondary_type[i] = 0)
+            global.secondary[i] = 0;
+        if(global.secondary[i] &lt;= 15 &amp;&amp; global.secondary_type[i] = 1)
+            global.secondary[i] = 0;
+    }
+    
     create_weaponslots();
     with(obj_customizer.weaponslot[4])
     {
@@ -142,6 +163,26 @@ if(changeselect = 32)
                     instance_destroy();
     }
     global.secondary_type[4] = 1;
+    switch(global.shipselect)
+    {
+        case 1:
+            global.secondary_type[2] = 0;        
+        break;
+        case 2:
+            global.secondary_type[3] = 0;        
+        
+        break;
+        case 3:
+            global.secondary_type[1] = 0;                
+        break;
+    }
+    for(i = 1; i &lt;= 4; i++)
+    {
+        if(global.secondary[i] &gt; 15 &amp;&amp; global.secondary_type[i] = 0)
+            global.secondary[i] = 0;
+        if(global.secondary[i] &lt;= 15 &amp;&amp; global.secondary_type[i] = 1)
+            global.secondary[i] = 0;
+    }
     create_weaponslots();    
     with(obj_customizer.weaponslot[4])
     {

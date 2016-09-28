@@ -141,7 +141,7 @@ with(obj_homingeffect)
           <argument>
             <kind>1</kind>
             <string>image_angle = direction;
-buildup = 1;
+
 </string>
           </argument>
         </arguments>
@@ -187,64 +187,65 @@ effect_create_below(ef_smoke, x, y, 0, c_gray);
 
 switch(go)
 {
- case 0:
-      closeby = instance_nearest(x, y, obj_dummy_enemy);
-      if(closeby != noone)
-      {
-       if(point_distance(x, y, closeby.x, closeby.y) &lt; 240 &amp;&amp; closeby.mid != oldmid)
-       {
-        target = closeby;
-        go = 1;
-        alarm[2] = 120;
-        cursor = instance_create(0, 0, obj_homingeffect);
-        cursor.target = target;    
-        cursor.create = id;
-       }
-      }
- break;
- case 1: 
-      //If the target still exists, take note of the direction to it
-      if(instance_exists(target))
-      {
-       point = point_direction(x, y, target.x, target.y);
-       //Move the missile's current direction towards the target
-       step_towards_direction(point, 4);
-      }
- break;
+    case 0:
+        closeby = instance_nearest(x, y, obj_dummy_enemy);
+        if(closeby != noone)
+        {
+            if(point_distance(x, y, closeby.x, closeby.y) &lt; 240 &amp;&amp; closeby.mid != oldmid)
+            {
+                target = closeby;
+                go = 1;
+                alarm[2] = 120;
+                cursor = instance_create(0, 0, obj_homingeffect);
+                cursor.target = target;    
+                cursor.create = id;
+            }
+        }
+    break;
+    case 1: 
+        //If the target still exists, take note of the direction to it
+        if(instance_exists(target))
+        {
+            point = point_direction(x, y, target.x, target.y);
+            //Move the missile's current direction towards the target
+            step_towards_direction(point, 4);
+        }
+    break;
 }
 if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 {
- instance_destroy();
- exit;
+    instance_destroy();
+    exit;
 }
 if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
 {
- if(damage &lt;= 4)
- {
-  instance_destroy();
-  exit;
- }
- //Make the missile invisible as it travels through walls
- visible = 0;
- explodecolor = make_color_rgb(255, random(255), 0);
- effect_create_above(ef_explosion, x, y, 0, explodecolor);
+    if(damage &lt;= 4)
+    {
+        instance_destroy();
+        exit;
+    }
+    //Make the missile invisible as it travels through walls
+    visible = 0;
+    explodecolor = make_color_rgb(255, random(255), 0);
+    effect_create_above(ef_explosion, x, y, 0, explodecolor);
+    buildup = 1;
 }
 else
- if(visible = 0 &amp;&amp; buildup = 1)
- {
-  //When the missile exits a wall, split into two missiles.
-  split = instance_create(x, y, obj_splitmissile);
-  split.mid = mid;
-  split.direction = direction-30;
-  split.damage = damage-2+amplified*2;
-  split.oldmid = oldmid;
-  split = instance_create(x, y, obj_splitmissile);
-  split.mid = mid;
-  split.direction = direction+30;
-  split.damage = damage-2+amplified*2;
-  split.oldmid = oldmid;
-  instance_destroy();
- }
+    if(visible = 0 &amp;&amp; buildup = 1)
+    {
+        //When the missile exits a wall, split into two missiles.
+        split = instance_create(x, y, obj_splitmissile);
+        split.mid = mid;
+        split.direction = direction-30;
+        split.damage = damage-2+amplified*2;
+        split.oldmid = oldmid;
+        split = instance_create(x, y, obj_splitmissile);
+        split.mid = mid;
+        split.direction = direction+30;
+        split.damage = damage-2+amplified*2;
+        split.oldmid = oldmid;
+        instance_destroy();
+    }
 
   
 </string>

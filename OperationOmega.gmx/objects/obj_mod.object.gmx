@@ -1870,7 +1870,7 @@ switch(global.matchtype)
 //Draw the radar
 draw_sprite_ext(spr_radar, 0, view_wport[0], 0, 1, 1, 0, c_white, 1);
 //Draw the map of the walls
-draw_sprite_part_ext(global.wallsprite, 0, (obj_player.x-1600)/16, (obj_player.y-1600)/16, 200, 200, view_wport[0]-113, 11, 0.5, 0.5, c_white, 0.8);
+draw_sprite_part_ext(global.wallsprite, 0, (obj_player.x-1600)/16, (obj_player.y-1600)/16, 200, 200, view_wport[0]-120, 16, 0.5, 0.5, c_white, 0.8);
 //Check which loop to set to
 for(i = 0; i &lt; 8; i += 1)
 {
@@ -1884,7 +1884,7 @@ for(i = 0; i &lt; 8; i += 1)
         radary = ((global.playership[i].y-obj_player.y)*50)/1500;
         //Draw radar point if it is in range
         if(abs(radarx) &lt;51 &amp;&amp; abs(radary) &lt; 51)
-            draw_sprite_ext(spr_radar_player, radarpoint, view_wport[0]-65+radarx, 62+radary, 1, 1, global.playership[i].image_angle, c_white, 1);
+            draw_sprite_ext(spr_radar_player, radarpoint, view_wport[0]-68+radarx, 68+radary, 1, 1, global.playership[i].image_angle, c_white, 1);
     }
 }
   
