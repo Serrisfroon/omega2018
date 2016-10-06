@@ -218,25 +218,8 @@ if(global.primary = 0 || global.secondary[1] = 0 || global.secondary[2] = 0
 {
  with(obj_waiting)
  {
-  //Send a message to your chat
-  chatline[0] = chatline[1];
-  chatcolor[0] = chatcolor[1];
-  chatline[1] = chatline[2];
-  chatcolor[1] = chatcolor[2];
-  chatline[2] = chatline[3];
-  chatcolor[2] = chatcolor[3];
-  chatline[3] = chatline[4];
-  chatcolor[3] = chatcolor[4];
-  chatline[4] = chatline[5];
-  chatcolor[4] = chatcolor[5];
-  chatline[5] = chatline[6];
-  chatcolor[5] = chatcolor[6];
-  chatline[6] = chatline[7];
-  chatcolor[6] = chatcolor[7];
-  chatline[7] = chatline[8];
-  chatcolor[7] = chatcolor[8];
-  chatcolor[8] = c_maroon;
-  chatline[8] = "You need to equip more weapons.";
+    //Send a message to your chat
+    chat_addline("You need to equip more weapons.", 1, 0, 0);
  }
  exit;
 } 

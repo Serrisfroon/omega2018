@@ -870,7 +870,8 @@ switch(global.matchtype)
 {
     case "stock":
         //Take a ship from your lives
-        global.ships -= 1;
+        if(mid = global.mymid)        
+            global.ships -= 1;
         //Reduce your team's score by 1
         switch(global.team[mid])
         {

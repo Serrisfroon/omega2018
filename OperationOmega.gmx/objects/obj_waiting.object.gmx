@@ -27,6 +27,11 @@
             <kind>1</kind>
             <string>//Match info update timer
 updatenow = 10;
+if(global.create_postgame_popup = true)
+{
+    global.create_postgame_popup = false;
+    instance_create(384, 240, obj_postgame_box);
+}
 
 //Restart the correct music
 audio_stop_all();

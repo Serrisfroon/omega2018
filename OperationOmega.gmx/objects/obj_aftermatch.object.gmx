@@ -89,7 +89,8 @@ alarm[0] = 10;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto(rm_aftergame);
+            <string>global.create_postgame_popup = true;
+room_goto(rm_waiting);
 </string>
           </argument>
         </arguments>

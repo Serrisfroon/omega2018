@@ -108,6 +108,30 @@ spark.connect = spark2;
 spark.direction = random(360);
 spark.speed = 2+random(3);
 
+switch(node_order)
+{
+    case 1:
+        if(global.playership[mid].sparkline_node[2] = id)
+        {
+            global.playership[mid].sparkline_node[1] = global.playership[mid].sparkline_node[2];
+            global.playership[mid].sparkline_node[2] = global.playership[mid].sparkline_node[3];
+            global.playership[mid].sparkline_node[3] = -1;
+        }
+    
+    break;
+    case 2:
+        if(global.playership[mid].sparkline_node[2] = id)
+        {
+            global.playership[mid].sparkline_node[2] = global.playership[mid].sparkline_node[3];
+            global.playership[mid].sparkline_node[3] = -1;
+        }
+    break;
+    case 3:
+        if(global.playership[mid].sparkline_node[3] = id)
+            global.playership[mid].sparkline_node[3] = -1;    
+    break;
+}
+
 
 
 </string>

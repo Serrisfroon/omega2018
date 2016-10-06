@@ -1625,6 +1625,7 @@
         <sprite>sprites\spr_attributes_title</sprite>
         <sprite>sprites\spr_title_bar</sprite>
         <sprite>sprites\spr_stat_divider</sprite>
+        <sprite>sprites\spr_postgame_box</sprite>
       </sprites>
       <sprite>sprites\spr_infobox</sprite>
       <sprite>sprites\spr_menu_selection_faded</sprite>
@@ -1912,6 +1913,7 @@
     <object>objects\obj_dummy_ally</object>
     <object>objects\obj_dummy_enemy</object>
     <objects name="Trash">
+      <object>objects\obj_weaponswitch</object>
       <object>objects\obj_deadother</object>
       <objects name="Error Prevention">
         <object>objects\obj_ship_placeholder</object>
@@ -2161,7 +2163,6 @@
         <object>objects\obj_mod_client</object>
         <object>objects\obj_bulletcontrol</object>
         <object>objects\obj_partsystem</object>
-        <object>objects\obj_weaponswitch</object>
         <object>objects\obj_starfield_mod</object>
         <object>objects\obj_fade_screen</object>
         <object>objects\obj_respawn_timer</object>
@@ -2222,6 +2223,7 @@
           <object>objects\obj_waiting_boxes</object>
           <object>objects\obj_modify_button</object>
           <object>objects\obj_modbox</object>
+          <object>objects\obj_postgame_box</object>
           <object>objects\obj_okaymod</object>
           <object>objects\obj_showpreview</object>
           <object>objects\obj_viewmap</object>

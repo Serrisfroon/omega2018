@@ -32,6 +32,9 @@ global.public_game = false;
 //Initialize popup window status variable
 global.popup_active = false;
 
+//Initialize the variable that controls whetehrr or not the postgame box appears.
+global.create_postgame_popup = false;
+
 //Initialize match variables
 global.matchlevel = "";
 
