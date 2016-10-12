@@ -7,14 +7,14 @@
   <coltolerance>197</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>4</bbox_left>
+  <bbox_left>5</bbox_left>
   <bbox_right>142</bbox_right>
   <bbox_top>5</bbox_top>
   <bbox_bottom>25</bbox_bottom>
   <HTile>-1</HTile>
   <VTile>-1</VTile>
   <TextureGroups>
-    <TextureGroup0>1</TextureGroup0>
+    <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
   <width>148</width>
@@ -31,6 +31,5 @@
     <frame index="8">images\spr_playerslot_8.png</frame>
     <frame index="9">images\spr_playerslot_9.png</frame>
     <frame index="10">images\spr_playerslot_10.png</frame>
-    <frame index="11">images\spr_playerslot_11.png</frame>
   </frames>
 </sprite>

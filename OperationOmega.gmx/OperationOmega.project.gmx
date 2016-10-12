@@ -1411,6 +1411,7 @@
         <sprite>sprites\spr_pscores</sprite>
         <sprite>sprites\spr_matchstart_text</sprite>
         <sprite>sprites\spr_matchbox</sprite>
+        <sprite>sprites\spr_match_slots</sprite>
         <sprite>sprites\spr_weaponswitch_box</sprite>
         <sprite>sprites\spr_weaponswitch_options</sprite>
         <sprite>sprites\spr_weaponswitch_infos</sprite>
@@ -1611,8 +1612,8 @@
           <sprite>sprites\spr_modify_button</sprite>
         </sprites>
         <sprite>sprites\spr_teamchange</sprite>
-        <sprite>sprites\spr_modbox</sprite>
         <sprite>sprites\spr_playerslot</sprite>
+        <sprite>sprites\spr_modbox</sprite>
         <sprite>sprites\spr_playerslot_readied</sprite>
         <sprite>sprites\spr_playerslot_addplayer</sprite>
         <sprite>sprites\spr_playerslot_openeffect</sprite>
@@ -2215,6 +2216,7 @@
           <object>objects\obj_playerslot_playerleave</object>
           <object>objects\obj_playerslot_addplayer</object>
           <object>objects\obj_playerslot_teamchange</object>
+          <object>objects\obj_playerslot_notready</object>
           <object>objects\obj_playerslot_openeffect</object>
           <object>objects\obj_playerslot_selected</object>
           <object>objects\obj_playerslot_readied</object>

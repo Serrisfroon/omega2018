@@ -36,8 +36,12 @@ amplified = 0;
 priority = 0;
 image_speed = 0
 image_index = 0;
+form_particle = obj_partsystem.formsplit[0];
 if(global.allycolor = c_red)
+{
     image_index = 1;
+    form_particle = obj_partsystem.formsplit[1];
+}
 alarm[4] = 1;
 
 //Set attack variable values
@@ -68,10 +72,10 @@ attack_name = "Formation";      //Set the name of the attack
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
-part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
+            <string>part_type_direction(form_particle, direction-1, direction+1, 0, 0);
+part_type_orientation(form_particle,direction,direction,0,0,0);
 repeat(10)
-    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit[global.team[mid]-1], 1);
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), form_particle, 1);
 </string>
           </argument>
         </arguments>
@@ -143,10 +147,10 @@ if(instance_exists(control))
  else
   direction = control.direction;
 }
-part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
-part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
+part_type_direction(form_particle, direction-1, direction+1, 0, 0);
+part_type_orientation(form_particle,direction,direction,0,0,0);
 repeat(10)
-    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit[global.team[mid]-1], 1);
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), form_particle, 1);
 if(priority = 1)
     sfx_play(snd_formation, x, y);
 bullet_create(x, y, "Formation", direction, mid, 0);

@@ -161,8 +161,8 @@ switch(current_ship)
 }
 
 //Set the shield and armor to their maximums
-shield = shield_maximum;
 armor = armor_maximum;
+shield = shield_maximum;
 
 //Initialize Shield variables
 shieldup = 1;     //Tells whether or not you have shield left.

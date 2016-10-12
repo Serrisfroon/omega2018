@@ -39,6 +39,9 @@ over_alpha = 0;
 display_alpha = 0;
 mouse_over = false;
 
+for(i = 0; i &lt; 8; i++)
+    if(global.activated[i] = 2)
+        global.activated[i] = 1;
 
 if(global.outcome = 0)
 {
@@ -237,7 +240,7 @@ if(mouse_over = true)
 draw_set_alpha(display_alpha);
 
 //166, 166
-var player_list = 1;
+var player_list = 0;
 var player_color;
 for(i = 0; i &lt; 8; i++)
 {
@@ -253,7 +256,7 @@ for(i = 0; i &lt; 8; i++)
 }
 
 draw_set_color(messagecolor);
-draw_text_bordered(x+14, y-133, message, 1, 1, messagecolor, c_white);
+draw_text_bordered(x-10, y-139, message, 1, 1, messagecolor, c_white);
 
 
 

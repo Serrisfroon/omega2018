@@ -332,6 +332,12 @@ else
         {
             chat_addline("All players are not yet ready.", 1, 0, 0);
         }
+        for(i = 1; i &lt; 8; i++)
+        {
+            if(global.readied[i] != 2 &amp;&amp; global.activated[i] = 1)
+                instance_create(global.playerslot[i].x, global.playerslot[i].y, obj_playerslot_notready);
+        }
+        
         clearbuffer(0);
         writebyte(16, 0);
         client_sendall(0, 0);

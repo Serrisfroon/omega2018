@@ -31,6 +31,14 @@ if(global.musictoggle = 0)
         audio_stop_sound(music_lunation);
         audio_play_sound(music_lunation, 1, 1);
 }
+
+//Create the postgame popup if it's called for
+if(global.create_postgame_popup = true)
+{
+    global.create_postgame_popup = false;
+    instance_create(384, 240, obj_postgame_box);
+}
+
 //Initialize chat
 chat_init(8);
 found = 0;
@@ -222,10 +230,10 @@ alarm[0] = 18;
     //The host wants to start, but all players aren't ready
     case 16:
          //If you are not ready, send a message to your chat
-         if(obj_readygo.image_index = 1)
+         if(obj_readygo.readied = 0)
          {
             //Update your own chat
-            chat_addline("The host wants to start. Click ready.", 1, 0, 0);
+            chat_addline("The host wants to start. Please click ready.", 1, 0, 0);
          }
     break;
            

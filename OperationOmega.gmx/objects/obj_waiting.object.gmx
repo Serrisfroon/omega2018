@@ -27,12 +27,6 @@
             <kind>1</kind>
             <string>//Match info update timer
 updatenow = 10;
-if(global.create_postgame_popup = true)
-{
-    global.create_postgame_popup = false;
-    instance_create(384, 240, obj_postgame_box);
-}
-
 //Restart the correct music
 audio_stop_all();
 if(global.musictoggle = 0)
@@ -48,20 +42,20 @@ flashing = '|';
 alarm[0] = 12;
 if(room = rm_waiting)
 {
-for(i = 0; i &lt; 8; i += 1)
-{
- global.playerprimary[i] = 0;
- global.playerslot[i] = instance_create(626, 27+(i*31), obj_playerslot);
- global.playerslot[i].mid = i;
- global.playerslot[i].active = 0;
- global.playerslot[i].alarm[1] = 20+i*5;
- if(i &gt; 0)
- {
-    global.othername[i] = "";
-    global.activated[i] = 0;
- }
- global.readied[i] = 1;
-}
+    for(i = 0; i &lt; 8; i += 1)
+    {
+        global.playerprimary[i] = 0;
+        global.playerslot[i] = instance_create(626, 27+(i*31), obj_playerslot);
+        global.playerslot[i].mid = i;
+        global.playerslot[i].active = 0;
+        global.playerslot[i].alarm[1] = 20+i*5;
+        if(i &gt; 0 &amp;&amp; global.create_postgame_popup = false)
+        {
+           global.othername[i] = "";
+           global.activated[i] = 0;
+        }
+        global.readied[i] = 1;
+    }
 }
 global.readied[0] = 3;
 
@@ -73,6 +67,12 @@ global.playerslot[0].name = global.name;
 global.activated[0] = 1;
 (instance_create(global.playerslot[0].x, global.playerslot[0].y, obj_playerslot_readied)).mid = 0;
 
+//Create the postgame popup if it's called for
+if(global.create_postgame_popup = true)
+{
+    global.create_postgame_popup = false;
+    instance_create(384, 240, obj_postgame_box);
+}
 
 
 //Set stock match elimination values

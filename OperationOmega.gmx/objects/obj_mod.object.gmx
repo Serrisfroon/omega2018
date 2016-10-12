@@ -558,7 +558,14 @@ if(global.ships &gt; 0)
 {
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
+    //Set the armor and shield to their max
+    with(obj_player)
+    {
+        armor = armor_maximum;
+        shield = shield_maximum;
+    }
     view_object = tele;
+    obj_player.secondary_selected = 1;
     //destroy the error stopper
     with(obj_respawn_timer)
        instance_destroy();
@@ -2087,7 +2094,7 @@ if(obj_mod.chat_open = true) exit;
 audio_play_sound(snd_changeweapon, 1, 0);
 secondary_selection_position = 42;
 //Switch to the correct new attack
-global.playership[global.mymid].secondary_selected = 2;
+obj_player.secondary_selected = 2;
 </string>
           </argument>
         </arguments>

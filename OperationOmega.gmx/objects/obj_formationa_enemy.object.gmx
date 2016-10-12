@@ -32,9 +32,12 @@ amplified = 0;
 
 image_speed = 0
 image_index = 0;
+form_particle = obj_partsystem.formsplit[0];
 if(global.allycolor = c_red)
+{
     image_index = 1;
-    
+    form_particle = obj_partsystem.formsplit[1];
+}    
 alarm[4] = 1;
 
 //Set attack variable values
@@ -65,10 +68,10 @@ attack_name = "Formation";      //Set the name of the attack
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
-part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
+            <string>part_type_direction(form_particle, direction-1, direction+1, 0, 0);
+part_type_orientation(form_particle,direction,direction,0,0,0);
 repeat(10)
-    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit[global.team[mid]-1], 1);
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), form_particle, 1);
 </string>
           </argument>
         </arguments>
@@ -110,10 +113,10 @@ repeat(10)
             <string>//Move towards the target if it still exists
 if(instance_exists(target))
  direction = point_direction(x, y, target.x, target.y);
-part_type_direction(obj_partsystem.formsplit, direction-1, direction+1, 0, 0);
-part_type_orientation(obj_partsystem.formsplit,direction,direction,0,0,0);
+part_type_direction(form_particle, direction-1, direction+1, 0, 0);
+part_type_orientation(form_particle,direction,direction,0,0,0);
 repeat(10)
-    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), obj_partsystem.formsplit[global.team[mid]-1], 1);
+    part_particles_create(obj_partsystem.system, x-15+random(30), y-15+random(30), form_particle, 1);
 sfx_play(snd_formation, x, y);
 bullet_create(x, y, "Formation", direction, mid, 0);
 instance_destroy();
@@ -147,7 +150,7 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  //Stop moving
  speed = 0;
  //Create an effect
- part_particles_create(obj_partsystem.system, x, y, obj_partsystem.formsplit, 6);
+ part_particles_create(obj_partsystem.system, x, y, form_particle, 6);
  //Create smaller shots. Give them their direction. Give them a branch number.
  //Keep track of this instance in them. Set the time until they attack.
  form = instance_create(x, y, obj_formationb_enemy);
