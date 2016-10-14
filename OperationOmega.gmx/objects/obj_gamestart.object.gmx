@@ -42,6 +42,14 @@ if(room != rm_katrinbase &amp;&amp; room != rm_victabase &amp;&amp; room != rm_v
     global.spacemap = 1;
 }
 
+countdown_second = 3;
+animation_step = 0;
+for(i = 1; i &lt;= 3; i++)
+{
+    countdown_xscaling[i] = 1;
+    countdown_yscaling[i] = 1;
+    countdown_alpha[i] = 0;
+}
 
 previous_countdown_second = 6;      //Holds the value of the previous countdown 
 packet_received = 0;                //Holds the value of the packet most recently received
@@ -209,6 +217,29 @@ switch(blue_team_total)
     break;
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>animation_step += 1;
 </string>
           </argument>
         </arguments>
@@ -441,7 +472,7 @@ if(global.master = true)
             writebyte(50, 0);
             client_sendall(0, 0);
             //Start the countdown
-            alarm[0] = 300;
+            animation_step = 1;
         }
     }
 else
@@ -473,7 +504,7 @@ else
             }
             //Read the information received and start the countdown
             packet = readbyte(0);
-            alarm[0] = 300;
+            animation_step = 1;
         }
 </string>
           </argument>
@@ -499,6 +530,82 @@ else
             <kind>1</kind>
             <string>if(transition_fade_in &gt; 0)
     transition_fade_in -= 0.0125;
+    
+switch(animation_step)
+{
+    case 1:
+        countdown_alpha[1] = 0.6;
+        countdown_xscaling[1] = 8;
+        countdown_yscaling[1] = 0;
+        animation_step += 1;
+    break;
+    case 2:
+        if(countdown_xscaling[1] &gt; 1)
+            countdown_xscaling[1] -= 0.4;
+        if(countdown_yscaling[1] &lt; 1)
+            countdown_yscaling[1] += 0.0625;
+        if(countdown_yscaling[1] = 1)
+        {
+            countdown_xscaling[3] = 0.7;
+            countdown_yscaling[3] = 0.7;
+            countdown_alpha[3] = 0.6;
+            animation_step += 1;
+        }    
+    break;
+    case 3:
+        if(countdown_xscaling[1] &gt; 1)
+            countdown_xscaling[1] -= 0.4;
+        else
+            if(countdown_alpha[1] &gt; 0.3)
+                countdown_alpha[1] -= 0.05;
+        if(countdown_xscaling[3] &lt; 1.25)
+        {
+            countdown_xscaling[3] += 0.08;   
+            countdown_yscaling[3] += 0.08;   
+        }
+        else
+        {
+            countdown_xscaling[3] = 1.25;
+            countdown_yscaling[3] = 1.25;
+            countdown_alpha[2] = 0.5;
+            animation_step += 1;
+            alarm[4] = 10;
+        }
+    break;
+    case 4:
+        countdown_alpha[2] += 0.1;
+        countdown_alpha[3] -= 0.1;
+        countdown_alpha[1] -= 0.05;
+    break;
+    case 5:
+        countdown_xscaling[2] -= 0.005;
+        countdown_yscaling[2] -= 0.005;
+        if(countdown_xscaling[2] &lt;= 0.85)
+        {
+            countdown_alpha[2] -= 0.1;
+            if(countdown_alpha[2] &lt;= 0)
+            {
+                alarm[4] = 2;
+                for(i = 1; i &lt;= 3; i++)
+                {
+                    countdown_xscaling[i] = 1;
+                    countdown_yscaling[i] = 1;
+                    countdown_alpha[i] = 0;
+                }
+                animation_step = 0;
+                countdown_second -= 1;
+                if(countdown_second = 0)
+                {
+                    instance_create(0, 0, obj_begin_operation);
+                    alarm[0] = 1;
+                }
+            }
+        }
+    break;
+                
+
+        
+}
 </string>
           </argument>
         </arguments>
@@ -552,21 +659,13 @@ for(i = 0; i &lt; 8; i++)
         blue_team++;
     }
 }
-//draw_text(room_width/2-240+70, room_height/2-158+35, global.matchtype+': '+string(global.matchvariable));
-//draw_text(room_width/2-240+400, room_height/2-158+35, global.shortlevel);
 
-//Hold the value of the seconds left until the game starts
-var countdown_second = ceil(alarm[0]/60);
 //Check if the countdown is at 5 seconds or less and still occurring
-if(countdown_second &lt; 6 &amp;&amp; alarm[0] != -1)
+if(countdown_second &gt; 0)
 {
-    //Play a sound if the countdown has lowered
-    if(countdown_second != previous_countdown_second)
-        audio_play_sound(snd_changeweapon, 1, 0);
-    //Set the previous countdown to the current one
-    previous_countdown_second = countdown_second;
-    //Draw the countdown
-    draw_sprite_ext(spr_matchstart_text, countdown_second, room_width/2, room_height/2, scaling, scaling, 0, c_white, 1);
+    draw_sprite_ext(spr_matchstart_text, countdown_second+3, room_width/2, room_height/2, countdown_xscaling[1], countdown_yscaling[1], 0, c_white, countdown_alpha[1]);
+    draw_sprite_ext(spr_matchstart_text, countdown_second, room_width/2, room_height/2, countdown_xscaling[2], countdown_yscaling[2], 0, c_white, countdown_alpha[2]);
+    draw_sprite_ext(spr_matchstart_text, countdown_second+3, room_width/2, room_height/2, countdown_xscaling[3], countdown_yscaling[3], 0, c_white, countdown_alpha[3]);
 }
 
 

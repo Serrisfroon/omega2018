@@ -1415,6 +1415,7 @@
         <sprite>sprites\spr_weaponswitch_box</sprite>
         <sprite>sprites\spr_weaponswitch_options</sprite>
         <sprite>sprites\spr_weaponswitch_infos</sprite>
+        <sprite>sprites\spr_begin_operation</sprite>
       </sprites>
       <sprites name="Cursors">
         <sprite>sprites\spr_cursor</sprite>
@@ -2167,6 +2168,7 @@
         <object>objects\obj_starfield_mod</object>
         <object>objects\obj_fade_screen</object>
         <object>objects\obj_respawn_timer</object>
+        <object>objects\obj_begin_operation</object>
       </objects>
       <objects name="Effects">
         <object>objects\obj_shippart</object>
