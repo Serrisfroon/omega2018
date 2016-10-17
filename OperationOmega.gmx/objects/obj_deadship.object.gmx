@@ -64,13 +64,7 @@ sfx_play(snd_explode3, x, y);
 
 effect_create_above(ef_ring, x, y, 1, make_color_rgb(255,142,8));
 //Create an effect
-part_type_size(obj_partsystem.fusionring,0.01,0.01,0.17,0);
-part_type_color1(obj_partsystem.fusionring,make_color_rgb(213, 160, 66));
-part_type_life(obj_partsystem.fusionring,50,70);
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring, 3)
-part_type_size(obj_partsystem.fusionring,0.01,0.01,0.10,0);
-part_type_color1(obj_partsystem.fusionring,255);
-part_type_life(obj_partsystem.fusionring,30,30);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring[2], 3)
 
 create_explosion(2);
 

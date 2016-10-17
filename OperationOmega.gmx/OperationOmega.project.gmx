@@ -1407,7 +1407,7 @@
       </sprites>
       <sprites name="Popups">
         <sprite>sprites\spr_extchat</sprite>
-        <sprite>sprites\spr_chatinput</sprite>
+        <sprite>sprites\spr_chatinputt</sprite>
         <sprite>sprites\spr_pscores</sprite>
         <sprite>sprites\spr_matchstart_text</sprite>
         <sprite>sprites\spr_matchbox</sprite>
@@ -1550,12 +1550,6 @@
         <sprite>sprites\spr_join_group</sprite>
         <sprite>sprites\spr_leave_group</sprite>
       </sprites>
-      <sprites name="Loading Screen">
-        <sprite>sprites\spr_matchnames</sprite>
-        <sprite>sprites\spr_playertypes</sprite>
-        <sprite>sprites\spr_loadingnumbers</sprite>
-        <sprite>sprites\spr_beginoperation</sprite>
-      </sprites>
       <sprites name="Mouseover Info">
         <sprite>sprites\spr_ship_infos</sprite>
         <sprite>sprites\spr_primary_infos</sprite>
@@ -1628,6 +1622,7 @@
         <sprite>sprites\spr_title_bar</sprite>
         <sprite>sprites\spr_stat_divider</sprite>
         <sprite>sprites\spr_postgame_box</sprite>
+        <sprite>sprites\spr_pregame_message_white</sprite>
       </sprites>
       <sprite>sprites\spr_infobox</sprite>
       <sprite>sprites\spr_menu_selection_faded</sprite>
@@ -1639,6 +1634,12 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
     <sprites name="Trash">
+      <sprites name="Loading Screen">
+        <sprite>sprites\spr_matchnames</sprite>
+        <sprite>sprites\spr_playertypes</sprite>
+        <sprite>sprites\spr_loadingnumbers</sprite>
+        <sprite>sprites\spr_beginoperation</sprite>
+      </sprites>
       <sprite>sprites\sprite253</sprite>
       <sprite>sprites\spr_icon_selectt</sprite>
       <sprite>sprites\spr_map_select</sprite>
@@ -1650,6 +1651,7 @@
       <sprite>sprites\spr_joingroup</sprite>
       <sprite>sprites\spr_creategame</sprite>
       <sprite>sprites\spr_selectgame</sprite>
+      <sprite>sprites\spr_badddd</sprite>
       <sprite>sprites\spr_joingame</sprite>
       <sprite>sprites\spr_refresher</sprite>
       <sprite>sprites\spr_swiftwing_beserkglow</sprite>
@@ -1885,18 +1887,20 @@
     <scripts name="Chat System">
       <script>scripts\chat_init.gml</script>
       <script>scripts\chat_addline.gml</script>
-      <script>scripts\script154.gml</script>
+      <script>scripts\chat_addline_game.gml</script>
     </scripts>
     <script>scripts\select_tip.gml</script>
     <script>scripts\view_sync.gml</script>
     <scripts name="Trash">
       <script>scripts\get_mouse.gml</script>
+      <script>scripts\script154.gml</script>
       <script>scripts\client_udpsock.gml</script>
       <script>scripts\client_udpport.gml</script>
       <script>scripts\client_udpip.gml</script>
       <script>scripts\getip.gml</script>
     </scripts>
     <script>scripts\defeat_player.gml</script>
+    <script>scripts\select_prematch_text.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
@@ -2169,6 +2173,7 @@
         <object>objects\obj_fade_screen</object>
         <object>objects\obj_respawn_timer</object>
         <object>objects\obj_begin_operation</object>
+        <object>objects\obj_chat</object>
       </objects>
       <objects name="Effects">
         <object>objects\obj_shippart</object>
@@ -2233,6 +2238,7 @@
           <object>objects\obj_viewmap</object>
           <object>objects\obj_effect_line</object>
         </objects>
+        <object>objects\obj_prematch_message</object>
       </objects>
       <objects name="select">
         <object>objects\obj_chooseprimary</object>

@@ -252,6 +252,19 @@ part_type_orientation(fusionring[1], 0, 359, 0, 0, 1);
 part_type_blend(fusionring[1], 1);
 part_type_life(fusionring[1], 30, 30);
 
+fusionring[2] = part_type_create();
+part_type_sprite(fusionring[2], spr_ring_part, 0, 0, 0);
+part_type_size(fusionring[2],0.01,0.01,0.17,0);
+part_type_scale(fusionring[2], 1, 0.30);
+part_type_color1(fusionring[2], make_color_rgb(213, 160, 66));
+part_type_alpha2(fusionring[2], 1, 0);
+part_type_speed(fusionring[2], 0, 0, 0, 0);
+part_type_direction(fusionring[2], 0, 359, 0, 0);
+part_type_gravity(fusionring[2], 0, 270);
+part_type_orientation(fusionring[2], 0, 359, 0, 0, 1);
+part_type_blend(fusionring[2], 1);
+part_type_life(fusionring[2], 50, 70);
+
 //Fusion bursts
 fusion_burst[0] = part_type_create();
 part_type_sprite(fusion_burst[0], spr_flare_part, 0, 0, 0);

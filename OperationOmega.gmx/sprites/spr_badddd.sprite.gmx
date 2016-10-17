@@ -2,24 +2,24 @@
 <sprite>
   <type>0</type>
   <xorig>0</xorig>
-  <yorigin>37</yorigin>
+  <yorigin>31</yorigin>
   <colkind>1</colkind>
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>5</bbox_left>
-  <bbox_right>320</bbox_right>
+  <bbox_left>0</bbox_left>
+  <bbox_right>383</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>36</bbox_bottom>
+  <bbox_bottom>30</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>326</width>
-  <height>37</height>
+  <width>384</width>
+  <height>31</height>
   <frames>
-    <frame index="0">images\spr_chatinput_0.png</frame>
+    <frame index="0">images\spr_badddd_0.png</frame>
   </frames>
 </sprite>

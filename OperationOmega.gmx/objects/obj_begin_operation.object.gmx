@@ -84,7 +84,7 @@ animation_step = 0;
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="75">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -101,8 +101,8 @@ animation_step = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_begin_operation, 0, view_wport[0]/2, view_hport[0]/2, begin_xscale, begin_yscale, 0, c_white, begin_alpha);
-draw_sprite_ext(spr_begin_operation, 1, view_wport[0]/2, view_hport[0]/2, begin_xscale, begin_yscale, 0, c_white, fade_alpha);
+            <string>draw_sprite_ext(spr_begin_operation, 0, view_wport[0]/2, view_hport[0]/2-50, begin_xscale, begin_yscale, 0, c_white, begin_alpha);
+draw_sprite_ext(spr_begin_operation, 1, view_wport[0]/2, view_hport[0]/2-50, begin_xscale, begin_yscale, 0, c_white, fade_alpha);
 </string>
           </argument>
         </arguments>

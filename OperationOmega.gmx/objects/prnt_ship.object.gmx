@@ -921,27 +921,14 @@ if(mid = global.mymid)
          obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.name;
          obj_mod.announcement_color = obj_mod.chatcolor[4];
     }
-    with(obj_mod)
-    {
-         //Send it to your chat
-         chatline_add(obj_player.message, c_maroon);
-         if(global.team[mid] = 1)
-         {
-              chatcolor[4] = c_navy;
-              lolcolor[4] = 2;
-         }
-         else
-         {
-              chatcolor[4] = c_maroon;
-              lolcolor[4] = 1;
-         }
-    }    
+    chat_addline_game(obj_player.message, global.team[mid], 0, mid);
+  
     //Send the defeat to everyone
     clearbuffer(0);
     packet_label_write(3, mid);
     writebyte(defeatmid, 0);
-    writebyte(obj_mod.lolcolor[4], 0);
-    writestring(obj_mod.chatline[4], 0);
+    writestring(obj_player.message, 0);
+    writebyte(global.team[mid], 0);
     writebyte(nextspawn, 0);
     writestring(obj_mod.announcement_message, 0);
     //Send to everyone if host

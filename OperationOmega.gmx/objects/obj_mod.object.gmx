@@ -880,18 +880,10 @@ while(true)
             //Send the mid of the player that defeated this player
             global.playership[dummy].defeatmid = readbyte(0);
             
+            var dead_message = readstring(0);
+            var dead_color = readbyte(0);
             //Send a defeat notice to chat
-            //Read the color sent
-            switch(readbyte(0))
-            {
-                case 1:         
-                    newcolor = c_maroon;
-                break;
-                case 2:
-                    newcolor = c_navy;
-                break;
-            }
-            chatline_add(readstring(0), newcolor);          //Add the line to the chat
+            chat_addline_game(dead_message, dead_color, 0, dummy);          //Add the line to the chat
             
             //Perform the defeat function for the player
             with(global.playership[dummy])
@@ -909,8 +901,8 @@ while(true)
                 
             //Send the message to other players
             client_sendall(0, dummy);
-        break;
-   
+        break;  
+  
         //A player is eliminated in a stock match
         case 4:
             //Skip this if the game is ending

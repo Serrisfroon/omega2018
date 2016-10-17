@@ -225,6 +225,7 @@ alarm[0] = 18;
              obj_quit.animation_step = 2;
              obj_menumod.animation = 1;
              obj_playerslot_readied.y = -100;
+             instance_create(0, 0, obj_prematch_message);
         break;
     
     //The host wants to start, but all players aren't ready

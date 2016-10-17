@@ -321,6 +321,7 @@ else
         obj_quit.animation_step = 2;
         obj_playerslot_readied.y = -100;
         obj_modify_button.animation_step = 2;
+        instance_create(0, 0, obj_prematch_message);
         alarm[3] = 60;
 
     }
