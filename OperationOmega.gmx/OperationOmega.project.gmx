@@ -1399,7 +1399,6 @@
         <sprite>sprites\spr_gauges</sprite>
         <sprite>sprites\spr_ammobar</sprite>
         <sprite>sprites\spr_armorbar</sprite>
-        <sprite>sprites\spr_beserkbar</sprite>
         <sprite>sprites\spr_energybar</sprite>
         <sprite>sprites\spr_weaponicons</sprite>
         <sprite>sprites\spr_shieldbar</sprite>
@@ -1578,15 +1577,11 @@
         <sprite>sprites\spr_firing</sprite>
         <sprite>sprites\spr_firing2</sprite>
       </sprites>
-      <sprites name="Postgame Room">
-        <sprite>sprites\spr_playagain</sprite>
-      </sprites>
       <sprites name="Private Game">
         <sprite>sprites\spr_host</sprite>
         <sprite>sprites\spr_connect</sprite>
         <sprite>sprites\spr_enterhostip</sprite>
       </sprites>
-      <sprite>sprites\spr_breakline</sprite>
       <sprites name="Title">
         <sprite>sprites\spr_insomniasoft</sprite>
         <sprite>sprites\spr_title</sprite>
@@ -1641,8 +1636,13 @@
         <sprite>sprites\spr_beginoperation</sprite>
       </sprites>
       <sprite>sprites\sprite253</sprite>
+      <sprites name="Postgame Room">
+        <sprite>sprites\spr_playagain</sprite>
+      </sprites>
       <sprite>sprites\spr_icon_selectt</sprite>
+      <sprite>sprites\spr_breakline</sprite>
       <sprite>sprites\spr_map_select</sprite>
+      <sprite>sprites\spr_beserkbar</sprite>
       <sprite>sprites\spr_gotopractice</sprite>
       <sprites name="Main Menu">
         <sprite>sprites\spr_singleplayer</sprite>
@@ -1890,15 +1890,6 @@
       <script>scripts\chat_addline_game.gml</script>
     </scripts>
     <script>scripts\select_tip.gml</script>
-    <script>scripts\view_sync.gml</script>
-    <scripts name="Trash">
-      <script>scripts\get_mouse.gml</script>
-      <script>scripts\script154.gml</script>
-      <script>scripts\client_udpsock.gml</script>
-      <script>scripts\client_udpport.gml</script>
-      <script>scripts\client_udpip.gml</script>
-      <script>scripts\getip.gml</script>
-    </scripts>
     <script>scripts\defeat_player.gml</script>
     <script>scripts\select_prematch_text.gml</script>
   </scripts>
@@ -1906,11 +1897,11 @@
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
   </shaders>
   <fonts name="fonts">
-    <font>fonts\fnt_digital</font>
     <font>fonts\fnt_chat</font>
-    <font>fonts\fnt_bigtext</font>
     <font>fonts\fnt_titles</font>
+    <font>fonts\fnt_digital</font>
     <font>fonts\fnt_stats</font>
+    <font>fonts\fnt_bigtext</font>
   </fonts>
   <objects name="objects">
     <object>objects\prnt_ship</object>
@@ -1918,56 +1909,6 @@
     <object>objects\prnt_dummy</object>
     <object>objects\obj_dummy_ally</object>
     <object>objects\obj_dummy_enemy</object>
-    <objects name="Trash">
-      <object>objects\obj_weaponswitch</object>
-      <object>objects\obj_deadother</object>
-      <objects name="Error Prevention">
-        <object>objects\obj_ship_placeholder</object>
-        <object>objects\obj_dud</object>
-        <object>objects\obj_ship</object>
-      </objects>
-      <object>objects\obj_teamchange</object>
-      <object>objects\obj_solus_shot</object>
-      <objects name="Main Menu">
-        <object>objects\obj_singleplayer</object>
-        <object>objects\obj_multiplayer</object>
-      </objects>
-      <object>objects\obj_creategame</object>
-      <object>objects\obj_host</object>
-      <objects name="Stats">
-        <object>objects\obj_armorstat</object>
-        <object>objects\obj_shieldstat</object>
-        <object>objects\obj_speedstat</object>
-      </objects>
-      <object>objects\obj_connect</object>
-      <objects name="Options">
-        <object>objects\obj_music</object>
-        <object>objects\obj_sfx</object>
-        <object>objects\obj_firing</object>
-      </objects>
-      <object>objects\obj_joingame</object>
-      <object>objects\obj_refresher</object>
-      <object>objects\obj_selectgame</object>
-      <object>objects\obj_server</object>
-      <object>objects\obj_options</object>
-      <object>objects\obj_tomain</object>
-      <object>objects\obj_private</object>
-      <object>objects\obj_solus_shot_enemy</object>
-      <object>objects\obj_endgame</object>
-      <object>objects\obj_teamchange_client</object>
-      <object>objects\prnt_menubutton</object>
-      <object>objects\obj_ally</object>
-      <object>objects\prnt_ally</object>
-      <object>objects\obj_playerslot_option</object>
-      <object>objects\prnt_allenemy</object>
-      <object>objects\prnt_enemy</object>
-      <object>objects\prnt_player</object>
-      <object>objects\obj_enemy</object>
-      <object>objects\obj_tomulti</object>
-      <object>objects\obj_modsettings</object>
-      <object>objects\object235</object>
-      <object>objects\obj_teleport_other</object>
-    </objects>
     <objects name="In Game">
       <object>objects\obj_wall</object>
       <object>objects\obj_bigwall</object>
@@ -2174,6 +2115,7 @@
         <object>objects\obj_respawn_timer</object>
         <object>objects\obj_begin_operation</object>
         <object>objects\obj_chat</object>
+        <object>objects\obj_tab_box</object>
       </objects>
       <objects name="Effects">
         <object>objects\obj_shippart</object>
@@ -2289,12 +2231,9 @@
         </objects>
       </objects>
       <object>objects\obj_messagebox</object>
-      <object>objects\obj_playagain</object>
       <object>objects\obj_menumod</object>
       <object>objects\obj_background</object>
-      <object>objects\obj_prematch</object>
       <object>objects\obj_aftermatch</object>
-      <object>objects\obj_aftergame</object>
       <object>objects\obj_gotopractice</object>
     </objects>
   </objects>
@@ -2308,10 +2247,10 @@
     <room>rooms\rm_waiting</room>
     <room>rooms\rm_prematch</room>
     <room>rooms\rm_aftermatch</room>
-    <room>rooms\rm_aftergame</room>
     <room>rooms\rm_options</room>
     <room>rooms\rm_practice</room>
     <room>rooms\rm_multiplayer</room>
+    <room>rooms\rm_aftergame</room>
     <rooms name="Multiplayer Maps">
       <room>rooms\rm_deepspace</room>
       <room>rooms\rm_katrinbase</room>

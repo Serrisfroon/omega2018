@@ -111,7 +111,7 @@ if(image_alpha = 0)
             <kind>1</kind>
             <string>if(image_speed = 0)
     exit;
-image_index = 19;
+image_index = 13;
 image_speed = 0;
 owner.showthisimage = 1;
 

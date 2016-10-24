@@ -325,6 +325,7 @@ if(global.master = true)
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     global.activated[global.mymid] = 2;
     instance_create(0, 0, obj_bulletcontrol);
+    instance_create(0, 0, obj_chat);
     instance_create(0, 0, obj_partsystem);
     instance_create(0, 0, obj_starfield_mod);
     //Create a ship for each additional player
@@ -365,6 +366,7 @@ else
     view_object = tele;
     global.activated[global.mymid] = 2;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
+    instance_create(0, 0, obj_chat);
     instance_create(0, 0, obj_bulletcontrol);
     instance_create(0, 0, obj_partsystem);
     instance_create(0, 0, obj_starfield_mod);

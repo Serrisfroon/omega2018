@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>10</depth>
   <persistent>0</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -317,8 +317,13 @@ switch(global.matchlevel)
             draw_sprite_ext(spr_previewnames, 9, 495, 475, 1, 1, 0, c_white, image_alpha);       
        break;
 }
+if(global.team[global.mymid] = 1)
+    var life_sprite = global.shipselect;
+else
+    var life_sprite = global.shipselect+3;
+
 for(i = 1; i &lt;= global.matchvariable; i += 1)
-    draw_sprite_ext(spr_lifecount, 0, 476+(i*12), 350, 1, 1, 0, c_white, image_alpha);    
+    draw_sprite_ext(spr_lifecount, life_sprite, 476+(i*12), 350, 1, 1, 0, c_white, image_alpha);    
 
 
 </string>

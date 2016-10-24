@@ -28,7 +28,7 @@
             <string>sound_stop_all();
 if(global.musictoggle = 0)
 {
-        audio_stop_sound(music_lunation);
+    audio_stop_all();        
         audio_play_sound(music_lunation, 1, 1);
 }
 

@@ -71,13 +71,16 @@ if(trio &gt; 1)
 }
 else
 {
- second.visible = 1;
- third.visible = 1;
+    if(instance_exists(second))
+        second.visible = 1;
+    if(instance_exists(third))
+        third.visible = 1;
 }
 obj_mod.createcheck = id;
-with(obj_homingeffect)
-    if(create = obj_mod.createcheck)
-        instance_destroy();
+if(instance_exists(obj_homingeffect))
+    with(obj_homingeffect)
+        if(create = obj_mod.createcheck)
+            instance_destroy();
 </string>
           </argument>
         </arguments>

@@ -1,4 +1,3 @@
-var disi;
 for(disi = 1; disi < 8; disi += 1)
 {
     if(global.activated[disi] != 1)
@@ -17,7 +16,7 @@ for(disi = 1; disi < 8; disi += 1)
         //Create a dud to intercept remaining messages
         global.playership[disi] = instance_create(-2000, -2000, obj_dud);
         //Send a notice to your chat
-        chatline_add(droppedname+" has been disconnected from the game.", c_maroon)
+        chat_addline_game(droppedname+" has been disconnected from the game.", global.team[disi], 0, disi)
         
 
         //Add the player to the elimination count
@@ -27,10 +26,8 @@ for(disi = 1; disi < 8; disi += 1)
             if(global.redteam = global.redteamout)
             {
                 //Send it to your chat
-                chatline_add("Red Team has been eliminated.", c_maroon);
-                lolcolor[3] = 1;
-                chatline_add("Blue Team has won the match.", c_navy);
-                lolcolor[4] = 2;
+                chat_addline_game("Red Team has been eliminated.", 1, 0, disi)
+                chat_addline_game("Blue Team has won the match.", 2, 0, disi)
                 if(global.team[global.mymid] = 1)
                 {
                     global.outcome = 1;
@@ -46,16 +43,15 @@ for(disi = 1; disi < 8; disi += 1)
                 obj_mod.announcement_color = c_navy;
                 obj_mod.announcement_alpha = 0;
             
+                //Hold the eliminated team value
+                var team_eliminated = 1;
+                //Set time until returning to waiting room
+                alarm[2] = 180;
                 //Send the message to all clients
                 clearbuffer(0);
-                packet_label_write(5, disi);
-                writebyte(lolcolor[3], 0);
-                writestring(chatline[3], 0);
-                writebyte(lolcolor[4], 0);
-                writestring(chatline[4], 0);
+                packet_label_write(5, mid);
+                writebyte(team_eliminated, 0);
                 client_sendall(0, 0);
-                //Set time until return to waiting room
-                alarm[2] = 180;
             }
         }
         else
@@ -64,10 +60,9 @@ for(disi = 1; disi < 8; disi += 1)
             if(global.blueteam = global.blueteamout)
             {
                 //Send it to your chat
-                chatline_add("Blue Team has been eliminated.", c_navy);
-                lolcolor[3] = 2;
-                chatline_add("Red Team has won the match.", c_red);
-                lolcolor[4] = 1;
+                chat_addline_game("Blue Team has been eliminated.", 2, 0, disi)
+                chat_addline_game("Red Team has won the match.", 1, 0, disi)
+                
                 obj_mod.announcement_stage  = 1;
                 obj_mod.announcement_color = c_red;
                 obj_mod.announcement_alpha = 0;
@@ -81,16 +76,15 @@ for(disi = 1; disi < 8; disi += 1)
                     global.outcome = 0;
                     obj_mod.announcement_message = "Operation Successful";
                 }
+                //Hold the eliminated team value
+                var team_eliminated = 2;
+                //Set time until returning to waiting room
+                alarm[2] = 180;
                 //Send the message to all clients
                 clearbuffer(0);
-                packet_label_write(5, disi);
-                writebyte(lolcolor[3], 0);
-                writestring(chatline[3], 0);
-                writebyte(lolcolor[4], 0);
-                writestring(chatline[4], 0);
+                packet_label_write(5, mid);
+                writebyte(team_eliminated, 0);
                 client_sendall(0, 0);
-                //Set time until return to waiting room    
-                alarm[2] = 180;
             }
         }
 

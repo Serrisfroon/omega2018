@@ -78,10 +78,6 @@ cstretch = 0;
 //Move the weapon slots according to the selected ship
 create_weaponslots();
 
-instance_create(70, 60, obj_armorstat);
-instance_create(70, 90, obj_shieldstat);
-instance_create(70, 120, obj_speedstat);
-
 stat_power = instance_create(231, 48, obj_statbar);
 stat_power.stat_name = "Power";
 stat_power.stat_percent = 0.6;

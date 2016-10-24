@@ -13,18 +13,24 @@
 with(obj_chat)
 {
     var iii, color_number, chat_action, mid_number;
-    for(iii = chat_length; iii > 1; iii -= 1)
+    for(iii = chat_lines+1; iii > 1; iii -= 1)
     {
         chat_line_message[iii] = chat_line_message[iii-1];
         chat_line_color[iii] = chat_line_color[iii-1];
         chat_line_x[iii] = chat_line_x[iii-1];
         chat_line_life[iii] = chat_line_life[iii-1];
+        chat_line_alpha[iii] = chat_line_alpha[iii-1];
     }
     
     chat_line_message[1] = argument0;
+    chat_line_x[1] = -string_length(chat_line_message[1])-20;
+    chat_line_life[1] = 600;
+    chat_line_alpha[1] = 1;
     color_number = argument1;
     chat_action = argument2;
     mid_number = argument3;
+    if(chat_lines < 10)
+    chat_lines += 1;
     
     audio_play_sound(snd_chatmessage, 1, 0);
     

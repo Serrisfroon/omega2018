@@ -31,13 +31,15 @@ chat_line_life[10] = 0;         //Holds the remaining lifespan(in frames) of eac
 chat_line_message[10] = "";     //Holds the message of each chat line
 chat_line_color[10] = c_red;    //Holds the color of each chat line
 chat_line_x[10] = 0;            //Holds the x position of each chat line
-
+chat_line_alpha[10] = 0;
 chat_typing = false;                             //Holds whether or not the player has the chat bar open
 chat_bar_image = -1;                             //Holds the chat bar image index. -1 means inactive
 
+chat_tab_alpha = 0;
 chat_flashing = "";
 draw_chat_typing = "";
 alarm[0] = 5;
+mid = global.mymid;
 </string>
           </argument>
         </arguments>
@@ -88,30 +90,83 @@ alarm[0] = 10;
           <argument>
             <kind>1</kind>
             <string>//Loop through all chat lines that exist
-for(i = 1; i &lt;= chatlines; i++)
+for(i = 1; i &lt;= chat_lines; i++)
 {
     chat_line_life[i] -= 1;                         //Reduce the chat line's life
     //Check if the chat line's life is less than 100
     if(chat_line_life[i] &lt; 100)
+    {
         chat_line_alpha[i] = chat_line_life[i]/100; //Set the chat line's alpha to lower as its life does
+
+    }
     //Move the chat line into view if it's not already
     if(chat_line_x[i] &lt; 10)
+    {
         chat_line_x[i] += 4;
+        if(chat_line_x[i] &gt; 10)
+            chat_line_x[i] = 10;
+    }
 }
-    chat_typing = true;                             //Set the typing flag to true to signify the chat bar is open
-    chat_bar_image = 0;                             //Reset the chat bar image to 0
 
 //Update the chat bar image based on if the chat bar is open or not
 if(chat_typing = true)
 {
     //Increase the chat bar image until it is fully open
-    if(char_bar_image &gt; -1 &amp;&amp; chat_bar_image &lt; 8)
+    if(chat_bar_image &gt; -1 &amp;&amp; chat_bar_image &lt; 8)
         chat_bar_image += 1;
+    if(chat_tab_alpha &lt; 1)
+        chat_tab_alpha += 0.05;
 }
 else
+{
     //Close the chat bar image
-    if(chat_bar_image &gt; 0)
+    if(chat_bar_image &gt; -1)
         chat_bar_image -= 1;
+    if(chat_tab_alpha &gt; 0)
+        chat_tab_alpha -= 0.05;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="5" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Eit if not currently inputting a chat message
+if(chat_typing = false)
+    exit;
+    
+//Stop more input if max is reached
+if(string_length(keyboard_string) &gt; 60)
+    keyboard_string = string_copy(keyboard_string, 0, 60);    
+//Undo '#'
+    keyboard_string = string_replace(keyboard_string, '#', '');
+
+//Find the correct text to fit into the bar
+for(i = string_length(keyboard_string); i &gt;= 0; i -= 1)
+    if(string_width(string_copy(keyboard_string, i, string_length(keyboard_string)-i)) &gt; 280 || i = 0)
+    {
+        var start_chat = i;
+        var stop_chat = string_length(keyboard_string)+1-i;
+        break;  
+    }
+    
+draw_chat_typing = string_copy(keyboard_string, start_chat, stop_chat);
 </string>
           </argument>
         </arguments>
@@ -137,9 +192,10 @@ else
             <string>//Draw the chat messages
 for(i = 1; i &lt;= chat_lines; i++)
 {
-    draw_sprite_ext(spr_extchat, 0, 0, 400-i*16, 1, 1, 0, c_white, chat_line_alpha[i]);                     //Draw the chat background
-    draw_set_alpha(chat_line_alpha[i]);                                                                     //Set the alpha for the chat text
-    draw_text_bordered(chat_line_x[i], 400-i*16, chat_line_message[i], 1, 1, c_black, chat_line_color[i]);  //Draw the chat line text
+    var max_alpha = max(chat_line_alpha[i], chat_tab_alpha)
+    draw_sprite_ext(spr_extchat, 0, 0, 400-i*16, 1, 1, 0, c_white, max_alpha);                     //Draw the chat background
+    draw_set_alpha(max_alpha);                                                                     //Set the alpha for the chat text
+    draw_text_bordered(chat_line_x[i], 399-i*16, chat_line_message[i], 1, 1, c_black, chat_line_color[i]);  //Draw the chat line text
 }
 //Reset alpha
 draw_set_alpha(1);   
@@ -148,7 +204,7 @@ draw_set_alpha(1);
 if(chat_bar_image &gt; -1)
     draw_sprite_ext(spr_chatinputt, chat_bar_image, 0, 395, 1, 1, 0, c_white, 1);                  
 if(chat_bar_image &gt; 6)
-    draw_text_bordered(10, 395, draw_chat_typing, 1, 1, c_black, c_white);  //Draw the chat line the player is typing
+    draw_text_bordered(10, 399, draw_chat_typing+chat_flashing, 1, 1, c_black, c_white);  //Draw the chat line the player is typing
 
                                                                                    
 </string>
@@ -203,6 +259,7 @@ if(chat_typing = false)
 }
 else
 {
+    chat_typing = false;
     obj_mod.chat_open = false;
     if(global.playership[mid].ship_status_hacked = false &amp;&amp; global.activated[mid] = 1)
         global.playership[mid].ship_disabled = false;
@@ -227,7 +284,7 @@ else
     }      
     
     //Check if text was typed
-    if(keyboard_string = '') break;
+    if(keyboard_string = '') exit;
     
 
     //create the new chat line and take note of its middle
@@ -238,7 +295,7 @@ else
         sendline = string_insert(' ', sendline, middle);
           
     //Send it to your chat
-    chat_addline_game(sendline, c_white);
+    chat_addline_game(sendline, global.team[global.mymid], 0, global.mymid);
     //Send the defeat to everyone
     clearbuffer(0);
     packet_label_write(7, mid);
@@ -250,48 +307,6 @@ else
         //Send to host if client
         sendmessage(global.host, 0, 0, 0);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Eit if not currently inputting a chat message
-if(chat_typing = false)
-    exit;
-    
-//Stop more input if max is reached
-if(string_length(keyboard_string) &gt; 60)
-    keyboard_string = string_copy(keyboard_string, 0, 60);    
-//Undo '#'
-    keyboard_string = string_replace(keyboard_string, '#', '');
-
-//Find the correct text to fit into the bar
-for(i = string_length(keyboard_string); i &gt;= 0; i -= 1)
-    if(string_width(string_copy(keyboard_string, i, string_length(keyboard_string)-i)) &gt; 280 || i = 0)
-    {
-        var start_chat = i;
-        var stop_chat = string_length(keyboard_string)+1-i;
-        break;  
-    }
-    
-draw_chat_typing = string_copy(keyboard_string, startchat, stopchat)+chat_flashing;
 </string>
           </argument>
         </arguments>

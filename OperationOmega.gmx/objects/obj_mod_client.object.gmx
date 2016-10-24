@@ -275,11 +275,7 @@ while(true)
         //A player is eliminated in a stock match
         case 4:
              //Send it to your chat
-             if(global.team[dummy] = 1)
-                var newcolor = c_red;
-             else
-                var newcolor = c_blue;
-             chatline_add(global.othername[dummy]+" has been eliminated.", newcolor);
+             chat_addline_game(global.othername[dummy]+" has been eliminated.", global.team[dummy], 0, dummy);          //Add the line to the chat
         break;
    
         //The stock match is over
@@ -288,6 +284,10 @@ while(true)
             switch(readbyte(0))
             {
                 case 1: //Blue team won   
+                    //Send a message to your chat
+                    chat_addline_game("Red Team has been eliminated.", 1, 0, dummy);          //Add the line to the chat
+                    chat_addline_game("Blue Team has won the match.", 2, 0, dummy);          //Add the line to the chat
+                    
                     newcolor = c_maroon;
                     if(global.team[global.mymid] = 1)
                     {
@@ -303,6 +303,9 @@ while(true)
                     }
                 break;
                 case 2: //Red team won
+                    //Send a message to your chat
+                    chat_addline_game("Blue Team has been eliminated.", 2, 0, dummy);          //Add the line to the chat
+                    chat_addline_game("Red Team has won the match.", 1, 0, dummy);          //Add the line to the chat
                     newcolor = c_navy;
                     if(global.team[global.mymid] = 1)
                     {
@@ -321,22 +324,6 @@ while(true)
             //Send the announcement
             obj_mod.announcement_stage  = 1;
             obj_mod.announcement_alpha = 0;
-            
-            //Send the first chat line
-            chatline_add(readstring(0), newcolor);
-            
-            //Read the second chat line color
-            switch(readbyte(0))
-            {
-                case 1:         
-                    newcolor = c_maroon;
-                break;
-                case 2:
-                    newcolor = c_navy;
-                break;
-            }
-            //Send the second chat line
-            chatline_add(readstring(0), newcolor);
             //Set time until returning to waiting room
             alarm[2] = 180;
         break;
@@ -350,7 +337,9 @@ while(true)
         //Chat Message
         case 7:
             //Put the message in your chat
-            chatline_add(readstring(0), c_white);
+            var chat_message = readstring(0);
+            var chat_color = global.team[dummy];
+            chat_addline_game(chat_message, chat_color, 0, dummy);          //Add the line to the chat
         break;
   
         //Respawn Packet
@@ -373,25 +362,6 @@ while(true)
         case 14:
             global.primaryRNG[dummy] = readushort(0);
         break;
-
-        //A Deathmatch is over
-        case TIME_UP:
-            chatline_add(readstring(0), c_maroon);
-            chatline_add(readstring(0), c_blue);
-            switch(readbyte(0))
-            {
-                case 0:
-                    chatline_add("The match has ended in a draw.", c_white);
-                break;
-                case 1:
-                    chatline_add("Red Team has won the match.", c_maroon);
-                break;
-                case 2:
-                    chatline_add("Blue Team has won the match.", c_navy);
-                break;
-            }
-            alarm[2] = 180;
-        break;
    
         //Begin Firing Primary weapon
         case 15:
@@ -405,15 +375,13 @@ while(true)
             droppedname = readstring(0);
             //Destroy the removed player
             with(global.playership[dummy])
-                instance_destroy();
-            //Create a dud to intercept remaining messages
-            global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
+            {
+                defeatmid = 20;
+                event_perform(ev_other, ev_user2);
+            }            
             //Send a notice to your chat
-            chatline_add(readstring(0), c_maroon)        
-            if(global.team[dummy] = 0)
-                chatcolor[4] = c_maroon;
-            else
-                chatcolor[4] = c_navy;
+            chat_addline_game(readstring(0), global.team[dummy], 0, dummy);          //Add the line to the chat
+
         break;
     }
 }

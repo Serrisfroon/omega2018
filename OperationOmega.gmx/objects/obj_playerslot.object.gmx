@@ -209,7 +209,7 @@ with(obj_playerslot_selected)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.popup_active = true)
+            <string>if(global.popup_active = true || global.master = false)
     exit;
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_clicktext, 1, 0);

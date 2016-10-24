@@ -143,6 +143,9 @@ view_y_increase = 15;
 view_height_base = 750;
 view_hview[0] = view_height_base;
 
+//Initialize the variable that controls the tab box
+tab_window_open = false;
+
 //Initialize the respawn locations of all players
 for(i = 0; i &lt; 8; i++)
     respawn_location[i] = i;      
@@ -591,27 +594,24 @@ else
    //Check if all of red team is eliminated
    if(global.redteam = global.redteamout)
    {
-    //Send it to your chat
-    chatline_add("Red Team has been eliminated.", c_maroon);
-    lolcolor[3] = 1;
-    chatline_add("Blue Team has won the match.", c_navy);
-    lolcolor[4] = 2;
+    //Send a message to your chat
+    chat_addline_game("Red Team has been eliminated.", 1, 0, mid);          //Add the line to the chat
+    chat_addline_game("Blue Team has won the match.", 2, 0, mid);          //Add the line to the chat
     obj_mod.announcement_stage  = 1;
     obj_mod.announcement_message = "Operation Failed";
     obj_mod.announcement_color = c_navy;
     obj_mod.announcement_alpha = 0;
     global.outcome = 1;
 
-    //Send the message to all clients
-    clearbuffer(0);
-    packet_label_write(5, global.mymid);
-    writebyte(lolcolor[3], 0);
-    writestring(chatline[3], 0);
-    writebyte(lolcolor[4], 0);
-    writestring(chatline[4], 0);
-    client_sendall(0, 0);
-    //Set time until return to waiting room
-    alarm[2] = 180;
+        //Hold the eliminated team value
+        var team_eliminated = 1;
+        //Set time until returning to waiting room
+        alarm[2] = 180;
+        //Send the message to all clients
+        clearbuffer(0);
+        packet_label_write(5, mid);
+        writebyte(team_eliminated, 0);
+        client_sendall(0, 0);
    }
   }
   else
@@ -620,26 +620,23 @@ else
    //Check if all of blue team is eliminated
    if(global.blueteam = global.blueteamout)
    {
-    //Send it to your chat
-    chatline_add("Blue Team has been eliminated.", c_navy);
-    lolcolor[3] = 2;
-    chatline_add("Red Team has won the match.", c_maroon);
-    lolcolor[4] = 1;
+    //Send a message to your chat
+    chat_addline_game("Blue Team has been eliminated.", 2, 0, mid);          //Add the line to the chat
+    chat_addline_game("Red Team has won the match.", 1, 0, mid);          //Add the line to the chat
     obj_mod.announcement_stage  = 1;
     obj_mod.announcement_message = "Operation Failed";
     obj_mod.announcement_color = c_red;
     obj_mod.announcement_alpha = 0;
     global.outcome = 1;
-    //Send the message to all clients
-    clearbuffer(0);
-    packet_label_write(5, global.mymid);
-    writebyte(lolcolor[3], 0);
-    writestring(chatline[3], 0);
-    writebyte(lolcolor[4], 0);
-    writestring(chatline[4], 0);
-    client_sendall(0, 0);
-    //Set time until return to waiting room    
-    alarm[2] = 180;
+        //Hold the eliminated team value
+        var team_eliminated = 1;
+        //Set time until returning to waiting room
+        alarm[2] = 180;
+        //Send the message to all clients
+        clearbuffer(0);
+        packet_label_write(5, mid);
+        writebyte(team_eliminated, 0);
+        client_sendall(0, 0);
    }
   }
  }
@@ -779,7 +776,7 @@ if(global.activated[mid] = 1)
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>obj_mod</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -921,10 +918,8 @@ while(true)
                 if(global.redteam = global.redteamout)
                 {
                     //Send a message to your chat
-                    chatline_add("Red Team has been eliminated.", c_maroon);
-                    lolcolor[3] = 1;
-                    chatline_add("Blue Team has won the match.", c_navy);
-                    lolcolor[4] = 2;
+                    chat_addline_game("Red Team has been eliminated.", 1, 0, dummy);          //Add the line to the chat
+                    chat_addline_game("Blue Team has won the match.", 2, 0, dummy);          //Add the line to the chat
                     
                     //Display an announcement
                     obj_mod.announcement_stage  = 1;
@@ -941,17 +936,16 @@ while(true)
                         obj_mod.announcement_color = c_navy;
                         global.outcome = 0;
                     }         
-
+                    
+                    //Hold the eliminated team value
+                    var team_eliminated = 1;
+                    //Set time until returning to waiting room
+                    alarm[2] = 180;
                     //Send the message to all clients
                     clearbuffer(0);
                     packet_label_write(5, mid);
-                    writebyte(lolcolor[3], 0);
-                    writestring(chatline[3], 0);
-                    writebyte(lolcolor[4], 0);
-                    writestring(chatline[4], 0);
+                    writebyte(team_eliminated, 0);
                     client_sendall(0, 0);
-                    //Set time until returning to waiting room
-                    alarm[2] = 180;
                 }
             }
             else
@@ -962,10 +956,8 @@ while(true)
                 if(global.blueteam = global.blueteamout)
                 {
                     //Send a message to your chat
-                    chatline_add("Blue Team has been eliminated.", c_navy);
-                    lolcolor[3] = 2;
-                    chatline_add("Red Team has won the match.", c_maroon);
-                    lolcolor[4] = 1;
+                    chat_addline_game("Blue Team has been eliminated.", 2, 0, dummy);          //Add the line to the chat
+                    chat_addline_game("Red Team has won the match.", 1, 0, dummy);          //Add the line to the chat
                     
                     //Display an announcement
                     obj_mod.announcement_stage  = 1;
@@ -982,17 +974,15 @@ while(true)
                         obj_mod.announcement_color = c_maroon;
                         global.outcome = 1;
                     }
-                    
+                    //Hold the eliminated team value
+                    var team_eliminated = 2;
+                    //Set time until returning to waiting room
+                    alarm[2] = 180;
                     //Send the message to all clients
                     clearbuffer(0);
                     packet_label_write(5, mid);
-                    writebyte(lolcolor[3], 0);
-                    writestring(chatline[3], 0);
-                    writebyte(lolcolor[4], 0);
-                    writestring(chatline[4], 0);
+                    writebyte(team_eliminated, 0);
                     client_sendall(0, 0);
-                    //Set time until returning to waiting room
-                    alarm[2] = 180;
                 }
             }
         break;
@@ -1005,7 +995,9 @@ while(true)
         //Chat Message
         case 7:
             //Put the message in your chat
-            chatline_add(readstring(0), c_white);
+            var chat_message = readstring(0);
+            var chat_color = global.team[dummy];
+            chat_addline_game(chat_message, chat_color, 0, dummy);          //Add the line to the chat
             client_sendall(0, dummy);  
         break;
 
@@ -1049,94 +1041,87 @@ while(true)
             client_drop(dummy);
             //Destroy the removed player
             with(global.playership[dummy])
-             instance_destroy();
-            //Create a dud to intercept remaining messages
-            global.playership[dummy] = instance_create(-2000, -2000, obj_dud);
-            //Send a notice to your chat
-            chatline_add(readstring(0), c_maroon)
-            if(global.team[dummy] = 1)
-                chatcolor[4] = c_maroon;
-            else
-                chatcolor[4] = c_navy;
-            //Relay the info to other players
-            client_sendall(0, 0); 
-            //Add the player to the elimination count
-            if(global.team[dummy] = 1)
             {
-                //Check if all of red team is eliminated
-                if(global.redteam = global.redteamout)
+                defeatmid = 20;
+                event_perform(ev_other, ev_user2);
+                //Send a notice to your chat
+                chat_addline_game(readstring(0), global.team[dummy], 0, dummy);          //Add the line to the chat
+
+                //Relay the info to other players
+                client_sendall(0, 0); 
+                //Add the player to the elimination count
+                if(global.team[dummy] = 1)
                 {
-                    //Send it to your chat
-                    chatline_add("Red Team has been eliminated.", c_maroon);
-                    lolcolor[3] = 1;
-                    chatline_add("Blue Team has won the match.", c_navy);
-                    lolcolor[4] = 2;
-                    if(global.team[mid] = 1)
+                    //Check if all of red team is eliminated
+                    if(global.redteam = global.redteamout)
                     {
-                        global.outcome = 1;
-                        obj_mod.announcement_message = "Operation Failed";
-                    }
-                    else
-                    {
-                        global.outcome = 0;
-                        obj_mod.announcement_message = "Operation Successful";
-                    }
+                        //Send it to your chat
+                        //Send a message to your chat
+                        chat_addline_game("Red Team has been eliminated.", 1, 0, dummy);          //Add the line to the chat
+                        chat_addline_game("Blue Team has won the match.", 2, 0, dummy);          //Add the line to the chat
+                        if(global.team[mid] = 1)
+                        {
+                            global.outcome = 1;
+                            obj_mod.announcement_message = "Operation Failed";
+                        }
+                        else
+                        {
+                            global.outcome = 0;
+                            obj_mod.announcement_message = "Operation Successful";
+                        }
+                    
+                        obj_mod.announcement_stage  = 1;
+                        obj_mod.announcement_color = c_navy;
+                        obj_mod.announcement_alpha = 0;
                 
-                    obj_mod.announcement_stage  = 1;
-                    obj_mod.announcement_color = c_navy;
-                    obj_mod.announcement_alpha = 0;
-            
-                    //Send the message to all clients
-                    clearbuffer(0);
-                    packet_label_write(5, disi);
-                    writebyte(lolcolor[3], 0);
-                    writestring(chatline[3], 0);
-                    writebyte(lolcolor[4], 0);
-                    writestring(chatline[4], 0);
-                    client_sendall(0, 0);
-                    //Set time until return to waiting room
-                    alarm[2] = 180;
+                        //Hold the eliminated team value
+                        var team_eliminated = 1;
+                        //Set time until returning to waiting room
+                        alarm[2] = 180;
+                        //Send the message to all clients
+                        clearbuffer(0);
+                        packet_label_write(5, disi);
+                        writebyte(team_eliminated, 0);
+                        client_sendall(0, 0);
+                    }
                 }
-            }
-            else
-            {
-                //Check if all of blue team is eliminated
-                if(global.blueteam = global.blueteamout)
+                else
                 {
-                    //Send it to your chat
-                    chatline_add("Blue Team has been eliminated.", c_navy);
-                    lolcolor[3] = 2;
-                    chatline_add("Red Team has won the match.", c_maroon);
-                    lolcolor[4] = 1;
-                    obj_mod.announcement_stage  = 1;
-                    obj_mod.announcement_color = c_maroon;
-                    obj_mod.announcement_alpha = 0;
-                    if(global.team[mid] = 2)
+                    //Check if all of blue team is eliminated
+                    if(global.blueteam = global.blueteamout)
                     {
-                        global.outcome = 1;
-                        obj_mod.announcement_message = "Operation Failed";
+                        //Send it to your chat
+                        //Send a message to your chat
+                        chat_addline_game("Blue Team has been eliminated.", 2, 0, dummy);          //Add the line to the chat
+                        chat_addline_game("Red Team has won the match.", 1, 0, dummy);          //Add the line to the chat
+                        obj_mod.announcement_stage  = 1;
+                        obj_mod.announcement_color = c_maroon;
+                        obj_mod.announcement_alpha = 0;
+                        if(global.team[mid] = 2)
+                        {
+                            global.outcome = 1;
+                            obj_mod.announcement_message = "Operation Failed";
+                        }
+                        else
+                        {
+                            global.outcome = 0;
+                            obj_mod.announcement_message = "Operation Successful";
+                        }
+                        //Hold the eliminated team value
+                        var team_eliminated = 1;
+                        //Set time until returning to waiting room
+                        alarm[2] = 180;
+                        //Send the message to all clients
+                        clearbuffer(0);
+                        packet_label_write(5, disi);
+                        writebyte(team_eliminated, 0);
+                        client_sendall(0, 0);
                     }
-                    else
-                    {
-                        global.outcome = 0;
-                        obj_mod.announcement_message = "Operation Successful";
-                    }
-                    //Send the message to all clients
-                    clearbuffer(0);
-                    packet_label_write(5, dummy);
-                    writebyte(lolcolor[3], 0);
-                    writestring(chatline[3], 0);
-                    writebyte(lolcolor[4], 0);
-                    writestring(chatline[4], 0);
-                    client_sendall(0, 0);
-                    //Set time until return to waiting room    
-                    alarm[2] = 180;
-                }
-            }   
+                }   
+            }
         break;
-    }
-}
- 
+   }
+} 
 //Listen for a new player
 newclient = tcpaccept(global.listen, true);
 if(newclient &gt; 0)
@@ -1145,7 +1130,7 @@ if(newclient &gt; 0)
     clearbuffer(0);
     writebyte(CLIENT_UNABLE, 0);
     sendmessage(newclient, 0, 0, 0);
-}
+}   
 </string>
           </argument>
         </arguments>
@@ -1173,6 +1158,14 @@ if(newclient &gt; 0)
 
 //Reset the 3d sound position
 audio_listener_position(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, 0);
+
+//Check if the tab box should be displayed
+if(tab_window_open = false)
+    if(keyboard_check_direct(vk_tab))
+    {
+        tab_window_open = true;
+        instance_create(0, 0, obj_tab_box);
+    }
 
 //Handle announcements
 switch(announcement_stage)
@@ -1848,11 +1841,11 @@ switch(global.matchtype)
       {
        case 1:
             for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect, i*shipspace, 0, 1, 1, 0, c_white, .7);
+             draw_sprite_ext(spr_lifecount, global.shipselect, i*shipspace+4, 2, 1, 1, 0, c_white, .7);
        break;
        case 2:
             for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect+3, i*shipspace, 0, 1, 1, 0, c_white, .7);
+             draw_sprite_ext(spr_lifecount, global.shipselect+3, i*shipspace+4, 2, 1, 1, 0, c_white, .7);
        break;
       }
  break;
@@ -1891,82 +1884,6 @@ draw_set_font(fnt_chat);
 //Draw the framerate
 draw_set_color(c_white);
 draw_text_transformed(10, view_hport[0]-20, string(fps), 1, 1, 0);
-
-//Draw the chat bar if chatting
-switch(obj_mod.chat_open)
-{
- case true:
-      draw_set_color(c_white);
-      draw_sprite_ext(spr_chatinput, 0, 0, view_hport[0], 1, 1, 0, c_white, 1);
-      //Stop more input if max is reached
-      if(string_length(keyboard_string) &gt; 60)
-       keyboard_string = string_copy(keyboard_string, 0, 60);
-            
-      //Undo '#'
-      keyboard_string = string_replace(keyboard_string, '#', '');
-      
-      //Find the correct text to fit into the bar
-      for(i = string_length(keyboard_string); i &gt;= 0; i -= 1)
-       if(string_width(string_copy(keyboard_string, i, string_length(keyboard_string)-i)) &gt; 280 || i = 0)
-       {
-        startchat = i;
-        stopchat = string_length(keyboard_string)+1-i;
-        break;  
-       }
-      //Draw the text in the chat bar
-      draw_text_transformed(14, 454, string_copy(keyboard_string, startchat, stopchat)+chat_flashing, 1, 1, 0);
-      draw_sprite_ext(spr_extchat, 0, 0, 0, 1, 1, 0, c_white, 1);
-      //draw chat
-      draw_set_color(c_white);
-      for(i = 0; i &lt;= 16; i += 1)
-      {
-       draw_text_ext_transformed(14, (406-(i*18)), extchatline[16-i], 9, 300, 1, 1, 0);
-      }
- break;
- case false:
-      //draw chat
-      for(i = 0; i &lt;= 4; i += 1)
-      {
-       draw_set_color(chatcolor[4-i]);
-       draw_set_alpha(chatalpha[4-i]);
-       draw_text_ext_transformed(14, (406-(i*18)), chatline[4-i], 9, 300, 1, 1, 0);
-       chatalpha[4-i] -= 0.005;
-      } 
- break;
-}
-
-//Show score window when ` is pressed
-draw_set_alpha(1);
-if(keyboard_check_direct(vk_tab))
-{
-    global.playerfps[mid] = fps;
-    draw_sprite_ext(spr_pscores, 0, view_wport[0], view_hport[0], 1, 1, 0, c_white, 1);
-    draw_set_font(fnt_chat);
-    for(i = 0; i &lt; 8; i += 1)
-    {
-        if(global.activated[i] = 0 &amp;&amp; i &gt; 0) continue;
-        switch(global.team[i])
-        {
-            case 1:
-                draw_set_color(c_red);
-            break;
-            case 2:
-                draw_set_color(c_navy);
-            break;
-        }
-        draw_set_halign(fa_left);
-        draw_text_transformed(view_wport[0]-247, view_hport[0]-(246-(i*20)), global.othername[i], 1, 1, 0);
-        draw_set_halign(fa_center);
-        draw_text_transformed(view_wport[0]-110, view_hport[0]-(246-(i*20)), string(global.playerfps[i]), 1, 1, 0);
-        draw_text_transformed(view_wport[0]-82, view_hport[0]-(246-(i*20)), string(global.ping[i]), 1, 1, 0);
-        draw_text_transformed(view_wport[0]-56, view_hport[0]-(246-(i*20)), string(global.kills[i]), 1, 1, 0);
-        draw_text_transformed(view_wport[0]-29, view_hport[0]-(246-(i*20)), string(global.deaths[i]), 1, 1, 0);
-    }
-    draw_set_color(c_black);
-    draw_text_transformed(view_wport[0]-52, view_hport[0]-305, string(global.redscore), 1, 1, 0);
-    draw_text_transformed(view_wport[0]-52, view_hport[0]-288, string(global.bluescore), 1, 1, 0); 
-    draw_set_halign(fa_left);
-}
 
 
 //Draw the cursor
@@ -2189,7 +2106,8 @@ alarm[1]=4;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(obj_mod.chat_open)
+            <string>/*
+switch(obj_mod.chat_open)
 {
  case false:
       obj_mod.chat_open = true;
