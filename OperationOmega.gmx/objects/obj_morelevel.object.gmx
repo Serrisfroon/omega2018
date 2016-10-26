@@ -73,7 +73,9 @@ image_single = 4;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>visible = 1;
+            <string>if(global.sfxtoggle = 0)
+    audio_play_sound(snd_overtext, 1, 0);
+visible = 1;
 </string>
           </argument>
         </arguments>

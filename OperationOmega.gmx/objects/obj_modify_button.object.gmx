@@ -124,6 +124,9 @@ mouseover = 0;
           <argument>
             <kind>1</kind>
             <string>mouseover = 1;
+//Play a sound effect to signify the button is hovered over
+if(global.sfxtoggle = 0)
+    audio_play_sound(snd_overtext, 1, 0);
 </string>
           </argument>
         </arguments>

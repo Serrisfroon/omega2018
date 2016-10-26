@@ -186,7 +186,12 @@ with(obj_playerslot_selected)
           <argument>
             <kind>1</kind>
             <string>if(global.master = 1 || mid = global.mymid)
+{
     (instance_create(x, y, obj_playerslot_selected)).mid = mid;
+    //Play a sound effect to signify the button is hovered over
+    if(global.sfxtoggle = 0)
+        audio_play_sound(snd_overtext, 1, 0);
+}
 </string>
           </argument>
         </arguments>

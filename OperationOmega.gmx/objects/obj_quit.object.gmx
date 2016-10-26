@@ -156,6 +156,10 @@ else
           <argument>
             <kind>1</kind>
             <string>mouseover = 1;
+//Play a sound effect to signify the button is hovered over
+if(global.sfxtoggle = 0)
+    audio_play_sound(snd_overtext, 1, 0);
+
 </string>
           </argument>
         </arguments>
@@ -180,6 +184,11 @@ else
             <kind>1</kind>
             <string>if(global.popup_active = true || animation_step != 1)
  exit;
+
+//Play a sound effect to signify the button was clicked  
+if(global.sfxtoggle = 0)
+    audio_play_sound(snd_clicktext, 1, 0);
+
 obj_readygo.animation_step = 2;
 obj_quit.animation_step = 2;
 obj_waiting_boxes.animation = 3;

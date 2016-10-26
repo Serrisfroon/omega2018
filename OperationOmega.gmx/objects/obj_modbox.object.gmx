@@ -111,8 +111,6 @@ display_alpha = 0;
             //A popup no loner exists
             global.popup_active = false;
             //Destroy all buttons except for the "Okay" button
-            with(obj_lessplayers) instance_destroy();
-            with(obj_moreplayers) instance_destroy();
             with(obj_lesstype) instance_destroy();
             with(obj_moretype) instance_destroy();
             with(obj_lessvariable) instance_destroy();

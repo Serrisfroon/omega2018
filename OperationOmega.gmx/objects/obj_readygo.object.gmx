@@ -180,6 +180,9 @@ changeable = 0;
           <argument>
             <kind>1</kind>
             <string>mouseover = 1;
+//Play a sound effect to signify the button is hovered over
+if(global.sfxtoggle = 0)
+    audio_play_sound(snd_overtext, 1, 0);
 </string>
           </argument>
         </arguments>
@@ -212,6 +215,8 @@ alarm[3] = 30;
 //Check if the button is full size
 if(animation_step != 1)
     exit;
+    
+        
 //Check if your weapons are equipped
 if(global.primary = 0 || global.secondary[1] = 0 || global.secondary[2] = 0
  || global.secondary[3] = 0 || global.secondary[4] = 0)
@@ -227,6 +232,9 @@ if(global.primary = 0 || global.secondary[1] = 0 || global.secondary[2] = 0
 
 if(global.master = false)
 {
+    //Play a sound effect to signify the button was clicked  
+    if(global.sfxtoggle = 0)
+        audio_play_sound(snd_readyup, 1, 0);
     with(prnt_selection) selected = 0;
     //If you are a client, this button will be used to change
     //your ready status
@@ -278,6 +286,10 @@ else
     //If you are the host, this button will be used
     //to start the game
     //Check to make sure you are not alone
+    //Play a sound effect to signify the button was clicked  
+    if(global.sfxtoggle = 0)
+        audio_play_sound(snd_clicktext, 1, 0);
+
     if(ds_list_size(global.clients) = 0)
     {
         //Send a notice to your chat

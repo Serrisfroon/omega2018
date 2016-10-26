@@ -2142,8 +2142,6 @@
       </objects>
       <objects name="Game Creation Popup">
         <object>objects\obj_creategamebox</object>
-        <object>objects\obj_lessplayers</object>
-        <object>objects\obj_moreplayers</object>
         <object>objects\obj_lesstype</object>
         <object>objects\obj_moretype</object>
         <object>objects\obj_lesslevel</object>
