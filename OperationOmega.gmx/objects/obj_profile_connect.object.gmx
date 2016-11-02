@@ -36,9 +36,9 @@ display_alpha = 0;
 rating = global.playerkills*10+global.playermatchwin*25-global.playerdeaths*3-global.playermatchloss*10;
 
 //Rating animation initialization
-rating_length = string_length(string(rating));
+rating_length = string_length(string(abs(rating)));
 rating_display = "99999999";
-rating_true = string(rating);
+rating_true = string(abs(rating));
 rating_checkdigit = 1;
 next_animate = 0;
 repeat(8-rating_length)

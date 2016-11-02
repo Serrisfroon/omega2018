@@ -37,7 +37,7 @@ if(global.musictoggle = 0)
 
 //Initilize chat
 chat_init(8);
-
+keyboard_string = "";
 flashing = '|';
 alarm[0] = 12;
 if(room = rm_waiting)

@@ -33,6 +33,7 @@ image_blend = global.enemycolor;
 alarm[4] = 1;
 emitter1 = part_emitter_create(obj_partsystem.system);
 amplified = 0;
+particle1 = part_type_create();
 
 //Set attack variable values
 attack_damage = 4;                      //Set the damage for the attack
@@ -64,10 +65,10 @@ attack_name = "Trident Missile";        //Set the name of the attack
             <kind>1</kind>
             <string>sfx_play(snd_explode2, x, y);
 create_explosion(1);
+    part_type_destroy(particle1);
 if(trio &gt; 1)
 {
     part_emitter_destroy(obj_partsystem.system, emitter1);
-    part_type_destroy(particle1);
 }
 else
 {
@@ -203,7 +204,6 @@ switch(trio)
  break;
  case 2:
       visible = 0;
-      particle1 = part_type_create();
       part_type_sprite(particle1,spr_smoke_part, 0, 0, 0);
       part_type_size(particle1,0.20,0.25,0.00,0);
       part_type_scale(particle1,1,1);
@@ -220,7 +220,6 @@ switch(trio)
  break;
  case 3:
       visible = 0;
-      particle1 = part_type_create();
       part_type_sprite(particle1,spr_smoke_part, 0, 0, 0);
       part_type_size(particle1,0.20,0.25,0.00,0);
       part_type_scale(particle1,1,1);

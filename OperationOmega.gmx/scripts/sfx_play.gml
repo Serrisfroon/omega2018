@@ -25,6 +25,6 @@ object.soundnumber = 1;
 with(object)
 {
     emitter = audio_emitter_create();
-    audio_emitter_position(emitter, (view_xview[0]+view_wview[0]/2-x)/2, (y-view_yview[0]+view_hview[0]/2)/2, 0);
+    audio_emitter_position(emitter, (view_xview[0]+view_wview[0]/2-x)/2, (view_yview[0]+view_hview[0]/2-y)/2, 0);
     sfx = audio_play_sound_on(emitter, sound, 0, 1);
 }

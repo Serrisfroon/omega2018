@@ -36,11 +36,26 @@ secondary_icon_order = global.shipselect*(global.secondary_type[4]+1)-1;
 
 //Start the match with your first energy secondary_selected selected
 secondary_selection_position = 2;
+change_secondary(1);
 
 //Hold the cursor rotations locally for faster lookup
 cursor_rotation[1] = 0;
 cursor_rotation[2] = 0;
 cursor_rotation[3] = 0;
+//Set the cursor drawing color
+color_cursor = make_color_rgb(0, 230, 0);
+//Initialize the tab selection variable
+selected_tab = 1;
+//Initialize the cursor secondary name
+current_secondary_name = "";
+current_secondary_name_alpha = 0;
+update_cursor_name = true;
+//Initialize the cursor weapon tab images
+for(i = 1; i &lt; 5; i++)
+    cursor_weapon[i] = (i-1)*8;
+    
+//Initialize the primary base rate of fire
+primary_base_rate = round(60/obj_player.primary_cooldown_base*10)/10;
 
 //Initialize the goliath flag- for handling its passive
 if(global.selected_ship[global.mymid] = 3)
@@ -420,6 +435,49 @@ superwall.image_yscale = 16;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Reset the cursor weapon to the selected one</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>change_secondary(obj_player.secondary_selected);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="2">
       <action>
         <libid>1</libid>
@@ -568,7 +626,7 @@ if(global.ships &gt; 0)
         shield = shield_maximum;
     }
     view_object = tele;
-    obj_player.secondary_selected = 1;
+    change_secondary(1);
     //destroy the error stopper
     with(obj_respawn_timer)
        instance_destroy();
@@ -1156,9 +1214,6 @@ if(newclient &gt; 0)
             <string>//This part of the step event is the personal checks
 //Things here will not be sent to/received by other players.
 
-//Reset the 3d sound position
-audio_listener_position(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, 0);
-
 //Check if the tab box should be displayed
 if(tab_window_open = false)
     if(keyboard_check_direct(vk_tab))
@@ -1166,7 +1221,29 @@ if(tab_window_open = false)
         tab_window_open = true;
         instance_create(0, 0, obj_tab_box);
     }
+    
+//Handle cursor weapon tabs
+for(i = 1; i &lt; 5; i++)
+{
+    if(selected_tab = i)
+        cursor_weapon[i] = min(cursor_weapon[i]+1, i*8-1);
+    else
+        cursor_weapon[i] = max(cursor_weapon[i]-1, (i-1)*8);        
+}
 
+var current_length = string_length(current_secondary_name);
+if(update_cursor_name = true)
+{
+    if(current_length &lt; string_length(cursor_secondary_name))
+    {
+        current_secondary_name = string_insert(string_copy(cursor_secondary_name, current_length+1, 1), current_secondary_name, current_length+1);
+        update_cursor_name = false;
+    }
+    else
+        current_secondary_name_alpha -= 0.03;
+}
+else
+    update_cursor_name = true;
 //Handle announcements
 switch(announcement_stage)
 {
@@ -1695,16 +1772,19 @@ cleanmem();
           <argument>
             <kind>1</kind>
             <string>var current_secondary = obj_player.secondary_selected;
-var current_secondary_stock = global.secondary_stock[current_secondary];
+var current_secondary_stock = global.secondary_stock[selected_tab];
 
 screen_scaling_ratio = view_hview[0]/480;
 texture_set_interpolation(false);
 
 //If you are targeting an enemy, draw the targetting cursor
 if(targeted_object != -1)
+{
+    var target_cursor_x = (targeted_object.x-view_xview[0])/screen_scaling_ratio;
+    var target_cursor_y = (targeted_object.y-view_yview[0])/screen_scaling_ratio;
     if(!instance_exists(obj_lockoncursor))
-        draw_sprite_ext(spr_targetcursor, distance_to_target, (targeted_object.x-view_xview[0])/screen_scaling_ratio, (targeted_object.y-view_yview[0])/screen_scaling_ratio, 1, 1, cursor_rotation[2], c_white, 0.7);
- 
+        draw_sprite_ext(spr_targetcursor, distance_to_target, target_cursor_x, target_cursor_y, 1, 1, cursor_rotation[2], c_white, 0.7);
+} 
 //Draw announcement text, if there is any
 if(announcement_alpha &gt; 0)
 {
@@ -1720,6 +1800,7 @@ if(announcement_alpha &gt; 0)
 //Draw equipped weapons
 check_weapons();
 
+/*
 //Draw the weapon icons and ammo bars depending on the icon order
 switch(secondary_icon_order)
 {
@@ -1793,6 +1874,7 @@ with(obj_weaponflash)
     
 //Draw the highlighter
 draw_sprite_ext(spr_numbers_selected, 0, secondary_selection_position+16, 89, 1, 1, 0, c_white, 1);
+*/
 
 //Draw Armor, Shield, Energy, and Ammo bars
 if(obj_player.armor &gt; 0)
@@ -1816,22 +1898,25 @@ if(obj_player.shield &gt; 0)
 else
     draw_shield_bar = 0;    
 
+var energy_ratio = current_secondary_stock/100;
+/*
 if(obj_player.energy &gt; 0)
 {
-    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+(obj_player.energy/100)*130, 86, 0, 0, 1, 1, c_white, 1);
+    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+energy_ratio*130, 86, 0, 0, 1, 1, c_white, 1);
 }
 
 draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
 if(instance_exists(obj_overheatshine))
     draw_sprite_ext(spr_overheatshine, obj_overheatshine.image_index, 0, 0, 1, 1, 0, c_white, 1);
-
-
+*/
+var heavy_ratio = current_secondary_stock/max_secondary_stock[current_secondary];
+/*
 if(current_secondary_stock &gt; 0)
-    draw_sprite_part_ext(spr_ammobar, max_secondary_stock[current_secondary], 0, 0, 81+(current_secondary_stock/max_secondary_stock[current_secondary])*157, 64, 0, 0, 1, 1, c_white, 1);
-
+    draw_sprite_part_ext(spr_ammobar, max_secondary_stock[current_secondary], 0, 0, 81+heavy_ratio*157, 64, 0, 0, 1, 1, c_white, 1);
+*/
 //Draw the gauge backgrounds
 draw_sprite_ext(spr_gauges, 0, 0, 0, 1, 1, 0, c_white, 1);
-draw_sprite_ext(spr_weaponicons, secondary_icon_order, 0, 0, 1, 1, 0, c_white, 1);
+//draw_sprite_ext(spr_weaponicons, secondary_icon_order, 0, 0, 1, 1, 0, c_white, 1);
 
 //Draw the match status
 switch(global.matchtype)
@@ -1841,11 +1926,11 @@ switch(global.matchtype)
       {
        case 1:
             for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect, i*shipspace+4, 2, 1, 1, 0, c_white, .7);
+             draw_sprite_ext(spr_lifecount, global.shipselect, i*shipspace+4, 4, 1, 1, 0, c_white, .7);
        break;
        case 2:
             for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect+3, i*shipspace+4, 2, 1, 1, 0, c_white, .7);
+             draw_sprite_ext(spr_lifecount, global.shipselect+3, i*shipspace+4, 4, 1, 1, 0, c_white, .7);
        break;
       }
  break;
@@ -1893,6 +1978,131 @@ var mouse_cursor_y = (mouse_y-view_yview[0])/screen_scaling_ratio;
 draw_sprite_ext(spr_cursor, 0, mouse_cursor_x, mouse_cursor_y, 0.7, 0.7, cursor_rotation[1], c_white, 0.7);
 draw_sprite_ext(spr_cursor, 1, mouse_cursor_x, mouse_cursor_y, 0.7, 0.7, cursor_rotation[2], c_white, 0.7);
 draw_sprite_ext(spr_cursor, 2, mouse_cursor_x, mouse_cursor_y, 0.7, 0.7, cursor_rotation[3], c_white, 0.7);
+
+
+//Draw the switched weapon icon
+with(obj_change_weapon)
+{
+    draw_sprite_ext(weapon_image, image, mouse_cursor_x, mouse_cursor_y, image_xscale, image_yscale, 0, c_white, image_alpha*(1-white_alpha));
+    draw_sprite_ext(spr_icon_white, -1, mouse_cursor_x, mouse_cursor_y, image_xscale, image_yscale, 0, c_white, image_alpha*white_alpha);
+}
+
+//Prepare the font for the cursor's text
+draw_set_font(fnt_cursor);
+draw_set_halign(fa_right);
+draw_set_valign(fa_middle);
+draw_set_color(color_cursor);
+draw_set_alpha(0.9);
+
+
+//Draw the cursor energy bar if the selected secondary is an energy weapon
+if(global.secondary_type[selected_tab] = 0)
+{
+    //Calculate the size of the bar to be displayed
+    var energy_bar_size = (1-energy_ratio)*60;
+    //Draw the remaining energy
+    draw_sprite_part_ext(spr_cursor, 6, 0, energy_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+energy_bar_size, 1, 1, c_white, 0.9);
+    //Draw the empty bar
+    draw_sprite_part_ext(spr_cursor, 7, 0, 0, 131, energy_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+    //Draw the number of uses remaining
+    draw_text(mouse_cursor_x+52, mouse_cursor_y, floor(current_secondary_stock/global.secondary_cost[selected_tab]));
+}
+else
+{
+    //Calculate the size of the bar to be displayed
+    if(selected_tab != 4)
+        var heavy_bar_size = (1-heavy_ratio)*60;
+    else
+        var heavy_bar_size = (1-(global.secondary_stock[4]/max_secondary_stock[4]))*60;    
+    //Draw the remaining energy
+    draw_sprite_part_ext(spr_cursor, 6, 0, heavy_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+heavy_bar_size, 1, 1, c_white, 0.9);
+    //Draw the empty bar
+    draw_sprite_part_ext(spr_cursor, 7, 0, 0, 131, heavy_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+    //Draw the number of uses remaining
+    draw_text(mouse_cursor_x+52, mouse_cursor_y, current_secondary_stock);
+}
+
+if(targeted_object != -1)
+    if(global.secondary_lockon_required[selected_tab] = true)
+    {
+        //Find the direction from the cursor to the target
+        var _lockon_direction = point_direction(mouse_cursor_x, mouse_cursor_y, target_cursor_x, target_cursor_y);
+        //Find the distance between the cursor and the target
+        var _lockon_distance = point_distance(mouse_cursor_x, mouse_cursor_y, target_cursor_x, target_cursor_y)-40;
+        //Calculate the number of repetitions needed
+        var _image_repeats = ceil(_lockon_distance/60);
+        
+        //Draw the line to the target from the cursor, leaving off the file image
+        for(i = 0; i &lt; _image_repeats-1; i++)
+            draw_sprite_general(spr_cursor_homing_line, -1, 0, 0, 60, 4, mouse_cursor_x+lengthdir_x(60*i+20, _lockon_direction), mouse_cursor_y+lengthdir_y(60*i+20, _lockon_direction), 1, 1, _lockon_direction, c_white, c_white, c_white, c_white, 0.6);
+            
+        //Draw enough of the final image to connect it
+        var _distance_sofar = 60*i+20;
+        draw_sprite_general(spr_cursor_homing_line, -1, 0, 0, round(_lockon_distance-_distance_sofar), 4, mouse_cursor_x+lengthdir_x(_distance_sofar, _lockon_direction), mouse_cursor_y+lengthdir_y(_distance_sofar, _lockon_direction), 1, 1, _lockon_direction, c_white, c_white, c_white, c_white, 0.6);
+    
+    }
+    
+draw_set_halign(fa_left);
+    
+//Draw the primary bar
+//Calculate the size of the bar to be displayed
+var primary_bar_size = (1-(obj_player.primary_cooldown_base/(obj_player.primary_cooldown_base*obj_player.primary_overheat)))*60;
+//Draw the remaining energy
+draw_sprite_part_ext(spr_cursor, 3, 0, primary_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+primary_bar_size, 1, 1, c_white, 0.9);
+//Draw the empty bar
+draw_sprite_part_ext(spr_cursor, 4, 0, 0, 131, primary_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+//Draw the number of uses remaining
+var primary_rate_of_fire = round((60/(obj_player.primary_cooldown_base*obj_player.primary_overheat))*10)/10;
+if(primary_rate_of_fire &gt;= 10)
+    var primary_digits = 0;
+else 
+    var primary_digits = 1;
+
+draw_text(mouse_cursor_x-52, mouse_cursor_y, string_format(primary_rate_of_fire, 2-primary_digits, primary_digits));
+    
+draw_sprite_ext(spr_cursor_weapons, cursor_weapon[1], mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+draw_sprite_ext(spr_cursor_weapons, cursor_weapon[2], mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[2], 0.9);
+draw_sprite_ext(spr_cursor_weapons, cursor_weapon[3], mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[3], 0.9);
+draw_sprite_ext(spr_cursor_weapons, cursor_weapon[4], mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[4], 0.9);
+switch(selected_tab)
+{
+    case 1:
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x-cursor_weapon[1], mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
+    break;
+    case 2:
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x-cursor_weapon[2]+8, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
+    break;
+    case 3:
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x-cursor_weapon[3]+16, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
+    break;
+    case 4:
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x-cursor_weapon[4]+24, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
+    break;
+}
+
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+draw_set_alpha(current_secondary_name_alpha);
+if(selected_tab = 1 || selected_tab = 4)   
+    var shift_name = 0;
+else
+    var shift_name = 3;
+draw_text(mouse_cursor_x+70-cursor_weapon[selected_tab]+8*(selected_tab-1)+shift_name, mouse_cursor_y-45+15*selected_tab, current_secondary_name);
+
+
+draw_set_alpha(1);
 
 </string>
           </argument>
@@ -1975,7 +2185,7 @@ audio_play_sound(snd_changeweapon, 1, 0);
 
 secondary_selection_position = 82;
 //Switch to the correct new attack
-global.playership[global.mymid].secondary_selected = 3;
+change_secondary(3);
 </string>
           </argument>
         </arguments>
@@ -2003,7 +2213,7 @@ if(obj_mod.chat_open = true) exit;
 audio_play_sound(snd_changeweapon, 1, 0);
 secondary_selection_position = 42;
 //Switch to the correct new attack
-obj_player.secondary_selected = 2;
+change_secondary(2);
 </string>
           </argument>
         </arguments>
@@ -2031,8 +2241,7 @@ if(obj_mod.chat_open = true) exit;
 audio_play_sound(snd_changeweapon, 1, 0);
 secondary_selection_position = 2;
 //Switch to the correct new attack
-global.playership[global.mymid].secondary_selected = 1;
-
+change_secondary(1);
 </string>
           </argument>
         </arguments>

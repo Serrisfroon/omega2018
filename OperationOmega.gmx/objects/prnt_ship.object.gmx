@@ -681,7 +681,7 @@ if(global.activated[mid] != 1)
 //Perform action based on if the primary is being fired
 if(primary_cooldown &lt;= 0)
     //Reduce the overheat multiplier since the primary isn't being fired
-    primary_overheat = max(1, primary_overheat-0.005);
+    primary_overheat = max(1, primary_overheat-0.0075);
 else
     //Reduce the cooldown until the next primary shot is possible
     primary_cooldown -= 1;
@@ -739,8 +739,10 @@ if(keyboard_check(ord('S')) || ship_disabled = true)
 speed = max(speedmin, speed - 0.04);
  
 //Constantly recover energy if not at full energy
-if(energy &lt; 100) 
-    energy += energy_regeneration;
+for(i = 1; i &lt;= 4; i++)
+if(global.secondary_type[i] = 0)
+    if(global.secondary_stock[i] &lt; 100) 
+        global.secondary_stock[i] += energy_regeneration;
 energy_regeneration += energy_regeneration_scaling; //Scale the regen rate over time
 
 ability_cooldown_timer -= 1;
@@ -1060,14 +1062,14 @@ if(mid = global.mymid)
                 current_secondary_cost -= 15;
         }
         //Make sure there is enough energy to fire the energy weapon
-        if(energy &lt; current_secondary_cost)                     
+        if(global.secondary_stock[current_secondary_selected] &lt; current_secondary_cost)                     
         {
                 //Play an audio cue and exit the script
                 audio_play_sound(snd_unable, 1, 0);
                 exit;
         }
-        energy -= current_secondary_cost;   //Reduce energy by the necessary amount
-        energy_regeneration =energy_regeneration_base;
+        global.secondary_stock[current_secondary_selected] -= current_secondary_cost;   //Reduce energy by the necessary amount
+        energy_regeneration = energy_regeneration_base;
     }
     else                    //Heavy Weapons
     {

@@ -59,9 +59,9 @@ part_type_life(ship_flame[0], 9, 9);
 
 ship_flame[1] = part_type_create();
 part_type_sprite(ship_flame[1], spr_sphere_part, 0, 0, 0);
-part_type_size(ship_flame[1], 0.40, 0.40, -0.03, 0);
+part_type_size(ship_flame[1], 0.65, 0.65, -0.03, 0);
 part_type_scale(ship_flame[1], 1.50, 0.75);
-part_type_color2(ship_flame[1], 16743805, 16711680);
+part_type_color2(ship_flame[1], 9830293, 65280);
 part_type_alpha2(ship_flame[1], 1, 0.7);
 part_type_speed(ship_flame[1], 0, 1, 0, 0);
 part_type_direction(ship_flame[1], 0, 0, 0, 0);

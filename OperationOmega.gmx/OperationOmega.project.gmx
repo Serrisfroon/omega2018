@@ -1324,10 +1324,13 @@
   <sprites name="sprites">
     <sprite>sprites\spr_alphastar</sprite>
     <sprite>sprites\spr_alphastar_enemy</sprite>
+    <sprite>sprites\spr_alpha_turn</sprite>
     <sprite>sprites\spr_swiftwing</sprite>
     <sprite>sprites\spr_swiftwing_enemy</sprite>
+    <sprite>sprites\spr_hornet_turn</sprite>
     <sprite>sprites\spr_goliath</sprite>
     <sprite>sprites\spr_goliath_enemy</sprite>
+    <sprite>sprites\spr_goliath_turn</sprite>
     <sprite>sprites\spr_swiftwing_warp</sprite>
     <sprite>sprites\spr_swiftwing_warp_enemy</sprite>
     <sprite>sprites\spr_goliath_hyperrush</sprite>
@@ -1418,8 +1421,11 @@
       </sprites>
       <sprites name="Cursors">
         <sprite>sprites\spr_cursor</sprite>
+        <sprite>sprites\spr_cursor_weapons</sprite>
         <sprite>sprites\spr_homingcursor</sprite>
         <sprite>sprites\spr_targetcursor</sprite>
+        <sprite>sprites\spr_cursor_homing_line</sprite>
+        <sprite>sprites\spr_cursor_weapons_ammo</sprite>
       </sprites>
       <sprite>sprites\spr_radar</sprite>
       <sprite>sprites\spr_radar_player</sprite>
@@ -1475,6 +1481,7 @@
       <sprite>sprites\spr_greenpixel</sprite>
       <sprite>sprites\spr_numbers_icon</sprite>
       <sprite>sprites\spr_chooseenergy_icon</sprite>
+      <sprite>sprites\spr_icon_white</sprite>
       <sprite>sprites\spr_choosedeploy_icon</sprite>
       <sprite>sprites\spr_numbers_selected</sprite>
       <sprite>sprites\spr_selectprimary</sprite>
@@ -1538,7 +1545,7 @@
       <sprites name="Games Server">
         <sprite>sprites\spr_creategamebox</sprite>
         <sprite>sprites\spr_quickplay</sprite>
-        <sprite>sprites\spr_searchforgame</sprite>
+        <sprite>sprites\spr_custom_game</sprite>
         <sprite>sprites\spr_groupsettings</sprite>
         <sprite>sprites\spr_server_message</sprite>
         <sprite>sprites\spr_serverinfo</sprite>
@@ -1561,8 +1568,8 @@
         <sprite>sprites\spr_weapons_infos</sprite>
       </sprites>
       <sprites name="Multiplayer">
-        <sprite>sprites\spr_server</sprite>
-        <sprite>sprites\spr_private</sprite>
+        <sprite>sprites\spr_play</sprite>
+        <sprite>sprites\spr_training</sprite>
         <sprite>sprites\spr_options</sprite>
         <sprite>sprites\spr_quit</sprite>
         <sprite>sprites\spr_back</sprite>
@@ -1591,6 +1598,7 @@
       <sprites name="Waiting Room">
         <sprite>sprites\spr_readygo</sprite>
         <sprite>sprites\spr_quit_waiting</sprite>
+        <sprite>sprites\spr_pregame_message</sprite>
         <sprite>sprites\spr_staticons</sprite>
         <sprite>sprites\spr_statbar</sprite>
         <sprite>sprites\spr_alphastar_select</sprite>
@@ -1619,6 +1627,10 @@
         <sprite>sprites\spr_postgame_box</sprite>
         <sprite>sprites\spr_pregame_message_white</sprite>
       </sprites>
+      <sprites name="Training">
+        <sprite>sprites\spr_howtoplay</sprite>
+        <sprite>sprites\spr_versus_ai</sprite>
+      </sprites>
       <sprite>sprites\spr_infobox</sprite>
       <sprite>sprites\spr_menu_selection_faded</sprite>
       <sprite>sprites\spr_menu_selection</sprite>
@@ -1628,38 +1640,6 @@
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_shipmask</sprite>
-    <sprites name="Trash">
-      <sprites name="Loading Screen">
-        <sprite>sprites\spr_matchnames</sprite>
-        <sprite>sprites\spr_playertypes</sprite>
-        <sprite>sprites\spr_loadingnumbers</sprite>
-        <sprite>sprites\spr_beginoperation</sprite>
-      </sprites>
-      <sprite>sprites\sprite253</sprite>
-      <sprites name="Postgame Room">
-        <sprite>sprites\spr_playagain</sprite>
-      </sprites>
-      <sprite>sprites\spr_icon_selectt</sprite>
-      <sprite>sprites\spr_breakline</sprite>
-      <sprite>sprites\spr_map_select</sprite>
-      <sprite>sprites\spr_beserkbar</sprite>
-      <sprite>sprites\spr_gotopractice</sprite>
-      <sprites name="Main Menu">
-        <sprite>sprites\spr_singleplayer</sprite>
-        <sprite>sprites\spr_multiplayer</sprite>
-      </sprites>
-      <sprite>sprites\spr_joingroup</sprite>
-      <sprite>sprites\spr_creategame</sprite>
-      <sprite>sprites\spr_selectgame</sprite>
-      <sprite>sprites\spr_badddd</sprite>
-      <sprite>sprites\spr_joingame</sprite>
-      <sprite>sprites\spr_refresher</sprite>
-      <sprite>sprites\spr_swiftwing_beserkglow</sprite>
-      <sprite>sprites\spr_helix2</sprite>
-      <sprite>sprites\spr_bluehelix2</sprite>
-      <sprite>sprites\spr_playerslot_options</sprite>
-      <sprite>sprites\spr_previewbound</sprite>
-    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\tile_wall</background>
@@ -1892,6 +1872,7 @@
     <script>scripts\select_tip.gml</script>
     <script>scripts\defeat_player.gml</script>
     <script>scripts\select_prematch_text.gml</script>
+    <script>scripts\change_secondary.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
@@ -1902,13 +1883,16 @@
     <font>fonts\fnt_digital</font>
     <font>fonts\fnt_stats</font>
     <font>fonts\fnt_bigtext</font>
+    <font>fonts\fnt_cursor</font>
   </fonts>
   <objects name="objects">
-    <object>objects\prnt_ship</object>
-    <object>objects\obj_player</object>
-    <object>objects\prnt_dummy</object>
-    <object>objects\obj_dummy_ally</object>
-    <object>objects\obj_dummy_enemy</object>
+    <objects name="Player Objects">
+      <object>objects\prnt_ship</object>
+      <object>objects\obj_player</object>
+      <object>objects\prnt_dummy</object>
+      <object>objects\obj_dummy_ally</object>
+      <object>objects\obj_dummy_enemy</object>
+    </objects>
     <objects name="In Game">
       <object>objects\obj_wall</object>
       <object>objects\obj_bigwall</object>
@@ -2116,6 +2100,7 @@
         <object>objects\obj_begin_operation</object>
         <object>objects\obj_chat</object>
         <object>objects\obj_tab_box</object>
+        <object>objects\obj_change_weapon</object>
       </objects>
       <objects name="Effects">
         <object>objects\obj_shippart</object>
@@ -2242,6 +2227,7 @@
     <room>rooms\rm_private_game</room>
     <room>rooms\rm_public_game</room>
     <room>rooms\rm_groupsettings</room>
+    <room>rooms\rm_training_menu</room>
     <room>rooms\rm_waiting</room>
     <room>rooms\rm_prematch</room>
     <room>rooms\rm_aftermatch</room>

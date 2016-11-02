@@ -175,10 +175,10 @@ room_goto(goto_room);
                     case spr_quickplay:
                         (instance_create(384, 240, obj_publicgame_search)).selection_reference = id;
                     break;
-                    case spr_searchforgame:
-                        (instance_create(384, 240, obj_searchforgame_box)).selection_reference = id;                        
-                    break;
-                    case spr_joingroup:
+                    //case spr_searchforgame:
+                    //    (instance_create(384, 240, obj_searchforgame_box)).selection_reference = id;                        
+                    //break;
+                    case spr_join_group:
                         (instance_create(384, 240, obj_joingroup_box)).selection_reference = id;                                            
                     break;
                     case spr_leave_group:

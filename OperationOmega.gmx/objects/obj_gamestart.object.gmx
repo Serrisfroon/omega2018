@@ -531,8 +531,13 @@ else
           <argument>
             <kind>1</kind>
             <string>if(transition_fade_in &gt; 0)
+{
     transition_fade_in -= 0.0125;
-    
+    obj_prematch_message.image_alpha = transition_fade_in;
+}
+else
+    with(obj_prematch_message)
+        instance_destroy();
 switch(animation_step)
 {
     case 1:
@@ -672,9 +677,8 @@ if(countdown_second &gt; 0)
 
 
 draw_set_alpha(transition_fade_in)
-draw_set_color(c_white);
-draw_rectangle(view_xview[0]-10, view_yview[0]-10, view_xview[0]+view_wview[0]+10, view_yview[0]+view_hview[0]+10, 0);
 draw_set_color(c_black);
+draw_rectangle(view_xview[0]-10, view_yview[0]-10, view_xview[0]+view_wview[0]+10, view_yview[0]+view_hview[0]+10, 0);
 draw_set_alpha(1);
 </string>
           </argument>

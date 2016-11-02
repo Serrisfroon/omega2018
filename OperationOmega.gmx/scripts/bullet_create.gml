@@ -233,6 +233,7 @@ switch(type)
          loldir[5] = loldir[1] + 15;
          loldir[6] = loldir[1] + 30;
          loldir[7] = loldir[1] + 45;
+         sfx_play(snd_spread, lolx, loly);
     break;
     case "Turret":
          name = "Turret";

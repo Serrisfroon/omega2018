@@ -43,6 +43,7 @@ if(global.create_postgame_popup = true)
 chat_init(8);
 found = 0;
 text = "";
+keyboard_string = "";
 alarm[0] = 12;
 flashing = '|';
 //Initialize match rule variable to avoid error
