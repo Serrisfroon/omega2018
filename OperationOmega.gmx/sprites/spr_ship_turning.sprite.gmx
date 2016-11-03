@@ -2,24 +2,26 @@
 <sprite>
   <type>0</type>
   <xorig>18</xorig>
-  <yorigin>15</yorigin>
+  <yorigin>21</yorigin>
   <colkind>0</colkind>
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
   <bbox_left>0</bbox_left>
-  <bbox_right>35</bbox_right>
+  <bbox_right>36</bbox_right>
   <bbox_top>0</bbox_top>
-  <bbox_bottom>29</bbox_bottom>
+  <bbox_bottom>41</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
     <TextureGroup0>0</TextureGroup0>
   </TextureGroups>
   <For3D>0</For3D>
-  <width>36</width>
-  <height>30</height>
+  <width>37</width>
+  <height>42</height>
   <frames>
-    <frame index="0">images\spr_alpha_turn_0.png</frame>
+    <frame index="0">images\spr_ship_turning_0.png</frame>
+    <frame index="1">images\spr_ship_turning_1.png</frame>
+    <frame index="2">images\spr_ship_turning_2.png</frame>
   </frames>
 </sprite>

@@ -158,7 +158,7 @@ if(fade = 1)
             <kind>1</kind>
             <string>//If the ship connected to this effect exists, draw the effect
 if(instance_exists(hurting))
- draw_sprite_ext(spr_shield, -1, hurting.x, hurting.y, 1, 1, hitdir, c_white, hit);
+ draw_sprite_ext(spr_shield, -1, hurting.x, hurting.y, 1, 1, hitdir, c_white, 1);
 </string>
           </argument>
         </arguments>

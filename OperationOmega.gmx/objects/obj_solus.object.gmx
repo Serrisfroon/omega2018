@@ -33,6 +33,7 @@ totaldir = 0;
 //Initialize rotation speed
 turn = 0;
 amplified = 0;
+sound_created = false;
 //Set time until rotation
 alarm[0] = 35;
 
@@ -61,9 +62,11 @@ alarm[0] = 35;
             <string>//Create an effect
 repeat(6)
  effect_create_above(ef_spark, x-20+random(40), y-20+random(40), 1, c_teal);
-
-audio_stop_sound(sound);
-audio_emitter_free(emit);
+if(sound_created = true)
+{
+    audio_stop_sound(sound);
+    audio_emitter_free(emit);
+}
 </string>
           </argument>
         </arguments>
@@ -123,6 +126,7 @@ alarm[1] = 4;
 
 if(global.sfxtoggle = 0)
 {
+    sound_created = true;
     emit = audio_emitter_create();
     audio_emitter_position(emit, x, y, 0);
     sound = audio_play_sound_on(emit, snd_sonic, 1, 1);

@@ -263,11 +263,10 @@ while(true)
                         
             //Read the respawn location for the player
             respawn_location[dummy] = readbyte(0);     
-            if(announcement_stage = 0 &amp;&amp; global.playership[dummy].defeatmid != 20)
+            if(global.playership[dummy].defeatmid != 20)
             {
-                 announcement_stage  = 1;
-                 announcement_message = readstring(0);
-                 announcement_color = chatcolor[4];
+                var new_message = readstring(0);
+                create_announcement(new_message, obj_chat.chat_line_color[1]);
             }
  
         break;
@@ -288,17 +287,15 @@ while(true)
                     chat_addline_game("Red Team has been eliminated.", 1, 0, dummy);          //Add the line to the chat
                     chat_addline_game("Blue Team has won the match.", 2, 0, dummy);          //Add the line to the chat
                     
-                    newcolor = c_maroon;
+                    newcolor = c_red;
                     if(global.team[global.mymid] = 1)
                     {
-                        obj_mod.announcement_message = "Operation Failed";
-                        obj_mod.announcement_color = c_navy;
+                        create_announcement("Operation Failed", c_blue);
                         global.outcome = 1;
                     }
                     else
                     {
-                        obj_mod.announcement_message = "Operation Successful";
-                        obj_mod.announcement_color = c_navy;
+                        create_announcement("Operation Successful", c_blue);
                         global.outcome = 0;
                     }
                 break;
@@ -306,24 +303,19 @@ while(true)
                     //Send a message to your chat
                     chat_addline_game("Blue Team has been eliminated.", 2, 0, dummy);          //Add the line to the chat
                     chat_addline_game("Red Team has won the match.", 1, 0, dummy);          //Add the line to the chat
-                    newcolor = c_navy;
+                    newcolor = c_blue;
                     if(global.team[global.mymid] = 1)
                     {
-                        obj_mod.announcement_message = "Operation Successful";
-                        obj_mod.announcement_color = c_maroon;
+                        create_announcement("Operation Successful", c_red);
                         global.outcome = 0;
                     }
                     else
                     {
-                        obj_mod.announcement_message = "Operation Failed";
-                        obj_mod.announcement_color = c_maroon;
+                        create_announcement("Operation Failed", c_red);
                         global.outcome = 1;
                     }
                 break;
             }
-            //Send the announcement
-            obj_mod.announcement_stage  = 1;
-            obj_mod.announcement_alpha = 0;
             //Set time until returning to waiting room
             alarm[2] = 180;
         break;

@@ -8,6 +8,7 @@ tile.selection_type = -1;
 tile.selection_cost = -1;
 tile.selection_stock = -1;
 tile.selection_object = -1;   
+tile.selection_name = "";
 tile.selection_lockon_required = false;   
 switch(tile.owner.object_index)
 {

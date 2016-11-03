@@ -101,12 +101,6 @@ for(i = 1; i &lt;= 4; i++)
 //Hold the value of the image index of weapon icons corresponding to your team
 team_color_index = global.team[global.mymid]-1;
 
-//Initialize announcement variables
-announcement_message = "";      //Holds the message string
-announcement_alpha = 0;         //Holds the alpha value of the announcement
-announcement_color = c_maroon;  //Holds the text color of the announcement
-announcement_stage = 0;         //Holds the stage variable that controls what the announcement is doing
-
 //Initialize chat-related variables
 chat_open = false;      //Flag that says whether or not the extended chat window is open
 chat_flashing = '';                  //Holds the ending typing character
@@ -204,49 +198,6 @@ var_circle_zoom_max = 0.60;
 
 magnify1 = surface_create(view_wport[0], view_hport[0]);
 magnify2 = surface_create(view_wport[0], view_hport[0]);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Begin fading out the displayed announcement.</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>announcement_stage = 3;
 </string>
           </argument>
         </arguments>
@@ -655,10 +606,7 @@ else
     //Send a message to your chat
     chat_addline_game("Red Team has been eliminated.", 1, 0, mid);          //Add the line to the chat
     chat_addline_game("Blue Team has won the match.", 2, 0, mid);          //Add the line to the chat
-    obj_mod.announcement_stage  = 1;
-    obj_mod.announcement_message = "Operation Failed";
-    obj_mod.announcement_color = c_navy;
-    obj_mod.announcement_alpha = 0;
+    create_announcement("Operation Failed", c_blue);
     global.outcome = 1;
 
         //Hold the eliminated team value
@@ -681,10 +629,7 @@ else
     //Send a message to your chat
     chat_addline_game("Blue Team has been eliminated.", 2, 0, mid);          //Add the line to the chat
     chat_addline_game("Red Team has won the match.", 1, 0, mid);          //Add the line to the chat
-    obj_mod.announcement_stage  = 1;
-    obj_mod.announcement_message = "Operation Failed";
-    obj_mod.announcement_color = c_red;
-    obj_mod.announcement_alpha = 0;
+    create_announcement("Operation Failed", c_red);
     global.outcome = 1;
         //Hold the eliminated team value
         var team_eliminated = 1;
@@ -947,11 +892,10 @@ while(true)
             //Read the respawn location for the player
             respawn_location[dummy] = readbyte(0);      
             //Create an announcement
-            if(announcement_stage = 0 &amp;&amp; global.playership[dummy].defeatmid != 20)
+            if(global.playership[dummy].defeatmid != 20)
             {
-                 announcement_stage  = 1;
-                 announcement_message = readstring(0);
-                 announcement_color = chatcolor[4];
+                var new_announcement = readstring(0);
+                create_announcement(new_announcement, obj_chat.chat_line_color[1]);
             }
                 
             //Send the message to other players
@@ -980,18 +924,14 @@ while(true)
                     chat_addline_game("Blue Team has won the match.", 2, 0, dummy);          //Add the line to the chat
                     
                     //Display an announcement
-                    obj_mod.announcement_stage  = 1;
-                    obj_mod.announcement_alpha = 0;
                     if(global.team[mid] = 1)
                     {
-                        obj_mod.announcement_message = "Operation Failed";
+                        create_announcement("Operation Failed", c_blue);
                         global.outcome = 1;
-                        obj_mod.announcement_color = c_navy;
                     }
                     else
                     {
-                        obj_mod.announcement_message = "Operation Successful";
-                        obj_mod.announcement_color = c_navy;
+                        create_announcement("Operation Successful", c_blue);
                         global.outcome = 0;
                     }         
                     
@@ -1018,18 +958,14 @@ while(true)
                     chat_addline_game("Red Team has won the match.", 1, 0, dummy);          //Add the line to the chat
                     
                     //Display an announcement
-                    obj_mod.announcement_stage  = 1;
-                    obj_mod.announcement_alpha = 0;
                     if(global.team[mid] = 1)
                     {
-                        obj_mod.announcement_message = "Operation Successful";
-                        obj_mod.announcement_color = c_maroon;
+                        create_announcement("Operation Successful", c_red);
                         global.outcome = 0;
                     }
                     else
                     {
-                        obj_mod.announcement_message = "Operation Failed";
-                        obj_mod.announcement_color = c_maroon;
+                        create_announcement("Operation Failed", c_red);
                         global.outcome = 1;
                     }
                     //Hold the eliminated team value
@@ -1120,18 +1056,14 @@ while(true)
                         if(global.team[mid] = 1)
                         {
                             global.outcome = 1;
-                            obj_mod.announcement_message = "Operation Failed";
+                            create_announcement("Operation Failed", c_blue);
                         }
                         else
                         {
                             global.outcome = 0;
-                            obj_mod.announcement_message = "Operation Successful";
+                            create_announcement("Operation Successful", c_blue);
                         }
-                    
-                        obj_mod.announcement_stage  = 1;
-                        obj_mod.announcement_color = c_navy;
-                        obj_mod.announcement_alpha = 0;
-                
+                                    
                         //Hold the eliminated team value
                         var team_eliminated = 1;
                         //Set time until returning to waiting room
@@ -1152,18 +1084,15 @@ while(true)
                         //Send a message to your chat
                         chat_addline_game("Blue Team has been eliminated.", 2, 0, dummy);          //Add the line to the chat
                         chat_addline_game("Red Team has won the match.", 1, 0, dummy);          //Add the line to the chat
-                        obj_mod.announcement_stage  = 1;
-                        obj_mod.announcement_color = c_maroon;
-                        obj_mod.announcement_alpha = 0;
                         if(global.team[mid] = 2)
                         {
                             global.outcome = 1;
-                            obj_mod.announcement_message = "Operation Failed";
+                            create_announcement("Operation Failed", c_red);
                         }
                         else
                         {
                             global.outcome = 0;
-                            obj_mod.announcement_message = "Operation Successful";
+                            create_announcement("Operation Successful", c_red);
                         }
                         //Hold the eliminated team value
                         var team_eliminated = 1;
@@ -1244,23 +1173,6 @@ if(update_cursor_name = true)
 }
 else
     update_cursor_name = true;
-//Handle announcements
-switch(announcement_stage)
-{
-    case 1:
-        announcement_alpha += 0.05;
-        if(announcement_alpha = 1)
-        {
-            alarm[10] = 240;
-            announcement_stage = 2;
-        }
-    break;
-    case 3:
-        announcement_alpha -= 0.05;
-        if(announcement_alpha = 0)
-            announcement_stage = 0;
-    break;
-}
 
 if((view_xview[0] &gt; 0 &amp;&amp; view_xview[0]+view_wview[0] &lt; room_width))
 {
@@ -1785,17 +1697,6 @@ if(targeted_object != -1)
     if(!instance_exists(obj_lockoncursor))
         draw_sprite_ext(spr_targetcursor, distance_to_target, target_cursor_x, target_cursor_y, 1, 1, cursor_rotation[2], c_white, 0.7);
 } 
-//Draw announcement text, if there is any
-if(announcement_alpha &gt; 0)
-{
-    draw_set_halign(fa_center);
-    draw_set_valign(fa_middle);
-    draw_set_font(fnt_bigtext);
-    draw_set_alpha(announcement_alpha);
-    draw_text_bordered(view_wport[0]/2, 130, announcement_message, 1, 2, announcement_color, c_white);
-    draw_set_halign(fa_left);
-    draw_set_valign(fa_top);
-}
 
 //Draw equipped weapons
 check_weapons();

@@ -31,18 +31,13 @@ for(disi = 1; disi < 8; disi += 1)
                 if(global.team[global.mymid] = 1)
                 {
                     global.outcome = 1;
-                    obj_mod.announcement_message = "Operation Failed";
+                    create_announcement("Operation Failed", c_blue);
                 }
                 else
                 {
                     global.outcome = 0;
-                    obj_mod.announcement_message = "Operation Successful";
-                }
-                
-                obj_mod.announcement_stage  = 1;
-                obj_mod.announcement_color = c_navy;
-                obj_mod.announcement_alpha = 0;
-            
+                    create_announcement("Operation Successful", c_blue);
+                }            
                 //Hold the eliminated team value
                 var team_eliminated = 1;
                 //Set time until returning to waiting room
@@ -63,18 +58,15 @@ for(disi = 1; disi < 8; disi += 1)
                 chat_addline_game("Blue Team has been eliminated.", 2, 0, disi)
                 chat_addline_game("Red Team has won the match.", 1, 0, disi)
                 
-                obj_mod.announcement_stage  = 1;
-                obj_mod.announcement_color = c_red;
-                obj_mod.announcement_alpha = 0;
                 if(global.team[global.mymid] = 2)
                 {
                     global.outcome = 1;
-                    obj_mod.announcement_message = "Operation Failed";
+                    create_announcement("Operation Failed", c_red);
                 }
                 else
                 {
                     global.outcome = 0;
-                    obj_mod.announcement_message = "Operation Successful";
+                    create_announcement("Operation Successful", c_red);
                 }
                 //Hold the eliminated team value
                 var team_eliminated = 2;

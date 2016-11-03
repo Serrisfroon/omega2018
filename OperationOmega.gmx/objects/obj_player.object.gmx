@@ -534,6 +534,26 @@ facedir -= ship_turning_rate;
 //Keep facedir at or below 360
 if(facedir &lt; 0) facedir += 360;
 
+if(ship_turn_side != -1)
+{
+    ship_turning = true;
+    ship_turn_side = 1;
+    if(ship_turn_alpha &lt; 1)
+    {
+        ship_turn_alpha += 0.1;
+        ship_turn_scaling -= 0.015;
+    }
+}
+else
+{
+    if(ship_turn_alpha &gt; 0)
+    {
+        ship_turn_alpha -= 0.1;
+        ship_turn_scaling += 0.015;
+    }
+    else
+        ship_turn_side = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -564,6 +584,26 @@ if(ship_disabled = true)
 facedir += ship_turning_rate;
 //Keep facedir at or below 360
 if(facedir &gt; 360) facedir -= 360;
+if(ship_turn_side != 1)
+{
+    ship_turning = true;
+    ship_turn_side = -1;
+    if(ship_turn_alpha &lt; 1)
+    {
+        ship_turn_alpha += 0.1;
+        ship_turn_scaling -= 0.015;
+    }
+}
+else
+{
+    if(ship_turn_alpha &gt; 0)
+    {
+        ship_turn_alpha -= 0.1;
+        ship_turn_scaling += 0.015;
+    }
+    else
+        ship_turn_side = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -769,6 +809,8 @@ if(ship_disabled = true)
 predictspeed = 2;
 //Have the controller object send a refresh packet
 obj_mod.update_packet_timer = 0;
+
+
 </string>
           </argument>
         </arguments>
@@ -799,6 +841,7 @@ if(ship_disabled = true)
 predictturn = 1;
 //Have the controller object send a refresh packet
 obj_mod.update_packet_timer = 0;
+
 </string>
           </argument>
         </arguments>
@@ -829,7 +872,6 @@ if(ship_disabled = true)
 predictturn = 2;
 //Have the controller object send a refresh packet
 obj_mod.update_packet_timer = 0;
-
 
 </string>
           </argument>
@@ -1126,6 +1168,9 @@ obj_mod.update_packet_timer = 0;
 predictturn = 0;
 //Have the controller object send a refresh packet
 obj_mod.update_packet_timer = 0;
+
+//Stop turning the ship
+ship_turning = false; 
 </string>
           </argument>
         </arguments>
@@ -1152,6 +1197,9 @@ obj_mod.update_packet_timer = 0;
 predictturn = 0;
 //Have the controller object send a refresh packet
 obj_mod.update_packet_timer = 0;
+
+//Stop turning the ship
+ship_turning = false; 
 </string>
           </argument>
         </arguments>

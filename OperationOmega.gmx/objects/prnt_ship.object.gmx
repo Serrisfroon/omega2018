@@ -103,6 +103,12 @@ alarm[10] = 120;
 ship_ability_active_flag = false;   //Ship active ability flag
 hornet_warp = -1;                   //Hornet's warp variable
 
+//Initialize turn effect variables
+ship_turn_image = current_ship-1;       //Holds the image index of the ship turning effect image
+ship_turn_scaling = 1;                  //Holds the scaling variable to simulate the ship turning
+ship_turn_side = 0;                     //Holds +1 or -1 to switch the side the ship appears to turn 0 means no turn
+ship_turn_alpha = 0;                    //Holds the alpha of the ship turning image
+ship_turning = false;                   //Tells if the ship is currently turning
 
 //Initialize flame trail particles
 flame_smoke_trails = 0;                     //Holds the value of the number of trails currently shown
@@ -698,6 +704,20 @@ vspeed += lengthdir_y(controlturn, facedir);
 //Reset the speed to scale the hspeed and vspeed changes back down
 speed = prespeed;
 
+//Handle ship turning
+if(ship_turning = false)
+{
+    if(ship_turn_alpha &gt; 0)
+    {
+        ship_turn_alpha -= 0.1;
+        ship_turn_scaling += 0.015;
+    }
+    else
+            ship_turn_side = 0;
+}        
+
+
+
 //Handle hornet warping
 if(hornet_warp &gt; -1)
 {
@@ -917,22 +937,29 @@ if(global.playership[mid] = view_object)
 if(mid = global.mymid)
 {  
     //Create an announcement
-    if(obj_mod.announcement_stage = 0 &amp;&amp; defeatmid != 20)
+    var new_announcement = global.othername[defeatmid]+" defeated "+global.name;
+    if(global.team[mid] = 1)
     {
-         obj_mod.announcement_stage  = 1;
-         obj_mod.announcement_message = global.othername[defeatmid]+" defeated "+global.name;
-         obj_mod.announcement_color = obj_mod.chatcolor[4];
+        var message_color = c_blue;
+        var chat_coloring = 2;
     }
-    chat_addline_game(obj_player.message, global.team[mid], 0, mid);
+    else
+    {
+        var message_color = c_red;
+        var chat_coloring = 1;
+    }
+    
+    chat_addline_game(obj_player.message, chat_coloring, 0, mid);
+    create_announcement(new_announcement, message_color);
   
     //Send the defeat to everyone
     clearbuffer(0);
     packet_label_write(3, mid);
     writebyte(defeatmid, 0);
     writestring(obj_player.message, 0);
-    writebyte(global.team[mid], 0);
+    writebyte(chat_coloring, 0);
     writebyte(nextspawn, 0);
-    writestring(obj_mod.announcement_message, 0);
+    writestring(new_announcement, 0);
     //Send to everyone if host
     if(global.master = true)
         client_sendall(0, 0);
@@ -2497,9 +2524,11 @@ switch(global.secondary_selected)
           <argument>
             <kind>1</kind>
             <string>draw_flame(direction);
-draw_turnblur();
+//draw_turnblur();
 //Draw the ship
-draw_sprite_ext(sprite_index, -1, x, y, 1, 1, image_angle, c_white, invincible);
+draw_sprite_ext(sprite_index, -1, x, y, 1, ship_turn_scaling, image_angle, c_white, invincible);
+draw_sprite_ext(spr_ship_turning, ship_turn_image, x, y, 1, ship_turn_scaling*ship_turn_side, image_angle, c_white, ship_turn_alpha);
+
 
 if(ship_ability_active_flag = true &amp;&amp; current_ship = 3)
     draw_sprite_ext(spr_goliath_hyperrush, -1, x, y, 1, 1, image_angle, c_white, invincible);
