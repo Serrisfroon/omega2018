@@ -11,7 +11,7 @@ var dmg, hack, shock, shieldstat, datchain, step;
 dmg = argument0;
 hack = argument1;
 shock = argument2;
-shieldstat = min(global.playership[argument3], 1);
+shieldstat = global.playership[argument3].shieldup;
 step = 0;
 
 //Compress the shield stat

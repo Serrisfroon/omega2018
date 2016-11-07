@@ -64,7 +64,7 @@ sfx_play(snd_explode3, x, y);
 
 effect_create_above(ef_ring, x, y, 1, make_color_rgb(255,142,8));
 //Create an effect
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring[2], 3)
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring[2], 2)
 
 create_explosion(2);
 
@@ -73,13 +73,8 @@ partno = 0;
 repeat(4)
 {
  part = instance_create(x, y, obj_shippart);
- part.image_index = partno;
+ part.image_index = partno+(4*(global.team[mid]-1));
  part.direction = 70+90*partno+random(40);
- //Change colors of certain parts if on blue team
- if(partno = 0 &amp;&amp; sprite_index = spr_alphastar_enemy)
-  part.image_index = 4;
- if(partno = 1 &amp;&amp; sprite_index = spr_alphastar_enemy)
-  part.image_index = 5;
  partno += 1; 
 }
 //Create a error stopper

@@ -488,66 +488,6 @@ if(mid = global.mymid)
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Shield Regen Handling</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Reset the timer if the ship is in Shock status
-if(ship_status_shocked = true)
-{
-    alarm[4] = 120;
-    exit;
-}
-//Regenerate shield if the shield is below the maximum
-if(shield &lt; shield_maximum)
-{
-    //Regen at the standard rate if the shield percentage is less than the armor percentage
-    if(armor/armor_maximum &gt; shield/shield_maximum)
-        shield += 0.15;
-    //Otherwise, regenerate at half the normal rate
-    else
-        shield += 0.075;
-}
-//Repeat this every step until interrupted
-alarm[4] = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="2" enumb="3">
       <action>
         <libid>1</libid>

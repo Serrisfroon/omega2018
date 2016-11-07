@@ -1523,7 +1523,8 @@
       </sprites>
       <sprite>sprites\spr_paladinshield</sprite>
       <sprite>sprites\spr_shield</sprite>
-      <sprite>sprites\sprite266</sprite>
+      <sprite>sprites\spr_shield_break</sprite>
+      <sprite>sprites\spr_shield_regain</sprite>
       <sprite>sprites\spr_shocksparks</sprite>
       <sprite>sprites\spr_slasheffect</sprite>
       <sprite>sprites\spr_teleport_hole</sprite>
@@ -2105,6 +2106,8 @@
       <objects name="Effects">
         <object>objects\obj_shippart</object>
         <object>objects\obj_hit</object>
+        <object>objects\obj_shield_break</object>
+        <object>objects\obj_shield_regain</object>
         <object>objects\obj_shieldpart</object>
         <object>objects\obj_deadship</object>
         <object>objects\obj_flareburst</object>
