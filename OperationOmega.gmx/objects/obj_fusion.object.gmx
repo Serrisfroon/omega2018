@@ -77,6 +77,7 @@ attack_name = "Fusion";     //Set the name of the attack
 //instance_create(x, y, obj_fusion_hit);
 sfx_play(snd_fusionexplode, x, y);
 
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusion_explosion[global.team[mid]-1], 10);
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring[global.team[mid]-1], 1);
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusion_burst[global.team[mid]-1], 20);
 

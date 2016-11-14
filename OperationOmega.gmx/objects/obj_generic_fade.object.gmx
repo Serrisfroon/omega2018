@@ -80,6 +80,7 @@ instance_destroy();
             <kind>1</kind>
             <string>visible = 1;
 image_angle = direction;
+image_index = global.team[mid]-1;
 </string>
           </argument>
         </arguments>

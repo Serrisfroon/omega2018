@@ -109,7 +109,7 @@ alarm[0] = 10;
             <string>//Rotate the part
 rotate += rotspeed;
 //Slowly make the part disappear
-fade -= 0.0065;
+fade -= 0.005;
 //Destroy the part when no longer visible
 if(fade &lt;= 0)
  instance_destroy();

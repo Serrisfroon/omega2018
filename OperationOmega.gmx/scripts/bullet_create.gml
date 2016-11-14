@@ -131,7 +131,7 @@ switch(type)
          name = "Formation";
          sprite = spr_newformation;
          life = 240;
-         after = obj_generic_hit;
+         after = obj_formation_hit;
          dmg = 5;
          mask = 16;
          lolspeed = 10;
@@ -167,7 +167,7 @@ switch(type)
          name = "Slash";
          sprite = spr_slash;
          life = 200;
-         after = obj_generic_hit;
+         after = obj_slash_hit;
          dmg = 5;
          mask = 17;
          lolspeed = 12;
@@ -179,7 +179,7 @@ switch(type)
          name = "Slash";
          sprite = spr_slash;
          life = 200;
-         after = obj_generic_hit;
+         after = obj_slash_hit;
          dmg = 5;
          mask = 17;
          lolspeed = 15;

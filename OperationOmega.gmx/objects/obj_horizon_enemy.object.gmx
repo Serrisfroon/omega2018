@@ -87,7 +87,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's name. Stored for ease of use
  obj_bulletcontrol.bulletname[i] = "Horizon";
  //The bullet's mask radius. Used for collision checking with ships
- obj_bulletcontrol.bulletmask[i] = 8;    
+ obj_bulletcontrol.bulletmask[i] = 17;    
  if(i = obj_bulletcontrol.bulletmax+1) obj_bulletcontrol.bulletmax += 1;
  break;
 }
@@ -120,7 +120,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's name. Stored for ease of use
  obj_bulletcontrol.bulletname[i] = "Horizon";
  //The bullet's mask radius. Used for collision checking with ships
- obj_bulletcontrol.bulletmask[i] = 8;    
+ obj_bulletcontrol.bulletmask[i] = 17;    
  if(i = obj_bulletcontrol.bulletmax+1) obj_bulletcontrol.bulletmax += 1;
  break;
 }
@@ -156,7 +156,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's name. Stored for ease of use
  obj_bulletcontrol.bulletname[i] = "Horizon ";
  //The bullet's mask radius. Used for collision checking with ships
- obj_bulletcontrol.bulletmask[i] = 8;    
+ obj_bulletcontrol.bulletmask[i] = 17;    
  if(i = obj_bulletcontrol.bulletmax+1) obj_bulletcontrol.bulletmax += 1;
  break;
 }
@@ -189,7 +189,7 @@ for(i = 1; i &lt;= obj_bulletcontrol.bulletmax+1; i += 1)
  //The bullet's name. Stored for ease of use
  obj_bulletcontrol.bulletname[i] = "Horizon ";
  //The bullet's mask radius. Used for collision checking with ships
- obj_bulletcontrol.bulletmask[i] = 8;    
+ obj_bulletcontrol.bulletmask[i] = 17;    
  if(i = obj_bulletcontrol.bulletmax+1) obj_bulletcontrol.bulletmax += 1;
  break;
 }

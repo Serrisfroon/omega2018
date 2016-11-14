@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,12 +25,38 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Create an effect
-effect_create_above(ef_spark, x, y, 1, c_green);
-part_type_color1(obj_partsystem.primarypart, c_green);
-part_type_speed(obj_partsystem.primarypart,1.68,2.40,-0.04,0);
-part_type_direction(obj_partsystem.primarypart,0,359,0,0);
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.primarypart, 6);
+            <string>//Set the destroy time
+alarm[0] = 1;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var parteffectcolor = obj_partsystem.energyhit[global.team[mid]-1]
+part_type_direction(parteffectcolor,0,359,0,0);
+part_particles_create(obj_partsystem.system, x, y, parteffectcolor, 3);
+
+part_type_direction(obj_partsystem.formation_hit[global.team[mid]-1],direction,direction,0,0);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.formation_hit[global.team[mid]-1], 5);
+
 
 instance_destroy();
 </string>
@@ -50,5 +76,8 @@ instance_destroy();
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>6,6</point>
+    <point>6,6</point>
+  </PhysicsShapePoints>
 </object>

@@ -1568,7 +1568,14 @@ for(i = 0; i &lt; 8; i += 1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Delete temporary data from memory
+            <string>//Loop through the four secondary weapons
+for(i = 1; i &lt;= 4; i++)
+{
+    //Hold the max stock for each secondary locally
+    global.secondary_stock[i] = max_secondary_stock[i];
+}
+
+//Delete temporary data from memory
 sprite_delete(global.wallsprite);
 background_delete(global.starback[0]);
 background_delete(global.starback[1]);
@@ -1969,27 +1976,27 @@ switch(selected_tab)
 {
     case 1:
         draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x-cursor_weapon[1], mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[2], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[3], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[4], 0.9);    
     break;
     case 2:
         draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x-cursor_weapon[2]+8, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x-cursor_weapon[2]+8, mouse_cursor_y, 1, 1, 0, weapon_available_color[2], 0.9-current_secondary_name_alpha);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[3], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[4], 0.9);    
     break;
     case 3:
         draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x-cursor_weapon[3]+16, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[2], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x-cursor_weapon[3]+16, mouse_cursor_y, 1, 1, 0, weapon_available_color[3], 0.9-current_secondary_name_alpha);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[4], 0.9);    
     break;
     case 4:
         draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[1]/global.secondary_cost[1]), mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);    
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9);
-        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x-cursor_weapon[4]+24, mouse_cursor_y, 1, 1, 0, weapon_available_color[1], 0.9-current_secondary_name_alpha);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[2]/global.secondary_cost[2])+5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[2], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[3]/global.secondary_cost[3])+10, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, weapon_available_color[3], 0.9);
+        draw_sprite_ext(spr_cursor_weapons_ammo, floor(global.secondary_stock[4]/global.secondary_cost[4])+15, mouse_cursor_x-cursor_weapon[4]+24, mouse_cursor_y, 1, 1, 0, weapon_available_color[4], 0.9-current_secondary_name_alpha);
     break;
 }
 

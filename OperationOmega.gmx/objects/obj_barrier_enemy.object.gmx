@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>prnt_bloom_attack</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -69,17 +69,22 @@ else
           <argument>
             <kind>1</kind>
             <string>//Create a smoke effect over the barrier's area
-effect_create_above(ef_smoke, x+lengthdir_x(20, direction), y+lengthdir_y(20, direction), 2, c_gray);
+if(global.team[mid] = 1)
+    var smoke_color = make_color_rgb(255, 100, 100);
+else
+    var smoke_color = make_color_rgb(100, 100, 255);
 
-effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction+90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction+90), 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction+90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction+90), 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction+90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction+90), 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction+90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction+90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(20, direction), y+lengthdir_y(20, direction), 2, smoke_color);
 
-effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction-90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction-90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction-90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction-90), 2, c_gray);
-effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction-90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction-90), 2, c_gray);
+effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction+90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction+90), 2, smoke_color);
+effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction+90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction+90), 2, smoke_color);
+effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction+90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction+90), 2, smoke_color);
+effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction+90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction+90), 2, smoke_color);
+
+effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction-90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction-90), 2, smoke_color);
+effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction-90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction-90), 2, smoke_color);
+effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction-90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction-90), 2, smoke_color);
+effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction-90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction-90), 2, smoke_color);
 
 </string>
           </argument>
@@ -105,8 +110,8 @@ effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, dire
             <kind>1</kind>
             <string>image_angle = direction;
 visible = 1;
-//Rotate the barrier as needed
-image_angle = direction;
+image_index = global.team[mid]-1;
+image_speed = 0;
 //Increase the duration if amplified
 if(amplified = true)
     alarm[0] +=  75;

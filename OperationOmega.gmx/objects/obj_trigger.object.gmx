@@ -32,6 +32,9 @@ nextshot = 0;
 sfx_play(snd_wave, x, y);
 alarm[0] = 5;
 altershot = 0;
+teamcolor = 0;
+alarm[1] = 1;
+
 </string>
           </argument>
         </arguments>
@@ -56,6 +59,29 @@ altershot = 0;
             <kind>1</kind>
             <string>effect_create_below(ef_flare, x, y, 1, c_yellow);
 global.playership[mid].direct_node = -1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>teamcolor = global.team[mid];
 </string>
           </argument>
         </arguments>
@@ -143,6 +169,30 @@ if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
     instance_destroy();
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+draw_sprite_ext(sprite_index, teamcolor, x, y, 1, 1, image_angle, c_white, 1);
 </string>
           </argument>
         </arguments>

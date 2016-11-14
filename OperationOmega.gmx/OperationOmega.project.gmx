@@ -1354,6 +1354,7 @@
       <sprite>sprites\spr_formation</sprite>
       <sprite>sprites\spr_beamflare</sprite>
       <sprite>sprites\spr_beam</sprite>
+      <sprite>sprites\spr_beam_light</sprite>
       <sprite>sprites\spr_nodetarget</sprite>
       <sprite>sprites\spr_sparkline</sprite>
       <sprite>sprites\spr_burst</sprite>
@@ -1937,6 +1938,7 @@
           <object>objects\obj_formationb</object>
           <object>objects\obj_formationa_enemy</object>
           <object>objects\obj_formationb_enemy</object>
+          <object>objects\obj_formation_hit</object>
         </objects>
         <objects name="Beam">
           <object>objects\obj_beam_attack</object>
@@ -1960,6 +1962,7 @@
           <object>objects\obj_slash_attack</object>
           <object>objects\obj_slash</object>
           <object>objects\obj_slash_enemy</object>
+          <object>objects\obj_slash_hit</object>
         </objects>
         <objects name="Horizon">
           <object>objects\obj_horizon_attack</object>

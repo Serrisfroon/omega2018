@@ -28,6 +28,8 @@
             <string>creates = 8;
 alarm[0] = 1;
 image_angle = direction;
+image_speed = 0;
+image_index = global.team[global.mymid]-1;
 image_xscale = 0;
 image_yscale = 0;
 amplified = 0;

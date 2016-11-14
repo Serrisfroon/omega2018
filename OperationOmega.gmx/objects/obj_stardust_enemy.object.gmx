@@ -68,7 +68,8 @@ attack_name = "Stardust";       //Set the name of the attack
             <string>//Create effect
 ending = instance_create(x, y, obj_stardust_end);
 ending.image_angle = direction;
-ending.color = global.team[mid];
+ending.image_index = global.team[mid]-1;
+ending.image_speed = 0;
 ending.mid = mid;
 </string>
           </argument>

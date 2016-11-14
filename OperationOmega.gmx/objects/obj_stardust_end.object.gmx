@@ -26,8 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>//Create effect
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stardust_smoke, 8);
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.starburst[global.team[mid]-1], 6);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stardust_flare[image_index], 6);
+
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stardust_swella[image_index], 6);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stardust_swellb[image_index], 1);
 </string>
           </argument>
         </arguments>
@@ -52,7 +54,7 @@ part_particles_create(obj_partsystem.system, x, y, obj_partsystem.starburst[glob
             <kind>1</kind>
             <string>image_xscale -= 0.08;
 image_yscale = image_xscale;
-if(image_xscale &lt;= 0)
+if(image_xscale &lt;= 0.15)
     instance_destroy();
 </string>
           </argument>
