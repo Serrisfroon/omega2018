@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_phantommine</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>prnt_enemydeploy</parentName>
@@ -28,7 +28,7 @@
             <string>sfx_play(snd_mine, x, y);
 //Set time until auto-destroy
 alarm[1] = 3000;
-image_blend = global.enemycolor;
+alarm[3] = 1;
 amplified = 0;
 alarm[2] = 1;
 image_alpha = 0.4;
@@ -65,6 +65,31 @@ attack_name = "Phantom Mine";       //Set the name of the attack
 //Create an effect
 create_explosion(1);
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visible = 1;
+image_index = global.team[mid]-1;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -128,13 +153,18 @@ create_explosion(1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>target = instance_nearest(x, y, prnt_ally);
-if(target != noone)
+            <string>ally = instance_nearest(x, y, obj_dummy_ally);
+if(ally = noone)
+  ally = global.playership[global.mymid];      
+else
+    if(point_distance(x, y, ally.x, fally.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+      ally = global.playership[global.mymid];
+if(ally != noone)
 {
-  if(distance_to_object(target) &lt; 50)
+  if(distance_to_object(ally) &lt; 50)
   {
    speed = 20;
-   direction = point_direction(x, y, target.x, target.y);
+   direction = point_direction(x, y, ally.x, ally.y);
   }
   else
     speed = 0;
@@ -167,8 +197,7 @@ if(image_alpha &lt; 0.7 &amp;&amp; distance_to_object(obj_player) &lt;= 200)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, image_alpha);
-draw_sprite_ext(sprite_index, 1, x, y, 1, 1, image_angle, image_blend, image_alpha);
+            <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, image_alpha);
 </string>
           </argument>
         </arguments>

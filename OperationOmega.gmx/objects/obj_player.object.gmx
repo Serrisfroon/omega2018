@@ -425,7 +425,7 @@ attack_collision(regdmg, penedmg, 0, 8, "Layer Missile");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(other.function_stage &gt; 0)
+            <string>if(other.function_stage = 2)
     attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold, 
                         other.attack_shake, other.attack_name);
 </string>

@@ -110,6 +110,8 @@ if(trio != 1)
     attack_burst = 4;
 else
     attack_burst = 16;
+image_index = global.team[mid]-1;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -204,33 +206,33 @@ switch(trio)
  break;
  case 2:
       visible = 0;
-      part_type_sprite(particle1,spr_smoke_part, 0, 0, 0);
-      part_type_size(particle1,0.20,0.25,0.00,0);
-      part_type_scale(particle1,1,1);
-      part_type_color1(particle1,8421504);
-      part_type_alpha2(particle1,1,0);
-      part_type_speed(particle1,0,0,1,0);
-      part_type_direction(particle1,direction+90,direction+90,0,0);
-      part_type_gravity(particle1,0,270);
-      part_type_orientation(particle1,0,0,0,0,1);
-      part_type_blend(particle1,0);
-      part_type_life(particle1,10,10);
+        part_type_sprite(particle1, spr_explosion_part, 0, 0, 0);
+        part_type_size(particle1,0.30,0.40,0,0);
+        part_type_scale(particle1,0.9,0.9);
+        part_type_color2(particle1,16512,8421504);
+        part_type_alpha1(particle1,1);
+        part_type_speed(particle1,0,0,1,0);
+        part_type_direction(particle1,direction+90,direction+90,0,0);
+        part_type_gravity(particle1,0,270);
+        part_type_orientation(particle1,0,359,0,0,1);
+        part_type_blend(particle1,1);
+        part_type_life(particle1,10,10);
       part_emitter_region(obj_partsystem.system,emitter1,x-8,x+8,y-8,y+8,1,1);
       part_emitter_stream(obj_partsystem.system,emitter1,particle1,5);
  break;
  case 3:
       visible = 0;
-      part_type_sprite(particle1,spr_smoke_part, 0, 0, 0);
-      part_type_size(particle1,0.20,0.25,0.00,0);
-      part_type_scale(particle1,1,1);
-      part_type_color1(particle1,8421504);
-      part_type_alpha2(particle1,1,0);
-      part_type_speed(particle1,0,0,1,0);
-      part_type_direction(particle1,direction-90,direction-90,0,0);
-      part_type_gravity(particle1,0,270);
-      part_type_orientation(particle1,0,0,0,0,1);
-      part_type_blend(particle1,0);
-      part_type_life(particle1,10,10);
+        part_type_sprite(particle1, spr_explosion_part, 0, 0, 0);
+        part_type_size(particle1,0.30,0.40,0,0);
+        part_type_scale(particle1,0.9,0.9);
+        part_type_color2(particle1,16512,8421504);
+        part_type_alpha1(particle1,1);
+        part_type_speed(particle1,0,0,1,0);
+        part_type_direction(particle1,direction-90,direction-90,0,0);
+        part_type_gravity(particle1,0,270);
+        part_type_orientation(particle1,0,359,0,0,1);
+        part_type_blend(particle1,1);
+        part_type_life(particle1,10,10);
       part_emitter_region(obj_partsystem.system,emitter1,x-8,x+8,y-8,y+8,1,1);
       part_emitter_stream(obj_partsystem.system,emitter1,particle1,5);
  break;
@@ -310,7 +312,7 @@ switch(go)
       switch(trio)
       {
        case 1:
-            effect_create_below(ef_smoke, x, y, 0, c_gray);
+            part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missile_flame[1], 1);
        break;
        case 2:
             part_type_direction(particle1,direction+90,direction+90,0,0);
@@ -379,27 +381,24 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, 1);
-draw_sprite_ext(sprite_index, 1, x, y, 1, 1, image_angle, global.allycolor, 1);
+            <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, 1);
 
 if(go != 1 || trio != 1)
  exit;
 
 if(instance_exists(second))
 {
- var addxdist1, addydist1;
- addxdist1 = lengthdir_x(42, direction-90)+lengthdir_x(42, direction-180);
- addydist1 = lengthdir_y(42, direction-90)+lengthdir_y(42, direction-180);
- draw_sprite_ext(sprite_index, 0, x+addxdist1, y+addydist1, 1, 1, image_angle, c_white, 1);
- draw_sprite_ext(sprite_index, 1, x+addxdist1, y+addydist1, 1, 1, image_angle, global.allycolor, 1);
+    var addxdist1, addydist1;
+    addxdist1 = lengthdir_x(42, direction-90)+lengthdir_x(42, direction-180);
+    addydist1 = lengthdir_y(42, direction-90)+lengthdir_y(42, direction-180);
+    draw_sprite_ext(sprite_index, image_index, x+addxdist1, y+addydist1, 1, 1, image_angle, c_white, 1);
 }
 if(instance_exists(third))
 {
- var addxdist2, addydist2;
- addxdist2 = lengthdir_x(42, direction+90)+lengthdir_x(42, direction-180);
- addydist2 = lengthdir_y(42, direction+90)+lengthdir_y(42, direction-180);
- draw_sprite_ext(sprite_index, 0, x+addxdist2, y+addydist2, 1, 1, image_angle, c_white, 1);
- draw_sprite_ext(sprite_index, 1, x+addxdist2, y+addydist2, 1, 1, image_angle, global.allycolor, 1);
+    var addxdist2, addydist2;
+    addxdist2 = lengthdir_x(42, direction+90)+lengthdir_x(42, direction-180);
+    addydist2 = lengthdir_y(42, direction+90)+lengthdir_y(42, direction-180);
+    draw_sprite_ext(sprite_index, image_index, x+addxdist2, y+addydist2, 1, 1, image_angle, c_white, 1);
 }
 </string>
           </argument>

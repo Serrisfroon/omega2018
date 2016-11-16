@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>prnt_bloom_attack</parentName>
+  <parentName>self</parentName>
   <maskName>spr_empty</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -191,7 +191,7 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, 1);
 draw_sprite_ext(sprite_index, teamcolor, x, y, 1, 1, image_angle, c_white, 1);
 </string>
           </argument>

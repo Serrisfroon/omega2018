@@ -142,7 +142,8 @@ with(obj_homingeffect)
           <argument>
             <kind>1</kind>
             <string>image_angle = direction;
-
+image_index = global.team[mid]-1;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -184,7 +185,7 @@ with(obj_homingeffect)
             <string>//Set image for masking
 image_angle = direction;
 //Create a smoke trail effect
-effect_create_below(ef_smoke, x, y, 0, c_gray);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missile_flame[1], 1);
 
 switch(go)
 {
@@ -279,8 +280,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, 1);
-draw_sprite_ext(sprite_index, 1, x, y, 1, 1, image_angle, image_blend, 1);
+            <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, 1);
 </string>
           </argument>
         </arguments>

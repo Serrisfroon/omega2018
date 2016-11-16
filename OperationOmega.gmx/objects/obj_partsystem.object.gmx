@@ -41,7 +41,49 @@ part_type_orientation(starpart,0,0,0,0,1);
 part_type_blend(starpart,1);
 part_type_life(starpart,12,12);
 
+//Missile Flames
+missile_flame[1] = part_type_create();
+part_type_sprite(missile_flame[1], spr_explosion_part, 0, 0, 0);
+part_type_size(missile_flame[1],0.30,0.50,0,0);
+part_type_scale(missile_flame[1],0.9,0.9);
+part_type_color2(missile_flame[1],16512,8421504);
+part_type_alpha1(missile_flame[1],1);
+part_type_speed(missile_flame[1],0,0,0,0);
+part_type_direction(missile_flame[1],359,359,0,0);
+part_type_gravity(missile_flame[1],0,270);
+part_type_orientation(missile_flame[1],0,359,0,0,1);
+part_type_blend(missile_flame[1],1);
+part_type_life(missile_flame[1],10,20);
 
+missile_flame[2] = part_type_create();
+part_type_sprite(missile_flame[2], spr_smoke_part, 0, 0, 0);
+part_type_size(missile_flame[2],0.30,0.50,0,0);
+part_type_scale(missile_flame[2],0.9,0.9);
+part_type_color2(missile_flame[2],4737096,3618615);
+part_type_alpha1(missile_flame[2],1);
+part_type_speed(missile_flame[2],0,0,0,0);
+part_type_direction(missile_flame[2],359,359,0,0);
+part_type_gravity(missile_flame[2],0,270);
+part_type_orientation(missile_flame[2],0,359,0,0,1);
+part_type_blend(missile_flame[2],1);
+part_type_life(missile_flame[2],20,30);
+
+missile_flame[3] = part_type_create();
+part_type_sprite(missile_flame[3], spr_smoke_part, 0, 0, 0);
+part_type_size(missile_flame[3],0.30,0.50,-0.01,0);
+part_type_scale(missile_flame[3],0.9,0.9);
+part_type_color1(missile_flame[3],3487029);
+part_type_alpha2(missile_flame[3],1,0.30);
+part_type_speed(missile_flame[3],0,0,0,0);
+part_type_direction(missile_flame[3],359,359,0,0);
+part_type_gravity(missile_flame[3],0,270);
+part_type_orientation(missile_flame[3],0,359,0,0,1);
+part_type_blend(missile_flame[3],1);
+part_type_life(missile_flame[3],10,10);
+
+
+part_type_death(missile_flame[1],1,missile_flame[2]);
+part_type_death(missile_flame[2],1,missile_flame[3]);
 
 //Ship flame
 ship_flame[0] = part_type_create();
@@ -87,17 +129,17 @@ part_type_life(ship_burn, 10, 20);
 
 //Smoke trail for missiles
 particle1 = part_type_create();
-part_type_sprite(particle1, spr_smoke_part, 0, 0, 0);
-part_type_size(particle1, 0.10, 0.25, 0.00, 0);
-part_type_scale(particle1, 1, 1);
-part_type_color1(particle1, 8421504);
-part_type_alpha2(particle1, 1, 0.20);
-part_type_speed(particle1, 0, 0, 0, 0);
-part_type_direction(particle1, 0, 0, 0, 0);
-part_type_gravity(particle1, 0, 270);
-part_type_orientation(particle1, 0, 0, 0, 0, 1);
-part_type_blend(particle1, 0);
-part_type_life(particle1, 25, 30);
+part_type_sprite(particle1, spr_explosion_part, 0, 0, 0);
+part_type_size(particle1,0.30,0.40,0,0);
+part_type_scale(particle1,0.9,0.9);
+part_type_color2(particle1,16512,8421504);
+part_type_alpha1(particle1,1);
+part_type_speed(particle1,0,0,0,0);
+part_type_direction(particle1,359,359,0,0);
+part_type_gravity(particle1,0,270);
+part_type_orientation(particle1,0,359,0,0,1);
+part_type_blend(particle1,1);
+part_type_life(particle1,20,20);
 
 //Ship part flame trail
 part_trail = part_type_create();
@@ -825,86 +867,6 @@ part_type_direction(explosion_flare, 0, 359, 0, 0);
 part_type_orientation(explosion_flare, 0, 0, 0, 0, 1);
 part_type_blend(explosion_flare, 1);
 part_type_life(explosion_flare, 45, 60);
-
-//Ship particles
-ship_turn_part[0] = part_type_create();
-part_type_sprite(ship_turn_part[0], spr_alphastar, 0, 0, 0);
-part_type_size(ship_turn_part[0], 1, 1, 0, 0);
-part_type_scale(ship_turn_part[0], 1, 1);
-//part_type_color1(ship_turn_part[0], c_white);
-part_type_alpha2(ship_turn_part[0], 0.70, 0);
-part_type_speed(ship_turn_part[0], 0, 0, 0, 0);
-part_type_direction(ship_turn_part[0], 0, 359, 0, 0);
-part_type_gravity(ship_turn_part[0], 0, 270);
-part_type_orientation(ship_turn_part[0], 0, 0, 0, 0, 1);
-part_type_blend(ship_turn_part[0], 1);
-part_type_life(ship_turn_part[0], 10, 10);
-
-ship_turn_part[1] = part_type_create();
-part_type_sprite(ship_turn_part[1], spr_swiftwing, 0, 0, 0);
-part_type_size(ship_turn_part[1], 1, 1, 0, 0);
-part_type_scale(ship_turn_part[1], 1, 1);
-//part_type_color1(ship_turn_part[1], c_white);
-part_type_alpha2(ship_turn_part[1], 0.70, 0);
-part_type_speed(ship_turn_part[1], 0, 0, 0, 0);
-part_type_direction(ship_turn_part[1], 0, 359, 0, 0);
-part_type_gravity(ship_turn_part[1], 0, 270);
-part_type_orientation(ship_turn_part[1], 0, 0, 0, 0, 1);
-part_type_blend(ship_turn_part[1], 1);
-part_type_life(ship_turn_part[1], 10, 10);
-
-ship_turn_part[2] = part_type_create();
-part_type_sprite(ship_turn_part[2], spr_goliath, 0, 0, 0);
-part_type_size(ship_turn_part[2], 1, 1, 0, 0);
-part_type_scale(ship_turn_part[2], 1, 1);
-//part_type_color1(ship_turn_part[2], c_white);
-part_type_alpha2(ship_turn_part[2], 0.70, 0);
-part_type_speed(ship_turn_part[2], 0, 0, 0, 0);
-part_type_direction(ship_turn_part[2], 0, 359, 0, 0);
-part_type_gravity(ship_turn_part[2], 0, 270);
-part_type_orientation(ship_turn_part[2], 0, 0, 0, 0, 1);
-part_type_blend(ship_turn_part[2], 1);
-part_type_life(ship_turn_part[2], 10, 10);
-
-ship_turn_part[3] = part_type_create();
-part_type_sprite(ship_turn_part[3], spr_alphastar_enemy, 0, 0, 0);
-part_type_size(ship_turn_part[3], 1, 1, 0, 0);
-part_type_scale(ship_turn_part[3], 1, 1);
-//part_type_color1(ship_turn_part[3], c_white);
-part_type_alpha2(ship_turn_part[3], 0.70, 0);
-part_type_speed(ship_turn_part[3], 0, 0, 0, 0);
-part_type_direction(ship_turn_part[3], 0, 359, 0, 0);
-part_type_gravity(ship_turn_part[3], 0, 270);
-part_type_orientation(ship_turn_part[3], 0, 0, 0, 0, 1);
-part_type_blend(ship_turn_part[3], 1);
-part_type_life(ship_turn_part[3], 10, 10);
-
-ship_turn_part[4] = part_type_create();
-part_type_sprite(ship_turn_part[4], spr_swiftwing_enemy, 0, 0, 0);
-part_type_size(ship_turn_part[4], 1, 1, 0, 0);
-part_type_scale(ship_turn_part[4], 1, 1);
-//part_type_color1(ship_turn_part[4], c_white);
-part_type_alpha2(ship_turn_part[4], 0.70, 0);
-part_type_speed(ship_turn_part[4], 0, 0, 0, 0);
-part_type_direction(ship_turn_part[4], 0, 359, 0, 0);
-part_type_gravity(ship_turn_part[4], 0, 270);
-part_type_orientation(ship_turn_part[4], 0, 0, 0, 0, 1);
-part_type_blend(ship_turn_part[4], 1);
-part_type_life(ship_turn_part[4], 10, 10);
-
-ship_turn_part[5] = part_type_create();
-part_type_sprite(ship_turn_part[5], spr_goliath_enemy, 0, 0, 0);
-part_type_size(ship_turn_part[5], 1, 1, 0, 0);
-part_type_scale(ship_turn_part[5], 1, 1);
-//part_type_color1(ship_turn_part[5], c_white);
-part_type_alpha2(ship_turn_part[5], 0.70, 0);
-part_type_speed(ship_turn_part[5], 0, 0, 0, 0);
-part_type_direction(ship_turn_part[5], 0, 359, 0, 0);
-part_type_gravity(ship_turn_part[5], 0, 270);
-part_type_orientation(ship_turn_part[5], 0, 0, 0, 0, 1);
-part_type_blend(ship_turn_part[5], 1);
-part_type_life(ship_turn_part[5], 10, 10);
-
 </string>
           </argument>
         </arguments>
@@ -928,6 +890,10 @@ part_type_life(ship_turn_part[5], 10, 10);
           <argument>
             <kind>1</kind>
             <string>part_system_destroy(system);
+part_type_destroy(starpart);
+part_type_destroy(missile_flame[1]);
+part_type_destroy(missile_flame[2]);
+part_type_destroy(missile_flame[3]);
 part_type_destroy(ship_flame[0]);
 part_type_destroy(ship_flame[1]);
 part_type_destroy(ship_burn);
@@ -943,10 +909,21 @@ part_type_destroy(fusionflare[0]);
 part_type_destroy(fusionflare[1]);
 part_type_destroy(fusionring[0]);
 part_type_destroy(fusionring[1]);
+part_type_destroy(fusionring[2]);
 part_type_destroy(fusion_burst[0]);
 part_type_destroy(fusion_burst[1]);
+part_type_destroy(fusion_explosion[0]);
+part_type_destroy(fusion_explosion[1]);
 part_type_destroy(fusion_tail[0]);
 part_type_destroy(fusion_tail[1]);
+part_type_destroy(stardust_swella[0]);
+part_type_destroy(stardust_swella[1]);
+part_type_destroy(stardust_swellb[0]);
+part_type_destroy(stardust_swellb[1]);
+part_type_destroy(stardust_wave[0]);
+part_type_destroy(stardust_wave[1]);
+part_type_destroy(stardust_flare[0]);
+part_type_destroy(stardust_flare[1]);
 part_type_destroy(barrier_light[0]);
 part_type_destroy(barrier_light[1]);
 part_type_destroy(beamspark[0]);
@@ -956,10 +933,13 @@ part_type_destroy(beamhit);
 part_type_destroy(beamline[0]);
 part_type_destroy(beamline[1]);
 part_type_destroy(beamline[2]);
+part_type_destroy(sparkline_sparks);
 part_type_destroy(horizonflare[0]);
 part_type_destroy(horizonflare[1]);
 part_type_destroy(formsplit[0]);
 part_type_destroy(formsplit[1]);
+part_type_destroy(formation_hit[0]);
+part_type_destroy(formation_hit[1]);
 part_type_destroy(burstsplit[0]);
 part_type_destroy(burstsplit[1]);
 part_type_destroy(spiralburst[0]);
@@ -971,12 +951,6 @@ part_type_destroy(explosion_core);
 part_type_destroy(explosion_glare);
 part_type_destroy(explosion_burst);
 part_type_destroy(explosion_flare);
-part_type_destroy(ship_turn_part[0]);
-part_type_destroy(ship_turn_part[1]);
-part_type_destroy(ship_turn_part[2]);
-part_type_destroy(ship_turn_part[3]);
-part_type_destroy(ship_turn_part[4]);
-part_type_destroy(ship_turn_part[5]);
 </string>
           </argument>
         </arguments>

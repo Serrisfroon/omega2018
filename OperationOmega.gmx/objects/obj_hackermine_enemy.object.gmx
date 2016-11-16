@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_hackermine</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>prnt_enemydeploy</parentName>
@@ -28,7 +28,7 @@
             <string>sfx_play(snd_mine, x, y);
 //Set time until auto-destroy
 alarm[1] = 1800;
-image_blend = global.enemycolor;
+alarm[3] = 1;
 outspeed = 0.25;
 inspeed = 0.125; 
 amplified = 0;
@@ -65,6 +65,31 @@ attack_name = "Hacker Mine";            //Set the name of the attack
 //Create an effect
 create_explosion(0);
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visible = 1;
+image_index = global.team[mid]-1;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -169,8 +194,7 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, 1);
-draw_sprite_ext(sprite_index, 1, x, y, 1, 1, image_angle, image_blend, 1);
+            <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, 1);
 </string>
           </argument>
         </arguments>

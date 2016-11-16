@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_clustermine</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>prnt_allydeploy</parentName>
@@ -28,6 +28,7 @@
             <string>sfx_play(snd_mine, x, y);
 //Set time until smoke trail effect
 alarm[0] = 30;
+alarm[3] = 1;
 //Set auto-destroy time
 alarm[1] = 1400;
 hit = 1;
@@ -65,6 +66,31 @@ attack_name = "Cluster Mine";               //Set the name of the attack
             <string>sfx_play(snd_explode2, x, y);
 //Create an effect
 create_explosion(0);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visible = 1;
+image_index = global.team[mid]-1;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -178,8 +204,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, 1);
-draw_sprite_ext(sprite_index, 1, x, y, 1, 1, image_angle, image_blend, 1);
+            <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, 1);
 </string>
           </argument>
         </arguments>

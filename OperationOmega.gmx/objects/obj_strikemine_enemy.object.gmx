@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_strikemine</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>1</depth>
   <persistent>0</persistent>
   <parentName>prnt_enemydeploy</parentName>
@@ -29,7 +29,6 @@
 //Set auto-destroy time
 alarm[1] = 1500;
 hit = 1;
-image_blend = global.enemycolor;
 amplified = 0;
 collected = 0;
 recollect = 0;
@@ -100,6 +99,9 @@ else
     attack_damage = 0;                          //Set the damage for the attack
     attack_burst = 27;                          //Set the bonus damage of the attack that ignores shield
 }
+visible = 1;
+image_index = global.team[mid]-1;
+image_speed = 0;
 </string>
           </argument>
         </arguments>
@@ -169,9 +171,11 @@ else
           <argument>
             <kind>1</kind>
             <string>image_angle += 1;
-ally = instance_nearest(x, y, prnt_enemy);
+if(recollect = 0)
+    exit;
+ally = instance_nearest(x, y, obj_dummy_enemy);
 if(instance_exists(ally))
-    if(point_distance(x, y, ally.x, ally.y) &lt; 40 &amp;&amp; ally = obj_enemy)
+    if(point_distance(x, y, ally.x, ally.y) &lt; 40 &amp;&amp; ally.mid = mid)
     {
         collected = 1;
         sfx_play(snd_pickup, x, y);
@@ -200,8 +204,7 @@ if(instance_exists(ally))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, 1);
-draw_sprite_ext(sprite_index, 1, x, y, 1, 1, image_angle, image_blend, 1);
+            <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, 1);
 </string>
           </argument>
         </arguments>
