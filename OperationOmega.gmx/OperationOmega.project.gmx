@@ -1389,6 +1389,10 @@
       <sprite>sprites\spr_hackermine</sprite>
       <sprite>sprites\spr_strikemine</sprite>
       <sprite>sprites\spr_clustermine</sprite>
+      <sprite>sprites\spr_solgrenade</sprite>
+      <sprite>sprites\spr_lunagrenade</sprite>
+      <sprite>sprites\spr_paladindrone</sprite>
+      <sprite>sprites\spr_valordrone</sprite>
       <sprite>sprites\spr_solus</sprite>
       <sprite>sprites\spr_turretbase</sprite>
       <sprite>sprites\spr_turretbase_color</sprite>
