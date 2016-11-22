@@ -78,6 +78,9 @@ var origin_object = global.playership[mid];
 var attack = instance_create(origin_object.x, origin_object.y, created_object);
 attack.amplified = amplified;                                                               //Pass on the amplified flag
 attack.mid = mid;                                                                           //Pass on the mid
+attack.targetx = target_x;                                                                  //Pass on the x coordinate of the target location
+attack.targety = target_y;                                                                  //Pass on the y coordinate of the target location
+attack.object_team = global.team[mid];                                                           
 
 //This object is no longer needed
 instance_destroy();

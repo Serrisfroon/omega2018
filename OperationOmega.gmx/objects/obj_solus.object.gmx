@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_solus</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -26,17 +26,19 @@
           <argument>
             <kind>1</kind>
             <string>sfx_play(snd_mine, x, y);
-//Set image size to 0
-scale = 0;
 //Initialize the count for total roation
 totaldir = 0;
 //Initialize rotation speed
 turn = 0;
 amplified = 0;
 sound_created = false;
-//Set time until rotation
-alarm[0] = 35;
 
+//Set specific variables after a frame
+alarm[2] = 1;
+
+image_speed = 0;
+full_rotation = 1080;
+animation_step = 0;
 </string>
           </argument>
         </arguments>
@@ -60,13 +62,58 @@ alarm[0] = 35;
           <argument>
             <kind>1</kind>
             <string>//Create an effect
-repeat(6)
- effect_create_above(ef_spark, x-20+random(40), y-20+random(40), 1, c_teal);
+create_explosion(1);
+
 if(sound_created = true)
 {
     audio_stop_sound(sound);
     audio_emitter_free(emit);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visible = 1;
+speed = 6;
+direction = point_direction(x, y, targetx, targety);
+object_team = global.team[mid];
+image_index = (object_team-1)*7;
+if(amplified = 1)
+    full_rotation = 1800;
 </string>
           </argument>
         </arguments>
@@ -94,9 +141,9 @@ if(sound_created = true)
 if(turn = 0)
  exit;
  
-bullet_create(x, y, "Solus", direction+90, mid, 0);
-bullet_create(x, y, "Solus", direction+210, mid, 0);
-bullet_create(x, y, "Solus", direction-30, mid, 0);
+bullet_create(x, y, "Solus", image_angle+90, mid, 0);
+bullet_create(x, y, "Solus", image_angle+210, mid, 0);
+bullet_create(x, y, "Solus", image_angle-30, mid, 0);
 
 </string>
           </argument>
@@ -122,6 +169,7 @@ bullet_create(x, y, "Solus", direction-30, mid, 0);
             <kind>1</kind>
             <string>//Set rotation speed
 turn = 7;
+animation_step = 3;
 alarm[1] = 4;
 
 if(global.sfxtoggle = 0)
@@ -153,25 +201,42 @@ if(global.sfxtoggle = 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Increase the image size if it isnt at normal size
-if(scale &lt; 1)
- scale += 0.1;
-//Stop the script if the object is not spinning
-if(turn = 0)
- exit;
-//Spin
-direction += turn;
-//Add the spin to the total rotation
-totaldir += turn;
-//If three full rotations have been done, destroy the Solus
-if(amplified = 0)
+            <string>part_particles_create(obj_partsystem.system, x, y, obj_partsystem.solus_core[object_team-1], 1);
+switch(animation_step)
 {
- if(totaldir &gt; 1080)
-  instance_destroy();
+    case 0:
+        image_angle += 4;
+        if(abs(x-targetx) &lt;= 6)
+            if(abs(y-targety) &lt;= 6)
+            {
+                speed = 0;
+                animation_step = 1;
+                image_speed = 0.5;
+            }               
+    break;
+    case 1:
+        if(image_index = 7*object_team-1)
+        {
+            image_speed = 0;
+            animation_step = 2;
+            alarm[0] = 15;
+        }
+    break;
+    case 3:
+        //Spin
+        image_angle += turn;
+        //Add the spin to the total rotation
+        totaldir += turn;
+        //If three full rotations have been done, destroy the Solus
+        if(totaldir &gt; full_rotation)
+        {
+            turn = 0;
+            alarm[3] = 20;
+            animation_step = 4;
+        }
+    break;
 }
-else
- if(totaldir &gt; 1800)
-  instance_destroy();
+
 
 </string>
           </argument>
@@ -196,7 +261,7 @@ else
           <argument>
             <kind>1</kind>
             <string>//Draw the image at the correct size
-draw_sprite_ext(sprite_index, 0, x, y, scale, scale, direction, global.allycolor, 1);
+draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, 1);
 </string>
           </argument>
         </arguments>

@@ -1499,6 +1499,7 @@
       <sprites name="Particles">
         <sprite>sprites\spr_pixel_part</sprite>
         <sprite>sprites\spr_circle_part</sprite>
+        <sprite>sprites\spr_crescent_part</sprite>
         <sprite>sprites\spr_box_part</sprite>
         <sprite>sprites\spr_ring_part</sprite>
         <sprite>sprites\spr_sphere_part</sprite>

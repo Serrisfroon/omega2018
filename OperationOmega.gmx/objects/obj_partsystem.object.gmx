@@ -815,6 +815,33 @@ part_type_orientation(deployhit, 0, 0, 0, 0, 0);
 part_type_blend(deployhit, 1);
 part_type_life(deployhit, 15, 25);
 
+//Solus Core
+solus_core[0] = part_type_create();
+part_type_sprite(solus_core[0], spr_smoke_part, 0, 0, 0);
+part_type_size(solus_core[0],1,1.50,-0.02,0);
+part_type_scale(solus_core[0],0.30,0.12);
+part_type_color2(solus_core[0],2960895,8421631);
+part_type_alpha2(solus_core[0],1,0.20);
+part_type_speed(solus_core[0],0,0,0,0);
+part_type_direction(solus_core[0],0,359,0,0);
+part_type_gravity(solus_core[0],0,270);
+part_type_orientation(solus_core[0],0,359,0,0,1);
+part_type_blend(solus_core[0],1);
+part_type_life(solus_core[0],20,35);
+
+solus_core[1] = part_type_create();
+part_type_sprite(solus_core[1], spr_smoke_part, 0, 0, 0);
+part_type_size(solus_core[1],1,1.50,-0.02,0);
+part_type_scale(solus_core[1],0.30,0.12);
+part_type_color2(solus_core[1],16723225,16744576);
+part_type_alpha2(solus_core[1],1,0.20);
+part_type_speed(solus_core[1],0,0,0,0);
+part_type_direction(solus_core[1],0,359,0,0);
+part_type_gravity(solus_core[1],0,270);
+part_type_orientation(solus_core[1],0,359,0,0,1);
+part_type_blend(solus_core[1],1);
+part_type_life(solus_core[1],20,35);
+
 
 //Explosion
 explosion_core = part_type_create();
@@ -946,6 +973,8 @@ part_type_destroy(spiralburst[0]);
 part_type_destroy(spiralburst[1]);
 part_type_destroy(trailfade[0]);
 part_type_destroy(trailfade[1]);
+part_type_destroy(solus_core[0]);
+part_type_destroy(solus_core[1]);
 part_type_destroy(deployhit);
 part_type_destroy(explosion_core);
 part_type_destroy(explosion_glare);

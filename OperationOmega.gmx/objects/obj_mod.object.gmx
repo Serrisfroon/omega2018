@@ -570,6 +570,12 @@ if(global.ships &gt; 0)
 {
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
+    //Loop through the four secondary weapons
+    for(i = 1; i &lt;= 4; i++)
+    {
+        //Hold the max stock for each secondary locally
+        global.secondary_stock[i] = max_secondary_stock[i];
+    }    
     //Set the armor and shield to their max
     with(obj_player)
     {
