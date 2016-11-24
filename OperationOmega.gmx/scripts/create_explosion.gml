@@ -52,6 +52,21 @@ case 2:
     part_type_size(obj_partsystem.explosion_flare,0.5,0.5,0,0);
     part_type_life(obj_partsystem.explosion_flare,65,80);
 break;
+case 3:
+    //Reset explosion particles
+    part_type_scale(obj_partsystem.explosion_core,1.8,1.8);
+    part_type_life(obj_partsystem.explosion_core,80,95);
+    
+    part_type_scale(obj_partsystem.explosion_glare,5,5);
+    part_type_life(obj_partsystem.explosion_glare,65,65);
+    
+    part_type_scale(obj_partsystem.explosion_burst,7.5,1.2);
+    part_type_life(obj_partsystem.explosion_burst,60,70);
+    part_type_speed(obj_partsystem.explosion_burst,5,10,-0.16,0);
+    
+    part_type_size(obj_partsystem.explosion_flare,0.6,0.6,0,0);
+    part_type_life(obj_partsystem.explosion_flare,65,80);
+break;
 }
 
 //Create explosion particles

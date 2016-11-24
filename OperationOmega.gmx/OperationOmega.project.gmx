@@ -1390,6 +1390,7 @@
       <sprite>sprites\spr_strikemine</sprite>
       <sprite>sprites\spr_clustermine</sprite>
       <sprite>sprites\spr_solgrenade</sprite>
+      <sprite>sprites\spr_solgrenade_hitbox</sprite>
       <sprite>sprites\spr_lunagrenade</sprite>
       <sprite>sprites\spr_paladindrone</sprite>
       <sprite>sprites\spr_valordrone</sprite>
@@ -1450,6 +1451,7 @@
         <sprite>sprites\spr_turret_icon</sprite>
         <sprite>sprites\spr_splitmissile_icon</sprite>
         <sprite>sprites\spr_clustermine_icon</sprite>
+        <sprite>sprites\spr_solgrenade_icon</sprite>
       </sprites>
       <sprites name="Energy Secondary">
         <sprite>sprites\spr_fusion_icon</sprite>
@@ -2092,6 +2094,13 @@
           <object>objects\obj_clustermine_small</object>
           <object>objects\obj_clustermine_enemy</object>
           <object>objects\obj_clustermine_small_enemy</object>
+        </objects>
+        <objects name="Sol Grenade">
+          <object>objects\obj_solgrenade_attack</object>
+          <object>objects\obj_solgrenade</object>
+          <object>objects\obj_solgrenade_enemy</object>
+          <object>objects\obj_solgrenade_hitbox</object>
+          <object>objects\obj_solgrenade_hitbox_enemy</object>
         </objects>
         <object>objects\prnt_allydeploy</object>
         <object>objects\prnt_enemydeploy</object>

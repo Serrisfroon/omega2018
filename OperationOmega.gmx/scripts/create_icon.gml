@@ -66,14 +66,14 @@ switch(tile.owner.object_index)
             if(tile.sprite_index = spr_chooseenergy_icon)
             {
                 var icon_order = 1;
-                tile.giveselection = 31;
+                tile.giveselection = 51;
             }
             if(tile.sprite_index = spr_choosedeploy_icon)
             {
                 var icon_order = 6;
-                tile.giveselection = 32;
+                tile.giveselection = 52;
             }
-            tile.display = tile.giveselection-30;              
+            tile.display = tile.giveselection-50;              
         }
         else
             switch(tile.sprite_index)
@@ -251,6 +251,16 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Layer Missile";
                     tile.display = 1;
                 break;
+                case spr_solgrenade_icon:
+                    var icon_order = 2;
+                    tile.giveselection = 31;
+                    tile.selection_type = 1;
+                    tile.selection_cost = 1;
+                    tile.selection_stock = 4;
+                    tile.selection_object = obj_solgrenade_attack;   
+                    tile.selection_name = "Sol Grenade"; 
+                    tile.display = 11;
+                break;
                 case spr_locustmissile_icon:
                     var icon_order = 3;
                     tile.giveselection = 18;
@@ -278,7 +288,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 20;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_shockmissile_attack;    
                     tile.selection_lockon_required = true;   
                     tile.selection_name = "Shock Missile";
@@ -350,7 +360,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 27;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 2;
                     tile.selection_object = obj_clustermine_attack; 
                     tile.selection_name = "Cluster Mine";   
                     tile.display = 12;
@@ -370,7 +380,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 29;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 2;
                     tile.selection_object = obj_solus_attack;    
                     tile.selection_name = "Solus";
                     tile.display = 6;
@@ -380,7 +390,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 30;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 2;
                     tile.selection_object = obj_turret_attack;   
                     tile.selection_name = "Turret"; 
                     tile.display = 11;

@@ -98,7 +98,7 @@ alarm[0] = 1;
           <argument>
             <kind>1</kind>
             <string>//Check to see if the energy icon was selected for the hotkey slot
-if(changeselect = 31)
+if(changeselect = 51)
 {
     with(obj_choosesecondary)
     {
@@ -152,7 +152,7 @@ if(changeselect = 31)
     }             
     exit;
 }
-if(changeselect = 32)
+if(changeselect = 52)
 {
     with(obj_choosesecondary)
     {
@@ -187,7 +187,7 @@ if(changeselect = 32)
     with(obj_customizer.weaponslot[4])
     {
         create_icon(spr_dualmissile_icon, 4);    
-        create_icon(spr_layermissile_icon, 4);    
+        create_icon(spr_solgrenade_icon, 4);    
         create_icon(spr_locustmissile_icon, 4);    
         create_icon(spr_tridentmissile_icon, 4);    
         create_icon(spr_shockmissile_icon, 4);                 
@@ -487,7 +487,7 @@ if(obj_readygo.readied = 0)
         else
         {
             create_icon(spr_dualmissile_icon, secondnumber);    
-            create_icon(spr_layermissile_icon, secondnumber);    
+            create_icon(spr_solgrenade_icon, secondnumber);    
             create_icon(spr_locustmissile_icon, secondnumber);    
             create_icon(spr_tridentmissile_icon, secondnumber);    
             create_icon(spr_shockmissile_icon, secondnumber);    
@@ -648,6 +648,9 @@ switch(global.secondary[secondnumber])
     break;
     case 30:
          draw_sprite_ext(spr_turret_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    break;
+    case 31:
+         draw_sprite_ext(spr_solgrenade_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
     break;
 }
 

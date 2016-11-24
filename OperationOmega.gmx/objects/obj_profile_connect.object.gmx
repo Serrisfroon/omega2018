@@ -338,6 +338,9 @@ for(i = 1; i &lt;= 4; i += 1)
         case 27:
              draw_sprite_ext(spr_clustermine_icon, 0, x-81+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
         break;
+        case 31:
+             draw_sprite_ext(spr_solgrenade_icon, 0, x-81+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
+        break;
     }    
     draw_sprite_ext(spr_numbers_icon, 3+global.secondary_type[i], x-81+(i*41), y+9, 1, 1, 0, c_white, display_alpha);
     draw_sprite_ext(spr_numbers_icon, i+4, x-81+(i*41), y+9, 1, 1, 0, c_white, display_alpha);

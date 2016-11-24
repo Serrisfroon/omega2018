@@ -202,6 +202,7 @@ if(global.sfxtoggle = 0)
           <argument>
             <kind>1</kind>
             <string>part_particles_create(obj_partsystem.system, x, y, obj_partsystem.solus_core[object_team-1], 1);
+
 switch(animation_step)
 {
     case 0:

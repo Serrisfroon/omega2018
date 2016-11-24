@@ -159,6 +159,11 @@ switch(receive_current_secondary)
         var receive_current_secondary_object = obj_turret_attack;
         var receive_current_secondary_lockon_required = false;
     break;
+    case 31:
+        var receive_current_secondary_type = 1;
+        var receive_current_secondary_object = obj_solgrenade_attack;
+        var receive_current_secondary_lockon_required = false;
+    break;
 }
 var receive_current_secondary_cost = 0;                 //Set the cost of the weapon to 0 because it shouldn't matter
 var receive_current_secondary_stock = 99;               //Set the stock to 99 for the same reason

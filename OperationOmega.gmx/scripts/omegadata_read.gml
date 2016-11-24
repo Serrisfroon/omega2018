@@ -273,5 +273,13 @@ for(i = 1; i <=4; i++)
             global.secondary_name[i] = "Turret";   
             global.secondary_icon_image[i] = spr_turret_icon;
         break;
+        case 31:
+            global.secondary_type[i] = 1;
+            global.secondary_cost[i] = 1;
+            global.secondary_stock[i] = 2;
+            global.secondary_object[i] = obj_solgrenade_attack; 
+            global.secondary_name[i] = "Sol Grenade";   
+            global.secondary_icon_image[i] = spr_solgrenade_icon;
+        break;
     }
 }

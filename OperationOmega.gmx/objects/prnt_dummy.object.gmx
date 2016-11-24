@@ -274,7 +274,7 @@ if(global.team[mid] = 1)
     draw_set_color(c_red);
 else
     draw_set_color(c_navy);
-draw_text((x-view_xview[0])/obj_mod.screen_scaling_ratio, (y-48-view_yview[0])/obj_mod.screen_scaling_ratio, thisname+"   "+string(shieldup));
+draw_text((x-view_xview[0])/obj_mod.screen_scaling_ratio, (y-48-view_yview[0])/obj_mod.screen_scaling_ratio, thisname);
 </string>
           </argument>
         </arguments>
