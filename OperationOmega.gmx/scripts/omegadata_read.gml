@@ -281,5 +281,13 @@ for(i = 1; i <=4; i++)
             global.secondary_name[i] = "Sol Grenade";   
             global.secondary_icon_image[i] = spr_solgrenade_icon;
         break;
+        case 32:
+            global.secondary_type[i] = 1;
+            global.secondary_cost[i] = 1;
+            global.secondary_stock[i] = 2;
+            global.secondary_object[i] = obj_lunagrenade_attack; 
+            global.secondary_name[i] = "Luna Grenade";   
+            global.secondary_icon_image[i] = spr_lunagrenade_icon;
+        break;
     }
 }

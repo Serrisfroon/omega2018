@@ -20,6 +20,6 @@
   <width>286</width>
   <height>286</height>
   <frames>
-    <frame index="0">images\spr_solgrenade_hitbox_0.png</frame>
+    <frame index="0">images\spr_lunagrenade_hitbox_0.png</frame>
   </frames>
 </sprite>

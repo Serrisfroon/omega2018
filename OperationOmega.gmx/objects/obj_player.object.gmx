@@ -119,6 +119,33 @@ alarm[4] = 1;
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_lunagrenade_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>other.hitmid = mid;
+
+attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold, 
+                        other.attack_shake, other.attack_name);
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_solgrenade_enemy">
       <action>
         <libid>1</libid>
@@ -624,6 +651,17 @@ if(ship_disabled = true)
 
 //Rotate the ship clockwise by its turning rate
 facedir -= ship_turning_rate;
+//Handle Luna Grenade turn control
+//Hold this object's mid and turning rate locally
+var my_mid = mid;
+var turn_rate = ship_turning_rate;
+with(obj_lunagrenade)
+{
+    //If this luna grenade is yours, turn it at your turn rate
+    if(mid = my_mid)
+        direction -= turn_rate;
+}
+
 //Keep facedir at or below 360
 if(facedir &lt; 0) facedir += 360;
 
@@ -675,6 +713,18 @@ if(ship_disabled = true)
 
 //Rotate the ship counter-clockwise by its turning rate
 facedir += ship_turning_rate;
+
+//Handle Luna Grenade turn control
+//Hold this object's mid and turning rate locally
+var my_mid = mid;
+var turn_rate = ship_turning_rate;
+with(obj_lunagrenade)
+{
+    //If this luna grenade is yours, turn it at your turn rate
+    if(mid = my_mid)
+        direction += turn_rate;
+}
+
 //Keep facedir at or below 360
 if(facedir &gt; 360) facedir -= 360;
 if(ship_turn_side != 1)

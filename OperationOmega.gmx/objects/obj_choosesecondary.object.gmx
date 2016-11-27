@@ -191,7 +191,7 @@ if(changeselect = 52)
         create_icon(spr_locustmissile_icon, 4);    
         create_icon(spr_tridentmissile_icon, 4);    
         create_icon(spr_shockmissile_icon, 4);                 
-        create_icon(spr_hermitmissile_icon, 4);    
+        create_icon(spr_lunagrenade_icon, 4);    
         create_icon(spr_splitmissile_icon, 4);    
         create_icon(spr_strikemissile_icon, 4);    
         create_icon(spr_huntermine_icon, 4);    
@@ -491,7 +491,7 @@ if(obj_readygo.readied = 0)
             create_icon(spr_locustmissile_icon, secondnumber);    
             create_icon(spr_tridentmissile_icon, secondnumber);    
             create_icon(spr_shockmissile_icon, secondnumber);    
-            create_icon(spr_hermitmissile_icon, secondnumber);    
+            create_icon(spr_lunagrenade_icon, secondnumber);    
             create_icon(spr_splitmissile_icon, secondnumber);    
             create_icon(spr_strikemissile_icon, secondnumber);    
             create_icon(spr_huntermine_icon, secondnumber);    
@@ -559,99 +559,10 @@ switch(global.secondary[secondnumber])
         else
             draw_sprite_ext(spr_numbers_icon, 2, x, y, 1, 1, 0, c_white, image_alpha);
     break;
-    case 1:
-         draw_sprite_ext(spr_fusion_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
+    default:
+         draw_sprite_ext(global.secondary_icon_image[secondnumber], teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
     break;
-    case 2:
-         draw_sprite_ext(spr_stardust_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 3:
-         draw_sprite_ext(spr_barrier_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 4:
-         draw_sprite_ext(spr_formation_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 5:
-         draw_sprite_ext(spr_beam_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 6:
-         draw_sprite_ext(spr_sparkline_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 7:
-         draw_sprite_ext(spr_burst_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 8:
-         draw_sprite_ext(spr_slash_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 9:
-         draw_sprite_ext(spr_horizon_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 10:
-         draw_sprite_ext(spr_spiral_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 11:
-         draw_sprite_ext(spr_laser_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 12:
-         draw_sprite_ext(spr_trail_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 13:
-         draw_sprite_ext(spr_reflection_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 14:
-         draw_sprite_ext(spr_storm_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 15:
-         draw_sprite_ext(spr_trigger_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 16:
-         draw_sprite_ext(spr_dualmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 17:
-         draw_sprite_ext(spr_layermissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 18:
-         draw_sprite_ext(spr_locustmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 19:
-         draw_sprite_ext(spr_tridentmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 20:
-         draw_sprite_ext(spr_shockmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 21:
-         draw_sprite_ext(spr_hermitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 22:
-         draw_sprite_ext(spr_splitmissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 23:
-         draw_sprite_ext(spr_strikemissile_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 24:
-         draw_sprite_ext(spr_huntermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 25:
-         draw_sprite_ext(spr_phantommine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 26:
-         draw_sprite_ext(spr_hackermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 27:
-         draw_sprite_ext(spr_clustermine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 28:
-         draw_sprite_ext(spr_strikemine_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 29:
-         draw_sprite_ext(spr_solus_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 30:
-         draw_sprite_ext(spr_turret_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
-    case 31:
-         draw_sprite_ext(spr_solgrenade_icon, teamcolorimg, x, y, 1, 1, 0, c_white, image_alpha);
-    break;
+
 }
 
 draw_sprite_ext(spr_numbers_icon, 3+weapontype, x, y, 1, 1, 0, c_white, image_alpha);

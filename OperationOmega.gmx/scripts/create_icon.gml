@@ -304,6 +304,16 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Hermit Missile";
                     tile.display = 13;
                 break;
+                case spr_lunagrenade_icon:
+                    var icon_order = 6;
+                    tile.giveselection = 32;
+                    tile.selection_type = 1;
+                    tile.selection_cost = 1;
+                    tile.selection_stock = 4;
+                    tile.selection_object = obj_lunagrenade_attack;    
+                    tile.selection_name = "Luna Grenade";
+                    tile.display = 13;
+                break;
                 case spr_splitmissile_icon:
                     var icon_order = 7;
                     tile.giveselection = 22;

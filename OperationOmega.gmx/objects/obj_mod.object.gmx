@@ -1216,7 +1216,7 @@ if((view_yview[0]&gt;0&amp;&amp;view_yview[0]+view_hview[0]&lt;room_height))
         background_vspeed[6]=(view_object.vspeed+back_extravspeed)/8;
     }
     
-    background_hspeed[6]=(view_object.vspeed+back_extrahspeed)/8;
+    background_vspeed[6]=(view_object.vspeed+back_extravspeed)/8;
     background_vspeed[1]=view_object.vspeed/1.2;
 }
 else

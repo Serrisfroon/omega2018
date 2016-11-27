@@ -843,6 +843,34 @@ part_type_blend(solus_core[1],1);
 part_type_life(solus_core[1],20,35);
 
 
+//Luna Grenade crescent
+luna_crescent[0] = part_type_create();
+part_type_sprite(luna_crescent[0], spr_crescent_part, 0, 0, 0);
+part_type_size(luna_crescent[0],1,1,0,0);
+part_type_scale(luna_crescent[0],1,1);
+part_type_color2(luna_crescent[0],2960895,8421631);
+part_type_alpha2(luna_crescent[0],1,0.20);
+part_type_speed(luna_crescent[0],0,0,0,0);
+part_type_direction(luna_crescent[0],0,359,0,0);
+part_type_gravity(luna_crescent[0],0,270);
+part_type_orientation(luna_crescent[0],0,359,2,0,1);
+part_type_blend(luna_crescent[0],1);
+part_type_life(luna_crescent[0],20,35);
+
+luna_crescent[1] = part_type_create();
+part_type_sprite(luna_crescent[1], spr_crescent_part, 0, 0, 0);
+part_type_size(luna_crescent[1],1,1,0,0);
+part_type_scale(luna_crescent[1],1,1);
+part_type_color2(luna_crescent[1],16723225,16744576);
+part_type_alpha2(luna_crescent[1],1,0.20);
+part_type_speed(luna_crescent[1],0,0,0,0);
+part_type_direction(luna_crescent[1],0,359,0,0);
+part_type_gravity(luna_crescent[1],0,270);
+part_type_orientation(luna_crescent[1],0,359,2,0,1);
+part_type_blend(luna_crescent[1],1);
+part_type_life(luna_crescent[1],20,35);
+
+
 //Explosion
 explosion_core = part_type_create();
 part_type_sprite(explosion_core, spr_explosion_part, 0, 0, 0);

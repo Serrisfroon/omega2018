@@ -66,6 +66,7 @@ for(i = 1; i &lt;= 4; i++)
     global.secondary_stock[i] = 0;
     global.secondary_object[i] = 0;
     global.lockon_required[i] = 0;
+    global.secondary_icon_image[i] = spr_empty;
 }
 
 //Initialize background loading variables

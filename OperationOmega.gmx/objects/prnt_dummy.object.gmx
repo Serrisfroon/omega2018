@@ -136,6 +136,22 @@ switch(turning)
 {
     case 1:    //Turn Clockwise
         facedir -= ship_turning_rate;
+        //Handle Luna Grenade turn control
+        //Hold this object's mid and turning rate locally
+        var my_mid = mid;
+        var turn_rate = ship_turning_rate;
+        with(obj_lunagrenade)
+        {
+            //If this luna grenade is yours, turn it at your turn rate
+            if(mid = my_mid)
+                direction -= turn_rate;
+        }
+        with(obj_lunagrenade_enemy)
+        {
+            //If this luna grenade is yours, turn it at your turn rate
+            if(mid = my_mid)
+                direction -= turn_rate;
+        }
         if(ship_turn_side != -1)
         {
             ship_turning = true;
@@ -162,6 +178,22 @@ switch(turning)
     break;
     case 2:    //Turn Counter-clockwise
         facedir += ship_turning_rate;
+        //Handle Luna Grenade turn control
+        //Hold this object's mid and turning rate locally
+        var my_mid = mid;
+        var turn_rate = ship_turning_rate;
+        with(obj_lunagrenade)
+        {
+            //If this luna grenade is yours, turn it at your turn rate
+            if(mid = my_mid)
+                direction += turn_rate;
+        }
+        with(obj_lunagrenade_enemy)
+        {
+            //If this luna grenade is yours, turn it at your turn rate
+            if(mid = my_mid)
+                direction += turn_rate;
+        }
         if(ship_turn_side != 1)
         {
             ship_turning = true;
