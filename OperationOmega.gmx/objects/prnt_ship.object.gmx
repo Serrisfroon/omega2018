@@ -123,6 +123,8 @@ ship_status_hacked = false;                 //Holds whether or not the ship is u
 ship_status_shocked = false;                //Holds whether or not the ship is under the shocked status, which causes the shield to be 50% effective.
 ship_disabled = false;                      //Holds the disable flag for the ship. This is used to consolidate if statements for faster processing.
 shock_image = 0;                            //Holds the image index of the shock effect
+buster_push = false;                        //Holds whether or not the ship is being pushed back by Buster. Used to calculate wall damage.
+
 //Initialize the secondary selection variable
 secondary_selected = 1;
 
@@ -808,14 +810,16 @@ defeat_player();
 var player_mid = mid;
 
 //Destroy any turrets associated with the defeated player
-with(obj_turret)
+with(obj_paladindrone)
     if(mid = player_mid)
         instance_destroy();
-                
-with(obj_trigger)
+with(obj_paladindrone_enemy)
     if(mid = player_mid)
         instance_destroy();
 
+with(obj_hack_effect)
+    if(target_ship = id)
+        instance_destroy();
 
 //Destroy all flame trail effects
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
@@ -876,6 +880,8 @@ if(global.playership[mid] = view_object)
 
 if(mid = global.mymid)
 {  
+    with(obj_screen_flash)
+        instance_destroy();
     //Create an announcement
     var new_announcement = global.othername[defeatmid]+" defeated "+global.name;
     if(global.team[mid] = 1)

@@ -1377,29 +1377,22 @@
     </sprites>
     <sprites name="Deploy Secondary">
       <sprite>sprites\spr_dualmissile</sprite>
-      <sprite>sprites\spr_layermissile</sprite>
       <sprite>sprites\spr_locustmissile</sprite>
       <sprite>sprites\spr_tridentmissile</sprite>
       <sprite>sprites\spr_shockmissile</sprite>
-      <sprite>sprites\spr_hermitmissile</sprite>
-      <sprite>sprites\spr_strikemissile</sprite>
       <sprite>sprites\spr_splitmissile</sprite>
-      <sprite>sprites\spr_huntermine</sprite>
       <sprite>sprites\spr_phantommine</sprite>
+      <sprite>sprites\spr_huntermine</sprite>
       <sprite>sprites\spr_hackermine</sprite>
-      <sprite>sprites\spr_strikemine</sprite>
       <sprite>sprites\spr_clustermine</sprite>
       <sprite>sprites\spr_solgrenade</sprite>
       <sprite>sprites\spr_solgrenade_hitbox</sprite>
       <sprite>sprites\spr_lunagrenade</sprite>
       <sprite>sprites\spr_lunagrenade_hitbox</sprite>
+      <sprite>sprites\spr_flashbomb</sprite>
+      <sprite>sprites\spr_buster</sprite>
       <sprite>sprites\spr_paladindrone</sprite>
-      <sprite>sprites\spr_valordrone</sprite>
       <sprite>sprites\spr_solus</sprite>
-      <sprite>sprites\spr_turretbase</sprite>
-      <sprite>sprites\spr_turretbase_color</sprite>
-      <sprite>sprites\spr_turrethead</sprite>
-      <sprite>sprites\spr_turrethead_color</sprite>
       <sprite>sprites\spr_turretshot</sprite>
     </sprites>
     <sprites name="HUD">
@@ -1438,22 +1431,20 @@
     <sprites name="Icons">
       <sprites name="Deploy Secondary">
         <sprite>sprites\spr_dualmissile_icon</sprite>
-        <sprite>sprites\spr_layermissile_icon</sprite>
         <sprite>sprites\spr_locustmissile_icon</sprite>
         <sprite>sprites\spr_tridentmissile_icon</sprite>
         <sprite>sprites\spr_shockmissile_icon</sprite>
-        <sprite>sprites\spr_hermitmissile_icon</sprite>
-        <sprite>sprites\spr_strikemissile_icon</sprite>
+        <sprite>sprites\spr_splitmissile_icon</sprite>
         <sprite>sprites\spr_huntermine_icon</sprite>
         <sprite>sprites\spr_phantommine_icon</sprite>
         <sprite>sprites\spr_hackermine_icon</sprite>
-        <sprite>sprites\spr_strikemine_icon</sprite>
-        <sprite>sprites\spr_solus_icon</sprite>
-        <sprite>sprites\spr_turret_icon</sprite>
-        <sprite>sprites\spr_splitmissile_icon</sprite>
         <sprite>sprites\spr_clustermine_icon</sprite>
+        <sprite>sprites\spr_solus_icon</sprite>
         <sprite>sprites\spr_solgrenade_icon</sprite>
         <sprite>sprites\spr_lunagrenade_icon</sprite>
+        <sprite>sprites\spr_flashbomb_icon</sprite>
+        <sprite>sprites\spr_paladindrone_icon</sprite>
+        <sprite>sprites\spr_buster_icon</sprite>
       </sprites>
       <sprites name="Energy Secondary">
         <sprite>sprites\spr_fusion_icon</sprite>
@@ -1647,6 +1638,22 @@
     </sprites>
     <sprite>sprites\spr_empty</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprites name="Unused">
+      <sprite>sprites\spr_hermitmissile</sprite>
+      <sprite>sprites\spr_strikemissile_icon</sprite>
+      <sprite>sprites\spr_layermissile_icon</sprite>
+      <sprite>sprites\spr_strikemine_icon</sprite>
+      <sprite>sprites\spr_strikemine</sprite>
+      <sprite>sprites\spr_bustergrenade</sprite>
+      <sprite>sprites\spr_turret_icon</sprite>
+      <sprite>sprites\spr_strikemissile</sprite>
+      <sprite>sprites\spr_hermitmissile_icon</sprite>
+      <sprite>sprites\spr_layermissile</sprite>
+      <sprite>sprites\spr_turrethead_color</sprite>
+      <sprite>sprites\spr_turrethead</sprite>
+      <sprite>sprites\spr_turretbase_color</sprite>
+      <sprite>sprites\spr_turretbase</sprite>
+    </sprites>
     <sprite>sprites\spr_shipmask</sprite>
   </sprites>
   <backgrounds name="background">
@@ -1663,6 +1670,7 @@
     <path>paths\path_spiral180</path>
     <path>paths\path_spiral270</path>
     <path>paths\path_spiral360</path>
+    <path>paths\path_drone</path>
   </paths>
   <scripts name="scripts">
     <scripts name="39dll">
@@ -2023,30 +2031,10 @@
           <object>objects\obj_dualmissile</object>
           <object>objects\obj_dualmissile_enemy</object>
         </objects>
-        <objects name="Layer Missile">
-          <object>objects\obj_layermissile_attack</object>
-          <object>objects\obj_layermissile</object>
-          <object>objects\obj_layermissile_enemy</object>
-        </objects>
-        <objects name="Hunter Mine">
-          <object>objects\obj_huntermine_attack</object>
-          <object>objects\obj_huntermine</object>
-          <object>objects\obj_huntermine_enemy</object>
-        </objects>
         <objects name="Locust Missile">
           <object>objects\obj_locustmissile_attack</object>
           <object>objects\obj_locustmissile</object>
           <object>objects\obj_locustmissile_enemy</object>
-        </objects>
-        <objects name="Phantom Mine">
-          <object>objects\obj_phantommine_attack</object>
-          <object>objects\obj_phantommine</object>
-          <object>objects\obj_phantommine_enemy</object>
-        </objects>
-        <objects name="Solus">
-          <object>objects\obj_solus_attack</object>
-          <object>objects\obj_solus</object>
-          <object>objects\obj_solus_enemy</object>
         </objects>
         <objects name="Trident Missile">
           <object>objects\obj_tridentmissile_attack</object>
@@ -2058,37 +2046,26 @@
           <object>objects\obj_shockmissile</object>
           <object>objects\obj_shockmissile_enemy</object>
         </objects>
-        <objects name="Hacker Mine">
-          <object>objects\obj_hackermine_attack</object>
-          <object>objects\obj_hackermine</object>
-          <object>objects\obj_hackermine_enemy</object>
-        </objects>
-        <objects name="Hermit Missile">
-          <object>objects\obj_hermitmissile_attack</object>
-          <object>objects\obj_hermitmissile</object>
-          <object>objects\obj_counterfield</object>
-          <object>objects\obj_hermitmissile_enemy</object>
-          <object>objects\obj_counterfield_enemy</object>
-        </objects>
-        <objects name="Strike Missile">
-          <object>objects\obj_strikemissile_attack</object>
-          <object>objects\obj_strikemissile</object>
-          <object>objects\obj_strikemissile_enemy</object>
-        </objects>
-        <objects name="Strike Mine">
-          <object>objects\obj_strikemine_attack</object>
-          <object>objects\obj_strikemine</object>
-          <object>objects\obj_strikemine_enemy</object>
-        </objects>
-        <objects name="Turret">
-          <object>objects\obj_turret_attack</object>
-          <object>objects\obj_turret</object>
-          <object>objects\obj_turret_enemy</object>
-        </objects>
         <objects name="Split Missile">
           <object>objects\obj_splitmissile_attack</object>
           <object>objects\obj_splitmissile</object>
           <object>objects\obj_splitmissile_enemy</object>
+        </objects>
+        <objects name="Hunter Mine">
+          <object>objects\obj_huntermine_attack</object>
+          <object>objects\obj_huntermine</object>
+          <object>objects\obj_huntermine_enemy</object>
+        </objects>
+        <objects name="Phantom Mine">
+          <object>objects\obj_phantommine_attack</object>
+          <object>objects\obj_phantommine</object>
+          <object>objects\obj_phantommine_enemy</object>
+        </objects>
+        <objects name="Hacker Mine">
+          <object>objects\obj_hackermine_attack</object>
+          <object>objects\obj_hackermine</object>
+          <object>objects\obj_hackermine_enemy</object>
+          <object>objects\obj_hack_effect</object>
         </objects>
         <objects name="Cluster Mine">
           <object>objects\obj_clustermine_attack</object>
@@ -2096,6 +2073,12 @@
           <object>objects\obj_clustermine_small</object>
           <object>objects\obj_clustermine_enemy</object>
           <object>objects\obj_clustermine_small_enemy</object>
+        </objects>
+        <objects name="Buster">
+          <object>objects\obj_buster_attack</object>
+          <object>objects\obj_buster</object>
+          <object>objects\obj_buster_enemy</object>
+          <object>objects\obj_buster_push</object>
         </objects>
         <objects name="Sol Grenade">
           <object>objects\obj_solgrenade_attack</object>
@@ -2110,6 +2093,22 @@
           <object>objects\obj_lunagrenade_enemy</object>
           <object>objects\obj_lunagrenade_hitbox</object>
           <object>objects\obj_lunagrenade_hitbox_enemy</object>
+        </objects>
+        <objects name="Flash Bomb">
+          <object>objects\obj_flashbomb_attack</object>
+          <object>objects\obj_flashbomb</object>
+          <object>objects\obj_flashbomb_enemy</object>
+          <object>objects\obj_screen_flash</object>
+        </objects>
+        <objects name="Paladin Drone">
+          <object>objects\obj_paladindrone_attack</object>
+          <object>objects\obj_paladindrone</object>
+          <object>objects\obj_paladindrone_enemy</object>
+        </objects>
+        <objects name="Solus">
+          <object>objects\obj_solus_attack</object>
+          <object>objects\obj_solus</object>
+          <object>objects\obj_solus_enemy</object>
         </objects>
         <object>objects\prnt_allydeploy</object>
         <object>objects\prnt_enemydeploy</object>
@@ -2145,6 +2144,35 @@
         <object>objects\obj_beserkeffect</object>
         <object>objects\obj_overheatshine</object>
         <object>objects\obj_boosteffect</object>
+      </objects>
+      <objects name="Unused">
+        <objects name="Strike Missile">
+          <object>objects\obj_strikemissile_attack</object>
+          <object>objects\obj_strikemissile</object>
+          <object>objects\obj_strikemissile_enemy</object>
+        </objects>
+        <objects name="Strike Mine">
+          <object>objects\obj_strikemine_attack</object>
+          <object>objects\obj_strikemine</object>
+          <object>objects\obj_strikemine_enemy</object>
+        </objects>
+        <objects name="Layer Missile">
+          <object>objects\obj_layermissile_attack</object>
+          <object>objects\obj_layermissile</object>
+          <object>objects\obj_layermissile_enemy</object>
+        </objects>
+        <objects name="Hermit Missile">
+          <object>objects\obj_hermitmissile_attack</object>
+          <object>objects\obj_hermitmissile</object>
+          <object>objects\obj_counterfield</object>
+          <object>objects\obj_hermitmissile_enemy</object>
+          <object>objects\obj_counterfield_enemy</object>
+        </objects>
+        <objects name="Turret">
+          <object>objects\obj_turret_attack</object>
+          <object>objects\obj_turret</object>
+          <object>objects\obj_turret_enemy</object>
+        </objects>
       </objects>
       <object>objects\prnt_bloom_attack</object>
     </objects>

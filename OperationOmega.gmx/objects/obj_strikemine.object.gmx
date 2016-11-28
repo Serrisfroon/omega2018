@@ -171,34 +171,35 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>image_angle += 1;
-ally = instance_nearest(x, y, obj_dummy_ally);
+var ally = instance_nearest(x, y, obj_dummy_ally);
 if(ally = noone)
   ally = global.playership[global.mymid];      
 else
-    if(point_distance(x, y, ally.x, fally.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+    if(point_distance(x, y, ally.x, ally.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
       ally = global.playership[global.mymid];
-if(point_distance(x, y, ally.x, ally.y) &lt; 40 &amp;&amp; mid = ally.mid)
-{
-    if(recollect = 0)
-        exit;
-    if(mid = global.mymid)
+if(mid = ally.mid)
+    if(point_distance(x, y, ally.x, ally.y) &lt; 40)
     {
-        //Take the mine away from your mine count
-        //Take from the correct deploy count
-        for(i = 1; i &lt;= 4; i += 1)
+        if(recollect = 0)
+            exit;
+        if(mid = global.mymid)
         {
-         if(global.secondary[i] = 28)
-            if(global.secondary_stock[i] != obj_mod.max_secondary_stock[i])
+            //Take the mine away from your mine count
+            //Take from the correct deploy count
+            for(i = 1; i &lt;= 4; i += 1)
             {
-                global.secondary_stock[i] += 1;
+             if(global.secondary[i] = 28)
+                if(global.secondary_stock[i] != obj_mod.max_secondary_stock[i])
+                {
+                    global.secondary_stock[i] += 1;
+                }
+            
             }
-        
         }
+        sfx_play(snd_pickup, x, y);
+        collected = 1;
+        instance_destroy();
     }
-    sfx_play(snd_pickup, x, y);
-    collected = 1;
-    instance_destroy();
-}
 
 </string>
           </argument>

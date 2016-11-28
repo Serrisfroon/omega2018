@@ -1026,13 +1026,40 @@ while(true)
             client_sendall(0, dummy);
         break;
    
-        //Begin Firing Primary weapon
+        //Change hacked status
         case 15:
             global.playership[dummy].ship_status_hacked = true;
             global.playership[dummy].alarm[5] = 90;        
             client_sendall(0, dummy);
         break;
-
+        
+        //Destroy paladin drone for player
+        case 16:
+            var pass_mid = dummy;
+            if(global.team[dummy] = global.team[global.mymid])
+            {
+                with(obj_paladindrone)
+                    if(mid = pass_mid)
+                        instance_destroy();
+            }
+            else
+            {
+                with(obj_paladindrone_enemy)
+                    if(mid = pass_mid)
+                        instance_destroy();
+            }
+            client_sendall(0, dummy);
+        break;
+        
+        //Push a ship
+        case 17:
+            var push_effect = instance_create(0, 0, obj_buster_push);
+            push_effect.target_object = global.playership[dummy];
+            push_effect.push_direction = readshort(0);
+            push_effect.amplified = readbyte(0);
+            client_sendall(0, dummy);
+        break;
+        
         //A player leaves the game
         case CLIENT_DROP:
             //Get info from leaving player

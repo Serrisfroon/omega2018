@@ -2,12 +2,13 @@
 
 
 //Script variables
-var dmg, pene, thresh, shake, weaponname;
+var dmg, pene, thresh, shake, weaponname, drone_active;
 dmg = argument0;
 pene = argument1;
 thresh = argument2;
 shake = argument3;
 weaponname = argument4;
+drone_active = false;
 if(invincible = 0.7)
 {
     dmg = 0;
@@ -21,13 +22,6 @@ if(sprite_index = spr_goliath || sprite_index = spr_goliath_enemy)
     }
 
 sfx_play(snd_hit, x, y);
-
-//Check if there's a nearby paladin turret
-var shielded, shielddown;
-shielded = 1;
-if(instance_exists(obj_turret))
-    if(distance_to_object(instance_nearest(x, y, obj_turret)) < 400)
-        shielded = 2;
         
 //Activate the limiter and set time until deactivation
 
@@ -39,37 +33,85 @@ alarm[9] = 60;
 if(threshold < 0.1)
  threshold = 0.1;
 
-if(thresh = 0)
+ 
+//Handle Paladin Drone stuff
+if(mid = global.mymid)
 {
-    //Take damage
-    armor -= pene/shielded;
-    //Check if under shock effect
-    if(ship_status_shocked = false)
-        shield -= dmg/shielded;
+    with(obj_paladindrone) 
+    {
+        if(mid = global.mymid)
+        {
+            var my_drone = id;
+            drone_active = true;
+        }
+    }
+}
+
+if(drone_active = false)
+{
+    if(thresh = 0)
+    {
+        //Take damage
+        armor -= pene;
+        //Check if under shock effect
+        if(ship_status_shocked = false)
+            shield -= dmg;
+        else
+        {
+            shield -= dmg/2;
+            armor -= dmg/2;
+        }
+    }
     else
     {
-        shield -= dmg/2;
-        armor -= dmg/2;
+        //Take damage
+        armor -= pene*threshold;
+        //Check if under shock effect
+        if(ship_status_shocked = false)
+            shield -= dmg*threshold;
+        else
+        {
+            shield -= dmg*threshold/2;
+            armor -= dmg*threshold/2;
+        }
     }
-    global.damagetaken[global.mymid] += (pene+dmg)/shielded;
-    global.damagedealt[other.mid] += (pene+dmg)/shielded;
 }
 else
 {
-    //Take damage
-    armor -= pene*threshold/shielded;
-    //Check if under shock effect
-    if(ship_status_shocked = false)
-        shield -= dmg*threshold/shielded;
+    if(thresh = 0)
+    {
+        //Take damage
+        shield -= pene;
+        //Check if under shock effect
+        if(ship_status_shocked = false)
+            my_drone.shield -= dmg;
+        else
+        {
+            my_drone.shield -= dmg/2;
+            shield -= dmg/2;
+        }
+    }
     else
     {
-        shield -= dmg*threshold/2;
-        armor -= dmg*threshold/2;
+        //Take damage
+        shield -= pene*threshold;
+        //Check if under shock effect
+        if(ship_status_shocked = false)
+            my_drone.shield -= dmg*threshold;
+        else
+        {
+            my_drone.shield -= dmg*threshold/2;
+            shield -= dmg*threshold/2;
+        }
     }
-    global.damagetaken[global.mymid] += (pene+dmg)*threshold/shielded;
-    global.damagedealt[other.mid] += (pene+dmg)*threshold/shielded;
+    //Destroy the drone if its shield is used up
+    if(my_drone.shield <= 0)
+    {
+        shield += my_drone.shield;
+        with(my_drone)
+            instance_destroy();
+    }
 }
-
 
 //If there is no more shield, transfer damage to armor
 if(shield < 0) 

@@ -32,6 +32,7 @@ alarm[3] = 1;
 amplified = 0;
 alarm[2] = 1;
 image_alpha = 0.4;
+collected = 0;
 
 //Set attack variable values
 attack_damage = 22;                 //Set the damage for the attack
@@ -61,10 +62,14 @@ attack_name = "Phantom Mine";       //Set the name of the attack
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sfx_play(snd_explode2, x, y);
-//Create an effect
-create_explosion(1);
-
+            <string>if(collected = 0)
+{
+    sfx_play(snd_explode2, x, y);
+    //Create an effect
+    create_explosion(1);
+}
+else
+    effect_create_above(ef_smoke, x, y, 0, global.enemycolor);
 </string>
           </argument>
         </arguments>
@@ -169,10 +174,20 @@ if(ally != noone)
   else
     speed = 0;
 }
-if(image_alpha &gt; 0 &amp;&amp; distance_to_object(obj_player) &gt; 200)
+var enemy = instance_nearest(x, y, obj_dummy_enemy);
+if(instance_exists(enemy))
+    if(enemy.mid = mid)
+        if(point_distance(x, y, enemy.x, enemy.y) &lt; 40)
+        {
+            collected = 1;
+            sfx_play(snd_pickup, x, y);
+            instance_destroy();
+        }
+
+if(image_alpha &gt; 0 &amp;&amp; distance_to_object(obj_player) &gt; 250)
  image_alpha -= 0.07;
 //Show the mine if nearby
-if(image_alpha &lt; 0.7 &amp;&amp; distance_to_object(obj_player) &lt;= 200)
+if(image_alpha &lt; 0.7 &amp;&amp; distance_to_object(obj_player) &lt;= 250)
  image_alpha += 0.07;
 
 </string>

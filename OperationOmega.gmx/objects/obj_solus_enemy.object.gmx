@@ -216,6 +216,14 @@ switch(animation_step)
                 animation_step = 1;
                 image_speed = 0.5;
             }               
+        if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
+        {
+            x = xprevious;
+            y = yprevious;
+            speed = 0;
+            animation_step = 1;
+            image_speed = 0.5;
+        }      
     break;
     case 1:
         if(image_index = 7*object_team-1)

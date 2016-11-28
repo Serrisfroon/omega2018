@@ -62,6 +62,35 @@ attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_hackermine">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(attack_collision(6, 11, 0, 8, "Hacker Mine") = 1)
+{
+    ship_status_hacked = true;
+    alarm[5] = 90;
+    repeat(4)
+        (instance_create(other.x, other.y, obj_hack_effect)).target_ship = id;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_splitmissile">
       <action>
         <libid>1</libid>
@@ -95,65 +124,6 @@ if(other.damage &gt; 4)
  other.split.oldmid = mid;
 }
 attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_strikemine_enemy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(other.mid != mid || other.recollect = 0)
-    exit;
-
-with(other)
-{
- collected = 1;
- sfx_play(snd_pickup, x, y);
- instance_destroy();
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_hackermine">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(attack_collision(6, 11, 0, 8, "Hacker Mine") = 1)
-{
-    ship_status_hacked = true;
-    alarm[5] = 90;
-}
 </string>
           </argument>
         </arguments>

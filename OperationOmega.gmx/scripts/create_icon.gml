@@ -78,6 +78,7 @@ switch(tile.owner.object_index)
         else
             switch(tile.sprite_index)
             {
+                //Energy Weapons 1-5
                 case spr_fusion_icon:
                     var icon_order = 1;
                     tile.giveselection = 1;
@@ -129,6 +130,7 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Beam";
                     tile.display = 4;
                 break;
+                //Energy Weapons 6-10
                 case spr_sparkline_icon:
                     var icon_order = 6;
                     tile.giveselection = 6;
@@ -180,6 +182,7 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Spiral";
                     tile.display = 9;
                 break;
+                //Energy Weapons 11-15
                 case spr_laser_icon:
                     var icon_order = 11;
                     tile.giveselection = 11;
@@ -230,6 +233,7 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Direct";
                     tile.display = 14;
                 break;
+                //Heavy Weapons 1-5
                 case spr_dualmissile_icon:
                     var icon_order = 1;
                     tile.giveselection = 16;
@@ -241,28 +245,8 @@ switch(tile.owner.object_index)
                     tile.selection_lockon_required = true;   
                     tile.display = 0;
                 break;
-                case spr_layermissile_icon:
-                    var icon_order = 2;
-                    tile.giveselection = 17;
-                    tile.selection_type = 1;
-                    tile.selection_cost = 1;
-                    tile.selection_stock = 3;
-                    tile.selection_object = obj_layermissile_attack;
-                    tile.selection_name = "Layer Missile";
-                    tile.display = 1;
-                break;
-                case spr_solgrenade_icon:
-                    var icon_order = 2;
-                    tile.giveselection = 31;
-                    tile.selection_type = 1;
-                    tile.selection_cost = 1;
-                    tile.selection_stock = 4;
-                    tile.selection_object = obj_solgrenade_attack;   
-                    tile.selection_name = "Sol Grenade"; 
-                    tile.display = 11;
-                break;
                 case spr_locustmissile_icon:
-                    var icon_order = 3;
+                    var icon_order = 2;
                     tile.giveselection = 18;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -273,7 +257,7 @@ switch(tile.owner.object_index)
                     tile.display = 8;
                 break;
                 case spr_tridentmissile_icon:
-                    var icon_order = 4;
+                    var icon_order = 3;
                     tile.giveselection = 19;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -284,7 +268,7 @@ switch(tile.owner.object_index)
                     tile.display = 2;
                 break;
                 case spr_shockmissile_icon:
-                    var icon_order = 5;
+                    var icon_order = 4;
                     tile.giveselection = 20;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -294,28 +278,8 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Shock Missile";
                     tile.display = 9;
                 break;
-                case spr_hermitmissile_icon:
-                    var icon_order = 6;
-                    tile.giveselection = 21;
-                    tile.selection_type = 1;
-                    tile.selection_cost = 1;
-                    tile.selection_stock = 4;
-                    tile.selection_object = obj_hermitmissile_attack;    
-                    tile.selection_name = "Hermit Missile";
-                    tile.display = 13;
-                break;
-                case spr_lunagrenade_icon:
-                    var icon_order = 6;
-                    tile.giveselection = 32;
-                    tile.selection_type = 1;
-                    tile.selection_cost = 1;
-                    tile.selection_stock = 4;
-                    tile.selection_object = obj_lunagrenade_attack;    
-                    tile.selection_name = "Luna Grenade";
-                    tile.display = 13;
-                break;
                 case spr_splitmissile_icon:
-                    var icon_order = 7;
+                    var icon_order = 5;
                     tile.giveselection = 22;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -324,19 +288,9 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Split Missile"; 
                     tile.display = 3;
                 break;
-                case spr_strikemissile_icon:
-                    var icon_order = 8;
-                    tile.giveselection = 23;
-                    tile.selection_type = 1;
-                    tile.selection_cost = 1;
-                    tile.selection_stock = 4;
-                    tile.selection_object = obj_strikemissile_attack;    
-                    tile.selection_name = "Strike Missile";
-                    tile.selection_lockon_required = true;   
-                    tile.display = 4;
-                break;
+                //Heavy Weapons 6-10
                 case spr_huntermine_icon:
-                    var icon_order = 9;
+                    var icon_order = 6;
                     tile.giveselection = 24;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -346,7 +300,7 @@ switch(tile.owner.object_index)
                     tile.display = 10;
                 break;
                 case spr_phantommine_icon:
-                    var icon_order = 10;
+                    var icon_order = 7;
                     tile.giveselection = 25;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -356,7 +310,7 @@ switch(tile.owner.object_index)
                     tile.display = 5;
                 break;
                 case spr_hackermine_icon:
-                    var icon_order = 11;
+                    var icon_order = 8;
                     tile.giveselection = 26;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -366,7 +320,7 @@ switch(tile.owner.object_index)
                     tile.display = 7;
                 break;
                 case spr_clustermine_icon:
-                    var icon_order = 12;
+                    var icon_order = 9;
                     tile.giveselection = 27;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -375,18 +329,60 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Cluster Mine";   
                     tile.display = 12;
                 break;
-                case spr_strikemine_icon:
-                    var icon_order = 13;
-                    tile.giveselection = 28;
+                case spr_buster_icon:
+                    var icon_order = 10;
+                    tile.giveselection = 34;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
                     tile.selection_stock = 4;
-                    tile.selection_object = obj_strikemine_attack;    
-                    tile.selection_name = "Strike Mine";
+                    tile.selection_object = obj_buster_attack;    
+                    tile.selection_name = "Buster";
                     tile.display = 14;
                 break;
-                case spr_solus_icon:
+                //Heavy Weapons 11-15
+                case spr_solgrenade_icon:
+                    var icon_order = 11;
+                    tile.giveselection = 31;
+                    tile.selection_type = 1;
+                    tile.selection_cost = 1;
+                    tile.selection_stock = 4;
+                    tile.selection_object = obj_solgrenade_attack;   
+                    tile.selection_name = "Sol Grenade"; 
+                    tile.display = 11;
+                break;
+                case spr_lunagrenade_icon:
+                    var icon_order = 12;
+                    tile.giveselection = 32;
+                    tile.selection_type = 1;
+                    tile.selection_cost = 1;
+                    tile.selection_stock = 4;
+                    tile.selection_object = obj_lunagrenade_attack;    
+                    tile.selection_name = "Luna Grenade";
+                    tile.display = 13;
+                break;
+                case spr_flashbomb_icon:
+                    var icon_order = 13;
+                    tile.giveselection = 33;
+                    tile.selection_type = 1;
+                    tile.selection_cost = 1;
+                    tile.selection_stock = 4;
+                    tile.selection_object = obj_flashbomb_attack;    
+                    tile.selection_name = "Flash Bomb";
+                    tile.selection_lockon_required = false;   
+                    tile.display = 4;
+                break;
+                case spr_paladindrone_icon:
                     var icon_order = 14;
+                    tile.giveselection = 35;
+                    tile.selection_type = 1;
+                    tile.selection_cost = 1;
+                    tile.selection_stock = 2;
+                    tile.selection_object = obj_paladindrone_attack;   
+                    tile.selection_name = "Paladin Drone"; 
+                    tile.display = 11;
+                break;
+                case spr_solus_icon:
+                    var icon_order = 15;
                     tile.giveselection = 29;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
@@ -394,16 +390,6 @@ switch(tile.owner.object_index)
                     tile.selection_object = obj_solus_attack;    
                     tile.selection_name = "Solus";
                     tile.display = 6;
-                break;
-                case spr_turret_icon:
-                    var icon_order = 15;
-                    tile.giveselection = 30;
-                    tile.selection_type = 1;
-                    tile.selection_cost = 1;
-                    tile.selection_stock = 2;
-                    tile.selection_object = obj_turret_attack;   
-                    tile.selection_name = "Turret"; 
-                    tile.display = 11;
                 break;
             }
     break;

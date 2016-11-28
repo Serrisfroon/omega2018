@@ -235,8 +235,8 @@ switch(type)
          loldir[7] = loldir[1] + 45;
          sfx_play(snd_spread, lolx, loly);
     break;
-    case "Turret":
-         name = "Turret";
+    case "Paladin Drone":
+         name = "Paladin Drone";
          sprite = spr_turretshot;
          life = 200;
          after = obj_generic_hit;

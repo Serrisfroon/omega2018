@@ -175,6 +175,8 @@ alarm[2] = 40;
             <kind>1</kind>
             <string>visible = 1;
 image_index = global.team[mid]-1;
+if(amplified = 1)
+    speed += 2.5;
 </string>
           </argument>
         </arguments>

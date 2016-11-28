@@ -173,6 +173,45 @@ attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_hackermine_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(attack_collision(6, 11, 0, 8, "Hacker Mine") = 1)
+{
+    ship_status_hacked = true;
+    ship_disabled = true;
+    repeat(4)
+        (instance_create(other.x, other.y, obj_hack_effect)).target_ship = id;
+    alarm[5] = 90;
+    //Send the information
+    clearbuffer(0);
+    packet_label_write(15, global.mymid);
+    //Send to everyone if host
+    if(global.master = true)
+        client_sendall(0, 0);
+    else
+        //Send to host if client
+        sendmessage(global.host, 0, 0, 0);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_splitmissile_enemy">
       <action>
         <libid>1</libid>
@@ -206,86 +245,6 @@ if(other.damage &gt; 4)
  other.split.oldmid = mid;
 }
 attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_strikemine">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(other.mid != global.mymid || other.recollect = 0)
- exit;
-//Take the mine away from your mine count
-//Take from the correct deploy count
-for(i = 1; i &lt;= 4; i += 1)
-{
- if(global.secondary[i] = 28)
-    if(global.secondary_stock[i] != obj_mod.max_secondary_stock[i])
-    {
-        global.secondary_stock[i] += 1;
-    }
-
-}
-
-with(other)
-{
- collected = 1;
- sfx_play(snd_pickup, x, y);
- instance_destroy();
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_hackermine_enemy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(attack_collision(6, 11, 0, 8, "Hacker Mine") = 1)
-{
-    ship_status_hacked = true;
-    ship_disabled = true;
-    alarm[5] = 90;
-    //Send the information
-    clearbuffer(0);
-    packet_label_write(15, global.mymid);
-    //Send to everyone if host
-    if(global.master = true)
-        client_sendall(0, 0);
-    else
-        //Send to host if client
-        sendmessage(global.host, 0, 0, 0);
-}
 </string>
           </argument>
         </arguments>
@@ -347,41 +306,64 @@ with(other)
             <string>if(invincible = 0.7)
     exit;
 
+//Handle Paladin Drone stuff
+var drone_active = false;
+var my_drone = noone;
+with(obj_paladindrone) 
+{
+    if(mid = global.mymid)
+    {
+        var my_drone = id;
+        drone_active = true;
+    }
+}
 
 
-//Check if there's a nearby paladin turret
-var shielded;
-shielded = 1;
-if(instance_exists(obj_turret))
-    if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
-        shielded = 2;
-//Take damage
-if(invincible = 1)
+if(drone_active = false)
 {
     //Check if under shock effect
-   if(ship_status_shocked = false)
-        shield -= 3/shielded;
+    if(ship_status_shocked = false)
+        shield -= 3;
     else
     {
         shield -= 1;
         armor -= 2;
     }
-
-    //If there is no more shield, transfer damage to armor
-    if(shield &lt; 0) 
+}
+else
+{
+    //Check if under shock effect
+    if(ship_status_shocked = false)
+        my_drone.shield -= 3;
+    else
     {
-        //Do double damage to armor
-        armor += shield*1.167;
-        shield = 0;
+        my_drone.shield -= 1;
+        shield -= 2;
+    }
+    //Destroy the drone if its shield is used up
+    if(my_drone.shield &lt;= 0)
+    {
+        shield += my_drone.shield;
+        with(my_drone)
+            instance_destroy();
     }
 }
+
+//If there is no more shield, transfer damage to armor
+if(shield &lt; 0) 
+{
+    //Do double damage to armor
+    armor += shield*1.167;
+    shield = 0;
+}
+
 
 //If there is shield left, create effect
 if(shield &gt; 0)
 {
- hurt = instance_create(0, 0, obj_hit);
- hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
- hurt.hurting = id;
+    hurt = instance_create(0, 0, obj_hit);
+    hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
+    hurt.hurting = id;
 }
 
 
@@ -409,53 +391,6 @@ if(armor &lt;= 0)
     //Destroy this object
     event_perform(ev_other, ev_user2);
 }
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_layermissile_enemy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>var directdir, regdmg, penedmg;
-//Find out ideal direction for a "direct hit"
-var directdir = point_direction(other.x, other.y, x, y);
-//Base connection damage and explosion
-var penedmg = 15;
-var regdmg = 10+other.bonusdamage;
-other.hits = 1;
-
-//If the missile's direction is near the ideal direction, add more damage and explosion
-if(directdir &gt;= other.direction-4 &amp;&amp; directdir &lt;= other.direction+4)
-{
-    penedmg += 20;
-    regdmg += 10;
-    other.hits = 2;
-}
-//If the missile's direction is VERY close to the ideal direction, add even more damage and explosion
-if(directdir &gt;= other.direction-1 &amp;&amp; directdir &lt;= other.direction+1)
-{
-    penedmg += 25;
-    regdmg += 10;
-    other.hits = 3;
-}
-
-attack_collision(regdmg, penedmg, 0, 8, "Layer Missile");
 
 </string>
           </argument>
@@ -517,12 +452,46 @@ if(other.damaged[global.mymid] = 1)
 other.damaged[global.mymid] = 1;
 sfx_play(snd_hit, x, y);
 
-//Take damage
-if(ship_status_shocked = false)
- shield -= 1;
+
+//Handle Paladin Drone stuff
+var drone_active = false;
+var my_drone = noone;
+with(obj_paladindrone) 
+{
+    if(mid = global.mymid)
+    {
+        var my_drone = id;
+        drone_active = true;
+    }
+}
+
+
+if(drone_active = false)
+{
+    //Check if under shock effect
+    if(ship_status_shocked = false)
+        shield -= 1;
+    else
+    {
+        armor -= 1;
+    }
+}
 else
 {
- armor -= 1;
+    //Check if under shock effect
+    if(ship_status_shocked = false)
+        my_drone.shield -= 1;
+    else
+    {
+        shield -= 1;
+    }
+    //Destroy the drone if its shield is used up
+    if(my_drone.shield &lt;= 0)
+    {
+        shield += my_drone.shield;
+        with(my_drone)
+            instance_destroy();
+    }
 }
 
 //If there is no more shield, transfer damage to armor

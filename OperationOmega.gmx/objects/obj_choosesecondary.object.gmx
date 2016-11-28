@@ -186,21 +186,21 @@ if(changeselect = 52)
     create_weaponslots();    
     with(obj_customizer.weaponslot[4])
     {
-        create_icon(spr_dualmissile_icon, 4);    
-        create_icon(spr_solgrenade_icon, 4);    
-        create_icon(spr_locustmissile_icon, 4);    
-        create_icon(spr_tridentmissile_icon, 4);    
-        create_icon(spr_shockmissile_icon, 4);                 
-        create_icon(spr_lunagrenade_icon, 4);    
-        create_icon(spr_splitmissile_icon, 4);    
-        create_icon(spr_strikemissile_icon, 4);    
-        create_icon(spr_huntermine_icon, 4);    
-        create_icon(spr_phantommine_icon, 4);                        
-        create_icon(spr_hackermine_icon, 4);    
-        create_icon(spr_clustermine_icon, 4);    
-        create_icon(spr_strikemine_icon, 4);    
-        create_icon(spr_solus_icon, 4);    
-        create_icon(spr_turret_icon, 4);          
+        create_icon(spr_dualmissile_icon, secondnumber);    
+        create_icon(spr_solgrenade_icon, secondnumber);    
+        create_icon(spr_locustmissile_icon, secondnumber);    
+        create_icon(spr_tridentmissile_icon, secondnumber);    
+        create_icon(spr_shockmissile_icon, secondnumber);    
+        create_icon(spr_lunagrenade_icon, secondnumber);    
+        create_icon(spr_splitmissile_icon, secondnumber);    
+        create_icon(spr_flashbomb_icon, secondnumber);    
+        create_icon(spr_huntermine_icon, secondnumber);    
+        create_icon(spr_phantommine_icon, secondnumber);        
+        create_icon(spr_hackermine_icon, secondnumber);    
+        create_icon(spr_clustermine_icon, secondnumber);    
+        create_icon(spr_buster_icon, secondnumber);    
+        create_icon(spr_solus_icon, secondnumber);    
+        create_icon(spr_paladindrone_icon, secondnumber);                                
         selected = 1;       
     }
     exit;
@@ -493,14 +493,14 @@ if(obj_readygo.readied = 0)
             create_icon(spr_shockmissile_icon, secondnumber);    
             create_icon(spr_lunagrenade_icon, secondnumber);    
             create_icon(spr_splitmissile_icon, secondnumber);    
-            create_icon(spr_strikemissile_icon, secondnumber);    
+            create_icon(spr_flashbomb_icon, secondnumber);    
             create_icon(spr_huntermine_icon, secondnumber);    
             create_icon(spr_phantommine_icon, secondnumber);        
             create_icon(spr_hackermine_icon, secondnumber);    
             create_icon(spr_clustermine_icon, secondnumber);    
-            create_icon(spr_strikemine_icon, secondnumber);    
+            create_icon(spr_buster_icon, secondnumber);    
             create_icon(spr_solus_icon, secondnumber);    
-            create_icon(spr_turret_icon, secondnumber);                                
+            create_icon(spr_paladindrone_icon, secondnumber);                                
         }
     }
     else

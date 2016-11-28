@@ -30,6 +30,7 @@
 alarm[1] = 3000;
 alarm[3] = 1;
 amplified = 0;
+collected = 0;
 alarm[2] = 1;
 
 //Set attack variable values
@@ -60,10 +61,14 @@ attack_name = "Phantom Mine";       //Set the name of the attack
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sfx_play(snd_explode2, x, y);
-//Create an effect
-create_explosion(1);
-
+            <string>if(collected = 0)
+{
+    sfx_play(snd_explode2, x, y);
+    //Create an effect
+    create_explosion(1);
+}
+else
+    effect_create_above(ef_smoke, x, y, 0, global.allycolor);
 </string>
           </argument>
         </arguments>
@@ -160,7 +165,8 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>target = instance_nearest(x, y, obj_dummy_enemy);
+            <string>image_angle += 1;
+target = instance_nearest(x, y, obj_dummy_enemy);
 if(target != noone)
 {
   if(distance_to_object(target) &lt; 50)
@@ -171,6 +177,36 @@ if(target != noone)
   else
     speed = 0;
 }
+var ally = instance_nearest(x, y, obj_dummy_ally);
+if(ally = noone)
+  ally = global.playership[global.mymid];      
+else
+    if(point_distance(x, y, ally.x, ally.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+      ally = global.playership[global.mymid];
+if(mid = ally.mid)
+    if(point_distance(x, y, ally.x, ally.y) &lt; 40)
+    {
+        if(recollect = 0)
+            exit;
+        if(mid = global.mymid)
+        {
+            //Take the mine away from your mine count
+            //Take from the correct deploy count
+            for(i = 1; i &lt;= 4; i += 1)
+            {
+             if(global.secondary[i] = 28)
+                if(global.secondary_stock[i] != obj_mod.max_secondary_stock[i])
+                {
+                    global.secondary_stock[i] += 1;
+                }
+            
+            }
+        }
+        sfx_play(snd_pickup, x, y);
+        collected = 1;
+        instance_destroy();
+    }
+
 </string>
           </argument>
         </arguments>
@@ -194,6 +230,12 @@ if(target != noone)
           <argument>
             <kind>1</kind>
             <string>draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, image_angle, c_white, 1);
+if(mid != global.mymid)
+    exit;
+draw_set_color(c_black);
+draw_rectangle(x-21, y-26, x+21, y-14, 0);
+draw_set_color(global.allycolor);
+draw_rectangle(x-20, y-25, x-20+alarm[1]*0.02, y-15, 0);
 </string>
           </argument>
         </arguments>

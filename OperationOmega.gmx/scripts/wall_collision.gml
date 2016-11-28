@@ -11,30 +11,41 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
         y = yprevious;
     }
     facedir = direction;
-    sfx_play(snd_explode1, x, y);
     //Take damage
     shielddown = 1;
     if(shielddown = 0)
         shielded = 0;
-    //Check if under shock effect
-    if(ship_status_shocked = false)
-        shield -= 2;
+    if(buster_push = false)
+    {
+        sfx_play(snd_explode1, x, y);
+        //Check if under shock effect
+        if(ship_status_shocked = false)
+            shield -= 2;
+        else
+        {
+            shield -= 1;
+            armor -= 1;
+        }
+        
+        //If there is no more shield, transfer damage to armor
+        if(shield < 0) 
+        {
+            if(shielddown = 1)
+                obj_mod.ping_send_timer = 0;
+            armor += shield;
+            shield = 0;
+        }
+    }
     else
     {
-        shield -= 1;
-        armor -= 1;
+        sfx_play(snd_explode2, x, y);
+        armor -= 30;
+        buster_push = false;
+        var pass_mid = mid;
+        with(obj_buster_push)
+            if(target_object = global.playership[pass_mid])
+                instance_destroy();
     }
-    
-    //If there is no more shield, transfer damage to armor
-    if(shield < 0) 
-    {
-        if(shielddown = 1)
-            obj_mod.ping_send_timer = 0;
-        armor += shield;
-        shield = 0;
-    }
-    global.damagetaken[global.mymid] += 2;
-    global.walldamage += 2;
 
     //Create smoke at the collision
     smokecolor = make_color_rgb(255, random(255), 0);
@@ -71,23 +82,36 @@ else
         vspeed = -vspeed;
         y = yprevious;
         facedir = direction;
-        sfx_play(snd_explode1, x, y);
-        //Take damage
-
-        //Check if under shock effect
-        if(ship_status_shocked = false)
-            shield -= 2;
+        if(buster_push = false)
+        {
+            sfx_play(snd_explode1, x, y);
+            //Check if under shock effect
+            if(ship_status_shocked = false)
+                shield -= 2;
+            else
+            {
+                shield -= 1;
+                armor -= 1;
+            }
+            
+            //If there is no more shield, transfer damage to armor
+            if(shield < 0) 
+            {
+                if(shielddown = 1)
+                    obj_mod.ping_send_timer = 0;
+                armor += shield;
+                shield = 0;
+            }
+        }
         else
         {
-            shield -= 1;
-            armor -= 1;
-        }
-        
-        //If there is no more shield, transfer damage to armor
-        if(shield < 0) 
-        {
-            armor += shield;
-            shield = 0;
+            sfx_play(snd_explode2, x, y);
+            armor -= 30;
+            buster_push = false;
+            var pass_mid = mid;
+            with(obj_buster_push)
+                if(target_object = global.playership[pass_mid])
+                    instance_destroy();
         }
         //Create smoke at the collision
         smokecolor = make_color_rgb(255, random(255), 0);

@@ -41,6 +41,21 @@ part_type_orientation(starpart,0,0,0,0,1);
 part_type_blend(starpart,1);
 part_type_life(starpart,12,12);
 
+//Hack effect
+hack_effect = part_type_create();
+part_type_sprite(hack_effect, spr_flare_part, 0, 0, 0);
+part_type_size(hack_effect,0.20,0.40,0,0);
+part_type_scale(hack_effect,1.50,0.80);
+part_type_color1(hack_effect,32768);
+part_type_alpha3(hack_effect,1,1,0);
+part_type_speed(hack_effect,0,1,0,0);
+part_type_direction(hack_effect,0,359,0,0);
+part_type_gravity(hack_effect,0,270);
+part_type_orientation(hack_effect,0,0,0,0,1);
+part_type_blend(hack_effect,1);
+part_type_life(hack_effect,30,30);
+
+
 //Missile Flames
 missile_flame[1] = part_type_create();
 part_type_sprite(missile_flame[1], spr_explosion_part, 0, 0, 0);
@@ -801,6 +816,21 @@ part_type_orientation(trailfade[1], 0, 0, 0, 0, 1);
 part_type_blend(trailfade[1], 1);
 part_type_life(trailfade[1], 60, 90);
 
+//Flash Bomb Flash
+bomb_flash = part_type_create();
+part_type_sprite(bomb_flash, spr_flare_part, 0, 0, 0);
+part_type_size(bomb_flash,1,1,1,0);
+part_type_scale(bomb_flash,2,2);
+part_type_color1(bomb_flash,16777215);
+part_type_alpha3(bomb_flash,1,1,0);
+part_type_speed(bomb_flash,0,2,0,0);
+part_type_direction(bomb_flash,0,359,0,0);
+part_type_gravity(bomb_flash,0,270);
+part_type_orientation(bomb_flash,0,359,8,0,1);
+part_type_blend(bomb_flash,1);
+part_type_life(bomb_flash,10,15);
+
+
 //Deploy Hit
 deployhit = part_type_create();
 part_type_sprite(deployhit, spr_explosion_part, 0, 0, 0);
@@ -869,6 +899,89 @@ part_type_gravity(luna_crescent[1],0,270);
 part_type_orientation(luna_crescent[1],0,359,2,0,1);
 part_type_blend(luna_crescent[1],1);
 part_type_life(luna_crescent[1],20,35);
+
+
+//Buster Wave
+buster_wave[0] = part_type_create();
+part_type_sprite(buster_wave[0], spr_ring_part, 0, 0, 0);
+part_type_size(buster_wave[0],0.10,0.10,0.10,0);
+part_type_scale(buster_wave[0],1,1);
+part_type_color2(buster_wave[0],8421631,255);
+part_type_alpha3(buster_wave[0],1,1,0.20);
+part_type_speed(buster_wave[0],0,0,0,0);
+part_type_direction(buster_wave[0],0,359,0,0);
+part_type_gravity(buster_wave[0],0,270);
+part_type_orientation(buster_wave[0],0,0,0,0,1);
+part_type_blend(buster_wave[0],1);
+part_type_life(buster_wave[0],15,15);
+
+buster_wave1[0] = part_type_create();
+part_type_sprite(buster_wave1[0], spr_ring_part, 0, 0, 0);
+part_type_size(buster_wave1[0],0.10,0.10,0.25,0);
+part_type_scale(buster_wave1[0],1,1);
+part_type_color2(buster_wave1[0],8421631,255);
+part_type_alpha3(buster_wave1[0],1,1,0.20);
+part_type_speed(buster_wave1[0],0,0,0,0);
+part_type_direction(buster_wave1[0],0,359,0,0);
+part_type_gravity(buster_wave1[0],0,270);
+part_type_orientation(buster_wave1[0],0,0,0,0,1);
+part_type_blend(buster_wave1[0],1);
+part_type_life(buster_wave1[0],15,15);
+
+buster_wave2[0] = part_type_create();
+part_type_sprite(buster_wave2[0], spr_ring_part, 0, 0, 0);
+part_type_size(buster_wave2[0],0.10,0.10,0.5,0);
+part_type_scale(buster_wave2[0],1,1);
+part_type_color2(buster_wave2[0],8421631,255);
+part_type_alpha3(buster_wave2[0],1,1,0.20);
+part_type_speed(buster_wave2[0],0,0,0,0);
+part_type_direction(buster_wave2[0],0,359,0,0);
+part_type_gravity(buster_wave2[0],0,270);
+part_type_orientation(buster_wave2[0],0,0,0,0,1);
+part_type_blend(buster_wave2[0],1);
+part_type_life(buster_wave2[0],15,15);
+
+buster_wave[1] = part_type_create();
+part_type_sprite(buster_wave[1], spr_ring_part, 0, 0, 0);
+part_type_size(buster_wave[1],0.10,0.10,0.1,0);
+part_type_scale(buster_wave[1],1,1);
+part_type_color2(buster_wave[1],16744576,16711680);
+part_type_alpha3(buster_wave[1],1,1,0.20);
+part_type_speed(buster_wave[1],0,0,0,0);
+part_type_direction(buster_wave[1],0,359,0,0);
+part_type_gravity(buster_wave[1],0,270);
+part_type_orientation(buster_wave[1],0,0,0,0,1);
+part_type_blend(buster_wave[1],1);
+part_type_life(buster_wave[1],15,15);
+
+buster_wave1[1] = part_type_create();
+part_type_sprite(buster_wave1[1], spr_ring_part, 0, 0, 0);
+part_type_size(buster_wave1[1],0.10,0.10,0.25,0);
+part_type_scale(buster_wave1[1],1,1);
+part_type_color2(buster_wave1[1],16744576,16711680);
+part_type_alpha3(buster_wave1[1],1,1,0.20);
+part_type_speed(buster_wave1[1],0,0,0,0);
+part_type_direction(buster_wave1[1],0,359,0,0);
+part_type_gravity(buster_wave1[1],0,270);
+part_type_orientation(buster_wave1[1],0,0,0,0,1);
+part_type_blend(buster_wave1[1],1);
+part_type_life(buster_wave1[1],15,15);
+
+buster_wave2[1] = part_type_create();
+part_type_sprite(buster_wave2[1], spr_ring_part, 0, 0, 0);
+part_type_size(buster_wave2[1],0.10,0.10,0.5,0);
+part_type_scale(buster_wave2[1],1,1);
+part_type_color2(buster_wave2[1],16744576,16711680);
+part_type_alpha3(buster_wave2[1],1,1,0.20);
+part_type_speed(buster_wave2[1],0,0,0,0);
+part_type_direction(buster_wave2[1],0,359,0,0);
+part_type_gravity(buster_wave2[1],0,270);
+part_type_orientation(buster_wave2[1],0,0,0,0,1);
+part_type_blend(buster_wave2[1],1);
+part_type_life(buster_wave2[1],15,15);
+
+
+
 
 
 //Explosion
