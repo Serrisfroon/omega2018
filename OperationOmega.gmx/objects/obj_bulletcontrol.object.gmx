@@ -289,88 +289,139 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             {
                 case global.mymid:
                     sfx_play(snd_hit, bulletx[i], bullety[i]);
-                    //Intercept turrets
-                    if(possihit.sprite_index = spr_turretbase)
-                    {
-                        if(point_distance(global.playership[bulletmid[i]].x, global.playership[bulletmid[i]].y, possihit.x, possihit.y) &lt;= 400)
-                            bulletdamage[i] = 5;
-                        else
-                            bulletdamage[i] = 0;
-                        
-                        if(possihit.reset = 0 &amp;&amp; bulletdamage[i] = 5)
-                        {
-                            possihit.armor -= bulletdamage[i];
-                            possihit.reset = 1;
-                            possihit.alarm[0] = 10;
-                        }
-                        break;
-                    }
                     //Check if there's a nearby paladin turret
                     var shielded, shielddown;
                     shielded = 1;
-                    if(instance_exists(obj_turret))
-                        if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
-                            shielded = 2;
+                    var drone_active = false;
+                    with(obj_paladindrone) 
+                    {
+                        if(mid = global.mymid)
+                        {
+                            var my_drone = id;
+                            drone_active = true;
+                        }
+                    }
                     if(possihit.invincible = 1)
                     {
-                            shielddown = 1;
-                            if(possihit.shield = 0)
-                                shielddown = 0;
+                        shielddown = 1;
+                        if(possihit.shield = 0)
+                            shielddown = 0;
 
-                        //Take damage
-                        //Take pierce damage
-                        if(bullettype[i] = spr_pierce)
+                        if(drone_active = false)
                         {
-                            possihit.armor -= 3;
-                            global.damagetaken[global.mymid] += 3;
-                            global.damagedealt[bulletmid[i]] += 3;                        
-                        }
-                        //Goliath Hyper Rush damage reduction
-                        if(possihit.sprite_index = spr_goliath || possihit.sprite_index = spr_goliath_enemy)
-                            if(possihit.ship_ability_active_flag = true)
+                            //Take damage
+                            //Take pierce damage
+                            if(bullettype[i] = spr_pierce)
                             {
-                                bulletdamage[i] *= 0.4;
+                                possihit.armor -= 3;
                             }
-                        //If burst, slash, or whip, apply threshold damage
-                        if((bullettype[i] = spr_burst || bullettype[i] = spr_slash || bullettype[i] = spr_whip || bulletname[i] = "Formation"))
-                        {
-                            //Check if under shock effect
-                            if(possihit.ship_status_shocked = false)
-                                possihit.shield -= bulletdamage[i]*possihit.threshold/shielded;
+                            //Goliath Hyper Rush damage reduction
+                            if(possihit.sprite_index = spr_goliath || possihit.sprite_index = spr_goliath_enemy)
+                                if(possihit.ship_ability_active_flag = true)
+                                {
+                                    bulletdamage[i] *= 0.4;
+                                }
+                            //If burst, slash, or whip, apply threshold damage
+                            if((bullettype[i] = spr_burst || bullettype[i] = spr_slash || bullettype[i] = spr_whip || bulletname[i] = "Formation"))
+                            {
+                                //Check if under shock effect
+                                if(possihit.ship_status_shocked = false)
+                                    possihit.shield -= bulletdamage[i]*possihit.threshold/shielded;
+                                else
+                                {
+                                    possihit.shield -= bulletdamage[i]*possihit.threshold/2;
+                                    possihit.armor -= bulletdamage[i]*possihit.threshold/2;
+                                }
+                        
+                                switch(bullettype[i])
+                                {
+                                    case spr_burst:
+                                    case spr_slash:
+                                    case spr_whip:
+                                    case spr_formation:
+                                    case spr_trigger_shot:
+                                        possihit.threshold -= 0.08;
+                                        possihit.alarm[9] = 60;
+                                    break;
+                                }    
+                                if(possihit.threshold &lt; 0.1)
+                                    possihit.threshold = 0.1;   
+                            } 
+                            //Otherwise, calculate damage normally
                             else
                             {
-                                possihit.shield -= bulletdamage[i]*possihit.threshold/2;
-                                possihit.armor -= bulletdamage[i]*possihit.threshold/2;
+                                //Check if under shock effect
+                                if(possihit.ship_status_shocked = false)
+                                    possihit.shield -= bulletdamage[i]/shielded;
+                                else
+                                {
+                                    possihit.shield -= bulletdamage[i]/2;
+                                    possihit.armor -= bulletdamage[i]/2;
+                                }
                             }
-                            global.damagetaken[global.mymid] += bulletdamage[i]*possihit.threshold/shielded;
-                            global.damagedealt[bulletmid[i]] += bulletdamage[i]*possihit.threshold/shielded;
-                  
-                            switch(bullettype[i])
-                            {
-                                case spr_burst:
-                                case spr_slash:
-                                case spr_whip:
-                                case spr_formation:
-                                case spr_trigger_shot:
-                                    possihit.threshold -= 0.08;
-                                    possihit.alarm[9] = 60;
-                                break;
-                            }    
-                            if(possihit.threshold &lt; 0.1)
-                                possihit.threshold = 0.1;   
-                        } 
-                        //Otherwise, calculate damage normally
+                        }
                         else
                         {
-                            //Check if under shock effect
-                            if(possihit.ship_status_shocked = false)
-                                possihit.shield -= bulletdamage[i]/shielded;
+                            //Take damage
+                            //Take pierce damage
+                            if(bullettype[i] = spr_pierce)
+                            {
+                                possihit.shield -= 3;
+                            }
+                            //Goliath Hyper Rush damage reduction
+                            if(possihit.sprite_index = spr_goliath || possihit.sprite_index = spr_goliath_enemy)
+                                if(possihit.ship_ability_active_flag = true)
+                                {
+                                    bulletdamage[i] *= 0.4;
+                                }
+                            //If burst, slash, or whip, apply threshold damage
+                            if((bullettype[i] = spr_burst || bullettype[i] = spr_slash || bullettype[i] = spr_whip || bulletname[i] = "Formation"))
+                            {
+                                //Check if under shock effect
+                                if(possihit.ship_status_shocked = false)
+                                    my_drone.shield -= bulletdamage[i]*possihit.threshold/shielded;
+                                else
+                                {
+                                    my_drone.shield -= bulletdamage[i]*possihit.threshold/2;
+                                    possihit.shield -= bulletdamage[i]*possihit.threshold/2;
+                                }
+                        
+                                switch(bullettype[i])
+                                {
+                                    case spr_burst:
+                                    case spr_slash:
+                                    case spr_whip:
+                                    case spr_formation:
+                                    case spr_trigger_shot:
+                                        possihit.threshold -= 0.08;
+                                        possihit.alarm[9] = 60;
+                                    break;
+                                }    
+                                if(possihit.threshold &lt; 0.1)
+                                    possihit.threshold = 0.1;   
+                            } 
+                            //Otherwise, calculate damage normally
                             else
                             {
-                                possihit.shield -= bulletdamage[i]/2;
-                                possihit.armor -= bulletdamage[i]/2;
+                                //Check if under shock effect
+                                if(possihit.ship_status_shocked = false)
+                                    my_drone.shield -= bulletdamage[i]/shielded;
+                                else
+                                {
+                                    possihit.shield -= bulletdamage[i]/2;
+                                    my_drone.shield -= bulletdamage[i]/2;
+                                }
+                            }
+                            
+                            //Destroy the drone if its shield is used up
+                            if(my_drone.shield &lt;= 0)
+                            {
+                                possihit.shield += my_drone.shield;
+                                with(my_drone)
+                                    instance_destroy();
                             }
                         }
+                        
                         //If there is no more shield, transfer damage to armor
                         if(possihit.shield &lt; 0) 
                         {
@@ -411,22 +462,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                 break;
                 default:
                     sfx_play(snd_hit, bulletx[i], bullety[i]);
-                    //Intercept turrets
-                    if(possihit.sprite_index = spr_turretbase)
-                    {
-                        if(point_distance(global.playership[bulletmid[i]].x, global.playership[bulletmid[i]].y, possihit.x, possihit.y) &lt;= 400)
-                            bulletdamage[i] = 5;
-                        else
-                            bulletdamage[i] = 0;
-                        if(possihit.reset = 0 &amp;&amp; bulletdamage[i] = 5)
-                        {
-                            possihit.armor -= bulletdamage[i];
-                            possihit.reset = 1;
-                            possihit.alarm[0] = 10;
-                        }
-                        break;
-                    }   
-                    
+                                        
                     //Take damage
                     if(bullettype[i] = spr_pierce)
                         possihit.armor -= 3;

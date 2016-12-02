@@ -81,7 +81,7 @@ switch(receive_current_secondary)
     break;
     case 15:
         var receive_current_secondary_type = 0;
-        var receive_current_secondary_object = obj_direct_attack;
+        var receive_current_secondary_object = obj_thorn_attack;
         var receive_current_secondary_lockon_required = false;
     break;
     case 16:

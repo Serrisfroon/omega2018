@@ -147,7 +147,7 @@ if(changeselect = 51)
         create_icon(spr_trail_icon, 4);    
         create_icon(spr_reflection_icon, 4);    
         create_icon(spr_storm_icon, 4);    
-        create_icon(spr_trigger_icon, 4);       
+        create_icon(spr_thorn_icon, 4);       
         selected = 1; 
     }             
     exit;
@@ -482,7 +482,7 @@ if(obj_readygo.readied = 0)
             create_icon(spr_trail_icon, secondnumber);    
             create_icon(spr_reflection_icon, secondnumber);    
             create_icon(spr_storm_icon, secondnumber);    
-            create_icon(spr_trigger_icon, secondnumber);                    
+            create_icon(spr_thorn_icon, secondnumber);                    
         }
         else
         {

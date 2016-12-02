@@ -32,6 +32,8 @@ alarm[3] = 1;
 amplified = 0;
 collected = 0;
 alarm[2] = 1;
+alarm[4] = 45;
+recollect = 0;
 
 //Set attack variable values
 attack_damage = 22;                 //Set the damage for the attack
@@ -69,6 +71,29 @@ attack_name = "Phantom Mine";       //Set the name of the attack
 }
 else
     effect_create_above(ef_smoke, x, y, 0, global.allycolor);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>recollect = 1;
 </string>
           </argument>
         </arguments>
@@ -177,6 +202,9 @@ if(target != noone)
   else
     speed = 0;
 }
+if(recollect = 0)
+    exit;
+
 var ally = instance_nearest(x, y, obj_dummy_ally);
 if(ally = noone)
   ally = global.playership[global.mymid];      
@@ -186,8 +214,6 @@ else
 if(mid = ally.mid)
     if(point_distance(x, y, ally.x, ally.y) &lt; 40)
     {
-        if(recollect = 0)
-            exit;
         if(mid = global.mymid)
         {
             //Take the mine away from your mine count

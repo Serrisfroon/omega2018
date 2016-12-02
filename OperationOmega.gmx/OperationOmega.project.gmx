@@ -1374,6 +1374,8 @@
       <sprite>sprites\spr_storm_wall</sprite>
       <sprite>sprites\spr_trigger_bomb</sprite>
       <sprite>sprites\spr_trigger_shot</sprite>
+      <sprite>sprites\spr_thorn</sprite>
+      <sprite>sprites\spr_thorn_out</sprite>
     </sprites>
     <sprites name="Deploy Secondary">
       <sprite>sprites\spr_dualmissile</sprite>
@@ -1461,7 +1463,7 @@
         <sprite>sprites\spr_trail_icon</sprite>
         <sprite>sprites\spr_reflection_icon</sprite>
         <sprite>sprites\spr_storm_icon</sprite>
-        <sprite>sprites\spr_trigger_icon</sprite>
+        <sprite>sprites\spr_thorn_icon</sprite>
       </sprites>
       <sprites name="Primary">
         <sprite>sprites\spr_needle_icon</sprite>
@@ -1644,6 +1646,7 @@
       <sprite>sprites\spr_layermissile_icon</sprite>
       <sprite>sprites\spr_strikemine_icon</sprite>
       <sprite>sprites\spr_strikemine</sprite>
+      <sprite>sprites\spr_trigger_icon</sprite>
       <sprite>sprites\spr_bustergrenade</sprite>
       <sprite>sprites\spr_turret_icon</sprite>
       <sprite>sprites\spr_strikemissile</sprite>
@@ -2021,6 +2024,12 @@
           <object>objects\obj_direct_attack</object>
           <object>objects\obj_trigger</object>
           <object>objects\obj_trigger_enemy</object>
+        </objects>
+        <objects name="Thorn">
+          <object>objects\obj_thorn_attack</object>
+          <object>objects\obj_thorn</object>
+          <object>objects\obj_thorn_enemy</object>
+          <object>objects\obj_thorn_hit</object>
         </objects>
         <object>objects\prnt_allyenergy</object>
         <object>objects\prnt_enemyenergy</object>

@@ -223,14 +223,14 @@ switch(tile.owner.object_index)
                     tile.selection_name = "Storm";
                     tile.display = 13;
                 break;
-                case spr_trigger_icon:
+                case spr_thorn_icon:
                     var icon_order = 15;
                     tile.giveselection = 15;
                     tile.selection_type = 0;
-                    tile.selection_cost = 20;
+                    tile.selection_cost = 40;
                     tile.selection_stock = 100;
-                    tile.selection_object = obj_direct_attack;
-                    tile.selection_name = "Direct";
+                    tile.selection_object = obj_thorn_attack;
+                    tile.selection_name = "Thorn";
                     tile.display = 14;
                 break;
                 //Heavy Weapons 1-5

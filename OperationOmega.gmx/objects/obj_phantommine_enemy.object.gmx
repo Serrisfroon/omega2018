@@ -33,6 +33,8 @@ amplified = 0;
 alarm[2] = 1;
 image_alpha = 0.4;
 collected = 0;
+recollect = 0;
+alarm[4] = 45;
 
 //Set attack variable values
 attack_damage = 22;                 //Set the damage for the attack
@@ -70,6 +72,29 @@ attack_name = "Phantom Mine";       //Set the name of the attack
 }
 else
     effect_create_above(ef_smoke, x, y, 0, global.enemycolor);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>recollect = 1;
 </string>
           </argument>
         </arguments>
@@ -174,6 +199,16 @@ if(ally != noone)
   else
     speed = 0;
 }
+
+if(image_alpha &gt; 0 &amp;&amp; distance_to_object(obj_player) &gt; 250)
+ image_alpha -= 0.07;
+//Show the mine if nearby
+if(image_alpha &lt; 0.7 &amp;&amp; distance_to_object(obj_player) &lt;= 250)
+ image_alpha += 0.07;
+
+if(recollect = 0)
+    exit;
+
 var enemy = instance_nearest(x, y, obj_dummy_enemy);
 if(instance_exists(enemy))
     if(enemy.mid = mid)
@@ -184,11 +219,6 @@ if(instance_exists(enemy))
             instance_destroy();
         }
 
-if(image_alpha &gt; 0 &amp;&amp; distance_to_object(obj_player) &gt; 250)
- image_alpha -= 0.07;
-//Show the mine if nearby
-if(image_alpha &lt; 0.7 &amp;&amp; distance_to_object(obj_player) &lt;= 250)
- image_alpha += 0.07;
 
 </string>
           </argument>

@@ -142,11 +142,11 @@ for(i = 1; i <=4; i++)
         break;
         case 15:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 20;
+            global.secondary_cost[i] = 40;
             global.secondary_stock[i] = 100;
-            global.secondary_object[i] = obj_direct_attack;
-            global.secondary_name[i] = "Direct";
-            global.secondary_icon_image[i] = spr_trigger_icon;
+            global.secondary_object[i] = obj_thorn_attack;
+            global.secondary_name[i] = "Thorn";
+            global.secondary_icon_image[i] = spr_thorn_icon;
         break;
         case 16:
             global.secondary_type[i] = 1;

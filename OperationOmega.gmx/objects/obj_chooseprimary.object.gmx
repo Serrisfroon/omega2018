@@ -387,7 +387,7 @@ for(i = 1; i &lt;= 4; i++)
              global.secondary_icon_image[i] = spr_storm_icon;
         break;
         case 15:
-             global.secondary_icon_image[i] = spr_trigger_icon;
+             global.secondary_icon_image[i] = spr_thorn_icon;
         break;
         case 16:
              global.secondary_icon_image[i] = spr_dualmissile_icon;
@@ -433,6 +433,21 @@ for(i = 1; i &lt;= 4; i++)
         break;
         case 27:
              global.secondary_icon_image[i] = spr_clustermine_icon;
+        break;
+        case 31:
+             global.secondary_icon_image[i] = spr_solgrenade_icon;
+        break;
+        case 32:
+             global.secondary_icon_image[i] = spr_lunagrenade_icon;
+        break;
+        case 33:
+             global.secondary_icon_image[i] = spr_flashbomb_icon;
+        break;
+        case 34:
+             global.secondary_icon_image[i] = spr_buster_icon;
+        break;
+        case 35:
+             global.secondary_icon_image[i] = spr_paladindrone_icon;
         break;
     }
 }

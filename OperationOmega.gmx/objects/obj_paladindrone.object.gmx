@@ -64,7 +64,7 @@ begin_path = false;
             <string>//Create an effect
 x += owner.x;
 y += owner.y;
-create_explosion(1);
+create_explosion(0);
 
 if(mid = global.mymid)
 {
@@ -103,13 +103,15 @@ if(mid = global.mymid)
             <string>//Reset the time until next shot
 alarm[1] = 15;
 
-var nearest_enemy = instance_nearest(x, y, obj_dummy_enemy);
+var nearest_enemy = instance_nearest(owner.x, owner.y, obj_dummy_enemy);
 var enemy_distance = point_distance(owner.x, owner.y, nearest_enemy.x, nearest_enemy.y);
 
 if(enemy_distance &lt; 400)
 {
-    var bullet_direction = point_direction(owner.x, owner.y, nearest_enemy.x, nearest_enemy.y);
-    bullet_create(owner.x+x+lengthdir_x(7, owner.direction), owner.x+y+lengthdir_y(7, owner.direction), "Paladin Drone", bullet_direction, mid, 0);
+    var bullet_create_x = owner.x+x+lengthdir_x(7, owner.direction);
+    var bullet_create_y = owner.y+y+lengthdir_y(7, owner.direction);
+    var bullet_direction = point_direction(bullet_create_x, bullet_create_y, nearest_enemy.x, nearest_enemy.y);
+    bullet_create(bullet_create_x, bullet_create_y, "Paladin Drone", bullet_direction, mid, 0);
     shield -= 0.5;
     if(shield &lt;= 0)
         instance_destroy();
@@ -140,8 +142,7 @@ if(enemy_distance &lt; 400)
 object_team = global.team[mid];
 image_index = object_team-1;
 owner = global.playership[mid];
-speed = 6;
-direction = 270;
+vspeed = -6;
 
 if(amplified = 1)
 {
@@ -171,11 +172,11 @@ if(amplified = 1)
           <argument>
             <kind>1</kind>
             <string>if(begin_path = false)
-    if(y = 48)
+    if(y = -48)
     {
         speed = 0;
         begin_path = true;
-        path_start(path_drone, 5, path_action_restart, false);
+        path_start(path_drone, 2, path_action_restart, false);
     }
 </string>
           </argument>
@@ -203,9 +204,6 @@ if(amplified = 1)
     exit;
 //Draw the image at the correct size
 draw_sprite_ext(sprite_index, image_index, owner.x+x, owner.y+y, 1, 1, owner.direction, c_white, 1);
-
-var shield_ratio = 1-shield/max_shield;
-draw_sprite_general(sprite_index, 2, 0, 0, 6+12*shield_ratio, 25, owner.x+x, owner.y+y, 1, 1, owner.direction, c_white, c_white, c_white, c_white, 1);
 </string>
           </argument>
         </arguments>

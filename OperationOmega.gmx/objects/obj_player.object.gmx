@@ -195,7 +195,7 @@ attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold
     ship_status_hacked = true;
     ship_disabled = true;
     repeat(4)
-        (instance_create(other.x, other.y, obj_hack_effect)).target_ship = id;
+        (instance_create(other.x, other.y, obj_hack_effect)).target_mid = mid;
     alarm[5] = 90;
     //Send the information
     clearbuffer(0);

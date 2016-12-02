@@ -266,6 +266,16 @@ switch(type)
          lolspeed = 14;
          bullet_number = 1;
     break;
+    case "Thorn":
+         name = "Thorn";
+         sprite = spr_thorn;
+         life = 300;
+         after = obj_thorn_hit;
+         dmg = 5;
+         mask = 16;
+         lolspeed = 5;
+         bullet_number = 1;
+    break;
     case "Serpent":
          name = "Serpent";
          sprite = spr_snake_body;

@@ -121,7 +121,7 @@ with(other)
     {
         hurt = instance_create(0, 0, obj_hit);
         hurt.hitdir = point_direction(x, y, other.x, other.y);
-        hurt.hurting = other.id;
+        hurt.hurting = id;
     }
     
     //Update smoking

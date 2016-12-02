@@ -64,7 +64,7 @@ begin_path = false;
             <string>//Create an effect
 x += owner.x;
 y += owner.y;
-create_explosion(1);
+create_explosion(0);
 </string>
           </argument>
         </arguments>
@@ -90,14 +90,24 @@ create_explosion(1);
             <string>//Reset the time until next shot
 alarm[1] = 15;
 
-var nearest_enemy = instance_nearest(x, y, obj_dummy_enemy);
+//Update targetting
+var nearest_enemy = instance_nearest(x, y, obj_dummy_ally);
+if(nearest_enemy = noone)
+  nearest_enemy = global.playership[global.mymid];      
+else
+    if(point_distance(x, y, nearest_enemy.x, nearest_enemy.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
+        nearest_enemy = global.playership[global.mymid];
 var enemy_distance = point_distance(owner.x, owner.y, nearest_enemy.x, nearest_enemy.y);
 
 if(enemy_distance &lt; 400)
 {
-    var bullet_direction = point_direction(owner.x, owner.y, nearest_enemy.x, nearest_enemy.y);
-    bullet_create(owner.x+x+lengthdir_x(7, owner.direction), owner.x+y+lengthdir_y(7, owner.direction), "Paladin Drone", bullet_direction, mid, 0);
+    var bullet_create_x = owner.x+x+lengthdir_x(7, owner.direction);
+    var bullet_create_y = owner.y+y+lengthdir_y(7, owner.direction);
+    var bullet_direction = point_direction(bullet_create_x, bullet_create_y, nearest_enemy.x, nearest_enemy.y);
+    bullet_create(bullet_create_x, bullet_create_y, "Paladin Drone", bullet_direction, mid, 0);
     shield -= 0.5;
+    if(shield &lt;= 0)
+        instance_destroy();
 }
 </string>
           </argument>
@@ -125,8 +135,7 @@ if(enemy_distance &lt; 400)
 object_team = global.team[mid];
 image_index = object_team-1;
 owner = global.playership[mid];
-speed = 6;
-direction = 270;
+vspeed = -6;
 
 if(amplified = 1)
 {
@@ -156,11 +165,11 @@ if(amplified = 1)
           <argument>
             <kind>1</kind>
             <string>if(begin_path = false)
-    if(y = 48)
+    if(y = -48)
     {
         speed = 0;
         begin_path = true;
-        path_start(path_drone, 5, path_action_restart, false);
+        path_start(path_drone, 2, path_action_restart, false);
     }
 </string>
           </argument>
