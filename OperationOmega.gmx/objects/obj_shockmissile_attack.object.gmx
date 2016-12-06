@@ -81,8 +81,12 @@ attack.direction = aim_limit(origin_object.facedir,
 attack.speed = 12;                                                                          //Set the starting speed of the attack
 attack.amplified = amplified;                                                               //Pass on the amplified flag
 attack.mid = mid;                                                                           //Pass on the mid
-attack.target = global.playership[target_object];                                           //Pass on the targeted object
-
+attack.base_direction = attack.direction;
+if(target_object != 10)
+    attack.target = global.playership[target_object];                                       //Pass on the targeted object
+else
+    attack.not_targeting = true;
+    
 //This object is no longer needed
 instance_destroy();
 </string>

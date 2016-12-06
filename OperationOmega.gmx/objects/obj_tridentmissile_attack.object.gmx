@@ -82,9 +82,13 @@ attack[1] = instance_create(origin_object.x, origin_object.y, created_object);
 attack[1].startdir = origin_object.facedir;
 attack[1].direction = attack[1].startdir;
 attack[1].speed = 4;
-attack[1].target = aiming_object;
 attack[1].mid = mid;
 attack[1].trio = 1;
+attack[1].base_direction = attack[1].direction;
+if(target_object != 10)
+    attack[1].target = aiming_object;                                       //Pass on the targeted object
+else
+    attack[1].not_targeting = true;
 attack[1].amplified = amplified;
 
 //Create the second missile
@@ -92,10 +96,14 @@ attack[2] = instance_create(origin_object.x, origin_object.y, created_object);
 attack[2].startdir = origin_object.facedir;
 attack[2].direction = attack[2].startdir-90;
 attack[2].speed = 4;
-attack[2].target = aiming_object;
 attack[2].mid = mid;
 attack[2].trio = 2;
 attack[2].middle = attack[1];
+attack[2].base_direction = attack[2].direction;
+if(target_object != 10)
+    attack[2].target = aiming_object;                                       //Pass on the targeted object
+else
+    attack[2].not_targeting = true;
 attack[2].amplified = amplified;
 
 //Create the last missile
@@ -103,10 +111,14 @@ attack[3] = instance_create(origin_object.x, origin_object.y, created_object);
 attack[3].startdir = origin_object.facedir;
 attack[3].direction = attack[3].startdir+90;
 attack[3].speed = 4;
-attack[3].target = aiming_object;
 attack[3].mid = mid;
 attack[3].trio = 3;
 attack[3].middle = attack[1];
+attack[3].base_direction = attack[3].direction;
+if(target_object != 10)
+    attack[3].target = aiming_object;                                       //Pass on the targeted object
+else
+    attack[3].not_targeting = true;
 attack[3].amplified = amplified;
 
 //Take note of the last two missile in the first missile

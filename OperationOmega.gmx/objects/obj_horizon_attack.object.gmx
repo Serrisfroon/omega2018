@@ -64,17 +64,30 @@ else
 
 //Hold the value of the origin object and target player locally for faster reference    
 var origin_object = global.playership[mid];
-var target_player = global.playership[target_object];
-//Hold the value of the target direction for multiple references
-var target_direction = point_direction(origin_object.x, origin_object.y, target_player.x, target_player.y);
 
-//Create the attack and give pass on the properties
-var attack = instance_create(target_player.x+lengthdir_x(500, target_direction), target_player.y+lengthdir_y(500, target_direction), created_object);
+if(target_object != 10)
+{
+    var target_player = global.playership[target_object];
+    //Hold the value of the target direction for multiple references
+    var target_direction = point_direction(origin_object.x, origin_object.y, target_player.x, target_player.y);
+    //Create the attack and give pass on the properties
+    var attack = instance_create(target_player.x+lengthdir_x(500, target_direction), target_player.y+lengthdir_y(500, target_direction), created_object);
+    attack.target = global.playership[target_object];                                       //Pass on the targeted object
+}
+else
+{
+    //Hold the value of the target direction for multiple references
+    var target_direction = point_direction(origin_object.x, origin_object.y, target_x, target_y);
+    //Create the attack and give pass on the properties
+    var attack = instance_create(origin_object.x+lengthdir_x(800, target_direction), origin_object.y+lengthdir_y(800, target_direction), created_object);
+    attack.target = noone;                                       //Pass on the targeted object
+}
 attack.direction = target_direction-180;                                                    //Pass on the direction
 attack.amplified = amplified;                                                               //Pass on the amplified flag
 attack.mid = mid;                                                                           //Pass on the mid                                                             //Pass on the y coordinate of the target location
-attack.target = global.playership[target_object];                                           //Pass on the targeted object
+attack.base_direction = attack.direction;
 
+    
 //This object is no longer needed
 instance_destroy();
 

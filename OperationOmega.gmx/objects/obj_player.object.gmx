@@ -784,7 +784,7 @@ with(obj_mod)
 
 //Pull the mid from the targeted object if you are targeting a player
 if(obj_mod.targeted_object = -1)
-    current_target_object = -1;
+    current_target_object = 10;
 else
     current_target_object = obj_mod.targeted_object.mid;
 

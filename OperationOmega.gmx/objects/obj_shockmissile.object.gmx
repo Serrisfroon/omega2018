@@ -38,6 +38,11 @@ go = 0;
 alarm[2] = 120;
 amplified = 0;
 
+//Initialize non-target control variables
+not_targeting = false;
+base_direction = 0;
+target = noone;
+
 //Set attack variable values
 attack_damage = 10;                     //Set the damage for the attack
 attack_burst = 10;                      //Set the bonus damage of the attack that ignores shield
@@ -125,9 +130,13 @@ with(obj_homingeffect)
             <kind>1</kind>
             <string>image_angle = direction;
 visible = 1;
-cursor = instance_create(0, 0, obj_homingeffect);
-cursor.target = target;    
-cursor.create = id;
+if(not_targeting = false)
+{
+    cursor = instance_create(0, 0, obj_homingeffect);
+    cursor.target = target;
+    cursor.create = id;
+}
+
 image_index = global.team[mid]-1;
 image_speed = 0;
 
@@ -174,7 +183,7 @@ image_angle = direction;
 //Create a smoke trail effect
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missile_flame[1], 1);
 //If the target still exists, take note of the direction to it
-if(instance_exists(target) &amp;&amp; go = 0)
+if(not_targeting = false &amp;&amp; go = 0)
 {
  point = point_direction(x, y, target.x, target.y);
  //Move the missile's current direction towards the target

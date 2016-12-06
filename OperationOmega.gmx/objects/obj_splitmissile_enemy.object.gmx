@@ -39,7 +39,7 @@ buildup = 0;
 speed = 13;
 amplified = 0;
 alarm[3] = 5;
-
+target = noone;
 </string>
           </argument>
         </arguments>

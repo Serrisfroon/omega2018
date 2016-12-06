@@ -43,6 +43,10 @@ if(global.allycolor = c_red)
     form_particle = obj_partsystem.formsplit[1];
 }
 alarm[4] = 1;
+//Initialize non-target control variables
+not_targeting = false;
+base_direction = 0;
+target = noone;
 
 //Set attack variable values
 attack_damage = 7;              //Set the damage for the attack
@@ -140,13 +144,19 @@ lesser = 1;
             <kind>1</kind>
             <string>//Move towards the target if it still exists. Otherwise, move in the main shot's
 //original direction
-if(instance_exists(control))
+if(not_targeting = false)
 {
- if(instance_exists(control.target))
-  direction = point_direction(control.x, control.y, control.target.x, control.target.y);
- else
-  direction = control.direction;
+    if(instance_exists(control))
+    {
+        if(instance_exists(control.target))
+            direction = point_direction(control.x, control.y, control.target.x, control.target.y);
+        else
+            direction = control.direction;
+    }
 }
+else
+    direction = base_direction;
+
 part_type_direction(form_particle, direction-1, direction+1, 0, 0);
 part_type_orientation(form_particle,direction,direction,0,0,0);
 repeat(10)
@@ -199,6 +209,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 1;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 90;
@@ -208,6 +220,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 270;
@@ -217,6 +231,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
  break;
  case 2:
@@ -228,6 +244,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 5;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
  break;
  case 3:
@@ -239,6 +257,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 180;
@@ -248,6 +268,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 3;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 270;
@@ -257,6 +279,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
  break;
  case 4:
@@ -268,6 +292,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 6;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
  break;
  case 5:
@@ -279,6 +305,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 90;
@@ -288,6 +316,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 180;
@@ -297,6 +327,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
  break;
  case 6:
@@ -308,6 +340,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 270;
@@ -317,6 +351,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
       form = instance_create(x, y, obj_formationb_enemy);
       form.direction = 0;
@@ -326,6 +362,8 @@ switch(location)
       form.alarm[1] = (45*(3-part))/(amplified+1);
       form.mid = mid;
       form.location = 0;
+    form.not_targeting = not_targeting;
+    form.base_direction = base_direction;
       form.amplified = amplified;
  break;
 }

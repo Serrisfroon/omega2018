@@ -35,6 +35,11 @@ emitter1 = part_emitter_create(obj_partsystem.system);
 amplified = 0;
       particle1 = part_type_create();
 
+//Initialize non-target control variables
+not_targeting = false;
+base_direction = 0;
+target = noone;
+
 //Set attack variable values
 attack_damage = 4;                      //Set the damage for the attack
 attack_burst = 4;                       //Set the bonus damage of the attack that ignores shield
@@ -196,9 +201,12 @@ speed = 14;
 alarm[2] = 80;
 //Set time until auto destruct
 alarm[1] = 120;
-cursor = instance_create(0, 0, obj_homingeffect);
-cursor.target = target;    
-cursor.create = id;
+if(not_targeting = false)
+{
+    cursor = instance_create(0, 0, obj_homingeffect);
+    cursor.target = target;
+    cursor.create = id;
+}
 switch(trio)
 {
  case 1:
@@ -269,9 +277,10 @@ switch(go)
  break;
  case 1:
       //If the target still exists, take note of the direction to it
-      if(instance_exists(target))
-      {
-       point = point_direction(x, y, target.x, target.y);
+        if(not_targeting = false)
+            point = point_direction(x, y, target.x, target.y);
+        else
+            point = base_direction;
        //Move the missile's current direction towards the target
        switch(trio)
        {
@@ -307,7 +316,6 @@ switch(go)
              }
         break;
       }
-     }
  case 2:
       switch(trio)
       {

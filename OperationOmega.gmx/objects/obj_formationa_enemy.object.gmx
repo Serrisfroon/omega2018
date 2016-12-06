@@ -39,6 +39,10 @@ if(global.allycolor = c_red)
     form_particle = obj_partsystem.formsplit[1];
 }    
 alarm[4] = 1;
+//Initialize non-target control variables
+not_targeting = false;
+base_direction = 0;
+target = noone;
 
 //Set attack variable values
 attack_damage = 7;              //Set the damage for the attack
@@ -111,8 +115,15 @@ repeat(10)
           <argument>
             <kind>1</kind>
             <string>//Move towards the target if it still exists
-if(instance_exists(target))
- direction = point_direction(x, y, target.x, target.y);
+//Move towards the target if it still exists
+if(not_targeting = false)
+{
+    if(instance_exists(target))
+        direction = point_direction(x, y, target.x, target.y);
+}
+else
+    direction = base_direction;
+
 part_type_direction(form_particle, direction-1, direction+1, 0, 0);
 part_type_orientation(form_particle,direction,direction,0,0,0);
 repeat(10)
@@ -162,6 +173,8 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.control = id;
  form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
+ form.not_targeting = not_targeting;
+ form.base_direction = base_direction;
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb_enemy);
  form.direction = 90;
@@ -171,6 +184,8 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.control = id;
  form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
+ form.not_targeting = not_targeting;
+ form.base_direction = base_direction;
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb_enemy);
  form.direction = 180;
@@ -180,6 +195,8 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.control = id;
  form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
+ form.not_targeting = not_targeting;
+ form.base_direction = base_direction;
  form.amplified = amplified;
  form = instance_create(x, y, obj_formationb_enemy);
  form.direction = 270;
@@ -189,6 +206,8 @@ if(point_distance(x, y, targetx, targety) &lt;= 10)
  form.control = id;
  form.alarm[1] = 135/(amplified+1);
  form.mid = mid;
+ form.not_targeting = not_targeting;
+ form.base_direction = base_direction;
  form.amplified = amplified;
  //Set mask to empty to prevent error due to collision
  mask_index = spr_empty;

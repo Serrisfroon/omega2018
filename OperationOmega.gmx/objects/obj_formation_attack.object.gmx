@@ -73,7 +73,11 @@ attack.amplified = amplified;                                                   
 attack.mid = mid;                                                                           //Pass on the mid
 attack.targetx = target_x;                                                                  //Pass on the x coordinate of the target location
 attack.targety = target_y;                                                                  //Pass on the y coordinate of the target location
-attack.target = global.playership[target_object];                                           //Pass on the targeted object
+attack.base_direction = attack.direction;
+if(target_object != 10)
+    attack.target = global.playership[target_object];                                       //Pass on the targeted object
+else
+    attack.not_targeting = true;
 
 //This object is no longer needed
 instance_destroy();

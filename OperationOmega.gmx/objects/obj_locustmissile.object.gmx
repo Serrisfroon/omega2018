@@ -35,6 +35,11 @@ hit = 1;
 image_blend = global.allycolor;
 alarm[3] = 1;
 
+//Initialize non-target control variables
+not_targeting = false;
+base_direction = 0;
+target = noone;
+
 //Set attack variable values
 attack_damage = 3;                  //Set the damage for the attack
 attack_burst = 0;                   //Set the bonus damage of the attack that ignores shield
@@ -172,9 +177,12 @@ go = 1;
 alarm[1] = 120;
 //Set time until auto destruct
 alarm[2] = 130;
-cursor = instance_create(0, 0, obj_homingeffect);
-cursor.target = target;    
-cursor.create = id;
+if(not_targeting = false)
+{
+    cursor = instance_create(0, 0, obj_homingeffect);
+    cursor.target = target;
+    cursor.create = id;
+}
 
 </string>
           </argument>
@@ -206,12 +214,12 @@ part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missile_flame[
 if(go = 1)
 {
  //If the target still exists, take note of the direction to it
- if(instance_exists(target))
- {
-  point = point_direction(x, y, target.x, target.y);
+    if(not_targeting = false)
+        point = point_direction(x, y, target.x, target.y);
+    else
+        point = point_direction(x, y, target_x, target_y);    
   //Move the missile's current direction towards the target
   step_towards_direction(point, 5);
- }
 }
 if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 {

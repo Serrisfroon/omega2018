@@ -39,6 +39,7 @@ speed = 13;
 go = 0;
 buildup = 0;
 amplified = 0;
+target = noone;
 </string>
           </argument>
         </arguments>

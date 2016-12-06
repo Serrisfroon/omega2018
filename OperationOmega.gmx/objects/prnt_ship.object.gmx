@@ -820,6 +820,51 @@ with(obj_paladindrone_enemy)
 with(obj_hack_effect)
     if(target_ship = id)
         instance_destroy();
+        
+//Reset the homing of any locked on attacks
+with(obj_formationa)
+    if(target = player_mid)
+        not_targeting = true;
+with(obj_formationb)
+    if(target = player_mid)
+        not_targeting = true;
+with(obj_formationa_enemy)
+    if(target = player_mid)
+        not_targeting = true;
+with(obj_formationb_enemy)
+    if(target = player_mid)
+        not_targeting = true;
+with(obj_dualmissile)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_dualmissile_enemy)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_locustmissile)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_locustmissile_enemy)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_tridentmissile)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_tridentmissile_enemy)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_shockmissile)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_shockmissile_enemy)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_splitmissile)
+    if(target = player_mid)
+        instance_destroy();
+with(obj_splitmissile_enemy)
+    if(target = player_mid)
+        instance_destroy();
+
 
 //Destroy all flame trail effects
 for(i = 0; i &lt; flame_smoke_trails; i += 1)
@@ -1012,12 +1057,7 @@ if(mid = global.mymid)
 //Make checks to ensure the weapon can be fired
 //Perform the checks only if this is your ship
 if(mid = global.mymid)
-{
-    //Make sure there is a target if this weapon requires lockon
-    if(current_secondary_lockon_required = true)
-        if(obj_mod.targeted_object = -1)
-            exit;                   //Exit the script if there is no target
-            
+{           
     if(current_secondary_type = 0)  //Energy Weapons
     {
         //Beam checks
