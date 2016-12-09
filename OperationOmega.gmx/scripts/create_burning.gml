@@ -10,4 +10,4 @@ switch(irandom(1))
     break;
 }
 
-part_particles_create(obj_partsystem.system, argument0, argument1, obj_partsystem.ship_burn, 8);
+part_particles_create(obj_partsystem_top.system, argument0, argument1, obj_partsystem_top.ship_burn, 8);

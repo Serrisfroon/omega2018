@@ -386,6 +386,18 @@ while(true)
             push_effect.amplified = readbyte(0);
         break;
         
+        //Shoot a charge shot
+        case 18:
+            var dummy_ship = global.playership[dummy];
+            dummy_ship.x = readshort(0);
+            dummy_ship.y = readshort(0);
+            dummy_ship.facedir = readshort(0);
+            dummy_ship.speed = readshort(0);
+            dummy_ship.primary_direction = readshort(0);
+            with(dummy_ship)
+                event_perform(ev_other, ev_user3);
+        break;
+        
         //A player leaves the game
         case CLIENT_DROP:
             //Get info from leaving player

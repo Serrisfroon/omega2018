@@ -852,7 +852,13 @@ obj_mod.chat_open = false;
 primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
 
 //Perform the primary firing event
-event_perform(ev_other, ev_user1);
+if(primary_charge &gt;= primary_charge_max)
+    event_perform(ev_other, ev_user3);
+else
+    event_perform(ev_other, ev_user1);
+    
+primary_charge = 0;
+
 </string>
           </argument>
         </arguments>
@@ -1036,7 +1042,7 @@ current_target_y = mouse_y;
 
 //Pull the mid from the targeted object if you are targeting a player
 if(obj_mod.targeted_object = -1)
-    current_target_object = -1;
+    current_target_object = 10;
 else
     current_target_object = obj_mod.targeted_object.mid;
 

@@ -29,6 +29,7 @@
 primary_cooldown = 0;       //Hold the time(in frames) until the next primary shot
 primary_overheat = 1;       //Holds the cooldown multiplier to modify the cooldown to a lower value
 primary_direction = 0;      //Holds the direction the primary will be fired in
+primary_charge = 0;          //Holds the value of the charge of the primary
 
 //Initialize unique primary variables
 //primary_name                  Holds the name of the primary to be passed to the bullet_create() function
@@ -40,51 +41,71 @@ switch(current_primary)
         primary_name = "Needle";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 7;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_needle_charge_attack;
     break;
     case 2:
         primary_name = "Sonic";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 4;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_sonic_charge;
     break;
     case 3:
         primary_name = "Wave";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 15;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_wave_charge;
     break;
     case 4:
         primary_name = "Seeker";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 10;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_seeker_charge;
     break;
     case 5:
         primary_name = "Stasis";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 25;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_stasis_charge;
     break;
     case 6:
         primary_name = "Helix";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 9;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_helix_charge;
     break;
     case 7:
         primary_name = "Siphon";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 12;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_siphon_charge;
     break;
     case 8:
         primary_name = "Double";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 10;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_double_charge;
     break;
     case 9:
         primary_name = "Pierce";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 7;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_pierce_charge;
     break;
     case 10:
         primary_name = "Spread";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 20;
+        primary_charge_max = 100;
+        primary_charge_shot = obj_spread_charge;
     break;
 }
 
@@ -628,8 +649,13 @@ if(global.activated[mid] != 1)
 
 //Perform action based on if the primary is being fired
 if(primary_cooldown &lt;= 0)
+{
     //Reduce the overheat multiplier since the primary isn't being fired
-    primary_overheat = max(1, primary_overheat-0.0075);
+    if(primary_overheat &gt; 1)
+        primary_overheat -= 0.0075;
+    else
+        primary_charge += 1;
+}
 else
     //Reduce the cooldown until the next primary shot is possible
     primary_cooldown -= 1;
@@ -747,6 +773,77 @@ while(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
 }
 
 wall_collision();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>Primary Charge Shot</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var charge_shot = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_charge_shot);
+charge_shot.give_direction = primary_direction;
+charge_shot.give_speed = speed/2;
+charge_shot.mid = mid;
+primary_cooldown = 30;
+
+//Do not perform any network communication if you are not controlling this object
+if(mid != global.mymid)
+    exit;
+    
+//Have to controller object send a refresh packet
+obj_mod.update_packet_timer = 0;    
+
+//Send the information
+clearbuffer(0);                                             //Clear the buffer to send a new packet
+packet_label_write(18, mid);                                 //This is a secondary attack
+writeshort(x, 0);                                       //Send the mid of the targeted object. 9 means no target.
+writeshort(y, 0);                                       //Send the mid of the targeted object. 9 means no target.
+writeshort(facedir, 0);                                       //Send the mid of the targeted object. 9 means no target.
+writeshort(speed, 0);                                       //Send the mid of the targeted object. 9 means no target.
+writeshort(primary_direction, 0);                           //Send thmid of the targeted object. 9 means no target.e 
+
+//Send to everyone if host
+if(global.master = true)
+    client_sendall(0, 0);
+else
+    //Send to host if client
+    sendmessage(global.host, 0, 0, 0);
+
 </string>
           </argument>
         </arguments>
@@ -1005,8 +1102,11 @@ if(mid = global.mymid)
     primary_overheat += primary_overheat_scaling;
     primary_cooldown = primary_cooldown_base * primary_overheat;
     //Create an effect
-    part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], speed+1.68, speed+2.80, -0.04,0);
-    part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-50, primary_direction+50, 0, 0);
+    part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], speed+1, speed+4, 0, 0);
+    
+    var particle_angle = 40-speed*3;
+    part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-particle_angle, primary_direction+particle_angle, 0, 0);
+    
     part_particles_create(obj_partsystem.system, x+lengthdir_x(9, primary_direction), y+lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 10);
     bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_name, primary_direction, mid, 0);
 }

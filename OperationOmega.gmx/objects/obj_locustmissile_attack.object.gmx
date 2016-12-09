@@ -84,7 +84,6 @@ if(amplified = 0)
         //Create the missile and give it its properties
         attack = instance_create(origin_object.x, origin_object.y, created_object);
         attack.direction = origin_object.facedir-90+(i*60);                         //Give the attack its direction based on which missile it is
-        attack.target = aiming_object;                                              //Pass on the target object
         attack.mid = mid;                                                           //Pass on the mid
         attack.base_direction = attack.direction;
         attack.target_x = target_x;

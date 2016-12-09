@@ -341,7 +341,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                                     case spr_formation:
                                     case spr_trigger_shot:
                                         possihit.threshold -= 0.08;
-                                        possihit.alarm[9] = 60;
+                                        possihit.alarm[9] = THRESHOLD_TIMEOUT;
                                     break;
                                 }    
                                 if(possihit.threshold &lt; 0.1)
@@ -394,7 +394,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                                     case spr_formation:
                                     case spr_trigger_shot:
                                         possihit.threshold -= 0.08;
-                                        possihit.alarm[9] = 60;
+                                        possihit.alarm[9] = THRESHOLD_TIMEOUT;
                                     break;
                                 }    
                                 if(possihit.threshold &lt; 0.1)

@@ -74,7 +74,8 @@ if(instance_exists(created_object))
 //Hold the value of the origin object locally for faster reference    
 var origin_object = global.playership[mid];
 //Hold the value of the targeted object as well
-var aiming_object = global.playership[target_object];
+if(target_object != 10)
+    var aiming_object = global.playership[target_object];
 
 var attack;
 //Create the first missile and give it its properties

@@ -1334,6 +1334,7 @@
     <sprite>sprites\spr_goliath_hyperrush</sprite>
     <sprites name="Primary">
       <sprite>sprites\spr_needle</sprite>
+      <sprite>sprites\spr_needle_charge</sprite>
       <sprite>sprites\spr_sonic</sprite>
       <sprite>sprites\spr_wave</sprite>
       <sprite>sprites\spr_flank</sprite>
@@ -1421,6 +1422,7 @@
       </sprites>
       <sprites name="Cursors">
         <sprite>sprites\spr_cursor</sprite>
+        <sprite>sprites\spr_charged</sprite>
         <sprite>sprites\spr_cursor_weapons</sprite>
         <sprite>sprites\spr_homingcursor</sprite>
         <sprite>sprites\spr_targetcursor</sprite>
@@ -1923,6 +1925,12 @@
       <objects name="Primary Weapons">
         <object>objects\obj_generic_hit</object>
         <object>objects\obj_generic_fade</object>
+        <object>objects\obj_needle_hit</object>
+        <objects name="Needle Charge">
+          <object>objects\obj_needle_charge_attack</object>
+          <object>objects\obj_needle_charge</object>
+          <object>objects\obj_needle_charge_enemy</object>
+        </objects>
         <object>objects\obj_flank</object>
         <object>objects\obj_flank_enemy</object>
         <object>objects\obj_crossfire</object>
@@ -2128,6 +2136,7 @@
         <object>objects\obj_mod_client</object>
         <object>objects\obj_bulletcontrol</object>
         <object>objects\obj_partsystem</object>
+        <object>objects\obj_partsystem_top</object>
         <object>objects\obj_starfield_mod</object>
         <object>objects\obj_fade_screen</object>
         <object>objects\obj_respawn_timer</object>
@@ -2314,7 +2323,7 @@
       <room>rooms\rm_orbitstation</room>
     </rooms>
   </rooms>
-  <constants number="12">
+  <constants number="11">
     <constant name="LOGINSERVER_IP">"potato"</constant>
     <constant name="VERSION_NUMBER">"0.7.0"</constant>
     <constant name="CLIENT_CHECK">30</constant>
@@ -2324,9 +2333,8 @@
     <constant name="CLIENT_REJECT">21</constant>
     <constant name="CLIENT_DROP">22</constant>
     <constant name="CLIENT_UNABLE">23</constant>
+    <constant name="THRESHOLD_TIMEOUT">30</constant>
     <constant name="TIME_UP">40</constant>
-    <constant name="GM_build_date">41886.8292368866</constant>
-    <constant name="GM_version">'1.0.0.13'</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

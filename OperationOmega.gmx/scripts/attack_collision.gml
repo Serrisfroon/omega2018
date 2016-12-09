@@ -29,7 +29,7 @@ shielddown = 1;
 if(shield = 0)
     shielddown = 0;
 threshold -= thresh;
-alarm[9] = 60;
+alarm[9] = THRESHOLD_TIMEOUT;
 if(threshold < 0.1)
  threshold = 0.1;
 

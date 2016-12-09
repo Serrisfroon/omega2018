@@ -56,6 +56,8 @@ for(i = 1; i &lt; 5; i++)
     
 //Initialize the primary base rate of fire
 primary_base_rate = round(60/obj_player.primary_cooldown_base*10)/10;
+primary_charge_flash = 1;
+alarm[7] = 4;
 
 //Initialize the goliath flag- for handling its passive
 if(global.selected_ship[global.mymid] = 3)
@@ -198,6 +200,30 @@ var_circle_zoom_max = 0.60;
 
 magnify1 = surface_create(view_wport[0], view_hport[0]);
 magnify2 = surface_create(view_wport[0], view_hport[0]);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>primary_charge_flash = -primary_charge_flash;
+alarm[7] = 4;
 </string>
           </argument>
         </arguments>
@@ -1057,6 +1083,19 @@ while(true)
             push_effect.target_object = global.playership[dummy];
             push_effect.push_direction = readshort(0);
             push_effect.amplified = readbyte(0);
+            client_sendall(0, dummy);
+        break;
+        
+        //Shoot a charge shot
+        case 18:
+            var dummy_ship = global.playership[dummy];
+            dummy_ship.x = readshort(0);
+            dummy_ship.y = readshort(0);
+            dummy_ship.facedir = readshort(0);
+            dummy_ship.speed = readshort(0);
+            dummy_ship.primary_direction = readshort(0);
+            with(dummy_ship)
+                event_perform(ev_other, ev_user3);
             client_sendall(0, dummy);
         break;
         
@@ -1988,10 +2027,24 @@ draw_set_halign(fa_left);
 //Draw the primary bar
 //Calculate the size of the bar to be displayed
 var primary_bar_size = (1-(obj_player.primary_cooldown_base/(obj_player.primary_cooldown_base*obj_player.primary_overheat)))*60;
-//Draw the remaining energy
-draw_sprite_part_ext(spr_cursor, 3, 0, primary_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+primary_bar_size, 1, 1, c_white, 0.9);
-//Draw the empty bar
-draw_sprite_part_ext(spr_cursor, 4, 0, 0, 131, primary_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+if(obj_player.primary_charge &gt;= obj_player.primary_charge_max)
+{
+    if(primary_charge_flash = 1)
+    {
+        draw_sprite_ext(spr_cursor, 5, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, c_white, 0.9);
+    }
+    else
+    {
+        draw_sprite_ext(spr_cursor, 3, mouse_cursor_x, mouse_cursor_y, 1, 1, 0, c_white, 0.9);
+    }
+}
+else
+{
+    //Draw the remaining energy
+    draw_sprite_part_ext(spr_cursor, 3, 0, primary_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+primary_bar_size, 1, 1, c_white, 0.9);
+    //Draw the empty bar
+    draw_sprite_part_ext(spr_cursor, 4, 0, 0, 131, primary_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+}
 //Draw the number of uses remaining
 var primary_rate_of_fire = round((60/(obj_player.primary_cooldown_base*obj_player.primary_overheat))*10)/10;
 if(primary_rate_of_fire &gt;= 10)
