@@ -49,7 +49,7 @@ switch(current_primary)
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 4;
         primary_charge_max = 100;
-        primary_charge_shot = obj_sonic_charge;
+        primary_charge_shot = obj_sonic_charge_attack;
     break;
     case 3:
         primary_name = "Wave";
@@ -63,14 +63,14 @@ switch(current_primary)
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 10;
         primary_charge_max = 100;
-        primary_charge_shot = obj_seeker_charge;
+        primary_charge_shot = obj_seeker_charge_attack;
     break;
     case 5:
-        primary_name = "Stasis";
+        primary_name = "Cryos";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 25;
+        primary_cooldown_base = 18;
         primary_charge_max = 100;
-        primary_charge_shot = obj_stasis_charge;
+        primary_charge_shot = obj_cryos_charge;
     break;
     case 6:
         primary_name = "Helix";

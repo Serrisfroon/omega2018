@@ -43,7 +43,7 @@ switch(type)
          name = "Sonic";
          sprite = spr_sonic;
          life = 180;
-         after = obj_generic_hit;
+         after = obj_sonic_hit;
          dmg = 4;
          mask = 12;
          lolspeed = 13.5+speed/2;
@@ -81,6 +81,20 @@ switch(type)
            flank.mid = current_bullet_mid;
            return -1;
            exit;
+    break;
+    case "Cryos":
+         name = "Cryos";
+         sprite = spr_cryos;
+         life = 180;
+         after = obj_cryos_hit;
+         dmg = 2;
+         mask = 17;
+         lolspeed = 9.5+speed/2;
+         accuracy = 3;
+         half_accuracy = 6;
+         bullet_number = 1;
+         is_primary = true;
+         sfx_play(snd_needle, lolx, loly);    
     break;
     case "Stasis":
             if(blend = global.allycolor)

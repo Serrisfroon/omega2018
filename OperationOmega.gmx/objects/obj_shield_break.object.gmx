@@ -51,12 +51,8 @@ hurting = 0;
             <kind>1</kind>
             <string>if(instance_exists(hurting))
 {
-    part_type_color1(obj_partsystem.primarypart[1], c_aqua);
-    part_type_speed(obj_partsystem.primarypart[1],1.68,2.40,-0.04,0);
-    part_type_direction(obj_partsystem.primarypart[1],0,359,0,0);
     repeat(10)
-        part_particles_create(obj_partsystem.system, hurting.x-30+random(60), hurting.y-30+random(60), obj_partsystem.primarypart[1], 2);
-    part_type_color1(obj_partsystem.primarypart[1], c_blue);
+        part_particles_create(obj_partsystem.system, hurting.x-30+random(60), hurting.y-30+random(60), obj_partsystem.basic_part[2], 3);
     repeat(10)
     {
         var piece;

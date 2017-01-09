@@ -31,7 +31,6 @@ hit = 1;
 //Set time until curve stop
 seek = 0;
 go = 0;
-alarm[1] = 25;
 alarm[2] = 1;
 
 //Set attack variable values
@@ -65,7 +64,7 @@ attack_name = "Seeker";     //Set the name of the attack
             <string>//create an effect
 if(hit = 1)
 {
-    endeffect = instance_create(x, y, obj_generic_hit);
+    endeffect = instance_create(x, y, obj_seeker_hit);
     endeffect.mid = mid;
     endeffect.direction = direction-180;
 }
@@ -101,7 +100,7 @@ else
             <kind>1</kind>
             <string>image_angle = direction;
 curve = 1;
-
+team_index = global.team[mid]-1;
 sprite_index = spr_flank;
 image_speed = 0;
 if(global.enemycolor = c_red)
@@ -134,16 +133,36 @@ else
     exit;
 seek += 1;
 go = 0;
-alarm[1] = 25;
 near = instance_nearest(x, y, obj_dummy_ally);
 if(near = noone)
   near = global.playership[global.mymid];      
 else
     if(point_distance(x, y, near.x, near.y) &gt; point_distance(x, y, global.playership[global.mymid].x, global.playership[global.mymid].y))
       near = global.playership[global.mymid];
-if(point_distance(x, y, near.x, near.y) &lt; 1000)
-    direction = point_direction(x, y, near.x, near.y);
+if(point_distance(x, y, near.x, near.y) &lt; 500)
+{
+        var new_direction = point_direction(x, y, near.x, near.y);
+        var turn_direction = get_turn(new_direction);
+        switch(turn_direction)
+        {
+            case 1://The turn is counter-go clockwise
+                if(direction &gt; new_direction)
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],new_direction, direction, 0,0);                
+                else
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],new_direction, direction+360, 0,0);                
+                part_particles_create(obj_partsystem.system, x, y, obj_partsystem.seeker_redirect[team_index], 10);
+            break;
+            case 2://The turn is clockwise-go counter
+                if(direction &gt; new_direction)
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],direction,new_direction+360,0,0);                
+                else
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],direction,new_direction,0,0);                            
+                part_particles_create(obj_partsystem.system, x, y, obj_partsystem.seeker_redirect[team_index], 10);
+            break;
+        }
+        direction = new_direction;   
 
+}
 </string>
           </argument>
         </arguments>

@@ -59,12 +59,9 @@ image_yscale = 0.5;
             <kind>1</kind>
             <string>if(instance_exists(hurting))
 {
-    part_type_color1(obj_partsystem.primarypart[1], c_aqua);
-    part_type_speed(obj_partsystem.primarypart[1],1.68,2.40,-0.04,0);
-    part_type_direction(obj_partsystem.primarypart[1],0,359,0,0);
-    part_particles_create(obj_partsystem.system, hurting.x+x, hurting.y+y, obj_partsystem.primarypart[1], 3);
-    part_type_color1(obj_partsystem.primarypart[1], c_blue);
+    part_particles_create(obj_partsystem.system, hurting.x+x, hurting.y+y, obj_partsystem.basic_part[2], 3);
 }
+
 </string>
           </argument>
         </arguments>

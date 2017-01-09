@@ -28,7 +28,7 @@
             <string>alarm[0] = 20;
 alarm[1] = 1;
 mid = 0;
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.primarypart[global.team[mid]-1], 5);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.basic_part[global.team[mid]-1], 8);
 
 </string>
           </argument>

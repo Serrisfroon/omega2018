@@ -209,9 +209,10 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             if(abs(possihit.x-bulletx[i]) &gt; bulletmask[i] || abs(possihit.y-bullety[i]) &gt; bulletmask[i]) break;
             
             sfx_play(snd_hit, bulletx[i], bullety[i]);
+            //Handle Cryos slow
+            if(bullettype[i] = spr_cryos)
+                possihit.speed = max(0, possihit.speed-4);
             //Take damage
-            if(bullettype[i] = spr_pierce)
-                possihit.armor -= 3;
             possihit.shield -= bulletdamage[i];
             if(possihit.shield &lt; 0)
             {
@@ -289,6 +290,10 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             {
                 case global.mymid:
                     sfx_play(snd_hit, bulletx[i], bullety[i]);
+                    //Handle Cryos Slowdown
+                    if(bullettype[i] = spr_cryos)
+                        possihit.speed = max(0, possihit.speed-4);
+
                     //Check if there's a nearby paladin turret
                     var shielded, shielddown;
                     shielded = 1;
@@ -463,9 +468,9 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                 default:
                     sfx_play(snd_hit, bulletx[i], bullety[i]);
                                         
-                    //Take damage
-                    if(bullettype[i] = spr_pierce)
-                        possihit.armor -= 3;
+                    //Handle Cryos Slowdown
+                    if(bullettype[i] = spr_cryos)
+                        possihit.speed = max(0, possihit.speed-4);
                     possihit.armor -= bulletdamage[i];
                     //If there is shield left, create effect
                     if(possihit.shieldup = 1)

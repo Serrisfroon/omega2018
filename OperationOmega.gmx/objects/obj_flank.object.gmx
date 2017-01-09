@@ -64,7 +64,7 @@ attack_name = "Seeker";     //Set the name of the attack
             <string>//create an effect
 if(hit = 1)
 {
-    endeffect = instance_create(x, y, obj_generic_hit);
+    endeffect = instance_create(x, y, obj_seeker_hit);
     endeffect.mid = mid;
     endeffect.direction = direction-180;
 }
@@ -102,6 +102,7 @@ else
 curve = 1;
 sprite_index = spr_flank;
 image_speed = 0;
+team_index = global.team[mid]-1;
 if(global.allycolor = c_red)
     image_index = 0;
 else
@@ -135,8 +136,29 @@ go = 0;
 if(instance_exists(obj_dummy_enemy))
 {
     near = instance_nearest(x, y, obj_dummy_enemy);
-    if(point_distance(x, y, near.x, near.y) &lt; 1000)
-        direction = point_direction(x, y, near.x, near.y);
+    if(point_distance(x, y, near.x, near.y) &lt; 500)
+    {
+        var new_direction = point_direction(x, y, near.x, near.y);
+        var turn_direction = get_turn(new_direction);
+        switch(turn_direction)
+        {
+            case 1://The turn is counter-go clockwise
+                if(direction &gt; new_direction)
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],new_direction, direction, 0,0);                
+                else
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],new_direction, direction+360, 0,0);                
+                part_particles_create(obj_partsystem.system, x, y, obj_partsystem.seeker_redirect[team_index], 10);
+            break;
+            case 2://The turn is clockwise-go counter
+                if(direction &gt; new_direction)
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],direction,new_direction+360,0,0);                
+                else
+                    part_type_direction(obj_partsystem.seeker_redirect[team_index],direction,new_direction,0,0);                            
+                part_particles_create(obj_partsystem.system, x, y, obj_partsystem.seeker_redirect[team_index], 10);
+            break;
+        }
+        direction = new_direction;   
+    }
 }
 </string>
           </argument>
