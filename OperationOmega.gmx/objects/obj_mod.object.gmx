@@ -190,7 +190,7 @@ uni_mouse_pos = shader_get_uniform(shd_magnify,"mouse_pos");
 uni_resolution = shader_get_uniform(shd_magnify,"resolution");
 
 uni_circle_radius = shader_get_uniform(shd_magnify,"circleRadius");
-var_circle_radius = 0.204; 
+var_circle_radius = 0.204; //.204
 
 uni_circle_zoom_min = shader_get_uniform(shd_magnify,"minZoom");
 var_circle_zoom_min = 0.40; 
@@ -742,6 +742,7 @@ switch(update_packet_timer)
                 //Send your RNG seed and firing direction
                 crush(global.primaryRNG[mid], 65536, 0);
                 crush(round(obj_player.primary_direction), 360, 0);                
+                crush(round(obj_player.primary_overheat*20), 200, 0);                
             }
         }
         //Loop through the other players to add their updates as well
@@ -772,6 +773,7 @@ switch(update_packet_timer)
                 //Send the players' RNG seed and firing direction
                 crush(global.primaryRNG[i], 65536, 0);
                 crush(round(global.playership[i].primary_direction), 360, 0);                
+                crush(round(global.playership[i].primary_overheat*20), 200, 0);                
             }
         }
         //Send the update packet to everyone
@@ -883,6 +885,7 @@ while(true)
                     //Read the player's RNG seed and firing direction
                     global.primaryRNG[dummy] = uncrush(65536, 0);
                     global.playership[dummy].primary_direction = uncrush(360, 0);
+                    global.playership[dummy].primary_overheat = uncrush(200, 0)/20;
                 }
             }
         break;

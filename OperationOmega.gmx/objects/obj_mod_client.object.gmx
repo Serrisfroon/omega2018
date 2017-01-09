@@ -62,6 +62,7 @@ switch(update_packet_timer)
                 //Send your RNG seed and firing direction
                 crush(global.primaryRNG[mid], 65536, 0);
                 crush(round(obj_player.primary_direction), 360, 0);
+                crush(round(obj_player.primary_overheat*20), 200, 0);                
             }
         }      
         //Send the update packet to the host
@@ -191,6 +192,7 @@ while(true)
                         //Read the player's RNG seed and firing direction
                         holdvar = uncrush(65536, 0);
                         holdvar = uncrush(360, 0);
+                        holdvar = uncrush(200, 0);
                     }
                     continue;
                 }   
@@ -217,6 +219,7 @@ while(true)
                     //Read the player's RNG seed and firing direction
                     global.primaryRNG[global.mymid] = uncrush(65536, 0);
                     global.playership[i].newdir = uncrush(360, 0)/10;
+                    global.playership[i].primary_overheat = uncrush(200, 0)/20;
                 }
             }
         break;

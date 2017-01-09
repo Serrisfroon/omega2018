@@ -27,6 +27,48 @@
             <kind>1</kind>
             <string>system = part_system_create();
 
+//Cryos clouds
+cryos_cloud[0] = part_type_create();
+part_type_sprite(cryos_cloud[0], spr_smoke_part, 0, 0, 0);
+part_type_size(cryos_cloud[0],0.20,0.40,-0.01,0);
+part_type_scale(cryos_cloud[0],1.70,1.70);
+part_type_color2(cryos_cloud[0],8421631,255);
+part_type_alpha3(cryos_cloud[0],0.80,1,0);
+part_type_speed(cryos_cloud[0],0,2,-0.01,0);
+part_type_direction(cryos_cloud[0],0,359,0,0);
+part_type_gravity(cryos_cloud[0],0,270);
+part_type_orientation(cryos_cloud[0],0,359,3,0,1);
+part_type_blend(cryos_cloud[0],1);
+part_type_life(cryos_cloud[0],10,35);
+
+cryos_cloud[1] = part_type_create();
+part_type_sprite(cryos_cloud[1], spr_sphere_part, 0, 0, 0);
+part_type_size(cryos_cloud[1],0.20,0.40,-0.01,0);
+part_type_scale(cryos_cloud[1],1.70,1.70);
+part_type_color2(cryos_cloud[1],16760767,16711680);
+part_type_alpha3(cryos_cloud[1],0.80,1,0);
+part_type_speed(cryos_cloud[1],0,2,-0.01,0);
+part_type_direction(cryos_cloud[1],0,359,0,0);
+part_type_gravity(cryos_cloud[1],0,270);
+part_type_orientation(cryos_cloud[1],0,359,3,0,1);
+part_type_blend(cryos_cloud[1],1);
+part_type_life(cryos_cloud[1],10,35);
+
+//Cryos freeze
+cryos_freeze = part_type_create();
+part_type_shape(cryos_freeze,pt_shape_snow);
+part_type_size(cryos_freeze,0.20,0.40,-0.01,0);
+part_type_scale(cryos_freeze,1.70,1.70);
+part_type_color3(cryos_freeze,16777088,16744448,16777215);
+part_type_alpha3(cryos_freeze,0.80,1,0);
+part_type_speed(cryos_freeze,0,1,0,0);
+part_type_direction(cryos_freeze,0,359,0,0);
+part_type_gravity(cryos_freeze,0,270);
+part_type_orientation(cryos_freeze,0,359,3,0,1);
+part_type_blend(cryos_freeze,1);
+part_type_life(cryos_freeze,10,35);
+
+
 //Needle Charge Shot wave
 needle_charge_wave[0] = part_type_create();
 part_type_sprite(needle_charge_wave[0], spr_sphere_part, 0, 0, 0);
