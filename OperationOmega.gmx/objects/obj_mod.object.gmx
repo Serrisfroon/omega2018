@@ -27,7 +27,6 @@
             <kind>1</kind>
             <string>//Set the size of the GUI to be the same as the screen port
 display_set_gui_size(view_wport[0], view_hport[0]);
-(instance_create(obj_player.x, obj_player.y, obj_camera)).mid = global.mymid;
 //Reset the position of the audio listener
 audio_listener_position(0, 0, 0);
 
@@ -113,9 +112,6 @@ ping_frame_count = 0;       //Holds the number of frames that have passed since 
 ping_send_timer = 0;        //Holds the time(in frames) until the next ping packet is sent
 update_packet_timer = 0;    //Holds the time(in frames) until the next refresh packet is sent
 disconnect_timer = 0;       //Holds the time(in frames) since the last update packet was received by the host
-
-//Initialize view position
-screen_shake_intensity = 0;
 
 //Merge walls together
 global.wallsprite = spr_empty;
@@ -608,7 +604,7 @@ if(global.ships &gt; 0)
         armor = armor_maximum;
         shield = shield_maximum;
     }
-    view_object = tele;
+    obj_camera.player_object = tele;
     change_secondary(1);
     //destroy the error stopper
     with(obj_respawn_timer)
@@ -1254,15 +1250,15 @@ if((view_xview[0] &gt; 0 &amp;&amp; view_xview[0]+view_wview[0] &lt; room_width)
 {
     if(map_type_space = 1)
     { 
-        background_hspeed[0]=view_object.hspeed/1.2;
-        background_hspeed[2]=(view_object.hspeed+back_extrahspeed)/2;
-        background_hspeed[3]=(view_object.hspeed+back_extrahspeed)/3;
-        background_hspeed[4]=(view_object.hspeed+back_extrahspeed)/4;
-        background_hspeed[5]=(view_object.hspeed+back_extrahspeed)/5.5;
-        background_hspeed[6]=(view_object.hspeed+back_extrahspeed)/8;
+        background_hspeed[0]=obj_camera.player_object.hspeed/1.2;
+        background_hspeed[2]=(obj_camera.player_object.hspeed+back_extrahspeed)/2;
+        background_hspeed[3]=(obj_camera.player_object.hspeed+back_extrahspeed)/3;
+        background_hspeed[4]=(obj_camera.player_object.hspeed+back_extrahspeed)/4;
+        background_hspeed[5]=(obj_camera.player_object.hspeed+back_extrahspeed)/5.5;
+        background_hspeed[6]=(obj_camera.player_object.hspeed+back_extrahspeed)/8;
     }
-    background_hspeed[6]=(view_object.hspeed+back_extrahspeed)/8;    
-    background_hspeed[1]=view_object.hspeed/1.2;
+    background_hspeed[6]=(obj_camera.player_object.hspeed+back_extrahspeed)/8;    
+    background_hspeed[1]=obj_camera.player_object.hspeed/1.2;
 }
 else
 {
@@ -1278,16 +1274,16 @@ if((view_yview[0]&gt;0&amp;&amp;view_yview[0]+view_hview[0]&lt;room_height))
 {
     if(map_type_space = 1)
     { 
-        background_vspeed[0]=view_object.vspeed/1.2;
-        background_vspeed[2]=(view_object.vspeed+back_extravspeed)/2;
-        background_vspeed[3]=(view_object.vspeed+back_extravspeed)/3;
-        background_vspeed[4]=(view_object.vspeed+back_extravspeed)/4;
-        background_vspeed[5]=(view_object.vspeed+back_extravspeed)/5.5;
-        background_vspeed[6]=(view_object.vspeed+back_extravspeed)/8;
+        background_vspeed[0]=obj_camera.player_object.vspeed/1.2;
+        background_vspeed[2]=(obj_camera.player_object.vspeed+back_extravspeed)/2;
+        background_vspeed[3]=(obj_camera.player_object.vspeed+back_extravspeed)/3;
+        background_vspeed[4]=(obj_camera.player_object.vspeed+back_extravspeed)/4;
+        background_vspeed[5]=(obj_camera.player_object.vspeed+back_extravspeed)/5.5;
+        background_vspeed[6]=(obj_camera.player_object.vspeed+back_extravspeed)/8;
     }
     
-    background_vspeed[6]=(view_object.vspeed+back_extravspeed)/8;
-    background_vspeed[1]=view_object.vspeed/1.2;
+    background_vspeed[6]=(obj_camera.player_object.vspeed+back_extravspeed)/8;
+    background_vspeed[1]=obj_camera.player_object.vspeed/1.2;
 }
 else
 {
@@ -1404,7 +1400,7 @@ for(i = 0; i &lt; 8; i += 1)
 {
  //Skip if not active
  if(global.activated[i] = 0 &amp;&amp; i &gt; 0) continue;
- if(global.playership[i] = view_object)
+ if(global.playership[i] = obj_camera.player_object)
  {
   //Reset view trigger
   var foundview = 0;
@@ -1415,7 +1411,7 @@ for(i = 0; i &lt; 8; i += 1)
    if(global.activated[ii] = 0 &amp;&amp; ii &gt; 0) continue;  
    if(global.playership[ii].x &gt; room_width || global.playership[ii] = obj_dud) continue;
    //Set the view to follow the found player
-   view_object = global.playership[ii];
+   obj_camera.player_object = global.playership[ii];
    foundview = 1;
    break;
   }
@@ -1427,13 +1423,12 @@ for(i = 0; i &lt; 8; i += 1)
     if(global.activated[ii] = 0 &amp;&amp; ii &gt; 0) continue;  
     if(global.playership[ii].x &gt; room_width || global.playership[ii] = obj_dud) continue;
     //Set the view to follow the found player
-    view_object = global.playership[ii];
+    obj_camera.player_object = global.playership[ii];
     break;
    }
   break;
  }
 }
-//view_object = global.object_view;
 </string>
           </argument>
         </arguments>
@@ -1465,7 +1460,7 @@ for(i = 0; i &lt; 8; i += 1)
 {
  //Skip if not active
  if(global.activated[i] = 0 &amp;&amp; i &gt; 0) continue;
- if(global.playership[i] = view_object)
+ if(global.playership[i] = obj_camera.player_object)
  {
   //Reset view trigger
   foundview = 0;
@@ -1476,7 +1471,7 @@ for(i = 0; i &lt; 8; i += 1)
    if(global.activated[ii] = 0 &amp;&amp; ii &gt; 0) continue;  
    if(global.playership[ii].x &gt; room_width || global.playership[ii] = obj_dud) continue;
    //Set the view to follow the found player
-   view_object = global.playership[ii];
+   obj_camera.player_object = global.playership[ii];
    foundview = 1;
    break;
   }
@@ -1488,7 +1483,7 @@ for(i = 0; i &lt; 8; i += 1)
     if(global.activated[ii] = 0 &amp;&amp; ii &gt; 0) continue;  
     if(global.playership[ii].x &gt; room_width || global.playership[ii] = obj_dud) continue;
     //Set the view to follow the found player
-    view_object = global.playership[ii];
+    obj_camera.player_object = global.playership[ii];
     break;
    }
   break;

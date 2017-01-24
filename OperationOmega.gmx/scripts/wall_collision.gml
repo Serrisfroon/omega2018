@@ -54,7 +54,8 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
     //Update smoking
     smoke = floor(armor/(armor_maximum/10));
     
-    obj_mod.screen_shake_intensity = 4;
+    if(mid = global.mymid)
+        screen_shake(10);
     
     //Check if your ship has been defeated
     if(armor <= 0)
@@ -120,8 +121,9 @@ else
         //Update smoking
         smoke = floor(armor/(armor_maximum/10));
         
-        obj_mod.screen_shake_intensity = 4;
-        
+        if(mid = global.mymid)
+            screen_shake(10);
+            
         //Check if your ship has been defeated
         if(armor <= 0)
         {

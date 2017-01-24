@@ -28,7 +28,7 @@
             <string>other.hitmid = mid;
 
 attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold, 
-                        other.attack_shake, other.attack_name);
+                        other.attack_name);
 
 </string>
           </argument>
@@ -55,7 +55,7 @@ attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold
             <string>other.hitmid = mid;
 
 attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold, 
-                        other.attack_shake, other.attack_name);
+                        other.attack_name);
 
 </string>
           </argument>
@@ -79,7 +79,7 @@ attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(attack_collision(6, 11, 0, 8, "Hacker Mine") = 1)
+            <string>if(attack_collision(6, 11, 0, "Hacker Mine") = 1)
 {
     ship_status_hacked = true;
     alarm[5] = 90;
@@ -123,7 +123,7 @@ if(other.damage &gt; 4)
  other.split.damage = other.damage-2+other.amplified*2;
  other.split.oldmid = mid;
 }
-attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
+attack_collision(other.damage, other.damage, 0, "Split Missile");
 </string>
           </argument>
         </arguments>
@@ -146,7 +146,7 @@ attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(attack_collision(10, 10, 0, 8, "Shock Missile") = 1)
+            <string>if(attack_collision(10, 10, 0, "Shock Missile") = 1)
 {
     if(ship_status_shocked = false)
     {
@@ -181,7 +181,7 @@ attack_collision(other.damage, other.damage, 0, 8, "Split Missile");
             <kind>1</kind>
             <string>if(other.function_stage = 2)
     attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold, 
-                        other.attack_shake, other.attack_name);
+                        other.attack_name);
 </string>
           </argument>
         </arguments>
@@ -270,7 +270,7 @@ if(armor &lt;= (armor_maximum*100)/60)
           <argument>
             <kind>1</kind>
             <string>attack_collision(other.attack_damage, other.attack_burst, other.attack_threshold, 
-                        other.attack_shake, other.attack_name);
+                        other.attack_name);
 </string>
           </argument>
         </arguments>

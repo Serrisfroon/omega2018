@@ -289,7 +289,9 @@ switch(blue_team_total)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//If on the Satellita map, move the background to keep the planet centered
+            <string>(instance_create(0, 0, obj_camera)).mid = global.mymid;
+
+//If on the Satellita map, move the background to keep the planet centered
 if(room = rm_satellite)
 {  
     //Handle the x coordinate        
@@ -321,7 +323,6 @@ if(global.master = true)
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    obj_camera.player_object = tele;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     global.activated[global.mymid] = 2;
     instance_create(0, 0, obj_bulletcontrol);
@@ -363,7 +364,6 @@ else
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    obj_camera.player_object = tele;
     global.activated[global.mymid] = 2;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     instance_create(0, 0, obj_chat);
@@ -418,6 +418,10 @@ global.matchcolor = c_black;
 obj_mod.back_extrahspeed = back_extrahspeed;
 obj_mod.back_extravspeed = back_extravspeed;
 
+//Set the viewed object to the teleporting in player
+obj_camera.player_object = tele;
+obj_camera.x = tele.x;
+obj_camera.y = tele.y;
 //Destroy this object because it's no longer needed
 instance_destroy();
 </string>

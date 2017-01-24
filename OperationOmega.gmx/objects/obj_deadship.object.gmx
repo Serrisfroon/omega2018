@@ -81,7 +81,7 @@ repeat(4)
 if(mid = global.mymid)
 {
     instance_create(x, y, obj_respawn_timer);
-    view_object = obj_respawn_timer; 
+    obj_camera.player_object = obj_respawn_timer; 
 }
 //Shake the screen
 obj_mod.viewpos = 12;

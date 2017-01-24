@@ -97,7 +97,7 @@ collide_mid[other.mid] = 1
 with(other)
 {
     sfx_play(snd_hit, x, y);
-    
+    screen_shake(30);
     //Take damage
     if(ship_status_shocked = false)
         shield -= 25;
@@ -125,8 +125,8 @@ with(other)
     }
     //Make the hit ship flash
     hurt = instance_create(0, 0, obj_ship_flash);
-    hurt.hurting = other.id;  
-    hurt.ship_image = global.playership[other.mid];
+    hurt.hurting = id;  
+    hurt.ship_image = global.playership[mid];
     
     //Update smoking
     if(armor &lt;= (armor_maximum*100)/60)

@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>targeted_enemy = -1;
 player_object = -1;
+screen_shaking = 0;
 </string>
           </argument>
         </arguments>
@@ -77,7 +78,7 @@ else
 
 
 //Check if the enemy is close enough to lock on
-if(distance_to_enemy &lt; 900)
+if(distance_to_enemy &lt; 1200)
 {  
     //Handle the camera to track the player, the target, and the mouse
 
@@ -95,7 +96,7 @@ if(distance_to_enemy &lt; 900)
         newlockon.direction = obj_mod.cursor_rotation[2];
     }
     
-    obj_mod.distance_to_target = floor(distance_to_enemy/33);         //Send the distance to the target to obj_mod
+    obj_mod.distance_to_target = floor(distance_to_enemy/44);         //Send the distance to the target to obj_mod
 
     
     //Calculate the difference in x and y values between the target and the player
@@ -106,29 +107,14 @@ if(distance_to_enemy &lt; 900)
     var camera_x = player_x + ship_difference_x/2;
     var camera_y = player_y + ship_difference_y/2;
     
-    //Calculate the change needed in camera size
-    //The view needs to contain both the target and the ship, and have 400 pixels extra space
-    var camera_width_change = view_wview[0] - abs(ship_difference_x) - 400;
-    var camera_height_change = view_hview[0] - abs(ship_difference_y) - 400;
-    
-    //Increase the camera size if the view is too small horizontally
-    if(camera_width_change &lt; 0 || camera_height_change &lt; 0)
+    var camera_change = min(view_wview[0] - abs(ship_difference_x) - 410, view_hview[0] - abs(ship_difference_y) - 410);
+    view_wview[0] -= camera_change/20;
+    view_hview[0] -= camera_change/32;
+    if(view_wview[0] &lt; 1200)
     {
-        view_wview[0] += 8;
-        view_hview[0] += 5;
-    }
-    else
-    {
-        //Decrease the camera size if it's more than 100 pixels too large horizontally
-        if(camera_width_change &gt; 100 || camera_height_change &gt; 100)
-        {
-            if(view_wview[0] &gt; 1200)
-            {
-                view_wview[0] -= 8;
-                view_hview[0] -= 5;
-            }
-        }
-    }     
+        view_wview[0] = 1200;
+        view_hview[0] = 750;
+    }        
 }
 else
 {
@@ -156,17 +142,20 @@ var direction_to_mouse = point_direction(x, y, mouse_x, mouse_y);
 var distance_to_mouse = point_distance(x, y, mouse_x, mouse_y);
 
 //Calculate the position of the camera to pan to
-var camera_pan_x = camera_x + lengthdir_x(min(96, distance_to_mouse), direction_to_mouse);
-var camera_pan_y = camera_y + lengthdir_y(min(96, distance_to_mouse), direction_to_mouse);
+var camera_pan_x = camera_x + lengthdir_x(min(180, distance_to_mouse), direction_to_mouse);
+var camera_pan_y = camera_y + lengthdir_y(min(180, distance_to_mouse), direction_to_mouse);
 
 //Pan the camera towards that position
-x += (camera_pan_x-x)/25;
-y += (camera_pan_y-y)/25;
+x += (camera_pan_x-x)/25+player_object.hspeed;
+y += (camera_pan_y-y)/25+player_object.vspeed;
 
 //Set the view position to be at the camera's position, but stay inside the room
 view_xview = clamp(x - (view_wview/2), 0, room_width-view_wview);
 view_yview = clamp(y - (view_hview/2), 0, room_height-view_hview);
 
+view_xview += random_range(-screen_shaking, screen_shaking);
+view_yview += random_range(-screen_shaking, screen_shaking);
+screen_shaking *= 0.9;
 
 </string>
           </argument>

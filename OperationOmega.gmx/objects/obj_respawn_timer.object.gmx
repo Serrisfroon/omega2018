@@ -31,7 +31,7 @@ alarm[0] = 180;
 
 respawnable = 0;
 
-view_object = id;
+obj_camera.player_object = id;
 
 </string>
           </argument>

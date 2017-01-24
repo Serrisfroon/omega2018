@@ -1,13 +1,12 @@
-//attack_collision(dmg, pene, threshold, shake, name)
+//attack_collision(dmg, pene, threshold, name)
 
 
 //Script variables
-var dmg, pene, thresh, shake, weaponname, drone_active;
+var dmg, pene, thresh, weaponname, drone_active;
 dmg = argument0;
 pene = argument1;
 thresh = argument2;
-shake = argument3;
-weaponname = argument4;
+weaponname = argument3;
 drone_active = false;
 if(invincible = 0.7)
 {
@@ -148,7 +147,8 @@ if(pene > 0)
     
 
 //Shake the screen
-obj_mod.screen_shake_intensity += shake;
+if(mid = global.mymid)
+    screen_shake(dmg+pene);
 
 //Destroy the attack
 with(other) instance_destroy();

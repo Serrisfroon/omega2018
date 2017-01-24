@@ -131,7 +131,6 @@ if(scale = 1 &amp;&amp; stage = 0)
     hurt.ship_image = global.playership[mid];
     //Shake the screen if in range
     if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
-     obj_mod.screen_shake_intensity = 4;
     part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
     //Take damage
     if(ship_status_shocked = false)

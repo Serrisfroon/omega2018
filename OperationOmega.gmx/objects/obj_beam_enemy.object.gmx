@@ -185,7 +185,8 @@ if(scale = 1 &amp;&amp; stage = 0)
                 smoke = floor(armor/(armor_maximum/10));
             //Shake the screen if in range
             if(point_distance(x, y, obj_player.x, obj_player.y) &lt; view_wview[0]/2)
-                obj_mod.screen_shake_intensity = 8;
+            screen_shake(15);
+
 
             //Check if your ship has been defeated
             if(armor &lt;= 0)

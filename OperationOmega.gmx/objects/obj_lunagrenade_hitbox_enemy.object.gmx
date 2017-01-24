@@ -97,7 +97,7 @@ collide_mid[other.mid] = 1
 with(other)
 {
     sfx_play(snd_hit, x, y);
-    
+    screen_shake(30);    
     //Take damage
     if(ship_status_shocked = false)
         shield -= 20;
