@@ -1,6 +1,5 @@
 var xx,yy,last_x,last_y,amount,dir,old_colour;
 old_colour=draw_get_color()
-draw_set_color(argument4)
 xx=argument0
 yy=argument1
 last_x=argument0
@@ -28,7 +27,7 @@ xx += cos(degtorad(dir-90))*amount;//moves the x in a random sideways amount
 yy -= sin(degtorad(dir-90))*amount;//moves the y in a random sideways amount
 draw_line(xx,yy,last_x,last_y)// draws a line between the last points and the previous ones
 draw_set_alpha(0.2)
-draw_set_color(c_aqua);
+draw_set_color(argument4);
 draw_line_width(xx,yy,last_x,last_y,8)// draws a line between the last points and the previous ones
 draw_set_color(c_white);
 draw_line_width(xx,yy,last_x,last_y,4)// draws a line between the last points and the previous ones

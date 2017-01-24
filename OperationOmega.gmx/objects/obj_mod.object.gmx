@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>//Set the size of the GUI to be the same as the screen port
 display_set_gui_size(view_wport[0], view_hport[0]);
-
+(instance_create(obj_player.x, obj_player.y, obj_camera)).mid = global.mymid;
 //Reset the position of the audio listener
 audio_listener_position(0, 0, 0);
 
@@ -1235,6 +1235,7 @@ for(i = 1; i &lt; 5; i++)
         cursor_weapon[i] = max(cursor_weapon[i]-1, (i-1)*8);        
 }
 
+//Update the selected secondary's name string
 var current_length = string_length(current_secondary_name);
 if(update_cursor_name = true)
 {
@@ -1303,133 +1304,6 @@ else
 cursor_rotation[1] += 2.5;
 cursor_rotation[2] -= 4;
 cursor_rotation[3] += 6;
-
-//Handle Goliath Weaponsmith Bay
-//if(goliath_selected = true)
-//    weaponsmith(dstock);
-if(global.activated[mid] = 1)
-{
-    //Find the player farthest from you, but within target range
-    //Initialize variables to hold the distance to the farthest possible target, and the farthest possible target
-    var distance_to_farthest_target = 0;
-    var farthest_target = -1;
-    //Loop through all players
-    for(i = 0; i &lt; 8; i += 1)
-    {
-        //Skip this player if it isn't activated
-        if(player_activated[i] = 0) continue;
-        //Skip this player it it's you
-        if(i = global.mymid) continue;
-        //Calculate the distance to this player
-        var distance_to_target = point_distance(view_object.x, view_object.y, player_object[i].x, player_object[i].y);
-        //Check if the player is within view range
-        if(distance_to_target &lt;= 900)
-        { 
-            //Also check if this player is farther away then the player previous marked fartheest away
-            if(distance_to_target &gt; distance_to_farthest_target)
-            {
-                distance_to_farthest_target = distance_to_target;   //Save this distance as the farthest distance
-                farthest_target = player_object[i];                 //Save this player as the farthest possible target
-            }
-        }
-    }
-    
-    //Targetting
-    oldtarget = targeted_object;
-    //Target the enemy closest to the cursor if you are still alive
-    if(obj_player.armor &gt; 0)
-        targeted_object = instance_nearest(mouse_x, mouse_y, obj_dummy_enemy);
-    else
-    {
-        targeted_object = -1;
-        exit;
-    }
-    
-    //Check if there is a target
-    if(farthest_target != -1)
-    {
-        //Initialize the x value of the second focus point of the view
-        var view_focusx = farthest_target.x;
-        //Make sure that the focus point if not close the edges of the room
-        if(farthest_target.x &lt; 64)
-            view_focusx = 66;
-        else
-            if(farthest_target.x &gt; room_width-64)
-                view_focusx = room_width-66;
-        //Initialize the y value of the second focus point of the view
-        var view_focusy = farthest_target.y;
-        //Make sure that the focus point if not close the edges of the room
-        if(farthest_target.y &lt; 64)
-            view_focusy = 66;
-        else
-            if(farthest_target.y &gt; room_height-64)
-                view_focusy = room_height-66;
-        
-        //Check if the view has room to expand
-        if(view_hview[0] &lt; 1480)
-            if(view_wview[0] &lt; room_width-view_x_increase)
-                //Check if the target is moving out of view
-                if(view_focusx &lt; view_xview[0]+64 || view_focusx &gt; view_xview[0]+view_wview[0]-64 || view_focusy&lt;view_yview[0]+64 || view_focusy &gt; view_yview[0]+view_hview[0]-64)
-                {
-                    //Expand the view to keep it seen
-                    view_wview[0] += view_x_increase;
-                    view_hview[0] += view_y_increase;
-                    view_zoom_out_flag = true;
-                }
-                
-        //Check if the view is larger than normal
-        if(view_hview[0] &gt; view_height_base)
-        {
-            //Check if the target is moving closer
-            if(view_zoom_out_flag = true)
-                if(view_focusx &gt; view_xview[0]+128)
-                    if(view_focusx &lt; view_xview[0]+view_wview[0]-128)
-                        if(view_focusy &gt; view_yview[0]+128)
-                            if(view_focusy &lt; view_yview[0]+view_hview[0]-128)
-                            {
-                                //Shrink the view as needed
-                                view_zoom_out_flag = false;
-                                alarm[6] = 180;
-                            }
-        }
-    }
-    else
-    {
-        //If there is no target, check to see if the view is larger
-        //than normal
-        if(view_zoom_out_flag = true)
-            if(view_hview[0] &gt; view_height_base)
-            {
-                //Shrink the view as needed
-                view_zoom_out_flag = false;
-                alarm[6] = 180;
-            }
-        targeted_object = -1;
-    }
-    //Convert the distance to target to be used by the targetting meter
-    if(targeted_object != -1)
-    {
-        distance_to_target = ceil(point_distance(view_object.x, view_object.y, targeted_object.x, targeted_object.y)/33.33);
-        if(distance_to_target &gt; 27)
-            targeted_object = -1;
-    }
-    else
-        distance_to_target = 0;
-    
-    
-    //Creeate a new cursor effect
-    if(targeted_object != -1)
-        if(targeted_object != oldtarget)
-        {
-            with(obj_lockoncursor)
-                instance_destroy();
-            newlockon = instance_create(0, 0, obj_lockoncursor);
-            newlockon.target = targeted_object;
-            newlockon.direction = global.rot2;
-        }
-}
-//Center your ship
-screen_shake(view_object);
 
 </string>
           </argument>
@@ -1783,82 +1657,6 @@ if(targeted_object != -1)
 //Draw equipped weapons
 check_weapons();
 
-/*
-//Draw the weapon icons and ammo bars depending on the icon order
-switch(secondary_icon_order)
-{
-    case 0: //The order is E-H-H-E
-        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 18, 89, 1, 1, 0, weapon_available_color[1], 1);
-        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 58, 89, 1, 1, 0, weapon_available_color[2], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
-        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 98, 89, 1, 1, 0, weapon_available_color[3], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
-        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 138, 89, 1, 1, 0, weapon_available_color[4], 1);
-    break;
-    case 1: //The order is E-E-H-H
-        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 18, 89, 1, 1, 0, weapon_available_color[1], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 58, 89, 1, 1, 0, weapon_available_color[2], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 98, 89, 1, 1, 0, weapon_available_color[3], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 138, 89, 1, 1, 0, weapon_available_color[4], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);    
-    break;
-    case 2: //The order is E-E-H-E
-        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 18, 89, 1, 1, 0, weapon_available_color[1], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 58, 89, 1, 1, 0, weapon_available_color[2], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 98, 89, 1, 1, 0, weapon_available_color[3], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 138, 89, 1, 1, 0, weapon_available_color[4], 1);    
-    break;
-    case 3: //The order is E-E-E-H
-        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 18, 89, 1, 1, 0, weapon_available_color[1], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 58, 89, 1, 1, 0, weapon_available_color[2], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 98, 89, 1, 1, 0, weapon_available_color[3], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 138, 89, 1, 1, 0, weapon_available_color[4], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);        
-    break;
-    case 4: //The order is H-H-H-E
-        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 18, 89, 1, 1, 0, weapon_available_color[1], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[1]/max_secondary_stock[1])*26, 36, 2, 73, 1, 1, c_white, 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 58, 89, 1, 1, 0, weapon_available_color[2], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 98, 89, 1, 1, 0, weapon_available_color[3], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 138, 89, 1, 1, 0, weapon_available_color[4], 1);
-    break;
-    case 5: //The order is E-H-H-H
-        draw_sprite_ext(global.secondary_icon_image[1], team_color_index, 18, 89, 1, 1, 0, weapon_available_color[1], 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[2], team_color_index, 58, 89, 1, 1, 0, weapon_available_color[2], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[2]/max_secondary_stock[2])*26, 36, 42, 73, 1, 1, c_white, 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[3], team_color_index, 98, 89, 1, 1, 0, weapon_available_color[3], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[3]/max_secondary_stock[3])*26, 36, 82, 73, 1, 1, c_white, 1);
-        
-        draw_sprite_ext(global.secondary_icon_image[4], team_color_index, 138, 89, 1, 1, 0, weapon_available_color[4], 1);
-        draw_sprite_part_ext(spr_deploybar, 0, 0, 0, (global.secondary_stock[4]/max_secondary_stock[4])*26, 36, 122, 73, 1, 1, c_white, 1);    
-    break;
-}
-
-with(obj_weaponflash)
-    draw_sprite_ext(sprite_index, image_index, xstart, 89, 1, 1, 0, c_white, 1);
-    
-//Draw the highlighter
-draw_sprite_ext(spr_numbers_selected, 0, secondary_selection_position+16, 89, 1, 1, 0, c_white, 1);
-*/
-
 //Draw Armor, Shield, Energy, and Ammo bars
 if(obj_player.armor &gt; 0)
 {
@@ -1882,24 +1680,9 @@ else
     draw_shield_bar = 0;    
 
 var energy_ratio = current_secondary_stock/100;
-/*
-if(obj_player.energy &gt; 0)
-{
-    draw_sprite_part_ext(spr_energybar, 0, 0, 0, 107+energy_ratio*130, 86, 0, 0, 1, 1, c_white, 1);
-}
-
-draw_sprite_ext(spr_overheatbar, 0, 0, 0, 1, 1, 0, c_white, 1);
-if(instance_exists(obj_overheatshine))
-    draw_sprite_ext(spr_overheatshine, obj_overheatshine.image_index, 0, 0, 1, 1, 0, c_white, 1);
-*/
 var heavy_ratio = current_secondary_stock/max_secondary_stock[current_secondary];
-/*
-if(current_secondary_stock &gt; 0)
-    draw_sprite_part_ext(spr_ammobar, max_secondary_stock[current_secondary], 0, 0, 81+heavy_ratio*157, 64, 0, 0, 1, 1, c_white, 1);
-*/
 //Draw the gauge backgrounds
 draw_sprite_ext(spr_gauges, 0, 0, 0, 1, 1, 0, c_white, 1);
-//draw_sprite_ext(spr_weaponicons, secondary_icon_order, 0, 0, 1, 1, 0, c_white, 1);
 
 //Draw the match status
 switch(global.matchtype)

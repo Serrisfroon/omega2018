@@ -42,7 +42,7 @@ damaged[7] = 0;
 damaged[8] = 0;
 focus = -1;
 
-
+alarm[3] = 1;
 if(global.allycolor = c_red)
 {
 part_type_colour3(obj_partsystem.stasis_field,c_white,c_red,c_aqua);
@@ -54,6 +54,33 @@ part_type_colour3(obj_partsystem.stasis_field,c_white,c_blue,c_aqua);
 }
 
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stasis_field, 15);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(step = 2)
+    exit;
+alarm[3] = 5;
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.cryos_stasis[global.team[mid]-1], 2);
+part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.cryos_fog, 2);
 </string>
           </argument>
         </arguments>

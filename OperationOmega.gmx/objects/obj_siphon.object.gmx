@@ -79,14 +79,19 @@ if(target_object.shieldup = 1)
  hurt.hitdir = point_direction(target_object.x, target_object.y, source.x, source.y);
  hurt.hurting = target_object;
 }
+//Make the hit ship flash
+hurt = instance_create(0, 0, obj_ship_flash);
+hurt.hurting = target_object;  
+hurt.ship_image = global.playership[target_object.mid];
+  
 //Absorb shield
 if(target_object.shield &gt; 0) source.shield += 2;
 if(source.shield &gt; source.shield_maximum) source.shield = source.shield_maximum;
 
 show = 1;
-effect_create_above(ef_ring, source.x, source.y, 0, c_aqua);
-effect_create_above(ef_ring, target_object.x, target_object.y, 0, c_aqua);
-part_particles_create(obj_partsystem.system, target_object.x, target_object.y, obj_partsystem.elecspark, 7);
+
+team_id = global.team[mid]-1;
+part_particles_create(obj_partsystem.system, target_object.x, target_object.y, obj_partsystem.elecspark[team_id], 7);
 
 </string>
           </argument>
@@ -129,11 +134,11 @@ part_particles_create(obj_partsystem.system, target_object.x, target_object.y, o
             <string>if(show = 0) exit;
 if(!instance_exists(source)) exit;
 var pointdist, pointdir;
-draw_electricity(source.x, source.y, target_object.x, target_object.y, c_blue, 3, 3, 6, true)//3-random(6) is equall in either way
+draw_electricity(source.x, source.y, target_object.x, target_object.y, global.allycolor, 3, 3, 6, true)//3-random(6) is equall in either way
 
 pointdist = irandom(point_distance(source.x, source.y, target_object.x, target_object.y));
 pointdir = point_direction(source.x, source.y, target_object.x, target_object.y);
-part_particles_create(obj_partsystem.system, source.x+lengthdir_x(pointdist, pointdir), source.y+lengthdir_y(pointdist, pointdir), obj_partsystem.elecspark, 1);
+part_particles_create(obj_partsystem.system, source.x+lengthdir_x(pointdist, pointdir), source.y+lengthdir_y(pointdist, pointdir), obj_partsystem.elecspark[team_id], 1);
 </string>
           </argument>
         </arguments>

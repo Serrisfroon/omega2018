@@ -123,6 +123,10 @@ with(other)
         hurt.hitdir = point_direction(x, y, other.x, other.y);
         hurt.hurting = other.id;
     }
+    //Make the hit ship flash
+    hurt = instance_create(0, 0, obj_ship_flash);
+    hurt.hurting = other.id;  
+    hurt.ship_image = global.playership[other.mid];
     
     //Update smoking
     if(armor &lt;= (armor_maximum*100)/60)

@@ -77,14 +77,14 @@ switch(current_primary)
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 9;
         primary_charge_max = 100;
-        primary_charge_shot = obj_helix_charge;
+        primary_charge_shot = obj_helix_charge_attack;
     break;
     case 7:
         primary_name = "Siphon";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 12;
         primary_charge_max = 100;
-        primary_charge_shot = obj_siphon_charge;
+        primary_charge_shot = obj_helix_charge_attack;
     break;
     case 8:
         primary_name = "Double";
@@ -694,7 +694,6 @@ if(hornet_warp &gt; -1)
     {
         x = warpx;
         y = warpy;
-        view_object = id;
     }
     //Return to the normal sprite at the last frame
     if(hornet_warp = 0)
@@ -773,6 +772,30 @@ while(x &lt; 16 || x &gt; room_width-16 || y &lt; 16 || y &gt; room_height-16)
 }
 
 wall_collision();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_cryos_hit">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(other.target_mid = mid)
+    speed = 3;
 </string>
           </argument>
         </arguments>
@@ -919,6 +942,12 @@ with(obj_hack_effect)
         instance_destroy();
         
 //Reset the homing of any locked on attacks
+with(obj_siphon)
+    if(mid = player_mid || target_object = global.playership[player_mid])
+        instance_destroy();
+with(obj_siphon_enemy)
+    if(mid = player_mid || target_object = global.playership[player_mid])
+        instance_destroy();
 with(obj_formationa)
     if(target = player_mid)
         not_targeting = true;
@@ -1016,8 +1045,8 @@ with(obj_mod)
 }
 
 //Update the viewed object if this player was being followed
-if(global.playership[mid] = view_object)
-    view_object = defeat;
+if(global.playership[mid] = obj_camera.player_object)
+    obj_camera.player_object = defeat;
 
 
 if(mid = global.mymid)

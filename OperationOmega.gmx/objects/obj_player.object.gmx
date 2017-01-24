@@ -28,7 +28,7 @@
             <string>//Perform code exclusive to the player-controlled ship
 
 //Start following this object
-view_object = id;
+obj_camera.player_object = id;
 
 //Set the current primary to your selected primary
 current_primary = global.primary;
@@ -365,7 +365,10 @@ if(shield &gt; 0)
     hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
     hurt.hurting = id;
 }
-
+//Make the hit ship flash
+hurt = instance_create(0, 0, obj_ship_flash);
+hurt.hurting = id;    
+hurt.ship_image = global.playership[mid];
 
 //Destroy the attack
 with(other) instance_destroy();
@@ -439,8 +442,7 @@ if(armor &lt;= 0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(speed &gt; 3)
-    speed = 3;
+            <string>speed = 3;
 stasis_slow_timer = 20; 
 chained = 1;
 other.slowing = 1;
@@ -508,6 +510,10 @@ if(shield &gt; 0)
  hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
  hurt.hurting = id;
 }
+//Make the hit ship flash
+hurt = instance_create(0, 0, obj_ship_flash);
+hurt.hurting = id;    
+hurt.ship_image = global.playership[mid];
 
 //Update smoking
 if(armor &lt;= (armor_maximum*100)/60)

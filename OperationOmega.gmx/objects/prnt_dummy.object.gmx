@@ -107,7 +107,6 @@ if(hornet_warp &gt; -1)
     {
         x = warpx;
         y = warpy;
-        view_object = id;
     }
     //Return to the normal sprite at the last frame
     if(hornet_warp = 0)

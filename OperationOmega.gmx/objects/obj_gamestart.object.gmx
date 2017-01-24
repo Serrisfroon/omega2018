@@ -321,7 +321,7 @@ if(global.master = true)
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    view_object = tele;
+    obj_camera.player_object = tele;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     global.activated[global.mymid] = 2;
     instance_create(0, 0, obj_bulletcontrol);
@@ -363,7 +363,7 @@ else
     tele = instance_create(global.myspawnx, global.myspawny, obj_teleport);
     tele.mid = global.mymid;
     tele.activate_all = true;
-    view_object = tele;
+    obj_camera.player_object = tele;
     global.activated[global.mymid] = 2;
     (instance_create(-1000, -1000, obj_player)).ship_disabled = true;
     instance_create(0, 0, obj_chat);

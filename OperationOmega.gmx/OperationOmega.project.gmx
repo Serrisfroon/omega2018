@@ -1331,6 +1331,7 @@
     <sprite>sprites\spr_goliath_enemy</sprite>
     <sprite>sprites\spr_swiftwing_warp</sprite>
     <sprite>sprites\spr_swiftwing_warp_enemy</sprite>
+    <sprite>sprites\spr_ship_flash</sprite>
     <sprite>sprites\spr_goliath_hyperrush</sprite>
     <sprites name="Primary">
       <sprite>sprites\spr_needle</sprite>
@@ -1340,10 +1341,14 @@
       <sprite>sprites\spr_flank</sprite>
       <sprite>sprites\spr_seeker_charge</sprite>
       <sprite>sprites\spr_cryos</sprite>
+      <sprite>sprites\spr_cryos_slow</sprite>
       <sprite>sprites\spr_stasis</sprite>
       <sprite>sprites\spr_stasis_field</sprite>
       <sprite>sprites\spr_helix</sprite>
       <sprite>sprites\spr_bluehelix</sprite>
+      <sprite>sprites\spr_helix_charge</sprite>
+      <sprite>sprites\spr_helix_charge_0</sprite>
+      <sprite>sprites\spr_helix_charge_1</sprite>
       <sprite>sprites\spr_double</sprite>
       <sprite>sprites\spr_pierce</sprite>
       <sprite>sprites\spr_spread</sprite>
@@ -1898,6 +1903,7 @@
     <script>scripts\defeat_player.gml</script>
     <script>scripts\select_prematch_text.gml</script>
     <script>scripts\change_secondary.gml</script>
+    <script>scripts\script154.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_magnify.shader</shader>
@@ -1930,6 +1936,7 @@
         <object>objects\obj_needle_hit</object>
         <object>objects\obj_sonic_hit</object>
         <object>objects\obj_seeker_hit</object>
+        <object>objects\obj_helix_hit</object>
         <object>objects\obj_cryos_hit</object>
         <objects name="Needle Charge">
           <object>objects\obj_needle_charge_attack</object>
@@ -1952,6 +1959,11 @@
           <object>objects\obj_cryos_charge_enemy</object>
           <object>objects\obj_stasis_field</object>
           <object>objects\obj_enemystasis_field</object>
+        </objects>
+        <objects name="Helix Charge">
+          <object>objects\obj_helix_charge_attack</object>
+          <object>objects\obj_helix_charge</object>
+          <object>objects\obj_helix_charge_enemy</object>
         </objects>
         <object>objects\obj_flank</object>
         <object>objects\obj_flank_enemy</object>
@@ -2045,11 +2057,6 @@
           <object>objects\obj_storm_wall</object>
           <object>objects\obj_storm_enemy</object>
           <object>objects\obj_storm_enemy_wall</object>
-        </objects>
-        <objects name="Direct">
-          <object>objects\obj_direct_attack</object>
-          <object>objects\obj_trigger</object>
-          <object>objects\obj_trigger_enemy</object>
         </objects>
         <objects name="Thorn">
           <object>objects\obj_thorn_attack</object>
@@ -2152,6 +2159,7 @@
         <object>objects\obj_gamestart</object>
         <object>objects\obj_mod</object>
         <object>objects\obj_mod_client</object>
+        <object>objects\obj_camera</object>
         <object>objects\obj_bulletcontrol</object>
         <object>objects\obj_partsystem</object>
         <object>objects\obj_partsystem_top</object>
@@ -2167,6 +2175,7 @@
       <objects name="Effects">
         <object>objects\obj_shippart</object>
         <object>objects\obj_hit</object>
+        <object>objects\obj_ship_flash</object>
         <object>objects\obj_shield_break</object>
         <object>objects\obj_shield_regain</object>
         <object>objects\obj_shieldpart</object>
@@ -2208,6 +2217,11 @@
           <object>objects\obj_turret_attack</object>
           <object>objects\obj_turret</object>
           <object>objects\obj_turret_enemy</object>
+        </objects>
+        <objects name="Direct">
+          <object>objects\obj_direct_attack</object>
+          <object>objects\obj_trigger</object>
+          <object>objects\obj_trigger_enemy</object>
         </objects>
       </objects>
       <object>objects\prnt_bloom_attack</object>

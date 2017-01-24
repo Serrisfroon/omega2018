@@ -129,8 +129,11 @@ if(shield > 0)
     hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
     hurt.hurting = id;
 }
+//Make the hit ship flash
+hurt = instance_create(0, 0, obj_ship_flash);
+hurt.hurting = id;    
+hurt.ship_image = global.playership[mid];
 
-    
 //Create burning trail effect
 if(pene > 0)
 {

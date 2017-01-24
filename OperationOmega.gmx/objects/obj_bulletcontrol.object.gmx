@@ -249,6 +249,11 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                 hurt.hitdir = point_direction(possihit.x, possihit.y, bulletx[i]-bullethspeed[i], bullety[i]-bulletvspeed[i]);
                 hurt.hurting = possihit;
             }
+            //Make the hit ship flash
+            hurt = instance_create(0, 0, obj_ship_flash);
+            hurt.hurting = possihit;  
+            hurt.ship_image = global.playership[possihit.mid];
+            
             bulletfree[i] = true;
             //Reduce the bullet max if this is the last bullet
             if(bulletmax = i)
@@ -261,14 +266,22 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
+            switch(bullettype[i])
             {
-                ending.image_speed = 0;
-                if(bulletblend[i] = c_red)
-                    ending.image_index = 0;
-                else
-                    ending.image_index = 1;                    
-                ending.image_angle = ending.direction;    
+                case spr_snake_body:
+                case spr_whip:
+                    ending.image_speed = 0;
+                    if(bulletblend[i] = c_red)
+                        ending.image_index = 0;
+                    else
+                        ending.image_index = 1;                    
+                    ending.image_angle = ending.direction;                        
+                break;
+                case spr_cryos:
+                    ending.target_mid = possihit.mid;
+                    ending.x = possihit.x;
+                    ending.y = possihit.y;
+                break;
             }
         break;
         //Check allies if this is an enemy bullet
@@ -479,6 +492,10 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         hurt.hitdir = point_direction(possihit.x, possihit.y, bulletx[i]-bullethspeed[i], bullety[i]-bulletvspeed[i]);
                         hurt.hurting = possihit;
                     }
+                    //Make the hit ship flash
+                    hurt = instance_create(0, 0, obj_ship_flash);
+                    hurt.hurting = possihit;  
+                    hurt.ship_image = global.playership[possihit.mid];
                 break;
             }        
             bulletfree[i] = true;
@@ -493,14 +510,22 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
+            switch(bullettype[i])
             {
-                ending.image_speed = 0;
-                if(bulletblend[i] = c_red)
-                    ending.image_index = 0;
-                else
-                    ending.image_index = 1;                    
-                ending.image_angle = ending.direction;    
+                case spr_snake_body:
+                case spr_whip:
+                    ending.image_speed = 0;
+                    if(bulletblend[i] = c_red)
+                        ending.image_index = 0;
+                    else
+                        ending.image_index = 1;                    
+                    ending.image_angle = ending.direction;                        
+                break;
+                case spr_cryos:
+                    ending.target_mid = possihit.mid;
+                    ending.x = possihit.x;
+                    ending.y = possihit.y;
+                break;
             }
         break;
     }
@@ -715,7 +740,10 @@ surface_reset_target();
 for(i = 1; i &lt;= bulletmax; i += 1)
 {
     if(bulletfree[i] = true) continue;
-    draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);
+    if(bullettype[i] = spr_cryos)
+        draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i]+bulletlife[i]*4, c_white, 1);    
+    else
+        draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);
 }
 with(prnt_enemyenergy)
     draw_self();

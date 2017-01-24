@@ -174,7 +174,11 @@ if(scale = 1 &amp;&amp; stage = 0)
                 hurt.hitdir = point_direction(x+lengthdir_x(16, direction), y+lengthdir_y(16, direction), other.xprevious, other.yprevious);
                 hurt.hurting = id;
             }
-            part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
+             //Make the hit ship flash
+            hurt = instance_create(0, 0, obj_ship_flash);
+            hurt.hurting = id;  
+            hurt.ship_image = global.playership[mid];
+           part_particles_create(obj_partsystem.system, x, y, obj_partsystem.beamhit, 30);
 
             //Update smoking
             if(armor &lt;= (armor_maximum*100)/60)

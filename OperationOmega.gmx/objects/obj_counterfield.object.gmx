@@ -96,6 +96,9 @@ image_yscale = 2;
             <string>hurt = instance_create(0, 0, obj_hit);
 hurt.hitdir = point_direction(x, y, other.xprevious, other.yprevious);
 hurt.hurting = id;
+//Make the hit ship flash
+hurt = instance_create(0, 0, obj_ship_flash);
+hurt.hurting = possihit;  
 
 with(other)
     instance_destroy();

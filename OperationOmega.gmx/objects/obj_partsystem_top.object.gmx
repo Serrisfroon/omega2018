@@ -27,6 +27,109 @@
             <kind>1</kind>
             <string>system = part_system_create();
 
+
+
+
+//Siphon Charge Orb
+siphon_charge[0] = part_type_create();
+part_type_shape(siphon_charge[0],pt_shape_spark);
+part_type_size(siphon_charge[0],0.20,0.35,-0.01,0);
+part_type_scale(siphon_charge[0],3,3);
+part_type_color2(siphon_charge[0],8421631,255);
+part_type_alpha2(siphon_charge[0],1,0);
+part_type_speed(siphon_charge[0],0,1,0,0);
+part_type_direction(siphon_charge[0],0,359,0,0);
+part_type_gravity(siphon_charge[0],0,270);
+part_type_orientation(siphon_charge[0],0,359,0,0,1);
+part_type_blend(siphon_charge[0],1);
+part_type_life(siphon_charge[0],5,15);
+
+siphon_charge[1] = part_type_create();
+part_type_shape(siphon_charge[1],pt_shape_spark);
+part_type_size(siphon_charge[1],0.20,0.35,-0.01,0);
+part_type_scale(siphon_charge[1],3,3);
+part_type_color2(siphon_charge[1],816760767,16711680);
+part_type_alpha2(siphon_charge[1],1,0);
+part_type_speed(siphon_charge[1],0,1,0,0);
+part_type_direction(siphon_charge[1],0,359,0,0);
+part_type_gravity(siphon_charge[1],0,270);
+part_type_orientation(siphon_charge[1],0,359,0,0,1);
+part_type_blend(siphon_charge[1],1);
+part_type_life(siphon_charge[1],5,15);
+
+
+//Helix Charge spawn
+helix_charge_spawn[0] = part_type_create();
+part_type_sprite(helix_charge_spawn[0], spr_sphere_part, 0, 0, 0);
+part_type_size(helix_charge_spawn[0],0.20,0.50,-0.01,0);
+part_type_scale(helix_charge_spawn[0],2.60,2.60);
+part_type_color2(helix_charge_spawn[0],8421631,255);
+part_type_alpha2(helix_charge_spawn[0],1,0);
+part_type_speed(helix_charge_spawn[0],3,4,-0.10,0);
+part_type_direction(helix_charge_spawn[0],0,359,0,0);
+part_type_gravity(helix_charge_spawn[0],0,270);
+part_type_orientation(helix_charge_spawn[0],0,0,0,0,0);
+part_type_blend(helix_charge_spawn[0],1);
+part_type_life(helix_charge_spawn[0],10,20);
+
+helix_charge_spawn[1] = part_type_create();
+part_type_sprite(helix_charge_spawn[1], spr_sphere_part, 0, 0, 0);
+part_type_size(helix_charge_spawn[1],0.20,0.50,-0.01,0);
+part_type_scale(helix_charge_spawn[1],2.60,2.60);
+part_type_color2(helix_charge_spawn[1],16760767,16711680);
+part_type_alpha2(helix_charge_spawn[1],1,0);
+part_type_speed(helix_charge_spawn[1],3,4,-0.10,0);
+part_type_direction(helix_charge_spawn[1],0,359,0,0);
+part_type_gravity(helix_charge_spawn[1],0,270);
+part_type_orientation(helix_charge_spawn[1],0,0,0,0,0);
+part_type_blend(helix_charge_spawn[1],1);
+part_type_life(helix_charge_spawn[1],10,20);
+
+
+
+//Helix Trail
+helix_charge_trail[0] = part_type_create();
+part_type_sprite(helix_charge_trail[0],spr_helix_charge_0,0,0,0);
+part_type_size(helix_charge_trail[0],1,1,0,0);
+part_type_scale(helix_charge_trail[0],1,1);
+part_type_color1(helix_charge_trail[0],16777215);
+part_type_alpha2(helix_charge_trail[0],1,0);
+part_type_speed(helix_charge_trail[0],0,0,0,0);
+part_type_direction(helix_charge_trail[0],0,359,0,0);
+part_type_gravity(helix_charge_trail[0],0,270);
+part_type_orientation(helix_charge_trail[0],0,0,0,0,1);
+part_type_blend(helix_charge_trail[0],1);
+part_type_life(helix_charge_trail[0],15,15);
+
+helix_charge_trail[1] = part_type_create();
+part_type_sprite(helix_charge_trail[1],spr_helix_charge_1,0,0,0);
+part_type_size(helix_charge_trail[1],1,1,0,0);
+part_type_scale(helix_charge_trail[1],1,1);
+part_type_color1(helix_charge_trail[1],16777215);
+part_type_alpha2(helix_charge_trail[1],1,0);
+part_type_speed(helix_charge_trail[1],0,0,0,0);
+part_type_direction(helix_charge_trail[1],0,359,0,0);
+part_type_gravity(helix_charge_trail[1],0,270);
+part_type_orientation(helix_charge_trail[1],0,0,0,0,1);
+part_type_blend(helix_charge_trail[1],1);
+part_type_life(helix_charge_trail[1],15,15);
+
+
+//Cryos fog
+cryos_fog = part_type_create();
+part_type_sprite(cryos_fog, spr_smoke_part, 0, 0, 0);
+part_type_size(cryos_fog,0.40,0.70,0,0);
+part_type_scale(cryos_fog,2,2.50);
+part_type_color1(cryos_fog,12632256);
+part_type_alpha2(cryos_fog,0.20,0);
+part_type_speed(cryos_fog,1,4,-0.01,0);
+part_type_direction(cryos_fog,0,359,0,0);
+part_type_gravity(cryos_fog,0,270);
+part_type_orientation(cryos_fog,0,359,0,0,1);
+part_type_blend(cryos_fog,1);
+part_type_life(cryos_fog,60,60);
+
+
 //Cryos clouds
 cryos_cloud[0] = part_type_create();
 part_type_sprite(cryos_cloud[0], spr_smoke_part, 0, 0, 0);

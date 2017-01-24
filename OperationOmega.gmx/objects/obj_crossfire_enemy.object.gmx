@@ -31,7 +31,7 @@ alarm[0] = 240;
 alarm[1] = 1;
 
 //Set attack variable values
-attack_damage = 5;          //Set the damage for the attack
+attack_damage = 3;          //Set the damage for the attack
 attack_burst = 0;           //Set the bonus damage of the attack that ignores shield
 attack_threshold = 0;       //Set the threshold reduction per hit
 attack_shake = 0;           //Set the screen shake intensity of the attack
@@ -61,7 +61,7 @@ attack_name = "Helix";     //Set the name of the attack
             <string>//create an effect
 if(hit = 1)
 {
-    endeffect = instance_create(x, y, obj_generic_hit);
+    endeffect = instance_create(x, y, obj_helix_hit);
     endeffect.mid = mid;
     endeffect.direction = direction-180;
 }
@@ -100,17 +100,19 @@ else
 if(global.enemycolor = c_red)
 {
     sprite_index = spr_helix;
+    image_index = 0;    
     if(side = 2)
-        image_speed = -1;
+        image_index = 17;
 }
 else
 {
     sprite_index = spr_bluehelix;
+    image_index = 0;    
     if(side = 2)
-        image_speed = -1;
+        image_index = 17;
 }
 
-image_index = 0;
+
 </string>
           </argument>
         </arguments>

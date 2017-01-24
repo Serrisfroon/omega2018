@@ -56,14 +56,71 @@ part_type_orientation(circle_light,0,0,0,0,1);
 part_type_blend(circle_light,1);
 part_type_life(circle_light,25,40);
 
+
+//Helix circles
+helix_circle[0] = part_type_create();
+part_type_sprite(helix_circle[0], spr_circle_part, 0, 0, 0);
+part_type_size(helix_circle[0],0.05,0.25,0,0);
+part_type_scale(helix_circle[0],1.50,1.50);
+part_type_color2(helix_circle[0],8421631,255);
+part_type_alpha2(helix_circle[0],1,0);
+part_type_speed(helix_circle[0],1,4,0,0);
+part_type_direction(helix_circle[0],0,359,0,0);
+part_type_gravity(helix_circle[0],0,270);
+part_type_orientation(helix_circle[0],0,0,0,0,1);
+part_type_blend(helix_circle[0],1);
+part_type_life(helix_circle[0],15,25);
+
+helix_circle[1] = part_type_create();
+part_type_sprite(helix_circle[1], spr_circle_part, 0, 0, 0);
+part_type_size(helix_circle[1],0.05,0.25,0,0);
+part_type_scale(helix_circle[1],1.50,1.50);
+part_type_color2(helix_circle[1],16744576,16711680);
+part_type_alpha2(helix_circle[1],1,0);
+part_type_speed(helix_circle[1],1,4,0,0);
+part_type_direction(helix_circle[1],0,359,0,0);
+part_type_gravity(helix_circle[1],0,270);
+part_type_orientation(helix_circle[1],0,0,0,0,1);
+part_type_blend(helix_circle[1],1);
+part_type_life(helix_circle[1],15,25);
+
+
+//Helix smoke
+helix_smoke[0] = part_type_create();
+part_type_sprite(helix_smoke[0], spr_smoke_part, 0, 0, 0);
+part_type_size(helix_smoke[0],0.05,0.25,0,0);
+part_type_scale(helix_smoke[0],1.50,1.50);
+part_type_color2(helix_smoke[0],8421631,255);
+part_type_alpha2(helix_smoke[0],1,0);
+part_type_speed(helix_smoke[0],1,3,0,0);
+part_type_direction(helix_smoke[0],0,359,0,0);
+part_type_gravity(helix_smoke[0],0,270);
+part_type_orientation(helix_smoke[0],0,0,0,0,1);
+part_type_blend(helix_smoke[0],1);
+part_type_life(helix_smoke[0],15,25);
+
+helix_smoke[1] = part_type_create();
+part_type_sprite(helix_smoke[1], spr_smoke_part, 0, 0, 0);
+part_type_size(helix_smoke[1],0.05,0.25,0,0);
+part_type_scale(helix_smoke[1],1.50,1.50);
+part_type_color2(helix_smoke[1],16744576,16711680);
+part_type_alpha2(helix_smoke[1],1,0);
+part_type_speed(helix_smoke[1],1,3,0,0);
+part_type_direction(helix_smoke[1],0,359,0,0);
+part_type_gravity(helix_smoke[1],0,270);
+part_type_orientation(helix_smoke[1],0,0,0,0,1);
+part_type_blend(helix_smoke[1],1);
+part_type_life(helix_smoke[1],15,25);
+
+
 //Cryos stasis
 cryos_stasis[0] = part_type_create();
 part_type_shape(cryos_stasis[0],pt_shape_snow);
-part_type_size(cryos_stasis[0],0.20,0.40,0,0);
-part_type_scale(cryos_stasis[0],1,1);
+part_type_size(cryos_stasis[0],0.10,0.430,0,0);
+part_type_scale(cryos_stasis[0],0.8,0.8);
 part_type_color3(cryos_stasis[0],16777215,8421631,255);
 part_type_alpha3(cryos_stasis[0],0.30,1,0);
-part_type_speed(cryos_stasis[0],1,3,-0.02,0);
+part_type_speed(cryos_stasis[0],1,3,-0.015,0);
 part_type_direction(cryos_stasis[0],0,359,0,0);
 part_type_gravity(cryos_stasis[0],0,270);
 part_type_orientation(cryos_stasis[0],0,359,1,0,1);
@@ -72,11 +129,11 @@ part_type_life(cryos_stasis[0],20,30);
 
 cryos_stasis[1] = part_type_create();
 part_type_shape(cryos_stasis[1],pt_shape_snow);
-part_type_size(cryos_stasis[1],0.20,0.40,0,0);
-part_type_scale(cryos_stasis[1],1,1);
+part_type_size(cryos_stasis[1],0.10,0.430,0,0);
+part_type_scale(cryos_stasis[1],0.8,0.8);
 part_type_color3(cryos_stasis[1],16777215,16744576,16711680);
 part_type_alpha3(cryos_stasis[1],0.30,1,0);
-part_type_speed(cryos_stasis[1],1,3,-0.02,0);
+part_type_speed(cryos_stasis[1],1,3,-0.015,0);
 part_type_direction(cryos_stasis[1],0,359,0,0);
 part_type_gravity(cryos_stasis[1],0,270);
 part_type_orientation(cryos_stasis[1],0,359,1,0,1);
@@ -562,18 +619,31 @@ part_type_life(energyhit[1],30,40);
 
 
 //Electric sparks
-elecspark = part_type_create();
-part_type_sprite(elecspark, spr_spark_part, 0, 0, 0);
-part_type_size(elecspark, 0.10, 0.43, 0, 0);
-part_type_scale(elecspark, 1, 1);
-part_type_color3(elecspark, 16777215, 16776960, 16776960);
-part_type_alpha3(elecspark, 0.93, 0.70, 0.09);
-part_type_speed(elecspark, 2.44, 3.59, 0, 0);
-part_type_direction(elecspark, 0, 359, -1, 0);
-part_type_gravity(elecspark, 0, 270);
-part_type_orientation(elecspark, 0, 0, 6, 0, 1);
-part_type_blend(elecspark, 1);
-part_type_life(elecspark, 20, 40);
+elecspark[0] = part_type_create();
+part_type_sprite(elecspark[0], spr_spark_part, 0, 0, 0);
+part_type_size(elecspark[0], 0.10, 0.43, 0, 0);
+part_type_scale(elecspark[0], 1, 1);
+part_type_color2(elecspark[0], 8421631,255);
+part_type_alpha3(elecspark[0], 0.93, 0.70, 0.09);
+part_type_speed(elecspark[0], 2.44, 3.59, 0, 0);
+part_type_direction(elecspark[0], 0, 359, -1, 0);
+part_type_gravity(elecspark[0], 0, 270);
+part_type_orientation(elecspark[0], 0, 0, 6, 0, 1);
+part_type_blend(elecspark[0], 1);
+part_type_life(elecspark[0], 20, 40);
+
+elecspark[1] = part_type_create();
+part_type_sprite(elecspark[1], spr_spark_part, 0, 0, 0);
+part_type_size(elecspark[1], 0.10, 0.43, 0, 0);
+part_type_scale(elecspark[1], 1, 1);
+part_type_color2(elecspark[1], 116744576,16711680);
+part_type_alpha3(elecspark[1], 0.93, 0.70, 0.09);
+part_type_speed(elecspark[1], 2.44, 3.59, 0, 0);
+part_type_direction(elecspark[1], 0, 359, -1, 0);
+part_type_gravity(elecspark[1], 0, 270);
+part_type_orientation(elecspark[1], 0, 0, 6, 0, 1);
+part_type_blend(elecspark[1], 1);
+part_type_life(elecspark[1], 20, 40);
 
 
 //Stasis field sparks
