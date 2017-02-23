@@ -96,7 +96,7 @@ if(distance_to_enemy &lt; 1200)
         newlockon.direction = obj_mod.cursor_rotation[2];
     }
     
-    obj_mod.distance_to_target = floor(distance_to_enemy/44);         //Send the distance to the target to obj_mod
+    obj_mod.distance_to_target = floor(distance_to_enemy/45);         //Send the distance to the target to obj_mod
 
     
     //Calculate the difference in x and y values between the target and the player
@@ -107,7 +107,7 @@ if(distance_to_enemy &lt; 1200)
     var camera_x = player_x + ship_difference_x/2;
     var camera_y = player_y + ship_difference_y/2;
     
-    var camera_change = min(view_wview[0] - abs(ship_difference_x) - 410, view_hview[0] - abs(ship_difference_y) - 410);
+    var camera_change = min(view_wview[0] - abs(ship_difference_x) - 430, view_hview[0] - abs(ship_difference_y) - 430);
     view_wview[0] -= camera_change/20;
     view_hview[0] -= camera_change/32;
     if(view_wview[0] &lt; 1200)

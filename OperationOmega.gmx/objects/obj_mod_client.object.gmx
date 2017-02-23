@@ -56,13 +56,12 @@ switch(update_packet_timer)
             //Check if you are currently firing your primary weapon
             if(obj_player.multiplayer_primary_fire_flag = true)
             {
-                //Lower the time until the next update
-                //update_packet_timer = 3;
-                
                 //Send your RNG seed and firing direction
                 crush(global.primaryRNG[mid], 65536, 0);
                 crush(round(obj_player.primary_direction), 360, 0);
                 crush(round(obj_player.primary_overheat*20), 200, 0);                
+                if(obj_player.current_primary = 3 || obj_player.current_primary = 9)
+                    crush(obj_player.primary_stop_distance, 200, 0); 
             }
         }      
         //Send the update packet to the host
@@ -193,6 +192,8 @@ while(true)
                         holdvar = uncrush(65536, 0);
                         holdvar = uncrush(360, 0);
                         holdvar = uncrush(200, 0);
+                        if(global.playership[i].current_primary = 3 || global.playership[i].current_primary = 9)
+                            holdvar = uncrush(200, 0);
                     }
                     continue;
                 }   
@@ -220,6 +221,8 @@ while(true)
                     global.primaryRNG[global.mymid] = uncrush(65536, 0);
                     global.playership[i].newdir = uncrush(360, 0)/10;
                     global.playership[i].primary_overheat = uncrush(200, 0)/20;
+                    if(global.playership[i].current_primary = 3 || global.playership[i].current_primary = 9)
+                        global.playership[i].primary_stop_distance = uncrush(200, 0);
                 }
             }
         break;
@@ -397,6 +400,9 @@ while(true)
             dummy_ship.facedir = readshort(0);
             dummy_ship.speed = readshort(0);
             dummy_ship.primary_direction = readshort(0);
+            dummy_ship.give_target_x = readshort(0);
+            dummy_ship.give_target_y = readshort(0);
+            
             with(dummy_ship)
                 event_perform(ev_other, ev_user3);
         break;

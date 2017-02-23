@@ -25,6 +25,28 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>//Initialize multiplayer aspects of the object
+multiplayer_primary_fire_flag = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>//Initialize primary variables
 primary_cooldown = 0;       //Hold the time(in frames) until the next primary shot
 primary_overheat = 1;       //Holds the cooldown multiplier to modify the cooldown to a lower value
@@ -43,6 +65,7 @@ switch(current_primary)
         primary_cooldown_base = 7;
         primary_charge_max = 100;
         primary_charge_shot = obj_needle_charge_attack;
+        primary_arc = 60;
     break;
     case 2:
         primary_name = "Sonic";
@@ -50,13 +73,16 @@ switch(current_primary)
         primary_cooldown_base = 4;
         primary_charge_max = 100;
         primary_charge_shot = obj_sonic_charge_attack;
+        primary_arc = 60;
     break;
     case 3:
-        primary_name = "Wave";
+        primary_name = "Nova";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 15;
+        primary_cooldown_base = 24;
         primary_charge_max = 100;
-        primary_charge_shot = obj_wave_charge;
+        primary_charge_shot = obj_nova_charge_attack;
+        primary_stop_distance = 0;
+        primary_arc = 60;
     break;
     case 4:
         primary_name = "Seeker";
@@ -64,6 +90,7 @@ switch(current_primary)
         primary_cooldown_base = 10;
         primary_charge_max = 100;
         primary_charge_shot = obj_seeker_charge_attack;
+        primary_arc = 60;
     break;
     case 5:
         primary_name = "Cryos";
@@ -71,6 +98,7 @@ switch(current_primary)
         primary_cooldown_base = 11;
         primary_charge_max = 100;
         primary_charge_shot = obj_cryos_charge_attack;
+        primary_arc = 60;
     break;
     case 6:
         primary_name = "Helix";
@@ -78,34 +106,40 @@ switch(current_primary)
         primary_cooldown_base = 9;
         primary_charge_max = 100;
         primary_charge_shot = obj_helix_charge_attack;
+        primary_arc = 60;
     break;
     case 7:
         primary_name = "Siphon";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 12;
         primary_charge_max = 100;
-        primary_charge_shot = obj_helix_charge_attack;
+        primary_charge_shot = obj_siphon_charge_attack;
+        primary_arc = 60;
     break;
     case 8:
         primary_name = "Double";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 10;
+        primary_cooldown_base = 19;
         primary_charge_max = 100;
-        primary_charge_shot = obj_double_charge;
+        primary_charge_shot = obj_double_charge_attack;
+        primary_arc = 360;
     break;
     case 9:
-        primary_name = "Pierce";
+        primary_name = "Branch";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 7;
+        primary_cooldown_base = 13;
         primary_charge_max = 100;
-        primary_charge_shot = obj_pierce_charge;
+        primary_charge_shot = obj_branch_charge_attack;
+        primary_stop_distance = 0;
+        primary_arc = 60;
     break;
     case 10:
         primary_name = "Spread";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 20;
+        primary_cooldown_base = 23;
         primary_charge_max = 100;
-        primary_charge_shot = obj_spread_charge;
+        primary_charge_shot = obj_spread_charge_attack;
+        primary_arc = 60;
     break;
 }
 
@@ -256,28 +290,6 @@ thisturn = 0;
 //Set the mask sprite
 mask_index = spr_shipmask;
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Initialize multiplayer aspects of the object
-multiplayer_primary_fire_flag = false;
 </string>
           </argument>
         </arguments>
@@ -601,15 +613,20 @@ if(smoke &lt; 6)
 {
     //Select a color
     if(smoke &gt; 3) 
-        effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_gray);
+    {
+        part_type_colour1(obj_partsystem_top.smoke_particle, c_gray);
+        part_particles_create(obj_partsystem_top.system, x-6+random(12), y-6+random(12), obj_partsystem_top.smoke_particle, 3);
+    }
     else
         switch(irandom(5))
         {
             case 1:
-                effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_gray);
+                part_type_colour1(obj_partsystem_top.smoke_particle, c_gray);
+                part_particles_create(obj_partsystem_top.system, x-6+random(12), y-6+random(12), obj_partsystem_top.smoke_particle, 3);
             break;
             case 2:
-                effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_dkgray);
+                part_type_colour1(obj_partsystem_top.smoke_particle, c_dkgray);
+                part_particles_create(obj_partsystem_top.system, x-6+random(12), y-6+random(12), obj_partsystem_top.smoke_particle, 3);
             break;
             default:
                 //Make a random color somewhere between pure red and pure yellow
@@ -842,6 +859,9 @@ wall_collision();
 charge_shot.give_direction = primary_direction;
 charge_shot.give_speed = speed/2;
 charge_shot.mid = mid;
+charge_shot.target_x = give_target_x;
+charge_shot.target_y = give_target_y;
+
 primary_cooldown = 30;
 
 //Do not perform any network communication if you are not controlling this object
@@ -859,6 +879,8 @@ writeshort(y, 0);                                       //Send the mid of the ta
 writeshort(facedir, 0);                                       //Send the mid of the targeted object. 9 means no target.
 writeshort(speed, 0);                                       //Send the mid of the targeted object. 9 means no target.
 writeshort(primary_direction, 0);                           //Send thmid of the targeted object. 9 means no target.e 
+writeshort(give_target_x, 0);
+writeshort(give_target_y, 0);
 
 //Send to everyone if host
 if(global.master = true)
@@ -1136,7 +1158,15 @@ if(mid = global.mymid)
     var particle_angle = 40-speed*3;
     part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-particle_angle, primary_direction+particle_angle, 0, 0);
     
-    part_particles_create(obj_partsystem.system, x+lengthdir_x(9, primary_direction), y+lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 10);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(9, primary_direction), y+lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 8);
+    if(current_primary = 8)
+    {
+        part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], 1, 4, 0, 0);
+        particle_angle = 20;
+        part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-particle_angle, primary_direction+particle_angle, 0, 0);
+        part_particles_create(obj_partsystem.system, x-lengthdir_x(9, primary_direction), y-lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 8);    
+    }
+    
     bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_name, primary_direction, mid, 0);
 }
 </string>

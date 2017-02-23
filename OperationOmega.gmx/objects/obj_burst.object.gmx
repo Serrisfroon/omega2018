@@ -67,12 +67,19 @@ attack_name = "Burst";      //Set the name of the attack
             <kind>1</kind>
             <string>if(global.allycolor = c_red)
 {
-    effect_create_above(ef_ring, x, y, 1, c_red);
+    part_type_colour2(obj_partsystem_top.ring_particle, 8421631,255);
+    part_type_size(obj_partsystem_top.ring_particle, 0.80, 1.20, 0.80, 0);  
+    part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.ring_particle, 3);
+    part_type_size(obj_partsystem_top.ring_particle,0.80,1.20,0.50,0); 
 }
 else
 {
-    effect_create_above(ef_ring, x, y, 1, c_blue);
+    part_type_colour2(obj_partsystem_top.ring_particle, 816760767,16711680);
+    part_type_size(obj_partsystem_top.ring_particle, 0.80, 1.20, 0.80, 0);  
+    part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.ring_particle, 3);
+    part_type_size(obj_partsystem_top.ring_particle,0.80,1.20,0.50,0); 
 }
+
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.burstsplit[global.team[mid]-1], 30);
 </string>
           </argument>

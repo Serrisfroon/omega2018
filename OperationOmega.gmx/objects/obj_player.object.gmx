@@ -369,7 +369,7 @@ if(shield &gt; 0)
 //Make the hit ship flash
 hurt = instance_create(0, 0, obj_ship_flash);
 hurt.hurting = id;    
-hurt.ship_image = global.playership[mid];
+hurt.ship_image = global.selected_ship[mid]-1;
 
 //Destroy the attack
 with(other) instance_destroy();
@@ -514,7 +514,7 @@ if(shield &gt; 0)
 //Make the hit ship flash
 hurt = instance_create(0, 0, obj_ship_flash);
 hurt.hurting = id;    
-hurt.ship_image = global.playership[mid];
+hurt.ship_image = global.selected_ship[mid]-1;
 
 //Update smoking
 if(armor &lt;= (armor_maximum*100)/60)
@@ -856,11 +856,16 @@ if(ship_status_hacked = true || global.activated[mid] = 2)
 obj_mod.chat_open = false;
 
 //Set the direction to aim at
-primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), 60)/5)*5;  
+primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), primary_arc)/5)*5;  
+primary_stop_distance = round(point_distance(x, y, mouse_x, mouse_y)/13);
 
 //Perform the primary firing event
 if(primary_charge &gt;= primary_charge_max)
+{
+    give_target_x = mouse_x;
+    give_target_y = mouse_y;
     event_perform(ev_other, ev_user3);
+}
 else
     event_perform(ev_other, ev_user1);
     

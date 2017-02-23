@@ -131,7 +131,7 @@ if(shield > 0)
 //Make the hit ship flash
 hurt = instance_create(0, 0, obj_ship_flash);
 hurt.hurting = id;    
-hurt.ship_image = global.playership[mid];
+hurt.ship_image = global.selected_ship[mid]-1;
 
 //Create burning trail effect
 if(pene > 0)

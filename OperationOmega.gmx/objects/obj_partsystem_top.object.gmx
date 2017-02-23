@@ -26,13 +26,125 @@
           <argument>
             <kind>1</kind>
             <string>system = part_system_create();
+//Branch Trail
+branch_charge_trail[0] = part_type_create();
+part_type_sprite(branch_charge_trail[0],spr_branch_charge_0,0,0,0);
+part_type_size(branch_charge_trail[0],1,1,0,0);
+part_type_scale(branch_charge_trail[0],1,1);
+part_type_color1(branch_charge_trail[0],16777215);
+part_type_alpha2(branch_charge_trail[0],1,0);
+part_type_speed(branch_charge_trail[0],0,0,0,0);
+part_type_direction(branch_charge_trail[0],0,359,0,0);
+part_type_gravity(branch_charge_trail[0],0,270);
+part_type_orientation(branch_charge_trail[0],0,0,0,0,1);
+part_type_blend(branch_charge_trail[0],1);
+part_type_life(branch_charge_trail[0],15,15);
+
+branch_charge_trail[1] = part_type_create();
+part_type_sprite(branch_charge_trail[1],spr_branch_charge_1,0,0,0);
+part_type_size(branch_charge_trail[1],1,1,0,0);
+part_type_scale(branch_charge_trail[1],1,1);
+part_type_color1(branch_charge_trail[1],16777215);
+part_type_alpha2(branch_charge_trail[1],1,0);
+part_type_speed(branch_charge_trail[1],0,0,0,0);
+part_type_direction(branch_charge_trail[1],0,359,0,0);
+part_type_gravity(branch_charge_trail[1],0,270);
+part_type_orientation(branch_charge_trail[1],0,0,0,0,1);
+part_type_blend(branch_charge_trail[1],1);
+part_type_life(branch_charge_trail[1],15,15);
 
 
+
+//Smoke particle
+smoke_particle = part_type_create();
+part_type_sprite(smoke_particle, spr_smoke_part, 0, 0, 0);
+part_type_size(smoke_particle, 0.10, 0.20, 0.01, 0);
+part_type_scale(smoke_particle, 1, 1);
+part_type_color1(smoke_particle, 3513087);
+part_type_alpha2(smoke_particle, 1, 0.30);
+part_type_speed(smoke_particle, 0, 0, 0, 0);
+part_type_direction(smoke_particle, 0, 359, 0, 0);
+part_type_gravity(smoke_particle, 0, 270);
+part_type_orientation(smoke_particle, 0, 359, 0, 0, 1);
+part_type_blend(smoke_particle, 1);
+part_type_life(smoke_particle, 10, 20);
+
+
+//Spark effect
+spark_particle = part_type_create();
+part_type_sprite(spark_particle, spr_spark_part, 0, 0, 0);
+part_type_size(spark_particle,0.80,1.20,-0.07,0);
+part_type_scale(spark_particle,0.80,0.80);
+part_type_color2(spark_particle,8421631,255);
+part_type_alpha1(spark_particle,1);
+part_type_speed(spark_particle,0,0,0,0);
+part_type_direction(spark_particle,0,359,0,0);
+part_type_gravity(spark_particle,0,270);
+part_type_orientation(spark_particle,0,359,3,0,1);
+part_type_blend(spark_particle,1);
+part_type_life(spark_particle,25,40);
+
+
+//Flare effect
+flare_particle = part_type_create();
+part_type_shape(flare_particle,pt_shape_flare);
+part_type_size(flare_particle,0.80,1.20,-0.04,0);
+part_type_scale(flare_particle,0.80,0.80);
+part_type_color2(flare_particle,8421631,255);
+part_type_alpha1(flare_particle,1);
+part_type_speed(flare_particle,0,0,0,0);
+part_type_direction(flare_particle,0,359,0,0);
+part_type_gravity(flare_particle,0,270);
+part_type_orientation(flare_particle,0,359,0,0,1);
+part_type_blend(flare_particle,1);
+part_type_life(flare_particle,25,40);
+
+
+//Ring effect
+ring_particle = part_type_create();
+part_type_shape(ring_particle,pt_shape_ring);
+part_type_size(ring_particle,0.80,1.20,0.50,0);
+part_type_scale(ring_particle,0.10,0.10);
+part_type_color2(ring_particle,8421631,255);
+part_type_alpha2(ring_particle,1,0);
+part_type_speed(ring_particle,0,0,0,0);
+part_type_direction(ring_particle,0,359,0,0);
+part_type_gravity(ring_particle,0,270);
+part_type_orientation(ring_particle,0,359,0,0,1);
+part_type_blend(ring_particle,1);
+part_type_life(ring_particle,25,40);
+
+//Nova Burst
+nova_burst[0] = part_type_create();
+part_type_sprite(nova_burst[0],spr_circle_part, 0, 0, 0);
+part_type_size(nova_burst[0],0.50,0.60,-0.03,0);
+part_type_scale(nova_burst[0],1.20,1.20);
+part_type_color2(nova_burst[0],8421631,255);
+part_type_alpha2(nova_burst[0],1,0);
+part_type_speed(nova_burst[0],1,3,-0.05,0);
+part_type_direction(nova_burst[0],0,359,0,0);
+part_type_gravity(nova_burst[0],0,270);
+part_type_orientation(nova_burst[0],0,0,0,0,1);
+part_type_blend(nova_burst[0],1);
+part_type_life(nova_burst[0],15,20);
+
+nova_burst[1] = part_type_create();
+part_type_sprite(nova_burst[1],spr_circle_part, 0, 0, 0);
+part_type_size(nova_burst[1],0.50,0.60,-0.03,0);
+part_type_scale(nova_burst[1],1.20,1.20);
+part_type_color2(nova_burst[1],816760767,16711680);
+part_type_alpha2(nova_burst[1],1,0);
+part_type_speed(nova_burst[1],1,3,-0.05,0);
+part_type_direction(nova_burst[1],0,359,0,0);
+part_type_gravity(nova_burst[1],0,270);
+part_type_orientation(nova_burst[1],0,0,0,0,1);
+part_type_blend(nova_burst[1],1);
+part_type_life(nova_burst[1],15,20);
 
 
 //Siphon Charge Orb
 siphon_charge[0] = part_type_create();
-part_type_shape(siphon_charge[0],pt_shape_spark);
+part_type_sprite(siphon_charge[0],spr_spark_part, 0, 0, 0);
 part_type_size(siphon_charge[0],0.20,0.35,-0.01,0);
 part_type_scale(siphon_charge[0],3,3);
 part_type_color2(siphon_charge[0],8421631,255);
@@ -45,7 +157,7 @@ part_type_blend(siphon_charge[0],1);
 part_type_life(siphon_charge[0],5,15);
 
 siphon_charge[1] = part_type_create();
-part_type_shape(siphon_charge[1],pt_shape_spark);
+part_type_sprite(siphon_charge[1],spr_spark_part, 0, 0, 0);
 part_type_size(siphon_charge[1],0.20,0.35,-0.01,0);
 part_type_scale(siphon_charge[1],3,3);
 part_type_color2(siphon_charge[1],816760767,16711680);
@@ -159,7 +271,7 @@ part_type_life(cryos_cloud[1],10,35);
 
 //Cryos freeze
 cryos_freeze = part_type_create();
-part_type_shape(cryos_freeze,pt_shape_snow);
+part_type_sprite(cryos_freeze, spr_snow_part, 0, 0, 0);
 part_type_size(cryos_freeze,0.20,0.40,-0.01,0);
 part_type_scale(cryos_freeze,1.70,1.70);
 part_type_color3(cryos_freeze,16777088,16744448,16777215);
@@ -227,7 +339,7 @@ part_type_life(needle_charge_burst[1],30,40);
 
 //Needle hit
 needle_ring[0] = part_type_create();
-part_type_shape(needle_ring[0],pt_shape_ring);
+part_type_sprite(needle_ring[0],spr_ring_part, 0, 0, 0);
 part_type_size(needle_ring[0],0.08,0.20,0.05,0);
 part_type_scale(needle_ring[0],1,1);
 part_type_color1(needle_ring[0],5987327);
@@ -240,7 +352,7 @@ part_type_blend(needle_ring[0],1);
 part_type_life(needle_ring[0],10,15);
 
 needle_ring[1] = part_type_create();
-part_type_shape(needle_ring[1],pt_shape_ring);
+part_type_sprite(needle_ring[1],spr_ring_part, 0, 0, 0);
 part_type_size(needle_ring[1],0.08,0.20,0.05,0);
 part_type_scale(needle_ring[1],1,1);
 part_type_color1(needle_ring[1],16735067);
@@ -254,7 +366,7 @@ part_type_life(needle_ring[1],10,15);
 
 
 needle_slash[0] = part_type_create();
-part_type_shape(needle_slash[0],pt_shape_flare);
+part_type_sprite(needle_slash[0],spr_flare_part, 0, 0, 0);
 part_type_size(needle_slash[0],0.20,0.30,0.06,0);
 part_type_scale(needle_slash[0],3,0.30);
 part_type_color3(needle_slash[0],16777215,12303359,255);
@@ -267,7 +379,7 @@ part_type_blend(needle_slash[0],1);
 part_type_life(needle_slash[0],10,15);
 
 needle_slash[1] = part_type_create();
-part_type_shape(needle_slash[1],pt_shape_flare);
+part_type_sprite(needle_slash[1],spr_flare_part, 0, 0, 0);
 part_type_size(needle_slash[1],0.20,0.30,0.06,0);
 part_type_scale(needle_slash[1],3,0.30);
 part_type_color3(needle_slash[1],16777215,16759739,16711680);
@@ -282,7 +394,7 @@ part_type_life(needle_slash[1],10,15);
 
 //Seeker Flare
 seeker_flare[0] = part_type_create();
-part_type_shape(seeker_flare[0],pt_shape_flare);
+part_type_sprite(seeker_flare[0],spr_flare_part, 0, 0, 0);
 part_type_size(seeker_flare[0],0.20,0.50,0.10,0);
 part_type_scale(seeker_flare[0],1,1);
 part_type_color2(seeker_flare[0],8421631,255);
@@ -295,7 +407,7 @@ part_type_blend(seeker_flare[0],1);
 part_type_life(seeker_flare[0],5,10);
 
 seeker_flare[1] = part_type_create();
-part_type_shape(seeker_flare[1],pt_shape_flare);
+part_type_sprite(seeker_flare[1],spr_flare_part, 0, 0, 0);
 part_type_size(seeker_flare[1],0.20,0.50,0.10,0);
 part_type_scale(seeker_flare[1],1,1);
 part_type_color2(seeker_flare[1],16760767,16711680);
@@ -310,7 +422,7 @@ part_type_life(seeker_flare[1],5,10);
 
 //Seeker burst
 seeker_burst[0] = part_type_create();
-part_type_shape(seeker_burst[0],pt_shape_sphere);
+part_type_sprite(seeker_burst[0],spr_sphere_part, 0, 0, 0);
 part_type_size(seeker_burst[0],0.10,0.25,0,0);
 part_type_scale(seeker_burst[0],2,1);
 part_type_color1(seeker_burst[0],3487231);
@@ -323,7 +435,7 @@ part_type_blend(seeker_burst[0],1);
 part_type_life(seeker_burst[0],10,20);
 
 seeker_burst[1] = part_type_create();
-part_type_shape(seeker_burst[1],pt_shape_sphere);
+part_type_sprite(seeker_burst[1],spr_sphere_part, 0, 0, 0);
 part_type_size(seeker_burst[1],0.10,0.25,0,0);
 part_type_scale(seeker_burst[1],2,1);
 part_type_color1(seeker_burst[1],16711680);
@@ -337,7 +449,7 @@ part_type_life(seeker_burst[1],10,20);
 
 
 seeker_burst_second[0] = part_type_create();
-part_type_shape(seeker_burst_second[0],pt_shape_sphere);
+part_type_sprite(seeker_burst_second[0],spr_sphere_part, 0, 0, 0);
 part_type_size(seeker_burst_second[0],0.10,0.25,-0.01,0);
 part_type_scale(seeker_burst_second[0],2,1);
 part_type_color1(seeker_burst_second[0],3487231);
@@ -350,7 +462,7 @@ part_type_blend(seeker_burst_second[0],1);
 part_type_life(seeker_burst_second[0],10,25);
 
 seeker_burst_second[1] = part_type_create();
-part_type_shape(seeker_burst_second[1],pt_shape_sphere);
+part_type_sprite(seeker_burst_second[1],spr_sphere_part, 0, 0, 0);
 part_type_size(seeker_burst_second[1],0.10,0.25,-0.01,0);
 part_type_scale(seeker_burst_second[1],2,1);
 part_type_color1(seeker_burst_second[1],16711680);
@@ -403,9 +515,40 @@ part_type_life(ship_burn, 10, 20);
           <argument>
             <kind>1</kind>
             <string>part_system_destroy(system);
+part_type_destroy(nova_burst[0]);
+part_type_destroy(nova_burst[1]);
+part_type_destroy(siphon_charge[0]);
+part_type_destroy(siphon_charge[1]);
+part_type_destroy(helix_charge_spawn[0]);
+part_type_destroy(helix_charge_spawn[1]);
+part_type_destroy(helix_charge_trail[0]);
+part_type_destroy(helix_charge_trail[1]);
+part_type_destroy(cryos_fog);
+part_type_destroy(cryos_cloud[0]);
+part_type_destroy(cryos_cloud[1]);
+part_type_destroy(cryos_freeze);
 part_type_destroy(needle_charge_wave[0]);
 part_type_destroy(needle_charge_wave[1]);
+part_type_destroy(needle_charge_burst[0]);
+part_type_destroy(needle_charge_burst[1]);
+part_type_destroy(needle_ring[0]);
+part_type_destroy(needle_ring[1]);
+part_type_destroy(needle_slash[0]);
+part_type_destroy(needle_slash[1]);
+part_type_destroy(seeker_flare[0]);
+part_type_destroy(seeker_flare[1]);
+part_type_destroy(seeker_burst[0]);
+part_type_destroy(seeker_burst[1]);
+part_type_destroy(seeker_burst_second[0]);
+part_type_destroy(seeker_burst_second[1]);
 part_type_destroy(ship_burn);
+part_type_destroy(smoke_particle);
+part_type_destroy(spark_particle);
+part_type_destroy(flare_particle);
+part_type_destroy(ring_particle);
+part_type_destroy(branch_charge_trail[0]);
+part_type_destroy(branch_charge_trail[1]);
+
 
 </string>
           </argument>

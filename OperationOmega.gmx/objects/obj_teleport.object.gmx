@@ -35,7 +35,7 @@ direction = point_direction(x, y, room_width/2, room_height/2);
 image_angle = direction;
 
 //Set the time until the animation begins
-alarm[0] = 30;
+alarm[0] = 70;
 go = 0;
 
 //Wait a step until changing image
@@ -338,7 +338,8 @@ part_particles_create(system, x, y, primarypart, 30);
           <argument>
             <kind>1</kind>
             <string>//Create a ring effect, go to the next step, set the time until the teleport is finished
-effect_create_below(ef_ring, x, y, 1, c_navy);
+part_type_colour1(obj_partsystem.ring_particle, c_navy);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.ring_particle, 3);
 go = 1;
 alarm[1] = 20;
 </string>
@@ -406,7 +407,10 @@ switch(go)
       //Create a spark when the wormhole disappears
       if(yscale = 0)
       {
-       effect_create_below(ef_spark, xstart, ystart, 1, c_white);
+        part_type_colour1(obj_partsystem.spark_particle, c_white);
+        part_type_scale(obj_partsystem.spark_particle, 2, 2);
+        part_particles_create(obj_partsystem.system, xstart, ystart, obj_partsystem.spark_particle, 5);
+        part_type_scale(obj_partsystem.spark_particle, 1, 1);
        go = 6;
       }
  break;

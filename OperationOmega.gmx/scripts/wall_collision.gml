@@ -48,8 +48,7 @@ if(obj_bulletcontrol.wallposition[floor((xprevious+hspeed)/32), floor(yprevious/
     }
 
     //Create smoke at the collision
-    smokecolor = make_color_rgb(255, random(255), 0);
-    effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, smokecolor);
+    create_burning(x-6+random(12), y-6+random(12))
     
     //Update smoking
     smoke = floor(armor/(armor_maximum/10));
@@ -115,8 +114,7 @@ else
                     instance_destroy();
         }
         //Create smoke at the collision
-        smokecolor = make_color_rgb(255, random(255), 0);
-        effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, smokecolor);
+        create_burning(x-6+random(12), y-6+random(12));
         
         //Update smoking
         smoke = floor(armor/(armor_maximum/10));

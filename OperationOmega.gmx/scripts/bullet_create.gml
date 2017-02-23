@@ -54,19 +54,32 @@ switch(type)
          is_primary = true;
          sfx_play(snd_sonic, lolx, loly);
     break;
-    case "Wave":
-         name = "Wave";
-         sprite = spr_wave;
-         life = 240;
-         after = obj_generic_hit;
-         dmg = 16;
-         mask = 23;
-         lolspeed = 7.5+speed/2;
-         accuracy = 2;
-         half_accuracy = 1;      
+    case "Nova":
+         name = "Nova";
+         sprite = spr_nova;
+         life = primary_stop_distance;
+         after = obj_nova_hit;
+         dmg = 6;
+         mask = 24;
+         lolspeed = 13;
+         accuracy = 0;
+         half_accuracy = 0;      
          bullet_number = 1;
          is_primary = true;
          sfx_play(snd_wave, lolx, loly);
+    break;
+    case "Nova ":
+         name = "Nova ";
+         sprite = spr_nova;
+         life = 1200;
+         after = obj_nova_hit;
+         dmg = 6;
+         mask = 24;
+         lolspeed = 0;
+         accuracy = 0;
+         half_accuracy = 0;      
+         bullet_number = 1;
+         is_primary = true;
     break;
     case "Seeker":
            sfx_play(snd_flank, x, y);
@@ -108,26 +121,6 @@ switch(type)
            bullet.mid = current_bullet_mid;
            return -1;
            exit;
-    break;
-    case "Stasisb":
-         name = "Stasis";
-         sprite = spr_stasis;
-         is_primary = true;
-         if(argument5 = 0)
-          life = point_distance(x, y, mouse_x, mouse_y)/13;
-         else
-          life = argument5;
-         if(life > 150)
-          life = 150;
-         if(global.team[current_bullet_mid] = global.team[global.mymid])
-          after = obj_stasis_field;
-         else
-          after = obj_enemystasis_field;      
-         dmg = 1;
-         mask = 18;
-         lolspeed = 9.5+speed/2;
-         is_primary = true;
-         bullet_number = 1;
     break;
     case "Burst":
          name = "Burst";
@@ -205,29 +198,60 @@ switch(type)
          name = "Double";
          sprite = spr_double;
          life = 140;
-         after = obj_generic_hit;
-         dmg = 8;
+         after = obj_double_hit;
+         dmg = 4;
          mask = 16;
          lolspeed = 9.5+speed/2;
          accuracy = 0;
          half_accuracy = 0;
-         bullet_number = 2;
+         bullet_number = 8;
          is_primary = true;
+         loldir[1] += 1
          loldir[2] = loldir[1]-180;
+         loldir[3] = loldir[1]-2;
+         loldir[4] = loldir[1]-4;
+         loldir[5] = loldir[1]+2;
+         loldir[6] = loldir[2]-2;
+         loldir[7] = loldir[2]-4;
+         loldir[8] = loldir[2]+2;
     break;
-    case "Pierce":
-         name = "Pierce";
-         sprite = spr_pierce;
-         life = 200;
-         after = obj_generic_hit;
-         dmg = 3;
-         mask = 14;
-         lolspeed = 10.5+speed/2;
-         sfx_play(snd_pierce, lolx, loly);
-         accuracy = 8;
-         half_accuracy = 4;
-         is_primary = true;
+    case "Double Charge":
+         name = "Double";
+         sprite = spr_double_charge;
+         life = 140;
+         after = obj_double_charge_hit;
+         dmg = 7;
+         mask = 23;
+         lolspeed = argument5;
+         accuracy = 0;
+         half_accuracy = 0;
          bullet_number = 1;
+         is_primary = true;
+    break;
+    case "Branch":
+        if(blend = global.allycolor)
+            var primary_object = obj_branch;
+        else
+            var primary_object = obj_branch_enemy;
+        
+        //Create the shot and give it speed and facedir
+        bullet = instance_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_object);
+        bullet.mid = current_bullet_mid;
+        bullet.alarm[0] = primary_stop_distance;
+        bullet.direction = loldir[1];
+        return -1;
+        exit;
+    break;
+    case "Branch ":
+         name = "Branch";
+         sprite = spr_branch_off;
+         life = 200;
+         after = obj_branch_hit;
+         dmg = 3;
+         mask = 15;
+         lolspeed = 13;
+         bullet_number = 1;
+         sfx_play(snd_sonic, lolx, loly);
     break;
     case "Spread":
          name = "Spread";
@@ -379,7 +403,7 @@ for(bullet_loop = 1; bullet_loop <= bullet_number; bullet_loop++)
         //The bullet's death object. When a bullet has a collision, this object is created.
         obj_bulletcontrol.bulletend[bullet_check] = after;     
         //The bullet's multiplayer id. This will trace the bullet to the player who shot it.
-        obj_bulletcontrol.bulletmid[bullet_check] = mid;
+        obj_bulletcontrol.bulletmid[bullet_check] = current_bullet_mid;
         //The bullet's name. Stored for ease of use
         obj_bulletcontrol.bulletname[bullet_check] = name;
         //The bullet's mask radius. Used for collision checking with ships

@@ -113,7 +113,8 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>effect_create_below(ef_ring, x, y, 0, c_white);
+            <string>part_type_colour1(obj_partsystem.ring_particle, c_white);
+part_particles_create(obj_partsystem.system,  x, y, obj_partsystem.ring_particle, 3);
 alarm[2] = 60;
 if(dist &lt; 800)
 {
@@ -169,7 +170,8 @@ if(dist &lt; 200)
           <argument>
             <kind>1</kind>
             <string>//create effect and set time until next effect
-effect_create_below(ef_smoke, x, y, 0, c_gray);
+part_type_colour1(obj_partsystem_top.smoke_particle, c_gray);
+part_particles_create(obj_partsystem_top.system,  x, y, obj_partsystem_top.smoke_particle, 3);
 alarm[0] = 30;
 </string>
           </argument>

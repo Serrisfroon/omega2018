@@ -32,8 +32,6 @@ full = 0;
 alarm[2] = 1;
 //Set scale
 scale = 0;
-//Set time until sparkle effect
-alarm[1] = 20;
 image = 0;
 amplified = 0;
 fullscale = 1;
@@ -74,17 +72,22 @@ if(global.team[mid] = 1)
 else
     var smoke_color = make_color_rgb(100, 100, 255);
 
-effect_create_above(ef_smoke, x+lengthdir_x(20, direction), y+lengthdir_y(20, direction), 2, smoke_color);
+part_type_colour1(obj_partsystem_top.smoke_particle, smoke_color);
+part_type_scale(obj_partsystem_top.smoke_particle, 3, 3);
 
-effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction+90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction+90), 2, smoke_color);
-effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction+90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction+90), 2, smoke_color);
-effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction+90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction+90), 2, smoke_color);
-effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction+90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction+90), 2, smoke_color);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(20, direction), y+lengthdir_y(20, direction), obj_partsystem_top.smoke_particle, 3);
 
-effect_create_above(ef_smoke, x+lengthdir_x(20, direction)+lengthdir_x(20, direction-90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction-90), 2, smoke_color);
-effect_create_above(ef_smoke, x+lengthdir_x(12, direction)+lengthdir_x(40, direction-90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction-90), 2, smoke_color);
-effect_create_above(ef_smoke, x+lengthdir_x(5, direction)+lengthdir_x(60, direction-90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction-90), 2, smoke_color);
-effect_create_above(ef_smoke, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction-90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction-90), 2, smoke_color);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(20, direction)+lengthdir_x(20, direction+90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction+90), obj_partsystem_top.smoke_particle, 3);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(12, direction)+lengthdir_x(40, direction+90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction+90), obj_partsystem_top.smoke_particle, 3);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(5, direction)+lengthdir_x(60, direction+90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction+90), obj_partsystem_top.smoke_particle, 3);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction+90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction+90), obj_partsystem_top.smoke_particle, 3);
+
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(20, direction)+lengthdir_x(20, direction-90), y+lengthdir_y(20, direction)+lengthdir_y(20, direction-90), obj_partsystem_top.smoke_particle, 3);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(12, direction)+lengthdir_x(40, direction-90), y+lengthdir_y(12, direction)+lengthdir_y(40, direction-90), obj_partsystem_top.smoke_particle, 3);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(5, direction)+lengthdir_x(60, direction-90), y+lengthdir_y(5, direction)+lengthdir_y(60, direction-90), obj_partsystem_top.smoke_particle, 3);
+part_particles_create(obj_partsystem_top.system, x+lengthdir_x(-10, direction)+lengthdir_x(80, direction-90), y+lengthdir_y(-10, direction)+lengthdir_y(80, direction-90), obj_partsystem_top.smoke_particle, 3);
+
+part_type_scale(obj_partsystem_top.smoke_particle, 1, 1);
 
 </string>
           </argument>
@@ -115,38 +118,6 @@ image_speed = 0;
 //Increase the duration if amplified
 if(amplified = true)
     alarm[0] +=  75;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Create random variables
-random1 = random(80);
-random2 = random(220);
-//Create sparkle effect over barrier
-if(amplified = 0)
- effect_create_above(ef_spark, x-lengthdir_x(40, direction)-lengthdir_x(110, direction-90)+lengthdir_x(random1, direction)+lengthdir_x(random2, direction-90), y-lengthdir_y(40, direction)-lengthdir_y(110, direction-90)+lengthdir_y(random1, direction)+lengthdir_y(random2, direction-90), 0, c_white);
-else
- effect_create_above(ef_flare, x-lengthdir_x(40, direction)-lengthdir_x(110, direction-90)+lengthdir_x(random1, direction)+lengthdir_x(random2, direction-90), y-lengthdir_y(40, direction)-lengthdir_y(110, direction-90)+lengthdir_y(random1, direction)+lengthdir_y(random2, direction-90), 0, c_white);
-//Set time until next effect
-alarm[1] = 5;
 </string>
           </argument>
         </arguments>

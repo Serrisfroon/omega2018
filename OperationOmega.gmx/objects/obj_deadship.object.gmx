@@ -62,7 +62,11 @@ sfx_play(snd_explode2, x, y);
             <string>//Create explosion effect
 sfx_play(snd_explode3, x, y);
 
-effect_create_above(ef_ring, x, y, 1, make_color_rgb(255,142,8));
+part_type_colour1(obj_partsystem_top.ring_particle, make_color_rgb(255,142,8));
+part_type_size(obj_partsystem_top.ring_particle, 0.80, 1.20, 0.80, 0);
+part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.ring_particle, 3);
+part_type_size(obj_partsystem_top.ring_particle, 0.80, 1.20, 0.50, 0);
+
 //Create an effect
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.fusionring[2], 2)
 
@@ -131,10 +135,12 @@ if(smokenow = 0)
     switch(irandom(6))
     {
         case 0:
-            effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_gray);
+            part_type_colour1(obj_partsystem_top.smoke_particle, c_gray);
+            part_particles_create(obj_partsystem_top.system, x-6+random(12), y-6+random(12), obj_partsystem_top.smoke_particle, 3);
         break;
         case 1:
-            effect_create_above(ef_smoke, x-6+random(12), y-6+random(12), 0, c_dkgray);
+            part_type_colour1(obj_partsystem_top.smoke_particle, c_dkgray);
+            part_particles_create(obj_partsystem_top.system, x-6+random(12), y-6+random(12), obj_partsystem_top.smoke_particle, 3);
         break;
         default:
             create_burning(x-6+random(12), y-6+random(12));

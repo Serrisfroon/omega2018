@@ -1337,7 +1337,7 @@
       <sprite>sprites\spr_needle</sprite>
       <sprite>sprites\spr_needle_charge</sprite>
       <sprite>sprites\spr_sonic</sprite>
-      <sprite>sprites\spr_wave</sprite>
+      <sprite>sprites\spr_nova</sprite>
       <sprite>sprites\spr_flank</sprite>
       <sprite>sprites\spr_seeker_charge</sprite>
       <sprite>sprites\spr_cryos</sprite>
@@ -1350,8 +1350,14 @@
       <sprite>sprites\spr_helix_charge_0</sprite>
       <sprite>sprites\spr_helix_charge_1</sprite>
       <sprite>sprites\spr_double</sprite>
-      <sprite>sprites\spr_pierce</sprite>
+      <sprite>sprites\spr_double_charge</sprite>
+      <sprite>sprites\spr_branch_main</sprite>
+      <sprite>sprites\spr_branch_off</sprite>
+      <sprite>sprites\spr_branch_charge</sprite>
+      <sprite>sprites\spr_branch_charge_0</sprite>
+      <sprite>sprites\spr_branch_charge_1</sprite>
       <sprite>sprites\spr_spread</sprite>
+      <sprite>sprites\spr_spread_charge</sprite>
     </sprites>
     <sprites name="Energy Secondary">
       <sprite>sprites\spr_fusion</sprite>
@@ -1504,6 +1510,7 @@
     <sprites name="Effects">
       <sprites name="Particles">
         <sprite>sprites\spr_pixel_part</sprite>
+        <sprite>sprites\spr_snow_part</sprite>
         <sprite>sprites\spr_circle_part</sprite>
         <sprite>sprites\spr_crescent_part</sprite>
         <sprite>sprites\spr_box_part</sprite>
@@ -1655,6 +1662,7 @@
       <sprite>sprites\spr_layermissile_icon</sprite>
       <sprite>sprites\spr_strikemine_icon</sprite>
       <sprite>sprites\spr_strikemine</sprite>
+      <sprite>sprites\spr_pierce</sprite>
       <sprite>sprites\spr_trigger_icon</sprite>
       <sprite>sprites\spr_bustergrenade</sprite>
       <sprite>sprites\spr_turret_icon</sprite>
@@ -1662,6 +1670,7 @@
       <sprite>sprites\spr_hermitmissile_icon</sprite>
       <sprite>sprites\spr_layermissile</sprite>
       <sprite>sprites\spr_turrethead_color</sprite>
+      <sprite>sprites\spr_wave</sprite>
       <sprite>sprites\spr_turrethead</sprite>
       <sprite>sprites\spr_turretbase_color</sprite>
       <sprite>sprites\spr_turretbase</sprite>
@@ -1935,9 +1944,13 @@
         <object>objects\obj_generic_fade</object>
         <object>objects\obj_needle_hit</object>
         <object>objects\obj_sonic_hit</object>
+        <object>objects\obj_nova_hit</object>
         <object>objects\obj_seeker_hit</object>
         <object>objects\obj_helix_hit</object>
         <object>objects\obj_cryos_hit</object>
+        <object>objects\obj_double_hit</object>
+        <object>objects\obj_branch_hit</object>
+        <object>objects\obj_double_charge_hit</object>
         <objects name="Needle Charge">
           <object>objects\obj_needle_charge_attack</object>
           <object>objects\obj_needle_charge</object>
@@ -1948,6 +1961,7 @@
           <object>objects\obj_sonic_charge</object>
           <object>objects\obj_sonic_charge_enemy</object>
         </objects>
+        <object>objects\obj_nova_charge_attack</object>
         <objects name="Seeker Charge">
           <object>objects\obj_seeker_charge_attack</object>
           <object>objects\obj_seeker_charge</object>
@@ -1965,12 +1979,37 @@
           <object>objects\obj_helix_charge</object>
           <object>objects\obj_helix_charge_enemy</object>
         </objects>
+        <objects name="Siphon Charge">
+          <object>objects\obj_siphon_charge_attack</object>
+          <object>objects\obj_siphon_charge</object>
+          <object>objects\obj_siphon_charge_hit</object>
+          <object>objects\obj_siphon_charge_enemy</object>
+          <object>objects\obj_siphon_charge_miss</object>
+        </objects>
+        <objects name="Double Charge">
+          <object>objects\obj_double_charge_attack</object>
+          <object>objects\obj_double_charge</object>
+          <object>objects\obj_double_charge_enemy</object>
+        </objects>
+        <objects name="Branch Charge">
+          <object>objects\obj_branch_charge_attack</object>
+          <object>objects\obj_branch_charge</object>
+          <object>objects\obj_branch_charge_enemy</object>
+        </objects>
+        <objects name="Spread Charge">
+          <object>objects\obj_spread_charge_attack</object>
+          <object>objects\obj_spread_charge</object>
+          <object>objects\obj_spread_charge_enemy</object>
+        </objects>
         <object>objects\obj_flank</object>
         <object>objects\obj_flank_enemy</object>
         <object>objects\obj_crossfire</object>
         <object>objects\obj_crossfire_enemy</object>
         <object>objects\obj_siphon</object>
         <object>objects\obj_siphon_enemy</object>
+        <object>objects\obj_branch</object>
+        <object>objects\obj_branch_enemy</object>
+        <object>objects\obj_branch_split</object>
         <object>objects\prnt_primary</object>
       </objects>
       <objects name="Energy Secondy Attacks">
@@ -2189,40 +2228,6 @@
         <object>objects\obj_beserkeffect</object>
         <object>objects\obj_overheatshine</object>
         <object>objects\obj_boosteffect</object>
-      </objects>
-      <objects name="Unused">
-        <objects name="Strike Missile">
-          <object>objects\obj_strikemissile_attack</object>
-          <object>objects\obj_strikemissile</object>
-          <object>objects\obj_strikemissile_enemy</object>
-        </objects>
-        <objects name="Strike Mine">
-          <object>objects\obj_strikemine_attack</object>
-          <object>objects\obj_strikemine</object>
-          <object>objects\obj_strikemine_enemy</object>
-        </objects>
-        <objects name="Layer Missile">
-          <object>objects\obj_layermissile_attack</object>
-          <object>objects\obj_layermissile</object>
-          <object>objects\obj_layermissile_enemy</object>
-        </objects>
-        <objects name="Hermit Missile">
-          <object>objects\obj_hermitmissile_attack</object>
-          <object>objects\obj_hermitmissile</object>
-          <object>objects\obj_counterfield</object>
-          <object>objects\obj_hermitmissile_enemy</object>
-          <object>objects\obj_counterfield_enemy</object>
-        </objects>
-        <objects name="Turret">
-          <object>objects\obj_turret_attack</object>
-          <object>objects\obj_turret</object>
-          <object>objects\obj_turret_enemy</object>
-        </objects>
-        <objects name="Direct">
-          <object>objects\obj_direct_attack</object>
-          <object>objects\obj_trigger</object>
-          <object>objects\obj_trigger_enemy</object>
-        </objects>
       </objects>
       <object>objects\prnt_bloom_attack</object>
     </objects>

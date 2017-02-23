@@ -28,7 +28,7 @@
             <string>//Set the auto-destroy time
 alarm[0] = 240;
 alarm[1] = 1;
-speed = 12;
+speed = 14;
 
 create_particles = false;
 

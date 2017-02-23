@@ -235,7 +235,8 @@ if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
  //Make the missile invisible as it travels through walls
  visible = 0;
  explodecolor = make_color_rgb(255, random(255), 0);
- effect_create_above(ef_explosion, x, y, 0, explodecolor);
+    part_type_colour1(obj_partsystem_top.smoke_particle, explodecolor);
+    part_particles_create(obj_partsystem_top.system,  x, y, obj_partsystem_top.smoke_particle, 3);
     buildup = 1;
 }
 else

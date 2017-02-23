@@ -159,32 +159,43 @@ for(i = 1; i &lt;= bulletmax; i += 1)
         if(bulletlife[i] &lt;= 0 || bulletx[i] &lt;= 0 || bulletx[i] &gt;= room_width || bullety[i] &lt;= 0 || bullety[i] &gt;= room_height)
         {
             bulletfree[i] = true;
-
-            //Create a stasis field if it is a stasis bullet
-            if(bullettype[i] = spr_whip || bullettype[i] = spr_snake_body || bullettype[i] = spr_stasis)
-            {         
-                ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
-                ending.direction = bulletdirection[i];
-                ending.image_angle = ending.direction;
-                ending.mid = bulletmid[i];
-                if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
-                {
+            switch(bullettype[i])
+            {
+                case spr_whip:
+                case spr_snake_body:
+                    var ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
+                    ending.direction = bulletdirection[i];
+                    ending.image_angle = ending.direction;
+                    ending.mid = bulletmid[i];
                     ending.image_speed = 0;
                     if(bulletblend[i] = c_red)
                         ending.image_index = 0;
                     else
                         ending.image_index = 1;                    
-                    ending.image_angle = ending.direction;    
-                }
-            }
-            else
-            {
-                ending = instance_create(bulletx[i], bullety[i], obj_generic_fade);
-                ending.direction = bulletdirection[i];
-                ending.hspeed = bullethspeed[i];
-                ending.vspeed = bulletvspeed[i];
-                ending.sprite_index = bullettype[i];
-                ending.mid = bulletmid[i];
+                    ending.image_angle = ending.direction;                    
+                break;
+                case spr_stasis:
+                    ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
+                    ending.direction = bulletdirection[i];
+                    ending.image_angle = ending.direction;
+                    ending.mid = bulletmid[i];                
+                break;
+                case spr_nova:
+                    if(bulletname[i] = "Nova")
+                        if(bulletlife[i] &lt;= 0)
+                        {
+                            mid = bulletmid[i];
+                            bullet_create(bulletx[i], bullety[i], "Nova ", bulletdirection[i], bulletmid[i], 0);      
+                        }          
+                break;
+                default:
+                    ending = instance_create(bulletx[i], bullety[i], obj_generic_fade);
+                    ending.direction = bulletdirection[i];
+                    ending.hspeed = bullethspeed[i];
+                    ending.vspeed = bulletvspeed[i];
+                    ending.sprite_index = bullettype[i];
+                    ending.mid = bulletmid[i];
+                break;
             }
             //Reduce the bullet max if this is the last bullet
             if(bulletmax = i)
@@ -252,7 +263,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             //Make the hit ship flash
             hurt = instance_create(0, 0, obj_ship_flash);
             hurt.hurting = possihit;  
-            hurt.ship_image = global.playership[possihit.mid];
+            hurt.ship_image = global.selected_ship[possihit.mid]-1;
             
             bulletfree[i] = true;
             //Reduce the bullet max if this is the last bullet
@@ -498,7 +509,7 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                     //Make the hit ship flash
                     hurt = instance_create(0, 0, obj_ship_flash);
                     hurt.hurting = possihit;  
-                    hurt.ship_image = global.playership[possihit.mid];
+                    hurt.ship_image = global.selected_ship[possihit.mid]-1;
                 break;
             }        
             bulletfree[i] = true;
@@ -580,16 +591,6 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             if(!collision_circle(bulletx[i], bullety[i], 5, possihit, 1, 0)) break;
             //Free this index
             bulletfree[i] = true;
-            if(bulletgraze[i] = 1)
-            {
-                obj_player.energy += 4;
-                if(obj_player.energy &gt; 100)
-                    obj_player.energy = 100;
-                repeat(3)
-                    effect_create_below(ef_spark, bulletx[i]-7+random(14), bullety[i]-7+random(14), 0, c_aqua);
-                sfx_play(snd_graze, bulletx[i], bullety[i]);
-                bulletgraze[i] = 0;
-            }
             if(possihit.sprite_index = spr_solus)
                 possihit.owner.absorb += 0.20;
             //Reduce the bullet max if this is the last bullet
@@ -709,7 +710,18 @@ draw_set_alpha(1);
 for(i = 1; i &lt;= bulletmax; i += 1)
 {
     if(bulletfree[i] = true) continue;
-    draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);
+    switch(bullettype[i])
+    {
+        case spr_cryos:
+            draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i]+bulletlife[i]*4, c_white, 1);    
+        break;
+        case spr_nova:
+            draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i]+(1200-bulletlife[i])*4, c_white, 1);    
+        break;
+        default:
+            draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);    
+        break;
+    }
 }
 with(prnt_enemyenergy)
     draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white,image_alpha);
@@ -743,10 +755,18 @@ surface_reset_target();
 for(i = 1; i &lt;= bulletmax; i += 1)
 {
     if(bulletfree[i] = true) continue;
-    if(bullettype[i] = spr_cryos)
-        draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i]+bulletlife[i]*4, c_white, 1);    
-    else
-        draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);
+    switch(bullettype[i])
+    {
+        case spr_cryos:
+            draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i]+bulletlife[i]*4, c_white, 1);    
+        break;
+        case spr_nova:
+            draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i]+(1200-bulletlife[i])*4, c_white, 1);    
+        break;
+        default:
+            draw_sprite_ext(bullettype[i], bulletsingle[i], bulletx[i], bullety[i], 1, 1, bulletdirection[i], c_white, 1);    
+        break;
+    }
 }
 with(prnt_enemyenergy)
     draw_self();

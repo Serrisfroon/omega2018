@@ -73,8 +73,19 @@ attack_name = "Shock Missile";          //Set the name of the attack
             <kind>1</kind>
             <string>sfx_play(snd_explode1, x, y);
 create_explosion(1);
+
+part_type_colour1(obj_partsystem_top.spark_particle, c_teal);
+part_type_scale(obj_partsystem_top.spark_particle, 2, 2);
+part_type_blend(obj_partsystem_top.spark_particle, 0);
+
 repeat(8)
-    effect_create_above(ef_spark, x-30+random(60), y-30+random(60), 1, c_teal);
+    part_particles_create(obj_partsystem_top.system,  x-30+random(60), y-30+random(60), obj_partsystem_top.spark_particle, 5);
+
+part_type_scale(obj_partsystem_top.spark_particle, 1, 1);
+part_type_blend(obj_partsystem_top.spark_particle, 1);
+
+    
+    
 obj_mod.createcheck = id;
 with(obj_homingeffect)
     if(create = obj_mod.createcheck)

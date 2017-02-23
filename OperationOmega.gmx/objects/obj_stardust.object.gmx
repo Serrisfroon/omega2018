@@ -27,7 +27,9 @@
             <kind>1</kind>
             <string>//Set destroy time
 alarm[0] = 90;
-effect_create_below(ef_smoke, x, y, 0, c_white);
+part_type_colour1(obj_partsystem.smoke_particle, c_ltgray);
+part_particles_create(obj_partsystem.system, x, y, obj_partsystem.smoke_particle, 3);
+
 slowdown = 0.1;
 amplified = 0;
 alarm[1] = 1;

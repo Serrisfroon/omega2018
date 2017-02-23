@@ -71,7 +71,10 @@ attack_name = "Phantom Mine";       //Set the name of the attack
     create_explosion(1);
 }
 else
-    effect_create_above(ef_smoke, x, y, 0, global.enemycolor);
+{
+    part_type_colour1(obj_partsystem_top.smoke_particle, global.enemycolor);
+    part_particles_create(obj_partsystem_top.system,  x, y, obj_partsystem_top.smoke_particle, 3);
+}
 </string>
           </argument>
         </arguments>

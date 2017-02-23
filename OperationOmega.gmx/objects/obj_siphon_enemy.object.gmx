@@ -95,7 +95,7 @@ switch(target_object.mid)
         //Make the hit ship flash
         hurt = instance_create(0, 0, obj_ship_flash);
         hurt.hurting = target;  
-        hurt.ship_image = global.playership[target.mid];
+        hurt.ship_image = global.selected_ship[target.mid]-1;
        
       //Update smoking
       if(target.armor &lt;= (target.armor_maximum*100)/60)
@@ -136,7 +136,7 @@ switch(target_object.mid)
         //Make the hit ship flash
         hurt = instance_create(0, 0, obj_ship_flash);
         hurt.hurting = target;  
-        hurt.ship_image = global.playership[target.mid];
+        hurt.ship_image = global.selected_ship[mid]-1;
  break;
 }
 

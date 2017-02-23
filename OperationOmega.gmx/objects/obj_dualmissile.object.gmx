@@ -227,7 +227,6 @@ switch(go)
        step_towards_direction(point, 3.5+amplified);
       }
  case 2:
-      effect_create_below(ef_smoke, x, y, 0, c_gray);
       part_particles_create(obj_partsystem.system, x, y, obj_partsystem.missile_flame[1], 1);
       image_angle = direction;
  break;
