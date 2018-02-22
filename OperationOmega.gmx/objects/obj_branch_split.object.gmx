@@ -81,7 +81,7 @@ if(bullets = 0)
             <string>if(team_color = 0)
     part_type_color2(obj_partsystem_top.flare_particle,8421631,255);
 else
-    part_type_color2(obj_partsystem_top.flare_particle,8816760767,16711680);
+    part_type_color2(obj_partsystem_top.flare_particle,816760767,16711680);
 
 part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.flare_particle, 2);
 </string>

@@ -92,8 +92,8 @@ part_particles_create(obj_partsystem.system, x, y, obj_partsystem.primarypart[my
 bullet_create(x, y, "Sonic", direction, mid, 0);
 
 
-ammo_x -= 0.0533;
-ammo_y -= 0.08;
+ammo_x -= 0.032;
+ammo_y -= 0.048;
 
 
 if(ammo_y &gt; 0)

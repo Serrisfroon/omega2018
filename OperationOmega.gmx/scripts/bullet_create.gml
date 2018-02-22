@@ -98,9 +98,9 @@ switch(type)
     case "Cryos":
          name = "Cryos";
          sprite = spr_cryos;
-         life = 180;
+         life = 75;
          after = obj_cryos_hit;
-         dmg = 3;
+         dmg = 2;
          mask = 17;
          lolspeed = 9.5+speed/2;
          accuracy = 3;

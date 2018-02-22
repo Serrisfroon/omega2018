@@ -83,7 +83,7 @@ switch(tile.owner.object_index)
                     var icon_order = 1;
                     tile.giveselection = 1;
                     tile.selection_type = 0;
-                    tile.selection_cost = 25;
+                    tile.selection_cost = 45;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_fusion_attack;
                     tile.selection_name = "Fusion";
@@ -93,7 +93,7 @@ switch(tile.owner.object_index)
                     var icon_order = 2;
                     tile.giveselection = 2;
                     tile.selection_type = 0;
-                    tile.selection_cost = 25;
+                    tile.selection_cost = 45;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_stardust_attack;
                     tile.selection_name = "Stardust";
@@ -103,7 +103,7 @@ switch(tile.owner.object_index)
                     var icon_order = 3;
                     tile.giveselection = 3;
                     tile.selection_type = 0;
-                    tile.selection_cost = 40;
+                    tile.selection_cost = 80;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_barrier_attack;
                     tile.selection_name = "Barrier";
@@ -113,7 +113,7 @@ switch(tile.owner.object_index)
                     var icon_order = 4;
                     tile.giveselection = 4;
                     tile.selection_type = 0;
-                    tile.selection_cost = 30;
+                    tile.selection_cost = 50;
                     tile.selection_stock = 100; 
                     tile.selection_object = obj_formation_attack;
                     tile.selection_name = "Formation"; 
@@ -124,7 +124,7 @@ switch(tile.owner.object_index)
                     var icon_order = 5;
                     tile.giveselection = 5;
                     tile.selection_type = 0;
-                    tile.selection_cost = 85;
+                    tile.selection_cost = 100;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_beam_attack;
                     tile.selection_name = "Beam";
@@ -135,7 +135,7 @@ switch(tile.owner.object_index)
                     var icon_order = 6;
                     tile.giveselection = 6;
                     tile.selection_type = 0;
-                    tile.selection_cost = 15;
+                    tile.selection_cost = 33;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_sparkline_attack;
                     tile.selection_name = "Sparkline";
@@ -145,7 +145,7 @@ switch(tile.owner.object_index)
                     var icon_order = 7;
                     tile.giveselection = 7;
                     tile.selection_type = 0;
-                    tile.selection_cost = 20;
+                    tile.selection_cost = 35;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_burst_attack;
                     tile.selection_name = "Burst";
@@ -155,7 +155,7 @@ switch(tile.owner.object_index)
                     var icon_order = 8;
                     tile.giveselection = 8;
                     tile.selection_type = 0;
-                    tile.selection_cost = 25;
+                    tile.selection_cost = 40;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_slash_attack;
                     tile.selection_name = "Slash";
@@ -165,7 +165,7 @@ switch(tile.owner.object_index)
                     var icon_order = 9;
                     tile.giveselection = 9;
                     tile.selection_type = 0;
-                    tile.selection_cost = 25;
+                    tile.selection_cost = 45;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_horizon_attack;
                     tile.selection_lockon_required = true;   
@@ -176,7 +176,7 @@ switch(tile.owner.object_index)
                     var icon_order = 10;
                     tile.giveselection = 10;
                     tile.selection_type = 0;
-                    tile.selection_cost = 20;
+                    tile.selection_cost = 35;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_spiral_attack;
                     tile.selection_name = "Spiral";
@@ -187,7 +187,7 @@ switch(tile.owner.object_index)
                     var icon_order = 11;
                     tile.giveselection = 11;
                     tile.selection_type = 0;
-                    tile.selection_cost = 20;
+                    tile.selection_cost = 35;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_whip_attack;
                     tile.selection_name = "Whip";
@@ -197,7 +197,7 @@ switch(tile.owner.object_index)
                     var icon_order = 12;
                     tile.giveselection = 12;
                     tile.selection_type = 0;
-                    tile.selection_cost = 30;
+                    tile.selection_cost = 50;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_trail_attack;
                     tile.selection_name = "Trail";
@@ -207,7 +207,7 @@ switch(tile.owner.object_index)
                     var icon_order = 13;
                     tile.giveselection = 13;
                     tile.selection_type = 0;
-                    tile.selection_cost = 30;
+                    tile.selection_cost = 50;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_serpent_attack;
                     tile.selection_name = "Serpent";
@@ -217,7 +217,7 @@ switch(tile.owner.object_index)
                     var icon_order = 14;
                     tile.giveselection = 14;
                     tile.selection_type = 0;
-                    tile.selection_cost = 20;
+                    tile.selection_cost = 35;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_storm_attack;
                     tile.selection_name = "Storm";
@@ -227,7 +227,7 @@ switch(tile.owner.object_index)
                     var icon_order = 15;
                     tile.giveselection = 15;
                     tile.selection_type = 0;
-                    tile.selection_cost = 40;
+                    tile.selection_cost = 45;
                     tile.selection_stock = 100;
                     tile.selection_object = obj_thorn_attack;
                     tile.selection_name = "Thorn";
@@ -239,7 +239,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 16;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_dualmissile_attack;
                     tile.selection_name = "Dual Missile";
                     tile.selection_lockon_required = true;   
@@ -250,7 +250,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 18;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_locustmissile_attack;    
                     tile.selection_name = "Locust Missile";
                     tile.selection_lockon_required = true;   
@@ -261,7 +261,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 19;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_tridentmissile_attack;    
                     tile.selection_name = "Trident Missile";
                     tile.selection_lockon_required = true;   
@@ -272,7 +272,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 20;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 3;
+                    tile.selection_stock = 2;
                     tile.selection_object = obj_shockmissile_attack;    
                     tile.selection_lockon_required = true;   
                     tile.selection_name = "Shock Missile";
@@ -283,7 +283,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 22;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_splitmissile_attack;   
                     tile.selection_name = "Split Missile"; 
                     tile.display = 3;
@@ -294,7 +294,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 24;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_huntermine_attack;    
                     tile.selection_name = "Hunter Mine";
                     tile.display = 10;
@@ -314,7 +314,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 26;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 2;
                     tile.selection_object = obj_hackermine_attack;  
                     tile.selection_name = "Hacker Mine";  
                     tile.display = 7;
@@ -334,7 +334,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 34;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_buster_attack;    
                     tile.selection_name = "Buster";
                     tile.display = 14;
@@ -345,7 +345,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 31;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 2;
                     tile.selection_object = obj_solgrenade_attack;   
                     tile.selection_name = "Sol Grenade"; 
                     tile.display = 11;
@@ -355,7 +355,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 32;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 2;
                     tile.selection_object = obj_lunagrenade_attack;    
                     tile.selection_name = "Luna Grenade";
                     tile.display = 13;
@@ -365,7 +365,7 @@ switch(tile.owner.object_index)
                     tile.giveselection = 33;
                     tile.selection_type = 1;
                     tile.selection_cost = 1;
-                    tile.selection_stock = 4;
+                    tile.selection_stock = 3;
                     tile.selection_object = obj_flashbomb_attack;    
                     tile.selection_name = "Flash Bomb";
                     tile.selection_lockon_required = false;   

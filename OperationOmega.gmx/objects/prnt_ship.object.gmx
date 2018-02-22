@@ -61,9 +61,9 @@ switch(current_primary)
 {
     case 1:
         primary_name = "Needle";
-        primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 7;
-        primary_charge_max = 100;
+        primary_overheat_scaling = 0.04;
+        primary_cooldown_base = 10;
+        primary_charge_max = 75;
         primary_charge_shot = obj_needle_charge_attack;
         primary_arc = 60;
     break;
@@ -79,7 +79,7 @@ switch(current_primary)
         primary_name = "Nova";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 24;
-        primary_charge_max = 100;
+        primary_charge_max = 40;
         primary_charge_shot = obj_nova_charge_attack;
         primary_stop_distance = 0;
         primary_arc = 60;
@@ -87,24 +87,24 @@ switch(current_primary)
     case 4:
         primary_name = "Seeker";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 10;
-        primary_charge_max = 100;
+        primary_cooldown_base = 15;
+        primary_charge_max = 120;
         primary_charge_shot = obj_seeker_charge_attack;
         primary_arc = 60;
     break;
     case 5:
         primary_name = "Cryos";
-        primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 11;
-        primary_charge_max = 100;
+        primary_overheat_scaling = 0.08;
+        primary_cooldown_base = 6;
+        primary_charge_max = 160;
         primary_charge_shot = obj_cryos_charge_attack;
         primary_arc = 60;
     break;
     case 6:
         primary_name = "Helix";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 9;
-        primary_charge_max = 100;
+        primary_cooldown_base = 12;
+        primary_charge_max = 220;
         primary_charge_shot = obj_helix_charge_attack;
         primary_arc = 60;
     break;
@@ -112,14 +112,14 @@ switch(current_primary)
         primary_name = "Siphon";
         primary_overheat_scaling = 0.05;
         primary_cooldown_base = 12;
-        primary_charge_max = 100;
+        primary_charge_max = 150;
         primary_charge_shot = obj_siphon_charge_attack;
         primary_arc = 60;
     break;
     case 8:
         primary_name = "Double";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 19;
+        primary_cooldown_base = 21;
         primary_charge_max = 100;
         primary_charge_shot = obj_double_charge_attack;
         primary_arc = 360;
@@ -127,8 +127,8 @@ switch(current_primary)
     case 9:
         primary_name = "Branch";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 13;
-        primary_charge_max = 100;
+        primary_cooldown_base = 15;
+        primary_charge_max = 150;
         primary_charge_shot = obj_branch_charge_attack;
         primary_stop_distance = 0;
         primary_arc = 60;
@@ -136,8 +136,8 @@ switch(current_primary)
     case 10:
         primary_name = "Spread";
         primary_overheat_scaling = 0.05;
-        primary_cooldown_base = 23;
-        primary_charge_max = 100;
+        primary_cooldown_base = 26;
+        primary_charge_max = 160;
         primary_charge_shot = obj_spread_charge_attack;
         primary_arc = 60;
     break;
@@ -1158,7 +1158,7 @@ if(mid = global.mymid)
     var particle_angle = 40-speed*3;
     part_type_direction(obj_partsystem.primarypart[global.team[mid]-1], primary_direction-particle_angle, primary_direction+particle_angle, 0, 0);
     
-    part_particles_create(obj_partsystem.system, x+lengthdir_x(9, primary_direction), y+lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 8);
+    part_particles_create(obj_partsystem.system, ship_front_x, ship_front_y, obj_partsystem.primarypart[global.team[mid]-1], 8);
     if(current_primary = 8)
     {
         part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], 1, 4, 0, 0);
@@ -1167,8 +1167,9 @@ if(mid = global.mymid)
         part_particles_create(obj_partsystem.system, x-lengthdir_x(9, primary_direction), y-lengthdir_y(9, primary_direction), obj_partsystem.primarypart[global.team[mid]-1], 8);    
     }
     
-    bullet = bullet_create(x+lengthdir_x(9, facedir), y+lengthdir_y(9, facedir), primary_name, primary_direction, mid, 0);
+    bullet = bullet_create(ship_front_x, ship_front_y, primary_name, primary_direction, mid, 0);
 }
+
 </string>
           </argument>
         </arguments>

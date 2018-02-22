@@ -275,7 +275,11 @@ else
     
 //If this ship's primary firing flag is set to true, fire the primary
 if(multiplayer_primary_fire_flag = true)
+{
+    ship_front_x = x+lengthdir_x(9, facedir);
+    ship_front_y = y+lengthdir_y(9, facedir);
     event_perform(ev_other, ev_user1);
+}
 </string>
           </argument>
         </arguments>

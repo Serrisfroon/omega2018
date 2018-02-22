@@ -28,7 +28,7 @@ for(i = 1; i <=4; i++)
     {
         case 1:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 25;
+            global.secondary_cost[i] = 45;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_fusion_attack;
             global.secondary_name[i] = "Fusion";
@@ -36,7 +36,7 @@ for(i = 1; i <=4; i++)
         break;
         case 2:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 25;
+            global.secondary_cost[i] = 45;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_stardust_attack;
             global.secondary_name[i] = "Stardust";
@@ -44,7 +44,7 @@ for(i = 1; i <=4; i++)
         break;
         case 3:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 40;
+            global.secondary_cost[i] = 80;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_barrier_attack;
             global.secondary_name[i] = "Barrier";
@@ -52,7 +52,7 @@ for(i = 1; i <=4; i++)
         break;
         case 4:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 30;
+            global.secondary_cost[i] = 50;
             global.secondary_stock[i] = 100; 
             global.secondary_object[i] = obj_formation_attack; 
             global.secondary_name[i] = "Formation";
@@ -61,7 +61,7 @@ for(i = 1; i <=4; i++)
         break;
         case 5:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 85;
+            global.secondary_cost[i] = 100;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_beam_attack;
             global.secondary_name[i] = "Beam";
@@ -69,7 +69,7 @@ for(i = 1; i <=4; i++)
         break;
         case 6:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 15;
+            global.secondary_cost[i] = 33;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_sparkline_attack;
             global.secondary_name[i] = "Sparkline";
@@ -77,7 +77,7 @@ for(i = 1; i <=4; i++)
         break;
         case 7:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 20;
+            global.secondary_cost[i] = 35;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_burst_attack;
             global.secondary_name[i] = "Burst";
@@ -85,7 +85,7 @@ for(i = 1; i <=4; i++)
         break;
         case 8:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 25;
+            global.secondary_cost[i] = 40;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_slash_attack;
             global.secondary_name[i] = "Slash";
@@ -93,7 +93,7 @@ for(i = 1; i <=4; i++)
         break;
         case 9:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 25;
+            global.secondary_cost[i] = 45;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_horizon_attack;
             global.secondary_name[i] = "Horizon";
@@ -102,7 +102,7 @@ for(i = 1; i <=4; i++)
         break;
         case 10:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 20;
+            global.secondary_cost[i] = 35;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_spiral_attack;
             global.secondary_name[i] = "Spiral";
@@ -110,7 +110,7 @@ for(i = 1; i <=4; i++)
         break;
         case 11:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 20;
+            global.secondary_cost[i] = 35;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_whip_attack;
             global.secondary_name[i] = "Whip";
@@ -118,7 +118,7 @@ for(i = 1; i <=4; i++)
         break;
         case 12:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 30;
+            global.secondary_cost[i] = 50;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_trail_attack;
             global.secondary_name[i] = "Trail";
@@ -126,7 +126,7 @@ for(i = 1; i <=4; i++)
         break;
         case 13:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 30;
+            global.secondary_cost[i] = 50;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_serpent_attack;
             global.secondary_name[i] = "Serpent";
@@ -134,7 +134,7 @@ for(i = 1; i <=4; i++)
         break;
         case 14:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 20;
+            global.secondary_cost[i] = 35;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_storm_attack;
             global.secondary_name[i] = "Storm";
@@ -142,7 +142,7 @@ for(i = 1; i <=4; i++)
         break;
         case 15:
             global.secondary_type[i] = 0;
-            global.secondary_cost[i] = 40;
+            global.secondary_cost[i] = 45;
             global.secondary_stock[i] = 100;
             global.secondary_object[i] = obj_thorn_attack;
             global.secondary_name[i] = "Thorn";
@@ -151,7 +151,7 @@ for(i = 1; i <=4; i++)
         case 16:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 3;
             global.secondary_object[i] = obj_dualmissile_attack;
             global.secondary_name[i] = "Dual Missile";
             global.secondary_lockon_required[i] = true;   
@@ -168,7 +168,7 @@ for(i = 1; i <=4; i++)
         case 18:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 3;
             global.secondary_object[i] = obj_locustmissile_attack;    
             global.secondary_name[i] = "Locust Missile";
             global.secondary_lockon_required[i] = true;   
@@ -177,7 +177,7 @@ for(i = 1; i <=4; i++)
         case 19:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 3;
             global.secondary_object[i] = obj_tridentmissile_attack; 
             global.secondary_name[i] = "Trident Missile";   
             global.secondary_lockon_required[i] = true;   
@@ -186,7 +186,7 @@ for(i = 1; i <=4; i++)
         case 20:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 2;
             global.secondary_object[i] = obj_shockmissile_attack;    
             global.secondary_name[i] = "Shock Missile";
             global.secondary_lockon_required[i] = true;   
@@ -203,7 +203,7 @@ for(i = 1; i <=4; i++)
         case 22:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 3;
             global.secondary_object[i] = obj_splitmissile_attack;  
             global.secondary_name[i] = "Split Missile";  
             global.secondary_icon_image[i] = spr_splitmissile_icon;
@@ -220,7 +220,7 @@ for(i = 1; i <=4; i++)
         case 24:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 3;
             global.secondary_object[i] = obj_huntermine_attack;    
             global.secondary_name[i] = "Hunter Mine";
             global.secondary_icon_image[i] = spr_huntermine_icon;
@@ -236,7 +236,7 @@ for(i = 1; i <=4; i++)
         case 26:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 2;
             global.secondary_object[i] = obj_hackermine_attack;   
             global.secondary_name[i] = "Hacker Mine"; 
             global.secondary_icon_image[i] = spr_hackermine_icon;
@@ -244,7 +244,7 @@ for(i = 1; i <=4; i++)
         case 27:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 2;
             global.secondary_object[i] = obj_clustermine_attack; 
             global.secondary_name[i] = "Cluster Mine";   
             global.secondary_icon_image[i] = spr_clustermine_icon;
@@ -260,7 +260,7 @@ for(i = 1; i <=4; i++)
         case 29:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 2;
             global.secondary_object[i] = obj_solus_attack;   
             global.secondary_name[i] = "Solus"; 
             global.secondary_icon_image[i] = spr_solus_icon;
@@ -276,7 +276,7 @@ for(i = 1; i <=4; i++)
         case 31:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 2;
             global.secondary_object[i] = obj_solgrenade_attack; 
             global.secondary_name[i] = "Sol Grenade";   
             global.secondary_icon_image[i] = spr_solgrenade_icon;
@@ -284,7 +284,7 @@ for(i = 1; i <=4; i++)
         case 32:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 2;
             global.secondary_object[i] = obj_lunagrenade_attack; 
             global.secondary_name[i] = "Luna Grenade";   
             global.secondary_icon_image[i] = spr_lunagrenade_icon;
@@ -292,7 +292,7 @@ for(i = 1; i <=4; i++)
         case 33:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 3;
             global.secondary_object[i] = obj_flashbomb_attack; 
             global.secondary_name[i] = "Flash Bomb";   
             global.secondary_icon_image[i] = spr_flashbomb_icon;
@@ -300,7 +300,7 @@ for(i = 1; i <=4; i++)
         case 34:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 2;
             global.secondary_object[i] = obj_paladindrone_attack; 
             global.secondary_name[i] = "Paladin Drone";   
             global.secondary_icon_image[i] = spr_paladindrone_icon;
@@ -308,7 +308,7 @@ for(i = 1; i <=4; i++)
         case 35:
             global.secondary_type[i] = 1;
             global.secondary_cost[i] = 1;
-            global.secondary_stock[i] = 4;
+            global.secondary_stock[i] = 3;
             global.secondary_object[i] = obj_buster_attack; 
             global.secondary_name[i] = "Buster";   
             global.secondary_icon_image[i] = spr_buster_icon;

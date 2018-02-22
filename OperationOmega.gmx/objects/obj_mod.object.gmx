@@ -1811,7 +1811,6 @@ draw_set_halign(fa_left);
     
 //Draw the primary bar
 //Calculate the size of the bar to be displayed
-var primary_bar_size = (1-(obj_player.primary_cooldown_base/(obj_player.primary_cooldown_base*obj_player.primary_overheat)))*60;
 if(obj_player.primary_charge &gt;= obj_player.primary_charge_max)
 {
     if(primary_charge_flash = 1)
@@ -1825,10 +1824,22 @@ if(obj_player.primary_charge &gt;= obj_player.primary_charge_max)
 }
 else
 {
-    //Draw the remaining energy
-    draw_sprite_part_ext(spr_cursor, 3, 0, primary_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+primary_bar_size, 1, 1, c_white, 0.9);
-    //Draw the empty bar
-    draw_sprite_part_ext(spr_cursor, 4, 0, 0, 131, primary_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+    if(obj_player.primary_charge = 0)
+    {
+        var primary_bar_size = (1-(obj_player.primary_cooldown_base/(obj_player.primary_cooldown_base*obj_player.primary_overheat)))*60;
+        //Draw the remaining energy
+        draw_sprite_part_ext(spr_cursor, 3, 0, primary_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+primary_bar_size, 1, 1, c_white, 0.9);
+        //Draw the empty bar
+        draw_sprite_part_ext(spr_cursor, 4, 0, 0, 131, primary_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+    }
+    else
+    {
+        var primary_bar_size = (1-(obj_player.primary_charge/obj_player.primary_charge_max))*60;
+        //Draw the remaining energy
+        draw_sprite_part_ext(spr_cursor, 5, 0, primary_bar_size, 131, 60, mouse_cursor_x-59, mouse_cursor_y-30+primary_bar_size, 1, 1, c_white, 0.9);
+        //Draw the empty bar
+        draw_sprite_part_ext(spr_cursor, 3, 0, 0, 131, primary_bar_size, mouse_cursor_x-59, mouse_cursor_y-30, 1, 1, c_white, 0.9);
+    }    
 }
 //Draw the number of uses remaining
 var primary_rate_of_fire = round((60/(obj_player.primary_cooldown_base*obj_player.primary_overheat))*10)/10;

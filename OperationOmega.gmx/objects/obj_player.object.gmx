@@ -856,8 +856,10 @@ if(ship_status_hacked = true || global.activated[mid] = 2)
 obj_mod.chat_open = false;
 
 //Set the direction to aim at
-primary_direction = round(aim_limit(facedir, point_direction(x, y, mouse_x, mouse_y), primary_arc)/5)*5;  
-primary_stop_distance = round(point_distance(x, y, mouse_x, mouse_y)/13);
+ship_front_x = x+lengthdir_x(9, facedir);
+ship_front_y = y+lengthdir_y(9, facedir);
+primary_direction = round(aim_limit(facedir, point_direction(ship_front_x, ship_front_y, mouse_x, mouse_y), primary_arc)/5)*5;  
+primary_stop_distance = round(point_distance(ship_front_x, ship_front_y, mouse_x, mouse_y)/13);
 
 //Perform the primary firing event
 if(primary_charge &gt;= primary_charge_max)
