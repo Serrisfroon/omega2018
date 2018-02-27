@@ -354,8 +354,13 @@ with(obj_choosesecondary)
           <argument>
             <kind>1</kind>
             <string>//Handle map display growing
-if(growing = 1 &amp;&amp; growth &lt; 1)
- growth += 0.1;
+if(growing = 1)
+{
+    if(growth &lt; 1)
+        growth += 0.1;
+    else
+        growth_light -= 0.1;   
+}
 if(growing = 0 &amp;&amp; growth &gt; 0)
  growth -= 0.1;
  
@@ -416,6 +421,7 @@ if(global.sfxtoggle = 0)
     audio_play_sound(snd_overcustom, 1, 0);
 alarm[3] = 20;
 growing = 2;
+growth_light = 1;
 prnt_selection.image_xscale = 1;
 prnt_selection.image_yscale = 1;
 prnt_selection.depth = -1;
@@ -569,8 +575,21 @@ draw_sprite_ext(spr_numbers_icon, 3+weapontype, x, y, 1, 1, 0, c_white, image_al
 draw_sprite_ext(spr_numbers_icon, 4+secondnumber, x, y, 1, 1, 0, c_white, image_alpha);
 if(growing != 0)
     draw_sprite_ext(spr_icon_select, 1, x, y, 1, 1, 0, c_white, image_alpha);
-draw_sprite_ext(spr_weapons_infos, 1+weapontype, x+16, y+16, growth, growth, 0, c_white, 0.6*growth+0.2);
-
+    
+var horizontal_expansion, vertical_expansion;
+horizontal_expansion = 189*growth;
+vertical_expansion = 239*growth;
+draw_sprite_general(spr_weapons_infos, weapontype+1, 0, 0, horizontal_expansion, vertical_expansion, x+12, y+12, 1, 1, 0, c_white, c_white, c_white, c_white, 0.6*growth+0.2);
+if(growth &gt; 0)
+{
+      draw_sprite_ext(spr_infos_corner, 0, x+12, y+12, 1, 1, 0, c_white, 0.6*growth+0.2);
+      draw_sprite_ext(spr_infos_corner, 0, x+12+horizontal_expansion, y+12, 1, 1, 270, c_white, 0.6*growth+0.2);
+      draw_sprite_ext(spr_infos_corner, 0, x+12, y+12+vertical_expansion, 1, 1, 90, c_white, 0.6*growth+0.2);
+      draw_sprite_ext(spr_infos_corner, 0, x+12+horizontal_expansion, y+12+vertical_expansion, 1, 1, 180, c_white, 0.6*growth+0.2);
+      
+      draw_sprite_ext(spr_info_light, 0, x+20, y+4+vertical_expansion, max(horizontal_expansion-16, 1), 1, 0, c_white, growth_light);      
+      draw_sprite_ext(spr_info_light, 0, x+4+horizontal_expansion, y+4+vertical_expansion, max(vertical_expansion-16, 1), 1, 90, c_white, growth_light);      
+}
 
 </string>
           </argument>

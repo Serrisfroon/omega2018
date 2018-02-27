@@ -39,6 +39,7 @@ back[5] = backspeed/10;
 //Imitialize size variable and growth switch
 growth = 0;
 growing = 1;
+growth_light = 0;
 display = 0;
 derp = 0;
 alarm[0] = 60;
@@ -164,8 +165,13 @@ switch(global.matchlevel)
  break;
 }
 //Handle map display growing
-if(growing = 1 &amp;&amp; growth &lt; 1)
- growth += 0.1;
+if(growing = 1)
+{
+    if(growth &lt; 1)
+        growth += 0.1;
+    else
+        growth_light -= 0.1;   
+}
 if(growing = 0 &amp;&amp; growth &gt; 0)
  growth -= 0.1;
  
@@ -222,6 +228,7 @@ if(image_alpha &lt; 1)
 if(global.sfxtoggle = 0)
     audio_play_sound(snd_overcustom, 1, 0);
 growing = 1;
+growth_light = 1;
 derp = 1;
 </string>
           </argument>

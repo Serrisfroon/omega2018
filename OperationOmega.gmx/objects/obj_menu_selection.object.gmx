@@ -382,7 +382,7 @@ switch(room)
         obj_profile_connect.animation = 3;
     break;
     case rm_public_game:
-        if(text_sprite = spr_back)
+        if(text_sprite = spr_back || text_sprite = spr_custom_game)
             with(obj_waiting_boxes)
                 animation = 3;
     break;

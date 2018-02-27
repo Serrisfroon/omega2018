@@ -1583,6 +1583,8 @@
         <sprite>sprites\spr_matchstats</sprite>
         <sprite>sprites\spr_stats_infos</sprite>
         <sprite>sprites\spr_weapons_infos</sprite>
+        <sprite>sprites\spr_infos_corner</sprite>
+        <sprite>sprites\spr_info_light</sprite>
       </sprites>
       <sprites name="Multiplayer">
         <sprite>sprites\spr_play</sprite>
@@ -2330,6 +2332,7 @@
       <object>objects\obj_background</object>
       <object>objects\obj_aftermatch</object>
       <object>objects\obj_gotopractice</object>
+      <object>objects\object287</object>
     </objects>
   </objects>
   <rooms name="rooms">

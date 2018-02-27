@@ -25,8 +25,25 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_map_previews, obj_viewmap.display, obj_viewmap.x-200, obj_viewmap.y-70, obj_viewmap.growth, obj_viewmap.growth, 0, c_white, 0.6*obj_viewmap.growth+0.2);
+            <string>var horizontal_expansion, vertical_expansion, box_x, box_y;
+horizontal_expansion = (185*obj_viewmap.growth)/2;
+vertical_expansion = (185*obj_viewmap.growth)/2;
+box_x = obj_viewmap.x-290;
+box_y = obj_viewmap.y-240;
 
+draw_sprite_general(spr_map_previews, obj_viewmap.display, 92.5-horizontal_expansion, 92.5-vertical_expansion, horizontal_expansion*2, vertical_expansion*2, box_x-horizontal_expansion, box_y-vertical_expansion, 1, 1, 0, c_white, c_white, c_white, c_white, 0.75*obj_viewmap.growth+0.2);
+if(obj_viewmap.growth &gt; 0)
+{
+      draw_sprite_ext(spr_infos_corner, 0, box_x-horizontal_expansion, box_y-vertical_expansion, 1, 1, 0, c_white, 0.5*obj_viewmap.growth+0.4);
+      draw_sprite_ext(spr_infos_corner, 0, box_x-horizontal_expansion, box_y+vertical_expansion, 1, 1, 90, c_white, 0.5*obj_viewmap.growth+0.4);
+      draw_sprite_ext(spr_infos_corner, 0, box_x+horizontal_expansion, box_y-vertical_expansion, 1, 1, 270, c_white, 0.5*obj_viewmap.growth+0.4);
+      draw_sprite_ext(spr_infos_corner, 0, box_x+horizontal_expansion, box_y+vertical_expansion, 1, 1, 180, c_white, 0.5*obj_viewmap.growth+0.4);
+      
+      draw_sprite_ext(spr_info_light, 0, box_x-horizontal_expansion+4, box_y+vertical_expansion-4, max((horizontal_expansion*2)-16, 1), 1, 0, c_white, obj_viewmap.growth_light);      
+      draw_sprite_ext(spr_info_light, 0, box_x+horizontal_expansion-4, box_y+vertical_expansion-4, max((vertical_expansion*2)-16, 1), 1, 90, c_white, obj_viewmap.growth_light);      
+      draw_sprite_ext(spr_info_light, 0, box_x+horizontal_expansion-4, box_y-vertical_expansion+4, max((horizontal_expansion*2)-16, 1), 1, 180, c_white, obj_viewmap.growth_light);      
+      draw_sprite_ext(spr_info_light, 0, box_x-horizontal_expansion+4, box_y-vertical_expansion+4, max((vertical_expansion*2)-16, 1), 1, 270, c_white, obj_viewmap.growth_light);      
+}
 </string>
           </argument>
         </arguments>
