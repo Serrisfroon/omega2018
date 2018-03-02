@@ -80,6 +80,7 @@ switch(type)
          half_accuracy = 0;      
          bullet_number = 1;
          is_primary = true;
+         obj_bulletcontrol.nova_count[current_bullet_mid] += 1;
     break;
     case "Seeker":
            sfx_play(snd_flank, x, y);

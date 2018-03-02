@@ -53,7 +53,15 @@ surface_reset_target();
 
 
 
-
+nova_count[0] = 0;
+nova_count[1] = 0;
+nova_count[2] = 0;
+nova_count[3] = 0;
+nova_count[4] = 0;
+nova_count[5] = 0;
+nova_count[6] = 0;
+nova_count[7] = 0;
+nova_count[8] = 0;
 
 //Initialize bullet attributes
 
@@ -190,8 +198,12 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                         {
                             mid = bulletmid[i];
                             bullet_create(bulletx[i], bullety[i], "Nova ", bulletdirection[i], bulletmid[i], 0);      
+                                break;
                         }          
-                break;
+                    if(bulletname[i] = "Nova ")
+                        if(bullethspeed[i] = 0)
+                            if(bulletvspeed[i] = 0)
+                                nova_count[bulletmid[i]] -= 1;
                 default:
                     ending = instance_create(bulletx[i], bullety[i], obj_generic_fade);
                     ending.direction = bulletdirection[i];
@@ -278,6 +290,12 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                     ending.target_mid = possihit.mid;
                     ending.x = possihit.x;
                     ending.y = possihit.y;
+                break;
+                case spr_nova:
+                    if(bulletname[i] = "Nova ")
+                        if(bullethspeed[i] = 0)
+                            if(bulletvspeed[i] = 0)
+                                nova_count[bulletmid[i]] -= 1;
                 break;
             }
         break;
@@ -525,6 +543,12 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                     ending.x = possihit.x;
                     ending.y = possihit.y;
                 break;
+                case spr_nova:
+                    if(bulletname[i] = "Nova ")
+                        if(bullethspeed[i] = 0)
+                            if(bulletvspeed[i] = 0)
+                                nova_count[bulletmid[i]] -= 1;
+                break;
             }
         break;
     }
@@ -556,14 +580,28 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
+            switch(bullettype[i])
             {
-                ending.image_speed = 0;
-                if(bulletblend[i] = c_red)
-                    ending.image_index = 0;
-                else
-                    ending.image_index = 1;                    
-                ending.image_angle = ending.direction;    
+                case spr_snake_body:
+                case spr_whip:
+                    ending.image_speed = 0;
+                    if(bulletblend[i] = c_red)
+                        ending.image_index = 0;
+                    else
+                        ending.image_index = 1;                    
+                    ending.image_angle = ending.direction;                        
+                break;
+                case spr_cryos:
+                    ending.target_mid = possihit.mid;
+                    ending.x = possihit.x;
+                    ending.y = possihit.y;
+                break;
+                case spr_nova:
+                    if(bulletname[i] = "Nova ")
+                        if(bullethspeed[i] = 0)
+                            if(bulletvspeed[i] = 0)
+                                nova_count[bulletmid[i]] -= 1;
+                break;
             }
         break;
         case global.enemycolor:
@@ -589,14 +627,28 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
             ending.direction = bulletdirection[i];
             ending.mid = bulletmid[i];
-            if(bullettype[i] = spr_snake_body || bullettype[i] = spr_whip)
+            switch(bullettype[i])
             {
-                ending.image_speed = 0;
-                if(bulletblend[i] = c_red)
-                    ending.image_index = 0;
-                else
-                    ending.image_index = 1;                    
-                ending.image_angle = ending.direction;    
+                case spr_snake_body:
+                case spr_whip:
+                    ending.image_speed = 0;
+                    if(bulletblend[i] = c_red)
+                        ending.image_index = 0;
+                    else
+                        ending.image_index = 1;                    
+                    ending.image_angle = ending.direction;                        
+                break;
+                case spr_cryos:
+                    ending.target_mid = possihit.mid;
+                    ending.x = possihit.x;
+                    ending.y = possihit.y;
+                break;
+                case spr_nova:
+                    if(bulletname[i] = "Nova ")
+                        if(bullethspeed[i] = 0)
+                            if(bulletvspeed[i] = 0)
+                                nova_count[bulletmid[i]] -= 1;
+               break;
             }
         break;
     }
@@ -620,6 +672,27 @@ for(i = 1; i &lt;= bulletmax; i += 1)
     ending = instance_create(bulletx[i], bullety[i], bulletend[i]);
     ending.direction = bulletdirection[i];
     ending.mid = bulletmid[i];
+            switch(bullettype[i])
+            {
+                case spr_snake_body:
+                case spr_whip:
+                    ending.image_speed = 0;
+                    if(bulletblend[i] = c_red)
+                        ending.image_index = 0;
+                    else
+                        ending.image_index = 1;                    
+                    ending.image_angle = ending.direction;                        
+                break;
+                case spr_cryos:
+                    ending.target_mid = 9;
+                break;
+                case spr_nova:
+                    if(bulletname[i] = "Nova ")
+                        if(bullethspeed[i] = 0)
+                            if(bulletvspeed[i] = 0)
+                                nova_count[bulletmid[i]] -= 1;
+                break;
+            }
 }
 
 

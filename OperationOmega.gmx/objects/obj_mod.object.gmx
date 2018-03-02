@@ -1739,12 +1739,11 @@ view_box_left = view_wport[0]-68+((view_xview[0]-obj_player.x)/30);
 view_box_right = view_box_left+(view_wview[0]/30);
 view_box_top = 68+((view_yview[0]-obj_player.y)/30);
 view_box_bottom = view_box_top+(view_hview[0]/30);
-draw_rectangle(view_box_left, view_box_top, view_box_right, view_box_bottom, true);
+draw_rectangle(max(view_wport[0]-120,view_box_left), max(16, view_box_top), min(view_wport[0]-19, view_box_right), min(117, view_box_bottom), true);
 
 
 //Draw the framerate
 draw_text_transformed(10, view_hport[0]-20, string(fps), 1, 1, 0);
-draw_text_transformed(10, view_hport[0]-50, instance_number(obj_cryos_fade), 1, 1, 0);
 
 
 //Draw the cursor

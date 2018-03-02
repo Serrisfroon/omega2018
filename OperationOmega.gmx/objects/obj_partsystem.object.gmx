@@ -258,30 +258,57 @@ part_type_life(circle_light,25,40);
 
 //Nova Targeting
 nova_target[0] = part_type_create();
-part_type_sprite(nova_target[0], spr_box_part, 0, 0, 0);
-part_type_size(nova_target[0],0.10,0.30,0,0);
-part_type_scale(nova_target[0],1,1);
-part_type_color2(nova_target[0],8421631,255);
-part_type_alpha2(nova_target[0],1,0);
-part_type_speed(nova_target[0],1,4,0,0);
-part_type_direction(nova_target[0],85,95,0,0);
+part_type_sprite(nova_target[0], spr_sphere_part, 0, 0, 0);
+part_type_size(nova_target[0],0.40,0.60,0,0);
+part_type_scale(nova_target[0],1,0.20);
+part_type_color2(nova_target[0],255,8421631);
+part_type_alpha3(nova_target[0],0,0.20,0.90);
+part_type_speed(nova_target[0],2,2,-0.05,0);
+part_type_direction(nova_target[0],0,359,5,0);
 part_type_gravity(nova_target[0],0,270);
 part_type_orientation(nova_target[0],0,0,0,0,1);
 part_type_blend(nova_target[0],1);
-part_type_life(nova_target[0],10,25);
+part_type_life(nova_target[0],33,33);
 
 nova_target[1] = part_type_create();
-part_type_sprite(nova_target[1], spr_box_part, 0, 0, 0);
-part_type_size(nova_target[1],0.10,0.30,0,0);
-part_type_scale(nova_target[1],1,1);
-part_type_color2(nova_target[1],16744576,16711680);
-part_type_alpha2(nova_target[1],1,0);
-part_type_speed(nova_target[1],1,4,0,0);
-part_type_direction(nova_target[1],85,95,0,0);
+part_type_sprite(nova_target[1], spr_sphere_part, 0, 0, 0);
+part_type_size(nova_target[1],0.40,0.60,0,0);
+part_type_scale(nova_target[1],1,0.20);
+part_type_color2(nova_target[1],16711680,16744576);
+part_type_alpha3(nova_target[1],0,0.20,0.90);
+part_type_speed(nova_target[1],2,2,-0.05,0);
+part_type_direction(nova_target[1],0,359,5,0);
 part_type_gravity(nova_target[1],0,270);
 part_type_orientation(nova_target[1],0,0,0,0,1);
 part_type_blend(nova_target[1],1);
-part_type_life(nova_target[1],10,25);
+part_type_life(nova_target[1],33,33);
+
+//Nova Link
+nova_link[0] = part_type_create();
+part_type_sprite(nova_link[0], spr_sphere_part, 0, 0, 0);
+part_type_size(nova_link[0],1,1.40,-0.01,0);
+part_type_scale(nova_link[0],1,0.20);
+part_type_color2(nova_link[0],255,8421631);
+part_type_alpha3(nova_link[0],0.30,1,0.20);
+part_type_speed(nova_link[0],25,25,0,0);
+part_type_direction(nova_link[0],0,359,0,0);
+part_type_gravity(nova_link[0],0,270);
+part_type_orientation(nova_link[0],0,0,0,0,1);
+part_type_blend(nova_link[0],1);
+part_type_life(nova_link[0],33,33);
+
+nova_link[1] = part_type_create();
+part_type_sprite(nova_link[1], spr_sphere_part, 0, 0, 0);
+part_type_size(nova_link[1],1,1.40,-0.01,0);
+part_type_scale(nova_link[1],1,0.20);
+part_type_color2(nova_link[1],16744576,16711680);
+part_type_alpha3(nova_link[1],0.30,1,0.20);
+part_type_speed(nova_link[1],25,25,0,0);
+part_type_direction(nova_link[1],0,359,0,0);
+part_type_gravity(nova_link[1],0,270);
+part_type_orientation(nova_link[1],0,0,0,0,1);
+part_type_blend(nova_link[1],1);
+part_type_life(nova_link[1],33,33);
 
 
 //Helix circles

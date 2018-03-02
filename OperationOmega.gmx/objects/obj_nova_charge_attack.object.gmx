@@ -32,13 +32,36 @@ mid = 0;                        //mid of this ship to shoot from
 give_direction = 0;
 give_speed = 0;
 enable_speed = false;
-
+disable_speed = false;
 target_angle[0] = irandom(90);
 target_angle[1] = target_angle[0]+90;
 target_angle[2] = target_angle[0]+180;
 target_angle[3] = target_angle[0]+270;
 //Set time until bullet object update
 alarm[0] = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>disable_speed = true;
 </string>
           </argument>
         </arguments>
@@ -77,7 +100,7 @@ alarm[0] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var next_bullet, hold_mid, bullet_direction, direction_x, direction_y, hold_direction;
+            <string>var next_bullet, hold_mid, bullet_direction, direction_x, direction_y, hold_direction, hold_life;
 next_bullet = 1;
 hold_mid = mid;
 direction_x = target_x;
@@ -100,13 +123,20 @@ with(obj_bulletcontrol)
                         hold_direction = point_direction(bulletx[i], bullety[i], direction_x, direction_y);
                         other.hold_hspeed[next_bullet] = lengthdir_x(0.2, hold_direction);
                         other.hold_vspeed[next_bullet] = lengthdir_y(0.2, hold_direction);
+                        
+                        part_type_direction(obj_partsystem.nova_link[other.team_id], hold_direction, hold_direction, 0, 0);
+                        hold_life = point_distance(bulletx[i], bullety[i], direction_x, direction_y)/25;
+                        part_type_life(obj_partsystem.nova_link[other.team_id], hold_life, hold_life);
+                        part_particles_create(obj_partsystem.system, bulletx[i], bullety[i], obj_partsystem.nova_link[other.team_id], 1);
+                        nova_count[hold_mid] -= 1;
                         next_bullet++;
                     }
     }
 }
 
 total_bullets = next_bullet;
-alarm[1] = 55;
+alarm[1] = 65;
+alarm[2] = 55;
 enable_speed = true;
 
 
@@ -137,21 +167,18 @@ if(total_bullets = 1)
             <kind>1</kind>
             <string>if(enable_speed = true)
 {
-    for(i = 0; i &lt; 4; i++)
-    {
-        part_type_direction(obj_partsystem.nova_target[team_id], target_angle[i]-5, target_angle[i]+5, 0, 0);
-        part_particles_create(obj_partsystem.system, target_x, target_y, obj_partsystem.nova_target[team_id], 5);
-    }
+    part_particles_create(obj_partsystem.system, target_x, target_y, obj_partsystem.nova_target[team_id], 9);
     var bullet_count = total_bullets;
-    with(obj_bulletcontrol)
-    {
-        //Update all bullets
-        for(i = 1; i &lt; bullet_count; i += 1)
+    if(disable_speed = false)
+        with(obj_bulletcontrol)
         {
-            bullethspeed[other.hold_bullet[i]] += other.hold_hspeed[i];
-            bulletvspeed[other.hold_bullet[i]] += other.hold_vspeed[i]
+            //Update all bullets
+            for(i = 1; i &lt; bullet_count; i += 1)
+            {
+                bullethspeed[other.hold_bullet[i]] += other.hold_hspeed[i];
+                bulletvspeed[other.hold_bullet[i]] += other.hold_vspeed[i]
+            }
         }
-    }
 }
 </string>
           </argument>

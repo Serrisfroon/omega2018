@@ -864,6 +864,13 @@ primary_stop_distance = round(point_distance(ship_front_x, ship_front_y, mouse_x
 //Perform the primary firing event
 if(primary_charge &gt;= primary_charge_max)
 {
+    if(current_primary = 3)
+        if(obj_bulletcontrol.nova_count[mid] = 0)
+        {
+            primary_charge = 0;
+            event_perform(ev_other, ev_user1);
+            exit;
+        }  
     give_target_x = mouse_x;
     give_target_y = mouse_y;
     event_perform(ev_other, ev_user3);
