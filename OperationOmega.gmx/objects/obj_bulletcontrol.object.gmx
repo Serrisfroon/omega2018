@@ -180,6 +180,10 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                     ending.image_angle = ending.direction;
                     ending.mid = bulletmid[i];                
                 break;
+                case spr_cryos:
+                    ending = instance_create(bulletx[i], bullety[i], obj_cryos_fade);
+                    ending.mid = bulletmid[i];                
+                break;
                 case spr_nova:
                     if(bulletname[i] = "Nova")
                         if(bulletlife[i] &lt;= 0)
@@ -226,27 +230,9 @@ for(i = 1; i &lt;= bulletmax; i += 1)
             //Take damage
             possihit.shield -= bulletdamage[i];
             if(possihit.shield &lt; 0)
-            {
-                if(possihit.sprite_index = spr_turretbase)
-                {
-                    if(point_distance(global.playership[bulletmid[i]].x, global.playership[bulletmid[i]].y, possihit.x, possihit.y) &lt;= 400)
-                        bulletdamage[i] = 5;
-                    else
-                        bulletdamage[i] = 0;
-                        
-                    possihit.shield = 0;
-                    if(possihit.reset = 0 &amp;&amp; bulletdamage[i] = 5)
-                    {
-                        possihit.armor -= bulletdamage[i];
-                        possihit.reset = 1;
-                        possihit.alarm[0] = 10;
-                    }
-                }
-                else
-                {   
-                    possihit.shield = 0;
-                    possihit.armor -= bulletdamage[i];
-                }
+            { 
+                possihit.shield = 0;
+                possihit.armor -= bulletdamage[i];
             }
         
             //Update smoking
@@ -350,44 +336,43 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                                 {
                                     bulletdamage[i] *= 0.4;
                                 }
-                            //If burst, slash, or whip, apply threshold damage
-                            if((bullettype[i] = spr_burst || bullettype[i] = spr_slash || bullettype[i] = spr_whip || bulletname[i] = "Formation"))
+                            //Damage calculation and application. Handled differently depending on the bullet type
+                            switch(bullettype[i])
                             {
-                                //Check if under shock effect
-                                if(possihit.ship_status_shocked = false)
-                                    possihit.shield -= bulletdamage[i]*possihit.threshold/shielded;
-                                else
-                                {
-                                    possihit.shield -= bulletdamage[i]*possihit.threshold/2;
-                                    possihit.armor -= bulletdamage[i]*possihit.threshold/2;
-                                }
-                        
-                                switch(bullettype[i])
-                                {
-                                    case spr_burst:
-                                    case spr_slash:
-                                    case spr_whip:
-                                    case spr_formation:
-                                    case spr_trigger_shot:
-                                        possihit.threshold -= 0.08;
-                                        possihit.alarm[9] = THRESHOLD_TIMEOUT;
-                                    break;
-                                }    
-                                if(possihit.threshold &lt; 0.1)
-                                    possihit.threshold = 0.1;   
-                            } 
-                            //Otherwise, calculate damage normally
-                            else
-                            {
-                                //Check if under shock effect
-                                if(possihit.ship_status_shocked = false)
-                                    possihit.shield -= bulletdamage[i]/shielded;
-                                else
-                                {
-                                    possihit.shield -= bulletdamage[i]/2;
-                                    possihit.armor -= bulletdamage[i]/2;
-                                }
-                            }
+                                case spr_burst:
+                                case spr_slash:
+                                case spr_whip:
+                                case spr_formation:
+                                case spr_trigger_shot:
+                                case spr_cryos:
+                                    //Calculate the damage while applying threshold multiplier and apply it
+                                    //Check if under shock effect
+                                    if(possihit.ship_status_shocked = false)
+                                        possihit.shield -= bulletdamage[i]*possihit.threshold/shielded;
+                                    else
+                                    {
+                                        possihit.shield -= bulletdamage[i]*possihit.threshold/2;
+                                        possihit.armor -= bulletdamage[i]*possihit.threshold/2;
+                                    }
+                                    
+                                    //Lower the damage ratio and set the time until it resets to 1:1
+                                    possihit.threshold -= 0.08;
+                                    if(possihit.threshold &lt; 0.1)
+                                        possihit.threshold = 0.1;   
+                                    possihit.alarm[9] = THRESHOLD_TIMEOUT;
+                                break;
+                                default:
+                                    //Calculate the damage done and apply it
+                                    //Check if under shock effect
+                                    if(possihit.ship_status_shocked = false)
+                                        possihit.shield -= bulletdamage[i]/shielded;
+                                    else
+                                    {
+                                        possihit.shield -= bulletdamage[i]/2;
+                                        possihit.armor -= bulletdamage[i]/2;
+                                    }
+                                break;                                    
+                            }    
                         }
                         else
                         {
@@ -403,44 +388,44 @@ for(i = 1; i &lt;= bulletmax; i += 1)
                                 {
                                     bulletdamage[i] *= 0.4;
                                 }
-                            //If burst, slash, or whip, apply threshold damage
-                            if((bullettype[i] = spr_burst || bullettype[i] = spr_slash || bullettype[i] = spr_whip || bulletname[i] = "Formation"))
+                            //Damage calculation and application. Handled differently depending on the bullet type
+                            switch(bullettype[i])
                             {
-                                //Check if under shock effect
-                                if(possihit.ship_status_shocked = false)
-                                    my_drone.shield -= bulletdamage[i]*possihit.threshold/shielded;
-                                else
-                                {
-                                    my_drone.shield -= bulletdamage[i]*possihit.threshold/2;
-                                    possihit.shield -= bulletdamage[i]*possihit.threshold/2;
-                                }
-                        
-                                switch(bullettype[i])
-                                {
-                                    case spr_burst:
-                                    case spr_slash:
-                                    case spr_whip:
-                                    case spr_formation:
-                                    case spr_trigger_shot:
-                                        possihit.threshold -= 0.08;
-                                        possihit.alarm[9] = THRESHOLD_TIMEOUT;
-                                    break;
-                                }    
-                                if(possihit.threshold &lt; 0.1)
-                                    possihit.threshold = 0.1;   
-                            } 
-                            //Otherwise, calculate damage normally
-                            else
-                            {
-                                //Check if under shock effect
-                                if(possihit.ship_status_shocked = false)
-                                    my_drone.shield -= bulletdamage[i]/shielded;
-                                else
-                                {
-                                    possihit.shield -= bulletdamage[i]/2;
-                                    my_drone.shield -= bulletdamage[i]/2;
-                                }
-                            }
+                                case spr_burst:
+                                case spr_slash:
+                                case spr_whip:
+                                case spr_formation:
+                                case spr_trigger_shot:
+                                case spr_cryos:
+                                    //Calculate the damage while applying threshold multiplier and apply it
+                                    //Check if under shock effect
+                                    if(possihit.ship_status_shocked = false)
+                                        my_drone.shield -= bulletdamage[i]*possihit.threshold/shielded;
+                                    else
+                                    {
+                                        my_drone.shield -= bulletdamage[i]*possihit.threshold/2;
+                                        possihit.shield -= bulletdamage[i]*possihit.threshold/2;
+                                    }
+                                    
+                                    //Lower the damage ratio and set the time until it resets to 1:1
+                                    possihit.threshold -= 0.08;
+                                    if(possihit.threshold &lt; 0.1)
+                                        possihit.threshold = 0.1;   
+                                    possihit.alarm[9] = THRESHOLD_TIMEOUT;
+                                break;
+                                default:
+                                    //Calculate the damage done and apply it
+                                    //Check if under shock effect
+                                    if(possihit.ship_status_shocked = false)
+                                        my_drone.shield -= bulletdamage[i]/shielded;
+                                    else
+                                    {
+                                        possihit.shield -= bulletdamage[i]/2;
+                                        my_drone.shield -= bulletdamage[i]/2;
+                                    }                            
+                                break;                                    
+                            }    
+
                             
                             //Destroy the drone if its shield is used up
                             if(my_drone.shield &lt;= 0)

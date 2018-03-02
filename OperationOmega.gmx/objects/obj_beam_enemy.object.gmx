@@ -146,9 +146,6 @@ if(scale = 1 &amp;&amp; stage = 0)
             //Check if there's a nearby paladin turret
             var shielded, shielddown;
             shielded = 1;
-            if(instance_exists(obj_turret))
-                if(distance_to_object(instance_nearest(x, y, obj_turret)) &lt; 400)
-                    shielded = 2;
             shielddown = 1;
             if(shield = 0)
                 shielddown = 0;

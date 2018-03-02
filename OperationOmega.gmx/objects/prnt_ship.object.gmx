@@ -95,7 +95,7 @@ switch(current_primary)
     case 5:
         primary_name = "Cryos";
         primary_overheat_scaling = 0.08;
-        primary_cooldown_base = 6;
+        primary_cooldown_base = 3.5;
         primary_charge_max = 160;
         primary_charge_shot = obj_cryos_charge_attack;
         primary_arc = 60;

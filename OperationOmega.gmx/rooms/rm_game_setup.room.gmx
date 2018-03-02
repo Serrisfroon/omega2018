@@ -13,6 +13,9 @@
   <code>//Remove the default sursor
 window_set_cursor(cr_none);
 
+//Enable Debug mode
+show_debug_overlay(true);
+
 //Initialize DLL systems
 dllinit(0,true,true);
 initpack();

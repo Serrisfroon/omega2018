@@ -98,15 +98,17 @@ switch(type)
     case "Cryos":
          name = "Cryos";
          sprite = spr_cryos;
-         life = 75;
+         life = 45;
          after = obj_cryos_hit;
-         dmg = 2;
-         mask = 17;
+         dmg = 3;
+         mask = 14;
          lolspeed = 9.5+speed/2;
-         accuracy = 3;
-         half_accuracy = 6;
-         bullet_number = 1;
+         accuracy = 40;
+         half_accuracy = 20;
+         bullet_number = 3;
          is_primary = true;
+         loldir[2] = loldir[1];
+         loldir[3] = loldir[1];
          sfx_play(snd_needle, lolx, loly);    
     break;
     case "Stasis":

@@ -293,10 +293,10 @@ part_type_color2(needle_charge_wave[0],12566527,255);
 part_type_alpha3(needle_charge_wave[0],0,0.8,0);
 part_type_speed(needle_charge_wave[0],3,5,0,0);
 part_type_direction(needle_charge_wave[0],0,359,0,0);
-part_type_gravity(needle_charge_wave[0],1.2,180);
+part_type_gravity(needle_charge_wave[0],1.6,180);
 part_type_orientation(needle_charge_wave[0],0,0,0,0,1);
 part_type_blend(needle_charge_wave[0],1);
-part_type_life(needle_charge_wave[0],8,12);
+part_type_life(needle_charge_wave[0],11,16);
 
 needle_charge_wave[1] = part_type_create();
 part_type_sprite(needle_charge_wave[1], spr_sphere_part, 0, 0, 0);
@@ -306,10 +306,10 @@ part_type_color2(needle_charge_wave[1],16760767,16711680);
 part_type_alpha3(needle_charge_wave[1],0,0.8,0);
 part_type_speed(needle_charge_wave[1],3,5,0,0);
 part_type_direction(needle_charge_wave[1],0,359,0,0);
-part_type_gravity(needle_charge_wave[1],1.2,180);
+part_type_gravity(needle_charge_wave[1],1.6,180);
 part_type_orientation(needle_charge_wave[1],0,0,0,0,1);
 part_type_blend(needle_charge_wave[1],1);
-part_type_life(needle_charge_wave[1],8,12);
+part_type_life(needle_charge_wave[1],11,16);
 
 needle_charge_burst[0] = part_type_create();
 part_type_sprite(needle_charge_burst[0], spr_flare_part, 0, 0, 0);

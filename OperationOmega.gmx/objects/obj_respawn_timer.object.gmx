@@ -55,8 +55,11 @@ obj_camera.player_object = id;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>obj_mod.alarm[0] = 1;
-
+            <string>if(respawnable = 2)
+    exit;
+obj_mod.alarm[0] = point_distance(x, y, global.myspawnx, global.myspawny)/100;
+x = global.myspawnx;
+y = global.myspawny;
 </string>
           </argument>
         </arguments>
@@ -145,7 +148,10 @@ draw_set_halign(fa_left);
             <kind>1</kind>
             <string>if(respawnable = 1)
 {
- obj_mod.alarm[0] = 1;
+    respawnable = 2;
+    obj_mod.alarm[0] = point_distance(x, y, global.myspawnx, global.myspawny)/100;
+    x = global.myspawnx;
+    y = global.myspawny;
 }
 </string>
           </argument>

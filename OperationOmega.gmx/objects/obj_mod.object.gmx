@@ -881,8 +881,8 @@ while(true)
                     global.primaryRNG[dummy] = uncrush(65536, 0);
                     global.playership[dummy].primary_direction = uncrush(360, 0);
                     global.playership[dummy].primary_overheat = uncrush(200, 0)/20;
-                    if(global.playership[i].current_primary = 3 || global.playership[i].current_primary = 9)
-                        global.playership[i].primary_stop_distance = uncrush(200, 0);
+                    if(global.playership[dummy].current_primary = 3 || global.playership[dummy].current_primary = 9)
+                        global.playership[dummy].primary_stop_distance = uncrush(200, 0);
                 }
             }
         break;
@@ -1722,8 +1722,8 @@ for(i = 0; i &lt; 8; i += 1)
         radarpoint = global.team[i]-1;
         //Set radar point position
         //radardist = point_distance(obj_player.x, obj_player.y, global.playership[radarplayer].x, global.playership[radarplayer].y);
-        radarx = ((global.playership[i].x-obj_player.x)*50)/1500;
-        radary = ((global.playership[i].y-obj_player.y)*50)/1500;
+        radarx = (global.playership[i].x-obj_player.x)/30;
+        radary = (global.playership[i].y-obj_player.y)/30;
         //Draw radar point if it is in range
         if(abs(radarx) &lt;51 &amp;&amp; abs(radary) &lt; 51)
             draw_sprite_ext(spr_radar_player, radarpoint, view_wport[0]-68+radarx, 68+radary, 1, 1, global.playership[i].image_angle, c_white, 1);
@@ -1731,9 +1731,20 @@ for(i = 0; i &lt; 8; i += 1)
 }
   
 draw_set_font(fnt_chat);
-//Draw the framerate
 draw_set_color(c_white);
+
+//Draw the view size in the radar
+var view_box_left, view_box_right, view_box_top, view_box_bottom;
+view_box_left = view_wport[0]-68+((view_xview[0]-obj_player.x)/30);
+view_box_right = view_box_left+(view_wview[0]/30);
+view_box_top = 68+((view_yview[0]-obj_player.y)/30);
+view_box_bottom = view_box_top+(view_hview[0]/30);
+draw_rectangle(view_box_left, view_box_top, view_box_right, view_box_bottom, true);
+
+
+//Draw the framerate
 draw_text_transformed(10, view_hport[0]-20, string(fps), 1, 1, 0);
+draw_text_transformed(10, view_hport[0]-50, instance_number(obj_cryos_fade), 1, 1, 0);
 
 
 //Draw the cursor

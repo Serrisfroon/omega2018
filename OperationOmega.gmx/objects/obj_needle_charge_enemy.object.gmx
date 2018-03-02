@@ -3,7 +3,7 @@
   <spriteName>spr_needle_charge</spriteName>
   <solid>0</solid>
   <visible>0</visible>
-  <depth>1</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>prnt_enemyenergy</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -31,6 +31,7 @@ alarm[1] = 1;
 speed = 14;
 
 create_particles = false;
+system = part_system_create();
 
 //Set attack variable values
 attack_damage = 25;          //Set the damage for the attack
@@ -63,10 +64,16 @@ attack_name = "Needle";     //Set the name of the attack
             <string>var particle = obj_partsystem.needle_charge_burst[global.team[mid]-1];
 part_type_direction(particle,0,359,0,0);
 part_type_speed(particle,1,4,0,0);
+part_system_destroy(system);
 
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.circle_light, 3);
 part_particles_create(obj_partsystem.system, x, y, particle, 20);
 part_particles_create(obj_partsystem.system, x, y, obj_partsystem.needle_charge_ending[global.team[mid]-1], 15);
+
+
+part_type_direction(particle, direction-20, direction+20,0,0);
+part_type_speed(particle,7,12,0,0);
+part_particles_create(obj_partsystem_top.system, x, y, particle, 15);
 </string>
           </argument>
         </arguments>
@@ -91,13 +98,13 @@ part_particles_create(obj_partsystem.system, x, y, obj_partsystem.needle_charge_
             <kind>1</kind>
             <string>trail_part = obj_partsystem.needle_charge_trail[global.team[mid]-1];
 wave_part = obj_partsystem_top.needle_charge_wave[global.team[mid]-1];
-wave_create_x = lengthdir_x(60, direction);
-wave_create_y = lengthdir_y(60, direction);
+
+wave_create_x = lengthdir_x(35, direction);
+wave_create_y = lengthdir_y(35, direction);
 create_particles = true;
 image_angle = direction;
 image_speed = 0;
 image_index = global.team[mid]-1;
-
 </string>
           </argument>
         </arguments>
@@ -140,24 +147,12 @@ image_index = global.team[mid]-1;
 {
     part_type_direction(trail_part,direction-180,direction-180,0,0);
     part_particles_create(obj_partsystem.system, x-25+random(50), y-25+random(50), trail_part, 1);
-    part_type_gravity(wave_part,1.2,direction-180);
     
-    part_type_speed(wave_part,1,3,0,0);
-    part_type_direction(wave_part,direction-90,direction-70,0,0);
-    part_particles_create(obj_partsystem_top.system, x+wave_create_x, y+wave_create_y, wave_part, 1);
-    part_type_speed(wave_part,3,6,0,0);
-    part_particles_create(obj_partsystem_top.system, x+wave_create_x, y+wave_create_y, wave_part, 1);
-    
-    part_type_speed(wave_part,1,3,0,0);
-    part_type_direction(wave_part,direction+90,direction+70,0,0);
-    part_particles_create(obj_partsystem_top.system, x+wave_create_x, y+wave_create_y, wave_part, 1);
-    part_type_speed(wave_part,3,6,0,0);
-    part_particles_create(obj_partsystem_top.system, x+wave_create_x, y+wave_create_y, wave_part, 1);
-    
-    part_type_direction(wave_part,direction+90,direction+270,0,0);
-    part_type_speed(wave_part,0,1,0,0);
-    part_particles_create(obj_partsystem_top.system, x+wave_create_x, y+wave_create_y, wave_part, 1);
+    part_system_position(system, x, y);
+    part_type_gravity(wave_part, 2.4 ,direction-180);    
+    part_particles_create(system, wave_create_x, wave_create_y, wave_part, 5);
 }
+
 
 if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 {
@@ -167,6 +162,29 @@ if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 if(obj_bulletcontrol.wallposition[floor(x/32), floor(y/32)] = true)
  instance_destroy();
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>part_system_drawit(system);
 </string>
           </argument>
         </arguments>
