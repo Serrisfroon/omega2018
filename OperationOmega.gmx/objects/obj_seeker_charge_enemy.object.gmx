@@ -67,15 +67,14 @@ attack_name = "Seeker";     //Set the name of the attack
     leader.follower[order] = -1;
 else
 {
-    for(i = 1; i &lt;= 3; i++)
+    for(i = 1; i &lt;= 2; i++)
         if(follower[i] != -1)
         {
             follower[i].is_leading = true;
             follower[i].leader = follower[i];
             follower[i].follower[1] = -1;
             follower[i].follower[2] = -1;
-            follower[i].follower[3] = -1;
-                for(ii = 1; ii+i &lt;= 3; ii++)
+                for(ii = 1; ii+i &lt;= 2; ii++)
                 {
                     follower[i].follower[i+ii] = follower[i+ii];
                     follower[i+ii].leader = follower[i];
@@ -84,11 +83,12 @@ else
         }    
 }
 
+var expand_distance = (image_index-team_index)*13;
 var particle = obj_partsystem.needle_charge_burst[global.team[mid]-1];
 part_type_direction(particle,0,359,0,0);
 part_type_speed(particle,1,4,0,0);
-var part_x = x+lengthdir_x(115, image_angle);
-var part_y = y+lengthdir_y(115, image_angle);
+var part_x = x+lengthdir_x(expand_distance, image_angle);
+var part_y = y+lengthdir_y(expand_distance, image_angle);
 part_particles_create(obj_partsystem.system, part_x, part_y, obj_partsystem.circle_light, 2);
 part_particles_create(obj_partsystem.system, part_x, part_y, particle, 5);
 
@@ -162,7 +162,7 @@ part_emitter_destroy(obj_partsystem.system, emit);
           <argument>
             <kind>1</kind>
             <string>//Rotate the bullet around the center point
-image_angle += 3;
+image_angle += 5;
 
 //Perform action for the leading bullet
 if(is_leading = true)
@@ -190,7 +190,7 @@ if(is_leading = true)
         {
             //Disable tracking for the leader and followers
             enable_tracking = false;
-            for(i = 1; i &lt;= 3; i++)
+            for(i = 1; i &lt;= 2; i++)
                 if(follower[i] != -1)
                 {
                     follower[i].enable_tracking = false;
@@ -211,7 +211,7 @@ else
 if(x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
 {
     if(is_leading = true)
-        for(i = 1; i &lt; 4; i++)
+        for(i = 1; i &lt; 3; i++)
             with(follower[i])
                 instance_destroy();
     instance_destroy();

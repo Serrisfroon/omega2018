@@ -161,45 +161,6 @@ for(i = 0; i &lt; 8; i++)
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Shader variables
-uni_time = shader_get_uniform(shd_magnify,"time");
-var_time_var = 0;
-
-uni_mouse_pos = shader_get_uniform(shd_magnify,"mouse_pos");
-
-uni_resolution = shader_get_uniform(shd_magnify,"resolution");
-
-uni_circle_radius = shader_get_uniform(shd_magnify,"circleRadius");
-var_circle_radius = 0.204; //.204
-
-uni_circle_zoom_min = shader_get_uniform(shd_magnify,"minZoom");
-var_circle_zoom_min = 0.40; 
-
-uni_circle_zoom_max = shader_get_uniform(shd_magnify,"maxZoom");
-var_circle_zoom_max = 0.60;
-
-magnify1 = surface_create(view_wport[0], view_hport[0]);
-magnify2 = surface_create(view_wport[0], view_hport[0]);
-</string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="2" enumb="7">
       <action>
@@ -1655,6 +1616,8 @@ if(targeted_object != -1)
 
 //Draw equipped weapons
 check_weapons();
+//Draw the gauge backgrounds
+draw_sprite_ext(spr_gauges, 0, 0, 0, 1, 1, 0, c_white, 1);
 
 //Draw Armor, Shield, Energy, and Ammo bars
 if(obj_player.armor &gt; 0)
@@ -1680,24 +1643,14 @@ else
 
 var energy_ratio = current_secondary_stock/100;
 var heavy_ratio = current_secondary_stock/max_secondary_stock[current_secondary];
-//Draw the gauge backgrounds
-draw_sprite_ext(spr_gauges, 0, 0, 0, 1, 1, 0, c_white, 1);
 
 //Draw the match status
 switch(global.matchtype)
 {
  case "stock":
-      switch(global.team[mid])
-      {
-       case 1:
-            for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect, i*shipspace+4, 4, 1, 1, 0, c_white, .7);
-       break;
-       case 2:
-            for(i = 0; i &lt; global.ships; i += 1)
-             draw_sprite_ext(spr_lifecount, global.shipselect+3, i*shipspace+4, 4, 1, 1, 0, c_white, .7);
-       break;
-      }
+    draw_sprite_ext(spr_lifecount, global.shipselect*global.team[mid], 18, 15, 1, 1, 0, c_white, 1);
+    draw_set_font(fnt_chat);
+    draw_text_bordered(37, 7, "x "+string(global.ships), 1, 1, c_black, c_white);
  break;
  case "death":
       draw_set_font(fnt_chat);
@@ -1730,8 +1683,9 @@ for(i = 0; i &lt; 8; i += 1)
     }
 }
   
-draw_set_font(fnt_chat);
+//draw_set_font(fnt_chat);
 draw_set_color(c_white);
+draw_text_transformed(10, view_hport[0]-20, string(fps), 1, 1, 0);
 
 //Draw the view size in the radar
 var view_box_left, view_box_right, view_box_top, view_box_bottom;
@@ -1904,29 +1858,6 @@ draw_text(mouse_cursor_x+70-cursor_weapon[selected_tab]+8*(selected_tab-1)+shift
 
 draw_set_alpha(1);
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_stasis();
 </string>
           </argument>
         </arguments>

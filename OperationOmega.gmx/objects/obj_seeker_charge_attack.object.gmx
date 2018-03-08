@@ -68,7 +68,7 @@ var create_y = origin_object.y+lengthdir_y(9, origin_object.facedir);
 var team_number = global.team[mid]-1
 var team_index = team_number*12;
 var attack;
-for(i = 0; i &lt; 360; i += 90)
+for(i = 0; i &lt; 360; i += 120)
 {
     part_type_direction(obj_partsystem.seeker_cross[team_number],give_direction+i-15,give_direction+i+15,0,0);
     part_particles_create(obj_partsystem.system, create_x, create_y, obj_partsystem.seeker_cross[team_number], 20);
@@ -79,6 +79,7 @@ for(i = 0; i &lt; 360; i += 90)
     attack.mid = mid;
     attack.image_angle = give_direction+i;
     attack.image_index = team_index;
+    attack.team_index = team_index;
     if(i = 0)
     {
         attack.is_leading = true;

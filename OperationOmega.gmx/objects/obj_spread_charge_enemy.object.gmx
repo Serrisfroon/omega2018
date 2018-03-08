@@ -145,7 +145,7 @@ if(slow = true)
         part_type_speed(obj_partsystem.primarypart[global.team[mid]-1], 1, 4, 0, 0);
         
         var particle_angle = 40-speed*3;
-        var nearest_enemy = instance_nearest(x, y, obj_dummy_enemy);
+        var nearest_enemy = instance_nearest(x, y, obj_dummy_ally);
         if(nearest_enemy = noone)
           nearest_enemy = global.playership[global.mymid];      
         else

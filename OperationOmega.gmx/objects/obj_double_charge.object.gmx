@@ -124,6 +124,8 @@ bullet_create(x, y, "Double Charge", direction-90, mid, 3);
 bullet_create(x, y, "Double Charge", direction-90, mid, 2);
 bullet_create(x, y, "Double Charge", direction-90, mid, 1);
 
+bullet_create(x, y, "Double Charge", direction-90, mid, 0);
+
 bullet_create(x, y, "Double Charge", direction+90, mid, 10);
 bullet_create(x, y, "Double Charge", direction+90, mid, 9);
 bullet_create(x, y, "Double Charge", direction+90, mid, 8);

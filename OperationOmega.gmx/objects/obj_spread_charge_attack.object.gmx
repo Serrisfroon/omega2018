@@ -67,7 +67,7 @@ var create_x = origin_object.x+lengthdir_x(9, origin_object.facedir);
 var create_y = origin_object.y+lengthdir_y(9, origin_object.facedir);
 
 var attack = instance_create(create_x, create_y, created_object);
-attack.direction = give_direction-50;
+attack.direction = give_direction-45;
 attack.mid = mid;
 
 var attack = instance_create(create_x, create_y, created_object);
@@ -75,11 +75,15 @@ attack.direction = give_direction-30;
 attack.mid = mid;
 
 var attack = instance_create(create_x, create_y, created_object);
-attack.direction = give_direction-10;
+attack.direction = give_direction-15;
 attack.mid = mid;
 
 var attack = instance_create(create_x, create_y, created_object);
-attack.direction = give_direction+10;
+attack.direction = give_direction;
+attack.mid = mid;
+
+var attack = instance_create(create_x, create_y, created_object);
+attack.direction = give_direction+15;
 attack.mid = mid;
 
 var attack = instance_create(create_x, create_y, created_object);
@@ -87,7 +91,7 @@ attack.direction = give_direction+30;
 attack.mid = mid;
 
 var attack = instance_create(create_x, create_y, created_object);
-attack.direction = give_direction+50;
+attack.direction = give_direction+45;
 attack.mid = mid;
 
 var particle = obj_partsystem_top.needle_charge_burst[global.team[mid]-1];

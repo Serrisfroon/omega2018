@@ -39,10 +39,6 @@ image_yscale = 0;
 sfx_play(snd_barrier, x, y);
 absorb = 0;
 
-if(global.enemycolor = c_red)
-    part_color = 1;
-else
-    part_color = 0;
 
 </string>
           </argument>
@@ -170,8 +166,8 @@ if(image_yscale &gt;= fullscale)
 repeat(5)
 {
     pix = random(55);
-    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction-90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction-90), obj_partsystem.barrier_light[part_color], 1);
-    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction+90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction+90), obj_partsystem.barrier_light[part_color], 1);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction-90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction-90), obj_partsystem.barrier_light[global.team[mid]-1], 1);
+    part_particles_create(obj_partsystem.system, x+lengthdir_x(pix-45*image_yscale, direction)+lengthdir_x(85*image_yscale, direction+90), y+lengthdir_y(pix-45*image_yscale, direction)+lengthdir_y(85*image_yscale, direction+90), obj_partsystem.barrier_light[global.team[mid]-1], 1);
 
 }
 </string>

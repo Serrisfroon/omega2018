@@ -28,7 +28,9 @@
             <string>sfx_play(snd_stasisfield, x, y);
 image_xscale = 0;
 image_yscale = 0;
-alarm[0] = 1;
+appearance_scale = 0;
+appearance_alpha = 0;
+image_angle = random(360);
 step = 0;
 slowing = 0;
 damaged[0] = 0;
@@ -43,23 +45,20 @@ damaged[8] = 0;
 focus = -1;
 
 alarm[3] = 1;
-if(global.allycolor = c_red)
-{
-part_type_colour3(obj_partsystem.stasis_field,c_white,c_red,c_aqua);
+smoke_emit = part_emitter_create(obj_partsystem.system);
+part_emitter_region(obj_partsystem.system, smoke_emit, x-30, x+30, y-30, y+30, 1, 0);
 
-}
-else
-{
-part_type_colour3(obj_partsystem.stasis_field,c_white,c_blue,c_aqua);
-}
+part_emitter_burst(obj_partsystem.system, smoke_emit, obj_partsystem.cryos_frosting, 4);
 
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stasis_field, 15);
+alarm[4] = 10;
+//part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stasis_field, 15);
+
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="3">
+    <event eventtype="2" enumb="4">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -78,9 +77,15 @@ part_particles_create(obj_partsystem.system, x, y, obj_partsystem.stasis_field, 
             <kind>1</kind>
             <string>if(step = 2)
     exit;
-alarm[3] = 5;
-part_particles_create(obj_partsystem.system, x, y, obj_partsystem.cryos_stasis[global.team[mid]-1], 2);
-part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.cryos_fog, 2);
+var size_emit;
+size_emit = max(30, 114*image_xscale);
+part_emitter_region(obj_partsystem.system, smoke_emit, x-size_emit, x+size_emit, y-size_emit, y+size_emit, 1, 0);
+
+part_emitter_burst(obj_partsystem.system, smoke_emit, obj_partsystem.cryos_frosting, 2+irandom(2));
+part_emitter_burst(obj_partsystem.system, smoke_emit, obj_partsystem.cryos_charge_cloud[global.team[mid]-1], irandom(2));
+part_emitter_burst(obj_partsystem.system, smoke_emit, obj_partsystem.cryos_stasis[global.team[mid]-1], 1+irandom(3));
+
+alarm[4] = 13+irandom(4);
 </string>
           </argument>
         </arguments>
@@ -132,29 +137,6 @@ part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.cryos_
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>sprite_index = spr_stasis_field;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -172,10 +154,18 @@ part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.cryos_
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(image_xscale &lt; 1.7 &amp;&amp; step = 0)
+            <string>if(image_xscale &lt; 1.6 &amp;&amp; step = 0)
 {
     image_xscale += 0.1;
     image_yscale = image_xscale;
+    appearance_scale = image_xscale;
+    appearance_alpha += 0.0625;
+    var size_emit;
+    size_emit = max(30, 114*image_xscale);
+    part_emitter_region(obj_partsystem.system, smoke_emit, x-size_emit, x+size_emit, y-size_emit, y+size_emit, 1, 0);
+
+    part_emitter_burst(obj_partsystem.system, smoke_emit, obj_partsystem.cryos_frosting, irandom(2));
+    
     if(focus != -1 &amp;&amp; instance_exists(focus))
     {
         speed = 14;
@@ -187,7 +177,7 @@ part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.cryos_
             speed = 0;
         }
     }
-    if(image_xscale = 1.7)
+    if(image_xscale = 1.6)
     {
         speed = 0;
         step = 1;
@@ -196,11 +186,46 @@ part_particles_create(obj_partsystem_top.system, x, y, obj_partsystem_top.cryos_
 }
 if(step = 2)
 {
-    image_xscale -= 0.1;
-    image_yscale = image_xscale;
-    if(image_xscale = 0)
+    appearance_alpha -= 0.05;
+    if(image_xscale &gt; 0)
+    {
+        image_xscale -= 0.1;
+        image_yscale = image_xscale;
+    }
+    if(appearance_alpha = 0)
         instance_destroy();
 }    
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.team[mid] = 1)
+    draw_set_color(c_red);
+else
+    draw_set_color(c_blue);
+draw_sprite_ext(spr_cryos_frost, 0, x, y, appearance_scale, appearance_scale, image_angle, c_white, appearance_alpha);
+draw_set_alpha(appearance_alpha);
+draw_circle(x, y, 114*appearance_scale, 1);
+draw_set_alpha(1);
+
 </string>
           </argument>
         </arguments>

@@ -1344,6 +1344,8 @@
       <sprite>sprites\spr_cryos_slow</sprite>
       <sprite>sprites\spr_stasis</sprite>
       <sprite>sprites\spr_stasis_field</sprite>
+      <sprite>sprites\spr_cryos_frost</sprite>
+      <sprite>sprites\spr_cryos_frost_part</sprite>
       <sprite>sprites\spr_helix</sprite>
       <sprite>sprites\spr_bluehelix</sprite>
       <sprite>sprites\spr_helix_charge</sprite>
